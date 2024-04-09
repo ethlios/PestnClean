@@ -1,8 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Questrial&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+:root {
+    --primary: #0274be;
+    --secondary: #78b461;
+    --secondary-dark: #8c8d8f;
+    --success: #d2fbd0;
+    --error: #fbd0da;
+    --warning: #fbf5d0;
+}
 
 body {
-  
+    text-rendering: optimizeSpeed;
+}
+
+html * {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+    -webkit-scrollbar: none;
+    font-family: 'Montserrat', serif !important;
+    font-weight: 500;
+}
+
+h1 {
+    font-family: 'Merriweather', serif !important;
+}
+
+html *::-webkit-scrollbar {
+    display: none;
+    border-radius: 0;
+    width: 2px;
+    height: 30px;
+}
+
+.cpmount {
+    animation: opacity 0.8s ease;
+}
+
+.opacity {
+    cursor: pointer;
+}
+
+.opacity:hover {
+    opacity: 0.6;
+    transition: all ease 0.5s;
+}
+
+input:focus {
+    outline: none;
+}
+
+@keyframes opacity {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
