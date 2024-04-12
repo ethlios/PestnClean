@@ -1,12 +1,11 @@
-import { Height } from '@mui/icons-material';
-import { headers } from 'next/headers';
-import Image from 'next/image';
 import BannerHomePage from '~/components/Home/banner';
+import TextImage from '~/components/Sections/TextImage/TextImage';
 
 export default function Home() {
     return (
         <main>
-            <BannerHomePage />
+            {/*<BannerHomePage />*/}
+            <TextImage />
             <div
                 style={{
                     height: '1000px',
