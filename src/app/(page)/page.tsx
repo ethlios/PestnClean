@@ -1,14 +1,17 @@
+import { Height } from '@mui/icons-material';
+import { headers } from 'next/headers';
+import Image from 'next/image';
 import BannerHomePage from '~/components/Home/banner';
-import TextImage from '~/components/Sections/TextImage/TextImage';
+import ButtonCommon from '~/components/Orther/Button';
 
 export default function Home() {
     return (
         <main>
-            {/*<BannerHomePage />*/}
-            <TextImage />
+            <BannerHomePage />
             <div
                 style={{
                     height: '1000px',
+                    paddingTop: '500px',
                 }}
             ></div>
         </main>

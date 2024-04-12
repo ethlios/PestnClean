@@ -1,13 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Questrial&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Questrial&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap');
 
 :root {
     --primary: #0274be;
     --secondary: #78b461;
     --secondary-dark: #8c8d8f;
+    --bg-color: #e9e9e9;
     --success: #d2fbd0;
     --error: #fbd0da;
     --warning: #fbf5d0;
@@ -23,6 +24,7 @@ html * {
     -webkit-scrollbar: none;
     font-family: 'Montserrat', serif !important;
     font-weight: 500;
+    user-select: none;
 }
 
 h1 {
@@ -60,4 +62,39 @@ input:focus {
     to {
         opacity: 1;
     }
+}
+
+/* CUSTOM MUI */
+
+.css-10hyoxo-MuiStack-root span {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: -0.5px;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.css-r47a1p-MuiFormControl-root,
+.css-qwo8uq-MuiFormControl-root {
+    margin: 0px !important;
+}
+
+.css-vq0uqb-MuiFormLabel-root-MuiInputLabel-root {
+    font-size: 14px !important;
+    font-weight: 500 !important;
+}
+
+.css-nxo287-MuiInputBase-input-MuiOutlinedInput-input {
+    font-size: 14px !important;
+    font-weight: 500 !important;
+}
+
+progress {
+    /* accent-color: coral !important; */
+    border-radius: 10px;
+    height: 6px;
+    width: 100%;
+}
+
+progress::-moz-progress-bar {
+    background-color: var(--primary);
 }

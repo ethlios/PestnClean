@@ -1,0 +1,199 @@
+// Banner
+.banner {
+    width: 100vw;
+    height: 300px;
+    background-color: var(--secondary-dark);
+}
+
+// Content
+.content {
+    display: flex;
+    flex-direction: row;
+    padding: 0 100px;
+    margin-top: 40px;
+    justify-content: space-between;
+}
+
+// INFORMATION
+.information {
+    width: 35%;
+
+    .information-1 {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 10px;
+        gap: 5px;
+    }
+
+    .information-1 a:hover {
+        color: var(--secondary);
+    }
+
+    .information-1 a {
+        font-size: 15px;
+        font-weight: 600;
+    }
+
+    .information-1 p,
+    .information-2 p {
+        font-size: 17px;
+        font-weight: 600;
+        margin-bottom: 5px;
+        text-decoration: 2px underline;
+        letter-spacing: -0.2px;
+    }
+}
+
+.social-icon {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    color: var(--primary);
+    margin-top: 10px;
+
+    svg {
+        font-size: 28px;
+    }
+}
+
+// Map
+.map {
+    width: 100%;
+    height: 300px;
+    margin-top: 30px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px;
+}
+
+.description {
+    margin-top: 30px;
+    font-size: 14px;
+    color: #434343;
+    font-weight: 600;
+    text-align: justify;
+    letter-spacing: -0.3px;
+}
+
+.watermark {
+    font-size: 17px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-top: 10px;
+}
+
+// FORM
+.form {
+    width: 50%;
+
+    h1 {
+        font-size: 29px;
+        font-weight: 700;
+    }
+}
+
+.service {
+    margin-top: 20px;
+}
+
+.form-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    text-decoration: 2px underline;
+    text-underline-offset: 4px;
+    letter-spacing: -0.2px;
+}
+
+.service-title {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+// Progress
+.progress {
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+}
+
+.progress-1 {
+    width: 50%;
+
+    p {
+        font-weight: 600;
+        letter-spacing: -0.5px;
+    }
+}
+
+.progress-value {
+    width: 100%;
+    height: 6px;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.16);
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+.progress-item {
+    height: 6px;
+    background-color: var(--secondary);
+    transition: all ease 0.5s;
+}
+
+.progress-item-first {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    height: 6px;
+    background-color: var(--secondary);
+    transition: all ease 0.5s;
+}
+
+.progress-item-last {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    height: 6px;
+    background-color: var(--secondary);
+    transition: all ease 0.5s;
+}
+
+// Form
+
+.form-wrapper {
+    width: 100%;
+}
+
+.form-content {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    margin-bottom: 20px;
+}
+
+.textarea {
+    border: solid 0.5px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    margin-top: 20px;
+    padding: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    resize: none;
+
+    &:hover {
+        border: solid 0.5px var(--primary);
+    }
+
+    &:focus {
+        border: solid 2px var(--primary);
+        outline: none;
+    }
+
+    &::placeholder {
+        color: rgba(0, 0, 0, 0.55);
+    }
+}
