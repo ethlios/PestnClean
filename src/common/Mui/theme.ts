@@ -7,11 +7,11 @@ export let theme = createTheme({
     },
     palette: {
         primary: {
-            main: '#023c2e',
+            main: '#0274be',
         },
         secondary: {
-            main: '#EBAE46;',
-            light: '#f8fafb',
+            main: '#78b461',
+            light: '#8c8d8f',
         },
         info: {
             main: '#000',

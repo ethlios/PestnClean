@@ -65,7 +65,7 @@ export default function Header(props: HeaderProps) {
         <div
             style={{
                 width: '100vw',
-                height: '80px',
+                height: '70px',
                 display: 'flex',
                 flexDirection: 'row',
                 alignItems: 'center',
@@ -76,7 +76,6 @@ export default function Header(props: HeaderProps) {
                 zIndex: 1000,
                 backgroundColor: scrollToTop > 0 ? '#fff' : 'transparent',
                 boxShadow: scrollToTop > 0 ? 'rgba(0, 0, 0, 0.2) 0px 5px 15px' : '',
-                transition: 'all ease .5s',
             }}
         >
             <Image alt="Logo công ty PESTNCLEAN" src={logo.src} width={176} height={100} />
