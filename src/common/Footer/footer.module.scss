@@ -1,0 +1,40 @@
+.footer {
+    margin: 1rem 0;
+
+    & > * {
+        padding: 1rem 0;
+    }
+
+    & > *:not(:first-child) {
+        border-top: 3px solid var(--secondary-dark);
+    }
+}
+
+.footer-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-content {
+
+    .footer-content-right {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+
+        & > * {
+            margin-bottom: 1rem;
+        }
+    }
+}
+
+.footer-bottom {
+    text-align: center;
+}
+
+.title {
+    font-weight: 700;
+    letter-spacing: 0.2px;
+    padding-bottom: 5px;
+}
