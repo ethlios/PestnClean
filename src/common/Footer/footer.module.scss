@@ -18,6 +18,22 @@
 
 .footer-content {
 
+    .footer-content-left {
+
+        .footer-icon {
+            display: flex;
+            align-items: center;
+
+            & > * {
+                margin-right: 1rem;
+            }
+        }
+
+        & > * {
+            margin-bottom: 1rem;
+        }
+    }
+
     .footer-content-right {
         display: flex;
         flex-wrap: wrap;

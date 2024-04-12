@@ -2,6 +2,9 @@ import classNames from 'classnames/bind';
 import Image from 'next/image';
 import Link from 'next/link';
 import logo from '../../../public/img/logo.png';
+import fbIcon from '../../../public/icon/facebook.svg';
+import linkedinIcon from '../../../public/icon/linkedin.svg';
+import youtubeIcon from '../../../public/icon/youtube.svg';
 import styles from './footer.module.scss';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
@@ -33,6 +36,11 @@ export default function Footer(props: FooterProps) {
                                     <p><strong>Địa chỉ: </strong>Lầu 8, 123 Lý Chính Thắng, P. Võ Thị Sau, Q.3</p>
                                     <p><strong>Điện thoại: </strong>0868 36 36 00</p>
                                     <p><strong>Email: </strong>sales@petnclea.vn</p>
+                                    <div className={cx('footer-icon')}>
+                                        <Image src={fbIcon} alt={'Facebook'} height={30} />
+                                        <Image src={linkedinIcon} alt={'Facebook'} height={30} />
+                                        <Image src={youtubeIcon} alt={'Facebook'} height={30} />
+                                    </div>
                                 </div>
                             </Grid>
                             <Grid item xs={12} md={6}>
