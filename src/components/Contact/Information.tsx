@@ -51,11 +51,16 @@ export default function InformationContactPage(props: IAppProps) {
                     loading="lazy"
                 ></iframe>
             </div>
-            <p className={cx('description')}>
-                {`Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-                been the industry's standard dummy text ever since the 1500s, when an unknown printer took a
-                galley of type and scrambled it to make a type specimen book.`}
-            </p>
+            <div className={cx('description')}>
+                <p>
+                    PestnClean cam kết phục vụ tận tâm mọi khách hàng và đối tác với đội ngũ tư vấn viên hỗ
+                    trợ liên tục 24/7.
+                </p>
+                <p>
+                    Chúng tôi tiến hành cấp dịch vụ theo khung thời gian theo yêu cầu của khách hàng mọi lúc
+                    mọi nơi. Liên hệ để được tư vấn và hỗ trợ cụ thể nhất qua email.
+                </p>
+            </div>
             <p className={cx('watermark')}>© PESTNCLEAN 2024</p>
         </div>
     );

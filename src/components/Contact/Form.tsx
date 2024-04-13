@@ -19,13 +19,18 @@ import { useEffect, useRef, useState } from 'react';
 import { services } from '~/constants/common';
 import ButtonCommon from '../Orther/Button';
 import styles from './contact.module.scss';
+import Toast from '../Orther/Toast';
 
 const cx = classNames.bind(styles);
 
-export interface IAppProps {}
+export interface IAppProps {
+    setData: any;
+    setIsConfirm: any;
+    data: any;
+    setShowToast: any;
+}
 
-export default function FormContactPage({}: IAppProps) {
-    const [data, setData] = useState<any>({});
+export default function FormContactPage({ setData, setIsConfirm, data, setShowToast }: IAppProps) {
     const [defaultService, setDefaultService] = useState<string>('Kiểm soát côn trùng');
     const [defaulServiceValue, setDefaultServiceValue] = useState<number>(0);
     const [defaulListValue, setDefaultListValue] = useState<number>(0);
@@ -40,6 +45,7 @@ export default function FormContactPage({}: IAppProps) {
     const isPhone = /(84|0[3|5|7|8|9])+([0-9]{8})\b/g;
     const form = useRef<any>('');
 
+    // Get List services
     useEffect(() => {
         const listFilter = services.filter((service) => service.title === defaultService);
 
@@ -52,6 +58,7 @@ export default function FormContactPage({}: IAppProps) {
         return () => setLists([]);
     }, [defaultService]);
 
+    // Submit Form
     const handleSubmit = (e: any) => {
         e.preventDefault();
 
@@ -67,16 +74,33 @@ export default function FormContactPage({}: IAppProps) {
 
         if (defaultList) {
             setData(data);
+            setIsConfirm(true);
+        } else {
+            setShowToast(true);
         }
-        // setOpenCotent(true);
 
         window.scrollTo({
-            top: 0,
+            top: 400,
             left: 0,
             behavior: 'smooth',
         });
     };
 
+    // Update
+
+    useEffect(() => {
+        if (!!data) {
+            setDefaultService(data.nganh);
+            setDefaultList(data.dichvu);
+            setName(data.name);
+            setEmail(data.email);
+            setPhone(data.phone);
+            setAddress(data.address);
+            setMessage(data.message);
+        }
+    }, [data]);
+
+    // Reset Form
     const handleReset = () => {
         setDefaultService('Kiểm soát côn trùng');
         setDefaultList('');
@@ -88,8 +112,6 @@ export default function FormContactPage({}: IAppProps) {
 
         setData('');
     };
-
-    console.log(data);
 
     return (
         <div className={cx('form')}>
@@ -118,7 +140,7 @@ export default function FormContactPage({}: IAppProps) {
                         <div
                             className={cx('progress-item')}
                             style={{
-                                width: name.length > 2 ? 'calc(100% /6)' : '0',
+                                width: !!name && name.length > 2 ? 'calc(100% /6)' : '0',
                             }}
                         ></div>
                         <div
@@ -136,7 +158,7 @@ export default function FormContactPage({}: IAppProps) {
                         <div
                             className={cx('progress-item-last')}
                             style={{
-                                width: address.length > 2 ? 'calc(100% /6)' : '0',
+                                width: !!address && address.length > 2 ? 'calc(100% /6)' : '0',
                             }}
                         ></div>
                     </div>

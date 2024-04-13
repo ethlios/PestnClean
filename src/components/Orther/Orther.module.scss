@@ -1,0 +1,17 @@
+.toast-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.toast {
+    padding: 15px 30px;
+    position: fixed;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 10px;
+    cursor: pointer;
+    z-index: 100;
+    transition: all ease 0.5s;
+}
