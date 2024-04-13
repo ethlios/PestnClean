@@ -91,7 +91,8 @@ input:focus {
     font-weight: 500 !important;
 }
 
-.css-nxo287-MuiInputBase-input-MuiOutlinedInput-input {
+.css-nxo287-MuiInputBase-input-MuiOutlinedInput-input,
+.css-mttclk {
     font-size: 14px !important;
     font-weight: 500 !important;
 }
