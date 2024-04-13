@@ -81,9 +81,13 @@ input:focus {
 }
 
 .css-vq0uqb-MuiFormLabel-root-MuiInputLabel-root,
-.css-1yu8n09,
-.css-9l3uo3 {
+.css-1yu8n09 {
     font-size: 14px !important;
+    font-weight: 500 !important;
+}
+
+.css-9l3uo3 {
+    font-size: 10px !important;
     font-weight: 500 !important;
 }
 
