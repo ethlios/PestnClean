@@ -3,7 +3,7 @@ import './globals.css';
 import { Merriweather } from 'next/font/google';
 import MuiSetUp from '../common/Mui/MuiSetup';
 
-const inter = Merriweather({ subsets: ['latin'], weight: ['300', '400', '700'] });
+const inter = Merriweather({ subsets: ['vietnamese'], weight: ['300', '400', '700'] });
 
 export const metadata: Metadata = {
     title: 'Create Next App',
