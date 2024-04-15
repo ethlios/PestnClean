@@ -118,9 +118,9 @@ export default function Footer(props: FooterProps) {
                         <Link href="/lienhe">Liên hệ</Link>
                     </div>
                 </div>
-                <div className={cx('copyright')}>
+                <p className={cx('copyright')}>
                     Copyright © 2024 Petsnclean | Công ty TNHH Thương Mại Dịch Vụ Xuất Nhập Khẩu Nguyễn Duy
-                </div>
+                </p>
             </div>
         </div>
     );
