@@ -1,3 +1,3 @@
-export default function ContactPageLayout({ children }: { children: React.ReactNode }) {
+export default function AboutPageLayout({ children }: { children: React.ReactNode }) {
     return children;
 }

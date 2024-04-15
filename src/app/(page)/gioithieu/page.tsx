@@ -11,6 +11,7 @@ export default function AboutPage(props: IAppProps) {
 
     return (
         <div className={'container'}>
+            {/*Header title*/}
             <div className={'grid grid-cols-2 my-20'}>
                 <div className={'col-span-2 md:col-span-1'}>
                     <h1 className={cx('head-title')}>
@@ -24,6 +25,7 @@ export default function AboutPage(props: IAppProps) {
                     </p>
                 </div>
             </div>
+            {/*Banner*/}
             <div className={'my-20'}>
                 <Image
                     src={''}
@@ -33,6 +35,7 @@ export default function AboutPage(props: IAppProps) {
                     className={'w-full bg-gray-200 h-auto md:h-96'}
                 />
             </div>
+            {/*Text align right*/}
             <div className={'grid grid-cols-2 my-20'}>
                 <div className={'col-span-2 md:col-start-2 md:col-span-1'}>
                     <p className={'text-right'}>Lorem Ipsum is simply dummy text of the printing and typesetting
@@ -42,6 +45,8 @@ export default function AboutPage(props: IAppProps) {
                     </p>
                 </div>
             </div>
+            {/*Company Scope*/}
+            {/*1st scope*/}
             <div className={'grid grid-cols-12 gap-6 my-20'}>
                 <div className={'col-span-12 md:col-span-5'}>
                     <div className={'mb-5'}>
@@ -62,6 +67,7 @@ export default function AboutPage(props: IAppProps) {
                         of type and scrambled it to make a type specimen book.
                     </p>
                 </div>
+                {/*2nd scope*/}
                 <div className={'col-span-12 md:col-span-7'}>
                     <div className={'mb-5'}>
                         <Image
@@ -82,6 +88,7 @@ export default function AboutPage(props: IAppProps) {
                     </p>
                 </div>
             </div>
+            {/*3rd scope*/}
             <div className={'grid grid-cols-4 mt-20'}>
                 <div className={'col-span-4 md:col-start-2 md:col-span-2 text-center'}>
                     <h2 className={cx('title') + ' mb-0'}>3. GIÁ TRỊ CỐT LÕI</h2>
@@ -90,6 +97,7 @@ export default function AboutPage(props: IAppProps) {
                     </p>
                 </div>
             </div>
+            {/*Core values*/}
             <div className={'grid grid-cols-4 gap-6 my-10'}>
                 {Array.from({ length: 4 }).map((_, index) => (
                     <div key={index} className={'col-span-4 md:col-span-2 xl:col-span-1'}>
