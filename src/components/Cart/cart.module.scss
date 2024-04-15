@@ -1,0 +1,24 @@
+.nav-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.panel {
+
+    .title {
+        font-weight: 600;
+        text-decoration: underline;
+        text-transform: uppercase;
+    }
+
+    .description {
+        font-size: 0.8rem;
+        color: var(--secondary-dark);
+    }
+
+    .currency {
+        font-weight: 600;
+        text-decoration: underline;
+    }
+}
