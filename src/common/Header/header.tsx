@@ -45,7 +45,8 @@ const link = [
 
 const cx = classNames.bind(styles);
 
-export interface HeaderProps {}
+export interface HeaderProps {
+}
 
 export default function Header(props: HeaderProps) {
     const path = usePathname();
@@ -63,6 +64,7 @@ export default function Header(props: HeaderProps) {
 
     return (
         <div
+            className={'container'}
             style={{
                 width: '100vw',
                 height: '70px',
@@ -70,7 +72,6 @@ export default function Header(props: HeaderProps) {
                 flexDirection: 'row',
                 alignItems: 'center',
                 justifyContent: 'space-between',
-                padding: '0 100px',
                 position: 'sticky',
                 top: 0,
                 zIndex: 1000,
