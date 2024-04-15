@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react';
 import bagIcon from '../../../public/icon/bag-shopping.svg';
 import searchIcon from '../../../public/icon/magnifying-glass.svg';
 import logo from '../../../public/img/logo.png';
-import styles from './common.module.scss';
+import styles from './header.module.scss';
 
 const link = [
     {
@@ -64,77 +64,48 @@ export default function Header(props: HeaderProps) {
 
     return (
         <div
-            className={'container'}
+            className={'py-4 ' + cx('header')}
             style={{
-                width: '100vw',
-                height: '70px',
-                display: 'flex',
-                flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                position: 'sticky',
-                top: 0,
-                zIndex: 1000,
                 backgroundColor: scrollToTop > 0 ? '#fff' : 'transparent',
                 boxShadow: scrollToTop > 0 ? 'rgba(0, 0, 0, 0.2) 0px 5px 15px' : '',
             }}
         >
-            <Image alt="Logo công ty PESTNCLEAN" src={logo.src} width={176} height={100} />
-            <div
-                style={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    gap: '30px',
-                }}
-            >
-                <ul
-                    style={{
-                        display: 'flex',
-                        flexDirection: 'row',
-                        gap: '20px',
-                        fontSize: '15px',
-                        transition: ' all ease 0.5s',
-                    }}
-                    className={cx('link')}
-                >
-                    {link.map((item) => {
-                        return (
-                            <li key={item.id}>
-                                <Link
-                                    href={item.pathname}
-                                    style={{
-                                        color: path === item.pathname ? 'var(--primary)' : '',
-                                        textDecoration: path === item.pathname ? '2px underline' : '',
-                                        textUnderlineOffset: path === item.pathname ? '5px' : '',
-                                    }}
-                                >
-                                    {item.title}
-                                </Link>
-                            </li>
-                        );
-                    })}
-                </ul>
-            </div>
-            <div
-                style={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    gap: '18px',
-                    justifyContent: 'center',
-                }}
-            >
-                <Image
-                    alt="Ảnh giỏ hàng PESTNCLEAN"
-                    src={searchIcon.src}
-                    width={18}
-                    height={30}
-                    className="opacity"
-                />
-                <a style={{}} className="opacity">
-                    <Image alt="Ảnh giỏ hàng PESTNCLEAN" src={bagIcon.src} width={18} height={30} />
-                </a>
+            <div className={'container'}>
+                <div className={'flex justify-between items-center'}>
+                    <Image alt="Logo công ty PESTNCLEAN" src={logo.src} width={176} height={100} />
+                    <div className={cx('header-link')}>
+                        <ul className={cx('link')}>
+                            {link.map((item) => {
+                                return (
+                                    <li key={item.id}>
+                                        <Link
+                                            href={item.pathname}
+                                            style={{
+                                                color: path === item.pathname ? 'var(--primary)' : '',
+                                                textDecoration: path === item.pathname ? '2px underline' : '',
+                                                textUnderlineOffset: path === item.pathname ? '5px' : '',
+                                            }}
+                                        >
+                                            {item.title}
+                                        </Link>
+                                    </li>
+                                );
+                            })}
+                        </ul>
+                    </div>
+                    <div className={cx('header-icon')}>
+                        <Image
+                            alt="Ảnh tìm kiếm PESTNCLEAN"
+                            src={searchIcon.src}
+                            width={18}
+                            height={30}
+                            className="opacity"
+                        />
+                        <Link href={'/giohang'} style={{}} className="opacity">
+                            <Image alt="Ảnh giỏ hàng PESTNCLEAN" src={bagIcon.src} width={18} height={30} />
+                        </Link>
+                    </div>
+                </div>
             </div>
         </div>
     );
