@@ -152,3 +152,8 @@ progress::-moz-progress-bar {
 .ql-clipboard {
     display: none;
 }
+
+/* CUSTOM TAILWIND */
+.shadow-lg {
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 15px;
+}

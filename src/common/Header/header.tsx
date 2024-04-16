@@ -45,8 +45,7 @@ const link = [
 
 const cx = classNames.bind(styles);
 
-export interface HeaderProps {
-}
+export interface HeaderProps {}
 
 export default function Header(props: HeaderProps) {
     const path = usePathname();
@@ -132,9 +131,9 @@ export default function Header(props: HeaderProps) {
                     height={30}
                     className="opacity"
                 />
-                <a style={{}} className="opacity">
+                <Link href={'/giohang'} className="opacity">
                     <Image alt="Ảnh giỏ hàng PESTNCLEAN" src={bagIcon.src} width={18} height={30} />
-                </a>
+                </Link>
             </div>
         </div>
     );
