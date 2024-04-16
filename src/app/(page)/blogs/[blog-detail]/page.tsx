@@ -1,6 +1,7 @@
 import classNames from 'classnames/bind';
 import Link from 'next/link';
 import BlogComment from '~/components/Blogs/BlogsDetail/BlogComment';
+import BlogSuggest from '~/components/Blogs/BlogsDetail/BlogSuggest';
 import BlogsBanner from '~/components/Blogs/BlogsDetail/BlogsBanner';
 import BlogDetails from '~/components/Blogs/BlogsDetail/BlogsDetail';
 import styles from '~/components/Blogs/BlogsDetail/blogDetail.module.scss';
@@ -26,6 +27,7 @@ export default function BlogsDetailPage(props: IAppProps) {
             {/* comment & suggest */}
             <div className={cx('blogs-last')}>
                 <BlogComment />
+                <BlogSuggest />
             </div>
         </div>
     );

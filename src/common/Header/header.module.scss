@@ -41,25 +41,3 @@
         text-underline-offset: 4px;
     }
 }
-
-.header {
-    justify-content: space-between;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
-
-.header-icon {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 18px;
-    justify-content: center;
-}
-
-.header-link {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 30px;
-}

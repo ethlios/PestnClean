@@ -5,10 +5,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import bagIcon from '../../../public/icon/bag-shopping.svg';
-import searchIcon from '../../../public/icon/magnifying-glass.svg';
 import logo from '../../../public/img/logo.png';
 import styles from './header.module.scss';
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
+import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 
 const link = [
     {
@@ -64,48 +65,80 @@ export default function Header(props: HeaderProps) {
 
     return (
         <div
-            className={'py-4 ' + cx('header')}
+            className={'container'}
             style={{
+                width: '100vw',
+                height: '70px',
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                position: 'sticky',
+                top: 0,
+                zIndex: 1000,
                 backgroundColor: scrollToTop > 0 ? '#fff' : 'transparent',
                 boxShadow: scrollToTop > 0 ? 'rgba(0, 0, 0, 0.2) 0px 5px 15px' : '',
             }}
         >
-            <div className={'container'}>
-                <div className={'flex justify-between items-center'}>
-                    <Image alt="Logo công ty PESTNCLEAN" src={logo.src} width={176} height={100} />
-                    <div className={cx('header-link')}>
-                        <ul className={cx('link')}>
-                            {link.map((item) => {
-                                return (
-                                    <li key={item.id}>
-                                        <Link
-                                            href={item.pathname}
-                                            style={{
-                                                color: path === item.pathname ? 'var(--primary)' : '',
-                                                textDecoration: path === item.pathname ? '2px underline' : '',
-                                                textUnderlineOffset: path === item.pathname ? '5px' : '',
-                                            }}
-                                        >
-                                            {item.title}
-                                        </Link>
-                                    </li>
-                                );
-                            })}
-                        </ul>
-                    </div>
-                    <div className={cx('header-icon')}>
-                        <Image
-                            alt="Ảnh tìm kiếm PESTNCLEAN"
-                            src={searchIcon.src}
-                            width={18}
-                            height={30}
-                            className="opacity"
-                        />
-                        <Link href={'/giohang'} style={{}} className="opacity">
-                            <Image alt="Ảnh giỏ hàng PESTNCLEAN" src={bagIcon.src} width={18} height={30} />
-                        </Link>
-                    </div>
-                </div>
+            <Image alt="Logo công ty PESTNCLEAN" src={logo.src} width={176} height={100} />
+            <div
+                style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    gap: '30px',
+                }}
+            >
+                <ul
+                    style={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        gap: '20px',
+                        fontSize: '15px',
+                        transition: ' all ease 0.5s',
+                    }}
+                    className={cx('link')}
+                >
+                    {link.map((item) => {
+                        return (
+                            <li key={item.id}>
+                                <Link
+                                    href={item.pathname}
+                                    style={{
+                                        color: path === item.pathname ? 'var(--primary)' : '',
+                                        textDecoration: path === item.pathname ? '2px underline' : '',
+                                        textUnderlineOffset: path === item.pathname ? '5px' : '',
+                                    }}
+                                >
+                                    {item.title}
+                                </Link>
+                            </li>
+                        );
+                    })}
+                </ul>
+            </div>
+            <div
+                style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    gap: '12px',
+                    justifyContent: 'center',
+                }}
+            >
+                <SearchOutlinedIcon
+                    sx={{
+                        position: 'relative',
+                        top: '2px',
+                    }}
+                    className="icon-hover"
+                />
+                <Link href={'/giohang'} className="icon-hover">
+                    <ShoppingBagOutlinedIcon />
+                </Link>
+                <Link href="/login" className="icon-hover">
+                    <AccountCircleOutlinedIcon />
+                </Link>
             </div>
         </div>
     );
