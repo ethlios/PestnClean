@@ -1,15 +1,59 @@
 //Titles
 .head-title {
-    font-size: 2.5rem;
+    font-size: 2.4rem;
     font-weight: 700;
     margin-bottom: 20px;
     line-height: normal;
-    letter-spacing: 5px;
+    letter-spacing: 0.5px;
+}
+
+.text-common {
+    font-size: 14.5px;
+    color: var(--text-black);
+    font-weight: 600;
+}
+
+.text-common-plus {
+    font-size: 16px;
+    color: var(--text-black);
+    font-weight: 600;
 }
 
 .title {
-    font-size: 2rem;
-    font-weight: 500;
-    margin-bottom: 20px;
+    font-size: 23px;
+    font-weight: 700;
+    margin-bottom: 10px;
     text-decoration: underline;
+}
+
+.img {
+    height: 250px;
+}
+
+// Banner
+.about-banner {
+    position: relative;
+}
+
+.banner-arrow {
+    position: absolute;
+    top: -40px;
+    right: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    height: 80px;
+    border: solid 1.4px #000;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all ease 0.5s;
+
+    svg {
+        font-size: 30px;
+    }
+
+    &:hover {
+        background-color: #79b46189;
+    }
 }
