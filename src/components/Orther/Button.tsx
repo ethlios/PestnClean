@@ -13,6 +13,7 @@ export interface IAppProps {
     setDefaultService?: any;
     setDefaultListValue?: any;
     setDefaultList?: any;
+    color?: string;
 }
 
 export default function ButtonCommon({
@@ -26,6 +27,7 @@ export default function ButtonCommon({
     setDefaultService,
     setDefaultListValue,
     setDefaultList,
+    color,
 }: IAppProps) {
     return (
         <Button
@@ -40,15 +42,31 @@ export default function ButtonCommon({
                     ? 'outlined'
                     : 'contained'
             }
+            color={color === 'secondary' ? 'secondary' : 'primary'}
             sx={{
+                color: color === 'secondary' ? '#fff' : '',
                 textTransform: !!path ? 'uppercase' : 'initial',
                 fontWeight: '600',
                 fontSize: path ? '' : '13px',
                 ':hover': {
                     backgroundColor:
                         rule === 'rule-1' ? 'var(--primary)' : rule2 === 'rule-1' ? 'var(--primary)' : '#fff',
-                    outline: rule === 'rule-1' ? '' : rule2 === 'rule-1' ? '' : 'solid 2px var(--primary)',
-                    color: rule === 'rule-1' ? '#fff' : rule2 === 'rule-1' ? '#fff' : 'var(--primary)',
+                    outline:
+                        color === 'secondary'
+                            ? 'solid 2px var(--secondary)'
+                            : rule === 'rule-1'
+                            ? ''
+                            : rule2 === 'rule-1'
+                            ? ''
+                            : 'solid 2px var(--primary)',
+                    color:
+                        color === 'secondary'
+                            ? 'var(--secondary)'
+                            : rule === 'rule-1'
+                            ? '#fff'
+                            : rule2 === 'rule-1'
+                            ? '#fff'
+                            : 'var(--primary)',
                 },
             }}
             onClick={() => {

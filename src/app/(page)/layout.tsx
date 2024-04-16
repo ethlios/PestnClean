@@ -1,13 +1,24 @@
+'use client';
+
 import 'tippy.js/dist/tippy.css';
 import Header from '~/common/Header/header';
 import Footer from '~/common/Footer/footer';
+import { usePathname } from 'next/navigation';
 
 export default function ComponentConnectLayout({ children }: { children: React.ReactNode }) {
+    const pathname = usePathname();
+
     return (
         <div>
-            <Header></Header>
-            {children}
-            <Footer></Footer>
+            {pathname === '/login' ? (
+                children
+            ) : (
+                <>
+                    <Header></Header>
+                    {children}
+                    <Footer></Footer>
+                </>
+            )}
         </div>
     );
 }

@@ -18,9 +18,12 @@ export default function AboutCPPage(props: IAppProps) {
                         HỆ SINH THÁI GIẢI PHÁP VỆ SINH VÀ KIỂM SOÁT CÔN TRÙNG TOÀN DIỆN
                     </h1>
                     <p className={cx('text-common')}>
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-                        has been the standard dummy text ever since the 1500s, when an unknown printer took a
-                        galley of type and scrambled it to make a type specimen book.
+                        Đến với PestnClean, bạn sẽ được cung cấp dịch vụ vệ sinh và kiểm soát côn trùng uy tín
+                        hàng đầu Việt Nam. <br />
+                        <br /> Được sáng lập bởi ông Nguyễn Thanh Duy – Người với nhiều năm kinh nghiệm trong
+                        lĩnh vực. PestnClean hiểu rõ những nỗi lo lắng, các vấn đề mà những người điều hành
+                        các Hotels & Resorts, F&B Retail và Nhà máy gặp phải và những thách thức để xử lý
+                        chúng.
                     </p>
                 </div>
             </div>

@@ -3,14 +3,12 @@
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import SearchIcon from '@mui/icons-material/Search';
 import classNames from 'classnames/bind';
-import Image from 'next/image';
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { blogs, btnLists } from '~/constants/blogs';
-import img from '../../../public/img/banner 1.jpg';
+import { nameToLink } from '~/libs/orthers/nameToLink';
 import ButtonCommon from '../Orther/Button';
 import styles from './blogs.module.scss';
-import { nameToLink } from '~/libs/orthers/nameToLink';
-import Link from 'next/link';
 
 const cx = classNames.bind(styles);
 

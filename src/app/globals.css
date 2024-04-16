@@ -28,6 +28,7 @@ html * {
 }
 
 p,
+b,
 a,
 input,
 span,
@@ -54,6 +55,11 @@ html *::-webkit-scrollbar {
 
 .opacity {
     cursor: pointer;
+}
+
+.icon-hover:hover {
+    color: #0274be;
+    transition: all ease 0.5s;
 }
 
 .opacity:hover {

@@ -9,6 +9,9 @@ import bagIcon from '../../../public/icon/bag-shopping.svg';
 import searchIcon from '../../../public/icon/magnifying-glass.svg';
 import logo from '../../../public/img/logo.png';
 import styles from './common.module.scss';
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
+import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 
 const link = [
     {
@@ -120,19 +123,22 @@ export default function Header(props: HeaderProps) {
                     display: 'flex',
                     flexDirection: 'row',
                     alignItems: 'center',
-                    gap: '18px',
+                    gap: '12px',
                     justifyContent: 'center',
                 }}
             >
-                <Image
-                    alt="Ảnh giỏ hàng PESTNCLEAN"
-                    src={searchIcon.src}
-                    width={18}
-                    height={30}
-                    className="opacity"
+                <SearchOutlinedIcon
+                    sx={{
+                        position: 'relative',
+                        top: '2px',
+                    }}
+                    className="icon-hover"
                 />
-                <Link href={'/giohang'} className="opacity">
-                    <Image alt="Ảnh giỏ hàng PESTNCLEAN" src={bagIcon.src} width={18} height={30} />
+                <Link href={'/giohang'} className="icon-hover">
+                    <ShoppingBagOutlinedIcon />
+                </Link>
+                <Link href="/login" className="icon-hover">
+                    <AccountCircleOutlinedIcon />
                 </Link>
             </div>
         </div>
