@@ -2,45 +2,93 @@ import classNames from 'classnames/bind';
 import styles from './faq.module.scss';
 import Question from './Question';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import Link from 'next/link';
 
 const cx = classNames.bind(styles);
 
-export interface IFaqProps {
-}
+export interface IFaqProps {}
+
+const questionsDaily = [
+    {
+        text: 'Phí vận chuyện?',
+        answer: '',
+    },
+    {
+        text: 'Hình thức thanh toán?',
+        answer: '',
+    },
+    {
+        text: 'Bao lâu tôi nhận được hàng?',
+        answer: '',
+    },
+    {
+        text: 'Hướng dẫn mua hàng?',
+        answer: '',
+    },
+];
+
+const questionsCommon = [
+    {
+        text: 'Chính sách bảo mật thông tin.',
+        answer: '',
+    },
+    {
+        text: 'Chính sách bảo hành, đổi trả.',
+        answer: '',
+    },
+    {
+        text: 'Hoàn trả và hoàn tiền.',
+        answer: '',
+    },
+    {
+        text: 'Kiểm tra trạng thái đơn hàng.',
+        answer: '',
+    },
+];
 
 export default function FaqCPPage(props: IFaqProps) {
     return (
         <div className={'container'}>
-            <div className={'my-5 text-center'}>
+            <div className={'mt-10 mb-5 text-center'}>
                 <h1 className={cx('head-title')}>FAQS</h1>
-                <b>Chúng tôi hi vọng có thể giúp được bạn</b>
+                <p className={cx('head-description')}>Chúng tôi hi vọng có thể giúp được bạn!</p>
             </div>
             <div className={'flex justify-center'}>
                 <div className={'w-full md:w-5/6 lg:w-3/4'}>
-                    <div className="my-3">
-                        <h2 className={cx('title')}>Câu hỏi thường gặp</h2>
-                        <div className={'my-3'}>
-                            {Array.from({ length: 3 }).map((_, index) => (
-                                <Question key={index} />
+                    <div className="my-8">
+                        <p className={cx('title')}>Câu hỏi thường gặp</p>
+                        <div className={'my-5'}>
+                            {questionsDaily.map((question, index) => (
+                                <Question key={index} text={question.text} />
                             ))}
                         </div>
                     </div>
-                    <div className="my-3">
-                        <h2 className={cx('title')}>Câu hỏi chung</h2>
-                        <div className={'my-3'}>
-                            {Array.from({ length: 4 }).map((_, index) => (
-                                <Question key={index} />
+                    <div className="my-8">
+                        <p className={cx('title')}>Câu hỏi chung</p>
+                        <div className={'my-5'}>
+                            {questionsCommon.map((question, index) => (
+                                <Question key={index} text={question.text} />
                             ))}
                         </div>
                     </div>
                     <div className="mt-20">
                         <div className="flex justify-end">
-                            <div className={'p-3 rounded-lg text-green-500 bg-green-100'}>
-                                <h3>Vẫn chưa giúp được bạn?</h3>
-                                <div className={'flex justify-between mt-2'}>
-                                    <h3>Liên hệ</h3>
+                            <div
+                                className={'p-8 rounded-lg'}
+                                style={{
+                                    backgroundColor: '#79b4614e',
+                                    color: 'var(--secondary)',
+                                }}
+                            >
+                                <h3 style={{ fontWeight: 'bold' }}>Vẫn chưa giúp được bạn?</h3>
+                                <Link
+                                    href="/lienhe"
+                                    className={`${cx('link-hover')} flex justify-between mt-4`}
+                                >
+                                    <p className={cx('contact-link')}>Liên hệ</p>
                                     <ArrowForwardIcon />
-                                </div>
+                                </Link>
+                                <div className={cx('card-decor')}></div>
                             </div>
                         </div>
                     </div>

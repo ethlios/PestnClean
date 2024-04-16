@@ -1,6 +1,7 @@
 import * as React from 'react';
 import classNames from 'classnames/bind';
 import styles from '../product.module.scss';
+import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
 
 const cx = classNames.bind(styles);
 
@@ -11,6 +12,12 @@ export default function AllProduct(props: IAppProps) {
         <div className={cx('product-event')}>
             <h1>Tất cả sản phẩm</h1>
             <div className={cx('horizontal-decor')}></div>
+            <div className={cx('filter-list')}>
+                <p>Bộ lọc:</p>
+                <div>
+                    Tất cả <ClearOutlinedIcon />
+                </div>
+            </div>
             <div className={cx('product-item-all')}>
                 {Array.from({ length: 9 }).map((_, index) => {
                     return (
@@ -24,6 +31,13 @@ export default function AllProduct(props: IAppProps) {
                         </div>
                     );
                 })}
+            </div>
+            <div className={cx('number-page')}>
+                <p>1</p>
+                <p>2</p>
+                <p>3</p>
+                <p>4</p>
+                <p>5</p>
             </div>
         </div>
     );
