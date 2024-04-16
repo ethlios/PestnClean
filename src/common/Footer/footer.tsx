@@ -115,7 +115,7 @@ export default function Footer(props: FooterProps) {
                     <div className={cx('khac')}>
                         <p className={cx('title')}>KHÁC</p>
                         <div className={cx('decor')}></div>
-                        <Link href={''}>Hỏi đáp</Link>
+                        <Link href={'/hoidap'}>Hỏi đáp</Link>
                         <Link href="/lienhe">Liên hệ</Link>
                     </div>
                 </div>
