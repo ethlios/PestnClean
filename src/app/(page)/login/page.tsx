@@ -44,7 +44,7 @@ export default function LoginPage(props: IAppProps) {
                     <h1>Title</h1>
                     <p
                         style={{
-                            color: !theme ? 'var(--text-black)' : 'rgba(255,255,255,0.7)',
+                            color: !theme ? 'var(--text-black)' : 'rgba(255,255,255,0.8)',
                         }}
                     >
                         Lorem Ipsum is simply dummy text of the printing and typesetting industry.

@@ -38,7 +38,7 @@ export default function BlogDetails(props: IAppProps) {
                     <div className={cx('hr-decor')}></div>
                     <div className={cx('list-icon')}>
                         <FavoriteBorderIcon />
-                        <ChatOutlinedIcon />
+                        <ChatOutlinedIcon onClick={() => smoothScroll('#comment-blogs')} />
                         <FacebookIcon />
                         <XIcon />
                     </div>

@@ -14,7 +14,7 @@ export default function BlogComment(props: IAppProps) {
     return (
         <div className={cx('comment-wrapper')}>
             <h1>ĐÁNH GIÁ</h1>
-            <div className={cx('input-list')}>
+            <div className={cx('input-list')} id="comment-blogs">
                 <input type="text" placeholder="Tên..." />
                 <input type="email" placeholder="Email..." />
             </div>

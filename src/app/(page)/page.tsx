@@ -8,8 +8,8 @@ import TextImage from '~/components/Home/TextImage';
 export default function Home() {
     return (
         <main>
-            {/*<BannerHomePage />*/}
-            <TextImage />
+            {/* <BannerHomePage /> */}
+            {/* <TextImage /> */}
             <div
                 style={{
                     height: '1000px',

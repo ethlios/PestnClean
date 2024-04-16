@@ -67,7 +67,7 @@ export default function LoginForm({ theme, setTheme }: IAppProps) {
                 />
                 <p
                     style={{
-                        color: !theme ? 'var(--text-black)' : 'rgba(255,255,255,0.7)',
+                        color: !theme ? 'var(--text-black)' : 'rgba(255,255,255,0.8)',
                     }}
                 >
                     Lorem Ipsum is simply dummy text of the printing and typesetting industry.
@@ -87,7 +87,7 @@ export default function LoginForm({ theme, setTheme }: IAppProps) {
                         })}
                     />
                     <input
-                        type="text"
+                        type="password"
                         placeholder="Mật khẩu..."
                         className={cx({
                             blackTheme: !theme,
@@ -112,7 +112,7 @@ export default function LoginForm({ theme, setTheme }: IAppProps) {
                     ></div>
                     <p
                         style={{
-                            color: !theme ? 'var(--text-black)' : 'rgba(255,255,255,0.7)',
+                            color: !theme ? 'var(--text-black)' : 'rgba(255,255,255,0.8)',
                             transition: 'all ease .5s',
                         }}
                     >
@@ -127,7 +127,7 @@ export default function LoginForm({ theme, setTheme }: IAppProps) {
                 </div>
                 <p
                     style={{
-                        color: !theme ? 'var(--text-black)' : 'rgba(255,255,255,0.7)',
+                        color: !theme ? 'var(--text-black)' : 'rgba(255,255,255,0.8)',
                         transition: 'all ease .5s',
                     }}
                 >
@@ -141,7 +141,7 @@ export default function LoginForm({ theme, setTheme }: IAppProps) {
                 <div className={cx('button-list')}>
                     <button
                         style={{
-                            color: !theme ? 'var(--text-black)' : 'rgba(255,255,255,0.7)',
+                            color: !theme ? '' : 'rgba(255,255,255,0.8)',
                         }}
                     >
                         <GoogleIcon />
@@ -149,7 +149,7 @@ export default function LoginForm({ theme, setTheme }: IAppProps) {
                     </button>
                     <button
                         style={{
-                            color: !theme ? 'var(--text-black)' : 'rgba(255,255,255,0.7)',
+                            color: !theme ? '' : 'rgba(255,255,255,0.8)',
                         }}
                     >
                         <FacebookOutlinedIcon />

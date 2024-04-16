@@ -29,7 +29,6 @@
 
 .logo {
     width: 176px;
-    height: 42px;
     object-position: center;
     object-fit: cover;
 }
@@ -318,7 +317,7 @@
         width: 100%;
         background-color: transparent;
         transition: all ease 0.5s;
-        color: #000;
+        color: var(--text-black);
         display: flex;
         gap: 8px;
         align-items: center;
