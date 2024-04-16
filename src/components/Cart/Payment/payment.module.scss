@@ -1,3 +1,4 @@
+//Header title
 .link {
     display: flex;
     flex-direction: row;
@@ -29,47 +30,6 @@
     margin-bottom: 30px;
 }
 
-// Product
-
-.product-category {
-    color: var(--primary);
-    font-size: 12px;
-    font-weight: 600;
-    text-transform: uppercase;
-}
-
-.product-name {
-    font-size: 16px;
-    font-weight: 600;
-}
-
-.product-info {
-    display: flex;
-    justify-content: space-between;
-}
-
-.price {
-    display: flex;
-    gap: 10px;
-    font-weight: 600;
-    color: var(--text-black);
-    font-size: 14.5px;
-    justify-content: center;
-    align-items: center;
-}
-
-.price-default {
-    font-size: 13px;
-    font-weight: 500px;
-    font-style: italic;
-}
-
-.nav-title {
-    font-size: 1.5rem;
-    font-weight: 700;
-    text-transform: uppercase;
-}
-
 //Panel
 .title {
     font-weight: 600;
@@ -86,4 +46,3 @@
     font-weight: 600;
     text-decoration: underline;
 }
-

@@ -7,7 +7,7 @@
 
 .banner-img {
     height: 300px;
-    width: 100wh;
+    width: 100%;
     object-fit: cover;
     object-position: center;
 }
@@ -45,8 +45,7 @@
         background-color: transparent;
         color: #fff;
         font-size: 12px;
-        font-weight: 300px;
-        width: 100%;
+        font-weight: 300;
         height: 40px;
         width: 60%;
     }
