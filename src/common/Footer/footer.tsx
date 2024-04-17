@@ -100,9 +100,9 @@ export default function Footer(props: FooterProps) {
                     <div className={cx('dichvu')}>
                         <p className={cx('title')}>DỊCH VỤ</p>
                         <div className={cx('decor')}></div>
-                        <Link href={'/kiemsoatcontrung'}>Kiểm soát côn trùng</Link>
-                        <Link href={'/dichvuvesinh'}>Dịch vụ vệ sinh</Link>
-                        <Link href={''}>Giải pháp vệ sinh</Link>
+                        <Link href={'/dichvu/kiem-soat-con-trung'}>Kiểm soát côn trùng</Link>
+                        <Link href={'/dichvu/dich-vu-ve-sinh'}>Dịch vụ vệ sinh</Link>
+                        <Link href={'/dichvu/giai-phap-ve-sinh'}>Giải pháp vệ sinh</Link>
                     </div>
                     <div className={cx('danhmuc')}>
                         <p className={cx('title')}>CHÍNH SÁCH</p>
