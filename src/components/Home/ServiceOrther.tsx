@@ -51,7 +51,7 @@ export default function ServiceAds(props: IAppProps) {
                 {otherService.map((item, index) => {
                     return (
                         <Link
-                            href={`/${nameToLink(item.title)}`}
+                            href={`/dichvu/${nameToLink(item.title)}`}
                             key={index}
                             className={cx('service-item')}
                             onMouseOver={() => setCurrentService(index)}
@@ -66,13 +66,24 @@ export default function ServiceAds(props: IAppProps) {
                                 className={cx('blogs-img')}
                             /> */}
                             <div className={cx('service-img')}></div>
-                            {currentService === index ? (
-                                <p className={cx('service-description')}>{item.description}</p>
-                            ) : (
-                                <div className={cx('service-title')}>
-                                    <p>{item.title}</p>
-                                </div>
-                            )}
+                            <p
+                                className={cx('service-description')}
+                                style={{
+                                    opacity: currentService === index ? 1 : 0,
+                                    transition: 'all ease .5s',
+                                }}
+                            >
+                                {item.description}
+                            </p>
+                            <div
+                                className={cx('service-title')}
+                                style={{
+                                    opacity: currentService === index ? 0 : 1,
+                                    transition: 'all ease .5s',
+                                }}
+                            >
+                                <p>{item.title}</p>
+                            </div>
                         </Link>
                     );
                 })}

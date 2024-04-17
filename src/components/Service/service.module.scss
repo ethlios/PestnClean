@@ -6,40 +6,61 @@
 }
 
 .text-common {
-    font-size: 1rem;
+    font-size: 14.5px;
     color: var(--text-black);
     font-weight: 600;
+    letter-spacing: -0.3px;
 }
 
 .bg-text {
     background-color: var(--primary);
     color: white;
     padding: 0.5rem 1rem;
-    font-size: 1rem;
-    font-weight: 700;
+    font-size: 14px;
+    font-weight: 600;
     text-align: center;
+    text-transform: uppercase;
+    cursor: pointer;
+    letter-spacing: -0.5px;
+    transition: all ease 0.5s;
+
+    &:hover {
+        opacity: 0.6;
+    }
 }
 
 .card-title {
-    font-size: 1.2rem;
-    font-weight: 700;
+    font-size: 16px;
+    font-weight: 600;
     text-transform: uppercase;
     margin-bottom: 10px;
+    letter-spacing: -0.5px;
 }
 
 .card-hover {
     position: relative;
-    border: 2px solid black;
     border-radius: 2rem;
     cursor: pointer;
+    height: 350px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 15px;
 
     & > * {
         border-radius: 2rem;
     }
 }
 
+.card-img {
+    background-color: #fff;
+    width: 100%;
+    height: 250px;
+}
+
 .img-wrapper {
     overflow: hidden;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
 }
 
 .card-content {
@@ -50,7 +71,7 @@
     width: 100%;
     height: 100%;
     z-index: 100;
-    padding: 2rem;
+    padding: 1.5rem;
 }
 
 .card-number {
@@ -60,8 +81,17 @@
 
 .decoration {
     width: 100%;
-    border-width: 2px;
+    border-width: 1px;
     border-color: var(--secondary);
     margin-bottom: 0.9rem;
 }
 
+.content-title {
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+    text-transform: uppercase;
+    text-decoration: 2px underline;
+    margin-top: 50px;
+    margin-bottom: 20px;
+}

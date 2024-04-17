@@ -3,14 +3,12 @@ import styles from './service.module.scss';
 
 const cx = classNames.bind(styles);
 
-export interface IAppProps {
-}
+export interface IAppProps {}
 
 export default function ServiceBanner(props: IAppProps) {
     return (
-        <div className="mt-10 mb-20">
-            <div className={'rounded-xl border-2 w-full h-64'}>
-            </div>
+        <div className="mt-10 mb-14">
+            <div className={'rounded-xl border-2 w-full h-80'}></div>
         </div>
     );
 }
