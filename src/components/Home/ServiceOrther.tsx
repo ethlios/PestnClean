@@ -51,7 +51,7 @@ export default function ServiceAds(props: IAppProps) {
                 {otherService.map((item, index) => {
                     return (
                         <Link
-                            href={`/${nameToLink(item.title)}`}
+                            href={`/dichvu/${nameToLink(item.title)}`}
                             key={index}
                             className={cx('service-item')}
                             onMouseOver={() => setCurrentService(index)}
