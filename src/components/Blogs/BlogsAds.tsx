@@ -17,7 +17,7 @@ export default function BlogsAds(props: IAppProps) {
         // Blog quang cao
         <div className={cx('blogs-ads-wrapper')}>
             <div className={cx('blogs-ads-content-1')}>
-                <p>
+                <p className={cx('timer')}>
                     <AccessTimeIcon /> {blogsAds[0].createdAt}
                 </p>
                 <h1>{blogsAds[0].title}</h1>

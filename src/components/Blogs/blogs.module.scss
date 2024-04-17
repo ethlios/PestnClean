@@ -55,7 +55,6 @@
         font-size: 13px;
         font-weight: 600;
         margin-bottom: 3px;
-        color: var(--text-black);
     }
 
     :nth-child(1) svg {
@@ -69,6 +68,10 @@
         letter-spacing: -0.2px;
         color: var(--text-black);
     }
+}
+
+.timer {
+    color: var(--text-black);
 }
 
 .blogs-ads-content-2 {

@@ -37,7 +37,7 @@ export default function Services({ setOpenService, openService }: IAppProps) {
                     {/* Dich vu 1 */}
                     <div className={cx('service-item')}>
                         <Link
-                            href="/kiemsoatcontrung"
+                            href="/kiem-soat-con-trung"
                             className={cx('service-title')}
                             onClick={() => setOpenService(false)}
                         >
@@ -75,7 +75,7 @@ export default function Services({ setOpenService, openService }: IAppProps) {
                     {/* Dich vu 2 */}
                     <div className={cx('service-item')}>
                         <Link
-                            href="/dichvuvesinh"
+                            href="/dich-vu-ve-sinh"
                             className={cx('service-title')}
                             onClick={() => setOpenService(false)}
                         >
@@ -162,7 +162,7 @@ export default function Services({ setOpenService, openService }: IAppProps) {
                     {/* Dich vu 3 */}
                     <div className={cx('service-item')}>
                         <Link
-                            href="/giaiphapvesinh"
+                            href="/giai-phap-ve-sinh"
                             className={cx('service-title')}
                             onClick={() => setOpenService(false)}
                         >
