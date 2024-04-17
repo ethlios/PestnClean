@@ -17,8 +17,7 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 
 const cx = classNames.bind(styles);
 
-export interface FooterProps {
-}
+export interface FooterProps {}
 
 export default function Footer(props: FooterProps) {
     const [checked, setChecked] = useState<boolean>(false);
@@ -105,12 +104,10 @@ export default function Footer(props: FooterProps) {
                         <Link href={''}>Giải pháp vệ sinh</Link>
                     </div>
                     <div className={cx('danhmuc')}>
-                        <p className={cx('title')}>DANH MỤC</p>
+                        <p className={cx('title')}>CHÍNH SÁCH</p>
                         <div className={cx('decor')}></div>
-                        <Link href={''}>Trang chủ</Link>
-                        <Link href={''}>Giới thiệu</Link>
-                        <Link href={''}>Sản phẩm</Link>
-                        <Link href={''}>Blogs</Link>
+                        <Link href={''}>Bảo mật, thông tin</Link>
+                        <Link href={''}>Bảo hành, đổi trả</Link>
                     </div>
                     <div className={cx('khac')}>
                         <p className={cx('title')}>KHÁC</p>

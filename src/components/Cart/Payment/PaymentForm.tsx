@@ -9,34 +9,39 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import PaymentsIcon from '@mui/icons-material/Payments';
 import PaymentIcon from '@mui/icons-material/Payment';
+import PaymentsOutlinedIcon from '@mui/icons-material/PaymentsOutlined';
 
 const cx = classNames.bind(styles);
 
-export interface IAppProps {
-}
+export interface IAppProps {}
 
-const classInput = 'w-full md:w-3/4 ';
+const classInput = 'w-full';
 
 export default function PaymentForm(props: IAppProps) {
-
     return (
-        <div className="p-3">
+        <div>
             <div className={'my-3'}>
-                <h3 className={cx('title')}>Phương thức thanh toán</h3>
-                <div className={'my-3'}>
-                    <div className={classInput + 'p-4 rounded border-2 flex items-center my-1'}>
-                        <PaymentsIcon className={'mr-3'} />
+                <p className={cx('title')}>Phương thức thanh toán</p>
+                <div className={'my-5'}>
+                    <div
+                        className={cx('payment-method')}
+                        style={{
+                            border: 'solid 2px var(--primary)',
+                            color: 'var(--primary)',
+                        }}
+                    >
+                        <PaymentsOutlinedIcon className={'mr-3'} />
                         <p>COD</p>
                     </div>
-                    <div className={classInput + 'p-4 rounded border-2 flex items-center my-1'}>
+                    <div className={cx('payment-method')}>
                         <PaymentIcon className={'mr-3'} />
-                        <p>Chuyển khoản</p>
+                        <p>CHUYỂN KHOẢN</p>
                     </div>
                 </div>
             </div>
             <div className={'my-3'}>
-                <h3 className={cx('title')}>Thông tin giao hàng</h3>
-                <div className={'my-3'}>
+                <p className={cx('title')}>Thông tin giao hàng</p>
+                <div className={'my-5'}>
                     <Box
                         component="form"
                         sx={{

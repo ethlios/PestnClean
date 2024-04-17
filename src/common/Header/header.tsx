@@ -83,7 +83,9 @@ export default function Header(props: HeaderProps) {
                     boxShadow: scrollToTop > 0 ? 'rgba(0, 0, 0, 0.2) 0px 5px 15px' : '',
                 }}
             >
-                <Image alt="Logo công ty PESTNCLEAN" src={logo.src} width={176} height={100} />
+                <Link href={'/'}>
+                    <Image alt="Logo công ty PESTNCLEAN" src={logo.src} width={176} height={100} />
+                </Link>
                 <div
                     style={{
                         display: 'flex',

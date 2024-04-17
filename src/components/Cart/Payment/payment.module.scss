@@ -1,48 +1,110 @@
 //Header title
-.link {
+.progress {
+    width: 100%;
+    margin: 50px 0;
+}
+
+.checkout-wrapper {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    padding: 0 80px;
+    justify-content: space-between;
+}
+
+.checkout-form {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+.checkout-detail {
+    width: 37%;
+}
+
+.payment-method {
     display: flex;
     flex-direction: row;
     font-size: 15px;
-    gap: 8px;
-    margin: 30px 0 5px 0;
+    font-weight: 600;
+    align-items: center;
+    gap: 10px;
+    border: 2px solid var(--text-black);
+    border-radius: 10px;
+    margin-bottom: 15px;
+    padding: 15px 10px;
+    cursor: pointer;
+    letter-spacing: -0.5px;
 
-    a {
-        font-weight: 600;
-        letter-spacing: -0.3px;
+    svg {
+        font-size: 30px;
     }
-
-    a:hover {
-        color: var(--primary);
-        transition: all ease 0.5s;
-    }
-
-    p {
-        font-weight: 600;
-        letter-spacing: -0.3px;
-    }
-}
-
-.decoration {
-    height: 3px;
-    width: 80px;
-    background-color: var(--secondary);
-    border-radius: 5px;
-    margin-bottom: 30px;
 }
 
 //Panel
 .title {
     font-weight: 600;
-    text-decoration: underline;
+    text-decoration: 2px underline;
+    letter-spacing: -0.5px;
     text-transform: uppercase;
 }
 
 .description {
     font-size: 0.8rem;
-    color: var(--secondary-dark);
+    color: var(--text-black);
 }
 
-.currency {
+.product-detail {
+    p {
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--text-black);
+        letter-spacing: -0.2px;
+    }
+}
+.product-name {
+    font-size: 15px;
     font-weight: 600;
-    text-decoration: underline;
+    color: #000 !important;
+}
+
+.hr-decor {
+    height: 1px;
+    background-color: var(--text-black);
+    width: 100%;
+    border-radius: 5px;
+    margin: 20px 0 !important;
+}
+
+.total-price {
+    letter-spacing: -0.2px;
+    font-size: 15px;
+    margin-bottom: 8px;
+
+    p {
+        font-weight: 600;
+    }
+
+    span {
+        font-weight: 500;
+    }
+}
+
+.back-cart {
+    transition: all ease 0.5s;
+
+    h1 {
+        font-size: 14px;
+        font-weight: 600;
+        letter-spacing: -0.2px;
+        text-transform: uppercase;
+    }
+
+    svg {
+        font-size: 18px;
+    }
+
+    &:hover {
+        color: var(--primary);
+    }
 }

@@ -1,16 +1,16 @@
-import classNames from 'classnames/bind';
-import styles from './cart.module.scss';
-import Link from 'next/link';
-import { Button } from '@mui/material';
+'use client';
+
 import CreditCardIcon from '@mui/icons-material/CreditCard';
 import PublishedWithChangesIcon from '@mui/icons-material/PublishedWithChanges';
-import Shipping from '~/components/Cart/Shipping';
+import classNames from 'classnames/bind';
+import Link from 'next/link';
 import DiscountCode from '~/components/Cart/DiscountCode';
+import ButtonCommon from '../Orther/Button';
+import styles from './cart.module.scss';
 
 const cx = classNames.bind(styles);
 
-export interface IAppProps {
-}
+export interface IAppProps {}
 
 export default function CheckoutPanel(props: IAppProps) {
     return (
@@ -19,55 +19,51 @@ export default function CheckoutPanel(props: IAppProps) {
                 {/*Discount code*/}
                 <DiscountCode />
                 {/* Shipping method */}
-                <Shipping />
+                {/* <Shipping /> */}
                 {/*Summary*/}
-                <div className={'my-3'}>
-                    <h3 className={cx('title')}>Tóm tắt đơn hàng</h3>
-                    <div className="flex justify-between items center mt-2">
-                        <span>
-                            <b>4</b> Sản phẩm
-                        </span>
-                        <b>
-                            4.400.000 <span className={cx('currency')}>đ</span>
-                        </b>
+                <div className={'my-5'}>
+                    <p className={`${cx('title')} mb-3`}>Tóm tắt đơn hàng</p>
+                    <div className={`${cx('total-price')} flex justify-between items center`}>
+                        <span>4 Sản phẩm</span>
+                        <p>
+                            4.400.000 <u>đ</u>
+                        </p>
                     </div>
-                    <div className="flex justify-between items center">
+                    <div className={`${cx('total-price')} flex justify-between items center`}>
                         <span>Phí vận chuyển</span>
-                        <b>
-                            0 <span className={cx('currency')}>đ</span>
-                        </b>
+                        <p>
+                            0 <u>đ</u>
+                        </p>
                     </div>
-                    <div className="flex justify-between items center">
+                    <div className={`${cx('total-price')} flex justify-between items center`}>
                         <span>Mã giảm giá</span>
-                        <b>
-                            0 <span className={cx('currency')}>đ</span>
-                        </b>
+                        <p>
+                            0 <u>đ</u>
+                        </p>
                     </div>
                 </div>
                 {/*Payment*/}
-                <div className={'my-3 pt-2 border-t-2'}>
-                    <div className="flex justify-between items center">
-                        <span>Tổng cộng</span>
-                        <b>
-                            4.400.000 <span className={cx('currency')}>đ</span>
-                        </b>
+                <div className={cx('hr-decor')}></div>
+
+                <div className={`${cx('total-price')} flex justify-between items center`}>
+                    <span>Tổng cộng</span>
+                    <p>
+                        4.400.000 <u>đ</u>
+                    </p>
+                </div>
+                <div className="my-5">
+                    <Link href={'/giohang/thanhtoan'}>
+                        <ButtonCommon text="THANH TOÁN" fullWidth />
+                    </Link>
+                </div>
+                <div className={cx('promise')}>
+                    <div className="flex items-center my-1">
+                        <CreditCardIcon />
+                        <p>Thanh toán an toàn</p>
                     </div>
-                    <div className="my-2">
-                        <Link href={'/giohang/thanhtoan'}>
-                            <Button variant="contained" fullWidth>
-                                Thanh toán
-                            </Button>
-                        </Link>
-                    </div>
-                    <div>
-                        <div className="flex items-center my-1">
-                            <CreditCardIcon />
-                            <b className={'underline ml-2'}>Thanh toán an toàn</b>
-                        </div>
-                        <div className="flex items-center my-1">
-                            <PublishedWithChangesIcon />
-                            <b className={'underline ml-2'}>Đổi trả dễ dàng</b>
-                        </div>
+                    <div className="flex items-center my-1">
+                        <PublishedWithChangesIcon />
+                        <p>Đổi trả dễ dàng</p>
                     </div>
                 </div>
             </div>

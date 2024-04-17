@@ -36,7 +36,11 @@ export default function Services({ setOpenService, openService }: IAppProps) {
                 <div className={cx('all-service')}>
                     {/* Dich vu 1 */}
                     <div className={cx('service-item')}>
-                        <Link href="" className={cx('service-title')}>
+                        <Link
+                            href="/kiemsoatcontrung"
+                            className={cx('service-title')}
+                            onClick={() => setOpenService(false)}
+                        >
                             <h1>KIỂM SOÁT CÔN TRÙNG</h1>
                             <EastOutlinedIcon />
                         </Link>
@@ -70,7 +74,11 @@ export default function Services({ setOpenService, openService }: IAppProps) {
 
                     {/* Dich vu 2 */}
                     <div className={cx('service-item')}>
-                        <Link href="" className={cx('service-title')}>
+                        <Link
+                            href="/dichvuvesinh"
+                            className={cx('service-title')}
+                            onClick={() => setOpenService(false)}
+                        >
                             <h1>Dịch vụ vệ sinh</h1>
                             <EastOutlinedIcon />
                         </Link>
@@ -153,7 +161,11 @@ export default function Services({ setOpenService, openService }: IAppProps) {
 
                     {/* Dich vu 3 */}
                     <div className={cx('service-item')}>
-                        <Link href="" className={cx('service-title')}>
+                        <Link
+                            href="/giaiphapvesinh"
+                            className={cx('service-title')}
+                            onClick={() => setOpenService(false)}
+                        >
                             <h1>Giải pháp vệ sinh</h1>
                             <EastOutlinedIcon />
                         </Link>

@@ -14,6 +14,7 @@ export interface IAppProps {
     setDefaultListValue?: any;
     setDefaultList?: any;
     color?: string;
+    fullWidth?: boolean;
 }
 
 export default function ButtonCommon({
@@ -28,6 +29,7 @@ export default function ButtonCommon({
     setDefaultListValue,
     setDefaultList,
     color,
+    fullWidth,
 }: IAppProps) {
     return (
         <Button
@@ -42,6 +44,7 @@ export default function ButtonCommon({
                     ? 'outlined'
                     : 'contained'
             }
+            fullWidth={fullWidth}
             color={color === 'secondary' ? 'secondary' : 'primary'}
             sx={{
                 color: color === 'secondary' ? '#fff' : '',

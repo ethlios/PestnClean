@@ -32,7 +32,7 @@ export default function Toast({ text, rule, showToast, setShowToast }: IAppProps
                 onClick={() => setShowToast(false)}
             >
                 <InfoIcon sx={{ marginRight: '10px' }} />
-                {text}
+                <p>{text}</p>
             </div>
         </div>
     );

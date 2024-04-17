@@ -6,29 +6,20 @@ import PaymentForm from '~/components/Cart/Payment/PaymentForm';
 
 const cx = classNames.bind(styles);
 
-export interface IAppProps {
-}
+export interface IAppProps {}
 
 export default function PaymentPage(props: IAppProps) {
     return (
         <div className={'container'}>
-            {/*Header title*/}
-            <div className={cx('link')}>
-                <Link href="/">Trang chủ</Link>
-                <p>|</p>
-                <Link href="/cart">Giỏ hàng</Link>
-                <p>|</p>
-                <Link href="/thanhtoan">Thanh toán</Link>
-            </div>
-            <div className={cx('decoration')}></div>
             {/*Main*/}
-            <div className={'grid grid-cols-12 gap-6 mb-20'}>
+            <div className={cx('progress')}></div>
+            <div className={cx('checkout-wrapper')}>
                 {/*Visual Content*/}
-                <div className={'col-span-12 md:col-span-8'}>
+                <div className={cx('checkout-form')}>
                     {/*Form*/}
                     <PaymentForm />
                 </div>
-                <div className={'col-span-12 md:col-span-4'}>
+                <div className={cx('checkout-detail')}>
                     {/*Checkout panel*/}
                     <CheckoutPanel />
                 </div>

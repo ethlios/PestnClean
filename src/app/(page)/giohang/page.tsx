@@ -7,8 +7,7 @@ import CheckoutPanel from '~/components/Cart/CheckoutPanel';
 
 const cx = classNames.bind(styles);
 
-export interface IAppProps {
-}
+export interface IAppProps {}
 
 export default function CartPage(props: IAppProps) {
     return (

@@ -6,6 +6,7 @@ import styles from './faq.module.scss';
 import IconButton from '@mui/material/IconButton';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
+import { useParams, usePathname, useSearchParams } from 'next/navigation';
 
 const cx = classNames.bind(styles);
 
@@ -16,6 +17,9 @@ export interface IFaqProps {
 
 export default function Question({ text, answer }: IFaqProps) {
     const [isOpen, setIsOpen] = useState(false);
+    const searchParams = useSearchParams();
+
+    console.log(searchParams.get('q'));
 
     const toggleOpen = () => {
         setIsOpen(!isOpen);

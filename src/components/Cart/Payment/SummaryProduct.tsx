@@ -4,21 +4,18 @@ import Image from 'next/image';
 
 const cx = classNames.bind(styles);
 
-export interface IAppProps {
-}
+export interface IAppProps {}
 
 export default function SummaryProduct(props: IAppProps) {
     return (
-        <div className={'my-2'}>
-            <div className={'flex'}>
-                <Image src={''} alt={'product'} width={70} height={90} className={'bg-gray-200'} />
-                <div className={'flex flex-col justify-center ml-2'}>
-                    <b>Tinh dầu chanh Viet Oils</b>
-                    <div className="flex">
-                        <p>1</p>
-                        <p className={'ml-2'}>x</p>
-                        <p className={'ml-2'}>1.100.000 đ</p>
-                    </div>
+        <div className={'flex mt-5'}>
+            <Image src={''} alt={''} width={70} height={90} className={'bg-gray-100'} />
+            <div className={`${cx('product-detail')} flex flex-col justify-center ml-2`}>
+                <p className={cx('product-name')}>Tinh dầu chanh Viet Oils</p>
+                <div className="flex">
+                    <p>1.100.000 đ</p>
+                    <p className={'ml-2'}>x{``}</p>
+                    <p className={'ml-2'}>2</p>
                 </div>
             </div>
         </div>

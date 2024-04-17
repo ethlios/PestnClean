@@ -14,4 +14,8 @@
     cursor: pointer;
     z-index: 100;
     transition: all ease 0.5s;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
