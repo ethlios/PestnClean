@@ -10,7 +10,8 @@ import AllProduct from '~/components/Product/Main/AllProduct';
 
 const cx = classNames.bind(styles);
 
-export interface IAppProps {}
+export interface IAppProps {
+}
 
 export default function ProductPage(props: IAppProps) {
     return (
@@ -18,7 +19,7 @@ export default function ProductPage(props: IAppProps) {
             <div className={cx('link')}>
                 <Link href="/">Trang chủ</Link>
                 <p>|</p>
-                <Link href="/blogs">Sản phẩm</Link>
+                <Link href="/sanpham">Sản phẩm</Link>
             </div>
             <div className={cx('product-wrapper')}>
                 <FilterProduct />

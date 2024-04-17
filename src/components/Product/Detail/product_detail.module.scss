@@ -1,0 +1,274 @@
+.link {
+    display: flex;
+    flex-direction: row;
+    font-size: 15px;
+    gap: 8px;
+    margin: 30px 0 5px 0;
+
+    a {
+        font-weight: 600;
+        letter-spacing: -0.3px;
+    }
+
+    a:hover {
+        color: var(--primary);
+        transition: all ease 0.5s;
+    }
+
+    p {
+        font-weight: 600;
+        letter-spacing: -0.3px;
+    }
+}
+
+@mixin text-format {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.text {
+    @include text-format;
+}
+
+.wrapper {
+    width: 100%;
+    margin: 30px 0;
+}
+
+.product-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    margin: 30px 0;
+}
+
+.product-img {
+    width: 60%;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+
+    & > * {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .thumbnail {
+        width: 20%;
+    }
+
+    .img {
+        width: 80%;
+    }
+}
+
+.product-info {
+    width: 40%;
+
+    & > * {
+        margin-bottom: 10px;
+    }
+}
+
+.sale {
+    @include text-format;
+    color: var(--primary);
+    text-transform: uppercase;
+}
+
+.name {
+    font-size: 40px;
+    font-weight: 600;
+    margin: 10px 0;
+    text-transform: uppercase;
+}
+
+.rating {
+    @include text-format;
+    opacity: 0.6;
+}
+
+.decoration {
+    width: 100%;
+    border: 1px solid var(--secondary);
+    margin: 20px 0;
+}
+
+.summary {
+    list-style-type: disc;
+    margin-left: 15px;
+
+    li {
+        font-size: 15px;
+        margin: 15px 0;
+    }
+}
+
+.share {
+    display: flex;
+    flex-direction: row;
+
+    & > * {
+        margin-right: 5px;
+    }
+
+    & > *:not(:first-child) {
+        color: var(--primary);
+    }
+}
+
+.type {
+
+    &:first-child {
+        margin-bottom: 10px;
+    }
+}
+
+.quantity {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid black;
+    border-radius: 5px;
+
+    & > * {
+        padding: 10px;
+    }
+}
+
+.price {
+    font-size: 30px;
+    color: var(--primary);
+    margin: 20px 0;
+}
+
+.other {
+    @include text-format;
+    margin: 20px 0;
+
+    & > * {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        margin-bottom: 10px;
+    }
+}
+
+.button-group {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.product-descript {
+    margin: 40px 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.tab-group {
+    width: 60%;
+}
+
+.tab-item {
+
+    .tab-title {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 2px solid var(--secondary-dark);
+
+        h2 {
+            font-size: 20px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+    }
+
+    .tab-content {
+        font-size: 15px;
+        margin-top: 10px;
+        border-bottom: 2px solid var(--secondary-dark);
+    }
+}
+
+.product-related {
+    margin: 30px 0;
+}
+
+.horizontal-decor {
+    width: 100px;
+    height: 3px;
+    background-color: var(--secondary);
+    border-radius: 5px;
+    margin-top: 5px;
+}
+
+.product-item {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    width: 100%;
+}
+
+.content-item {
+    width: calc(100% / 4);
+    display: flex;
+    flex-direction: column;
+}
+
+.item-img {
+    width: 100%;
+    height: 200px;
+    border: solid 1.5px var(--text-black);
+    position: relative;
+}
+
+.item-event-hot {
+    position: absolute;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--secondary);
+    color: #fff;
+    width: 50px;
+    font-weight: 600;
+    font-size: 13.5px;
+    padding: 3px 0;
+}
+
+.item-category {
+    font-size: 11px;
+    color: var(--primary);
+    font-weight: bold;
+    margin-top: 7px;
+}
+
+.item-name {
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.item-sale-price {
+    font-size: 13px;
+    color: var(--text-black);
+    text-decoration: line-through;
+    font-weight: 700;
+}
+
+.item-sale {
+    color: var(--secondary);
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.item-price {
+    font-size: 14px;
+    color: var(--text-black);
+    font-weight: 700;
+}
