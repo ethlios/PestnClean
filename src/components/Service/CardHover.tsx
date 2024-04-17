@@ -5,13 +5,22 @@ import classNames from 'classnames/bind';
 import styles from './service.module.scss';
 import Image from 'next/image';
 import { Button } from '@mui/material';
+import { usePathname } from 'next/navigation';
+import ButtonCommon from '../Orther/Button';
 
 const cx = classNames.bind(styles);
 
-export interface IAppProps {}
+export interface IAppProps {
+    id?: number;
+    title?: string;
+    description?: string;
+    path?: string;
+}
 
-export default function CardHover(props: IAppProps) {
+export default function CardHover({ title, description, path, id }: IAppProps) {
     const [isHover, setIsHover] = useState(false);
+
+    const pathname = usePathname();
 
     return (
         <div
@@ -27,9 +36,9 @@ export default function CardHover(props: IAppProps) {
                 style={{ background: isHover ? 'rgba(0, 0, 0, 0.2)' : 'initial' }}
             >
                 <div className={'grid content-end h-full overflow-hidden'}>
-                    <h1 className={cx('card-number')}>01.</h1>
+                    <h1 className={cx('card-number')}>0{id}.</h1>
                     <div className={cx('decoration')} />
-                    <p className={cx('card-title')}>Nhà hàng và chuỗi bán lẻ</p>
+                    <p className={cx('card-title')}>{title}</p>
                     <div
                         style={{
                             height: isHover ? '180px' : '0px',
@@ -44,13 +53,17 @@ export default function CardHover(props: IAppProps) {
                                 color: 'var(--text-black)',
                             }}
                         >
-                            Cung cấp giải pháp kiểm soát côn trùng toàn diện cho các nhà hàng, cơ sở dịch vụ
-                            ăn uống, chuỗi bán lẻ, siêu thị … đảm bảo nâng cao sự hài lòng của khách hàng và
-                            danh tiếng thương hiệu
+                            {description}
                         </p>
-                        <Button variant="contained" className={'mt-3'}>
-                            Xem thêm
-                        </Button>
+                        <div
+                            style={{
+                                marginLeft: '2px',
+                            }}
+                        >
+                            {pathname !== '/dichvu/giai-phap-ve-sinh' && (
+                                <ButtonCommon text="Xem thêm" path={path} />
+                            )}
+                        </div>
                     </div>
                 </div>
             </div>

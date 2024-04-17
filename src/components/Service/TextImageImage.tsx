@@ -1,12 +1,18 @@
+'use client';
+
 import classNames from 'classnames/bind';
 import styles from './service.module.scss';
 import Image from 'next/image';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 const cx = classNames.bind(styles);
 
 export interface IAppProps {}
 
 export default function TextImageImage(props: IAppProps) {
+    const pathname = usePathname();
+
     return (
         <div className="my-20">
             <div
@@ -43,12 +49,36 @@ export default function TextImageImage(props: IAppProps) {
                     }}
                 >
                     <div className={'col-span-3 md:col-span-1'}>
-                        <Image src={''} alt={''} width={500} height={300} />
-                        <p className={cx('bg-text')}>Vệ sinh công nghiệp</p>
+                        <Image src="" alt={''} width={500} height={300} />
+                        <Link
+                            href={
+                                pathname === '/dichvu/dich-vu-ve-sinh'
+                                    ? '/dichvu/ve-sinh-cong-nghiep'
+                                    : '/dichvu/giai-phap-ve-sinh-pestnclean-hieu-qua'
+                            }
+                        >
+                            <p className={cx('bg-text')}>
+                                {pathname === '/dichvu/dich-vu-ve-sinh'
+                                    ? 'Vệ sinh công nghiệp'
+                                    : 'Giải pháp vệ sinh'}
+                            </p>
+                        </Link>
                     </div>
                     <div className={'col-span-3 md:col-span-1'}>
                         <Image src={''} alt={''} width={500} height={300} />
-                        <p className={cx('bg-text')}>Vệ sinh nhà ở</p>
+                        <Link
+                            href={
+                                pathname === '/dichvu/dich-vu-ve-sinh'
+                                    ? '/dichvu/dich-vu-ve-sinh-nha-o'
+                                    : '/dichvu/giai-phap-mui-huong-cho-doanh-nghiep'
+                            }
+                        >
+                            <p className={cx('bg-text')}>
+                                {pathname === '/dichvu/dich-vu-ve-sinh'
+                                    ? 'Vệ sinh nhà ở'
+                                    : 'Giải pháp mùi hương'}
+                            </p>
+                        </Link>
                     </div>
                 </div>
             </div>

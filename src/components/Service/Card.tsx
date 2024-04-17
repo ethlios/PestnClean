@@ -14,9 +14,10 @@ export interface IAppProps {
     width?: number;
     height?: number;
     title?: string;
+    path?: string;
 }
 
-export default function Card({ src, alt, width = 1680, height = 1050, title }: IAppProps) {
+export default function Card({ src, alt, width = 1680, height = 1050, title, path }: IAppProps) {
     return (
         <div className={cx('card')}>
             {/* <Image
@@ -38,7 +39,7 @@ export default function Card({ src, alt, width = 1680, height = 1050, title }: I
             >
                 {title}
             </p>
-            <ButtonCommon text="XEM THÊM"></ButtonCommon>
+            <ButtonCommon text="XEM THÊM" path={path}></ButtonCommon>
         </div>
     );
 }

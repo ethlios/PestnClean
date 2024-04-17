@@ -15,7 +15,7 @@
 .bg-text {
     background-color: var(--primary);
     color: white;
-    padding: 0.5rem 1rem;
+    padding: 0.8rem 1rem;
     font-size: 14px;
     font-weight: 600;
     text-align: center;
@@ -94,4 +94,14 @@
     text-decoration: 2px underline;
     margin-top: 50px;
     margin-bottom: 20px;
+}
+
+.content-title-fix {
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+    text-transform: uppercase;
+    text-decoration: 2px underline;
+    margin-top: 50px;
+    margin-bottom: 40px;
 }
