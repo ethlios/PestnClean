@@ -1,21 +1,26 @@
-import { Height } from '@mui/icons-material';
-import { headers } from 'next/headers';
-import Image from 'next/image';
+import BlogOthers from '~/components/Home/BlogsOrther';
+import Certification from '~/components/Home/Certification';
+import ImageWork from '~/components/Home/ImgWork';
+import ServiceAds from '~/components/Home/ServiceOrther';
+import WhyChooseMe from '~/components/Home/WhyChoseMe';
 import BannerHomePage from '~/components/Home/banner';
-import ButtonCommon from '~/components/Orther/Button';
-import TextImage from '~/components/Home/TextImage';
 
 export default function Home() {
     return (
         <main>
-            {/* <BannerHomePage /> */}
-            {/* <TextImage /> */}
+            <BannerHomePage />
             <div
                 style={{
-                    height: '1000px',
                     paddingTop: '500px',
                 }}
-            ></div>
+                className={'container'}
+            >
+                <ServiceAds />
+                <WhyChooseMe />
+                <ImageWork />
+                <Certification />
+                <BlogOthers />
+            </div>
         </main>
     );
 }
