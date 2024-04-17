@@ -33,7 +33,7 @@ const questionsCommon = [
         answer: '',
     },
     {
-        text: 'Chính sách bảo hành, đổi trả.',
+        text: 'Chính sách bảo hành đổi trả.',
         answer: '',
     },
     {

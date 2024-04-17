@@ -1,12 +1,13 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import classNames from 'classnames/bind';
 import styles from './faq.module.scss';
 import IconButton from '@mui/material/IconButton';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import { useParams, usePathname, useSearchParams } from 'next/navigation';
+import { nameToLink } from '~/libs/orthers/nameToLink';
 
 const cx = classNames.bind(styles);
 
@@ -18,12 +19,24 @@ export interface IFaqProps {
 export default function Question({ text, answer }: IFaqProps) {
     const [isOpen, setIsOpen] = useState(false);
     const searchParams = useSearchParams();
-
-    console.log(searchParams.get('q'));
+    const mainRef = useRef<any>();
 
     const toggleOpen = () => {
         setIsOpen(!isOpen);
     };
+
+    useEffect(() => {
+        const q = searchParams.get('q');
+
+        if (nameToLink(text).slice(0, -1) === q) {
+            setIsOpen(true);
+
+            mainRef.current.scrollIntoView({
+                behavior: 'smooth',
+                block: 'center',
+            });
+        }
+    }, [searchParams, text]);
 
     return (
         <div
@@ -31,6 +44,7 @@ export default function Question({ text, answer }: IFaqProps) {
             style={{
                 borderColor: isOpen ? 'var(--primary)' : 'black',
             }}
+            ref={mainRef}
         >
             <div className={'flex justify-between items-center cursor-pointer'} onClick={toggleOpen}>
                 <div
