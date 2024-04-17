@@ -163,3 +163,11 @@ progress::-moz-progress-bar {
 .shadow-lg {
     box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 15px;
 }
+
+/* Tippy */
+.tippy-box {
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 13px !important;
+    font-weight: 500;
+    letter-spacing: -0.2px;
+}

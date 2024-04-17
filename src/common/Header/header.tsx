@@ -11,6 +11,7 @@ import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import Services from './service';
+import MoreBtn from './More';
 
 const link = [
     {
@@ -67,6 +68,7 @@ export default function Header(props: HeaderProps) {
     return (
         <>
             <Services setOpenService={setOpenService} openService={openService} />
+            <MoreBtn />
             <div
                 className={'container'}
                 style={{

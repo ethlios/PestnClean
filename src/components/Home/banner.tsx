@@ -1,13 +1,14 @@
 'use client';
 
-import React, { useState } from 'react';
+import { Button } from '@mui/material';
+import classNames from 'classnames/bind';
 import Image from 'next/image';
+import { useState } from 'react';
 import banner1 from '../../../public/img/banner 1.jpg';
 import banner2 from '../../../public/img/banner 2.jpg';
 import banner3 from '../../../public/img/banner 3.jpg';
-import classNames from 'classnames/bind';
-import styles from './banner.module.scss';
-import { Button } from '@mui/material';
+import styles from './home.module.scss';
+
 const cx = classNames.bind(styles);
 
 export interface IAppProps {}
@@ -41,54 +42,34 @@ export default function BannerHomePage(props: IAppProps) {
             style={{
                 position: 'absolute',
                 top: '0',
-                height: '580px',
+                height: '550px',
                 width: '100vw',
-
                 display: 'flex',
                 flex: 1,
                 flexWrap: 'nowrap',
                 alignItems: ' center',
             }}
         >
-            {imgList.map((img, index) => {
-                return (
-                    <div
-                        key={img.id}
-                        style={{
-                            display: 'flex',
-                            flexGrow: 1,
-                            flexBasis: '1px',
-                            width: 'calc(100vw / 3)',
-                            objectFit: 'cover',
-                            objectPosition: 'center',
-                            height: '100%',
-                            backgroundColor: `${img.color}`,
-                            cursor: 'pointer',
-                        }}
-                        onMouseOver={() => setImgIndex(index)}
-                        onMouseOut={() => setImgIndex(3)}
-                        className={cx({
-                            imgHover: imgIndex === index,
-                        })}
-                    >
-                        {imgIndex === index && (
-                            <Image
-                                src={img.src}
-                                alt={img.alt}
-                                width={1000}
-                                height={1000}
-                                style={{
-                                    width: '100%',
-                                    height: '100%',
-                                    objectFit: 'cover',
-                                    objectPosition: 'center',
-                                }}
-                                className="cpmount"
-                            ></Image>
-                        )}
-                    </div>
-                );
-            })}
+            {/* <Image
+                src={''}
+                alt=""
+                width={1000}
+                height={1000}
+                style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    objectPosition: 'center',
+                    backgroundColor: 'rgba(0,0,0,0.05)',
+                }}
+            /> */}
+            <div
+                style={{
+                    width: '100%',
+                    height: '100%',
+                    backgroundColor: 'rgba(0,0,0,0.05)',
+                }}
+            ></div>
             <div
                 style={{
                     position: 'absolute',

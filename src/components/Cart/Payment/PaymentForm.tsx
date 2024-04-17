@@ -45,15 +45,37 @@ export default function PaymentForm(props: IAppProps) {
                     <Box
                         component="form"
                         sx={{
-                            '& .MuiTextField-root': { mb: 1 },
+                            display: 'flex',
+                            gap: '10px',
+                            flexDirection: 'column',
                         }}
                         noValidate
                         autoComplete="off"
                     >
-                        <TextField id="name" label="Tên..." className={classInput} />
-                        <TextField id="email" label="Email..." className={classInput} />
-                        <TextField id="phone" label="Số điện thoại..." className={classInput} />
-                        <TextField id="address" label="Địa chỉ..." className={classInput} />
+                        <TextField
+                            id="name"
+                            label="Tên..."
+                            className={classInput}
+                            sx={{ marginBottom: '10px' }}
+                        />
+                        <TextField
+                            id="email"
+                            label="Email..."
+                            className={classInput}
+                            sx={{ marginBottom: '10px' }}
+                        />
+                        <TextField
+                            id="phone"
+                            label="Số điện thoại..."
+                            className={classInput}
+                            sx={{ marginBottom: '10px' }}
+                        />
+                        <TextField
+                            id="address"
+                            label="Địa chỉ..."
+                            className={classInput}
+                            sx={{ marginBottom: '10px' }}
+                        />
                         <SelectField id="city" label="Tỉnh thành" className={classInput}>
                             <MenuItem value={'hn'}>Hà Nội</MenuItem>
                             <MenuItem value={'dn'}>Đà Nẵng</MenuItem>
