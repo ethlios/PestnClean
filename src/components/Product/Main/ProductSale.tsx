@@ -1,6 +1,7 @@
 import * as React from 'react';
 import classNames from 'classnames/bind';
 import styles from '../product.module.scss';
+import Link from 'next/link';
 
 const cx = classNames.bind(styles);
 
@@ -14,7 +15,7 @@ export default function ProductSale(props: IAppProps) {
             <div className={cx('product-item')}>
                 {Array.from({ length: 3 }).map((_, index) => {
                     return (
-                        <div className={cx('content-item')} key={index}>
+                        <Link href="/sanpham/detail" className={cx('content-item')} key={index}>
                             <div className={cx('item-img')}>
                                 <div className={cx('item-event-sale')}>
                                     <p>14%</p>
@@ -28,7 +29,7 @@ export default function ProductSale(props: IAppProps) {
                             <p className={cx('item-sale')}>
                                 1.000.000 <u>đ</u>
                             </p>
-                        </div>
+                        </Link>
                     );
                 })}
             </div>

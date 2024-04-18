@@ -12,6 +12,7 @@ import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import Services from './service';
 import MoreBtn from './More';
+import useScroll from '~/libs/hooks/useScroll';
 
 const link = [
     {
@@ -54,6 +55,7 @@ export default function Header(props: HeaderProps) {
     const path = usePathname();
     const [scrollToTop, setScrollToTop] = useState<number>(0);
     const [openService, setOpenService] = useState<boolean>(false);
+    const wheel: boolean = useScroll();
 
     useEffect(() => {
         const scroll = () => {
@@ -83,6 +85,9 @@ export default function Header(props: HeaderProps) {
                     zIndex: 1000,
                     backgroundColor: scrollToTop > 0 ? '#fff' : 'transparent',
                     boxShadow: scrollToTop > 0 ? 'rgba(0, 0, 0, 0.2) 0px 5px 15px' : '',
+                    transition: 'all ease .5s',
+                    overflow: 'hidden',
+                    opacity: !wheel ? 1 : 0,
                 }}
             >
                 <Link href={'/'}>

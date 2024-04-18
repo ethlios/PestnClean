@@ -60,9 +60,9 @@
     .thumbnail {
         width: 12%;
         position: sticky;
-        top: 70px;
         height: 100%;
         z-index: 1;
+        transition: all ease 0.5s;
     }
 
     .thumbnail img {
@@ -77,9 +77,9 @@
 .product-info {
     width: 43%;
     position: sticky;
-    top: -120px;
     z-index: 1;
     height: 100%;
+    transition: all ease 0.5s;
 
     & > * {
         margin-bottom: 10px;
@@ -102,7 +102,16 @@
 
 .rating {
     @include text-format;
-    opacity: 0.6;
+    // opacity: 0.6;
+    text-decoration: 2px underline;
+    text-underline-offset: 4px;
+    color: var(--text-black);
+    cursor: pointer;
+    transition: all ease 0.5s;
+
+    &:hover {
+        opacity: 0.6;
+    }
 }
 
 .decoration {
@@ -510,9 +519,8 @@
 }
 
 .person-cmt {
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 600;
-    color: var(--text-black);
     letter-spacing: -0.2px;
 }
 
@@ -521,8 +529,8 @@
     flex-direction: row;
     align-items: center;
     gap: 7px;
-    font-size: 11px;
-    font-weight: 500;
+    font-size: 12px;
+    font-weight: 600;
     margin-bottom: 3px;
     color: var(--text-black);
 

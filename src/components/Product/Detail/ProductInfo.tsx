@@ -16,6 +16,9 @@ import classNames from 'classnames/bind';
 import Link from 'next/link';
 import { useState } from 'react';
 import styles from './product_detail.module.scss';
+import useScroll from '~/libs/hooks/useScroll';
+import smoothScroll from '~/libs/orthers/smoothScroll';
+import $ from 'jquery';
 
 const cx = classNames.bind(styles);
 
@@ -23,16 +26,29 @@ export interface IAppProps {}
 
 export default function ProductInfo(props: IAppProps) {
     const [type, setType] = useState('');
+    const wheel: boolean = useScroll();
 
     const handleChange = (event: SelectChangeEvent) => {
         setType(event.target.value as string);
     };
 
+    const handleClick = () => {
+        $('#dropbox-2').show();
+        smoothScroll('#dropbox-2');
+    };
+
     return (
-        <div className={cx('product-info')}>
+        <div
+            className={cx('product-info')}
+            style={{
+                top: wheel ? '-180px' : '-120px',
+            }}
+        >
             <p className={cx('sale')}>Đang giảm giá</p>
             <h1 className={cx('name')}>Tinh dầu chanh viet oils</h1>
-            <p className={cx('rating')}>1 Đánh giá</p>
+            <p className={cx('rating')} onClick={handleClick}>
+                3 Đánh giá
+            </p>
             <div className={cx('decoration')} />
             <ul className={cx('summary')}>
                 <li>

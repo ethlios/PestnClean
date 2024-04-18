@@ -4,6 +4,7 @@ import classNames from 'classnames/bind';
 import styles from './product_detail.module.scss';
 import Image from 'next/image';
 import smoothScroll from '~/libs/orthers/smoothScroll';
+import useScroll from '~/libs/hooks/useScroll';
 
 const cx = classNames.bind(styles);
 
@@ -13,9 +14,16 @@ export interface IAppProps {}
 const imgLists = ['', '', ''];
 
 export default function ProductImage(props: IAppProps) {
+    const wheel: boolean = useScroll();
+
     return (
         <div className={cx('product-img')}>
-            <div className={cx('thumbnail')}>
+            <div
+                className={cx('thumbnail')}
+                style={{
+                    top: wheel ? '0px' : '70px',
+                }}
+            >
                 {imgLists.map((img, index) => {
                     return (
                         <Image

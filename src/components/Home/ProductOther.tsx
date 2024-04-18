@@ -49,14 +49,14 @@ export default function ProductOthers(props: IAppProps) {
             <div className={cx('product-item-all')}>
                 {Array.from({ length: 3 }).map((_, index) => {
                     return (
-                        <div className={cx('content-item')} key={index}>
+                        <Link href="/sanpham/detail" className={cx('content-item')} key={index}>
                             <div className={cx('item-img')}></div>
                             <p className={cx('item-category')}>SẢN PHẨM GIẢI PHÁP VỆ SINH</p>
                             <p className={cx('item-name')}>Tinh dầu Chanh Viet Oils</p>
                             <p className={cx('item-price')}>
                                 1.100.000 <u>đ</u>
                             </p>
-                        </div>
+                        </Link>
                     );
                 })}
             </div>
