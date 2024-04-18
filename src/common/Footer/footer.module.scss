@@ -45,7 +45,7 @@
         background-color: transparent;
         color: #fff;
         font-size: 12px;
-        font-weight: 300;
+        font-weight: 600;
         height: 40px;
         width: 60%;
     }
@@ -65,9 +65,12 @@
         font-size: 14px;
     }
 
+    svg {
+        transition: all ease 0.2s;
+    }
+
     :hover ~ svg {
         margin-left: 4px;
-        transition: all ease 0.2s;
     }
 }
 
@@ -84,6 +87,7 @@
         opacity: 0.8;
         cursor: pointer;
         font-style: italic;
+        font-weight: 500;
     }
 }
 

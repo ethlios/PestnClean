@@ -92,6 +92,7 @@ export default function PaymentForm(props: IAppProps) {
                             <MenuItem value={'phuong3'}>Phường 3</MenuItem>
                         </SelectField>
                     </Box>
+                    <textarea spellCheck="false" placeholder="Ghi chú thêm" className={cx('textarea')} />
                     <FormGroup>
                         <FormControlLabel
                             required

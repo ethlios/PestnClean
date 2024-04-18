@@ -173,3 +173,28 @@
         color: var(--primary);
     }
 }
+
+.textarea {
+    border: solid 0.5px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    margin-top: 12px;
+    padding: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    resize: none;
+    width: 100%;
+    min-height: 150px;
+
+    &:hover {
+        border: solid 0.5px rgba(0, 0, 0, 0.7);
+    }
+
+    &:focus {
+        border: solid 2px var(--primary);
+        outline: none;
+    }
+
+    &::placeholder {
+        color: rgba(0, 0, 0, 0.55);
+    }
+}

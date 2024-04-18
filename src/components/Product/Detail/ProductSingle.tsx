@@ -5,8 +5,7 @@ import ProductInfo from '~/components/Product/Detail/ProductInfo';
 
 const cx = classNames.bind(styles);
 
-export interface IAppProps {
-}
+export interface IAppProps {}
 
 export default function ProductSingle(props: IAppProps) {
     return (

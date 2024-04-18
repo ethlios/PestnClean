@@ -3,13 +3,12 @@ import styles from './product_detail.module.scss';
 
 const cx = classNames.bind(styles);
 
-export interface IAppProps {
-}
+export interface IAppProps {}
 
 export default function ProductRelated(props: IAppProps) {
     return (
         <div className={cx('product-related')}>
-            <h1 className={'uppercase text-2xl'}>Sản phẩm liên quan</h1>
+            <p className={cx('related-title')}>Sản phẩm liên quan</p>
             <div className={cx('horizontal-decor')} />
             <div className={cx('product-item')}>
                 {Array.from({ length: 4 }).map((_, index) => {

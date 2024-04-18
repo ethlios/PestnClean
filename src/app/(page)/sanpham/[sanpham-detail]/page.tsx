@@ -7,8 +7,7 @@ import ProductRelated from '~/components/Product/Detail/ProductRelated';
 
 const cx = classNames.bind(styles);
 
-export interface IAppProps {
-}
+export interface IAppProps {}
 
 export default function ProductDetailPage(props: IAppProps) {
     return (
@@ -22,9 +21,9 @@ export default function ProductDetailPage(props: IAppProps) {
             </div>
             <div className={cx('wrapper')}>
                 <ProductSingle />
-                <ProductDescript />
-                <ProductRelated />
             </div>
+            <ProductDescript />
+            <ProductRelated />
         </div>
     );
 }
