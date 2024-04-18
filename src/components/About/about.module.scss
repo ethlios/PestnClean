@@ -57,3 +57,10 @@
         background-color: #79b46189;
     }
 }
+
+.img-fix-size {
+    img {
+        object-fit: cover;
+        object-position: center;
+    }
+}

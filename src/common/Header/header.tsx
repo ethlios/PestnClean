@@ -87,7 +87,7 @@ export default function Header(props: HeaderProps) {
                     boxShadow: scrollToTop > 0 ? 'rgba(0, 0, 0, 0.2) 0px 5px 15px' : '',
                     transition: 'all ease .5s',
                     overflow: 'hidden',
-                    opacity: !wheel ? 1 : 0,
+                    opacity: scrollToTop === 0 ? 1 : !wheel ? 1 : 0,
                 }}
             >
                 <Link href={'/'}>

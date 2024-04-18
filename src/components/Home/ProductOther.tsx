@@ -8,6 +8,7 @@ import Image from 'next/image';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import { nameToLink } from '~/libs/orthers/nameToLink';
 import Link from 'next/link';
+import OwlCarouselCP from '../Orther/Carousel';
 
 const cx = classNames.bind(styles);
 
@@ -46,20 +47,23 @@ export default function ProductOthers(props: IAppProps) {
                 </h1>
                 <ButtonCommon text="Xem thêm" path="sanpham" />
             </div>
-            <div className={cx('product-item-all')}>
-                {Array.from({ length: 3 }).map((_, index) => {
-                    return (
-                        <Link href="/sanpham/detail" className={cx('content-item')} key={index}>
-                            <div className={cx('item-img')}></div>
-                            <p className={cx('item-category')}>SẢN PHẨM GIẢI PHÁP VỆ SINH</p>
-                            <p className={cx('item-name')}>Tinh dầu Chanh Viet Oils</p>
-                            <p className={cx('item-price')}>
-                                1.100.000 <u>đ</u>
-                            </p>
-                        </Link>
-                    );
-                })}
-            </div>
+
+            <OwlCarouselCP>
+                <>
+                    {Array.from({ length: 10 }).map((_, index) => {
+                        return (
+                            <Link href="/sanpham/detail" className={cx('content-item')} key={index}>
+                                <div className={cx('item-img')}></div>
+                                <p className={cx('item-category')}>SẢN PHẨM GIẢI PHÁP VỆ SINH</p>
+                                <p className={cx('item-name')}>Tinh dầu Chanh Viet Oils</p>
+                                <p className={cx('item-price')}>
+                                    1.100.000 <u>đ</u>
+                                </p>
+                            </Link>
+                        );
+                    })}
+                </>
+            </OwlCarouselCP>
         </div>
     );
 }

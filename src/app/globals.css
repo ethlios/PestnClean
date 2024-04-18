@@ -173,3 +173,25 @@ progress::-moz-progress-bar {
     font-weight: 500;
     letter-spacing: -0.2px;
 }
+
+/* Custom Carousel */
+.owl-dots {
+    margin-top: 20px !important;
+}
+
+.owl-theme .owl-dots .owl-dot.active span {
+    background-color: #78b461 !important;
+}
+
+.owl-theme .owl-dots .owl-dot.active span:hover {
+    background-color: #78b461 !important;
+}
+
+.owl-theme .owl-dots .owl-dot span {
+    width: 35px !important;
+    height: 4px !important;
+}
+
+/* Custom Slick */
+.slick-list div {
+}
