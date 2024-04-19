@@ -18,7 +18,7 @@ const imgList = [
         title: 'Nâng cao chất lượng cuộc sống',
         path: 'blogs',
         description:
-            'Bằng tất cả những gì mình có, PESTNCLEAN hứa hẹn sẽ mang đến cho quý khách hàng những trải nghiệm về dịch vụ chưa từng có. Lấy đam mê nhiệt huyết làm nguồn sức mạnh, và lấy nụ cười của khách hàng làm mục tiêu theo đuổi, PESTNCLEAN đã và đang không ngừng hoàn thiện bản thân cho hiện tại và tương lai. "Nụ cười của quý khách hàng - là tất cả đối với chúng tôi!"',
+            'Bằng tất cả những gì mình có, PESTNCLEAN hứa hẹn sẽ mang đến cho quý khách hàng những trải nghiệm về dịch vụ chưa từng có. Lấy đam mê nhiệt huyết làm nguồn sức mạnh, và lấy nụ cười của khách hàng làm mục tiêu theo đuổi, PESTNCLEAN đã và đang không ngừng hoàn thiện bản thân cho hiện tại và tương lai.',
     },
     {
         id: 2,
@@ -48,7 +48,7 @@ const imgList = [
         title: 'Dịch vụ Giải pháp vệ sinh',
         path: 'dichvu/giai-phap-ve-sinh',
         description:
-            'PestnClean cung cấp giải pháp vệ sinh chuyên sâu cho các doanh nghiệp, nhà hàng, khách sạn... đảm bảo rằng các loại vi sinh vật và nấm mốc được loại bỏ, mang đến môi trường sạch khuẩn, hương thơm thư giãn và bảo vệ an toàn sức khỏe con người. Các nghiên cứu đã chứng minh rằng mùi hương dễ chịu có thể tăng cường sự sáng tạo và tinh thần, thậm chí có thể giảm căng thẳng cho con người.',
+            'PestnClean cung cấp giải pháp vệ sinh chuyên sâu cho các doanh nghiệp, nhà hàng, khách sạn... đảm bảo rằng các loại vi sinh vật và nấm mốc được loại bỏ, mang đến môi trường sạch khuẩn, hương thơm thư giãn và bảo vệ an toàn sức khỏe con người.',
     },
 ];
 
@@ -73,12 +73,16 @@ export default function BannerHomePage(props: IAppProps) {
                             <div key={index}>
                                 <div
                                     style={{
-                                        padding: '100px 100px',
                                         // backgroundImage: `url('${banner1.src}')`,
                                         backgroundPosition: 'center',
                                         backgroundSize: 'cover',
                                         width: '100%',
                                         backgroundColor: 'rgba(0,0,0,0.05)',
+                                        height: '500px',
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        justifyContent: 'center',
+                                        padding: '0 100px',
                                     }}
                                 >
                                     <h1
@@ -105,7 +109,9 @@ export default function BannerHomePage(props: IAppProps) {
                                     >
                                         {item.description}
                                     </p>
-                                    <ButtonCommon text={'XEM THÊM'} path={item.path}></ButtonCommon>
+                                    <div>
+                                        <ButtonCommon text={'XEM THÊM'} path={item.path}></ButtonCommon>
+                                    </div>
                                 </div>
                             </div>
                         );

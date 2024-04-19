@@ -90,7 +90,7 @@ export default function Header(props: HeaderProps) {
             <Services setOpenService={setOpenService} openService={openService} />
             <MoreBtn />
             <div
-                className={`${cx('header')}`}
+                className={`${cx('header')} container`}
                 style={{
                     backgroundColor: scrollToTop > 0 ? '#fff' : 'transparent',
                     boxShadow: scrollToTop > 0 ? 'rgba(0, 0, 0, 0.2) 0px 5px 15px' : '',
@@ -118,50 +118,53 @@ export default function Header(props: HeaderProps) {
                         </IconButton>
                     </div>
                 </div>
-                <div className={'container flex justify-between items-center'}>
-                    <Link href={'/'}>
-                        <Image alt="Logo công ty PESTNCLEAN" src={logo.src} width={176} height={100} />
+                <Link href={'/'}>
+                    <Image alt="Logo công ty PESTNCLEAN" src={logo.src} width={176} height={100} />
+                </Link>
+                <div className={'flex items-center'}>
+                    <ul className={cx('link')}>
+                        {link.map((item) => {
+                            return (
+                                <li key={item.id}>
+                                    {!!item.pathname ? (
+                                        <Link
+                                            href={item.pathname}
+                                            style={{
+                                                color: path === item.pathname ? 'var(--primary)' : '',
+                                                textDecoration: path === item.pathname ? '2px underline' : '',
+                                                textUnderlineOffset: path === item.pathname ? '5px' : '',
+                                            }}
+                                        >
+                                            {item.title}
+                                        </Link>
+                                    ) : (
+                                        <p onClick={() => setOpenService(true)}>{item.title}</p>
+                                    )}
+                                </li>
+                            );
+                        })}
+                    </ul>
+                </div>
+                <div
+                    className={'flex items-center justify-center'}
+                    style={{
+                        gap: '8px',
+                    }}
+                >
+                    <SearchOutlinedIcon
+                        sx={{
+                            position: 'relative',
+                            top: '2px',
+                        }}
+                        className="icon-hover"
+                        onClick={() => setOpenSearch(true)}
+                    />
+                    <Link href={'/giohang'} className="icon-hover">
+                        <ShoppingBagOutlinedIcon />
                     </Link>
-                    <div className={'flex items-center'}>
-                        <ul className={cx('link')}>
-                            {link.map((item) => {
-                                return (
-                                    <li key={item.id}>
-                                        {!!item.pathname ? (
-                                            <Link
-                                                href={item.pathname}
-                                                style={{
-                                                    color: path === item.pathname ? 'var(--primary)' : '',
-                                                    textDecoration: path === item.pathname ? '2px underline' : '',
-                                                    textUnderlineOffset: path === item.pathname ? '5px' : '',
-                                                }}
-                                            >
-                                                {item.title}
-                                            </Link>
-                                        ) : (
-                                            <p onClick={() => setOpenService(true)}>{item.title}</p>
-                                        )}
-                                    </li>
-                                );
-                            })}
-                        </ul>
-                    </div>
-                    <div className={'flex items-center justify-center'}>
-                        <SearchOutlinedIcon
-                            sx={{
-                                position: 'relative',
-                                top: '2px',
-                            }}
-                            className="icon-hover"
-                            onClick={() => setOpenSearch(true)}
-                        />
-                        <Link href={'/giohang'} className="icon-hover">
-                            <ShoppingBagOutlinedIcon />
-                        </Link>
-                        <Link href="/login" className="icon-hover">
-                            <AccountCircleOutlinedIcon />
-                        </Link>
-                    </div>
+                    <Link href="/login" className="icon-hover">
+                        <AccountCircleOutlinedIcon />
+                    </Link>
                 </div>
             </div>
         </>

@@ -173,7 +173,7 @@ progress::-moz-progress-bar {
 
 /* Tippy */
 .tippy-box {
-    font-family: Montserrat, sans-serif !important;
+    font-family: 'Montserrat', sans-serif !important;
     font-size: 13px !important;
     font-weight: 500;
     letter-spacing: -0.2px;
@@ -200,7 +200,7 @@ progress::-moz-progress-bar {
 /* Custom Slick */
 .slick-dots {
     position: absolute !important;
-    bottom: 10px !important;
+    bottom: 15px !important;
 }
 
 .slick-dots li {
