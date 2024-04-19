@@ -106,7 +106,7 @@ const cards = [
 
 export default function DichVu1Page(props: IAppProps) {
     return (
-        <div className={'container'}>
+        <div className={'container cpmount'}>
             <ServiceBanner />
             <ParagraphAlignLeft>
                 <h1 className={cx('title')}>Dịch vụ kiểm soát côn trùng tại PetnClean</h1>

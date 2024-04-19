@@ -10,7 +10,7 @@ export interface IAppProps {}
 
 export default function BlogsPage(props: IAppProps) {
     return (
-        <div className={'container'}>
+        <div className={'container cpmount'}>
             <div className={cx('link')}>
                 <Link href="/">Trang chủ</Link>
                 <p>|</p>

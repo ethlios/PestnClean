@@ -10,12 +10,11 @@ import AllProduct from '~/components/Product/Main/AllProduct';
 
 const cx = classNames.bind(styles);
 
-export interface IAppProps {
-}
+export interface IAppProps {}
 
 export default function ProductPage(props: IAppProps) {
     return (
-        <div className={'container'}>
+        <div className={'container cpmount'}>
             <div className={cx('link')}>
                 <Link href="/">Trang chủ</Link>
                 <p>|</p>

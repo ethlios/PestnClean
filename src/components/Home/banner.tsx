@@ -1,12 +1,8 @@
 'use client';
 
-import { Button } from '@mui/material';
 import classNames from 'classnames/bind';
-import Image from 'next/image';
-import { useState } from 'react';
-import banner1 from '../../../public/img/banner 1.jpg';
-import banner2 from '../../../public/img/banner 2.jpg';
-import banner3 from '../../../public/img/banner 3.jpg';
+import Slider from 'react-slick';
+import ButtonCommon from '../Orther/Button';
 import styles from './home.module.scss';
 
 const cx = classNames.bind(styles);
@@ -16,124 +12,100 @@ export interface IAppProps {}
 const imgList = [
     {
         id: 1,
-        src: banner1.src,
-        alt: 'Dịch vụ kiểm soát côn trùng của PESTNCLEAN',
+        src: '',
+        alt: 'Các dịch vụ của pestnclean',
         color: 'var(--primary)',
+        title: 'Nâng cao chất lượng cuộc sống',
+        path: 'blogs',
     },
     {
         id: 2,
-        src: banner2.src,
-        alt: 'Dịch vụ vệ sinh côn trùng của PESTNCLEAN',
-        color: 'var(--secondary)',
+        src: '',
+        alt: 'Dịch vụ kiểm soát côn trùng của PESTNCLEAN',
+        color: 'var(--primary)',
+        title: 'Dịch vụ kiểm soát côn trùng',
+        path: 'dichvu/kiem-soat-con-trung',
     },
     {
         id: 3,
-        src: banner3.src,
-        alt: 'Giải pháp vệ sinh của PESTNCLEAN',
+        src: '',
+        alt: 'Dịch vụ vệ sinh côn trùng',
+        color: 'var(--secondary)',
+        title: 'Dịch vụ vệ sinh côn trùng',
+        path: 'dichvu/dich-vu-ve-sinh',
+    },
+    {
+        id: 4,
+        src: '',
+        alt: 'Dịch vụ Giải pháp vệ sinh',
         color: 'var(--secondary-dark)',
+        title: 'Dịch vụ Giải pháp vệ sinh',
+        path: 'dichvu/giai-phap-ve-sinh',
     },
 ];
 
-export default function BannerHomePage(props: IAppProps) {
-    const [imgIndex, setImgIndex] = useState<number>(3);
+const settings = {
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    pauseOnHover: true,
+    dots: true,
+};
 
+export default function BannerHomePage(props: IAppProps) {
     return (
-        <div
-            style={{
-                position: 'absolute',
-                top: '0',
-                height: '550px',
-                width: '100vw',
-                display: 'flex',
-                flex: 1,
-                flexWrap: 'nowrap',
-                alignItems: ' center',
-            }}
-        >
-            {/* <Image
-                src={''}
-                alt=""
-                width={1000}
-                height={1000}
-                style={{
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'cover',
-                    objectPosition: 'center',
-                    backgroundColor: 'rgba(0,0,0,0.05)',
-                }}
-            /> */}
-            <div
-                style={{
-                    width: '100%',
-                    height: '100%',
-                    backgroundColor: 'rgba(0,0,0,0.05)',
-                }}
-            ></div>
-            <div
-                style={{
-                    position: 'absolute',
-                    left:
-                        imgIndex === 0
-                            ? '100px'
-                            : imgIndex === 1
-                            ? '300px'
-                            : imgIndex === 2
-                            ? '550px'
-                            : '100px',
-                    transition: 'all ease .5s',
-                    // color: imgIndex === 0 ? '#fff' : '',
-                }}
-                onMouseOver={() => setImgIndex(imgIndex)}
-            >
-                {imgIndex === 3 ? (
-                    <h1
-                        style={{
-                            fontSize: '32px',
-                            fontWeight: '600',
-                        }}
-                    >
-                        NÂNG CAO CHẤT LƯỢNG <br /> CUỘC SỐNG
-                    </h1>
-                ) : (
-                    <h1
-                        style={{
-                            fontSize: '32px',
-                            fontWeight: '600',
-                        }}
-                    >
-                        {imgIndex === 0
-                            ? 'KIỂM SOÁT CÔN TRÙNG'
-                            : imgIndex === 1
-                            ? 'DỊCH VỤ VỆ SINH'
-                            : imgIndex === 2
-                            ? 'GIẢI PHÁP VỆ SINH'
-                            : ''}
-                    </h1>
-                )}
-                <p
-                    style={{
-                        width: '450px',
-                        fontSize: '14px',
-                        fontWeight: '500',
-                    }}
-                >
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-                    been the standard dummy text ever since the 1500s, when an unknown printer took a galley
-                    of type and scrambled it to make a type specimen book.
-                </p>
-                {imgIndex !== 3 && (
-                    <Button
-                        variant="contained"
-                        style={{
-                            backgroundColor: 'var(--primary)',
-                            marginTop: '15px',
-                        }}
-                        className="opacity"
-                    >
-                        XEM DỊCH VỤ
-                    </Button>
-                )}
+        <div>
+            <div className="slider-container">
+                <Slider {...settings}>
+                    {imgList.map((item, index) => {
+                        return (
+                            <div key={index}>
+                                <div
+                                    style={{
+                                        padding: '100px 100px',
+                                        // backgroundImage: `url('${banner1.src}')`,
+                                        backgroundPosition: 'center',
+                                        backgroundSize: 'cover',
+                                        width: '100%',
+                                        backgroundColor: 'rgba(0,0,0,0.05)',
+                                    }}
+                                >
+                                    <h1
+                                        style={{
+                                            width: '450px',
+                                            fontSize: '34px',
+                                            fontWeight: '600',
+                                            textTransform: 'uppercase',
+                                            marginBottom: '5px',
+                                            letterSpacing: '-.5px',
+                                        }}
+                                    >
+                                        {item.title}
+                                    </h1>
+                                    <p
+                                        style={{
+                                            width: '450px',
+                                            fontSize: '14.6px',
+                                            fontWeight: '600',
+                                            letterSpacing: '-.5px',
+                                            color: 'var(--text-black)',
+                                            marginBottom: '10px',
+                                        }}
+                                    >
+                                        Lorem Ipsum is simply dummy text of the printing and typesetting
+                                        industry. Lorem Ipsum has been the standard dummy text ever since the
+                                        1500s, when an unknown printer took a galley of type and scrambled it
+                                        to make a type specimen book.
+                                    </p>
+                                    <ButtonCommon text={'XEM THÊM'} path={item.path}></ButtonCommon>
+                                </div>
+                            </div>
+                        );
+                    })}
+                </Slider>
             </div>
         </div>
     );

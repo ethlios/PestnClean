@@ -4,7 +4,7 @@ export interface IAppProps {}
 
 export default function AboutPage(props: IAppProps) {
     return (
-        <div className={'container'}>
+        <div className={'container cpmount'}>
             <AboutCPPage />
         </div>
     );

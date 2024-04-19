@@ -1,0 +1,13 @@
+.search-wrapper {
+    min-height: calc(100vh - 70px);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    p {
+        font-size: 15px;
+        font-weight: 600;
+        letter-spacing: -0.2px;
+    }
+}

@@ -8,14 +8,15 @@ import BannerHomePage from '~/components/Home/banner';
 
 export default function Home() {
     return (
-        <main>
-            <BannerHomePage />
+        <main className="cpmount">
             <div
                 style={{
-                    paddingTop: '500px',
+                    overflowX: 'hidden',
                 }}
-                className={'container'}
             >
+                <BannerHomePage />
+            </div>
+            <div className={'container'}>
                 <ServiceAds />
                 <WhyChooseMe />
                 <ImageWork />

@@ -11,7 +11,7 @@ export interface IAppProps {}
 
 export default function CartPage(props: IAppProps) {
     return (
-        <div className={'container'}>
+        <div className={'container cpmount'}>
             {/*Header title*/}
             <div className={cx('link')}>
                 <Link href="/">Trang chủ</Link>
