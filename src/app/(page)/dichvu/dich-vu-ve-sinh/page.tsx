@@ -73,7 +73,20 @@ export default function DichVu3Page(props: IAppProps) {
                     type specimen book.
                 </p>
             </ParagraphAlignLeft>
-            <ServiceBanner />
+            <div style={{ width: '100%', height: '450px', backgroundColor: 'rgba(0,0,0,0.05)' }}>
+                <video
+                    style={{ width: '100%', height: '100%' }}
+                    controls
+                    preload="none"
+                    draggable={false}
+                    title="Dịch vụ vệ sinh công nghiệp tại PetnClean."
+                >
+                    <source
+                        src="https://res.cloudinary.com/dj2jarcxk/video/upload/v1713531630/Ve%CC%A3%CC%82_Sinh_Co%CC%82ng_Nghie%CC%A3%CC%82p_yqfytu.mp4"
+                        type="video/mp4"
+                    />
+                </video>
+            </div>
             <TextImageImage />
             <p className={cx('content-title')}>Dịch vụ vệ sinh chuyên biệt</p>
             <BundleCard className={'rounded-xl bg-gray-200 p-10'}>

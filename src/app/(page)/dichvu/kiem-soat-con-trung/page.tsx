@@ -118,7 +118,20 @@ export default function DichVu1Page(props: IAppProps) {
                     một dịch vụ chất lượng nhất.
                 </p>
             </ParagraphAlignLeft>
-            <ServiceBanner />
+            <div style={{ width: '100%', height: '450px', backgroundColor: 'rgba(0,0,0,0.05)' }}>
+                <video
+                    style={{ width: '100%', height: '100%' }}
+                    controls
+                    preload="none"
+                    draggable={false}
+                    title="Dịch vụ kiểm soát côn trùng tại PetnClean."
+                >
+                    <source
+                        src="https://res.cloudinary.com/dj2jarcxk/video/upload/v1713528846/Termite_bw08jg.mp4"
+                        type="video/mp4"
+                    />
+                </video>
+            </div>
             <ParagraphAlignRight>
                 <h1 className={`${cx('title')} text-right`}>Báo cáo phân tích chuẩn BRC, HACCP, ISO</h1>
                 <p className={cx('text-common')}>
