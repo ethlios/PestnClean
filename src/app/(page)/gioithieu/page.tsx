@@ -1,11 +1,10 @@
 import AboutCPPage from '~/components/About/About';
 
-export interface IAppProps {}
+export interface IAppProps {
+}
 
 export default function AboutPage(props: IAppProps) {
     return (
-        <div className={'container'}>
-            <AboutCPPage />
-        </div>
+        <AboutCPPage />
     );
 }
