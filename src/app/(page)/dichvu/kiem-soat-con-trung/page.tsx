@@ -111,23 +111,24 @@ export default function DichVu1Page(props: IAppProps) {
             <ParagraphAlignLeft>
                 <h1 className={cx('title')}>Dịch vụ kiểm soát côn trùng tại PetnClean</h1>
                 <p className={cx('text-common')}>
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-                    been the standard dummy text ever since the 1500s, when an unknown printer took a galley
-                    of type and scrambled it to make a type specimen book. Lorem Ipsum is simply dummy text of
-                    the printing and typesetting industry. Lorem Ipsum has been the standard dummy text ever
-                    since the 1500s, when an unknown printer took a galley of type and scrambled it to make a
-                    type specimen book.
+                    Việc tìm được một công ty kiểm soát côn trùng hiệu quả cho nhà ở, các cơ sở, đơn vị kinh
+                    doanh là hết sức cần thiết. PestnClean tự hào là một đơn vị có nhiều năm kinh nghiệm trong
+                    lĩnh vực kiểm soát côn trùng. Chúng tôi với đội ngũ nhân viên lành nghề, được đào tạo kỹ
+                    càng về nhiều mặt (chuyên môn và thái độ phục vụ) cam kết sẽ cung cấp tới Quý khách hàng
+                    một dịch vụ chất lượng nhất.
                 </p>
             </ParagraphAlignLeft>
             <ServiceBanner />
             <ParagraphAlignRight>
+                <h1 className={`${cx('title')} text-right`}>Báo cáo phân tích chuẩn BRC, HACCP, ISO</h1>
                 <p className={cx('text-common')}>
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-                    been the standard dummy text ever since the 1500s, when an unknown printer took a galley
-                    of type and scrambled it to make a type specimen book. Lorem Ipsum is simply dummy text of
-                    the printing and typesetting industry. Lorem Ipsum has been the standard dummy text ever
-                    since the 1500s, when an unknown printer took a galley of type and scrambled it to make a
-                    type specimen book.
+                    PestnClean hỗ trợ các doanh nghiệp có yêu cầu tuân thủ các tiêu chuẩn: BRC, HACCP, ISO,…
+                    cùng các dịch vụ báo cáo phân tích chuyên sâu. Hệ thống báo cáo kỹ thật số của chúng tôi
+                    là một công cụ để theo dõi báo cáo thông tin về chương trình kiểm soát côn trùng, bao gồm
+                    tất cả thông tin về phương pháp, thiết bị và sản phẩm sử dụng trong chương trình kiểm soát
+                    côn trùng. Đây là một cách để PestnClean đơn giản hóa việc kiểm soát côn trùng cho khách
+                    hàng. Chúng tôi cam kết liên tục theo dõi & điều chỉnh chương trình kiểm soát côn trùng
+                    khi cần thiết.
                 </p>
             </ParagraphAlignRight>
             <BundleCard>

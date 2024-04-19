@@ -7,8 +7,7 @@ import CheckoutPanel from '~/components/Cart/CheckoutPanel';
 
 const cx = classNames.bind(styles);
 
-export interface IAppProps {
-}
+export interface IAppProps {}
 
 export default function CartPage(props: IAppProps) {
     return (
@@ -21,7 +20,7 @@ export default function CartPage(props: IAppProps) {
             </div>
             <div className={cx('decoration')}></div>
             {/*Main*/}
-            <div className={'grid grid-cols-12 gap-6 mb-20'}>
+            <div className={'grid grid-cols-12 gap-6 mb-10'}>
                 {/*Visual Content*/}
                 <div className={'col-span-12 md:col-span-8 flex flex-col'}>
                     {/*Item*/}
@@ -35,10 +34,10 @@ export default function CartPage(props: IAppProps) {
                 </div>
             </div>
             {/*Back to shop*/}
-            <div className={'my-20'}>
+            <div className={'mb-10'}>
                 <Link href={'/sanpham'} className={'inline-flex items-center'}>
                     <ArrowBackIosIcon />
-                    <h1 className={'font-bold'}>Trở lại mua sắm</h1>
+                    <h1 className={'font-semibold'}>Trở lại mua sắm</h1>
                 </Link>
             </div>
         </div>

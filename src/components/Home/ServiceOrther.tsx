@@ -17,25 +17,19 @@ const otherService = [
         id: 1,
         img: '',
         title: 'Kiểm Soát côn trùng',
-        description: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-        been the standard dummy text ever since the 1500s, when an unknown printer took a galley
-        of type and scrambled it to make a type specimen book.`,
+        description: `Việc tìm được một công ty kiểm soát côn trùng hiệu quả cho nhà ở, các cơ sở, đơn vị kinh doanh là hết sức cần thiết. PestnClean tự hào là một đơn vị có nhiều năm kinh nghiệm trong lĩnh vực kiểm soát côn trùng. Chúng tôi với đội ngũ nhân viên lành nghề, được đào tạo kỹ càng về nhiều mặt (chuyên môn và thái độ phục vụ) cam kết sẽ cung cấp tới Quý khách hàng một dịch vụ chất lượng nhất.`,
     },
     {
         id: 2,
         img: '',
         title: 'Dịch vụ vệ sinh',
-        description: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-        been the standard dummy text ever since the 1500s, when an unknown printer took a galley
-        of type and scrambled it to make a type specimen book.`,
+        description: `PestnClean là công ty dịch vụ vệ sinh chuyên nghiệp, cung cấp các dịch vụ vệ sinh công nghiệp và vệ sinh dân dụng chất lượng cao, được thiết kế linh hoạt nhằm đáp ứng tối ưu yêu cầu của khách hàng, góp phần nâng cao chất lượng môi trường sống và làm việc, đáp ứng đầy đủ các điều kiện pháp lý và tiêu chuẩn ngành để đảm bảo quá trình kinh doanh hiệu quả, nâng cao danh tiếng thương hiệu.`,
     },
     {
         id: 3,
         img: '',
         title: 'Giải pháp vệ sinh',
-        description: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-        been the standard dummy text ever since the 1500s, when an unknown printer took a galley
-        of type and scrambled it to make a type specimen book.`,
+        description: `PestnClean cung cấp giải pháp vệ sinh chuyên sâu cho các doanh nghiệp, nhà hàng, khách sạn... đảm bảo rằng các loại vi sinh vật và nấm mốc được loại bỏ, mang đến môi trường sạch khuẩn, hương thơm thư giãn và bảo vệ an toàn sức khỏe con người. Các nghiên cứu đã chứng minh rằng mùi hương dễ chịu có thể tăng cường sự sáng tạo và tinh thần, thậm chí có thể giảm căng thẳng cho con người.`,
     },
 ];
 
