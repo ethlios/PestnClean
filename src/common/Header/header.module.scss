@@ -45,7 +45,6 @@
 
 // Header
 .header {
-    width: 100vw;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -53,7 +52,7 @@
     position: sticky;
     top: 0;
     z-index: 1000;
-    transition: all ease .5s;
+    transition: all ease 0.5s;
     overflow: hidden;
     padding-top: 1rem;
     padding-bottom: 1rem;

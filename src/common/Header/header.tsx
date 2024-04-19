@@ -51,8 +51,7 @@ const link = [
 
 const cx = classNames.bind(styles);
 
-export interface HeaderProps {
-}
+export interface HeaderProps {}
 
 export default function Header(props: HeaderProps) {
     const path = usePathname();
@@ -145,7 +144,12 @@ export default function Header(props: HeaderProps) {
                         })}
                     </ul>
                 </div>
-                <div className={'flex items-center justify-center gap-6'}>
+                <div
+                    className={'flex items-center justify-center '}
+                    style={{
+                        gap: '8px',
+                    }}
+                >
                     <SearchOutlinedIcon
                         sx={{
                             position: 'relative',

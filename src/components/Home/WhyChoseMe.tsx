@@ -31,8 +31,10 @@ const solutions = [
 
 export default function WhyChooseMe() {
     return (
-        <Container sx={{ paddingY: 5 }}>
-            <h1 className={'pb-5 text-center font-bold underline underline-offset-2 text-2xl uppercase'}>
+        <div>
+            <h1
+                className={'pb-5 text-center font-bold underline underline-offset-2 text-2xl uppercase mt-14'}
+            >
                 Vì sao chọn chúng tôi?
             </h1>
             <div className={cx('choose-wrapper')}>
@@ -101,6 +103,6 @@ export default function WhyChooseMe() {
                     </p>
                 </div>
             </div>
-        </Container>
+        </div>
     );
 }
