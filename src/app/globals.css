@@ -19,13 +19,13 @@ body {
     text-rendering: optimizeSpeed;
 }
 
-html * {
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
-    -webkit-scrollbar: none;
-    user-select: none;
-    scroll-behavior: smooth !important;
-}
+/*html * {*/
+/*    -ms-overflow-style: none; !* IE and Edge *!*/
+/*    scrollbar-width: none; !* Firefox *!*/
+/*    -webkit-scrollbar: none;*/
+/*    user-select: none;*/
+/*    scroll-behavior: smooth !important;*/
+/*}*/
 
 p,
 b,
@@ -43,12 +43,12 @@ h1 {
     font-weight: 700;
 }
 
-html *::-webkit-scrollbar {
-    display: none;
-    border-radius: 0;
-    width: 2px;
-    height: 30px;
-}
+/*html *::-webkit-scrollbar {*/
+/*    display: none;*/
+/*    border-radius: 0;*/
+/*    width: 2px;*/
+/*    height: 30px;*/
+/*}*/
 
 .cpmount {
     animation: opacity 1s ease;
@@ -89,11 +89,6 @@ input:focus {
     to {
         opacity: 1;
     }
-}
-
-/*  */
-.container {
-    padding: 0 100px;
 }
 
 /* CUSTOM MUI */
