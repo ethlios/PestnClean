@@ -13,8 +13,7 @@ import Toast from '~/components/Orther/Toast';
 
 const cx = classNames.bind(styles);
 
-export interface IAppProps {
-}
+export interface IAppProps {}
 
 export default function BuyItem(props: IAppProps) {
     const [quantity, setQuantity] = useState(1);
@@ -43,12 +42,7 @@ export default function BuyItem(props: IAppProps) {
             <div className={'shadow-lg rounded-md mb-3'}>
                 <div className={'grid grid-cols-6 gap-4'}>
                     <div className={'col-span-1 p-4'}>
-                        <Image
-                            src={''}
-                            alt={'Ảnh sản phẩm'}
-                            width={1000}
-                            className={'bg-gray-200 h-auto md:h-32'}
-                        />
+                        <Image src={''} alt={''} width={1000} className={'bg-gray-200 h-auto md:h-32'} />
                     </div>
                     <div className={'col-span-2 py-4'}>
                         <div className={`flex flex-col justify-between md:h-32 w-max`}>
@@ -76,7 +70,8 @@ export default function BuyItem(props: IAppProps) {
                                     </IconButton>
                                 </div>
                                 <div
-                                    className={'h-1/3 border-l-2 border-y-2 flex items-center justify-center'}>
+                                    className={'h-1/3 border-l-2 border-y-2 flex items-center justify-center'}
+                                >
                                     <p>{quantity}</p>
                                 </div>
                                 <div className={'h-1/3 border-l-2 flex items-center justify-center'}>
