@@ -12,7 +12,7 @@ export interface IAppProps {}
 
 export default function PaymentPage(props: IAppProps) {
     return (
-        <div className={'container'}>
+        <div className={'container cpmount'}>
             {/*Main*/}
             <div className={cx('progress-wrapper')}>
                 <div className={cx('progress')}>

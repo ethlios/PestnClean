@@ -1,14 +1,10 @@
 'use client';
 
-import * as React from 'react';
 import classNames from 'classnames/bind';
-import styles from './home.module.scss';
-import ButtonCommon from '../Orther/Button';
-import Image from 'next/image';
-import AccessTimeIcon from '@mui/icons-material/AccessTime';
-import { nameToLink } from '~/libs/orthers/nameToLink';
 import Link from 'next/link';
+import ButtonCommon from '../Orther/Button';
 import OwlCarouselCP from '../Orther/Carousel';
+import styles from './home.module.scss';
 
 const cx = classNames.bind(styles);
 

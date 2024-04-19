@@ -19,7 +19,7 @@ export default function ContactPage(props: IAppProps) {
     const [showToast, setShowToast] = useState<boolean>(false);
 
     return (
-        <div>
+        <div className="cpmount">
             <BannerContactPage />
             {/* Toast */}
             <Toast

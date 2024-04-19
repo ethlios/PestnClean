@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Questrial&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap');
+@import url(https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Questrial&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap);
 
 :root {
     --primary: #0274be;
@@ -36,7 +36,7 @@ button,
 label,
 li,
 textarea {
-    font-family: 'Montserrat', serif !important;
+    font-family: Montserrat, serif !important;
 }
 
 h1 {
@@ -51,7 +51,7 @@ html *::-webkit-scrollbar {
 }
 
 .cpmount {
-    animation: opacity 0.8s ease;
+    animation: opacity 1s ease;
 }
 
 .opacity {
@@ -70,6 +70,16 @@ html *::-webkit-scrollbar {
 
 input:focus {
     outline: none;
+}
+
+/* loader */
+.loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    width: 100vw;
+    height: 100vh;
 }
 
 @keyframes opacity {
@@ -168,7 +178,7 @@ progress::-moz-progress-bar {
 
 /* Tippy */
 .tippy-box {
-    font-family: 'Montserrat', sans-serif !important;
+    font-family: Montserrat, sans-serif !important;
     font-size: 13px !important;
     font-weight: 500;
     letter-spacing: -0.2px;
@@ -193,5 +203,32 @@ progress::-moz-progress-bar {
 }
 
 /* Custom Slick */
-.slick-list div {
+.slick-dots {
+    position: absolute !important;
+    bottom: 10px !important;
+}
+
+.slick-dots li {
+    width: 35px !important;
+    height: 4px !important;
+    background-color: #d6d6d6;
+    transition: all ease 0.5s;
+    border-radius: 10px;
+}
+
+.slick-dots li:hover {
+    background-color: #869791;
+}
+
+.slick-dots li button {
+    width: 35px !important;
+    height: 4px !important;
+}
+
+.slick-dots .slick-active {
+    background-color: var(--secondary) !important;
+}
+
+.slick-dots li button::before {
+    display: none !important;
 }

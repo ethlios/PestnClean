@@ -83,7 +83,7 @@ const cards = [
 
 export default function DichVu3Page(props: IAppProps) {
     return (
-        <div className={'container'}>
+        <div className={'container cpmount'}>
             <ServiceBanner />
             <p className={'text-center ' + cx('content-title-fix')}>Các giải pháp vệ sinh tại PetnClean</p>
             <BundleCard>

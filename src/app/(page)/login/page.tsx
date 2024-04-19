@@ -17,7 +17,7 @@ export default function LoginPage(props: IAppProps) {
     const [theme, setTheme] = useState<boolean>(false);
 
     return (
-        <div className={cx('login-page')}>
+        <div className={`${cx('login-page')} cpmount`}>
             <Image
                 src={!theme ? loginBanner[0] : loginBanner[1]}
                 alt="ảnh wave trang đăng nhập pestnclean"

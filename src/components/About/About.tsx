@@ -43,7 +43,7 @@ export default function AboutCPPage(props: IAppProps) {
     }, []);
 
     return (
-        <div className={'container'}>
+        <div className={'container cpmount'}>
             <section data-bgcolor={'#c5ebcf'}>
                 {/*Header title*/}
                 <div className={'grid grid-cols-2 mt-20 my-10'}>

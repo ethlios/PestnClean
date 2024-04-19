@@ -60,7 +60,7 @@ const links = [
 
 export default function DichVu3Page(props: IAppProps) {
     return (
-        <div className={'container'}>
+        <div className={'container cpmount'}>
             <ServiceBanner />
             <ParagraphAlignLeft>
                 <h1 className={cx('title')}>Công ty dịch vụ vệ sinh PetnClean</h1>

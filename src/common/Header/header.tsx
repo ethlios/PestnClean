@@ -3,7 +3,7 @@
 import classNames from 'classnames/bind';
 import Image from 'next/image';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import logo from '../../../public/img/logo.png';
 import styles from './header.module.scss';
@@ -13,6 +13,8 @@ import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import Services from './service';
 import MoreBtn from './More';
 import useScroll from '~/libs/hooks/useScroll';
+import { IconButton } from '@mui/material';
+import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 
 const link = [
     {
@@ -55,6 +57,9 @@ export default function Header(props: HeaderProps) {
     const path = usePathname();
     const [scrollToTop, setScrollToTop] = useState<number>(0);
     const [openService, setOpenService] = useState<boolean>(false);
+    const [openSearch, setOpenSearch] = useState<boolean>(false);
+    const [searchValue, setSearchValue] = useState<string>('');
+    const router = useRouter();
     const wheel: boolean = useScroll();
 
     useEffect(() => {
@@ -66,6 +71,18 @@ export default function Header(props: HeaderProps) {
 
         return () => window.removeEventListener('scroll', scroll);
     }, []);
+
+    useEffect(() => {
+        if (wheel) {
+            setOpenSearch(false);
+        }
+    }, [wheel]);
+
+    const handleSubmit = () => {
+        if (searchValue) {
+            router.push(`search?q=${searchValue}`);
+        }
+    };
 
     return (
         <>
@@ -90,6 +107,27 @@ export default function Header(props: HeaderProps) {
                     opacity: scrollToTop === 0 ? 1 : !wheel ? 1 : 0,
                 }}
             >
+                <div
+                    className={cx({
+                        searchFill: true,
+                        searchFillOpen: openSearch,
+                        searchFillClose: !openSearch,
+                    })}
+                >
+                    <form onSubmit={handleSubmit}>
+                        <input
+                            type="text"
+                            placeholder="Tìm kiếm..."
+                            value={searchValue}
+                            onChange={(e) => setSearchValue(e.target.value)}
+                        />
+                    </form>
+                    <div className={cx('search-btn-fill')} onClick={() => setOpenSearch(false)}>
+                        <IconButton>
+                            <CloseOutlinedIcon />
+                        </IconButton>
+                    </div>
+                </div>
                 <Link href={'/'}>
                     <Image alt="Logo công ty PESTNCLEAN" src={logo.src} width={176} height={100} />
                 </Link>
@@ -148,6 +186,7 @@ export default function Header(props: HeaderProps) {
                             top: '2px',
                         }}
                         className="icon-hover"
+                        onClick={() => setOpenSearch(true)}
                     />
                     <Link href={'/giohang'} className="icon-hover">
                         <ShoppingBagOutlinedIcon />
