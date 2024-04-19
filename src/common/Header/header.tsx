@@ -51,7 +51,8 @@ const link = [
 
 const cx = classNames.bind(styles);
 
-export interface HeaderProps {}
+export interface HeaderProps {
+}
 
 export default function Header(props: HeaderProps) {
     const path = usePathname();
@@ -89,21 +90,10 @@ export default function Header(props: HeaderProps) {
             <Services setOpenService={setOpenService} openService={openService} />
             <MoreBtn />
             <div
-                className={'container'}
+                className={`${cx('header')} container`}
                 style={{
-                    width: '100vw',
-                    height: '70px',
-                    display: 'flex',
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    position: 'sticky',
-                    top: 0,
-                    zIndex: 1000,
                     backgroundColor: scrollToTop > 0 ? '#fff' : 'transparent',
                     boxShadow: scrollToTop > 0 ? 'rgba(0, 0, 0, 0.2) 0px 5px 15px' : '',
-                    transition: 'all ease .5s',
-                    overflow: 'hidden',
                     opacity: scrollToTop === 0 ? 1 : !wheel ? 1 : 0,
                 }}
             >
@@ -131,24 +121,8 @@ export default function Header(props: HeaderProps) {
                 <Link href={'/'}>
                     <Image alt="Logo công ty PESTNCLEAN" src={logo.src} width={176} height={100} />
                 </Link>
-                <div
-                    style={{
-                        display: 'flex',
-                        flexDirection: 'row',
-                        alignItems: 'center',
-                        gap: '30px',
-                    }}
-                >
-                    <ul
-                        style={{
-                            display: 'flex',
-                            flexDirection: 'row',
-                            gap: '20px',
-                            fontSize: '15px',
-                            transition: ' all ease 0.5s',
-                        }}
-                        className={cx('link')}
-                    >
+                <div className={'flex items-center'}>
+                    <ul className={cx('link')}>
                         {link.map((item) => {
                             return (
                                 <li key={item.id}>
@@ -171,15 +145,7 @@ export default function Header(props: HeaderProps) {
                         })}
                     </ul>
                 </div>
-                <div
-                    style={{
-                        display: 'flex',
-                        flexDirection: 'row',
-                        alignItems: 'center',
-                        gap: '12px',
-                        justifyContent: 'center',
-                    }}
-                >
+                <div className={'flex items-center justify-center gap-6'}>
                     <SearchOutlinedIcon
                         sx={{
                             position: 'relative',
