@@ -13,7 +13,8 @@ import Toast from '~/components/Orther/Toast';
 
 const cx = classNames.bind(styles);
 
-export interface IAppProps {}
+export interface IAppProps {
+}
 
 export default function BuyItem(props: IAppProps) {
     const [quantity, setQuantity] = useState(1);
@@ -39,9 +40,9 @@ export default function BuyItem(props: IAppProps) {
                 showToast={showToast}
                 setShowToast={setShowToast}
             />
-            <div className={'shadow-lg rounded-md my-2'}>
-                <div className={'grid grid-cols-6 gap-4 p-4'}>
-                    <div className={'col-span-1'}>
+            <div className={'shadow-lg rounded-md mb-3'}>
+                <div className={'grid grid-cols-6 gap-4'}>
+                    <div className={'col-span-1 p-4'}>
                         <Image
                             src={''}
                             alt={'Ảnh sản phẩm'}
@@ -49,7 +50,7 @@ export default function BuyItem(props: IAppProps) {
                             className={'bg-gray-200 h-auto md:h-32'}
                         />
                     </div>
-                    <div className={'col-span-2'}>
+                    <div className={'col-span-2 py-4'}>
                         <div className={`flex flex-col justify-between md:h-32 w-max`}>
                             <div>
                                 <p className={cx('product-category')}>Sản phẩm giải pháp vệ sinh</p>
@@ -62,25 +63,26 @@ export default function BuyItem(props: IAppProps) {
                         </div>
                     </div>
                     <div className={'col-span-1 col-start-6'}>
-                        <div className={'grid grid-cols-2 gap-0 h-full'}>
-                            <div className={'grid justify-items-end content-end'}>
+                        <div className={'grid grid-cols-2 h-full'}>
+                            <div className={'grid justify-items-end content-end py-2'}>
                                 <IconButton>
                                     <DeleteIcon />
                                 </IconButton>
                             </div>
                             <div className={'flex-col h-full text-center'}>
-                                <div className={'h-1/3 border-l-2'}>
-                                    <Button onClick={handleAdd}>
+                                <div className={'h-1/3 border-l-2 flex items-center justify-center'}>
+                                    <IconButton onClick={handleAdd}>
                                         <AddIcon />
-                                    </Button>
+                                    </IconButton>
                                 </div>
-                                <div className={'h-1/3 border-l-2 border-y-2 grid content-center'}>
+                                <div
+                                    className={'h-1/3 border-l-2 border-y-2 flex items-center justify-center'}>
                                     <p>{quantity}</p>
                                 </div>
-                                <div className={'h-1/3 border-l-2'}>
-                                    <Button onClick={handleRemove}>
+                                <div className={'h-1/3 border-l-2 flex items-center justify-center'}>
+                                    <IconButton onClick={handleRemove}>
                                         <RemoveIcon color={'inherit'} />
-                                    </Button>
+                                    </IconButton>
                                 </div>
                             </div>
                         </div>
