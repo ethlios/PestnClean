@@ -73,7 +73,7 @@ export default function DichVu3Page(props: IAppProps) {
             <ServiceBanner />
             <ParagraphAlignLeft>
                 <h1 className={cx('title')}>Công ty dịch vụ vệ sinh PetnClean</h1>
-                <p className={cx('text-common')}>
+                <p className={`${cx('text-common')}`}>
                     Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
                     been the standard dummy text ever since the 1500s, when an unknown printer took a galley
                     of type and scrambled it to make a type specimen book. Lorem Ipsum is simply dummy text of
@@ -82,6 +82,8 @@ export default function DichVu3Page(props: IAppProps) {
                     type specimen book.
                 </p>
             </ParagraphAlignLeft>
+
+            <TextImageImage />
             <div style={{ width: '100%', height: '450px', backgroundColor: 'rgba(0,0,0,0.05)' }}>
                 <video
                     style={{ width: '100%', height: '100%' }}
@@ -96,7 +98,6 @@ export default function DichVu3Page(props: IAppProps) {
                     />
                 </video>
             </div>
-            <TextImageImage />
             <h1 className={cx('content-title')}>Dịch vụ vệ sinh chuyên biệt</h1>
             <BundleCard className={'rounded-xl bg-gray-200 p-10'}>
                 {links.map((item, index) => (

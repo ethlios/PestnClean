@@ -203,11 +203,11 @@ progress::-moz-progress-bar {
 }
 
 .owl-theme .owl-dots .owl-dot.active span {
-    background-color: #78b461 !important;
+    background-color: var(--primary) !important;
 }
 
 .owl-theme .owl-dots .owl-dot.active span:hover {
-    background-color: #78b461 !important;
+    background-color: var(--primary) !important;
 }
 
 .owl-theme .owl-dots .owl-dot span {
@@ -239,7 +239,7 @@ progress::-moz-progress-bar {
 }
 
 .slick-dots .slick-active {
-    background-color: var(--secondary) !important;
+    background-color: var(--primary) !important;
 }
 
 .slick-dots li button::before {

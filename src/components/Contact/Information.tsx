@@ -45,7 +45,7 @@ export default function InformationContactPage(props: IAppProps) {
             {/* Map */}
             <div className={cx('map')}>
                 <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.3198192504315!2d106.68233077473832!3d10.786798789362605!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f2c53afffff%3A0xf831d8aaee883f90!2zTmjDoCBIw6BuZyBUaeG7h2MgQ8aw4bubaSBDYWxsYXJ5!5e0!3m2!1svi!2s!4v1712913812701!5m2!1svi!2s"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d951.936780105516!2d106.6846497507514!3d10.786597795062624!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f20cdef0107%3A0xa6a58be629300115!2zSOG7hyBTaW5oIFRow6FpIFBlc3RuQ2xlYW4!5e0!3m2!1svi!2s!4v1713603621602!5m2!1svi!2s"
                     width="100%"
                     height="300px"
                     loading="lazy"

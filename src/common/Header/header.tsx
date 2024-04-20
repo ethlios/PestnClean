@@ -15,6 +15,7 @@ import MoreBtn from './More';
 import useScroll from '~/libs/hooks/useScroll';
 import { IconButton } from '@mui/material';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
+import useSize from '~/libs/hooks/useSize';
 
 const link = [
     {
@@ -51,8 +52,7 @@ const link = [
 
 const cx = classNames.bind(styles);
 
-export interface HeaderProps {
-}
+export interface HeaderProps {}
 
 export default function Header(props: HeaderProps) {
     const path = usePathname();
@@ -62,6 +62,7 @@ export default function Header(props: HeaderProps) {
     const [searchValue, setSearchValue] = useState<string>('');
     const router = useRouter();
     const wheel: boolean = useScroll();
+    const { sizeX } = useSize();
 
     useEffect(() => {
         const scroll = () => {

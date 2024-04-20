@@ -72,7 +72,7 @@ export default function AboutBanner(props: IAppProps) {
     }, []);
 
     return (
-        <div className={`${cx('about-banner')} my-10 `}>
+        <div className={`${cx('about-banner')} mt-16 `}>
             <div className="slider-container">
                 <Slider {...settings}>
                     {aboutBanner.map((item, index) => {

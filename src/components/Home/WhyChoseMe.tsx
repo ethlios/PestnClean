@@ -25,7 +25,7 @@ const solutions = [
         title: 'PHÂN TÍCH CHUẨN BRC, HACCP',
         img: '',
         description:
-            'Pest N Clean Care sẵn sàng hỗ trợ các doanh nghiệp có yêu cầu tuân thủ các tiêu chuẩn: BRC, HACCP, ISO,… cùng các dịch vụ báo cáo phân tích chuyên sâu',
+            'Pestnclean Care sẵn sàng hỗ trợ các doanh nghiệp có yêu cầu tuân thủ các tiêu chuẩn: BRC, HACCP, ISO,… cùng các dịch vụ báo cáo.',
     },
 ];
 
@@ -47,7 +47,14 @@ export default function WhyChooseMe() {
                             <div className={cx('choose-img')}></div>
                             <div className={cx('chose-content')}>
                                 <p className={cx('choose-title')}>{item.title}</p>
-                                <p className={cx('choose-description')}>{item.description}</p>
+                                <p
+                                    className={cx('choose-description')}
+                                    style={{
+                                        marginBottom: '15px',
+                                    }}
+                                >
+                                    {item.description}
+                                </p>
                             </div>
                         </div>
                     );
@@ -96,6 +103,7 @@ export default function WhyChooseMe() {
                             fontWeight: '500',
                             letterSpacing: '-.5px',
                             color: 'rgba(0,0,0,0.5)',
+                            textAlign: 'justify',
                         }}
                     >
                         Chúng tôi đảm bảo với quý khách hàng rằng, mọi loại hình dịch vụ mà chúng tôi cung
