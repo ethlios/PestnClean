@@ -34,7 +34,6 @@ const animation = (x?: number) => {
             scrollTrigger: {
                 trigger: '.des-about-2',
                 start: 'top bottom-=100',
-                toggleActions: 'restart none none reverse',
             },
         },
     ];
@@ -54,7 +53,6 @@ const animation2 = (trigger: any) => {
             scrollTrigger: {
                 trigger: trigger,
                 start: 'top bottom-=500px',
-                toggleActions: 'restart none none reverse',
             },
         },
     ];
@@ -106,15 +104,14 @@ export default function AboutCPPage(props: IAppProps) {
             {
                 opacity: 1,
                 scale: 1,
-                durations: 0.8,
-                delay: 0.3,
+                durations: 0.5,
+                delay: 0.1,
                 stagger: {
                     amount: 1,
                 },
                 scrollTrigger: {
                     trigger: '.card-about',
                     start: 'top bottom-=300px',
-                    toggleActions: 'restart none none reverse',
                 },
             },
         );
@@ -210,7 +207,7 @@ export default function AboutCPPage(props: IAppProps) {
                         <div className={'mb-5 card-about'}>
                             <Image
                                 src={''}
-                                alt="giới thiệu pestnclean"
+                                alt=""
                                 key="pestnclean about page "
                                 width={1980}
                                 className={`${cx('img')} w-full bg-gray-200 h-10 md:h-80`}

@@ -38,7 +38,11 @@ export default function ServiceAds(props: IAppProps) {
 
     return (
         <div className={cx('blog-wrapper')}>
-            <h1 className={'font-bold underline underline-offset-2 text-2xl uppercase text-center'}>
+            <h1
+                className={
+                    'font-bold underline underline-offset-2 text-2xl uppercase text-center decoration-2'
+                }
+            >
                 CÁC DỊCH VỤ CỦA CHÚNG TÔI
             </h1>
             <div className={cx('service-wrapper')}>

@@ -60,7 +60,15 @@ export default function CheckoutPanel(props: IAppProps) {
             <div className={'my-3'}>
                 <Link href={'/giohang'} className={`${cx('back-cart')} inline-flex items-center`}>
                     <ArrowBackIosIcon />
-                    <h1 className={'font-500'}>Trở lại giỏ hàng</h1>
+                    <p
+                        style={{
+                            fontSize: '15px',
+                            fontWeight: '600',
+                            letterSpacing: '-.5px',
+                        }}
+                    >
+                        Trở lại giỏ hàng
+                    </p>
                 </Link>
             </div>
         </div>

@@ -1,10 +1,10 @@
 import type { Metadata } from 'next';
-import './globals.css';
-import { Merriweather } from 'next/font/google';
-import MuiSetUp from '../common/Mui/MuiSetup';
+import { Montserrat } from 'next/font/google';
 import Favicon from '../../public/favicon.ico';
+import MuiSetUp from '../common/Mui/MuiSetup';
+import './globals.css';
 
-const inter = Merriweather({ subsets: ['vietnamese'], weight: ['300', '400', '700'] });
+const main = Montserrat({ subsets: ['latin'], weight: ['300', '400', '500', '600', '700'] });
 
 export const metadata: Metadata = {
     title: {
@@ -36,7 +36,7 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-            <body className={inter.className}>
+            <body className={main.className}>
                 <MuiSetUp>{children}</MuiSetUp>
             </body>
         </html>

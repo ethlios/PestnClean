@@ -169,8 +169,10 @@
     padding-bottom: 10px;
     border-bottom: solid 2px var(--text-black);
 
-    h1 {
+    p {
         text-transform: uppercase;
+        font-weight: 700;
+        letter-spacing: -0.5px;
     }
 
     svg {
@@ -210,7 +212,6 @@
 
     p {
         display: flex;
-        gap: 5px;
         cursor: pointer;
     }
 
@@ -220,6 +221,7 @@
 
     svg {
         color: var(--primary);
+        margin-right: 5px;
     }
 }
 

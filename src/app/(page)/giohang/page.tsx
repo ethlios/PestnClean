@@ -37,7 +37,15 @@ export default function CartPage(props: IAppProps) {
             <div className={'mb-10'}>
                 <Link href={'/sanpham'} className={'inline-flex items-center'}>
                     <ArrowBackIosIcon />
-                    <h1 className={'font-semibold'}>Trở lại mua sắm</h1>
+                    <p
+                        style={{
+                            fontSize: '15px',
+                            fontWeight: '600',
+                            letterSpacing: '-.5px',
+                        }}
+                    >
+                        Trở lại mua sắm
+                    </p>
                 </Link>
             </div>
         </div>

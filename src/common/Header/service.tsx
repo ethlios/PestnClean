@@ -52,7 +52,7 @@ export default function Services({ setOpenService, openService }: IAppProps) {
                             className={cx('service-title')}
                             onClick={() => setOpenService(false)}
                         >
-                            <h1>KIỂM SOÁT CÔN TRÙNG</h1>
+                            <p>KIỂM SOÁT CÔN TRÙNG</p>
                             <EastOutlinedIcon />
                         </Link>
                         <div className={cx('service-list')}>
@@ -108,7 +108,7 @@ export default function Services({ setOpenService, openService }: IAppProps) {
                             className={cx('service-title')}
                             onClick={() => setOpenService(false)}
                         >
-                            <h1>Dịch vụ vệ sinh</h1>
+                            <p>Dịch vụ vệ sinh</p>
                             <EastOutlinedIcon />
                         </Link>
                         <div style={{ marginTop: '5px' }}>
@@ -232,7 +232,7 @@ export default function Services({ setOpenService, openService }: IAppProps) {
                             className={cx('service-title')}
                             onClick={() => setOpenService(false)}
                         >
-                            <h1>Giải pháp vệ sinh</h1>
+                            <p>Giải pháp vệ sinh</p>
                             <EastOutlinedIcon />
                         </Link>
                         <div style={{ marginTop: '5px' }}>

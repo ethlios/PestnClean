@@ -9,7 +9,11 @@ export interface IAppProps {}
 export default function Certification(props: IAppProps) {
     return (
         <div className={cx('certi-wrapper')}>
-            <h1 className={'pb-5 text-center font-bold underline underline-offset-2 text-2xl uppercase'}>
+            <h1
+                className={
+                    'pb-5 text-center font-bold underline underline-offset-2 text-2xl uppercase decoration-2'
+                }
+            >
                 Giải thưởng và chứng nhận
             </h1>
             <div className={cx('certi-img-wrapper')}>

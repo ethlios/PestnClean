@@ -38,7 +38,7 @@ export default function ProductOthers(props: IAppProps) {
     return (
         <div className={cx('blog-wrapper')}>
             <div className={cx('blog-header')}>
-                <h1 className={'font-bold underline underline-offset-2 text-2xl uppercase'}>
+                <h1 className={'font-bold underline underline-offset-2 text-2xl uppercase decoration-2'}>
                     Có thể bạn thích
                 </h1>
                 <ButtonCommon text="Xem thêm" path="sanpham" />

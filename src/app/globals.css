@@ -2,7 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url(https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Questrial&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap);
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Questrial&family=Merriweather:wght@400;700&display=swap');
+
+@font-face {
+    font-family: 'Merriweather';
+    src: url('../../public/fonts/Merriweather-Bold.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Merriweather-2';
+    src: url('../../public/fonts/Merriweather-Regular.woff2') format('woff2');
+}
 
 :root {
     --primary: #0274be;
@@ -27,6 +37,18 @@ html * {
     scroll-behavior: smooth !important;
 }
 
+/* Custom font */
+
+h1 {
+    font-family: 'Merriweather' !important;
+}
+
+h2,
+h3,
+h4 {
+    font-family: 'Merriweather-2' !important;
+}
+
 p,
 b,
 a,
@@ -37,10 +59,6 @@ label,
 li,
 textarea {
     font-family: Montserrat, serif !important;
-}
-
-h1 {
-    font-weight: 700;
 }
 
 html *::-webkit-scrollbar {

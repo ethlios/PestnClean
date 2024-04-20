@@ -33,7 +33,9 @@ export default function WhyChooseMe() {
     return (
         <div>
             <h1
-                className={'pb-5 text-center font-bold underline underline-offset-2 text-2xl uppercase mt-14'}
+                className={
+                    'pb-5 text-center font-bold underline underline-offset-2 text-2xl uppercase mt-14 decoration-2'
+                }
             >
                 Vì sao chọn chúng tôi?
             </h1>

@@ -16,46 +16,55 @@ const links = [
         id: 1,
         name: 'Kiểm soát côn trùng tích hợp',
         path: 'dichvu/dich-vu-kiem-soat-con-trung-toan-dien',
+        description: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book`,
     },
     {
         id: 2,
         name: 'Kiểm soát mối',
         path: 'dichvu/dich-vu-diet-moi-tan-goc-tai-nha',
+        description: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book`,
     },
     {
         id: 3,
         name: 'Kiểm soát chuột',
         path: 'dichvu/dich-vu-diet-chuot-uy-tin',
+        description: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book`,
     },
     {
         id: 4,
         name: 'Kiểm soát ruồi',
         path: 'dichvu/dich-vu-diet-ruoi-an-toan-hieu-qua',
+        description: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book`,
     },
     {
         id: 5,
         name: 'Kiểm soát muỗi',
         path: 'dichvu/dich-vu-diet-muoi-an-toan-chuyen-nghiep',
+        description: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book`,
     },
     {
         id: 6,
         name: 'Kiểm soát kiến',
         path: 'dichvu/dich-vu-diet-kien-tan-goc-tai-nha-hieu-qua',
+        description: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book`,
     },
     {
         id: 7,
         name: 'Kiểm soát gián',
         path: 'dichvu/dich-vu-diet-gian-duc',
+        description: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book`,
     },
     {
         id: 8,
         name: 'Dịch vụ khử khuẩn',
         path: 'dichvu/dich-vu-phun-khu-khuan-tai-nha',
+        description: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book`,
     },
     {
         id: 9,
         name: 'Dịch vụ đào tạo nhận thức',
         path: 'dichvu/dao-tao-nhan-thuc-kiem-soat-con-trung',
+        description: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book`,
     },
 ];
 
@@ -155,10 +164,17 @@ export default function DichVu1Page(props: IAppProps) {
                     />
                 ))}
             </BundleCard>
-            <p className={cx('content-title')}>Dịch vụ kiểm soát côn trùng chuyên biệt</p>
+            <h1 className={cx('content-title')}>Dịch vụ kiểm soát côn trùng chuyên biệt</h1>
             <BundleCard className={'rounded-xl bg-gray-200 p-10'}>
                 {links.map((item, index) => (
-                    <Card key={index} src={''} alt={''} title={item.name} path={item.path} />
+                    <Card
+                        key={index}
+                        src={''}
+                        alt={''}
+                        title={item.name}
+                        path={item.path}
+                        description={item.description}
+                    />
                 ))}
             </BundleCard>
         </div>

@@ -15,9 +15,10 @@ export interface IAppProps {
     height?: number;
     title?: string;
     path?: string;
+    description?: string;
 }
 
-export default function Card({ src, alt, width = 1680, height = 1050, title, path }: IAppProps) {
+export default function Card({ src, alt, width = 1680, height = 1050, title, path, description }: IAppProps) {
     return (
         <div className={cx('card')}>
             {/* <Image
@@ -30,14 +31,25 @@ export default function Card({ src, alt, width = 1680, height = 1050, title, pat
             <div className={cx('card-img')}></div>
             <p
                 style={{
-                    margin: '10px 0',
-                    fontWeight: 600,
+                    margin: '10px 0 5px 0',
+                    fontWeight: 700,
                     textTransform: 'uppercase',
                     letterSpacing: '-.5px',
-                    fontSize: '15px',
+                    fontSize: '16px',
                 }}
             >
                 {title}
+            </p>
+            <p
+                style={{
+                    margin: '5px 0 10px 0',
+                    fontWeight: 600,
+                    letterSpacing: '-.5px',
+                    fontSize: '14.5px',
+                    color: 'var(--text-black)',
+                }}
+            >
+                {description}
             </p>
             <ButtonCommon text="XEM THÊM" path={path}></ButtonCommon>
         </div>

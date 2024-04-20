@@ -127,7 +127,7 @@ const btnLists = [
     },
     {
         id: 2,
-        title: 'Khám phá',
+        title: 'Dịch vụ',
     },
     {
         id: 3,
