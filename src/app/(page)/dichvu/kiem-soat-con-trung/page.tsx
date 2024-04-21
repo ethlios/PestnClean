@@ -78,7 +78,7 @@ const cards = [
     },
     {
         id: 2,
-        title: 'Văn phòng, building, cơ sở công nghiệp',
+        title: 'Văn phòng, tòa nhà',
         description:
             'Cung cấp các dịch vụ kiểm soát côn trùng hiệu quả, tiết kiệm, an toàn cho sức khoẻ và bảo vệ tài sản cho các cơ sở công nghiệp và sản xuất, các văn phòng, nhà máy, trường học, v.v.',
         path: 'dichvu/kiem-soat-con-trung-o-van-phong-co-so-cong-nghiep',
@@ -99,7 +99,7 @@ const cards = [
     },
     {
         id: 5,
-        title: 'Nhà hát, rạp phim, trung tâm hội nghị ',
+        title: 'Nhà hát, rạp chiếu phim ',
         description:
             'Cung cấp các giải pháp kiểm soát côn trùng và dịch hại toàn diện cho các rạp chiếu phim, nhà hát, sân khấu … đảm bảo các tiêu chuẩn về an toàn và sức khỏe.',
         path: 'dichvu/quy-trinh-kiem-soat-con-trung-nha-hat-rap-chieu-phim',
@@ -164,7 +164,7 @@ export default function DichVu1Page(props: IAppProps) {
                     />
                 ))}
             </BundleCard>
-            <h1 className={cx('content-title')}>Dịch vụ kiểm soát côn trùng chuyên biệt</h1>
+            <h1 className={`${cx('content-title')} text-center`}>Dịch vụ kiểm soát côn trùng chuyên biệt</h1>
             <BundleCard className={'rounded-xl bg-gray-200 p-10'}>
                 {links.map((item, index) => (
                     <Card

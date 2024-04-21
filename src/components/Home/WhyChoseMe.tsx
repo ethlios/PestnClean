@@ -1,7 +1,14 @@
+'use client';
+
 import Container from '@mui/material/Container';
 import styles from './home.module.scss';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
+import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined';
+import ArrowRightAltOutlinedIcon from '@mui/icons-material/ArrowRightAltOutlined';
+import SubdirectoryArrowLeftOutlinedIcon from '@mui/icons-material/SubdirectoryArrowLeftOutlined';
+import ButtonCommon from '../Orther/Button';
+import Link from 'next/link';
 
 const cx = classNames.bind(styles);
 
@@ -27,38 +34,74 @@ const solutions = [
         description:
             'Pestnclean Care sẵn sàng hỗ trợ các doanh nghiệp có yêu cầu tuân thủ các tiêu chuẩn: BRC, HACCP, ISO,… cùng các dịch vụ báo cáo.',
     },
+    {
+        id: 4,
+        title: 'PHÂN TÍCH CHUẨN BRC, HACCP',
+        img: '',
+        description:
+            'Pestnclean Care sẵn sàng hỗ trợ các doanh nghiệp có yêu cầu tuân thủ các tiêu chuẩn: BRC, HACCP, ISO,… cùng các dịch vụ báo cáo.',
+    },
 ];
 
 export default function WhyChooseMe() {
     return (
         <div>
-            <h1
-                className={
-                    'pb-5 text-center font-bold underline underline-offset-2 text-2xl uppercase mt-14 decoration-2'
-                }
-            >
-                Vì sao chọn chúng tôi?
-            </h1>
-            <div className={cx('choose-wrapper')}>
-                {solutions.map((item, index) => {
-                    return (
-                        <div key={index} className={cx('choose-item')}>
-                            {/* <Image src={''} alt="" width={1000} height={1000} className={cx('choose-img')} /> */}
-                            <div className={cx('choose-img')}></div>
-                            <div className={cx('chose-content')}>
-                                <p className={cx('choose-title')}>{item.title}</p>
-                                <p
-                                    className={cx('choose-description')}
+            <div className={cx('choose-content-1')}>
+                <div className={cx('choose-text')}>
+                    <div className={cx('choose-text-main')}>
+                        <h1
+                            className={
+                                'font-bold underline underline-offset-2 text-2xl uppercase decoration-2'
+                            }
+                        >
+                            <HelpOutlineOutlinedIcon />
+                            Vì sao chọn chúng tôi?
+                        </h1>
+                    </div>
+                    <div className={cx('choose-wrapper')}>
+                        {solutions.map((item, index) => {
+                            return (
+                                <div
+                                    key={index}
+                                    className={cx('choose-item')}
                                     style={{
-                                        marginBottom: '15px',
+                                        borderBottomRightRadius: index === 0 ? '30px' : 0,
+                                        borderBottomLeftRadius: index === 1 ? '30px' : 0,
+                                        borderTopLeftRadius: index === 3 ? '30px' : 0,
+                                        borderTopRightRadius: index === 2 ? '30px' : 0,
                                     }}
                                 >
-                                    {item.description}
-                                </p>
-                            </div>
-                        </div>
-                    );
-                })}
+                                    <div className={cx('chose-content')}>
+                                        <p className={cx('choose-title')}>{item.title}</p>
+                                        <p
+                                            className={cx('choose-description')}
+                                            style={{
+                                                marginBottom: '15px',
+                                            }}
+                                        >
+                                            {item.description}
+                                        </p>
+                                    </div>
+                                </div>
+                            );
+                        })}
+                    </div>
+                </div>
+                <div className={cx('choose-content-img')}>
+                    {/* <Image/> */}
+                    <Image
+                        src="https://res.cloudinary.com/dj2jarcxk/image/upload/v1713699714/l%C3%B4go-mockup_optimized_gnftec.png"
+                        alt="Hình ảnh trang chủ Pestnclean"
+                        width={1000}
+                        height={1000}
+                    />
+                    <Link href={'/gioithieu'} className={cx('choose-link')}>
+                        <p>
+                            Giới thiệu
+                            <ArrowRightAltOutlinedIcon />
+                        </p>
+                    </Link>
+                </div>
             </div>
             <div className={cx('number-wrapper')}>
                 <p className={cx('committed-text')}>
@@ -104,6 +147,8 @@ export default function WhyChooseMe() {
                             letterSpacing: '-.5px',
                             color: 'rgba(0,0,0,0.5)',
                             textAlign: 'justify',
+                            borderTop: 'solid 3px var(--secondary)',
+                            paddingTop: '20px',
                         }}
                     >
                         Chúng tôi đảm bảo với quý khách hàng rằng, mọi loại hình dịch vụ mà chúng tôi cung

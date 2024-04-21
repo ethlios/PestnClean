@@ -103,7 +103,7 @@ export default function AboutCPPage(props: IAppProps) {
                 style={{
                     width: '100%',
                     height: '450px',
-                    backgroundColor: 'rgba(0,0,0,0.05)',
+                    backgroundColor: '#000',
                     marginBottom: '70px',
                 }}
                 ref={videoRef}
@@ -116,7 +116,7 @@ export default function AboutCPPage(props: IAppProps) {
                     title="Dịch vụ vệ sinh công nghiệp tại PetnClean."
                 >
                     <source
-                        src="https://res.cloudinary.com/dj2jarcxk/video/upload/v1713531630/Ve%CC%A3%CC%82_Sinh_Co%CC%82ng_Nghie%CC%A3%CC%82p_yqfytu.mp4"
+                        src="https://res.cloudinary.com/dj2jarcxk/video/upload/v1713698995/Thie%CC%82%CC%81t_Bi%CC%A3_Ve%CC%A3%CC%82_Sinh_1_r5nsql.mp4"
                         type="video/mp4"
                     />
                 </video>

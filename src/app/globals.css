@@ -245,3 +245,12 @@ progress::-moz-progress-bar {
 .slick-dots li button::before {
     display: none !important;
 }
+
+.slick-fix .slick-slider .slick-list .slick-track .slick-slide div:nth-child(1) {
+    margin-right: 20px !important;
+}
+
+.slick-fix .slick-slider .slick-list .slick-track .slick-slide div:nth-child(2) {
+    margin-right: 20px !important;
+    margin-top: 20px;
+}

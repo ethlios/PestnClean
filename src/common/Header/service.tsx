@@ -7,6 +7,24 @@ import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOu
 import RemoveCircleOutlineOutlinedIcon from '@mui/icons-material/RemoveCircleOutlineOutlined';
 import Link from 'next/link';
 import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
+import PestControlOutlinedIcon from '@mui/icons-material/PestControlOutlined';
+import CleaningServicesOutlinedIcon from '@mui/icons-material/CleaningServicesOutlined';
+import EmojiObjectsOutlinedIcon from '@mui/icons-material/EmojiObjectsOutlined';
+import StorefrontOutlinedIcon from '@mui/icons-material/StorefrontOutlined';
+import HotelOutlinedIcon from '@mui/icons-material/HotelOutlined';
+import FactoryOutlinedIcon from '@mui/icons-material/FactoryOutlined';
+import EmojiTransportationOutlinedIcon from '@mui/icons-material/EmojiTransportationOutlined';
+import TheatersOutlinedIcon from '@mui/icons-material/TheatersOutlined';
+import RepeatOutlinedIcon from '@mui/icons-material/RepeatOutlined';
+import ChairOutlinedIcon from '@mui/icons-material/ChairOutlined';
+import OtherHousesOutlinedIcon from '@mui/icons-material/OtherHousesOutlined';
+import HeatPumpOutlinedIcon from '@mui/icons-material/HeatPumpOutlined';
+import LightOutlinedIcon from '@mui/icons-material/LightOutlined';
+import CorporateFareOutlinedIcon from '@mui/icons-material/CorporateFareOutlined';
+import CleanHandsOutlinedIcon from '@mui/icons-material/CleanHandsOutlined';
+import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
+import AutoFixHighOutlinedIcon from '@mui/icons-material/AutoFixHighOutlined';
+import FitnessCenterOutlinedIcon from '@mui/icons-material/FitnessCenterOutlined';
 
 const cx = classNames.bind(styles);
 
@@ -46,13 +64,20 @@ export default function Services({ setOpenService, openService }: IAppProps) {
 
                 <div className={cx('all-service')}>
                     {/* Dich vu 1 */}
-                    <div className={cx('service-item')}>
+                    <div
+                        className={cx('service-item')}
+                        style={{
+                            color: 'var(--secondary-dark)',
+                        }}
+                    >
                         <Link
                             href="/dichvu/kiem-soat-con-trung"
                             className={cx('service-title')}
                             onClick={() => setOpenService(false)}
                         >
-                            <p>KIỂM SOÁT CÔN TRÙNG</p>
+                            <p>
+                                <PestControlOutlinedIcon /> KIỂM SOÁT CÔN TRÙNG
+                            </p>
                             <EastOutlinedIcon />
                         </Link>
                         <div className={cx('service-list')}>
@@ -60,55 +85,66 @@ export default function Services({ setOpenService, openService }: IAppProps) {
                                 href="/dichvu/kiem-soat-con-trung-tai-nha-hang-chuoi-ban-le"
                                 onClick={() => setOpenService(false)}
                             >
-                                <AdjustOutlinedIcon />
+                                <StorefrontOutlinedIcon />
                                 Nhà hàng / Chuỗi bán lẻ
                             </Link>
                             <Link
                                 href="/dichvu/kiem-soat-con-trung-o-van-phong-co-so-cong-nghiep"
                                 onClick={() => setOpenService(false)}
                             >
-                                <AdjustOutlinedIcon />
+                                <EmojiTransportationOutlinedIcon />
                                 Văn phòng, cơ sở công nghiệp
                             </Link>
                             <Link
                                 href="/dichvu/kiem-soat-con-trung-tai-khach-san-resort"
                                 onClick={() => setOpenService(false)}
                             >
-                                <AdjustOutlinedIcon />
+                                <HotelOutlinedIcon />
                                 Khách sạn & Resort
                             </Link>
                             <Link
                                 href="/dichvu/kiem-soat-con-trung-trong-co-so-che-bien-thuc-pham"
                                 onClick={() => setOpenService(false)}
                             >
-                                <AdjustOutlinedIcon />
+                                <FactoryOutlinedIcon />
                                 Nhà máy, cơ sở chế biến thực phẩm
                             </Link>
                             <Link
                                 href="/dichvu/quy-trinh-kiem-soat-con-trung-nha-hat-rap-chieu-phim"
                                 onClick={() => setOpenService(false)}
                             >
-                                <AdjustOutlinedIcon />
+                                <TheatersOutlinedIcon />
                                 Nhà hát, Rạp chiếu film
                             </Link>
                             <Link
                                 href="/dichvu/tai-sao-can-kiem-soat-con-trung-trong-chuoi-cung-ung"
                                 onClick={() => setOpenService(false)}
                             >
-                                <AdjustOutlinedIcon />
+                                <RepeatOutlinedIcon />
                                 Kho vận và chuỗi cung ứng
                             </Link>
                         </div>
                     </div>
 
                     {/* Dich vu 2 */}
-                    <div className={cx('service-item')}>
+                    <div
+                        className={cx('service-item')}
+                        style={{
+                            color: 'var(--primary)',
+                        }}
+                    >
                         <Link
                             href="/dichvu/dich-vu-ve-sinh"
                             className={cx('service-title')}
                             onClick={() => setOpenService(false)}
+                            style={{
+                                borderColor: 'var(--primary)',
+                            }}
                         >
-                            <p>Dịch vụ vệ sinh</p>
+                            <p>
+                                <CleaningServicesOutlinedIcon />
+                                Dịch vụ vệ sinh
+                            </p>
                             <EastOutlinedIcon />
                         </Link>
                         <div style={{ marginTop: '5px' }}>
@@ -132,20 +168,21 @@ export default function Services({ setOpenService, openService }: IAppProps) {
                                     height: currentService === 1 ? '120px' : '0px',
                                     overflow: 'hidden',
                                     transition: 'all ease .5s',
+                                    color: 'var(--primary)',
                                 }}
                             >
                                 <Link
                                     href={'/dichvu/dich-vu-ve-sinh-van-phong'}
                                     onClick={() => setOpenService(false)}
                                 >
-                                    <AdjustOutlinedIcon />
+                                    <EmojiTransportationOutlinedIcon />
                                     Vệ sinh văn phòng
                                 </Link>
                                 <Link
                                     href={'/dichvu/dich-vu-ve-sinh-nha-xuong'}
                                     onClick={() => setOpenService(false)}
                                 >
-                                    <AdjustOutlinedIcon />
+                                    <FactoryOutlinedIcon />
                                     Vệ sinh nhà xưởng
                                 </Link>
                                 <Link
@@ -159,7 +196,7 @@ export default function Services({ setOpenService, openService }: IAppProps) {
                                     href={'/dichvu/dich-vu-ve-sinh-toa-nha'}
                                     onClick={() => setOpenService(false)}
                                 >
-                                    <AdjustOutlinedIcon />
+                                    <CorporateFareOutlinedIcon />
                                     Vệ sinh tòa nhà, building
                                 </Link>
                             </div>
@@ -184,6 +221,7 @@ export default function Services({ setOpenService, openService }: IAppProps) {
                                     height: currentService === 2 ? '145px' : '0px',
                                     overflow: 'hidden',
                                     transition: 'all ease .5s',
+                                    color: 'var(--primary)',
                                 }}
                             >
                                 <Link
@@ -197,28 +235,28 @@ export default function Services({ setOpenService, openService }: IAppProps) {
                                     href="/dichvu/dich-vu-ve-sinh-tran-san-nha-pestnclean"
                                     onClick={() => setOpenService(false)}
                                 >
-                                    <AdjustOutlinedIcon />
+                                    <LightOutlinedIcon />
                                     Vệ sinh trần, sàn
                                 </Link>
                                 <Link
                                     href="/dichvu/phuong-phap-dich-vu-ve-sinh-sofa"
                                     onClick={() => setOpenService(false)}
                                 >
-                                    <AdjustOutlinedIcon />
+                                    <ChairOutlinedIcon />
                                     Vệ sinh sofa
                                 </Link>
                                 <Link
                                     href="/dichvu/dich-vu-ve-sinh-may-lanh-uy-tin-chuyen-nghiep"
                                     onClick={() => setOpenService(false)}
                                 >
-                                    <AdjustOutlinedIcon />
+                                    <HeatPumpOutlinedIcon />
                                     Vệ sinh máy lạnh
                                 </Link>
                                 <Link
                                     href="/dichvu/loi-ich-cua-dich-vu-don-dep-nha-cua"
                                     onClick={() => setOpenService(false)}
                                 >
-                                    <AdjustOutlinedIcon />
+                                    <OtherHousesOutlinedIcon />
                                     Dọn dẹp nhà cửa
                                 </Link>
                             </div>
@@ -226,13 +264,24 @@ export default function Services({ setOpenService, openService }: IAppProps) {
                     </div>
 
                     {/* Dich vu 3 */}
-                    <div className={cx('service-item')}>
+                    <div
+                        className={cx('service-item')}
+                        style={{
+                            color: 'var(--secondary)',
+                        }}
+                    >
                         <Link
                             href="/dichvu/giai-phap-ve-sinh"
                             className={cx('service-title')}
                             onClick={() => setOpenService(false)}
+                            style={{
+                                borderColor: 'var(--secondary)',
+                            }}
                         >
-                            <p>Giải pháp vệ sinh</p>
+                            <p>
+                                <EmojiObjectsOutlinedIcon />
+                                Giải pháp vệ sinh
+                            </p>
                             <EastOutlinedIcon />
                         </Link>
                         <div style={{ marginTop: '5px' }}>
@@ -266,48 +315,49 @@ export default function Services({ setOpenService, openService }: IAppProps) {
                                     height: currentService === 3 ? '145px' : '0px',
                                     overflow: 'hidden',
                                     transition: 'all ease .5s',
+                                    color: 'var(--secondary)',
                                 }}
                             >
                                 <Link
                                     href="/dichvu/giai-phap-mui-huong-cho-khach-san-resort"
                                     onClick={() => setOpenService(false)}
                                 >
-                                    <AdjustOutlinedIcon />
+                                    <HotelOutlinedIcon />
                                     Khách sạn & Resort
                                 </Link>
                                 <Link
                                     href="/dichvu/giai-phap-mui-huong-cho-trung-tam-thuong-mai"
                                     onClick={() => setOpenService(false)}
                                 >
-                                    <AdjustOutlinedIcon />
+                                    <LocalMallOutlinedIcon />
                                     Trung tâm thương mại
                                 </Link>
                                 <Link
                                     href="/dichvu/giai-phap-mui-huong-cho-khong-gian-gia-dinh"
                                     onClick={() => setOpenService(false)}
                                 >
-                                    <AdjustOutlinedIcon />
+                                    <CleanHandsOutlinedIcon />
                                     Không gian gia đình
                                 </Link>
                                 <Link
                                     href="/dichvu/tai-sao-can-co-giai-phap-mui-huong-cho-phong-gym"
                                     onClick={() => setOpenService(false)}
                                 >
-                                    <AdjustOutlinedIcon />
+                                    <FitnessCenterOutlinedIcon />
                                     Phòng gym
                                 </Link>
                                 <Link
                                     href="/dichvu/giai-phap-mui-huong-cho-toa-nha-van-phong"
                                     onClick={() => setOpenService(false)}
                                 >
-                                    <AdjustOutlinedIcon />
+                                    <CorporateFareOutlinedIcon />
                                     Tòa nhà / Văn phòng
                                 </Link>
                                 <Link
                                     href="/dichvu/giai-phap-mui-huong-cho-spa-tham-my-vien"
                                     onClick={() => setOpenService(false)}
                                 >
-                                    <AdjustOutlinedIcon />
+                                    <AutoFixHighOutlinedIcon />
                                     Spa
                                 </Link>
                             </div>

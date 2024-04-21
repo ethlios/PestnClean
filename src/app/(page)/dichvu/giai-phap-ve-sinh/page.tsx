@@ -124,7 +124,7 @@ export default function DichVu3Page(props: IAppProps) {
                 </video>
             </div>
             <TextImageImage />
-            <h1 className={cx('content-title')}>Giải pháp theo ngành hàng</h1>
+            <h1 className={`${cx('content-title')} text-center`}>Giải pháp theo ngành hàng</h1>
             <BundleCard className={'rounded-xl bg-gray-200 p-10'}>
                 {links.map((item, index) => (
                     <Card

@@ -27,7 +27,9 @@ export default function Footer(props: FooterProps) {
             {/* Email Register */}
             <div className={cx('banner-footer')}>
                 <Image
-                    src={menImg.src}
+                    src={
+                        'https://res.cloudinary.com/dj2jarcxk/image/upload/v1713230969/pestnclean/21821905_OFC_3_231_12_2021-min_f7tr71.png'
+                    }
                     alt="hinh anh PESTNCLEAN"
                     width={2000}
                     height={2000}

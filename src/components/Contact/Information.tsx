@@ -6,6 +6,9 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import InstagramIcon from '@mui/icons-material/Instagram';
+import AttachEmailOutlinedIcon from '@mui/icons-material/AttachEmailOutlined';
+import PhoneAndroidOutlinedIcon from '@mui/icons-material/PhoneAndroidOutlined';
+import RingVolumeOutlinedIcon from '@mui/icons-material/RingVolumeOutlined';
 
 const cx = classNames.bind(styles);
 
@@ -18,10 +21,11 @@ export default function InformationContactPage(props: IAppProps) {
             <div className={cx('information-1')}>
                 <p>LIÊN HỆ</p>
                 <Link href="mailto:sales@pestnclean.vn" target="_blank" rel="noopener noreferrer">
+                    <AttachEmailOutlinedIcon className="mr-2" />
                     sales@pestnclean.vn
                 </Link>
                 <Link href="tel:0868363600" target="_blank" rel="noopener noreferrer">
-                    0868 36 36 00
+                    <RingVolumeOutlinedIcon className="mr-1" /> 0868 36 36 00
                 </Link>
             </div>
             <div className={cx('information-2')}>
