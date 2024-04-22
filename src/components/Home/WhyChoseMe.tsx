@@ -1,15 +1,13 @@
 'use client';
 
-import Container from '@mui/material/Container';
-import styles from './home.module.scss';
+import ArrowRightAltOutlinedIcon from '@mui/icons-material/ArrowRightAltOutlined';
+import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
-import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined';
-import ArrowRightAltOutlinedIcon from '@mui/icons-material/ArrowRightAltOutlined';
-import SubdirectoryArrowLeftOutlinedIcon from '@mui/icons-material/SubdirectoryArrowLeftOutlined';
-import ButtonCommon from '../Orther/Button';
 import Link from 'next/link';
 import useSize from '~/libs/hooks/useSize';
+import styles from './home.module.scss';
+import logo2 from '../../../public/img/logo2.png';
 
 const cx = classNames.bind(styles);
 
@@ -108,16 +106,22 @@ export default function WhyChooseMe() {
                 </div>
             </div>
             <div className={cx('number-wrapper')}>
-                <p className={cx('committed-text')} style={sizeX < 768 ? { width: '100%' } : { width: '75%' }}>
-                    Bằng tất cả những gì mình có, PESTNCLEAN hứa hẹn sẽ mang đến cho quý khách hàng những trải
-                    nghiệm về dịch vụ chưa từng có. Lấy đam mê nhiệt huyết làm nguồn sức mạnh, và lấy nụ cười
-                    của khách hàng làm mục tiêu theo đuổi, PESTNCLEAN đã và đang không ngừng hoàn thiện bản
-                    thân cho hiện tại và tương lai.{' '}
-                    <b>
-                        Một tập thể vững mạnh không có nghĩa là một tập thể xuất sắc hay một cá nhân vượt
-                        trội, mà nó còn được khẳng định bằng việc đã mang lại được gì cho cộng đồng!{' '}
-                    </b>
-                </p>
+                <div className={'flex flex-wrap'}>
+                    <p className={cx('committed-text')} style={sizeX < 768 ? { width: '100%' } : { width: '70%' }}>
+                        Bằng tất cả những gì mình có, PESTNCLEAN hứa hẹn sẽ mang đến cho quý khách hàng những
+                        trải nghiệm về dịch vụ chưa từng có. Lấy đam mê nhiệt huyết làm nguồn sức mạnh, và lấy
+                        nụ cười của khách hàng làm mục tiêu theo đuổi, PESTNCLEAN đã và đang không ngừng hoàn
+                        thiện bản thân cho hiện tại và tương lai.{' '}
+                        <b>
+                            Một tập thể vững mạnh không có nghĩa là một tập thể xuất sắc hay một cá nhân vượt
+                            trội, mà nó còn được khẳng định bằng việc đã mang lại được gì cho cộng đồng!{' '}
+                        </b>
+                    </p>
+                    <div className={'flex justify-center items-center'}
+                         style={sizeX < 768 ? { width: '100%' } : { width: '30%' }}>
+                        <Image src={logo2.src} alt="Logo đơn của Pestnclean" width={173} height={216} />
+                    </div>
+                </div>
                 <div className={`${cx('committed-wrapper-2')} ${sizeX < 768 ? 'flex-wrap' : ''} `}>
                     <div className={'flex flex-row gap-5'}
                          style={sizeX <= 768 ? { flexWrap: 'wrap' } : {}}>

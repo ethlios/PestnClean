@@ -156,24 +156,27 @@
     gap: 20px;
 }
 
-.blog-item {
-    :nth-child(2) {
+.blog-text-wrapper {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+
+    :nth-child(1) {
         font-size: 12px;
         color: var(--primary);
         font-weight: 600;
         margin-top: 5px;
     }
 
-    :nth-child(3) {
+    :nth-child(2) {
         font-weight: 600;
         font-size: 13.4px;
         letter-spacing: -0.5px;
-        margin: 3px 0 10px 0;
+        margin: 3px 0 5px 0;
         text-transform: uppercase;
         cursor: pointer;
     }
 
-    :nth-child(4) {
+    :nth-child(3) {
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -182,10 +185,9 @@
         font-weight: 600;
         margin-bottom: 3px;
         color: var(--text-black);
-        margin-top: 5px;
     }
 
-    :nth-child(4) svg {
+    :nth-child(3) svg {
         font-size: 18px;
     }
 }
@@ -194,14 +196,19 @@
     position: relative;
     overflow: hidden;
     cursor: pointer;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 }
 
 .blog-img {
     background-color: #fff;
-    border-radius: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
     height: 200px;
     width: 100%;
     position: relative;
+    object-fit: cover;
+    object-position: center;
 }
 
 .blog-hover {
@@ -226,4 +233,13 @@
     justify-content: center;
     width: 100%;
     margin-top: 25px;
+}
+
+.blogs-wrong {
+    font-weight: 600;
+    letter-spacing: -0.2px;
+    text-align: center;
+    padding: 50px 0;
+    color: var(--text-black);
+    font-size: 15px;
 }

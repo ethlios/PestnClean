@@ -144,7 +144,7 @@
 }
 
 .committed-text {
-    //width: 75%;
+    width: 75%;
     font-size: 21px;
     font-weight: 600;
     letter-spacing: -1.1px;
@@ -167,8 +167,7 @@
 }
 
 .committed-number {
-    //font-size: 85px;
-    font-size: 5rem;
+    font-size: 85px;
     font-weight: 700;
     color: var(--primary);
 }
@@ -208,7 +207,7 @@
 
 .img-item {
     width: 100%;
-    height: 350px;
+    height: 300px;
     cursor: pointer;
     margin-right: 20px;
 }
@@ -220,11 +219,12 @@
     object-fit: cover;
     object-position: center;
     border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 15px;
 }
 
 // Certification
 .certi-wrapper {
-    margin-top: 50px;
+    margin-top: 20px;
 }
 
 .certi-img-wrapper {
@@ -267,29 +267,12 @@
 .blog-item {
     width: calc(100% / 3);
     overflow: hidden;
-    height: 300px;
-    border-radius: 20px;
+    height: 100%;
+    // border-radius: 20px;
     box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 15px;
     position: relative;
-}
 
-.blogs-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    // background-color: rgba($color: #000000, $alpha: 0.05);
-}
-
-.blog-content {
-    position: absolute;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.1);
-    padding: 5px 12px;
-    cursor: pointer;
-    transition: all ease 0.5s;
-
-    &:hover {
+    &:hover .blog-content {
         background-color: var(--primary);
         color: #fff;
     }
@@ -303,12 +286,63 @@
     }
 }
 
+.blog-time {
+    display: flex;
+
+    p:nth-child(1) {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-size: 16px;
+        font-weight: 500;
+    }
+
+    u {
+        letter-spacing: 5px;
+        font-weight: 600;
+        font-size: 13.5px;
+    }
+}
+
+.time-decor {
+    border-right: solid 2px var(--secondary);
+    margin-left: 10px;
+}
+
+.content-hover {
+    overflow: hidden;
+
+    p {
+        font-size: 14.5px;
+        font-weight: 500;
+        letter-spacing: -0.5px;
+        color: var(--text-black);
+    }
+}
+
+.blogs-img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    object-position: center;
+    // background-color: rgba($color: #000000, $alpha: 0.05);
+}
+
+.blog-content {
+    background-color: rgba(0, 0, 0, 0.1);
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: all ease 0.5s;
+    overflow: hidden;
+}
+
 .blog-title {
     font-weight: 600;
-    text-transform: uppercase;
     margin-bottom: 5px;
-    font-size: 15px;
+    font-size: 16.5px;
     letter-spacing: -0.7px;
+    margin-left: 10px;
 }
 
 .blog-createdAt {
@@ -375,12 +409,26 @@
     background-color: rgba($color: #000000, $alpha: 0.3);
     width: 100%;
     height: 100%;
-    text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;
     letter-spacing: -0.5px;
-    padding: 10px;
+    padding: 10px 20px;
+    text-align: justify;
+    flex-direction: column;
+
+    p:nth-child(2) {
+        margin-top: 10px;
+    }
+
+    svg {
+        margin-left: 5px;
+        transition: all ease 0.5s;
+    }
+
+    p:nth-child(2):hover svg {
+        margin-left: 15px;
+    }
 }
 
 // Product
@@ -398,6 +446,8 @@
     position: relative;
     border-radius: 20px;
     background-color: rgba($color: #000000, $alpha: 0.05);
+    object-fit: cover;
+    object-position: center;
 }
 
 .item-category {
@@ -411,7 +461,6 @@
     font-weight: 600;
     font-size: 16px;
 }
-
 .item-price {
     font-size: 14px;
     color: var(--text-black);

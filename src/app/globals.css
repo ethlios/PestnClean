@@ -33,7 +33,7 @@ html * {
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
     -webkit-scrollbar: none;
-    user-select: none;
+    /* user-select: none; */
     scroll-behavior: smooth !important;
 }
 
@@ -182,6 +182,22 @@ progress::-moz-progress-bar {
 .ql-tooltip-editor,
 .ql-clipboard {
     display: none;
+}
+
+.ql-editor blockquote {
+    font-size: 14.5px;
+    border-left: 4px solid var(--primary) !important;
+    color: var(--text-black);
+    letter-spacing: -0.5px;
+    font-size: 15px;
+    padding-left: 10px;
+    font-weight: 500;
+}
+
+.ql-editor li {
+    font-size: 14.5px;
+    font-weight: 500;
+    color: var(--text-black);
 }
 
 /* CUSTOM TAILWIND */
