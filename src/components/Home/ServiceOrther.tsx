@@ -7,10 +7,12 @@ import ButtonCommon from '../Orther/Button';
 import Image from 'next/image';
 import { nameToLink } from '~/libs/orthers/nameToLink';
 import Link from 'next/link';
+import useSize from '~/libs/hooks/useSize';
 
 const cx = classNames.bind(styles);
 
-export interface IAppProps {}
+export interface IAppProps {
+}
 
 const otherService = [
     {
@@ -35,9 +37,10 @@ const otherService = [
 
 export default function ServiceAds(props: IAppProps) {
     const [currentService, setCurrentService] = useState<number>(-1);
+    const { sizeX } = useSize();
 
     return (
-        <div className={cx('blog-wrapper')}>
+        <div className={'mt-12'}>
             <h1
                 className={
                     'font-bold underline underline-offset-2 text-2xl uppercase text-center decoration-2'
@@ -45,13 +48,13 @@ export default function ServiceAds(props: IAppProps) {
             >
                 CÁC DỊCH VỤ CỦA CHÚNG TÔI
             </h1>
-            <div className={cx('service-wrapper')}>
+            <div className={'grid grid-cols-12 mt-8 gap-6'}>
                 {otherService.map((item, index) => {
                     return (
                         <Link
                             href={`/dichvu/${nameToLink(item.title)}`}
                             key={index}
-                            className={cx('service-item')}
+                            className={`${cx('service-item')} col-span-12 md:col-span-4`}
                             onMouseOver={() => setCurrentService(index)}
                             onMouseOut={() => setCurrentService(-1)}
                         >

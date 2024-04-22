@@ -7,7 +7,8 @@ import styles from './home.module.scss';
 
 const cx = classNames.bind(styles);
 
-export interface IAppProps {}
+export interface IAppProps {
+}
 
 const imgList = [
     {
@@ -61,25 +62,24 @@ const settings = {
 
 export default function BannerHomePage(props: IAppProps) {
     return (
-        <div>
+        <div className={'w-full'}>
             <div className="slider-container">
                 <Slider {...settings}>
                     {imgList.map((item, index) => {
                         return (
                             <div key={index}>
-                                <div
-                                    style={{
-                                        // backgroundImage: `url('${banner1.src}')`,
-                                        backgroundPosition: 'center',
-                                        backgroundSize: 'cover',
-                                        width: '100%',
-                                        backgroundColor: 'rgba(0,0,0,0.05)',
-                                        height: '500px',
-                                        display: 'flex',
-                                        flexDirection: 'column',
-                                        justifyContent: 'center',
-                                        padding: '0 100px',
-                                    }}
+                                <div className={'container'}
+                                     style={{
+                                         // backgroundImage: `url('${banner1.src}')`,
+                                         backgroundPosition: 'center',
+                                         backgroundSize: 'cover',
+                                         width: '100%',
+                                         backgroundColor: 'rgba(0,0,0,0.05)',
+                                         height: '500px',
+                                         display: 'flex',
+                                         flexDirection: 'column',
+                                         justifyContent: 'center',
+                                     }}
                                 >
                                     <h1
                                         style={{

@@ -9,6 +9,7 @@ import ArrowRightAltOutlinedIcon from '@mui/icons-material/ArrowRightAltOutlined
 import SubdirectoryArrowLeftOutlinedIcon from '@mui/icons-material/SubdirectoryArrowLeftOutlined';
 import ButtonCommon from '../Orther/Button';
 import Link from 'next/link';
+import useSize from '~/libs/hooks/useSize';
 
 const cx = classNames.bind(styles);
 
@@ -44,10 +45,12 @@ const solutions = [
 ];
 
 export default function WhyChooseMe() {
+    const { sizeX } = useSize();
+
     return (
         <div>
             <div className={cx('choose-content-1')}>
-                <div className={cx('choose-text')}>
+                <div className={cx('choose-text')} style={sizeX < 768 ? { width: '100%' } : { width: '60%' }}>
                     <div className={cx('choose-text-main')}>
                         <h1
                             className={
@@ -87,7 +90,7 @@ export default function WhyChooseMe() {
                         })}
                     </div>
                 </div>
-                <div className={cx('choose-content-img')}>
+                <div className={cx('choose-content-img')} style={sizeX < 768 ? { width: '100%' } : { width: '30%' }}>
                     {/* <Image/> */}
                     <Image
                         src="https://res.cloudinary.com/dj2jarcxk/image/upload/v1713699714/l%C3%B4go-mockup_optimized_gnftec.png"
@@ -95,7 +98,8 @@ export default function WhyChooseMe() {
                         width={1000}
                         height={1000}
                     />
-                    <Link href={'/gioithieu'} className={cx('choose-link')}>
+                    <Link href={'/gioithieu'} className={cx('choose-link')}
+                          style={sizeX < 768 ? { left: '0' } : { left: '-60px' }}>
                         <p>
                             Giới thiệu
                             <ArrowRightAltOutlinedIcon />
@@ -104,7 +108,7 @@ export default function WhyChooseMe() {
                 </div>
             </div>
             <div className={cx('number-wrapper')}>
-                <p className={cx('committed-text')}>
+                <p className={cx('committed-text')} style={sizeX < 768 ? { width: '100%' } : { width: '75%' }}>
                     Bằng tất cả những gì mình có, PESTNCLEAN hứa hẹn sẽ mang đến cho quý khách hàng những trải
                     nghiệm về dịch vụ chưa từng có. Lấy đam mê nhiệt huyết làm nguồn sức mạnh, và lấy nụ cười
                     của khách hàng làm mục tiêu theo đuổi, PESTNCLEAN đã và đang không ngừng hoàn thiện bản
@@ -114,20 +118,10 @@ export default function WhyChooseMe() {
                         trội, mà nó còn được khẳng định bằng việc đã mang lại được gì cho cộng đồng!{' '}
                     </b>
                 </p>
-                <div className={cx('committed-wrapper-2')}>
-                    <div
-                        style={{
-                            display: 'flex',
-                            flexDirection: 'row',
-                            gap: '60px',
-                        }}
-                    >
-                        <div
-                            className={cx('committed-number')}
-                            style={{
-                                minWidth: '125px',
-                            }}
-                        >
+                <div className={`${cx('committed-wrapper-2')} ${sizeX < 768 ? 'flex-wrap' : ''} `}>
+                    <div className={'flex flex-row gap-5'}
+                         style={sizeX < 768 ? { flexWrap: 'wrap' } : {}}>
+                        <div>
                             <h1 className={cx('committed-number')}>3+</h1>
                             <p className={cx('committed-des')}>Năm hoạt động</p>
                         </div>

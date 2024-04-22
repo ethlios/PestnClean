@@ -22,10 +22,11 @@
     gap: 50px;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: wrap;
 }
 
 .choose-text {
-    width: 60%;
+    //width: 60%;
 
     h1 {
         display: flex;
@@ -50,7 +51,7 @@
 }
 
 .choose-content-img {
-    width: 30%;
+    //width: 30%;
     background-color: rgba(0, 0, 0, 0.05);
     height: 450px;
     border-radius: 20px;
@@ -143,7 +144,7 @@
 }
 
 .committed-text {
-    width: 75%;
+    //width: 75%;
     font-size: 21px;
     font-weight: 600;
     letter-spacing: -1.1px;
@@ -166,7 +167,8 @@
 }
 
 .committed-number {
-    font-size: 85px;
+    //font-size: 85px;
+    font-size: 5rem;
     font-weight: 700;
     color: var(--primary);
 }
@@ -334,7 +336,7 @@
 }
 
 .service-item {
-    width: calc(100% / 3);
+    //width: calc(100% / 3);
     overflow: hidden;
     height: 300px;
     border-radius: 20px;
@@ -409,6 +411,7 @@
     font-weight: 600;
     font-size: 16px;
 }
+
 .item-price {
     font-size: 14px;
     color: var(--text-black);
