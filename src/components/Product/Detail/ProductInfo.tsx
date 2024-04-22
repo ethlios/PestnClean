@@ -22,7 +22,8 @@ import $ from 'jquery';
 
 const cx = classNames.bind(styles);
 
-export interface IAppProps {}
+export interface IAppProps {
+}
 
 export default function ProductInfo(props: IAppProps) {
     const [type, setType] = useState('');
@@ -38,12 +39,7 @@ export default function ProductInfo(props: IAppProps) {
     };
 
     return (
-        <div
-            className={cx('product-info')}
-            style={{
-                top: wheel ? '-180px' : '-120px',
-            }}
-        >
+        <div className={`col-span-12 md:col-span-5`}>
             <p className={cx('sale')}>Đang giảm giá</p>
             <h1 className={cx('name')}>Tinh dầu chanh viet oils</h1>
             <p className={cx('rating')} onClick={handleClick}>

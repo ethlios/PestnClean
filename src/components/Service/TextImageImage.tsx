@@ -8,27 +8,16 @@ import { usePathname } from 'next/navigation';
 
 const cx = classNames.bind(styles);
 
-export interface IAppProps {}
+export interface IAppProps {
+}
 
 export default function TextImageImage(props: IAppProps) {
     const pathname = usePathname();
 
     return (
         <div className="my-10">
-            <div
-                style={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    width: '100%',
-                    justifyContent: 'space-between',
-                    gap: '30px',
-                }}
-            >
-                <div
-                    style={{
-                        width: '50%',
-                    }}
-                >
+            <div className={'grid grid-cols-2 gap-8'}>
+                <div className={'col-span-2 md:col-span-1'}>
                     <Image
                         src=""
                         alt={''}
@@ -54,11 +43,7 @@ export default function TextImageImage(props: IAppProps) {
                         </p>
                     </Link>
                 </div>
-                <div
-                    style={{
-                        width: '50%',
-                    }}
-                >
+                <div className={'col-span-2 md:col-span-1'}>
                     <Image
                         src={''}
                         alt={''}

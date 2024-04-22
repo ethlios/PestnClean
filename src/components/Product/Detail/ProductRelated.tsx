@@ -6,14 +6,15 @@ import EastOutlinedIcon from '@mui/icons-material/EastOutlined';
 import KeyboardBackspaceOutlinedIcon from '@mui/icons-material/KeyboardBackspaceOutlined';
 import { IconButton } from '@mui/material';
 import Slider from 'react-slick';
+import useSize from '~/libs/hooks/useSize';
 
 const cx = classNames.bind(styles);
 
-export interface IAppProps {}
+export interface IAppProps {
+}
 
 const settings = {
     infinite: true,
-    slidesToShow: 4,
     slidesToScroll: 4,
     autoplay: true,
     autoplaySpeed: 3000,
@@ -60,12 +61,16 @@ function SampleNextArrow(props: any) {
 const arrayTest = ['', '', '', '', '', '', ''];
 
 export default function ProductRelated(props: IAppProps) {
+    const { sizeX } = useSize();
+
     return (
         <div className={cx('product-related')}>
             <p className={cx('related-title')}>Sản phẩm liên quan</p>
             <div className={cx('horizontal-decor')} />
             <div className="slider-container">
-                <Slider {...settings}>
+                <Slider {...settings}
+                        slidesToShow={sizeX > 1024 ? 4 : sizeX > 768 ? 3 : 2}
+                >
                     {arrayTest.map((_, index) => {
                         return (
                             <div className={cx('content-item')} key={index}>

@@ -11,7 +11,8 @@ import ButtonCommon from '~/components/Orther/Button';
 
 const cx = classNames.bind(styles);
 
-export interface IAppProps {}
+export interface IAppProps {
+}
 
 export default function CheckoutPanel(props: IAppProps) {
     return (
@@ -25,23 +26,25 @@ export default function CheckoutPanel(props: IAppProps) {
                     <SummaryProduct key={index} />
                 ))}
                 <div className={cx('hr-decor')}></div>
-                <div className={`${cx('total-price')} flex justify-between items center`}>
-                    <span>6 Sản phẩm</span>
-                    <p>
-                        4.400.000 <u>đ</u>
-                    </p>
-                </div>
-                <div className={`${cx('total-price')} flex justify-between items center`}>
-                    <span>Phí vận chuyển</span>
-                    <p>
-                        0 <u>đ</u>
-                    </p>
-                </div>
-                <div className={`${cx('total-price')} flex justify-between items center`}>
-                    <span>Mã giảm giá</span>
-                    <p>
-                        0 <u>đ</u>
-                    </p>
+                <div className={'*:flex *:justify-between *:items center'}>
+                    <div className={cx('total-price')}>
+                        <span>6 Sản phẩm</span>
+                        <p>
+                            4.400.000 <u>đ</u>
+                        </p>
+                    </div>
+                    <div className={cx('total-price')}>
+                        <span>Phí vận chuyển</span>
+                        <p>
+                            0 <u>đ</u>
+                        </p>
+                    </div>
+                    <div className={cx('total-price')}>
+                        <span>Mã giảm giá</span>
+                        <p>
+                            0 <u>đ</u>
+                        </p>
+                    </div>
                 </div>
             </div>
             {/*Payment*/}

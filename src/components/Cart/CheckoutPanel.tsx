@@ -10,7 +10,8 @@ import styles from './cart.module.scss';
 
 const cx = classNames.bind(styles);
 
-export interface IAppProps {}
+export interface IAppProps {
+}
 
 export default function CheckoutPanel(props: IAppProps) {
     return (
@@ -23,23 +24,25 @@ export default function CheckoutPanel(props: IAppProps) {
                 {/*Summary*/}
                 <div className={'my-5'}>
                     <p className={`${cx('title')} mb-3`}>Tóm tắt đơn hàng</p>
-                    <div className={`${cx('total-price')} flex justify-between items center`}>
-                        <span>4 Sản phẩm</span>
-                        <p>
-                            4.400.000 <u>đ</u>
-                        </p>
-                    </div>
-                    <div className={`${cx('total-price')} flex justify-between items center`}>
-                        <span>Phí vận chuyển</span>
-                        <p>
-                            0 <u>đ</u>
-                        </p>
-                    </div>
-                    <div className={`${cx('total-price')} flex justify-between items center`}>
-                        <span>Mã giảm giá</span>
-                        <p>
-                            0 <u>đ</u>
-                        </p>
+                    <div className={'*:flex *:justify-between *:items center'}>
+                        <div className={cx('total-price')}>
+                            <span>4 Sản phẩm</span>
+                            <p>
+                                4.400.000 <u>đ</u>
+                            </p>
+                        </div>
+                        <div className={cx('total-price')}>
+                            <span>Phí vận chuyển</span>
+                            <p>
+                                0 <u>đ</u>
+                            </p>
+                        </div>
+                        <div className={cx('total-price')}>
+                            <span>Mã giảm giá</span>
+                            <p>
+                                0 <u>đ</u>
+                            </p>
+                        </div>
                     </div>
                 </div>
                 {/*Payment*/}
@@ -56,12 +59,12 @@ export default function CheckoutPanel(props: IAppProps) {
                         <ButtonCommon text="THANH TOÁN" fullWidth />
                     </Link>
                 </div>
-                <div className={cx('promise')}>
-                    <div className="flex items-center my-1">
+                <div className={`${cx('promise')} *:flex *:items-center *:my-1`}>
+                    <div>
                         <CreditCardIcon />
                         <p>Thanh toán an toàn</p>
                     </div>
-                    <div className="flex items-center my-1">
+                    <div>
                         <PublishedWithChangesIcon />
                         <p>Đổi trả dễ dàng</p>
                     </div>

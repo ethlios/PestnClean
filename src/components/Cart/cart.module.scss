@@ -50,12 +50,10 @@
 
 .price {
     display: flex;
-    gap: 10px;
     font-weight: 600;
     color: var(--text-black);
     font-size: 14.5px;
-    justify-content: center;
-    align-items: center;
+    flex-wrap: wrap;
 }
 
 .price-default {

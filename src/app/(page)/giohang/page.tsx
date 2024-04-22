@@ -7,7 +7,8 @@ import CheckoutPanel from '~/components/Cart/CheckoutPanel';
 
 const cx = classNames.bind(styles);
 
-export interface IAppProps {}
+export interface IAppProps {
+}
 
 export default function CartPage(props: IAppProps) {
     return (
@@ -22,13 +23,13 @@ export default function CartPage(props: IAppProps) {
             {/*Main*/}
             <div className={'grid grid-cols-12 gap-6 mb-10'}>
                 {/*Visual Content*/}
-                <div className={'col-span-12 md:col-span-8 flex flex-col'}>
+                <div className={'col-span-12 md:col-span-7 lg:col-span-8 flex flex-col'}>
                     {/*Item*/}
                     {Array.from({ length: 3 }).map((_, index) => (
                         <BuyItem key={index} />
                     ))}
                 </div>
-                <div className={'col-span-12 md:col-span-4'}>
+                <div className={'col-span-12 md:col-span-5 lg:col-span-4'}>
                     {/*Checkout panel*/}
                     <CheckoutPanel />
                 </div>

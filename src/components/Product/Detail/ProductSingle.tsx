@@ -5,11 +5,12 @@ import ProductInfo from '~/components/Product/Detail/ProductInfo';
 
 const cx = classNames.bind(styles);
 
-export interface IAppProps {}
+export interface IAppProps {
+}
 
 export default function ProductSingle(props: IAppProps) {
     return (
-        <div className={cx('product-wrapper')}>
+        <div className={'grid grid-cols-12 gap-8'}>
             <ProductImage />
             <ProductInfo />
         </div>

@@ -68,24 +68,6 @@
     right: -7.5px;
 }
 
-.checkout-wrapper {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    padding: 0 80px;
-    justify-content: space-between;
-}
-
-.checkout-form {
-    display: flex;
-    flex-direction: column;
-    width: 50%;
-}
-
-.checkout-detail {
-    width: 37%;
-}
-
 .payment-method {
     display: flex;
     flex-direction: row;
@@ -126,6 +108,7 @@
         letter-spacing: -0.2px;
     }
 }
+
 .product-name {
     font-size: 15px;
     font-weight: 600;
@@ -182,7 +165,6 @@
     font-size: 14px;
     font-weight: 500;
     resize: none;
-    width: 100%;
     min-height: 150px;
 
     &:hover {

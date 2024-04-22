@@ -8,7 +8,8 @@ import Tippy from '@tippyjs/react';
 
 const cx = classNames.bind(styles);
 
-export interface IAppProps {}
+export interface IAppProps {
+}
 
 export default function PaymentPage(props: IAppProps) {
     return (
@@ -31,13 +32,13 @@ export default function PaymentPage(props: IAppProps) {
                     </Tippy>
                 </div>
             </div>
-            <div className={cx('checkout-wrapper')}>
+            <div className={'grid grid-cols-12 gap-6 mb-10'}>
                 {/*Visual Content*/}
-                <div className={cx('checkout-form')}>
+                <div className={'col-span-12 md:col-span-7 lg:col-span-8 flex flex-col'}>
                     {/*Form*/}
                     <PaymentForm />
                 </div>
-                <div className={cx('checkout-detail')}>
+                <div className={'col-span-12 md:col-span-5 lg:col-span-4'}>
                     {/*Checkout panel*/}
                     <CheckoutPanel />
                 </div>

@@ -13,9 +13,10 @@ import PaymentsOutlinedIcon from '@mui/icons-material/PaymentsOutlined';
 
 const cx = classNames.bind(styles);
 
-export interface IAppProps {}
+export interface IAppProps {
+}
 
-const classInput = 'w-full';
+const classInput = 'w-full lg:w-5/6';
 
 export default function PaymentForm(props: IAppProps) {
     return (
@@ -24,7 +25,7 @@ export default function PaymentForm(props: IAppProps) {
                 <p className={cx('title')}>Phương thức thanh toán</p>
                 <div className={'my-5'}>
                     <div
-                        className={cx('payment-method')}
+                        className={`${cx('payment-method')} ${classInput}`}
                         style={{
                             border: 'solid 2px var(--primary)',
                             color: 'var(--primary)',
@@ -33,7 +34,7 @@ export default function PaymentForm(props: IAppProps) {
                         <PaymentsOutlinedIcon className={'mr-3'} />
                         <p>COD</p>
                     </div>
-                    <div className={cx('payment-method')}>
+                    <div className={`${cx('payment-method')} ${classInput}`}>
                         <PaymentIcon className={'mr-3'} />
                         <p>CHUYỂN KHOẢN</p>
                     </div>
@@ -92,7 +93,8 @@ export default function PaymentForm(props: IAppProps) {
                             <MenuItem value={'phuong3'}>Phường 3</MenuItem>
                         </SelectField>
                     </Box>
-                    <textarea spellCheck="false" placeholder="Ghi chú thêm" className={cx('textarea')} />
+                    <textarea spellCheck="false" placeholder="Ghi chú thêm"
+                              className={`${cx('textarea')} ${classInput}`} />
                     <FormGroup>
                         <FormControlLabel
                             required
