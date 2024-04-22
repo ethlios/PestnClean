@@ -9,14 +9,18 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 import AttachEmailOutlinedIcon from '@mui/icons-material/AttachEmailOutlined';
 import PhoneAndroidOutlinedIcon from '@mui/icons-material/PhoneAndroidOutlined';
 import RingVolumeOutlinedIcon from '@mui/icons-material/RingVolumeOutlined';
+import useSize from '~/libs/hooks/useSize';
 
 const cx = classNames.bind(styles);
 
-export interface IAppProps {}
+export interface IAppProps {
+}
 
 export default function InformationContactPage(props: IAppProps) {
+    const { sizeX } = useSize();
+
     return (
-        <div className={cx('information')}>
+        <div className={cx('information')} style={sizeX < 768 ? { width: '100%' } : { width: '35%' }}>
             {/* Content 1 */}
             <div className={cx('information-1')}>
                 <p>LIÊN HỆ</p>

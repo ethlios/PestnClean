@@ -9,12 +9,14 @@ import AboutBanner from './Banner';
 import styles from './about.module.scss';
 import { animation, animation2 } from '~/libs/orthers/animation';
 import Content3 from './Content3';
+import useSize from '~/libs/hooks/useSize';
 
 const cx = classNames.bind(styles);
 
 gsap.registerPlugin(ScrollTrigger);
 
-export interface IAppProps {}
+export interface IAppProps {
+}
 
 export default function AboutCPPage(props: IAppProps) {
     const titleRef = useRef<any>();
@@ -25,6 +27,7 @@ export default function AboutCPPage(props: IAppProps) {
     const textAbout1 = useRef<any>();
     const textAbout2 = useRef<any>();
     const videoRef = useRef<any>();
+    const { sizeX } = useSize();
 
     useEffect(() => {
         const tl = titleRef.current;
@@ -80,12 +83,7 @@ export default function AboutCPPage(props: IAppProps) {
             {/*Header title*/}
             <div className={'my-14'}>
                 <div className={''} ref={titleRef}>
-                    <h1
-                        className={cx('head-title')}
-                        style={{
-                            width: '60%',
-                        }}
-                    >
+                    <h1 className={`${cx('head-title')} md:w-3/5`}>
                         HỆ SINH THÁI GIẢI PHÁP VỆ SINH VÀ KIỂM SOÁT CÔN TRÙNG TOÀN DIỆN
                     </h1>
                     <p className={cx('text-common')}>
@@ -142,7 +140,8 @@ export default function AboutCPPage(props: IAppProps) {
                         }}
                         ref={imgAbout1}
                     />
-                    <div className={cx('text-content')} ref={textAbout1}>
+                    <div className={cx('text-content')} ref={textAbout1}
+                         style={sizeX < 768 ? { width: '100%' } : { width: '40%' }}>
                         <p>2024</p>
                         <h1 className={cx('title')}>1. TẦM NHÌN</h1>
                         <p className={cx('text-common')}>
@@ -157,7 +156,8 @@ export default function AboutCPPage(props: IAppProps) {
                 {/*2nd scope*/}
                 <div className={cx('main-content-2')}>
                     <div className={cx('bg-decor-2')}></div>
-                    <div className={cx('text-content-2')} ref={textAbout2}>
+                    <div className={cx('text-content-2')} ref={textAbout2}
+                         style={sizeX < 768 ? { width: '100%' } : { width: '40%' }}>
                         <p>2024</p>
                         <h1 className={cx('title')}>2. SỨ MỆNH</h1>
                         <p className={cx('text-common')}>

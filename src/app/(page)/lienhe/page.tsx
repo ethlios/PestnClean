@@ -11,7 +11,8 @@ import Toast from '~/components/Orther/Toast';
 
 const cx = classNames.bind(styles);
 
-export interface IAppProps {}
+export interface IAppProps {
+}
 
 export default function ContactPage(props: IAppProps) {
     const [data, setData] = useState<any>();
@@ -28,7 +29,7 @@ export default function ContactPage(props: IAppProps) {
                 showToast={showToast}
                 setShowToast={setShowToast}
             />
-            <div className={cx('content')}>
+            <div className={`${cx('content')} container`}>
                 <InformationContactPage />
                 {!isConfirm ? (
                     <FormContactPage

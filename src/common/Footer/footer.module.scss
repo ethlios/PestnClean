@@ -112,6 +112,7 @@
     justify-content: space-between;
     font-size: 14px;
     letter-spacing: -0.2px;
+    flex-wrap: wrap;
 
     a:hover {
         text-decoration: 1px underline;
@@ -132,6 +133,7 @@
     gap: 10px;
     color: var(--primary);
     margin-top: 10px;
+    margin-bottom: 10px;
 
     svg {
         font-size: 28px;

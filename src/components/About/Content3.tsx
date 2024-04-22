@@ -9,15 +9,16 @@ import styles from './about.module.scss';
 import { animation2 } from '~/libs/orthers/animation';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+import useSize from '~/libs/hooks/useSize';
 
-export interface IAppProps {}
+export interface IAppProps {
+}
 
 const cx = classNames.bind(styles);
 
 const settings = {
     infinite: true,
     speed: 500,
-    slidesToShow: 2,
     slidesToScroll: 1,
 };
 
@@ -44,6 +45,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function Content3(props: IAppProps) {
     const about1DesRef = useRef<any>();
+    const { sizeX } = useSize();
 
     useEffect(() => {
         gsap.fromTo(
@@ -78,7 +80,8 @@ export default function Content3(props: IAppProps) {
         <div className={cx('content-3')}>
             <div className={cx('text-content-3')}>
                 <div className={cx('text-content-3-main')}>
-                    <div className={cx('text-content-tired')}>
+                    <div className={cx('text-content-tired')}
+                         style={sizeX < 768 ? { width: '100%' } : { width: '35%' }}>
                         <p>2024</p>
                         <h1 className={cx('title')}>3. GIÁ TRỊ CỐT LÕI</h1>
                         <p className={cx('text-common')} ref={about1DesRef}>
@@ -89,9 +92,14 @@ export default function Content3(props: IAppProps) {
                     </div>
                 </div>
             </div>
-            <div className={cx('img-content-3')}>
+            <div className={cx('img-content-3')}
+                 style={
+                     sizeX < 768 ?
+                         { width: '100%', bottom: '0' }
+                         : { width: '80%', right: '-200px' }
+                 }>
                 <div className="slider-container">
-                    <Slider {...settings}>
+                    <Slider {...settings} slidesToShow={sizeX > 768 ? 2 : 1}>
                         {content3.map((item, index) => {
                             return (
                                 <div key={index} className={cx('img-item-wrapper')}>

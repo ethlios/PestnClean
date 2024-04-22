@@ -1,6 +1,6 @@
 // Banner
 .banner {
-    width: 100vw;
+    width: 100%;
     height: 350px;
     background-color: var(--secondary-dark);
     position: relative;
@@ -20,14 +20,13 @@
 .content {
     display: flex;
     flex-direction: row;
-    padding: 0 100px;
     margin-top: 40px;
     justify-content: space-between;
+    flex-wrap: wrap;
 }
 
 // INFORMATION
 .information {
-    width: 35%;
 
     .information-1 {
         display: flex;
@@ -100,7 +99,6 @@
 
 // FORM
 .form {
-    width: 50%;
 
     h1 {
         font-size: 28px;
@@ -309,8 +307,8 @@
 // Dialog
 .dialog-wrapper {
     display: flex;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
     position: fixed;
     z-index: 3000;
