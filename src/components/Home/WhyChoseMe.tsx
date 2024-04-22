@@ -120,7 +120,7 @@ export default function WhyChooseMe() {
                 </p>
                 <div className={`${cx('committed-wrapper-2')} ${sizeX < 768 ? 'flex-wrap' : ''} `}>
                     <div className={'flex flex-row gap-5'}
-                         style={sizeX < 768 ? { flexWrap: 'wrap' } : {}}>
+                         style={sizeX <= 768 ? { flexWrap: 'wrap' } : {}}>
                         <div>
                             <h1 className={cx('committed-number')}>3+</h1>
                             <p className={cx('committed-des')}>Năm hoạt động</p>
