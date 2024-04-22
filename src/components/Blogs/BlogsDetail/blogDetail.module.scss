@@ -31,28 +31,12 @@
 
 // Banner
 .banner {
-    display: flex;
-    flex-direction: row;
     width: 100%;
-    gap: 10px;
-}
-
-.img {
-    background-color: rgba(0, 0, 0, 0.1);
-    height: 320px;
-    width: 70%;
-}
-
-.img-thumbnail {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-
-    div {
-        height: calc(100% / 4);
-        width: 75px;
-        background-color: rgba(0, 0, 0, 0.1);
-    }
+    height: 370px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 15px;
 }
 
 // Main
@@ -372,14 +356,13 @@
     position: relative;
     overflow: hidden;
     cursor: pointer;
-    border: solid 2px var(--text-black);
     border-radius: 10px;
 }
 
 .blog-img {
     background-color: #fff;
     border-radius: 10px;
-    height: 200px;
+    height: 250px;
     width: 100%;
     position: relative;
 }
@@ -404,4 +387,5 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    gap: 10px;
 }

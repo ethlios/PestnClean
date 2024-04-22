@@ -9,6 +9,8 @@ import { blogs, btnLists } from '~/constants/blogs';
 import { nameToLink } from '~/libs/orthers/nameToLink';
 import ButtonCommon from '../Orther/Button';
 import styles from './blogs.module.scss';
+import Image from 'next/image';
+import { removeVietnameseTones } from '~/libs/orthers/removeVietnamese';
 
 const cx = classNames.bind(styles);
 
@@ -19,19 +21,32 @@ export default function BlogsList(props: IAppProps) {
     const [defaultList, setDefaultList] = useState<string>('Tất cả');
     const [blogsList, setBlogsList] = useState<any[]>([]);
     const [currentBlog, setCurrentBlog] = useState(-1);
+    const [searchValue, setSearchValue] = useState<string>('');
 
     // Filter
     useEffect(() => {
         if (defaultList === 'Tất cả') {
             setBlogsList(blogs);
         } else {
-            const newBlogsList = blogs.filter((blog) => blog.category === defaultList);
+            const newBlogsList = blogs.filter((blog: any) => blog.category === defaultList);
 
             setBlogsList(newBlogsList);
         }
 
+        if (searchValue) {
+            const newBlogs = blogs.filter((blog: any) => {
+                return (
+                    removeVietnameseTones(blog.title)
+                        .toLowerCase()
+                        .indexOf(removeVietnameseTones(searchValue).toLowerCase()) !== -1
+                );
+            });
+
+            setBlogsList(newBlogs);
+        }
+
         return () => setBlogsList([]);
-    }, [defaultList]);
+    }, [defaultList, searchValue]);
 
     return (
         // All blogs
@@ -54,59 +69,91 @@ export default function BlogsList(props: IAppProps) {
             <div className={cx('blogs-list-wrapper')}>
                 {/* Search */}
                 <div className={cx('search')}>
-                    <input type="text" placeholder="Tìm kiếm..." />
+                    <input
+                        type="text"
+                        placeholder="Tìm kiếm..."
+                        value={searchValue}
+                        onChange={(e) => setSearchValue(e.target.value)}
+                    />
                     <div className={cx('search-btn')}>
                         <SearchIcon />
                     </div>
                 </div>
 
                 {/* Blog render */}
-                <div className={cx('lists-inside')}>
-                    {blogsList.map((blog, index) => {
-                        return (
-                            <div key={blog.id} className={cx('blog-item')}>
-                                <div
-                                    className={cx('img-wrapper')}
-                                    onMouseOver={() => setCurrentBlog(index)}
-                                    onMouseOut={() => setCurrentBlog(-1)}
-                                >
-                                    {/* <Image
-                                        src={img.src}
-                                        alt={blog.title}
-                                        width={1000}
-                                        height={1000}
-                                        className={cx('blog-img')}
-                                    ></Image> */}
-                                    <div className={cx('blog-img')}></div>
+                {blogsList.length > 0 ? (
+                    <>
+                        <div className={cx('lists-inside')}>
+                            {blogsList.map((blog, index) => {
+                                return (
                                     <div
-                                        className={cx('blog-hover')}
+                                        key={blog.id}
+                                        className={cx('blog-item')}
                                         style={{
-                                            backgroundColor: currentBlog === index ? 'rgba(0,0,0,0.1)' : '',
+                                            overflow: 'hidden',
                                         }}
                                     >
-                                        {currentBlog === index && (
-                                            <ButtonCommon
-                                                text="XEM"
-                                                path={`blogs/${nameToLink(blog.title)}`}
-                                            />
-                                        )}
-                                    </div>
-                                </div>
-                                <p>{blog.category}</p>
-                                <Link href={`blogs/${nameToLink(blog.title)}`}>{blog.title}</Link>
-                                <p>
-                                    <AccessTimeIcon />
-                                    {blog.createdAt}
-                                </p>
-                            </div>
-                        );
-                    })}
-                </div>
+                                        <div
+                                            className={cx('img-wrapper')}
+                                            onMouseOver={() => setCurrentBlog(index)}
+                                            onMouseOut={() => setCurrentBlog(-1)}
+                                        >
+                                            <Image
+                                                src={blog.img}
+                                                alt={blog.title}
+                                                width={1000}
+                                                height={1000}
+                                                className={cx('blog-img')}
+                                                style={{
+                                                    scale: currentBlog === index ? '1.5' : 1,
+                                                    transition: 'all ease .5s',
+                                                }}
+                                            ></Image>
+                                            <div
+                                                className={cx('blog-hover')}
+                                                style={{
+                                                    backgroundColor:
+                                                        currentBlog === index ? 'rgba(0,0,0,0.4)' : '',
+                                                }}
+                                            >
+                                                {currentBlog === index && (
+                                                    <ButtonCommon
+                                                        text="XEM"
+                                                        path={`blogs/${nameToLink(blog.title)}`}
+                                                    />
+                                                )}
+                                            </div>
+                                        </div>
 
-                {/* More */}
-                <div className={cx('btn-more')}>
-                    <ButtonCommon text="XEM THÊM" />
-                </div>
+                                        <div
+                                            className={cx('blog-text-wrapper')}
+                                            style={{
+                                                backgroundColor:
+                                                    currentBlog === index ? '#fff' : 'transparent',
+                                                padding: currentBlog === index ? '5px' : '',
+                                                transition: 'all ease .5s',
+                                            }}
+                                        >
+                                            <p>{blog.category}</p>
+                                            <Link href={`blogs/${nameToLink(blog.title)}`}>{blog.title}</Link>
+                                            <p>
+                                                <AccessTimeIcon />
+                                                {blog.createdAt}
+                                            </p>
+                                        </div>
+                                    </div>
+                                );
+                            })}
+                        </div>
+
+                        {/* More */}
+                        <div className={cx('btn-more')}>
+                            <ButtonCommon text="XEM THÊM" />
+                        </div>
+                    </>
+                ) : (
+                    <p className={cx('blogs-wrong')}>Không tìm thấy bài viết nào!</p>
+                )}
             </div>
         </div>
     );

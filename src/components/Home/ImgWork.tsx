@@ -20,8 +20,9 @@ import img3 from '../../../public/img/img_3.jpg';
 import img4 from '../../../public/img/img_4.jpg';
 import img5 from '../../../public/img/img_5.jpg';
 import img6 from '../../../public/img/img_6.jpg';
+import img7 from '../../../public/img/img_3.jpg';
 
-const listImg = [img1.src, img2.src, img3.src, img4.src, img5.src, img6.src];
+const listImg = [img1.src, img2.src, img3.src, img4.src, img5.src, img6.src, img7.src];
 
 const cx = classNames.bind(styles);
 
@@ -106,7 +107,7 @@ export default function ImageWork(props: IAppProps) {
                 grabCursor={true}
                 centeredSlides={true}
                 loop={true}
-                slidesPerView={2}
+                slidesPerView={3}
                 coverflowEffect={{
                     rotate: 0,
                     stretch: 0,
@@ -124,7 +125,7 @@ export default function ImageWork(props: IAppProps) {
                 // }}
                 // navigation={true}
                 style={{
-                    marginTop: '40px',
+                    padding: '30px 0',
                 }}
             >
                 {listImg.map((item, index) => {

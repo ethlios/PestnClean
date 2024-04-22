@@ -7,6 +7,7 @@ import ButtonCommon from '../Orther/Button';
 import Image from 'next/image';
 import { nameToLink } from '~/libs/orthers/nameToLink';
 import Link from 'next/link';
+import EastOutlinedIcon from '@mui/icons-material/EastOutlined';
 
 const cx = classNames.bind(styles);
 
@@ -64,15 +65,27 @@ export default function ServiceAds(props: IAppProps) {
                                 className={cx('blogs-img')}
                             /> */}
                             <div className={cx('service-img')}></div>
-                            <p
-                                className={cx('service-description')}
+                            <div
                                 style={{
                                     opacity: currentService === index ? 1 : 0,
                                     transition: 'all ease .5s',
+                                    backgroundColor:
+                                        currentService === 0
+                                            ? 'var(--secondary-dark)'
+                                            : currentService === 1
+                                            ? 'var(--primary)'
+                                            : currentService === 2
+                                            ? 'var(--secondary)'
+                                            : '',
                                 }}
+                                className={cx('service-description')}
                             >
-                                {item.description}
-                            </p>
+                                <p>{item.description}</p>
+                                <p>
+                                    Xem thêm
+                                    <EastOutlinedIcon />
+                                </p>
+                            </div>
                             <div
                                 className={cx('service-title')}
                                 style={{
