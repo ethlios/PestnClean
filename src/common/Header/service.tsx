@@ -149,7 +149,10 @@ export default function Services({ setOpenService, openService }: IAppProps) {
                         </Link>
                         <div style={{ marginTop: '5px' }}>
                             <div className={cx('service-title-item')}>
-                                <Link href="/ve-sinh-cong-nghiep" onClick={() => setOpenService(false)}>
+                                <Link
+                                    href="/dich-vu-ve-sinh-cong-nghiep"
+                                    onClick={() => setOpenService(false)}
+                                >
                                     Vệ sinh công nghiệp
                                 </Link>
                                 {currentService !== 1 ? (

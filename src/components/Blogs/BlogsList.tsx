@@ -11,6 +11,7 @@ import ButtonCommon from '../Orther/Button';
 import styles from './blogs.module.scss';
 import Image from 'next/image';
 import { removeVietnameseTones } from '~/libs/orthers/removeVietnamese';
+import smoothScroll from '~/libs/orthers/smoothScroll';
 
 const cx = classNames.bind(styles);
 
@@ -22,11 +23,18 @@ export default function BlogsList(props: IAppProps) {
     const [blogsList, setBlogsList] = useState<any[]>([]);
     const [currentBlog, setCurrentBlog] = useState(-1);
     const [searchValue, setSearchValue] = useState<string>('');
+    const [numberPage, setNumberPage] = useState<number>(0);
+    const [numberPageValue, setNumberPageValue] = useState<number>(0);
 
     // Filter
     useEffect(() => {
         if (defaultList === 'Tất cả') {
-            setBlogsList(blogs);
+            // setBlogsList(blogs);
+            const newList = blogs.filter((a) => {
+                return 8 * numberPageValue < a.id && a.id <= 8 * (numberPageValue + 1);
+            });
+
+            setBlogsList(newList);
         } else {
             const newBlogsList = blogs.filter((blog: any) => blog.category === defaultList);
 
@@ -46,7 +54,11 @@ export default function BlogsList(props: IAppProps) {
         }
 
         return () => setBlogsList([]);
-    }, [defaultList, searchValue]);
+    }, [defaultList, numberPageValue, searchValue]);
+
+    useEffect(() => {
+        setNumberPage(Math.ceil(blogs.length / 8));
+    }, []);
 
     return (
         // All blogs
@@ -83,7 +95,7 @@ export default function BlogsList(props: IAppProps) {
                 {/* Blog render */}
                 {blogsList.length > 0 ? (
                     <>
-                        <div className={cx('lists-inside')}>
+                        <div className={cx('lists-inside')} id="blogs-list">
                             {blogsList.map((blog, index) => {
                                 return (
                                     <div
@@ -147,9 +159,28 @@ export default function BlogsList(props: IAppProps) {
                         </div>
 
                         {/* More */}
-                        <div className={cx('btn-more')}>
-                            <ButtonCommon text="XEM THÊM" />
-                        </div>
+                        {defaultList === 'Tất cả' && !searchValue && (
+                            <div className={cx('btn-more')}>
+                                {Array.from({ length: numberPage }).map((_, index) => {
+                                    return (
+                                        <p
+                                            key={index}
+                                            className={cx('number-page')}
+                                            style={{
+                                                backgroundColor:
+                                                    numberPageValue === index ? 'var(--secondary)' : '',
+                                            }}
+                                            onClick={() => {
+                                                setNumberPageValue(index);
+                                                smoothScroll('#blogs-list');
+                                            }}
+                                        >
+                                            {index + 1}
+                                        </p>
+                                    );
+                                })}
+                            </div>
+                        )}
                     </>
                 ) : (
                     <p className={cx('blogs-wrong')}>Không tìm thấy bài viết nào!</p>

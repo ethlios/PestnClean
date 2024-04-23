@@ -21,14 +21,17 @@ export interface IAppProps {
 export default function Card({ src, alt, width = 1680, height = 1050, title, path, description }: IAppProps) {
     return (
         <div className={cx('card')}>
-            {/* <Image
-                src={src}
-                alt={alt}
-                width={width}
-                height={height}
-                className={'w-full rounded-xl bg-white mb-2'}
-            /> */}
-            <div className={cx('card-img')}></div>
+            <div className={cx('card-img-wrapper')}>
+                <Image
+                    src={src}
+                    alt={alt}
+                    width={width}
+                    height={height}
+                    className={`${cx('card-img')} w-full rounded-xl bg-white mb-2`}
+                    draggable={false}
+                />
+            </div>
+
             <p
                 style={{
                     margin: '10px 0 5px 0',

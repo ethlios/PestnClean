@@ -9,6 +9,7 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import ButtonCommon from '~/components/Orther/Button';
 import { nameToLink } from '~/libs/orthers/nameToLink';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const cx = classNames.bind(styles);
 
@@ -36,14 +37,19 @@ export default function ServiceSuggest(props: IAppProps) {
                                 onMouseOver={() => setCurrentBlog(index)}
                                 onMouseOut={() => setCurrentBlog(-1)}
                             >
-                                {/* <Image
-                        src={img.src}
-                        alt={blog.title}
-                        width={1000}
-                        height={1000}
-                        className={cx('blog-img')}
-                    ></Image> */}
-                                <div className={cx('blog-img')}></div>
+                                <Image
+                                    src={blog.img}
+                                    alt={blog.title}
+                                    width={1000}
+                                    height={1000}
+                                    className={cx('blog-img')}
+                                    style={{
+                                        scale: currentBlog === index ? '1.5' : 1,
+                                        transition: 'all ease .5s',
+                                        objectFit: 'cover',
+                                        objectPosition: 'center',
+                                    }}
+                                ></Image>
                                 <div
                                     className={cx('blog-hover')}
                                     style={{
@@ -66,8 +72,8 @@ export default function ServiceSuggest(props: IAppProps) {
                 })}
             </div>
             <div className={cx('suggest-btn')}>
-                <ButtonCommon text="CÁC BÀI VIẾT KHÁC" path="blogs" />
-                <ButtonCommon text="TRỞ LẠI TRANG CHỦ" path="/" color="secondary" />
+                <ButtonCommon text="CÁC BÀI VIẾT KHÁC" path="blogs" fullWidth />
+                <ButtonCommon text="TRỞ LẠI TRANG CHỦ" path="/" color="secondary" fullWidth />
             </div>
         </div>
     );

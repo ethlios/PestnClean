@@ -14,35 +14,24 @@ import smoothScroll from '~/libs/orthers/smoothScroll';
 
 const cx = classNames.bind(styles);
 
-export interface IAppProps {}
+export interface IAppProps {
+    blog: any[];
+}
 
-export default function ServiceDetails(props: IAppProps) {
-    const QuillEditor = useMemo(() => {
-        return dynamic(() => import('react-quill'), {
-            loading: () => <p>LOADING...</p>,
-
-            ssr: false,
-        });
-    }, []);
-
+export default function ServiceDetails({ blog }: IAppProps) {
     return (
         <div className={cx('blogs-detail')}>
             <div className={cx('blogs-decor')}></div>
             <div className={cx('main-content')}>
                 <div className={cx('menu')}>
                     <h1>MỤC LỤC</h1>
-                    <p onClick={() => smoothScroll('#header1')}>
-                        01. Lý do bạn nên chọn dịch vụ vệ sinh công nghiệp định kỳ.
-                    </p>
-                    <p onClick={() => smoothScroll('#header2')}>
-                        02. Thiết bị, máy móc vệ sinh công nghiệp gồm những gì?
-                    </p>
-                    <p onClick={() => smoothScroll('#header3')}>
-                        03. Vệ sinh công nghiệp PestnClean được tin tưởng.
-                    </p>
-                    <p onClick={() => smoothScroll('#header4')}>
-                        04. Mẹo chọn đơn vị uy tín giữa các loại dịch vụ vệ sinh công nghiệp.
-                    </p>
+                    {blog[0].menu.map((item: any, index: number) => {
+                        return (
+                            <p key={index} onClick={() => smoothScroll(`#header${index + 1}`)}>
+                                {`0${index + 1}. ${item}`}
+                            </p>
+                        );
+                    })}
                     <div className={cx('hr-decor')}></div>
                     <div className={cx('list-icon')}>
                         <FavoriteBorderIcon />
@@ -52,17 +41,13 @@ export default function ServiceDetails(props: IAppProps) {
                     </div>
                 </div>
                 <div className={cx('detail')}>
-                    <p className={cx('detail-title')}>{serviceTest[0].title}</p>
+                    <p className={cx('detail-title')}>{blog[0].title}</p>
                     <p className={cx('detail-create')}>
                         <AccessTimeIcon />
-                        {serviceTest[0].createdAt}
+                        {blog[0].createdAt}
                     </p>
-                    <p className={cx('detail-description')}>{serviceTest[0].description}</p>
-                    {/* <QuillEditor theme="bubble" value={serviceTest[0].detail} readOnly /> */}
-                    <div
-                        dangerouslySetInnerHTML={{ __html: serviceTest[0].detail }}
-                        className="ql-editor"
-                    ></div>
+                    <p className={cx('detail-description')}>{blog[0].description}</p>
+                    <div dangerouslySetInnerHTML={{ __html: blog[0].detail }} className="ql-editor"></div>
                 </div>
             </div>
         </div>
