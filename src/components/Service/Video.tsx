@@ -5,6 +5,10 @@ import classNames from 'classnames/bind';
 import styles from './service.module.scss';
 import { gsap } from 'gsap';
 import { fadeIn } from '~/libs/orthers/animation';
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+import useSize from '~/libs/hooks/useSize';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const cx = classNames.bind(styles);
 
@@ -15,17 +19,22 @@ export interface IAppProps {
 
 export default function Video(props: IAppProps) {
     const ref = useRef<any>();
+    const { sizeX } = useSize();
+
     useEffect(() => {
-        gsap.fromTo(
-            ref.current,
-            fadeIn(ref.current)[0],
-            fadeIn(ref.current)[1],
-        );
+        gsap.fromTo(ref.current, fadeIn(ref.current)[0], fadeIn(ref.current)[1]);
     }, []);
 
     return (
-        <div className={'my-10'}
-             style={{ width: '100%', height: '450px', backgroundColor: 'rgba(0,0,0,0.05)' }} ref={ref}>
+        <div
+            className={'my-10'}
+            style={{
+                width: '100%',
+                height: sizeX < 1024 ? 'auto' : '450px',
+                backgroundColor: 'rgba(0,0,0,1)',
+            }}
+            ref={ref}
+        >
             <video
                 style={{ width: '100%', height: '100%' }}
                 controls
@@ -33,10 +42,7 @@ export default function Video(props: IAppProps) {
                 draggable={false}
                 title={props.title}
             >
-                <source
-                    src={props.src}
-                    type="video/mp4"
-                />
+                <source src={props.src} type="video/mp4" />
             </video>
         </div>
     );

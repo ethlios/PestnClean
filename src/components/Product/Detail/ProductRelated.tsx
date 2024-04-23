@@ -10,8 +10,7 @@ import useSize from '~/libs/hooks/useSize';
 
 const cx = classNames.bind(styles);
 
-export interface IAppProps {
-}
+export interface IAppProps {}
 
 const settings = {
     infinite: true,
@@ -68,9 +67,7 @@ export default function ProductRelated(props: IAppProps) {
             <p className={cx('related-title')}>Sản phẩm liên quan</p>
             <div className={cx('horizontal-decor')} />
             <div className="slider-container">
-                <Slider {...settings}
-                        slidesToShow={sizeX > 1024 ? 4 : sizeX > 768 ? 3 : 2}
-                >
+                <Slider {...settings} slidesToShow={sizeX > 1024 ? 4 : sizeX > 768 ? 3 : sizeX > 440 ? 2 : 1}>
                     {arrayTest.map((_, index) => {
                         return (
                             <div className={cx('content-item')} key={index}>

@@ -1,3 +1,5 @@
+'use client';
+
 import classNames from 'classnames/bind';
 import styles from '~/components/Service/service.module.scss';
 import ServiceBanner from '~/components/Service/Banner';
@@ -7,65 +9,66 @@ import BundleCard from '~/components/Service/BundleCard';
 import Card from '~/components/Service/Card';
 import CardHover from '~/components/Service/CardHover';
 import Video from '~/components/Service/Video';
+import useSize from '~/libs/hooks/useSize';
 
 const cx = classNames.bind(styles);
 
-export interface IAppProps {
-}
+export interface IAppProps {}
 
 const links = [
     {
         id: 1,
         name: 'Kiểm soát côn trùng tích hợp',
-        path: 'dichvu/dich-vu-kiem-soat-con-trung-toan-dien',
-        description: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book`,
+        path: '/blogs/dich-vu-kiem-soat-con-trung-toan-dien',
+        description: `Nếu bạn đang bị quấy rối bởi côn trùng và gặp khó khăn trong việc giải quyết chúng. Một dịch vụ kiểm soát côn trùng toàn diện là một điều cần thiết.`,
+        img: '',
     },
     {
         id: 2,
         name: 'Kiểm soát mối',
-        path: 'dichvu/dich-vu-diet-moi-tan-goc-tai-nha',
+        path: '/blogs/dich-vu-diet-moi-tan-goc-tai-nha',
         description: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book`,
     },
     {
         id: 3,
         name: 'Kiểm soát chuột',
-        path: 'dichvu/dich-vu-diet-chuot-uy-tin',
+        path: '/blogs/dich-vu-diet-chuot-uy-tin',
         description: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book`,
     },
     {
         id: 4,
         name: 'Kiểm soát ruồi',
-        path: 'dichvu/dich-vu-diet-ruoi-an-toan-hieu-qua',
+        path: '/blogs/dich-vu-diet-ruoi-an-toan-hieu-qua',
         description: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book`,
     },
     {
         id: 5,
         name: 'Kiểm soát muỗi',
-        path: 'dichvu/dich-vu-diet-muoi-an-toan-chuyen-nghiep',
+        path: '/blogs/dich-vu-diet-muoi-an-toan-chuyen-nghiep',
         description: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book`,
     },
     {
         id: 6,
         name: 'Kiểm soát kiến',
-        path: 'dichvu/dich-vu-diet-kien-tan-goc-tai-nha-hieu-qua',
+        path: '/blogs/dich-vu-diet-kien-tan-goc-tai-nha-hieu-qua',
         description: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book`,
     },
     {
         id: 7,
         name: 'Kiểm soát gián',
-        path: 'dichvu/dich-vu-diet-gian-duc',
+        path: '/blogs/dich-vu-diet-gian-duc',
         description: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book`,
     },
     {
         id: 8,
         name: 'Dịch vụ khử khuẩn',
-        path: 'dichvu/dich-vu-phun-khu-khuan-tai-nha',
+        path: '/blogs/dich-vu-phun-khu-khuan-tai-nha',
         description: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book`,
     },
     {
         id: 9,
         name: 'Dịch vụ đào tạo nhận thức',
-        path: 'dichvu/dao-tao-nhan-thuc-kiem-soat-con-trung',
+        path: '/blogs/dao-tao-nhan-thuc-kiem-soat-con-trung',
         description: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book`,
     },
 ];
@@ -93,7 +96,7 @@ const cards = [
         id: 3,
         title: 'Khách sạn & Resorts',
         description:
-            'Chương trình kiểm soát côn trùng toàn diện giúp các khách sạn & resorts đáp ứng các yêu cầu pháp lý và tiêu chuẩn ngành, đồng thời tránh những tác động tiêu cực đến hoạt động kinh doanh và danh tiếng.',
+            'Chương trình kiểm soát côn trùng toàn diện giúp các khách sạn & resorts đáp ứng các yêu cầu pháp lý và tiêu chuẩn ngành.',
         path: 'kiem-soat-con-trung-tai-khach-san-resort',
         src: 'https://res.cloudinary.com/dj2jarcxk/image/upload/v1713838167/verne-ho-MwW-zrkYSIU-unsplash_h7a2ki.jpg',
         alt: 'Dịch vụ kiểm soát côn trùng tại Khách sạn & Resorts',
@@ -102,7 +105,7 @@ const cards = [
         id: 4,
         title: 'Cơ sở chế biến thực phẩm',
         description:
-            'Các giải pháp kiểm soát côn trùng đáp ứng nghiêm ngặt các tiêu chuẩn ngành (BRC, HACCP, GFIS), giúp doanh nghiệp chủ động quản lý rủi ro và đảm bảo an toàn thực phẩm - cốt lõi trong hoạt động kinh doanh.',
+            'Các giải pháp kiểm soát côn trùng đáp ứng nghiêm ngặt các tiêu chuẩn ngành (BRC, HACCP, GFIS), giúp doanh nghiệp chủ động quản lý rủi ro và đảm bảo an toàn thực phẩm.',
         path: 'kiem-soat-con-trung-trong-co-so-che-bien-thuc-pham',
         src: 'https://res.cloudinary.com/dj2jarcxk/image/upload/v1713838672/technologist-make-set-up-production-line-while-standing-near-digital-screen-department-dairy-factory-min_vodohk.jpg',
         alt: 'Dịch vụ kiểm soát côn trùng tại Cơ sở chế biến thực phẩm ',
@@ -128,6 +131,8 @@ const cards = [
 ];
 
 export default function DichVu1Page(props: IAppProps) {
+    const { sizeX } = useSize();
+
     return (
         <div className={'container cpmount'}>
             <ServiceBanner
@@ -135,8 +140,20 @@ export default function DichVu1Page(props: IAppProps) {
                 alt="Dịch vụ kiểm soát côn trùng chuyên nghiệp tại pestnclean"
             />
             <ParagraphAlignLeft>
-                <h1 className={cx('title')}>Dịch vụ kiểm soát côn trùng tại PetnClean</h1>
-                <p className={cx('text-common')}>
+                <h1
+                    className={cx('title')}
+                    style={{
+                        fontSize: sizeX < 560 ? '25px' : sizeX < 768 ? '30px' : '',
+                    }}
+                >
+                    Dịch vụ kiểm soát côn trùng tại PetnClean
+                </h1>
+                <p
+                    className={cx('text-common')}
+                    style={{
+                        textAlign: sizeX < 768 ? 'justify' : 'left',
+                    }}
+                >
                     Việc tìm được một công ty kiểm soát côn trùng hiệu quả cho nhà ở, các cơ sở, đơn vị kinh
                     doanh là hết sức cần thiết. PestnClean tự hào là một đơn vị có nhiều năm kinh nghiệm trong
                     lĩnh vực kiểm soát côn trùng. Chúng tôi với đội ngũ nhân viên lành nghề, được đào tạo kỹ
@@ -144,11 +161,26 @@ export default function DichVu1Page(props: IAppProps) {
                     một dịch vụ chất lượng nhất.
                 </p>
             </ParagraphAlignLeft>
-            <Video title="Dịch vụ kiểm soát côn trùng tại PetnClean."
-                   src="https://res.cloudinary.com/dj2jarcxk/video/upload/v1713528846/Termite_bw08jg.mp4" />
+            <Video
+                title="Dịch vụ kiểm soát côn trùng tại PetnClean."
+                src="https://res.cloudinary.com/dj2jarcxk/video/upload/v1713528846/Termite_bw08jg.mp4"
+            />
             <ParagraphAlignRight>
-                <h1 className={`${cx('title')} text-right`}>Báo cáo phân tích chuẩn BRC, HACCP, ISO</h1>
-                <p className={cx('text-common')}>
+                <h1
+                    className={`${cx('title')}`}
+                    style={{
+                        fontSize: sizeX < 560 ? '25px' : sizeX < 768 ? '30px' : '',
+                        textAlign: sizeX < 768 ? 'left' : 'right',
+                    }}
+                >
+                    Báo cáo phân tích chuẩn BRC, HACCP, ISO
+                </h1>
+                <p
+                    className={cx('text-common')}
+                    style={{
+                        textAlign: sizeX < 768 ? 'justify' : 'right',
+                    }}
+                >
                     PestnClean hỗ trợ các doanh nghiệp có yêu cầu tuân thủ các tiêu chuẩn: BRC, HACCP, ISO,…
                     cùng các dịch vụ báo cáo phân tích chuyên sâu. Hệ thống báo cáo kỹ thật số của chúng tôi
                     là một công cụ để theo dõi báo cáo thông tin về chương trình kiểm soát côn trùng, bao gồm

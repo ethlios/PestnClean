@@ -7,8 +7,7 @@ import ProductRelated from '~/components/Product/Detail/ProductRelated';
 
 const cx = classNames.bind(styles);
 
-export interface IAppProps {
-}
+export interface IAppProps {}
 
 export default function ProductDetailPage(props: IAppProps) {
     return (
@@ -20,7 +19,7 @@ export default function ProductDetailPage(props: IAppProps) {
                 <p>|</p>
                 <p>Chi tiết sản phẩm</p>
             </div>
-            <div className={'w-full my-7'}>
+            <div className={cx('wrapper')}>
                 <ProductSingle />
             </div>
             <ProductDescript />
