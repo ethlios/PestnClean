@@ -16,7 +16,7 @@ export interface IAppProps {
 export default function BundleCard(props: IAppProps) {
     const ref = useRef<any>();
     useEffect(() => {
-        gsap.fromTo(ref.current, fadeIn(ref.current)[0], fadeIn(ref.current)[1]);
+        // gsap.fromTo(ref.current, fadeIn(ref.current)[0], fadeIn(ref.current)[1]);
     }, []);
 
     return (

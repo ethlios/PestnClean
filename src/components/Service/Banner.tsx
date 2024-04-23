@@ -27,7 +27,7 @@ export default function ServiceBanner({ src, alt }: IAppProps) {
     }, []);
 
     return (
-        <div className={'mt-10' + `${sizeX < 768 ? 'mb-1' : 'mb-14'}`} ref={ref}>
+        <div className={'mt-8 mb-10'} ref={ref}>
             <div
                 className={'rounded-xl w-full h-80 overflow-hidden shadow-lg'}
                 style={{

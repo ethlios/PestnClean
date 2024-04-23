@@ -51,7 +51,7 @@ export default function TextImageImage(props: IAppProps) {
                         src={
                             pathname === '/dichvu/dich-vu-ve-sinh'
                                 ? 'https://res.cloudinary.com/dj2jarcxk/image/upload/v1713844619/xyzcharlize-7b49gfsgQZY-unsplash_pjjzlf.jpg'
-                                : '/dichvu/giai-phap-ve-sinh-pestnclean-hieu-qua'
+                                : 'https://res.cloudinary.com/dj2jarcxk/image/upload/v1713879102/2150700358_1_tzqpqe.jpg'
                         }
                         alt={
                             pathname === '/dichvu/dich-vu-ve-sinh'
@@ -94,7 +94,7 @@ export default function TextImageImage(props: IAppProps) {
                         src={
                             pathname === '/dichvu/dich-vu-ve-sinh'
                                 ? 'https://res.cloudinary.com/dj2jarcxk/image/upload/v1713844611/naomi-hebert-MP0bgaS_d1c-unsplash_qcp4ej.jpg'
-                                : ''
+                                : 'https://res.cloudinary.com/dj2jarcxk/image/upload/v1713879088/still-life-with-aroma-diffuser-humidify-air-interior-decor-details-scandinavian-style_qgnsf1.jpg'
                         }
                         alt={
                             pathname === '/dichvu/dich-vu-ve-sinh'

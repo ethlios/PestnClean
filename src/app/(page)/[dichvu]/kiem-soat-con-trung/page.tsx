@@ -21,55 +21,63 @@ const links = [
         name: 'Kiểm soát côn trùng tích hợp',
         path: '/blogs/dich-vu-kiem-soat-con-trung-toan-dien',
         description: `Nếu bạn đang bị quấy rối bởi côn trùng và gặp khó khăn trong việc giải quyết chúng. Một dịch vụ kiểm soát côn trùng toàn diện là một điều cần thiết.`,
-        img: '',
+        img: 'https://res.cloudinary.com/dj2jarcxk/image/upload/v1713874790/people-disinfecting-biohazard-area_1_yk8d7i.jpg',
     },
     {
         id: 2,
         name: 'Kiểm soát mối',
         path: '/blogs/dich-vu-diet-moi-tan-goc-tai-nha',
-        description: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book`,
+        description: `Mối đang là vấn đề của bạn? Đừng lo dịch vụ diệt mối PestnClean là giải pháp tối ưu cho việc loại bỏ tận gốc mối ra khỏi không gian sống và làm việc của bạn.`,
+        img: 'https://res.cloudinary.com/dj2jarcxk/image/upload/v1713874939/morten-jakob-pedersen-nvpiA6WS3zU-unsplash_ukveyd.jpg',
     },
     {
         id: 3,
         name: 'Kiểm soát chuột',
         path: '/blogs/dich-vu-diet-chuot-uy-tin',
-        description: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book`,
+        description: `Bạn muốn tiêu diệt lũ chuột phá hoại trong nhà của mình nhưng vẫn đang gặp khó khăn? Một dịch vụ diệt chuột là điều mà bạn cần, cùng tìm hiểu về dịch vụ này nhé.`,
+        img: 'https://res.cloudinary.com/dj2jarcxk/image/upload/v1713874921/joshua-j-cotten-QxW15BmJxOQ-unsplash_elegw0.jpg',
     },
     {
         id: 4,
         name: 'Kiểm soát ruồi',
         path: '/blogs/dich-vu-diet-ruoi-an-toan-hieu-qua',
-        description: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book`,
+        description: `Dịch vụ diệt ruồi và kiểm soát ruồi được định nghĩa là thế nào? Làm sao để hạn chế ruồi xâm nhập đến nơi mình đang sống, học tập hoặc làm việc.`,
+        img: 'https://res.cloudinary.com/dj2jarcxk/image/upload/v1713874875/jin-yeong-kim-f98dJ8VkuTk-unsplash_pwfpin.jpg',
     },
     {
         id: 5,
         name: 'Kiểm soát muỗi',
         path: '/blogs/dich-vu-diet-muoi-an-toan-chuyen-nghiep',
-        description: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book`,
+        description: `Muỗi là nguồn gốc của nhiều căn bệnh vô cùng nguy hiểm mà chúng ta không thể không đề phòng, sau đây hãy cùng tìm hiểu dịch vụ diệt muỗi uy tín, chất lượng.`,
+        img: 'https://res.cloudinary.com/dj2jarcxk/image/upload/v1713874904/syed-ali-80a3A_BFeic-unsplash_evnnnh.jpg',
     },
     {
         id: 6,
         name: 'Kiểm soát kiến',
         path: '/blogs/dich-vu-diet-kien-tan-goc-tai-nha-hieu-qua',
-        description: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book`,
+        description: `Kiến là loài côn trùng tưởng chừng như vô hại nhưng lại là mối phiền toái của nhiều người, vì thế cần tìm một dịch vụ diệt kiến hiệu quả để có thể xử lý chúng.`,
+        img: 'https://res.cloudinary.com/dj2jarcxk/image/upload/v1713874888/peter-f-wolf-Xtdqunzk17Y-unsplash_yqsl7t.jpg',
     },
     {
         id: 7,
         name: 'Kiểm soát gián',
         path: '/blogs/dich-vu-diet-gian-duc',
-        description: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book`,
+        description: `PestnClean là công ty hàng đầu có nhiều năm kinh nghiệm trong lĩnh vực kiểm soát gián và một số loại côn trùng khác, đặc biệt là dịch vụ diệt gián Đức.`,
+        img: 'https://res.cloudinary.com/dj2jarcxk/image/upload/v1713874895/erik-karits-CAgEXn8iFZc-unsplash_k8q8gb.jpg',
     },
     {
         id: 8,
         name: 'Dịch vụ khử khuẩn',
         path: '/blogs/dich-vu-phun-khu-khuan-tai-nha',
-        description: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book`,
+        description: `Dịch vụ phun khử khuẩn là một giải pháp hiệu quả để đảm bảo môi trường sống và làm việc của bạn được bảo vệ khỏi vi khuẩn. Hãy cùng tìm hiểu.`,
+        img: 'https://res.cloudinary.com/dj2jarcxk/image/upload/v1713874882/fusion-medical-animation-rnr8D3FNUNY-unsplash_ibmxg7.jpg',
     },
     {
         id: 9,
         name: 'Dịch vụ đào tạo nhận thức',
         path: '/blogs/dao-tao-nhan-thuc-kiem-soat-con-trung',
-        description: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book`,
+        description: `Đào tạo nhận thức kiểm soát côn trùng có vai trò quan trọng như thế nào trong cuộc sống của chúng ta? Hãy cùng tìm hiểu vấn đề này nhé!`,
+        img: 'https://res.cloudinary.com/dj2jarcxk/image/upload/v1713874865/andrew-neel-cckf4TsHAuw-unsplash_zjueph.jpg',
     },
 ];
 
@@ -208,8 +216,8 @@ export default function DichVu1Page(props: IAppProps) {
                 {links.map((item, index) => (
                     <Card
                         key={index}
-                        src={''}
-                        alt={''}
+                        src={item.img}
+                        alt={`${item.name} tại Pestnclean`}
                         title={item.name}
                         path={item.path}
                         description={item.description}
