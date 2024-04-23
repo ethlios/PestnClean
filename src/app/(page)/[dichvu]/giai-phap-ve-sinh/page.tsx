@@ -9,8 +9,7 @@ import Video from '~/components/Service/Video';
 
 const cx = classNames.bind(styles);
 
-export interface IAppProps {
-}
+export interface IAppProps {}
 
 const links = [
     {
@@ -97,15 +96,24 @@ const cards = [
 export default function DichVu3Page(props: IAppProps) {
     return (
         <div className={'container cpmount'}>
-            <ServiceBanner />
+            <ServiceBanner src="" alt="" />
             <h1 className={'text-center ' + cx('content-title-fix')}>Các giải pháp vệ sinh tại PetnClean</h1>
             <BundleCard>
                 {cards.map((item, index) => (
-                    <CardHover key={index} id={item.id} title={item.title} description={item.description} />
+                    <CardHover
+                        key={index}
+                        id={item.id}
+                        title={item.title}
+                        description={item.description}
+                        src=""
+                        alt=""
+                    />
                 ))}
             </BundleCard>
-            <Video title="Các giải pháp mùi hương tại PetnClean."
-                   src="https://res.cloudinary.com/dj2jarcxk/video/upload/v1713531625/Gia%CC%89i_Pha%CC%81p_Mu%CC%80i_Hu%CC%9Bo%CC%9Bng_dm989a.mp4" />
+            <Video
+                title="Các giải pháp mùi hương tại PetnClean."
+                src="https://res.cloudinary.com/dj2jarcxk/video/upload/v1713531625/Gia%CC%89i_Pha%CC%81p_Mu%CC%80i_Hu%CC%9Bo%CC%9Bng_dm989a.mp4"
+            />
             <TextImageImage />
             <h1 className={`${cx('content-title')} text-center`}>Giải pháp theo ngành hàng</h1>
             <BundleCard className={'rounded-xl bg-gray-200 p-10'}>
