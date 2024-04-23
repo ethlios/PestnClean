@@ -7,6 +7,7 @@ import Image from 'next/image';
 import { Button } from '@mui/material';
 import { usePathname } from 'next/navigation';
 import ButtonCommon from '../Orther/Button';
+import useSize from '~/libs/hooks/useSize';
 
 const cx = classNames.bind(styles);
 
@@ -21,6 +22,7 @@ export interface IAppProps {
 
 export default function CardHover({ title, description, path, id, src, alt }: IAppProps) {
     const [isHover, setIsHover] = useState(false);
+    const { sizeX } = useSize();
 
     const pathname = usePathname();
 

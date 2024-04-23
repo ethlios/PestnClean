@@ -16,17 +16,15 @@ export interface IAppProps {
 export default function BundleCard(props: IAppProps) {
     const ref = useRef<any>();
     useEffect(() => {
-        gsap.fromTo(
-            ref.current,
-            fadeIn(ref.current)[0],
-            fadeIn(ref.current)[1],
-        );
+        gsap.fromTo(ref.current, fadeIn(ref.current)[0], fadeIn(ref.current)[1]);
     }, []);
 
     return (
         <div className={props.className} ref={ref}>
             <div className={cx('bundle-card')}>
-                <div className={'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'}>{props.children}</div>
+                <div className={'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 fix:grid-cols-3 gap-6'}>
+                    {props.children}
+                </div>
             </div>
         </div>
     );

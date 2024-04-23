@@ -8,16 +8,21 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { gsap } from 'gsap';
 import { slideFromX } from '~/libs/orthers/animation';
+import useSize from '~/libs/hooks/useSize';
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const cx = classNames.bind(styles);
 
-export interface IAppProps {
-}
+export interface IAppProps {}
 
 export default function TextImageImage(props: IAppProps) {
+    const { sizeX } = useSize();
     const pathname = usePathname();
     const imageLeft = useRef<any>();
     const imageRight = useRef<any>();
+
     useEffect(() => {
         gsap.fromTo(
             imageLeft.current,
@@ -59,6 +64,7 @@ export default function TextImageImage(props: IAppProps) {
                             width: '100%',
                             objectFit: 'cover',
                             objectPosition: 'center',
+                            height: sizeX < 768 ? '250px' : '',
                         }}
                         draggable={false}
                     />
@@ -101,6 +107,7 @@ export default function TextImageImage(props: IAppProps) {
                             width: '100%',
                             objectFit: 'cover',
                             objectPosition: 'center',
+                            height: sizeX < 768 ? '250px' : '',
                         }}
                         draggable={false}
                     />

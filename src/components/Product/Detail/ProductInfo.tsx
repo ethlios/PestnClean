@@ -19,15 +19,16 @@ import styles from './product_detail.module.scss';
 import useScroll from '~/libs/hooks/useScroll';
 import smoothScroll from '~/libs/orthers/smoothScroll';
 import $ from 'jquery';
+import useSize from '~/libs/hooks/useSize';
 
 const cx = classNames.bind(styles);
 
-export interface IAppProps {
-}
+export interface IAppProps {}
 
 export default function ProductInfo(props: IAppProps) {
     const [type, setType] = useState('');
     const wheel: boolean = useScroll();
+    const { sizeX } = useSize();
 
     const handleChange = (event: SelectChangeEvent) => {
         setType(event.target.value as string);
@@ -39,9 +40,22 @@ export default function ProductInfo(props: IAppProps) {
     };
 
     return (
-        <div className={`col-span-12 md:col-span-5`}>
+        <div
+            className={cx('product-info')}
+            style={{
+                top: wheel ? '-180px' : '-120px',
+                width: sizeX < 768 ? '100%' : sizeX < 950 ? '55%' : '',
+            }}
+        >
             <p className={cx('sale')}>Đang giảm giá</p>
-            <h1 className={cx('name')}>Tinh dầu chanh viet oils</h1>
+            <h1
+                className={cx('name')}
+                style={{
+                    fontSize: sizeX < 600 ? '28px' : '',
+                }}
+            >
+                Tinh dầu chanh viet oils
+            </h1>
             <p className={cx('rating')} onClick={handleClick}>
                 3 Đánh giá
             </p>

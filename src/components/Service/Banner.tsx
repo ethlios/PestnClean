@@ -6,6 +6,10 @@ import styles from './service.module.scss';
 import { gsap } from 'gsap';
 import { fadeIn } from '~/libs/orthers/animation';
 import Image from 'next/image';
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+import useSize from '~/libs/hooks/useSize';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const cx = classNames.bind(styles);
 
@@ -15,18 +19,21 @@ export interface IAppProps {
 }
 
 export default function ServiceBanner({ src, alt }: IAppProps) {
+    const { sizeX } = useSize();
     const ref = useRef<any>();
+
     useEffect(() => {
-        gsap.fromTo(
-            ref.current,
-            fadeIn(ref.current)[0],
-            fadeIn(ref.current)[1],
-        );
+        gsap.fromTo(ref.current, fadeIn(ref.current)[0], fadeIn(ref.current)[1]);
     }, []);
 
     return (
-        <div className="mt-10 mb-14" ref={ref}>
-            <div className={'rounded-xl w-full h-80 overflow-hidden shadow-lg'}>
+        <div className={'mt-10' + `${sizeX < 768 ? 'mb-1' : 'mb-14'}`} ref={ref}>
+            <div
+                className={'rounded-xl w-full h-80 overflow-hidden shadow-lg'}
+                style={{
+                    height: sizeX < 768 ? '250px' : '',
+                }}
+            >
                 <Image
                     src={src}
                     alt={alt}

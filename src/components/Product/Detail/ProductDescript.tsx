@@ -11,6 +11,7 @@ import { useEffect, useState } from 'react';
 import styles from './product_detail.module.scss';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import ButtonCommon from '~/components/Orther/Button';
+import useSize from '~/libs/hooks/useSize';
 
 const cx = classNames.bind(styles);
 
@@ -20,6 +21,7 @@ export default function ProductDescript(props: IAppProps) {
     const [isOpen1, setIsOpen1] = useState(false);
     const [isOpen2, setIsOpen2] = useState(false);
     const [isOpen3, setIsOpen3] = useState(false);
+    const { sizeX } = useSize();
 
     useEffect(() => {
         $('#dropbox-1').hide();
@@ -47,7 +49,12 @@ export default function ProductDescript(props: IAppProps) {
 
     return (
         <div className={cx('product-descript')}>
-            <div className={cx('tab-group')}>
+            <div
+                className={cx('tab-group')}
+                style={{
+                    width: sizeX < 768 ? '100%' : sizeX < 1024 ? '80%' : '',
+                }}
+            >
                 {/*  */}
                 <div className={cx('tab-item')}>
                     <div className={cx('tab-title')} onClick={handleShowContent1}>
@@ -74,7 +81,12 @@ export default function ProductDescript(props: IAppProps) {
                         <IconButton>{isOpen2 ? <RemoveIcon /> : <AddIcon />}</IconButton>
                     </div>
                     <div className={cx('tab-content-2')} id="dropbox-2">
-                        <div className={cx('comment-wrapper')}>
+                        <div
+                            className={cx('comment-wrapper')}
+                            style={{
+                                padding: sizeX < 560 ? '20px 15px' : '',
+                            }}
+                        >
                             <div className={cx('input-list')} id="comment-blogs">
                                 <input type="text" placeholder="Tên..." />
                                 <input type="email" placeholder="Email..." />
