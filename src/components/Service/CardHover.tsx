@@ -15,9 +15,11 @@ export interface IAppProps {
     title?: string;
     description?: string;
     path?: string;
+    src: string;
+    alt: string;
 }
 
-export default function CardHover({ title, description, path, id }: IAppProps) {
+export default function CardHover({ title, description, path, id, src, alt }: IAppProps) {
     const [isHover, setIsHover] = useState(false);
 
     const pathname = usePathname();
@@ -28,12 +30,11 @@ export default function CardHover({ title, description, path, id }: IAppProps) {
             onMouseOver={() => setIsHover(true)}
             onMouseOut={() => setIsHover(false)}
         >
-            {/* <Image src={''} alt={''} width={1000} height={1000} className={cx('img-wrapper')} /> */}
-            <div className={cx('img-wrapper')} />
+            <Image src={src} alt={alt} width={1000} height={1000} className={cx('img-wrapper')} />
 
             <div
                 className={cx('card-content')}
-                style={{ background: isHover ? 'rgba(0, 0, 0, 0.2)' : 'initial' }}
+                style={{ background: isHover ? 'rgba(0, 0, 0, 0.6)' : 'initial' }}
             >
                 <div className={'grid content-end h-full overflow-hidden'}>
                     <h1 className={cx('card-number')}>0{id}.</h1>
@@ -50,7 +51,7 @@ export default function CardHover({ title, description, path, id }: IAppProps) {
                                 fontSize: '14.2px',
                                 fontWeight: '600',
                                 marginBottom: '10px',
-                                color: 'var(--text-black)',
+                                color: '#fff',
                             }}
                         >
                             {description}

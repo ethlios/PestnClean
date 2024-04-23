@@ -34,10 +34,25 @@ export default function TextImageImage(props: IAppProps) {
     return (
         <div className="my-10">
             <div className={'grid grid-cols-2 gap-8'}>
-                <div className={'col-span-2 md:col-span-1'} ref={imageLeft}>
+                <div
+                    className={'col-span-2 md:col-span-1 shadow-lg'}
+                    style={{
+                        borderRadius: '20px',
+                        overflow: 'hidden',
+                    }}
+                    ref={imageLeft}
+                >
                     <Image
-                        src=""
-                        alt={''}
+                        src={
+                            pathname === '/dichvu/dich-vu-ve-sinh'
+                                ? 'https://res.cloudinary.com/dj2jarcxk/image/upload/v1713844619/xyzcharlize-7b49gfsgQZY-unsplash_pjjzlf.jpg'
+                                : '/dichvu/giai-phap-ve-sinh-pestnclean-hieu-qua'
+                        }
+                        alt={
+                            pathname === '/dichvu/dich-vu-ve-sinh'
+                                ? 'Vệ sinh công nghiệp tại Pestnclean'
+                                : 'Giải pháp vệ sinh tại Pestnclean'
+                        }
                         width={500}
                         height={300}
                         style={{
@@ -45,12 +60,13 @@ export default function TextImageImage(props: IAppProps) {
                             objectFit: 'cover',
                             objectPosition: 'center',
                         }}
+                        draggable={false}
                     />
                     <Link
                         href={
                             pathname === '/dichvu/dich-vu-ve-sinh'
-                                ? '/dichvu/ve-sinh-cong-nghiep'
-                                : '/dichvu/giai-phap-ve-sinh-pestnclean-hieu-qua'
+                                ? '/dich-vu-ve-sinh-cong-nghiep'
+                                : '/giai-phap-ve-sinh-pestnclean-hieu-qua'
                         }
                     >
                         <p className={cx('bg-text')}>
@@ -60,10 +76,25 @@ export default function TextImageImage(props: IAppProps) {
                         </p>
                     </Link>
                 </div>
-                <div className={'col-span-2 md:col-span-1'} ref={imageRight}>
+                <div
+                    className={'col-span-2 md:col-span-1 shadow-lg'}
+                    style={{
+                        borderRadius: '20px',
+                        overflow: 'hidden',
+                    }}
+                    ref={imageRight}
+                >
                     <Image
-                        src={''}
-                        alt={''}
+                        src={
+                            pathname === '/dichvu/dich-vu-ve-sinh'
+                                ? 'https://res.cloudinary.com/dj2jarcxk/image/upload/v1713844611/naomi-hebert-MP0bgaS_d1c-unsplash_qcp4ej.jpg'
+                                : ''
+                        }
+                        alt={
+                            pathname === '/dichvu/dich-vu-ve-sinh'
+                                ? 'Vệ sinh nhà ở tại Pestnclean'
+                                : 'Giải pháp mùi hương tại Pestnclean'
+                        }
                         width={500}
                         height={300}
                         style={{
@@ -71,11 +102,12 @@ export default function TextImageImage(props: IAppProps) {
                             objectFit: 'cover',
                             objectPosition: 'center',
                         }}
+                        draggable={false}
                     />
                     <Link
                         href={
                             pathname === '/dichvu/dich-vu-ve-sinh'
-                                ? '/dichvu/dich-vu-ve-sinh-nha-o'
+                                ? '/dich-vu-ve-sinh-nha-o'
                                 : '/dichvu/giai-phap-mui-huong-cho-doanh-nghiep'
                         }
                     >

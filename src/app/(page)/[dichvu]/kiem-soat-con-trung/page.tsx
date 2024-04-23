@@ -76,49 +76,64 @@ const cards = [
         title: 'Nhà hàng & chuỗi bán lẻ',
         description:
             'Cung cấp giải pháp kiểm soát côn trùng toàn diện cho các nhà hàng, cơ sở dịch vụ ăn uống, chuỗi bán lẻ, siêu thị … đảm bảo nâng cao sự hài lòng của khách hàng và danh tiếng thương hiệu.',
-        path: 'dichvu/kiem-soat-con-trung-tai-nha-hang-chuoi-ban-le/',
+        path: 'kiem-soat-con-trung-tai-nha-hang-chuoi-ban-le/',
+        src: 'https://res.cloudinary.com/dj2jarcxk/image/upload/v1713838241/jason-leung-poI7DelFiVA-unsplash_d95nt0.jpg',
+        alt: 'Dịch vụ kiểm soát côn trùng tại Nhà hàng & chuỗi bán lẻ',
     },
     {
         id: 2,
         title: 'Văn phòng, tòa nhà',
         description:
             'Cung cấp các dịch vụ kiểm soát côn trùng hiệu quả, tiết kiệm, an toàn cho sức khoẻ và bảo vệ tài sản cho các cơ sở công nghiệp và sản xuất, các văn phòng, nhà máy, trường học, v.v.',
-        path: 'dichvu/kiem-soat-con-trung-o-van-phong-co-so-cong-nghiep',
+        path: 'kiem-soat-con-trung-o-van-phong-co-so-cong-nghiep',
+        src: 'https://res.cloudinary.com/dj2jarcxk/image/upload/v1713838158/nastuh-abootalebi-eHD8Y1Znfpk-unsplash_ppcawq.jpg',
+        alt: 'Dịch vụ kiểm soát côn trùng tại Văn phòng, tòa nhà',
     },
     {
         id: 3,
         title: 'Khách sạn & Resorts',
         description:
             'Chương trình kiểm soát côn trùng toàn diện giúp các khách sạn & resorts đáp ứng các yêu cầu pháp lý và tiêu chuẩn ngành, đồng thời tránh những tác động tiêu cực đến hoạt động kinh doanh và danh tiếng.',
-        path: 'dichvu/kiem-soat-con-trung-tai-khach-san-resort',
+        path: 'kiem-soat-con-trung-tai-khach-san-resort',
+        src: 'https://res.cloudinary.com/dj2jarcxk/image/upload/v1713838167/verne-ho-MwW-zrkYSIU-unsplash_h7a2ki.jpg',
+        alt: 'Dịch vụ kiểm soát côn trùng tại Khách sạn & Resorts',
     },
     {
         id: 4,
         title: 'Cơ sở chế biến thực phẩm',
         description:
             'Các giải pháp kiểm soát côn trùng đáp ứng nghiêm ngặt các tiêu chuẩn ngành (BRC, HACCP, GFIS), giúp doanh nghiệp chủ động quản lý rủi ro và đảm bảo an toàn thực phẩm - cốt lõi trong hoạt động kinh doanh.',
-        path: 'dichvu/kiem-soat-con-trung-trong-co-so-che-bien-thuc-pham',
+        path: 'kiem-soat-con-trung-trong-co-so-che-bien-thuc-pham',
+        src: 'https://res.cloudinary.com/dj2jarcxk/image/upload/v1713838672/technologist-make-set-up-production-line-while-standing-near-digital-screen-department-dairy-factory-min_vodohk.jpg',
+        alt: 'Dịch vụ kiểm soát côn trùng tại Cơ sở chế biến thực phẩm ',
     },
     {
         id: 5,
-        title: 'Nhà hát, rạp chiếu phim ',
+        title: 'Nhà hát, rạp chiếu phim',
         description:
             'Cung cấp các giải pháp kiểm soát côn trùng và dịch hại toàn diện cho các rạp chiếu phim, nhà hát, sân khấu … đảm bảo các tiêu chuẩn về an toàn và sức khỏe.',
-        path: 'dichvu/quy-trinh-kiem-soat-con-trung-nha-hat-rap-chieu-phim',
+        path: 'quy-trinh-kiem-soat-con-trung-nha-hat-rap-chieu-phim',
+        src: 'https://res.cloudinary.com/dj2jarcxk/image/upload/v1713838162/wesley-pribadi-dyJq7vzPeU8-unsplash_zlrbcw.jpg',
+        alt: 'Dịch vụ kiểm soát côn trùng tại Nhà hát, rạp chiếu phim',
     },
     {
         id: 6,
         title: 'Kho bãi & chuỗi cung ứng',
         description:
             'Chương trình kiểm soát côn trùng và sinh vật gây hại toàn diện, tích hợp và thông minh phù hợp với từng địa điểm trong chuỗi cung ứng và kho bãi.',
-        path: 'dichvu/tai-sao-can-kiem-soat-con-trung-trong-chuoi-cung-ung',
+        path: 'tai-sao-can-kiem-soat-con-trung-trong-chuoi-cung-ung',
+        src: 'https://res.cloudinary.com/dj2jarcxk/image/upload/v1713838156/reproductive-health-supplies-coalition-i2I0_u98Rh4-unsplash_iswarv.jpg',
+        alt: 'Dịch vụ kiểm soát côn trùng tại Kho bãi & chuỗi cung ứng',
     },
 ];
 
 export default function DichVu1Page(props: IAppProps) {
     return (
         <div className={'container cpmount'}>
-            <ServiceBanner />
+            <ServiceBanner
+                src="https://res.cloudinary.com/dj2jarcxk/image/upload/v1713837564/person-disinfecting-dangerous-area-while-wearing-protective-suit_wj8knz.jpg"
+                alt="Dịch vụ kiểm soát côn trùng chuyên nghiệp tại pestnclean"
+            />
             <ParagraphAlignLeft>
                 <h1 className={cx('title')}>Dịch vụ kiểm soát côn trùng tại PetnClean</h1>
                 <p className={cx('text-common')}>
@@ -151,6 +166,8 @@ export default function DichVu1Page(props: IAppProps) {
                         title={item.title}
                         description={item.description}
                         path={item.path}
+                        src={item.src}
+                        alt={item.alt}
                     />
                 ))}
             </BundleCard>

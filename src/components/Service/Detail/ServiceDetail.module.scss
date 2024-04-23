@@ -372,14 +372,13 @@
     position: relative;
     overflow: hidden;
     cursor: pointer;
-    border: solid 2px var(--text-black);
     border-radius: 10px;
 }
 
 .blog-img {
     background-color: #fff;
     border-radius: 10px;
-    height: 200px;
+    height: 250px;
     width: 100%;
     position: relative;
 }
@@ -404,4 +403,5 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    gap: 10px;
 }

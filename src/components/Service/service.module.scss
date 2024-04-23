@@ -35,6 +35,7 @@
     text-transform: uppercase;
     margin-bottom: 10px;
     letter-spacing: -0.5px;
+    color: white;
 }
 
 .card-hover {
@@ -49,10 +50,24 @@
     }
 }
 
+.card-img-wrapper {
+    overflow: hidden;
+    height: 250px;
+    width: 100%;
+    border-radius: 10px;
+}
+
 .card-img {
     background-color: #fff;
     width: 100%;
-    height: 250px;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: all ease 0.5s;
+
+    &:hover {
+        scale: 1.5;
+    }
 }
 
 .img-wrapper {
@@ -77,6 +92,7 @@
 .card-number {
     font-size: 2rem;
     font-weight: 700;
+    color: #fff;
 }
 
 .decoration {
