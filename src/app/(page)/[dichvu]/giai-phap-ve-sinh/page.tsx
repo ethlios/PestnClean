@@ -5,10 +5,12 @@ import BundleCard from '~/components/Service/BundleCard';
 import CardHover from '~/components/Service/CardHover';
 import Card from '~/components/Service/Card';
 import TextImageImage from '~/components/Service/TextImageImage';
+import Video from '~/components/Service/Video';
 
 const cx = classNames.bind(styles);
 
-export interface IAppProps {}
+export interface IAppProps {
+}
 
 const links = [
     {
@@ -102,27 +104,8 @@ export default function DichVu3Page(props: IAppProps) {
                     <CardHover key={index} id={item.id} title={item.title} description={item.description} />
                 ))}
             </BundleCard>
-            <div
-                style={{
-                    width: '100%',
-                    height: '450px',
-                    backgroundColor: 'rgba(0,0,0,0.05)',
-                    marginTop: '80px',
-                }}
-            >
-                <video
-                    style={{ width: '100%', height: '100%' }}
-                    controls
-                    preload="none"
-                    draggable={false}
-                    title="Các giải pháp mùi hương tại PetnClean."
-                >
-                    <source
-                        src="https://res.cloudinary.com/dj2jarcxk/video/upload/v1713531625/Gia%CC%89i_Pha%CC%81p_Mu%CC%80i_Hu%CC%9Bo%CC%9Bng_dm989a.mp4"
-                        type="video/mp4"
-                    />
-                </video>
-            </div>
+            <Video title="Các giải pháp mùi hương tại PetnClean."
+                   src="https://res.cloudinary.com/dj2jarcxk/video/upload/v1713531625/Gia%CC%89i_Pha%CC%81p_Mu%CC%80i_Hu%CC%9Bo%CC%9Bng_dm989a.mp4" />
             <TextImageImage />
             <h1 className={`${cx('content-title')} text-center`}>Giải pháp theo ngành hàng</h1>
             <BundleCard className={'rounded-xl bg-gray-200 p-10'}>

@@ -6,7 +6,7 @@ import SupportAgentOutlinedIcon from '@mui/icons-material/SupportAgentOutlined';
 import Diversity1OutlinedIcon from '@mui/icons-material/Diversity1Outlined';
 import classNames from 'classnames/bind';
 import styles from './about.module.scss';
-import { animation2 } from '~/libs/orthers/animation';
+import { fadeIn } from '~/libs/orthers/animation';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import useSize from '~/libs/hooks/useSize';
@@ -50,8 +50,8 @@ export default function Content3(props: IAppProps) {
     useEffect(() => {
         gsap.fromTo(
             about1DesRef.current,
-            animation2(about1DesRef.current)[0],
-            animation2(about1DesRef.current)[1],
+            fadeIn(about1DesRef.current)[0],
+            fadeIn(about1DesRef.current)[1],
         );
 
         gsap.fromTo(

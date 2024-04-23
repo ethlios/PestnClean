@@ -5,10 +5,12 @@ import ParagraphAlignLeft from '~/components/Service/ParagraphAlignLeft';
 import BundleCard from '~/components/Service/BundleCard';
 import Card from '~/components/Service/Card';
 import TextImageImage from '~/components/Service/TextImageImage';
+import Video from '~/components/Service/Video';
 
 const cx = classNames.bind(styles);
 
-export interface IAppProps {}
+export interface IAppProps {
+}
 
 const links = [
     {
@@ -82,22 +84,9 @@ export default function DichVu3Page(props: IAppProps) {
                     type specimen book.
                 </p>
             </ParagraphAlignLeft>
-
             <TextImageImage />
-            <div style={{ width: '100%', height: '450px', backgroundColor: 'rgba(0,0,0,0.05)' }}>
-                <video
-                    style={{ width: '100%', height: '100%' }}
-                    controls
-                    preload="none"
-                    draggable={false}
-                    title="Dịch vụ vệ sinh công nghiệp tại PetnClean."
-                >
-                    <source
-                        src="https://res.cloudinary.com/dj2jarcxk/video/upload/v1713531630/Ve%CC%A3%CC%82_Sinh_Co%CC%82ng_Nghie%CC%A3%CC%82p_yqfytu.mp4"
-                        type="video/mp4"
-                    />
-                </video>
-            </div>
+            <Video title="Dịch vụ vệ sinh công nghiệp tại PetnClean."
+                   src="https://res.cloudinary.com/dj2jarcxk/video/upload/v1713531630/Ve%CC%A3%CC%82_Sinh_Co%CC%82ng_Nghie%CC%A3%CC%82p_yqfytu.mp4" />
             <h1 className={`${cx('content-title')} text-center`}>Dịch vụ vệ sinh chuyên biệt</h1>
             <BundleCard className={'rounded-xl bg-gray-200 p-10'}>
                 {links.map((item, index) => (

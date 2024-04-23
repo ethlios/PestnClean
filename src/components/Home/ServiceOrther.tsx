@@ -1,14 +1,13 @@
 'use client';
 
-import React, { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import classNames from 'classnames/bind';
 import styles from './home.module.scss';
-import ButtonCommon from '../Orther/Button';
-import Image from 'next/image';
 import { nameToLink } from '~/libs/orthers/nameToLink';
 import Link from 'next/link';
-import useSize from '~/libs/hooks/useSize';
 import EastOutlinedIcon from '@mui/icons-material/EastOutlined';
+import { fadeIn } from '~/libs/orthers/animation';
+import { gsap } from 'gsap';
 
 const cx = classNames.bind(styles);
 
@@ -37,11 +36,19 @@ const otherService = [
 ];
 
 export default function ServiceAds(props: IAppProps) {
+    const serviceOther = useRef<any>();
+
     const [currentService, setCurrentService] = useState<number>(-1);
-    const { sizeX } = useSize();
+    useEffect(() => {
+        gsap.fromTo(
+            serviceOther.current,
+            fadeIn(serviceOther.current)[0],
+            fadeIn(serviceOther.current)[1],
+        );
+    }, []);
 
     return (
-        <div className={'mt-12'}>
+        <div className={'mt-12'} ref={serviceOther}>
             <h1
                 className={
                     'font-bold underline underline-offset-2 text-2xl uppercase text-center decoration-2'
@@ -76,10 +83,10 @@ export default function ServiceAds(props: IAppProps) {
                                         currentService === 0
                                             ? 'var(--secondary-dark)'
                                             : currentService === 1
-                                            ? 'var(--primary)'
-                                            : currentService === 2
-                                            ? 'var(--secondary)'
-                                            : '',
+                                                ? 'var(--primary)'
+                                                : currentService === 2
+                                                    ? 'var(--secondary)'
+                                                    : '',
                                 }}
                                 className={cx('service-description')}
                             >

@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useRef } from 'react';
 import ArrowRightAltOutlinedIcon from '@mui/icons-material/ArrowRightAltOutlined';
 import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined';
 import classNames from 'classnames/bind';
@@ -8,6 +9,8 @@ import Link from 'next/link';
 import useSize from '~/libs/hooks/useSize';
 import styles from './home.module.scss';
 import logo2 from '../../../public/img/logo2.png';
+import { gsap } from 'gsap';
+import { slideFromX, slideFromY, rotate } from '~/libs/orthers/animation';
 
 const cx = classNames.bind(styles);
 
@@ -43,12 +46,43 @@ const solutions = [
 ];
 
 export default function WhyChooseMe() {
+    const chooseText = useRef<any>();
+    const chooseImg = useRef<any>();
+    const numberWrapper = useRef<any>();
+    const logoCompany = useRef<any>();
     const { sizeX } = useSize();
+
+
+    useEffect(() => {
+        gsap.fromTo(
+            chooseText.current,
+            slideFromX(chooseText.current, -500)[0],
+            slideFromX(chooseText.current, -500)[1],
+        );
+        gsap.fromTo(
+            chooseImg.current,
+            slideFromX(chooseImg.current, 2000)[0],
+            slideFromX(chooseImg.current, 2000)[1],
+        );
+        gsap.fromTo(
+            numberWrapper.current,
+            slideFromY(numberWrapper.current, 500)[0],
+            slideFromY(numberWrapper.current, 500)[1],
+        ).then(() => {
+            gsap.fromTo(
+                logoCompany.current,
+                rotate(logoCompany.current)[0],
+                rotate(logoCompany.current)[1],
+            );
+        });
+    }, []);
 
     return (
         <div>
             <div className={cx('choose-content-1')}>
-                <div className={cx('choose-text')} style={sizeX < 768 ? { width: '100%' } : { width: '60%' }}>
+                <div className={cx('choose-text')}
+                     style={sizeX < 768 ? { width: '100%' } : { width: '60%' }}
+                     ref={chooseText}>
                     <div className={cx('choose-text-main')}>
                         <h1
                             className={
@@ -88,7 +122,9 @@ export default function WhyChooseMe() {
                         })}
                     </div>
                 </div>
-                <div className={cx('choose-content-img')} style={sizeX < 768 ? { width: '100%' } : { width: '30%' }}>
+                <div className={cx('choose-content-img')}
+                     style={sizeX < 768 ? { width: '100%' } : { width: '30%' }}
+                     ref={chooseImg}>
                     {/* <Image/> */}
                     <Image
                         src="https://res.cloudinary.com/dj2jarcxk/image/upload/v1713699714/l%C3%B4go-mockup_optimized_gnftec.png"
@@ -105,7 +141,7 @@ export default function WhyChooseMe() {
                     </Link>
                 </div>
             </div>
-            <div className={cx('number-wrapper')}>
+            <div className={cx('number-wrapper')} ref={numberWrapper}>
                 <div className={'flex flex-wrap'}>
                     <p className={cx('committed-text')} style={sizeX < 768 ? { width: '100%' } : { width: '70%' }}>
                         Bằng tất cả những gì mình có, PESTNCLEAN hứa hẹn sẽ mang đến cho quý khách hàng những
@@ -118,7 +154,7 @@ export default function WhyChooseMe() {
                         </b>
                     </p>
                     <div className={'flex justify-center items-center'}
-                         style={sizeX < 768 ? { width: '100%' } : { width: '30%' }}>
+                         style={sizeX < 768 ? { width: '100%' } : { width: '30%' }} ref={logoCompany}>
                         <Image src={logo2.src} alt="Logo đơn của Pestnclean" width={173} height={216} />
                     </div>
                 </div>

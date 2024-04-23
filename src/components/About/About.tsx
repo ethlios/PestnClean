@@ -7,7 +7,7 @@ import Image from 'next/image';
 import { useEffect, useRef } from 'react';
 import AboutBanner from './Banner';
 import styles from './about.module.scss';
-import { animation, animation2 } from '~/libs/orthers/animation';
+import { slideFromX, fadeIn } from '~/libs/orthers/animation';
 import Content3 from './Content3';
 import useSize from '~/libs/hooks/useSize';
 
@@ -34,28 +34,28 @@ export default function AboutCPPage(props: IAppProps) {
 
         gsap.fromTo(
             imgAbout1.current,
-            animation(imgAbout1.current, -500)[0],
-            animation(imgAbout1.current, -500)[1],
+            slideFromX(imgAbout1.current, -500)[0],
+            slideFromX(imgAbout1.current, -500)[1],
         );
         gsap.fromTo(
             textAbout2.current,
-            animation(textAbout2.current, -500)[0],
-            animation(textAbout2.current, -500)[1],
+            slideFromX(textAbout2.current, -500)[0],
+            slideFromX(textAbout2.current, -500)[1],
         );
         gsap.fromTo(
             textAbout1.current,
-            animation(textAbout1.current, 2000)[0],
-            animation(textAbout1.current, 2000)[1],
+            slideFromX(textAbout1.current, 2000)[0],
+            slideFromX(textAbout1.current, 2000)[1],
         );
         gsap.fromTo(
             imgAbout2.current,
-            animation(imgAbout2.current, 2000)[0],
-            animation(imgAbout2.current, 2000)[1],
+            slideFromX(imgAbout2.current, 2000)[0],
+            slideFromX(imgAbout2.current, 2000)[1],
         );
-        gsap.fromTo(about1Ref.current, animation(-500)[0], animation()[1]);
-        gsap.fromTo(about2Ref.current, animation(2000)[0], animation()[1]);
+        gsap.fromTo(about1Ref.current, slideFromX(-500)[0], slideFromX()[1]);
+        gsap.fromTo(about2Ref.current, slideFromX(2000)[0], slideFromX()[1]);
 
-        gsap.fromTo(videoRef.current, animation2(videoRef.current)[0], animation2(videoRef.current)[1]);
+        gsap.fromTo(videoRef.current, fadeIn(videoRef.current)[0], fadeIn(videoRef.current)[1]);
 
         gsap.fromTo(
             tl,
