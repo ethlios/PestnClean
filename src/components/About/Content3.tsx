@@ -11,8 +11,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import useSize from '~/libs/hooks/useSize';
 
-export interface IAppProps {
-}
+export interface IAppProps {}
 
 const cx = classNames.bind(styles);
 
@@ -48,11 +47,7 @@ export default function Content3(props: IAppProps) {
     const { sizeX } = useSize();
 
     useEffect(() => {
-        gsap.fromTo(
-            about1DesRef.current,
-            fadeIn(about1DesRef.current)[0],
-            fadeIn(about1DesRef.current)[1],
-        );
+        gsap.fromTo(about1DesRef.current, fadeIn(about1DesRef.current)[0], fadeIn(about1DesRef.current)[1]);
 
         gsap.fromTo(
             '.card-about',
@@ -77,14 +72,62 @@ export default function Content3(props: IAppProps) {
     }, []);
 
     return (
-        <div className={cx('content-3')}>
-            <div className={cx('text-content-3')}>
-                <div className={cx('text-content-3-main')}>
-                    <div className={cx('text-content-tired')}
-                         style={sizeX < 768 ? { width: '100%' } : { width: '35%' }}>
-                        <p>2024</p>
-                        <h1 className={cx('title')}>3. GIÁ TRỊ CỐT LÕI</h1>
-                        <p className={cx('text-common')} ref={about1DesRef}>
+        <div
+            className={cx('content-3')}
+            style={{
+                flexDirection: sizeX < 768 ? 'column' : 'row',
+                paddingBottom: sizeX < 768 ? '30px' : '',
+                gap: '30px',
+            }}
+        >
+            <div
+                className={cx('text-content-3')}
+                style={{
+                    position: sizeX < 768 ? 'relative' : 'absolute',
+                    top: sizeX < 768 ? '0px' : '',
+                }}
+            >
+                <div
+                    className={cx('text-content-3-main')}
+                    style={{
+                        backgroundColor: sizeX < 768 ? 'transparent' : '',
+                        height: sizeX < 768 ? '200px' : '',
+                    }}
+                >
+                    <div
+                        className={cx('text-content-tired')}
+                        style={{
+                            width: sizeX < 768 ? '100%' : sizeX < 950 ? '45%' : '35%',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            justifyContent: 'center',
+                            height: '100%',
+                            paddingLeft: sizeX < 768 ? '0' : sizeX < 800 ? '20px' : '50px',
+                        }}
+                    >
+                        <p
+                            style={{
+                                fontSize: sizeX < 500 ? '60px' : sizeX < 900 ? '75px' : '',
+                            }}
+                        >
+                            2024
+                        </p>
+                        <h1
+                            className={cx('title')}
+                            style={{
+                                fontSize: sizeX < 768 ? '20px' : '',
+                            }}
+                        >
+                            3. GIÁ TRỊ CỐT LÕI
+                        </h1>
+                        <p
+                            className={cx('text-common')}
+                            ref={about1DesRef}
+                            style={{
+                                fontSize: sizeX < 900 ? '13px' : '',
+                                textAlign: 'justify',
+                            }}
+                        >
                             {
                                 'Sự cam kết với khách hàng - Chất lượng của dịch vụ - Chuyên nghiệp về thái độ - Trách nhiệm với xã hội.'
                             }
@@ -92,22 +135,31 @@ export default function Content3(props: IAppProps) {
                     </div>
                 </div>
             </div>
-            <div className={cx('img-content-3')}
-                 style={
-                     sizeX < 768 ?
-                         { width: '100%', bottom: '0' }
-                         : { width: '80%', right: '-200px' }
-                 }>
+            <div
+                className={cx('img-content-3')}
+                style={{
+                    width: sizeX < 768 ? '100%' : '80%',
+                    bottom: sizeX < 768 ? '0' : '',
+                    right: sizeX < 768 ? '0' : '-250px',
+                    position: sizeX < 768 ? 'relative' : 'absolute',
+                }}
+            >
                 <div className="slider-container">
                     <Slider {...settings} slidesToShow={sizeX > 768 ? 2 : 1}>
                         {content3.map((item, index) => {
                             return (
                                 <div key={index} className={cx('img-item-wrapper')}>
-                                    <div className={`${cx('img-item')} card-about`}>
-                                        <div className={cx('img-decor')}></div>
+                                    <div
+                                        className={`${cx('img-item')} card-about`}
+                                        style={{
+                                            height: sizeX < 768 ? '400px' : '',
+                                            width: sizeX < 768 ? '100%' : '',
+                                        }}
+                                    >
+                                        <div className={cx('img-decor')}> </div>
                                         <div className={cx('img-item-main')}>
                                             <div className={cx('img-icon')}>
-                                                <p>0{index + 1}.</p>
+                                                <p style={{}}>0{index + 1}.</p>
                                                 <div className={cx('img-icon-decor')}></div>
                                             </div>
                                             <div className={cx('img-item-text')}>

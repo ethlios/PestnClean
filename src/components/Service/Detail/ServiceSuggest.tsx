@@ -20,8 +20,8 @@ export default function ServiceSuggest(props: IAppProps) {
     const [suggestBlog, setSuggestBlog] = useState<any[]>([]);
 
     useEffect(() => {
-        if (randomList(blogs).length > 0) {
-            setSuggestBlog(randomList(blogs));
+        if (randomList(blogs, 2).length > 0) {
+            setSuggestBlog(randomList(blogs, 2));
         }
     }, []);
 

@@ -35,10 +35,6 @@
         gap: 8px;
         color: var(--primary);
     }
-
-    svg {
-        font-size: 35px;
-    }
 }
 
 .choose-text-main {
@@ -63,6 +59,8 @@
 
     img {
         border-radius: 20px;
+        object-fit: cover;
+        object-position: center;
     }
 }
 
@@ -162,7 +160,6 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    gap: 70px;
     margin-top: 15px;
 }
 
@@ -173,7 +170,7 @@
 }
 
 .committed-des {
-    font-size: 14px;
+    font-size: 12px;
     text-transform: uppercase;
     font-weight: 600;
     letter-spacing: -0.5px;
@@ -198,7 +195,6 @@
     display: flex;
     flex-direction: row;
     gap: 10px;
-    margin-top: 10px;
 }
 
 .img-wrapper {

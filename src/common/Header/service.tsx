@@ -25,6 +25,7 @@ import CleanHandsOutlinedIcon from '@mui/icons-material/CleanHandsOutlined';
 import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
 import AutoFixHighOutlinedIcon from '@mui/icons-material/AutoFixHighOutlined';
 import FitnessCenterOutlinedIcon from '@mui/icons-material/FitnessCenterOutlined';
+import useSize from '~/libs/hooks/useSize';
 
 const cx = classNames.bind(styles);
 
@@ -35,6 +36,7 @@ export interface IAppProps {
 
 export default function Services({ setOpenService, openService }: IAppProps) {
     const [currentService, setCurrentSurvice] = useState<number>(-1);
+    const { sizeX } = useSize();
 
     return (
         <div>
@@ -49,13 +51,21 @@ export default function Services({ setOpenService, openService }: IAppProps) {
                 className={cx('service')}
                 onClick={(e) => e.stopPropagation()}
                 style={{
-                    right: openService ? '0' : '-450px',
+                    right: openService ? '0' : sizeX < 420 ? '-350px' : sizeX < 500 ? '-380px' : '-450px',
+                    width: sizeX < 420 ? '350px' : sizeX < 500 ? '380px' : '',
                 }}
             >
                 <div
                     className={cx('close-btn')}
                     style={{
-                        right: openService ? '400px' : '-50px',
+                        right:
+                            openService && sizeX < 420
+                                ? '350px'
+                                : openService && sizeX < 500
+                                ? '380px'
+                                : openService
+                                ? '400px'
+                                : '-50px',
                     }}
                     onClick={() => setOpenService(false)}
                 >

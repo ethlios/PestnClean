@@ -1,6 +1,7 @@
 import { Button } from '@mui/material';
 import Link from 'next/link';
 import * as React from 'react';
+import useSize from '~/libs/hooks/useSize';
 
 export interface IAppProps {
     text: string;
@@ -31,6 +32,8 @@ export default function ButtonCommon({
     color,
     fullWidth,
 }: IAppProps) {
+    const { sizeX } = useSize();
+
     return (
         <Button
             variant={
@@ -50,7 +53,7 @@ export default function ButtonCommon({
                 color: color === 'secondary' ? '#fff' : '',
                 textTransform: !!path ? 'uppercase' : 'initial',
                 fontWeight: '600',
-                fontSize: path ? '' : '13px',
+                fontSize: sizeX < 550 ? '11px' : path ? '' : '13px',
                 ':hover': {
                     backgroundColor:
                         rule === 'rule-1' ? 'var(--primary)' : rule2 === 'rule-1' ? 'var(--primary)' : '#fff',

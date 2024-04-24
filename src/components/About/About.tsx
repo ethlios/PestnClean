@@ -15,8 +15,7 @@ const cx = classNames.bind(styles);
 
 gsap.registerPlugin(ScrollTrigger);
 
-export interface IAppProps {
-}
+export interface IAppProps {}
 
 export default function AboutCPPage(props: IAppProps) {
     const titleRef = useRef<any>();
@@ -81,12 +80,24 @@ export default function AboutCPPage(props: IAppProps) {
             <AboutBanner />
 
             {/*Header title*/}
-            <div className={'my-14'}>
+            <div className={sizeX < 768 ? 'my-8' : 'my-14'}>
                 <div className={''} ref={titleRef}>
-                    <h1 className={`${cx('head-title')} md:w-3/5`}>
+                    <h1
+                        className={`${cx('head-title')} md:w-3/5`}
+                        style={{
+                            fontSize: sizeX < 550 ? '24px' : sizeX < 768 ? '28px' : '',
+                            width: sizeX < 900 ? '100%' : '',
+                        }}
+                    >
                         HỆ SINH THÁI GIẢI PHÁP VỆ SINH VÀ KIỂM SOÁT CÔN TRÙNG TOÀN DIỆN
                     </h1>
-                    <p className={cx('text-common')}>
+                    <p
+                        className={cx('text-common')}
+                        style={{
+                            textAlign: sizeX < 768 ? 'justify' : 'left',
+                            fontSize: sizeX < 550 ? '14.5px' : '',
+                        }}
+                    >
                         Đến với PestnClean, bạn sẽ được cung cấp dịch vụ vệ sinh và kiểm soát côn trùng uy tín
                         hàng đầu Việt Nam. <br />
                         <br /> Được sáng lập bởi ông Nguyễn Thanh Duy – Người với nhiều năm kinh nghiệm trong
@@ -100,7 +111,7 @@ export default function AboutCPPage(props: IAppProps) {
             <div
                 style={{
                     width: '100%',
-                    height: '450px',
+                    height: sizeX < 1024 ? 'auto' : '450px',
                     backgroundColor: '#000',
                     marginBottom: '70px',
                 }}
@@ -133,18 +144,43 @@ export default function AboutCPPage(props: IAppProps) {
                         width={3000}
                         height={1000}
                         style={{
-                            width: '80%',
+                            width: sizeX < 768 ? '100%' : '80%',
                             height: '550px',
                             objectFit: 'cover',
                             objectPosition: 'center',
                         }}
                         ref={imgAbout1}
                     />
-                    <div className={cx('text-content')} ref={textAbout1}
-                         style={sizeX < 768 ? { width: '100%' } : { width: '40%' }}>
-                        <p>2024</p>
-                        <h1 className={cx('title')}>1. TẦM NHÌN</h1>
-                        <p className={cx('text-common')}>
+                    <div
+                        className={cx('text-content')}
+                        ref={textAbout1}
+                        style={{
+                            width: sizeX < 768 ? '80%' : '40%',
+                            padding: sizeX < 900 ? '20px 0 40px 25px' : '',
+                        }}
+                    >
+                        <p
+                            style={{
+                                fontSize: sizeX < 500 ? '60px' : sizeX < 900 ? '75px' : '',
+                            }}
+                        >
+                            2024
+                        </p>
+                        <h1
+                            className={cx('title')}
+                            style={{
+                                fontSize: sizeX < 768 ? '20px' : '',
+                            }}
+                        >
+                            1. TẦM NHÌN
+                        </h1>
+                        <p
+                            className={cx('text-common')}
+                            style={{
+                                fontSize: sizeX < 900 ? '13px' : '',
+                                textAlign: 'justify',
+                            }}
+                        >
                             PestnClean khát vọng trở thành đối tác đáng tin cậy, đồng hành cùng quá trình phát
                             triển của các doanh nghiệp trong ngành Hotels & Resorts, F&B Retail và Nhà máy.
                             Phấn đấu đạt mục tiêu xây dựng thương hiệu hàng đầu trong ngành Dịch vụ vệ sinh và
@@ -156,11 +192,36 @@ export default function AboutCPPage(props: IAppProps) {
                 {/*2nd scope*/}
                 <div className={cx('main-content-2')}>
                     <div className={cx('bg-decor-2')}></div>
-                    <div className={cx('text-content-2')} ref={textAbout2}
-                         style={sizeX < 768 ? { width: '100%' } : { width: '40%' }}>
-                        <p>2024</p>
-                        <h1 className={cx('title')}>2. SỨ MỆNH</h1>
-                        <p className={cx('text-common')}>
+                    <div
+                        className={cx('text-content-2')}
+                        ref={textAbout2}
+                        style={{
+                            width: sizeX < 768 ? '80%' : '40%',
+                            padding: sizeX < 900 ? '20px 25px 40px 0' : '',
+                        }}
+                    >
+                        <p
+                            style={{
+                                fontSize: sizeX < 500 ? '60px' : sizeX < 900 ? '75px' : '',
+                            }}
+                        >
+                            2024
+                        </p>
+                        <h1
+                            className={cx('title')}
+                            style={{
+                                fontSize: sizeX < 768 ? '20px' : '',
+                            }}
+                        >
+                            2. SỨ MỆNH
+                        </h1>
+                        <p
+                            className={cx('text-common')}
+                            style={{
+                                fontSize: sizeX < 900 ? '13px' : '',
+                                textAlign: 'justify',
+                            }}
+                        >
                             “ Nâng cao chất lượng môi trường làm việc, đảm bảo giá trị kinh doanh hiệu quả bền
                             vững ”. PestnClean tin rằng việc cung cấp mô hình dịch vụ giải pháp toàn diện về
                             vệ sinh và kiểm soát côn trùng sẽ mang lại những giá trị tốt đẹp cho công việc
@@ -176,7 +237,7 @@ export default function AboutCPPage(props: IAppProps) {
                         width={3000}
                         height={1000}
                         style={{
-                            width: '80%',
+                            width: sizeX < 768 ? '100%' : '80%',
                             height: '550px',
                             objectFit: 'cover',
                             objectPosition: 'center',

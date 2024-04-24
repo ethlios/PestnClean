@@ -8,11 +8,14 @@ import Link from 'next/link';
 import EastOutlinedIcon from '@mui/icons-material/EastOutlined';
 import { fadeIn } from '~/libs/orthers/animation';
 import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+import useSize from '~/libs/hooks/useSize';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const cx = classNames.bind(styles);
 
-export interface IAppProps {
-}
+export interface IAppProps {}
 
 const otherService = [
     {
@@ -37,14 +40,11 @@ const otherService = [
 
 export default function ServiceAds(props: IAppProps) {
     const serviceOther = useRef<any>();
+    const { sizeX } = useSize();
 
     const [currentService, setCurrentService] = useState<number>(-1);
     useEffect(() => {
-        gsap.fromTo(
-            serviceOther.current,
-            fadeIn(serviceOther.current)[0],
-            fadeIn(serviceOther.current)[1],
-        );
+        gsap.fromTo(serviceOther.current, fadeIn(serviceOther.current)[0], fadeIn(serviceOther.current)[1]);
     }, []);
 
     return (
@@ -53,6 +53,9 @@ export default function ServiceAds(props: IAppProps) {
                 className={
                     'font-bold underline underline-offset-2 text-2xl uppercase text-center decoration-2'
                 }
+                style={{
+                    fontSize: sizeX < 550 ? '18px' : '24px',
+                }}
             >
                 CÁC DỊCH VỤ CỦA CHÚNG TÔI
             </h1>
@@ -83,10 +86,10 @@ export default function ServiceAds(props: IAppProps) {
                                         currentService === 0
                                             ? 'var(--secondary-dark)'
                                             : currentService === 1
-                                                ? 'var(--primary)'
-                                                : currentService === 2
-                                                    ? 'var(--secondary)'
-                                                    : '',
+                                            ? 'var(--primary)'
+                                            : currentService === 2
+                                            ? 'var(--secondary)'
+                                            : '',
                                 }}
                                 className={cx('service-description')}
                             >

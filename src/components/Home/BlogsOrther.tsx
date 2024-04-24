@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
 import styles from './home.module.scss';
 import ButtonCommon from '../Orther/Button';
@@ -10,61 +10,63 @@ import { nameToLink } from '~/libs/orthers/nameToLink';
 import Link from 'next/link';
 import { IconButton } from '@mui/material';
 import EastOutlinedIcon from '@mui/icons-material/EastOutlined';
+import randomList from '~/libs/orthers/random';
+import { blogs } from '~/constants/blogs';
+import useSize from '~/libs/hooks/useSize';
 
 const cx = classNames.bind(styles);
 
 export interface IAppProps {}
 
-const otherBlogs = [
-    {
-        id: 1,
-        img: '',
-        title: 'Bảng giá vệ sinh công nghiệp PestnClean',
-        created: '09.04',
-    },
-    {
-        id: 2,
-        img: '',
-        title: '6 Cách khử mùi hôi nhà vệ sinh mới nhất 2024',
-        created: '09.04',
-    },
-    {
-        id: 3,
-        img: '',
-        title: '3 cách tạo mùi thơm cho xe ô tô bạn nên biết',
-        created: '09.04',
-    },
-];
-
 export default function BlogOthers(props: IAppProps) {
     const [blogHover, setBlogHover] = useState<number>(-1);
+    const [blogSuggest, setSuggestBlog] = useState<any[]>([]);
+    const { sizeX } = useSize();
+
+    useEffect(() => {
+        if (randomList(blogs, 3).length > 0) {
+            setSuggestBlog(randomList(blogs, 3));
+        }
+    }, []);
 
     return (
         <div className={cx('blog-wrapper')}>
             <div className={cx('blog-header')}>
-                <h1 className={`font-bold underline underline-offset-2 text-2xl uppercase decoration-2`}>
+                <h1
+                    className={`font-bold underline underline-offset-2 uppercase decoration-2`}
+                    style={{
+                        fontSize: sizeX < 550 ? '18px' : '24px',
+                    }}
+                >
                     BàI VIẾT Tham KHẢO
                 </h1>
                 <ButtonCommon text="Xem thêm" path="blogs" />
             </div>
-            <div className={cx('other-wrapper')}>
-                {otherBlogs.map((item, index) => {
+            <div
+                className={cx('other-wrapper')}
+                style={{
+                    flexDirection: sizeX < 600 ? 'column' : 'row',
+                }}
+            >
+                {blogSuggest.map((item, index) => {
                     return (
                         <div
                             key={index}
                             className={cx('blog-item')}
                             onMouseOver={() => setBlogHover(index)}
                             onMouseOut={() => setBlogHover(-1)}
+                            style={{
+                                display: sizeX < 850 && index === 2 ? 'none' : '',
+                                width: sizeX < 850 ? '100%' : '',
+                            }}
                         >
-                            {/* <Image
+                            <Image
                                 src={item.img}
-                                alt={''}
-                                // alt={item.title}
+                                alt={item.title}
                                 width={1000}
                                 height={1000}
                                 className={cx('blogs-img')}
-                            /> */}
-                            <div className={cx('blogs-img')}></div>
+                            />
                             <div className={cx('blog-content')}>
                                 <div
                                     className={cx('blog-time')}
@@ -88,7 +90,7 @@ export default function BlogOthers(props: IAppProps) {
                                         borderTop: blogHover === index ? 'solid 2px var(--secondary)' : '',
                                     }}
                                 >
-                                    <p>{`Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s`}</p>
+                                    <p>{item.description}</p>
                                     <Link href={`/blogs/${nameToLink(item.title)}`}>
                                         <IconButton
                                             sx={{
