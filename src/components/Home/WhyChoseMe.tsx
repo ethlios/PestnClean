@@ -51,7 +51,6 @@ const solutions = [
 export default function WhyChooseMe() {
     const chooseText = useRef<any>();
     const chooseImg = useRef<any>();
-    const numberWrapper = useRef<any>();
     const logoCompany = useRef<any>();
     const { sizeX } = useSize();
 
@@ -66,21 +65,21 @@ export default function WhyChooseMe() {
             slideFromX(chooseImg.current, 2000)[0],
             slideFromX(chooseImg.current, 2000)[1],
         );
-        gsap.fromTo(
-            numberWrapper.current,
-            slideFromY(numberWrapper.current, 500)[0],
-            slideFromY(numberWrapper.current, 500)[1],
-        ).then(() => {
-            gsap.fromTo(logoCompany.current, rotate(logoCompany.current)[0], rotate(logoCompany.current)[1]);
-        });
+
+        gsap.fromTo(logoCompany.current, rotate(logoCompany.current)[0], rotate(logoCompany.current)[1]);
     }, []);
 
     return (
         <div>
-            <div className={cx('choose-content-1')}>
+            <div
+                className={cx('choose-content-1')}
+                style={{
+                    flexDirection: sizeX < 900 ? 'column' : 'row',
+                }}
+            >
                 <div
                     className={cx('choose-text')}
-                    style={sizeX < 768 ? { width: '100%' } : { width: '60%' }}
+                    style={sizeX < 900 ? { width: '100%' } : { width: '60%' }}
                     ref={chooseText}
                 >
                     <div className={cx('choose-text-main')}>
@@ -88,8 +87,15 @@ export default function WhyChooseMe() {
                             className={
                                 'font-bold underline underline-offset-2 text-2xl uppercase decoration-2'
                             }
+                            style={{
+                                fontSize: sizeX < 550 ? '18px' : '24px',
+                            }}
                         >
-                            <HelpOutlineOutlinedIcon />
+                            <HelpOutlineOutlinedIcon
+                                sx={{
+                                    fontSize: sizeX < 550 ? '25px' : '35px',
+                                }}
+                            />
                             Vì sao chọn chúng tôi?
                         </h1>
                     </div>
@@ -106,12 +112,25 @@ export default function WhyChooseMe() {
                                         borderTopRightRadius: index === 2 ? '30px' : 0,
                                     }}
                                 >
-                                    <div className={cx('chose-content')}>
-                                        <p className={cx('choose-title')}>{item.title}</p>
+                                    <div
+                                        className={cx('chose-content')}
+                                        style={{
+                                            padding: sizeX < 550 ? '10px' : '',
+                                        }}
+                                    >
+                                        <p
+                                            className={cx('choose-title')}
+                                            style={{
+                                                fontSize: sizeX < 550 ? '15px' : '',
+                                            }}
+                                        >
+                                            {item.title}
+                                        </p>
                                         <p
                                             className={cx('choose-description')}
                                             style={{
                                                 marginBottom: '15px',
+                                                fontSize: sizeX < 550 ? '12.5px' : '',
                                             }}
                                         >
                                             {item.description}
@@ -124,7 +143,7 @@ export default function WhyChooseMe() {
                 </div>
                 <div
                     className={cx('choose-content-img')}
-                    style={sizeX < 768 ? { width: '100%' } : { width: '30%' }}
+                    style={sizeX < 900 ? { width: '100%' } : { width: '30%' }}
                     ref={chooseImg}
                 >
                     {/* <Image/> */}
@@ -133,11 +152,14 @@ export default function WhyChooseMe() {
                         alt="Hình ảnh trang chủ Pestnclean"
                         width={1000}
                         height={1000}
+                        style={{
+                            height: sizeX < 900 ? '300px' : '',
+                        }}
                     />
                     <Link
                         href={'/gioithieu'}
                         className={cx('choose-link')}
-                        style={sizeX < 768 ? { left: '0' } : { left: '-60px' }}
+                        style={sizeX < 900 ? { left: '0' } : { left: '-60px' }}
                     >
                         <p>
                             Giới thiệu
@@ -146,11 +168,28 @@ export default function WhyChooseMe() {
                     </Link>
                 </div>
             </div>
-            <div className={cx('number-wrapper')} ref={numberWrapper}>
-                <div className={'flex flex-wrap'}>
+            <div
+                className={cx('number-wrapper')}
+                style={{
+                    padding: sizeX < 550 ? '15px' : '',
+                }}
+            >
+                <div
+                    className={'flex'}
+                    style={{
+                        flexDirection: sizeX < 1024 ? 'column-reverse' : 'row',
+                    }}
+                >
                     <p
                         className={cx('committed-text')}
-                        style={sizeX < 768 ? { width: '100%' } : { width: '70%' }}
+                        style={{
+                            width: sizeX < 1024 ? '100%' : '70%',
+                            marginTop: sizeX < 1024 ? '20px' : '',
+                            fontSize:
+                                sizeX < 500 ? '14px' : sizeX < 768 ? '16px' : sizeX < 1024 ? '18px' : '',
+                            textAlign: sizeX < 1024 ? 'justify' : 'left',
+                            paddingLeft: sizeX < 500 ? '10px' : '',
+                        }}
                     >
                         Bằng tất cả những gì mình có, PESTNCLEAN hứa hẹn sẽ mang đến cho quý khách hàng những
                         trải nghiệm về dịch vụ chưa từng có. Lấy đam mê nhiệt huyết làm nguồn sức mạnh, và lấy
@@ -163,30 +202,85 @@ export default function WhyChooseMe() {
                     </p>
                     <div
                         className={'flex justify-center items-center'}
-                        style={sizeX < 768 ? { width: '100%' } : { width: '30%' }}
+                        style={{
+                            width: sizeX < 1024 ? '100%' : '70%',
+                        }}
                         ref={logoCompany}
                     >
-                        <Image src={logo2.src} alt="Logo đơn của Pestnclean" width={173} height={216} />
+                        <Image
+                            src={logo2.src}
+                            alt="Logo đơn của Pestnclean"
+                            width={sizeX < 600 ? 100 : sizeX < 1024 ? 140 : 173}
+                            height={216}
+                        />
                     </div>
                 </div>
-                <div className={`${cx('committed-wrapper-2')} ${sizeX < 768 ? 'flex-wrap' : ''} `}>
+                <div
+                    className={`${cx('committed-wrapper-2')}`}
+                    style={{
+                        flexDirection: sizeX < 1024 ? 'column' : 'row',
+                        gap: sizeX < 1024 ? '15px' : '60px',
+                    }}
+                >
                     <div className={'flex flex-row gap-5'} style={sizeX <= 768 ? { flexWrap: 'wrap' } : {}}>
                         <div>
-                            <h1 className={cx('committed-number')}>3+</h1>
-                            <p className={cx('committed-des')}>Năm hoạt động</p>
+                            <h1
+                                className={cx('committed-number')}
+                                style={{
+                                    fontSize: sizeX < 500 ? '45px' : sizeX < 768 ? '60px' : '',
+                                }}
+                            >
+                                3+
+                            </h1>
+                            <p
+                                className={cx('committed-des')}
+                                style={{
+                                    fontSize: sizeX < 500 ? '8.5px' : '',
+                                }}
+                            >
+                                Năm hoạt động
+                            </p>
                         </div>
                         <div className={cx('committed-item')}>
-                            <h1 className={cx('committed-number')}>29+</h1>
-                            <p className={cx('committed-des')}>Đối tác kinh doanh</p>
+                            <h1
+                                className={cx('committed-number')}
+                                style={{
+                                    fontSize: sizeX < 500 ? '45px' : sizeX < 768 ? '60px' : '',
+                                }}
+                            >
+                                29+
+                            </h1>
+                            <p
+                                className={cx('committed-des')}
+                                style={{
+                                    fontSize: sizeX < 500 ? '8.5px' : '',
+                                }}
+                            >
+                                Đối tác kinh doanh
+                            </p>
                         </div>
                         <div className={cx('committed-item')}>
-                            <h1 className={cx('committed-number')}>199+</h1>
-                            <p className={cx('committed-des')}>Tổng dự án hoàn thành</p>
+                            <h1
+                                className={cx('committed-number')}
+                                style={{
+                                    fontSize: sizeX < 500 ? '45px' : sizeX < 768 ? '60px' : '',
+                                }}
+                            >
+                                199+
+                            </h1>
+                            <p
+                                className={cx('committed-des')}
+                                style={{
+                                    fontSize: sizeX < 500 ? '8.5px' : '',
+                                }}
+                            >
+                                Tổng dự án hoàn thành
+                            </p>
                         </div>
                     </div>
                     <p
                         style={{
-                            fontSize: '12.7px',
+                            fontSize: sizeX < 768 ? '11.5px' : '12.7px',
                             fontWeight: '500',
                             letterSpacing: '-.5px',
                             color: 'rgba(0,0,0,0.5)',

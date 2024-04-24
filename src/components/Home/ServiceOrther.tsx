@@ -9,6 +9,7 @@ import EastOutlinedIcon from '@mui/icons-material/EastOutlined';
 import { fadeIn } from '~/libs/orthers/animation';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+import useSize from '~/libs/hooks/useSize';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -39,6 +40,7 @@ const otherService = [
 
 export default function ServiceAds(props: IAppProps) {
     const serviceOther = useRef<any>();
+    const { sizeX } = useSize();
 
     const [currentService, setCurrentService] = useState<number>(-1);
     useEffect(() => {
@@ -51,6 +53,9 @@ export default function ServiceAds(props: IAppProps) {
                 className={
                     'font-bold underline underline-offset-2 text-2xl uppercase text-center decoration-2'
                 }
+                style={{
+                    fontSize: sizeX < 550 ? '18px' : '24px',
+                }}
             >
                 CÁC DỊCH VỤ CỦA CHÚNG TÔI
             </h1>

@@ -90,7 +90,7 @@ export const rotate = (trigger: any) => {
             scale: 1,
             opacity: 1,
             ease: 'power3.out',
-            duration: 1.2,
+            duration: 0.5,
             scrollTrigger: {
                 trigger: trigger,
             },

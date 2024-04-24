@@ -21,6 +21,7 @@ import img4 from '../../../public/img/img_4.jpg';
 import img5 from '../../../public/img/img_5.jpg';
 import img6 from '../../../public/img/img_6.jpg';
 import img7 from '../../../public/img/img_3.jpg';
+import useSize from '~/libs/hooks/useSize';
 
 const listImg = [img1.src, img2.src, img3.src, img4.src, img5.src, img6.src, img7.src];
 
@@ -48,6 +49,7 @@ const settings = {
 export default function ImageWork(props: IAppProps) {
     const [defaulListValue, setDefaultListValue] = useState<number>(0);
     const [defaultList, setDefaultList] = useState<string>('Tất cả');
+    const { sizeX } = useSize();
 
     return (
         <div className={cx('work-wrapper')}>
@@ -55,6 +57,9 @@ export default function ImageWork(props: IAppProps) {
                 className={
                     'pb-5 text-center font-bold underline underline-offset-2 text-2xl uppercase mt-14 decoration-2'
                 }
+                style={{
+                    fontSize: sizeX < 550 ? '18px' : '24px',
+                }}
             >
                 Hình ảnh làm việc
             </h1>
@@ -87,7 +92,12 @@ export default function ImageWork(props: IAppProps) {
                     </div>
                 </div> */}
 
-            <div className={cx('btn-lists')}>
+            <div
+                className={cx('btn-lists')}
+                style={{
+                    flexWrap: sizeX < 500 ? 'wrap' : 'nowrap',
+                }}
+            >
                 {imgTypes.map((btn, index) => {
                     return (
                         <ButtonCommon
@@ -107,7 +117,7 @@ export default function ImageWork(props: IAppProps) {
                 grabCursor={true}
                 centeredSlides={true}
                 loop={true}
-                slidesPerView={3}
+                slidesPerView={sizeX < 500 ? 1 : sizeX < 700 ? 2 : 3}
                 coverflowEffect={{
                     rotate: 0,
                     stretch: 0,

@@ -6,16 +6,29 @@ import ButtonCommon from '../Orther/Button';
 import OwlCarouselCP from '../Orther/Carousel';
 import styles from './home.module.scss';
 import Image from 'next/image';
+import useSize from '~/libs/hooks/useSize';
 
 const cx = classNames.bind(styles);
 
 export interface IAppProps {}
 
 export default function ProductOthers(props: IAppProps) {
+    const { sizeX } = useSize();
+
     return (
         <div className={cx('blog-wrapper')}>
-            <div className={cx('blog-header')}>
-                <h1 className={'font-bold underline underline-offset-2 text-2xl uppercase decoration-2'}>
+            <div
+                className={cx('blog-header')}
+                style={{
+                    marginBottom: '30px',
+                }}
+            >
+                <h1
+                    className={'font-bold underline underline-offset-2 uppercase decoration-2'}
+                    style={{
+                        fontSize: sizeX < 550 ? '18px' : '24px',
+                    }}
+                >
                     Có thể bạn thích
                 </h1>
                 <ButtonCommon text="Xem thêm" path="sanpham" />

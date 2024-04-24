@@ -12,6 +12,7 @@ import { IconButton } from '@mui/material';
 import EastOutlinedIcon from '@mui/icons-material/EastOutlined';
 import randomList from '~/libs/orthers/random';
 import { blogs } from '~/constants/blogs';
+import useSize from '~/libs/hooks/useSize';
 
 const cx = classNames.bind(styles);
 
@@ -20,6 +21,7 @@ export interface IAppProps {}
 export default function BlogOthers(props: IAppProps) {
     const [blogHover, setBlogHover] = useState<number>(-1);
     const [blogSuggest, setSuggestBlog] = useState<any[]>([]);
+    const { sizeX } = useSize();
 
     useEffect(() => {
         if (randomList(blogs, 3).length > 0) {
@@ -30,12 +32,22 @@ export default function BlogOthers(props: IAppProps) {
     return (
         <div className={cx('blog-wrapper')}>
             <div className={cx('blog-header')}>
-                <h1 className={`font-bold underline underline-offset-2 text-2xl uppercase decoration-2`}>
+                <h1
+                    className={`font-bold underline underline-offset-2 uppercase decoration-2`}
+                    style={{
+                        fontSize: sizeX < 550 ? '18px' : '24px',
+                    }}
+                >
                     BàI VIẾT Tham KHẢO
                 </h1>
                 <ButtonCommon text="Xem thêm" path="blogs" />
             </div>
-            <div className={cx('other-wrapper')}>
+            <div
+                className={cx('other-wrapper')}
+                style={{
+                    flexDirection: sizeX < 600 ? 'column' : 'row',
+                }}
+            >
                 {blogSuggest.map((item, index) => {
                     return (
                         <div
@@ -43,6 +55,10 @@ export default function BlogOthers(props: IAppProps) {
                             className={cx('blog-item')}
                             onMouseOver={() => setBlogHover(index)}
                             onMouseOut={() => setBlogHover(-1)}
+                            style={{
+                                display: sizeX < 850 && index === 2 ? 'none' : '',
+                                width: sizeX < 850 ? '100%' : '',
+                            }}
                         >
                             <Image
                                 src={item.img}

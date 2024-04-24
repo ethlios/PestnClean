@@ -10,6 +10,7 @@ import styles from './about.module.scss';
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+import useSize from '~/libs/hooks/useSize';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -19,6 +20,7 @@ export interface IAppProps {}
 
 function SampleNextArrow(props: any) {
     const btnAboutRef = useRef<any>();
+    const { sizeX } = useSize();
 
     const { className, style, onClick, cb } = props;
 
@@ -35,7 +37,17 @@ function SampleNextArrow(props: any) {
     }, []);
 
     return (
-        <div className={cx('banner-arrow')} onClick={onClick} ref={btnAboutRef}>
+        <div
+            className={cx('banner-arrow')}
+            onClick={onClick}
+            ref={btnAboutRef}
+            style={{
+                width: sizeX < 768 ? '60px' : '',
+                height: sizeX < 768 ? '60px' : '',
+                right: sizeX < 768 ? '25px' : '',
+                top: sizeX < 768 ? '-40px' : '',
+            }}
+        >
             <IconButton
                 style={{
                     width: '100%',
@@ -59,6 +71,8 @@ const settings = {
 };
 
 export default function AboutBanner(props: IAppProps) {
+    const { sizeX } = useSize();
+
     useEffect(() => {
         gsap.fromTo(
             '.banner-about',
@@ -77,13 +91,24 @@ export default function AboutBanner(props: IAppProps) {
                 <Slider {...settings}>
                     {aboutBanner.map((item, index) => {
                         return (
-                            <div key={index} className={`${cx('img-fix-size')} banner-about`}>
+                            <div
+                                key={index}
+                                className={`${cx('img-fix-size')} banner-about`}
+                                style={{
+                                    height: '380px',
+                                    overflow: 'hidden',
+                                }}
+                            >
                                 <Image
                                     src={item.link}
                                     alt="giới thiệu pestnclean"
                                     width={1980}
                                     className={'w-full bg-gray-200 h-auto md:h-96'}
                                     height={1000}
+                                    style={{
+                                        height: sizeX < 768 ? '300px' : '380px',
+                                        width: '100%',
+                                    }}
                                 />
                             </div>
                         );

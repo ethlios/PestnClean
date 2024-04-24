@@ -4,7 +4,7 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { Checkbox } from '@mui/material';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import menImg from '../../../public/img/men.jpg';
 import logo from '../../../public/img/logo.png';
 import styles from './footer.module.scss';
@@ -14,6 +14,10 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import InstagramIcon from '@mui/icons-material/Instagram';
+import useSize from '~/libs/hooks/useSize';
+import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
+import RemoveOutlinedIcon from '@mui/icons-material/RemoveOutlined';
+import $ from 'jquery';
 
 const cx = classNames.bind(styles);
 
@@ -21,6 +25,34 @@ export interface FooterProps {}
 
 export default function Footer(props: FooterProps) {
     const [checked, setChecked] = useState<boolean>(false);
+    const { sizeX } = useSize();
+    const [isOpen1, setIsOpen1] = useState(false);
+    const [isOpen2, setIsOpen2] = useState(false);
+    const [isOpen3, setIsOpen3] = useState(false);
+
+    useEffect(() => {
+        $('.sv-footer').hide();
+        $('.cs-footer').hide();
+        $('.other-footer').hide();
+    }, []);
+
+    const handleShowContent1 = () => {
+        setIsOpen1(!isOpen1);
+
+        $('.sv-footer').slideToggle();
+    };
+
+    const handleShowContent2 = () => {
+        setIsOpen2(!isOpen2);
+
+        $('.cs-footer').slideToggle();
+    };
+
+    const handleShowContent3 = () => {
+        setIsOpen3(!isOpen3);
+
+        $('.other-footer').slideToggle();
+    };
 
     return (
         <div>
@@ -65,11 +97,28 @@ export default function Footer(props: FooterProps) {
             {/* Footer */}
             <div className={'container ' + cx('footer')}>
                 <div className={cx('footer-head')}>
-                    <Image alt="Logo công ty PESTNCLEAN" src={logo.src} width={176} height={100} />
+                    <Image
+                        alt="Logo công ty PESTNCLEAN"
+                        src={logo.src}
+                        width={sizeX < 576 ? 150 : 176}
+                        height={100}
+                    />
                     <ButtonCommon text="Liên hệ" path="lienhe" />
                 </div>
-                <div className={cx('footer-main')}>
-                    <div className={cx('infor')}>
+                <div
+                    className={cx('footer-main')}
+                    style={{
+                        flexDirection: sizeX < 900 ? 'column' : 'row',
+                        gap: '20px',
+                        flexWrap: 'nowrap',
+                    }}
+                >
+                    <div
+                        className={cx('infor')}
+                        style={{
+                            width: sizeX < 900 ? '100%' : '50%',
+                        }}
+                    >
                         <Link
                             href="https://www.google.com/maps/place/Nh%C3%A0+H%C3%A0ng+Ti%E1%BB%87c+C%C6%B0%E1%BB%9Bi+Callary/@10.7867988,106.6823308,17z/data=!4m6!3m5!1s0x31752f2c53afffff:0xf831d8aaee883f90!8m2!3d10.7867988!4d106.6849057!16s%2Fg%2F11j00srjjz?entry=ttu"
                             target="_blank"
@@ -98,29 +147,137 @@ export default function Footer(props: FooterProps) {
                             </Link>
                         </div>
                     </div>
-                    <div className={cx('dichvu')}>
-                        <p className={cx('title')}>DỊCH VỤ</p>
-                        <div className={cx('decor')}></div>
-                        <Link href={'/dichvu/kiem-soat-con-trung'}>Kiểm soát côn trùng</Link>
-                        <Link href={'/dichvu/dich-vu-ve-sinh'}>Dịch vụ vệ sinh</Link>
-                        <Link href={'/dichvu/giai-phap-ve-sinh'}>Giải pháp vệ sinh</Link>
-                    </div>
-                    <div className={cx('danhmuc')}>
-                        <p className={cx('title')}>CHÍNH SÁCH</p>
-                        <div className={cx('decor')}></div>
-                        <Link href={'/hoidap?q=chinh-sach-bao-mat-thong-tin'}>Bảo mật, thông tin</Link>
-                        <Link href={'/hoidap?q=chinh-sach-bao-hanh-doi-tra'}>Bảo hành, đổi trả</Link>
-                    </div>
-                    <div className={cx('khac')}>
-                        <p className={cx('title')}>KHÁC</p>
-                        <div className={cx('decor')}></div>
-                        <Link href={'/hoidap'}>Hỏi đáp</Link>
-                        <Link href="/lienhe">Liên hệ</Link>
+                    <div
+                        className={cx('link')}
+                        style={{
+                            display: 'flex',
+                            justifyContent: 'space-between',
+                            width: sizeX < 900 ? '100%' : '50%',
+                            flexDirection: sizeX < 576 ? 'column' : 'row',
+                            gap: sizeX < 576 ? '20px' : '0px',
+                        }}
+                    >
+                        <div className={cx('dichvu')}>
+                            <p className={cx('title')} onClick={handleShowContent1}>
+                                DỊCH VỤ{' '}
+                                {sizeX < 576 && !isOpen1 ? (
+                                    <AddOutlinedIcon />
+                                ) : sizeX < 576 ? (
+                                    <RemoveOutlinedIcon />
+                                ) : (
+                                    ''
+                                )}
+                            </p>
+                            <div
+                                className={cx('decor')}
+                                style={{
+                                    width: sizeX < 576 ? '100%' : '',
+                                }}
+                            ></div>
+                            {sizeX < 576 ? (
+                                <div
+                                    className="sv-footer"
+                                    style={{
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        gap: '10px',
+                                    }}
+                                >
+                                    <Link href={'/dichvu/kiem-soat-con-trung'}>Kiểm soát côn trùng</Link>
+                                    <Link href={'/dichvu/dich-vu-ve-sinh'}>Dịch vụ vệ sinh</Link>
+                                    <Link href={'/dichvu/giai-phap-ve-sinh'}>Giải pháp vệ sinh</Link>
+                                </div>
+                            ) : (
+                                <>
+                                    <Link href={'/dichvu/kiem-soat-con-trung'}>Kiểm soát côn trùng</Link>
+                                    <Link href={'/dichvu/dich-vu-ve-sinh'}>Dịch vụ vệ sinh</Link>
+                                    <Link href={'/dichvu/giai-phap-ve-sinh'}>Giải pháp vệ sinh</Link>
+                                </>
+                            )}
+                        </div>
+                        <div className={cx('danhmuc')}>
+                            <p className={cx('title')} onClick={handleShowContent2}>
+                                CHÍNH SÁCH{' '}
+                                {sizeX < 576 && !isOpen2 ? (
+                                    <AddOutlinedIcon />
+                                ) : sizeX < 576 ? (
+                                    <RemoveOutlinedIcon />
+                                ) : (
+                                    ''
+                                )}
+                            </p>
+                            <div
+                                className={cx('decor')}
+                                style={{
+                                    width: sizeX < 576 ? '100%' : '',
+                                }}
+                            ></div>
+                            {sizeX < 576 ? (
+                                <div
+                                    className="cs-footer"
+                                    style={{
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        gap: '10px',
+                                    }}
+                                >
+                                    <Link href={'/hoidap?q=chinh-sach-bao-mat-thong-tin'}>
+                                        Bảo mật, thông tin
+                                    </Link>
+                                    <Link href={'/hoidap?q=chinh-sach-bao-hanh-doi-tra'}>
+                                        Bảo hành, đổi trả
+                                    </Link>
+                                </div>
+                            ) : (
+                                <>
+                                    <Link href={'/hoidap?q=chinh-sach-bao-mat-thong-tin'}>
+                                        Bảo mật, thông tin
+                                    </Link>
+                                    <Link href={'/hoidap?q=chinh-sach-bao-hanh-doi-tra'}>
+                                        Bảo hành, đổi trả
+                                    </Link>
+                                </>
+                            )}
+                        </div>
+                        <div className={cx('khac')}>
+                            <p className={cx('title')} onClick={handleShowContent3}>
+                                KHÁC{' '}
+                                {sizeX < 576 && !isOpen3 ? (
+                                    <AddOutlinedIcon />
+                                ) : sizeX < 576 ? (
+                                    <RemoveOutlinedIcon />
+                                ) : (
+                                    ''
+                                )}
+                            </p>
+                            <div
+                                className={cx('decor')}
+                                style={{
+                                    width: sizeX < 576 ? '100%' : '',
+                                }}
+                            ></div>
+                            {sizeX < 576 ? (
+                                <div
+                                    className="other-footer"
+                                    style={{
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        gap: '10px',
+                                    }}
+                                >
+                                    <Link href={'/hoidap'}>Hỏi đáp</Link>
+                                    <Link href="/lienhe">Liên hệ</Link>
+                                </div>
+                            ) : (
+                                <>
+                                    <Link href={'/hoidap'}>Hỏi đáp</Link>
+                                    <Link href="/lienhe">Liên hệ</Link>
+                                </>
+                            )}
+                        </div>
                     </div>
                 </div>
-                <p className={cx('copyright')}>
-                    Copyright © 2024 Petsnclean | Công ty TNHH Thương Mại Dịch Vụ Xuất Nhập Khẩu Nguyễn Duy
-                </p>
+                <p className={cx('copyright')}>Copyright © 2024 Petsnclean</p>
             </div>
         </div>
     );
