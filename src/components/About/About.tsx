@@ -15,8 +15,7 @@ const cx = classNames.bind(styles);
 
 gsap.registerPlugin(ScrollTrigger);
 
-export interface IAppProps {
-}
+export interface IAppProps {}
 
 export default function AboutCPPage(props: IAppProps) {
     const titleRef = useRef<any>();
@@ -140,8 +139,11 @@ export default function AboutCPPage(props: IAppProps) {
                         }}
                         ref={imgAbout1}
                     />
-                    <div className={cx('text-content')} ref={textAbout1}
-                         style={sizeX < 768 ? { width: '100%' } : { width: '40%' }}>
+                    <div
+                        className={cx('text-content')}
+                        ref={textAbout1}
+                        style={sizeX < 768 ? { width: '100%' } : { width: '40%' }}
+                    >
                         <p>2024</p>
                         <h1 className={cx('title')}>1. TẦM NHÌN</h1>
                         <p className={cx('text-common')}>
@@ -156,8 +158,11 @@ export default function AboutCPPage(props: IAppProps) {
                 {/*2nd scope*/}
                 <div className={cx('main-content-2')}>
                     <div className={cx('bg-decor-2')}></div>
-                    <div className={cx('text-content-2')} ref={textAbout2}
-                         style={sizeX < 768 ? { width: '100%' } : { width: '40%' }}>
+                    <div
+                        className={cx('text-content-2')}
+                        ref={textAbout2}
+                        style={sizeX < 768 ? { width: '100%' } : { width: '40%' }}
+                    >
                         <p>2024</p>
                         <h1 className={cx('title')}>2. SỨ MỆNH</h1>
                         <p className={cx('text-common')}>

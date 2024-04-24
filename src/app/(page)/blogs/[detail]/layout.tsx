@@ -1,18 +1,18 @@
-import { allServices } from '~/constants/service';
+import { blogs } from '~/constants/blogs';
 import { nameToLink } from '~/libs/orthers/nameToLink';
 
 interface Props {
     params: {
-        dichvu: string;
+        detail: string;
     };
 }
 
 export async function generateMetadata({ params }: Props) {
-    const blog: any = allServices.filter((blog) => {
-        return nameToLink(blog.title) === params.dichvu;
+    const blog: any = blogs.filter((blog) => {
+        return nameToLink(blog.title) === params.detail;
     });
 
-    const path = nameToLink(blog.lengt > 0 ? blog[0].title : '');
+    const path = nameToLink(blog[0].title ?? '');
 
     if (!blog[0]) {
         return {
@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: Props) {
         title: blog[0].title,
         description: blog[0].desHead ?? '',
         alternates: {
-            canonical: `/${path}`,
+            canonical: `/blogs/${path}`,
         },
         keywords: `${blog[0].key}`,
         openGraph: {
@@ -45,11 +45,11 @@ export async function generateMetadata({ params }: Props) {
             type: 'website',
             locale: 'vi_VN',
             siteName: blog.title,
-            url: `/${path}`,
+            url: `/blogs/${path}`,
         },
     };
 }
 
-export default function ServiceDetailPageLayout({ children }: { children: React.ReactNode }) {
+export default function BlogsDetailPageLayout({ children }: { children: React.ReactNode }) {
     return children;
 }

@@ -11,30 +11,6 @@ const cx = classNames.bind(styles);
 
 export interface IAppProps {}
 
-const otherBlogs = [
-    {
-        id: 1,
-        category: 'Sản phẩm giải pháp vệ sinh',
-        img: 'https://res.cloudinary.com/dj2jarcxk/image/upload/v1713752119/tinh-dau-sweet-dream-viet-oils_rj89xg.jpg',
-        title: 'Bảng giá vệ sinh công nghiệp PestnClean',
-        created: '09 tháng 4, 2024',
-    },
-    {
-        id: 2,
-        img: 'https://res.cloudinary.com/dj2jarcxk/image/upload/v1713752119/tinh-dau-sweet-dream-viet-oils_rj89xg.jpg',
-        category: 'Sản phẩm giải pháp vệ sinh',
-        title: '6 Cách khử mùi hôi nhà vệ sinh mới nhất 2024',
-        created: '09 tháng 4, 2024',
-    },
-    {
-        id: 3,
-        category: 'Sản phẩm giải pháp vệ sinh',
-        img: 'https://res.cloudinary.com/dj2jarcxk/image/upload/v1713752119/tinh-dau-sweet-dream-viet-oils_rj89xg.jpg',
-        title: '3 cách tạo mùi thơm cho xe ô tô bạn nên biết',
-        created: '09 tháng 4, 2024',
-    },
-];
-
 export default function ProductOthers(props: IAppProps) {
     return (
         <div className={cx('blog-wrapper')}>

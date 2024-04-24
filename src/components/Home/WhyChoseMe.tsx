@@ -11,6 +11,9 @@ import styles from './home.module.scss';
 import logo2 from '../../../public/img/logo2.png';
 import { gsap } from 'gsap';
 import { slideFromX, slideFromY, rotate } from '~/libs/orthers/animation';
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const cx = classNames.bind(styles);
 
@@ -52,7 +55,6 @@ export default function WhyChooseMe() {
     const logoCompany = useRef<any>();
     const { sizeX } = useSize();
 
-
     useEffect(() => {
         gsap.fromTo(
             chooseText.current,
@@ -69,20 +71,18 @@ export default function WhyChooseMe() {
             slideFromY(numberWrapper.current, 500)[0],
             slideFromY(numberWrapper.current, 500)[1],
         ).then(() => {
-            gsap.fromTo(
-                logoCompany.current,
-                rotate(logoCompany.current)[0],
-                rotate(logoCompany.current)[1],
-            );
+            gsap.fromTo(logoCompany.current, rotate(logoCompany.current)[0], rotate(logoCompany.current)[1]);
         });
     }, []);
 
     return (
         <div>
             <div className={cx('choose-content-1')}>
-                <div className={cx('choose-text')}
-                     style={sizeX < 768 ? { width: '100%' } : { width: '60%' }}
-                     ref={chooseText}>
+                <div
+                    className={cx('choose-text')}
+                    style={sizeX < 768 ? { width: '100%' } : { width: '60%' }}
+                    ref={chooseText}
+                >
                     <div className={cx('choose-text-main')}>
                         <h1
                             className={
@@ -122,9 +122,11 @@ export default function WhyChooseMe() {
                         })}
                     </div>
                 </div>
-                <div className={cx('choose-content-img')}
-                     style={sizeX < 768 ? { width: '100%' } : { width: '30%' }}
-                     ref={chooseImg}>
+                <div
+                    className={cx('choose-content-img')}
+                    style={sizeX < 768 ? { width: '100%' } : { width: '30%' }}
+                    ref={chooseImg}
+                >
                     {/* <Image/> */}
                     <Image
                         src="https://res.cloudinary.com/dj2jarcxk/image/upload/v1713699714/l%C3%B4go-mockup_optimized_gnftec.png"
@@ -132,8 +134,11 @@ export default function WhyChooseMe() {
                         width={1000}
                         height={1000}
                     />
-                    <Link href={'/gioithieu'} className={cx('choose-link')}
-                          style={sizeX < 768 ? { left: '0' } : { left: '-60px' }}>
+                    <Link
+                        href={'/gioithieu'}
+                        className={cx('choose-link')}
+                        style={sizeX < 768 ? { left: '0' } : { left: '-60px' }}
+                    >
                         <p>
                             Giới thiệu
                             <ArrowRightAltOutlinedIcon />
@@ -143,7 +148,10 @@ export default function WhyChooseMe() {
             </div>
             <div className={cx('number-wrapper')} ref={numberWrapper}>
                 <div className={'flex flex-wrap'}>
-                    <p className={cx('committed-text')} style={sizeX < 768 ? { width: '100%' } : { width: '70%' }}>
+                    <p
+                        className={cx('committed-text')}
+                        style={sizeX < 768 ? { width: '100%' } : { width: '70%' }}
+                    >
                         Bằng tất cả những gì mình có, PESTNCLEAN hứa hẹn sẽ mang đến cho quý khách hàng những
                         trải nghiệm về dịch vụ chưa từng có. Lấy đam mê nhiệt huyết làm nguồn sức mạnh, và lấy
                         nụ cười của khách hàng làm mục tiêu theo đuổi, PESTNCLEAN đã và đang không ngừng hoàn
@@ -153,14 +161,16 @@ export default function WhyChooseMe() {
                             trội, mà nó còn được khẳng định bằng việc đã mang lại được gì cho cộng đồng!{' '}
                         </b>
                     </p>
-                    <div className={'flex justify-center items-center'}
-                         style={sizeX < 768 ? { width: '100%' } : { width: '30%' }} ref={logoCompany}>
+                    <div
+                        className={'flex justify-center items-center'}
+                        style={sizeX < 768 ? { width: '100%' } : { width: '30%' }}
+                        ref={logoCompany}
+                    >
                         <Image src={logo2.src} alt="Logo đơn của Pestnclean" width={173} height={216} />
                     </div>
                 </div>
                 <div className={`${cx('committed-wrapper-2')} ${sizeX < 768 ? 'flex-wrap' : ''} `}>
-                    <div className={'flex flex-row gap-5'}
-                         style={sizeX <= 768 ? { flexWrap: 'wrap' } : {}}>
+                    <div className={'flex flex-row gap-5'} style={sizeX <= 768 ? { flexWrap: 'wrap' } : {}}>
                         <div>
                             <h1 className={cx('committed-number')}>3+</h1>
                             <p className={cx('committed-des')}>Năm hoạt động</p>

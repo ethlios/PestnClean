@@ -8,11 +8,13 @@ import Link from 'next/link';
 import EastOutlinedIcon from '@mui/icons-material/EastOutlined';
 import { fadeIn } from '~/libs/orthers/animation';
 import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const cx = classNames.bind(styles);
 
-export interface IAppProps {
-}
+export interface IAppProps {}
 
 const otherService = [
     {
@@ -40,11 +42,7 @@ export default function ServiceAds(props: IAppProps) {
 
     const [currentService, setCurrentService] = useState<number>(-1);
     useEffect(() => {
-        gsap.fromTo(
-            serviceOther.current,
-            fadeIn(serviceOther.current)[0],
-            fadeIn(serviceOther.current)[1],
-        );
+        gsap.fromTo(serviceOther.current, fadeIn(serviceOther.current)[0], fadeIn(serviceOther.current)[1]);
     }, []);
 
     return (
@@ -83,10 +81,10 @@ export default function ServiceAds(props: IAppProps) {
                                         currentService === 0
                                             ? 'var(--secondary-dark)'
                                             : currentService === 1
-                                                ? 'var(--primary)'
-                                                : currentService === 2
-                                                    ? 'var(--secondary)'
-                                                    : '',
+                                            ? 'var(--primary)'
+                                            : currentService === 2
+                                            ? 'var(--secondary)'
+                                            : '',
                                 }}
                                 className={cx('service-description')}
                             >
