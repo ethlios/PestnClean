@@ -9,13 +9,15 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 
 import 'swiper/css';
+import Image from 'next/image';
 
 const cx = classNames.bind(styles);
 
 export interface IAppProps {
+    openFilter: boolean;
 }
 
-export default function ProductHot(props: IAppProps) {
+export default function ProductHot({ openFilter }: IAppProps) {
     const { sizeX } = useSize();
 
     return (
@@ -24,7 +26,7 @@ export default function ProductHot(props: IAppProps) {
             <div className={cx('horizontal-decor')}></div>
             <div className={cx('product-item')}>
                 <Swiper
-                    slidesPerView={sizeX < 768 ? 2 : sizeX < 1024 ? 3 : 4}
+                    slidesPerView={sizeX < 740 ? 2 : sizeX < 1024 ? 3 : !openFilter ? 4 : 3}
                     spaceBetween={sizeX < 768 ? 10 : sizeX < 1024 ? 20 : 30}
                     loop={true}
                     autoplay={{
@@ -33,18 +35,31 @@ export default function ProductHot(props: IAppProps) {
                         pauseOnMouseEnter: true,
                     }}
                     modules={[Autoplay]}
-                    style={{ padding: '0 0.45rem' }}
+                    style={{ padding: '0 3.2px 0 0' }}
                 >
                     {Array.from({ length: 6 }).map((_, index) => {
                         return (
                             <SwiperSlide key={index}>
                                 <Link href="/sanpham/detail" className={cx('content-item')}>
-                                    <div className={cx('item-img')}>
+                                    <div
+                                        className={cx('item-img')}
+                                        style={{
+                                            height: sizeX < 430 ? '160px' : '',
+                                        }}
+                                    >
+                                        {/* <Image src="" alt="" width={800} height={800} /> */}
                                         <div className={cx('item-event-hot')}>
                                             <p>Hot</p>
                                         </div>
                                     </div>
-                                    <p className={cx('item-category')}>SẢN PHẨM GIẢI PHÁP VỆ SINH</p>
+                                    <p
+                                        className={cx('item-category')}
+                                        style={{
+                                            fontSize: sizeX < 400 ? '10.5px' : '',
+                                        }}
+                                    >
+                                        SẢN PHẨM GIẢI PHÁP VỆ SINH
+                                    </p>
                                     <p className={cx('item-name')}>Tinh dầu Chanh Viet Oils</p>
                                     <p className={cx('item-price')}>
                                         1.100.000 <u>đ</u>

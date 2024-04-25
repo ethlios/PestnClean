@@ -11,8 +11,7 @@ import useSize from '~/libs/hooks/useSize';
 
 const cx = classNames.bind(styles);
 
-export interface IAppProps {
-}
+export interface IAppProps {}
 
 export default function CheckoutPanel(props: IAppProps) {
     const { sizeX } = useSize();
@@ -85,15 +84,6 @@ export default function CheckoutPanel(props: IAppProps) {
                     </div>
                 </div>
             </div>
-
-            {sizeX <= 800 && (
-                <hr
-                    style={{
-                        border: 'solid 1px rgba(0,0,0,0.5)',
-                        margin: '20px 0 0 0',
-                    }}
-                ></hr>
-            )}
         </div>
     );
 }

@@ -19,11 +19,11 @@ export default function FilterMenu({ title, subMenu }: IAppProps) {
     const toggleOpen = () => {
         setIsOpen(!isOpen);
     };
-    
+
     return (
         <>
             <div className={cx('menu-title')} onClick={toggleOpen}>
-                <h3>{title}</h3>
+                <p>{title}</p>
                 {isOpen ? <KeyboardArrowDownIcon /> : <KeyboardArrowRightIcon />}
             </div>
             {isOpen && (

@@ -3,28 +3,74 @@ import classNames from 'classnames/bind';
 import styles from '../product.module.scss';
 import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
 import Link from 'next/link';
+import TuneIcon from '@mui/icons-material/Tune';
+import useSize from '~/libs/hooks/useSize';
 
 const cx = classNames.bind(styles);
 
-export interface IAppProps {}
+export interface IAppProps {
+    setOpenFilter: any;
+    openFilter: boolean;
+}
 
-export default function AllProduct(props: IAppProps) {
+export default function AllProduct({ setOpenFilter, openFilter }: IAppProps) {
+    const { sizeX } = useSize();
+
     return (
         <div className={cx('product-event')}>
-            <h1>Tất cả sản phẩm</h1>
-            <div className={cx('horizontal-decor')}></div>
+            <div className={`${cx('title-filter')}`}>
+                <div>
+                    <h1>Tất cả sản phẩm</h1>
+                    <div className={cx('horizontal-decor')}></div>
+                </div>
+                <p className="opacity" onClick={() => setOpenFilter(!openFilter)}>
+                    {openFilter ? 'Đóng' : 'Mở'}
+                    <TuneIcon />
+                </p>
+            </div>
             <div className={cx('filter-list')}>
                 <p>Bộ lọc:</p>
                 <div>
                     Tất cả <ClearOutlinedIcon />
                 </div>
             </div>
-            <div className={cx('product-item-all')}>
-                {Array.from({ length: 9 }).map((_, index) => {
+            <div
+                className={cx('product-item-all2')}
+                style={{
+                    gap: sizeX < 740 ? '8px' : '',
+                }}
+            >
+                {Array.from({ length: 12 }).map((_, index) => {
                     return (
-                        <Link href="/sanpham/detail" className={cx('content-item')} key={index}>
-                            <div className={cx('item-img')}></div>
-                            <p className={cx('item-category')}>SẢN PHẨM GIẢI PHÁP VỆ SINH</p>
+                        <Link
+                            href="/sanpham/detail"
+                            className={cx('content-item2')}
+                            key={index}
+                            style={{
+                                width:
+                                    sizeX < 740
+                                        ? 'calc(100% /2 - 5px)'
+                                        : sizeX < 1024
+                                        ? ''
+                                        : !openFilter
+                                        ? 'calc(100% /4 - 19px)'
+                                        : '',
+                            }}
+                        >
+                            <div
+                                className={cx('item-img')}
+                                style={{
+                                    height: sizeX < 430 ? '160px' : '',
+                                }}
+                            ></div>
+                            <p
+                                className={cx('item-category')}
+                                style={{
+                                    fontSize: sizeX < 400 ? '10.5px' : '',
+                                }}
+                            >
+                                SẢN PHẨM GIẢI PHÁP VỆ SINH
+                            </p>
                             <p className={cx('item-name')}>Tinh dầu Chanh Viet Oils</p>
                             <p className={cx('item-price')}>
                                 1.100.000 <u>đ</u>
