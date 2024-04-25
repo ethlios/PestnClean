@@ -31,16 +31,26 @@
 
 // Product
 
+.productImg {
+    background-size: cover;
+    background-position: center;
+    height: 140px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    cursor: pointer;
+}
+
 .product-category {
     color: var(--primary);
-    font-size: 12px;
-    font-weight: 600;
+    font-size: 11.5px;
+    font-weight: 700;
     text-transform: uppercase;
+    letter-spacing: -0.3px;
 }
 
 .product-name {
-    font-size: 16px;
-    font-weight: 600;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
 }
 
 .product-info {
@@ -48,12 +58,23 @@
     justify-content: space-between;
 }
 
+.cart-list {
+    list-style-type: initial;
+    margin-left: 10px;
+
+    li {
+        font-size: 14.5px;
+        font-weight: 600;
+    }
+}
+
 .price {
     display: flex;
-    font-weight: 600;
+    font-weight: 700;
     color: var(--text-black);
     font-size: 14.5px;
     flex-wrap: wrap;
+    gap: 10px;
 }
 
 .price-default {
@@ -68,12 +89,23 @@
     text-transform: uppercase;
 }
 
+.imgHover {
+    transition: all ease 0.5s;
+
+    &:hover {
+        scale: 1.03;
+        opacity: 0.8;
+        transition: all ease 0.5s;
+    }
+}
+
 //Panel
 .title {
-    font-weight: 600;
+    font-weight: 700;
     text-decoration: 2px underline;
     letter-spacing: -0.5px;
     text-transform: uppercase;
+    font-size: 15px;
 }
 
 .description {
@@ -129,18 +161,18 @@
     margin-bottom: 8px;
 
     p {
-        font-weight: 600;
+        font-weight: 700;
     }
 
     span {
-        font-weight: 500;
+        font-weight: 600;
         letter-spacing: -0.5px;
     }
 }
 
 .hr-decor {
-    height: 1px;
-    background-color: var(--text-black);
+    height: 1.5px;
+    background-color: var(--primary);
     width: 100%;
     border-radius: 5px;
     margin: 20px 0 !important;
@@ -153,13 +185,22 @@
     div {
         display: flex;
         flex-direction: row;
-        gap: 5px;
+        gap: 8px;
         color: var(--text-black);
     }
 
     div p {
-        font-size: 14.5px;
+        font-size: 14px;
         font-weight: 600;
         letter-spacing: -0.2px;
+    }
+}
+
+.productHover {
+    transition: all ease 0.5s;
+
+    &:hover {
+        transition: all ease 0.5s;
+        background-color: rgba($color: #000000, $alpha: 0.08);
     }
 }

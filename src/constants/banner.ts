@@ -14,8 +14,8 @@ const aboutBanner = [
 ];
 
 const loginBanner = [
-    'https://res.cloudinary.com/dj2jarcxk/image/upload/v1713235358/login_2-min_lt0nin.jpg',
-    'https://res.cloudinary.com/dj2jarcxk/image/upload/v1713235361/login_1-min_oe1gae.jpg',
+    'https://res.cloudinary.com/dj2jarcxk/image/upload/v1714017676/carolinie-cavalli-Qw3w0oBH63s-unsplash_uwk9vq.jpg',
+    'https://res.cloudinary.com/dj2jarcxk/image/upload/v1714017257/marcelo-quinan-R3pUGn5YiTg-unsplash_gvl2ut.jpg',
 ];
 
 export { aboutBanner, loginBanner };

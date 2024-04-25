@@ -126,7 +126,7 @@
 }
 
 .choose-description {
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 600;
     letter-spacing: -0.5px;
     color: var(--text-black);
@@ -143,7 +143,7 @@
 
 .committed-text {
     width: 75%;
-    font-size: 21px;
+    font-size: 19px;
     font-weight: 600;
     letter-spacing: -1.1px;
     border-left: solid 4px var(--primary);
@@ -151,7 +151,7 @@
 
     b {
         font-weight: 600;
-        color: rgba(0, 0, 0, 0.5);
+        color: var(--secondary);
     }
 }
 

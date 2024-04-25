@@ -1,18 +1,16 @@
 'use client';
 
-import classNames from 'classnames/bind';
-import styles from './payment.module.scss';
-import { Button } from '@mui/material';
-import Link from 'next/link';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import classNames from 'classnames/bind';
+import Link from 'next/link';
 import DiscountCode from '~/components/Cart/DiscountCode';
 import SummaryProduct from '~/components/Cart/Payment/SummaryProduct';
 import ButtonCommon from '~/components/Orther/Button';
+import styles from './payment.module.scss';
 
 const cx = classNames.bind(styles);
 
-export interface IAppProps {
-}
+export interface IAppProps {}
 
 export default function CheckoutPanel(props: IAppProps) {
     return (

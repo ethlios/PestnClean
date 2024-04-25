@@ -1,23 +1,25 @@
 'use client';
 
-import { useState } from 'react';
-import classNames from 'classnames/bind';
-import styles from './cart.module.scss';
-import Image from 'next/image';
-import IconButton from '@mui/material/IconButton';
-import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
+import DeleteIcon from '@mui/icons-material/Delete';
 import RemoveIcon from '@mui/icons-material/Remove';
-import Toast from '~/components/Orther/Toast';
+import IconButton from '@mui/material/IconButton';
+import classNames from 'classnames/bind';
+import Link from 'next/link';
+import { useState } from 'react';
+import useSize from '~/libs/hooks/useSize';
+import styles from './cart.module.scss';
 
 const cx = classNames.bind(styles);
 
-export interface IAppProps {
-}
+export interface IAppProps {}
+
+const cart = ['', '', '', ''];
 
 export default function BuyItem(props: IAppProps) {
     const [quantity, setQuantity] = useState(1);
     const [showToast, setShowToast] = useState(false);
+    const { sizeX } = useSize();
 
     const handleAdd = () => {
         setQuantity(quantity + 1);
@@ -32,57 +34,200 @@ export default function BuyItem(props: IAppProps) {
     };
 
     return (
-        <>
-            <Toast
-                text={'Số lượng không thể nhỏ hơn 0'}
-                rule={'error'}
-                showToast={showToast}
-                setShowToast={setShowToast}
-            />
-            <div className={'shadow-lg rounded-md mb-3'}>
-                <div className={'grid grid-cols-6'}>
-                    <div className={'col-span-2 md:col-span-2 lg:col-span-1 p-4'}>
-                        <Image src={''} alt={''} width={1000} height={1500} className={'h-auto'} />
-                    </div>
-                    <div className={'col-span-4 md:col-span-4 lg:col-span-2 py-4'}>
-                        <div className={`flex flex-col justify-between w-full h-full`}>
-                            <div>
-                                <p className={cx('product-category')}>Sản phẩm giải pháp vệ sinh</p>
-                                <p className={cx('product-name')}>Tinh dầu chanh Viet Oils</p>
-                            </div>
-                            <span className={cx('price')}>
-                                <p className={'mr-2'}>Tổng: 2.200.000 đ</p>
-                                <p className={cx('price-default')}>(1.100.000 đ)</p>
-                            </span>
-                        </div>
-                    </div>
-                    <div className={'col-span-6 lg:col-span-1 lg:col-start-6'}>
-                        <div className={'flex justify-between lg:grid lg:grid-cols-2 lg:h-full'}>
-                            <div className={'lg:grid lg:justify-items-end lg:content-end lg:py-2'}>
-                                <IconButton>
-                                    <DeleteIcon />
-                                </IconButton>
-                            </div>
-                            <div
-                                className={'flex lg:flex-col lg:h-full *:flex *:items-center *:justify-center *:lg:h-1/3'}>
-                                <div className={'lg:border-l-2'}>
-                                    <IconButton onClick={handleAdd}>
-                                        <AddIcon />
-                                    </IconButton>
-                                </div>
-                                <div className={'lg:border-l-2 lg:border-y-2'}>
-                                    <p>{quantity}</p>
-                                </div>
-                                <div className={'lg:border-l-2'}>
-                                    <IconButton onClick={handleRemove}>
-                                        <RemoveIcon color={'inherit'} />
-                                    </IconButton>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        <div
+            style={{
+                height: sizeX <= 800 ? '480px' : 'calc(100vh - 60px)',
+                width: sizeX <= 800 ? '100vw' : 'calc(100% - 350px)',
+                padding: sizeX <= 600 ? '0 0 1px 0' : '',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: cart.length === 0 ? 'center' : 'normal',
+                alignItems: cart.length === 0 ? 'center' : 'normal',
+            }}
+        >
+            {cart.length === 0 ? (
+                <div
+                    style={{
+                        fontWeight: '500',
+                    }}
+                >
+                    Giỏ hàng trống!
                 </div>
-            </div>
-        </>
+            ) : (
+                <div
+                    style={{
+                        height: '100%',
+                        width: '100%',
+                        overflow: 'scroll',
+                        display: 'flex',
+                        flexDirection: 'column',
+                    }}
+                >
+                    {cart.map((list, index) => {
+                        return (
+                            <div
+                                key={index}
+                                style={{
+                                    display: 'flex',
+                                    flexDirection: sizeX <= 600 ? 'column' : 'row',
+                                    height: '180px',
+                                    borderBottom: 'solid 1.5px rgba(0,0,0,0.4)',
+                                    marginBottom: sizeX <= 600 ? '50px' : '',
+                                }}
+                            >
+                                <div
+                                    style={{
+                                        width: sizeX <= 600 ? '100vw' : 'calc(100% - 50px)',
+                                        padding: sizeX <= 440 ? '20px 10px' : '20px 30px',
+                                        display: 'flex',
+                                        flexDirection: 'row',
+                                        borderRight: sizeX <= 600 ? '' : 'solid 1.5px rgba(0,0,0,0.4)',
+                                    }}
+                                    className={cx({
+                                        productHover: sizeX > 992,
+                                    })}
+                                >
+                                    <Link href={``}>
+                                        <div
+                                            style={{
+                                                backgroundImage: ``,
+                                                width:
+                                                    sizeX < 500
+                                                        ? '100px'
+                                                        : sizeX < 800
+                                                        ? '120px'
+                                                        : sizeX < 950
+                                                        ? '100px'
+                                                        : '110px',
+                                            }}
+                                            className={cx({
+                                                imgHover: sizeX > 992,
+                                                productImg: true,
+                                            })}
+                                        ></div>
+                                    </Link>
+                                    <div
+                                        style={{
+                                            marginLeft: sizeX <= 440 ? '20px' : '30px',
+                                            fontSize: sizeX <= 490 ? '15px' : '16px',
+                                            wordBreak: 'break-word',
+                                            width: 'calc(100% - 100px)',
+                                            display: 'flex',
+                                            flexDirection: 'column',
+                                            justifyContent: 'space-between',
+                                        }}
+                                    >
+                                        <div
+                                            style={{
+                                                height: 'calc(100% - 15px)',
+                                                cursor: 'pointer',
+                                                display: 'flex',
+                                                gap: '3px',
+                                                flexDirection: 'column',
+                                            }}
+                                        >
+                                            <p className={cx('product-category')}>
+                                                Sản phẩm giải pháp vệ sinh
+                                            </p>
+                                            <p className={cx('product-name')}>Tinh dầu chanh Viet Oils</p>
+                                            <ul className={cx('cart-list')}>
+                                                <li>
+                                                    <p>Dung tích:</p>
+                                                </li>
+                                                <li>
+                                                    <p>Thành phần:</p>
+                                                </li>
+                                                <li>
+                                                    <p>Xuất sứ:</p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div
+                                            style={{
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                justifyContent: 'space-between',
+                                                height: '15px',
+                                                width: '100%',
+                                            }}
+                                        >
+                                            <p className={cx('price')}>
+                                                <b>Giá: </b>
+                                                1.100.000 <u>đ</u>
+                                            </p>
+                                            <IconButton>
+                                                <DeleteIcon />
+                                            </IconButton>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div
+                                    style={{
+                                        display: 'flex',
+                                        flexDirection: sizeX <= 600 ? 'row' : 'column',
+                                        width: sizeX <= 600 ? '100vw' : '50px',
+                                        borderBottom: sizeX <= 600 ? 'solid 1.5px rgba(0,0,0,0.4)' : '',
+                                    }}
+                                >
+                                    <div
+                                        style={{
+                                            height: '50px',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            fontSize: '16px',
+                                            width: sizeX <= 600 ? '50px' : '',
+                                        }}
+                                        className={cx({
+                                            productHover: sizeX > 992,
+                                        })}
+                                        // onClick={() => handleDeleteCart(list[0].id)}
+                                    >
+                                        <IconButton>
+                                            <RemoveIcon />
+                                        </IconButton>
+                                    </div>
+                                    <div
+                                        style={{
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            height: sizeX <= 600 ? '50px' : 'calc(100% - 100px)',
+                                            borderTop: sizeX <= 600 ? '' : 'solid 1.5px rgba(0,0,0,0.4)',
+                                            borderBottom: sizeX <= 600 ? '' : 'solid 1.5px rgba(0,0,0,0.4)',
+                                            borderLeft: sizeX <= 600 ? 'solid 1.5px rgba(0,0,0,0.4)' : '',
+                                            borderRight: sizeX <= 600 ? 'solid 1.5px rgba(0,0,0,0.4)' : '',
+                                            fontSize: '16px',
+                                            fontWeight: '600',
+                                            width: sizeX <= 600 ? 'calc(100vw - 100px)' : '',
+                                        }}
+                                    >
+                                        {list.length}
+                                    </div>
+                                    <div
+                                        style={{
+                                            height: '50px',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            cursor: 'pointer',
+                                            width: sizeX <= 600 ? '50px' : '',
+                                        }}
+                                        className={cx({
+                                            productHover: sizeX > 992,
+                                        })}
+                                        // onClick={() => handleAddProduct(list[0])}
+                                    >
+                                        <IconButton>
+                                            <AddIcon />
+                                        </IconButton>
+                                    </div>
+                                </div>
+                            </div>
+                        );
+                    })}
+                </div>
+            )}
+        </div>
     );
 }
