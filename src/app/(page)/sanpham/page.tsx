@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind';
 import styles from '../../../components/Product/product.module.scss';
-import FilterProduct from '~/components/Product/Filter';
+import FilterProduct from '~/components/Product/Main/Filter';
 import BannerProduct from '~/components/Product/Main/Banner';
 import Link from 'next/link';
 import CategoryIconProduct from '~/components/Product/Main/CategoryIcon';
@@ -10,7 +10,8 @@ import AllProduct from '~/components/Product/Main/AllProduct';
 
 const cx = classNames.bind(styles);
 
-export interface IAppProps {}
+export interface IAppProps {
+}
 
 export default function ProductPage(props: IAppProps) {
     return (
