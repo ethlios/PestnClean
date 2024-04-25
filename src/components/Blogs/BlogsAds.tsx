@@ -48,7 +48,11 @@ export default function BlogsAds(props: IAppProps) {
                 >
                     {blogsAds[0].description}
                 </p>
-                <ButtonCommon text="XEM THÊM" path={`blogs/${nameToLink(blogsAds[0].title)}`} fullWidth />
+                <ButtonCommon
+                    text="XEM THÊM"
+                    path={`blogs/${nameToLink(blogsAds[0].title)}`}
+                    fullWidth={sizeX < 800 ? true : false}
+                />
             </div>
             <div
                 className={cx('blogs-ads-content-2')}
