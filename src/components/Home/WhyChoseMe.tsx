@@ -187,7 +187,7 @@ export default function WhyChooseMe() {
                             width: '100%',
                             marginTop: sizeX < 1024 ? '20px' : '',
                             fontSize:
-                                sizeX < 500 ? '14px' : sizeX < 768 ? '16px' : sizeX < 1024 ? '18px' : '',
+                                sizeX < 500 ? '14px' : sizeX < 768 ? '16px' : sizeX < 1024 ? '17px' : '',
                             textAlign: 'justify',
                             paddingLeft: sizeX < 500 ? '10px' : '',
                         }}

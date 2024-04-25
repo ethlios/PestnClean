@@ -1,3 +1,5 @@
+'use client';
+
 import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
 import GoogleIcon from '@mui/icons-material/Google';
 import KeyboardBackspaceOutlinedIcon from '@mui/icons-material/KeyboardBackspaceOutlined';
@@ -9,6 +11,7 @@ import MaterialUISwitch from '~/common/Mui/MuiSwitch';
 import text2 from '../../../public/img/text-2.png';
 import text1 from '../../../public/img/text.png';
 import styles from './login.module.scss';
+import useSize from '~/libs/hooks/useSize';
 
 const cx = classNames.bind(styles);
 
@@ -20,15 +23,40 @@ export interface IAppProps {
 const textList = [text1.src, text2.src];
 
 export default function LoginForm({ theme, setTheme }: IAppProps) {
+    const { sizeX } = useSize();
+
     return (
-        <div className={cx('content-2')}>
+        <div
+            className={cx('content-2')}
+            style={{
+                width:
+                    sizeX < 480
+                        ? '100%'
+                        : sizeX < 600
+                        ? '80%'
+                        : sizeX < 700
+                        ? '70%'
+                        : sizeX < 900
+                        ? '60%'
+                        : sizeX < 1150
+                        ? '50%'
+                        : '',
+                position: sizeX < 900 ? 'absolute' : 'fixed',
+                right: sizeX < 900 ? 'auto' : '',
+            }}
+        >
             <div
                 className={cx('login-wrapper')}
                 style={{
-                    backgroundColor: !theme ? 'rgba(255, 255, 255, 0.3)' : 'rgba(0, 0, 0, 0.3)',
+                    backgroundColor: !theme ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.3)',
                 }}
             ></div>
-            <div className={cx('login-form')}>
+            <div
+                className={cx('login-form')}
+                style={{
+                    padding: sizeX < 480 ? '20px 30px' : sizeX < 1024 ? '20px 50px' : '',
+                }}
+            >
                 <div className={cx('form-header')}>
                     {/* Back home */}
                     <Link href="/" className={cx('back-home')}>
@@ -68,6 +96,7 @@ export default function LoginForm({ theme, setTheme }: IAppProps) {
                 <p
                     style={{
                         color: !theme ? 'var(--text-black)' : 'rgba(255,255,255,0.8)',
+                        width: '100%',
                     }}
                 >
                     Lorem Ipsum is simply dummy text of the printing and typesetting industry.

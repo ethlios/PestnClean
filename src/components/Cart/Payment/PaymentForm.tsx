@@ -13,6 +13,7 @@ import PaymentsIcon from '@mui/icons-material/Payments';
 import PaymentIcon from '@mui/icons-material/Payment';
 import PaymentsOutlinedIcon from '@mui/icons-material/PaymentsOutlined';
 import useSize from '~/libs/hooks/useSize';
+import Link from 'next/link';
 
 const cx = classNames.bind(styles);
 
@@ -102,12 +103,27 @@ export default function PaymentForm(props: IAppProps) {
                         placeholder="Ghi chú thêm"
                         className={`${cx('textarea')} ${classInput}`}
                     />
-                    <FormGroup>
-                        <FormControlLabel
-                            required
-                            control={<Checkbox />}
-                            label="Tôi đã đọc chính sách bảo mật và quyền riêng tư"
-                        />
+                    <FormGroup
+                        style={{
+                            display: 'flex',
+                            flexDirection: 'row',
+                            alignItems: 'center',
+                            fontSize: '13px',
+                            fontWeight: 600,
+                            color: 'var(--text-black)',
+                        }}
+                    >
+                        <Checkbox id="checkboxid" />
+                        <label htmlFor="checkboxid">
+                            Tôi đã đọc{' '}
+                            <Link
+                                href={'/hoidap?q=chinh-sach-bao-mat-thong-tin'}
+                                rel="noopener nooreferrer"
+                                target="_blank"
+                            >
+                                <u>chính sách bảo mật và quyền riêng tư</u>
+                            </Link>
+                        </label>
                     </FormGroup>
                 </div>
             </div>

@@ -10,6 +10,7 @@ import ButtonCommon from '~/components/Orther/Button';
 import { nameToLink } from '~/libs/orthers/nameToLink';
 import Link from 'next/link';
 import Image from 'next/image';
+import useSize from '~/libs/hooks/useSize';
 
 const cx = classNames.bind(styles);
 
@@ -18,6 +19,7 @@ export interface IAppProps {}
 export default function ServiceSuggest(props: IAppProps) {
     const [currentBlog, setCurrentBlog] = useState<number>(-1);
     const [suggestBlog, setSuggestBlog] = useState<any[]>([]);
+    const { sizeX } = useSize();
 
     useEffect(() => {
         if (randomList(blogs, 2).length > 0) {
@@ -26,12 +28,28 @@ export default function ServiceSuggest(props: IAppProps) {
     }, []);
 
     return (
-        <div className={cx('blog-suggest')}>
+        <div
+            className={cx('blog-suggest')}
+            style={{
+                width: sizeX < 780 ? '100%' : sizeX < 900 ? '50%' : '',
+            }}
+        >
             <h1>CÁC BÀI VIẾT KHÁC</h1>
-            <div className={cx('suggest-wrapper')}>
+            <div
+                className={cx('suggest-wrapper')}
+                style={{
+                    flexDirection: sizeX < 580 ? 'column' : sizeX < 780 ? 'row' : 'column',
+                }}
+            >
                 {suggestBlog.map((blog, index) => {
                     return (
-                        <div key={blog.id} className={cx('blog-item')}>
+                        <div
+                            key={blog.id}
+                            className={cx('blog-item')}
+                            style={{
+                                width: sizeX < 780 ? '100%' : '',
+                            }}
+                        >
                             <div
                                 className={cx('img-wrapper')}
                                 onMouseOver={() => setCurrentBlog(index)}

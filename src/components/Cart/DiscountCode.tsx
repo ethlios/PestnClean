@@ -7,7 +7,7 @@ export interface IAppProps {}
 
 export default function DiscountCode(props: IAppProps) {
     return (
-        <div className="my-3">
+        <div>
             <p className={cx('title')}>Mã khuyến mãi</p>
             <p className={cx('description')}>Nhập mã khuyến mãi để được giảm giá!</p>
             <div className={cx('input-code')}>

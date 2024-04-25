@@ -12,6 +12,8 @@ import { notFound, usePathname } from 'next/navigation';
 import { allServices } from '~/constants/service';
 import { nameToLink } from '~/libs/orthers/nameToLink';
 import Script from 'next/script';
+import useSize from '~/libs/hooks/useSize';
+import MenuMB from '~/components/Service/Detail/MenuMB';
 
 const cx = classNames.bind(styles);
 
@@ -20,6 +22,8 @@ export interface IAppProps {}
 export default function ServiceDetail(props: IAppProps) {
     const [blog, setBlog] = useState<any[]>([]);
     const pathname = usePathname();
+    const { sizeX } = useSize();
+    const [isOpen, setOpen] = useState<boolean>(false);
 
     useEffect(() => {
         const blogFilter = allServices.filter((blog) => {
@@ -52,6 +56,7 @@ export default function ServiceDetail(props: IAppProps) {
                     <p>Chi tiết</p>
                 </div>
                 <div className={cx('decoration')}></div>
+                {sizeX < 780 && <MenuMB blogs={blog} isOpen={isOpen} setOpen={setOpen} />}
                 {blog.length > 0 && <ServiceBanner src={blog[0].img} alt={blog[0].title} />}
                 {blog.length > 0 && <ServiceDetails blog={blog} />}
 
