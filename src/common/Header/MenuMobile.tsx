@@ -15,6 +15,7 @@ import AttachEmailOutlinedIcon from '@mui/icons-material/AttachEmailOutlined';
 import RingVolumeOutlinedIcon from '@mui/icons-material/RingVolumeOutlined';
 import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
+import { headerMobile, serviceMobile } from '~/constants/menu';
 
 const cx = classNames.bind(styles);
 
@@ -22,52 +23,6 @@ export interface IAppProps {
     open: boolean;
     setOpen: any;
 }
-
-const link = [
-    {
-        id: 1,
-        title: 'Trang Chủ',
-        pathname: '/',
-    },
-    {
-        id: 2,
-        title: 'Giới thiệu',
-        pathname: '/gioithieu',
-    },
-    {
-        id: 4,
-        title: 'Sản phẩm',
-        pathname: '/sanpham',
-    },
-    {
-        id: 5,
-        title: 'Blogs',
-        pathname: '/blogs',
-    },
-    {
-        id: 6,
-        title: 'Liên hệ',
-        pathname: '/lienhe',
-    },
-];
-
-const link2 = [
-    {
-        id: 1,
-        title: 'Kiểm soát côn trùng',
-        pathname: '/dichvu/kiem-soat-con-trung',
-    },
-    {
-        id: 2,
-        title: 'Dịch vụ vệ sinh',
-        pathname: '/dichvu/dich-vu-ve-sinh',
-    },
-    {
-        id: 3,
-        title: 'Giải pháp vệ sinh',
-        pathname: '/dichvu/giai-phap-ve-sinh',
-    },
-];
 
 export default function MenuMobile({ open, setOpen }: IAppProps) {
     const path = usePathname();
@@ -136,7 +91,7 @@ export default function MenuMobile({ open, setOpen }: IAppProps) {
                 {/* Link */}
                 <div className={'flex flex-col justify-center'}>
                     <ul className={cx('hdm-link')}>
-                        {link.map((item) => {
+                        {headerMobile.map((item) => {
                             return (
                                 <li
                                     key={item.id}
@@ -167,7 +122,7 @@ export default function MenuMobile({ open, setOpen }: IAppProps) {
                     <div className={cx('hdm-decor')}></div>
 
                     <div className={cx('hdm-link2')}>
-                        {link2.map((item) => {
+                        {serviceMobile.map((item) => {
                             return (
                                 <Link
                                     key={item.id}

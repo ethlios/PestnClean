@@ -15,7 +15,8 @@ const cx = classNames.bind(styles);
 
 gsap.registerPlugin(ScrollTrigger);
 
-export interface IAppProps {}
+export interface IAppProps {
+}
 
 export default function AboutCPPage(props: IAppProps) {
     const titleRef = useRef<any>();
@@ -71,12 +72,7 @@ export default function AboutCPPage(props: IAppProps) {
     }, []);
 
     return (
-        <div
-            className={'container cpmount'}
-            style={{
-                overflowX: 'hidden',
-            }}
-        >
+        <div className={'container cpmount overflow-x-hidden'}>
             <AboutBanner />
 
             {/*Header title*/}

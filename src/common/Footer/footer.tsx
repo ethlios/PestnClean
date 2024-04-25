@@ -5,7 +5,6 @@ import { Checkbox } from '@mui/material';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import menImg from '../../../public/img/men.jpg';
 import logo from '../../../public/img/logo.png';
 import styles from './footer.module.scss';
 import ButtonCommon from '~/components/Orther/Button';
@@ -21,7 +20,8 @@ import $ from 'jquery';
 
 const cx = classNames.bind(styles);
 
-export interface FooterProps {}
+export interface FooterProps {
+}
 
 export default function Footer(props: FooterProps) {
     const [checked, setChecked] = useState<boolean>(false);
@@ -109,8 +109,6 @@ export default function Footer(props: FooterProps) {
                     className={cx('footer-main')}
                     style={{
                         flexDirection: sizeX < 900 ? 'column' : 'row',
-                        gap: '20px',
-                        flexWrap: 'nowrap',
                     }}
                 >
                     <div
@@ -148,10 +146,8 @@ export default function Footer(props: FooterProps) {
                         </div>
                     </div>
                     <div
-                        className={cx('link')}
+                        className={`${cx('link')} flex justify-between`}
                         style={{
-                            display: 'flex',
-                            justifyContent: 'space-between',
                             width: sizeX < 900 ? '100%' : '50%',
                             flexDirection: sizeX < 576 ? 'column' : 'row',
                             gap: sizeX < 576 ? '20px' : '0px',
@@ -175,14 +171,7 @@ export default function Footer(props: FooterProps) {
                                 }}
                             ></div>
                             {sizeX < 576 ? (
-                                <div
-                                    className="sv-footer"
-                                    style={{
-                                        display: 'flex',
-                                        flexDirection: 'column',
-                                        gap: '10px',
-                                    }}
-                                >
+                                <div className="sv-footer flex flex-col gap-3">
                                     <Link href={'/dichvu/kiem-soat-con-trung'}>Kiểm soát côn trùng</Link>
                                     <Link href={'/dichvu/dich-vu-ve-sinh'}>Dịch vụ vệ sinh</Link>
                                     <Link href={'/dichvu/giai-phap-ve-sinh'}>Giải pháp vệ sinh</Link>
@@ -213,14 +202,7 @@ export default function Footer(props: FooterProps) {
                                 }}
                             ></div>
                             {sizeX < 576 ? (
-                                <div
-                                    className="cs-footer"
-                                    style={{
-                                        display: 'flex',
-                                        flexDirection: 'column',
-                                        gap: '10px',
-                                    }}
-                                >
+                                <div className="cs-footer flex flex-col gap-3">
                                     <Link href={'/hoidap?q=chinh-sach-bao-mat-thong-tin'}>
                                         Bảo mật, thông tin
                                     </Link>
@@ -257,14 +239,7 @@ export default function Footer(props: FooterProps) {
                                 }}
                             ></div>
                             {sizeX < 576 ? (
-                                <div
-                                    className="other-footer"
-                                    style={{
-                                        display: 'flex',
-                                        flexDirection: 'column',
-                                        gap: '10px',
-                                    }}
-                                >
+                                <div className="other-footer flex flex-col gap-3">
                                     <Link href={'/hoidap'}>Hỏi đáp</Link>
                                     <Link href="/lienhe">Liên hệ</Link>
                                 </div>

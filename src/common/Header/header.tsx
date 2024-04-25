@@ -15,44 +15,12 @@ import MoreBtn from './More';
 import useScroll from '~/libs/hooks/useScroll';
 import { IconButton } from '@mui/material';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
-import useSize from '~/libs/hooks/useSize';
-
-const link = [
-    {
-        id: 1,
-        title: 'Trang Chủ',
-        pathname: '/',
-    },
-    {
-        id: 2,
-        title: 'Giới thiệu',
-        pathname: '/gioithieu',
-    },
-    {
-        id: 3,
-        title: 'Dịch vụ',
-        // pathname: '/dichvu',
-    },
-    {
-        id: 4,
-        title: 'Sản phẩm',
-        pathname: '/sanpham',
-    },
-    {
-        id: 5,
-        title: 'Blogs',
-        pathname: '/blogs',
-    },
-    {
-        id: 6,
-        title: 'Liên hệ',
-        pathname: '/lienhe',
-    },
-];
+import { headerMenu } from '~/constants/menu';
 
 const cx = classNames.bind(styles);
 
-export interface HeaderProps {}
+export interface HeaderProps {
+}
 
 export default function Header(props: HeaderProps) {
     const path = usePathname();
@@ -62,7 +30,6 @@ export default function Header(props: HeaderProps) {
     const [searchValue, setSearchValue] = useState<string>('');
     const router = useRouter();
     const wheel: boolean = useScroll();
-    const { sizeX } = useSize();
 
     useEffect(() => {
         const scroll = () => {
@@ -124,7 +91,7 @@ export default function Header(props: HeaderProps) {
                 </Link>
                 <div className={'flex items-center'}>
                     <ul className={cx('link')}>
-                        {link.map((item) => {
+                        {headerMenu.map((item) => {
                             return (
                                 <li key={item.id}>
                                     {!!item.pathname ? (

@@ -16,7 +16,7 @@ import {
 } from '@mui/material';
 import classNames from 'classnames/bind';
 import { useEffect, useRef, useState } from 'react';
-import { services } from '~/constants/common';
+import { services } from '~/constants/menu';
 import ButtonCommon from '../Orther/Button';
 import styles from './contact.module.scss';
 import Toast from '../Orther/Toast';
@@ -216,17 +216,17 @@ export default function FormContactPage({ setData, setIsConfirm, data, setShowTo
                 <div className={cx('service-title')}>
                     {lists.length > 0
                         ? lists.map((list: any, index: number) => {
-                              return (
-                                  <ButtonCommon
-                                      key={list.id}
-                                      text={list.title}
-                                      rule2={defaulListValue === index ? 'rule-1' : 'rule-2'}
-                                      setDefaultListValue={setDefaultListValue}
-                                      index2={index}
-                                      setDefaultList={setDefaultList}
-                                  />
-                              );
-                          })
+                            return (
+                                <ButtonCommon
+                                    key={list.id}
+                                    text={list.title}
+                                    rule2={defaulListValue === index ? 'rule-1' : 'rule-2'}
+                                    setDefaultListValue={setDefaultListValue}
+                                    index2={index}
+                                    setDefaultList={setDefaultList}
+                                />
+                            );
+                        })
                         : ''}
                 </div>
             </div>

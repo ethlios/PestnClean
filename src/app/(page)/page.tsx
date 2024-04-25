@@ -9,19 +9,10 @@ import BannerHomePage from '~/components/Home/banner';
 export default function Home() {
     return (
         <main className="cpmount">
-            <div
-                style={{
-                    overflowX: 'hidden',
-                }}
-            >
+            <div className={'overflow-x-hidden'}>
                 <BannerHomePage />
             </div>
-            <div
-                className={'container'}
-                style={{
-                    overflowX: 'hidden',
-                }}
-            >
+            <div className={'container overflow-x-hidden'}>
                 <ServiceAds />
                 <WhyChooseMe />
                 <ImageWork />

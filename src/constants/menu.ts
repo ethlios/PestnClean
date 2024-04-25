@@ -1,3 +1,82 @@
+const headerMenu = [
+    {
+        id: 1,
+        title: 'Trang Chủ',
+        pathname: '/',
+    },
+    {
+        id: 2,
+        title: 'Giới thiệu',
+        pathname: '/gioithieu',
+    },
+    {
+        id: 3,
+        title: 'Dịch vụ',
+        // pathname: '/dichvu',
+    },
+    {
+        id: 4,
+        title: 'Sản phẩm',
+        pathname: '/sanpham',
+    },
+    {
+        id: 5,
+        title: 'Blogs',
+        pathname: '/blogs',
+    },
+    {
+        id: 6,
+        title: 'Liên hệ',
+        pathname: '/lienhe',
+    },
+];
+
+const headerMobile = [
+    {
+        id: 1,
+        title: 'Trang Chủ',
+        pathname: '/',
+    },
+    {
+        id: 2,
+        title: 'Giới thiệu',
+        pathname: '/gioithieu',
+    },
+    {
+        id: 4,
+        title: 'Sản phẩm',
+        pathname: '/sanpham',
+    },
+    {
+        id: 5,
+        title: 'Blogs',
+        pathname: '/blogs',
+    },
+    {
+        id: 6,
+        title: 'Liên hệ',
+        pathname: '/lienhe',
+    },
+];
+
+const serviceMobile = [
+    {
+        id: 1,
+        title: 'Kiểm soát côn trùng',
+        pathname: '/dichvu/kiem-soat-con-trung',
+    },
+    {
+        id: 2,
+        title: 'Dịch vụ vệ sinh',
+        pathname: '/dichvu/dich-vu-ve-sinh',
+    },
+    {
+        id: 3,
+        title: 'Giải pháp vệ sinh',
+        pathname: '/dichvu/giai-phap-ve-sinh',
+    },
+];
+
 const services = [
     {
         id: 1,
@@ -153,4 +232,9 @@ const services = [
     },
 ];
 
-export { services };
+export {
+    services,
+    headerMenu,
+    headerMobile,
+    serviceMobile,
+};

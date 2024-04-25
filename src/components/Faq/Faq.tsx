@@ -3,48 +3,12 @@ import styles from './faq.module.scss';
 import Question from './Question';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import Link from 'next/link';
+import { questionsDaily, questionsCommon } from '~/constants/faq';
 
 const cx = classNames.bind(styles);
 
-export interface IFaqProps {}
-
-const questionsDaily = [
-    {
-        text: 'Phí vận chuyện?',
-        answer: '',
-    },
-    {
-        text: 'Hình thức thanh toán?',
-        answer: '',
-    },
-    {
-        text: 'Bao lâu tôi nhận được hàng?',
-        answer: '',
-    },
-    {
-        text: 'Hướng dẫn mua hàng?',
-        answer: '',
-    },
-];
-
-const questionsCommon = [
-    {
-        text: 'Chính sách bảo mật thông tin.',
-        answer: '',
-    },
-    {
-        text: 'Chính sách bảo hành đổi trả.',
-        answer: '',
-    },
-    {
-        text: 'Hoàn trả và hoàn tiền.',
-        answer: '',
-    },
-    {
-        text: 'Kiểm tra trạng thái đơn hàng.',
-        answer: '',
-    },
-];
+export interface IFaqProps {
+}
 
 export default function FaqCPPage(props: IFaqProps) {
     return (

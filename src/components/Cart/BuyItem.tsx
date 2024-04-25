@@ -12,7 +12,8 @@ import styles from './cart.module.scss';
 
 const cx = classNames.bind(styles);
 
-export interface IAppProps {}
+export interface IAppProps {
+}
 
 const cart = ['', '', '', ''];
 
@@ -34,16 +35,14 @@ export default function BuyItem(props: IAppProps) {
     };
 
     return (
-        <div
-            style={{
-                height: sizeX <= 800 ? '480px' : 'calc(100vh - 60px)',
-                width: sizeX <= 800 ? '100vw' : 'calc(100% - 350px)',
-                padding: sizeX <= 600 ? '0 0 1px 0' : '',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: cart.length === 0 ? 'center' : 'normal',
-                alignItems: cart.length === 0 ? 'center' : 'normal',
-            }}
+        <div className={'flex flex-col'}
+             style={{
+                 height: sizeX <= 800 ? '480px' : 'calc(100vh - 60px)',
+                 width: sizeX <= 800 ? '100vw' : 'calc(100% - 350px)',
+                 padding: sizeX <= 600 ? '0 0 1px 0' : '',
+                 justifyContent: cart.length === 0 ? 'center' : 'normal',
+                 alignItems: cart.length === 0 ? 'center' : 'normal',
+             }}
         >
             {cart.length === 0 ? (
                 <div
@@ -54,15 +53,7 @@ export default function BuyItem(props: IAppProps) {
                     Giỏ hàng trống!
                 </div>
             ) : (
-                <div
-                    style={{
-                        height: '100%',
-                        width: '100%',
-                        overflow: 'scroll',
-                        display: 'flex',
-                        flexDirection: 'column',
-                    }}
-                >
+                <div className={'w-full h-full flex flex-col overflow-scroll'}>
                     {cart.map((list, index) => {
                         return (
                             <div
@@ -95,10 +86,10 @@ export default function BuyItem(props: IAppProps) {
                                                     sizeX < 500
                                                         ? '100px'
                                                         : sizeX < 800
-                                                        ? '120px'
-                                                        : sizeX < 950
-                                                        ? '100px'
-                                                        : '110px',
+                                                            ? '120px'
+                                                            : sizeX < 950
+                                                                ? '100px'
+                                                                : '110px',
                                             }}
                                             className={cx({
                                                 imgHover: sizeX > 992,
@@ -106,16 +97,13 @@ export default function BuyItem(props: IAppProps) {
                                             })}
                                         ></div>
                                     </Link>
-                                    <div
-                                        style={{
-                                            marginLeft: sizeX <= 440 ? '20px' : '30px',
-                                            fontSize: sizeX <= 490 ? '15px' : '16px',
-                                            wordBreak: 'break-word',
-                                            width: 'calc(100% - 100px)',
-                                            display: 'flex',
-                                            flexDirection: 'column',
-                                            justifyContent: 'space-between',
-                                        }}
+                                    <div className={'flex flex-col justify-between'}
+                                         style={{
+                                             marginLeft: sizeX <= 440 ? '20px' : '30px',
+                                             fontSize: sizeX <= 490 ? '15px' : '16px',
+                                             wordBreak: 'break-word',
+                                             width: 'calc(100% - 100px)',
+                                         }}
                                     >
                                         <div
                                             style={{
@@ -142,14 +130,10 @@ export default function BuyItem(props: IAppProps) {
                                                 </li>
                                             </ul>
                                         </div>
-                                        <div
-                                            style={{
-                                                display: 'flex',
-                                                alignItems: 'center',
-                                                justifyContent: 'space-between',
-                                                height: '15px',
-                                                width: '100%',
-                                            }}
+                                        <div className={'w-full flex justify-between items-center'}
+                                             style={{
+                                                 height: '15px',
+                                             }}
                                         >
                                             <p className={cx('price')}>
                                                 <b>Giá: </b>
@@ -187,20 +171,17 @@ export default function BuyItem(props: IAppProps) {
                                             <RemoveIcon />
                                         </IconButton>
                                     </div>
-                                    <div
-                                        style={{
-                                            display: 'flex',
-                                            alignItems: 'center',
-                                            justifyContent: 'center',
-                                            height: sizeX <= 600 ? '50px' : 'calc(100% - 100px)',
-                                            borderTop: sizeX <= 600 ? '' : 'solid 1.5px rgba(0,0,0,0.4)',
-                                            borderBottom: sizeX <= 600 ? '' : 'solid 1.5px rgba(0,0,0,0.4)',
-                                            borderLeft: sizeX <= 600 ? 'solid 1.5px rgba(0,0,0,0.4)' : '',
-                                            borderRight: sizeX <= 600 ? 'solid 1.5px rgba(0,0,0,0.4)' : '',
-                                            fontSize: '16px',
-                                            fontWeight: '600',
-                                            width: sizeX <= 600 ? 'calc(100vw - 100px)' : '',
-                                        }}
+                                    <div className={'flex justify-center items-center'}
+                                         style={{
+                                             height: sizeX <= 600 ? '50px' : 'calc(100% - 100px)',
+                                             borderTop: sizeX <= 600 ? '' : 'solid 1.5px rgba(0,0,0,0.4)',
+                                             borderBottom: sizeX <= 600 ? '' : 'solid 1.5px rgba(0,0,0,0.4)',
+                                             borderLeft: sizeX <= 600 ? 'solid 1.5px rgba(0,0,0,0.4)' : '',
+                                             borderRight: sizeX <= 600 ? 'solid 1.5px rgba(0,0,0,0.4)' : '',
+                                             fontSize: '16px',
+                                             fontWeight: '600',
+                                             width: sizeX <= 600 ? 'calc(100vw - 100px)' : '',
+                                         }}
                                     >
                                         {list.length}
                                     </div>

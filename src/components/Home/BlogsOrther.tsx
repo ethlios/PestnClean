@@ -5,7 +5,6 @@ import classNames from 'classnames/bind';
 import styles from './home.module.scss';
 import ButtonCommon from '../Orther/Button';
 import Image from 'next/image';
-import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import { nameToLink } from '~/libs/orthers/nameToLink';
 import Link from 'next/link';
 import { IconButton } from '@mui/material';
@@ -16,7 +15,8 @@ import useSize from '~/libs/hooks/useSize';
 
 const cx = classNames.bind(styles);
 
-export interface IAppProps {}
+export interface IAppProps {
+}
 
 export default function BlogOthers(props: IAppProps) {
     const [blogHover, setBlogHover] = useState<number>(-1);
@@ -85,7 +85,6 @@ export default function BlogOthers(props: IAppProps) {
                                     className={cx('content-hover')}
                                     style={{
                                         height: blogHover === index ? '100%' : '0px',
-                                        transition: 'all ease .5s',
                                         padding: blogHover === index ? '10px 0 ' : '0px',
                                         borderTop: blogHover === index ? 'solid 2px var(--secondary)' : '',
                                     }}

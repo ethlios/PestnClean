@@ -308,6 +308,7 @@
 
 .content-hover {
     overflow: hidden;
+    transition: all ease .5s;
 
     p {
         font-size: 14.5px;
@@ -457,6 +458,7 @@
     font-weight: 600;
     font-size: 16px;
 }
+
 .item-price {
     font-size: 14px;
     color: var(--text-black);

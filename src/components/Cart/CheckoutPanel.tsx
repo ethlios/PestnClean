@@ -8,11 +8,11 @@ import DiscountCode from '~/components/Cart/DiscountCode';
 import ButtonCommon from '../Orther/Button';
 import styles from './cart.module.scss';
 import useSize from '~/libs/hooks/useSize';
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
 const cx = classNames.bind(styles);
 
-export interface IAppProps {}
+export interface IAppProps {
+}
 
 export default function CheckoutPanel(props: IAppProps) {
     const { sizeX } = useSize();
@@ -66,14 +66,7 @@ export default function CheckoutPanel(props: IAppProps) {
                         4.400.000 <u>đ</u>
                     </p>
                 </div>
-                <div
-                    className="my-5"
-                    style={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        gap: '10px',
-                    }}
-                >
+                <div className={'my-5 flex flex-col gap-3'}>
                     <Link href={'/giohang/thanhtoan'}>
                         <ButtonCommon text="THANH TOÁN" fullWidth />
                     </Link>

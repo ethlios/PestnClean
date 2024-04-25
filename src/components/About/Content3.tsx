@@ -11,7 +11,8 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import useSize from '~/libs/hooks/useSize';
 
-export interface IAppProps {}
+export interface IAppProps {
+}
 
 const cx = classNames.bind(styles);
 
@@ -98,10 +99,6 @@ export default function Content3(props: IAppProps) {
                         className={cx('text-content-tired')}
                         style={{
                             width: sizeX < 768 ? '100%' : sizeX < 950 ? '45%' : '35%',
-                            display: 'flex',
-                            flexDirection: 'column',
-                            justifyContent: 'center',
-                            height: '100%',
                             paddingLeft: sizeX < 768 ? '0' : sizeX < 800 ? '20px' : '50px',
                         }}
                     >
@@ -156,7 +153,7 @@ export default function Content3(props: IAppProps) {
                                             width: sizeX < 768 ? '100%' : '',
                                         }}
                                     >
-                                        <div className={cx('img-decor')}> </div>
+                                        <div className={cx('img-decor')}></div>
                                         <div className={cx('img-item-main')}>
                                             <div className={cx('img-icon')}>
                                                 <p style={{}}>0{index + 1}.</p>
