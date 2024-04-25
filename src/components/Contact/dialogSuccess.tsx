@@ -4,6 +4,7 @@ import Image from 'next/image';
 import sendEmailImg from '../../../public/img/Asset 1.png';
 import styles from './contact.module.scss';
 import classNames from 'classnames/bind';
+import useSize from '~/libs/hooks/useSize';
 
 const cx = classNames.bind(styles);
 
@@ -14,6 +15,8 @@ export interface IAppProps {
 }
 
 export default function DialogSuccess({ setIsConfirm, setData, item }: IAppProps) {
+    const { sizeX } = useSize();
+
     const handleDowloadImg = () => {
         item.style.padding = '30px';
         item.childNodes[7].style.display = 'none';
@@ -56,10 +59,34 @@ export default function DialogSuccess({ setIsConfirm, setData, item }: IAppProps
                     setData('');
                 }}
             >
-                <div className={cx('dialog-content')} onClick={(e) => e.stopPropagation()}>
-                    <Image src={sendEmailImg.src} alt="email pestnclean" width={230} height={230} />
-                    <p className={cx('dialog-title')}>Yêu cầu của bạn đã được gửi thành công!</p>
-                    <p className={cx('dialog-text')}>
+                <div
+                    className={cx('dialog-content')}
+                    onClick={(e) => e.stopPropagation()}
+                    style={{
+                        padding: sizeX < 500 ? '20px' : '',
+                    }}
+                >
+                    <Image
+                        src={sendEmailImg.src}
+                        alt="email pestnclean"
+                        width={sizeX < 500 ? 180 : 230}
+                        height={230}
+                    />
+                    <p
+                        className={cx('dialog-title')}
+                        style={{
+                            fontSize: sizeX < 500 ? '16px' : '',
+                            textAlign: 'center',
+                        }}
+                    >
+                        Yêu cầu của bạn đã được gửi thành công!
+                    </p>
+                    <p
+                        className={cx('dialog-text')}
+                        style={{
+                            fontSize: sizeX < 500 ? '13px' : '',
+                        }}
+                    >
                         Chúng tôi đã tiếp nhận yêu cầu của bạn. Chúng tôi sẽ gấp rút liên lạc lại với bạn ngay
                         khi có thể. Nếu có sự thay đổi hãy gọi ngay đến số{' '}
                         <a
@@ -83,7 +110,7 @@ export default function DialogSuccess({ setIsConfirm, setData, item }: IAppProps
                             }}
                             onClick={handleDowloadImg}
                         >
-                            In thông tin cuộc hẹn
+                            {sizeX < 580 ? 'Print' : 'In thông tin cuộc hẹn'}
                         </Button>
                         <Button
                             variant="contained"
@@ -97,7 +124,7 @@ export default function DialogSuccess({ setIsConfirm, setData, item }: IAppProps
                                 setIsConfirm(false);
                             }}
                         >
-                            quay Trở lại
+                            {sizeX < 580 ? 'Back' : 'quay Trở lại'}
                         </Button>
                     </div>
                 </div>

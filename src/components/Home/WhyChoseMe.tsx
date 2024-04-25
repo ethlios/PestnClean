@@ -37,14 +37,14 @@ const solutions = [
         title: 'PHÂN TÍCH CHUẨN BRC, HACCP',
         img: '',
         description:
-            'Pestnclean Care sẵn sàng hỗ trợ các doanh nghiệp có yêu cầu tuân thủ các tiêu chuẩn: BRC, HACCP, ISO,… cùng các dịch vụ báo cáo.',
+            'Pestnclean sẵn sàng hỗ trợ các doanh nghiệp có yêu cầu tuân thủ các tiêu chuẩn: BRC, HACCP, ISO,… cùng các dịch vụ báo cáo.',
     },
     {
         id: 4,
-        title: 'PHÂN TÍCH CHUẨN BRC, HACCP',
+        title: 'TRIỂN KHAI DỊCH VỤ NHANH',
         img: '',
         description:
-            'Pestnclean Care sẵn sàng hỗ trợ các doanh nghiệp có yêu cầu tuân thủ các tiêu chuẩn: BRC, HACCP, ISO,… cùng các dịch vụ báo cáo.',
+            'Với đội ngũ nhân viên được đào tạo chuyên sâu, PestnClean luôn sẵn sàng đáp ứng nhanh chóng và kịp thời với mọi yêu cầu từ khách hàng.',
     },
 ];
 
@@ -131,6 +131,7 @@ export default function WhyChooseMe() {
                                             style={{
                                                 marginBottom: '15px',
                                                 fontSize: sizeX < 550 ? '12.5px' : '',
+                                                textAlign: 'justify',
                                             }}
                                         >
                                             {item.description}
@@ -183,11 +184,11 @@ export default function WhyChooseMe() {
                     <p
                         className={cx('committed-text')}
                         style={{
-                            width: sizeX < 1024 ? '100%' : '70%',
+                            width: '100%',
                             marginTop: sizeX < 1024 ? '20px' : '',
                             fontSize:
                                 sizeX < 500 ? '14px' : sizeX < 768 ? '16px' : sizeX < 1024 ? '18px' : '',
-                            textAlign: sizeX < 1024 ? 'justify' : 'left',
+                            textAlign: 'justify',
                             paddingLeft: sizeX < 500 ? '10px' : '',
                         }}
                     >

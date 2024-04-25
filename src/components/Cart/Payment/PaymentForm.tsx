@@ -1,3 +1,5 @@
+'use client';
+
 import classNames from 'classnames/bind';
 import styles from './payment.module.scss';
 import Box from '@mui/material/Box';
@@ -10,15 +12,17 @@ import Checkbox from '@mui/material/Checkbox';
 import PaymentsIcon from '@mui/icons-material/Payments';
 import PaymentIcon from '@mui/icons-material/Payment';
 import PaymentsOutlinedIcon from '@mui/icons-material/PaymentsOutlined';
+import useSize from '~/libs/hooks/useSize';
 
 const cx = classNames.bind(styles);
 
-export interface IAppProps {
-}
+export interface IAppProps {}
 
 const classInput = 'w-full lg:w-5/6';
 
 export default function PaymentForm(props: IAppProps) {
+    const { sizeX } = useSize();
+
     return (
         <div>
             <div className={'my-3'}>
@@ -93,8 +97,11 @@ export default function PaymentForm(props: IAppProps) {
                             <MenuItem value={'phuong3'}>Phường 3</MenuItem>
                         </SelectField>
                     </Box>
-                    <textarea spellCheck="false" placeholder="Ghi chú thêm"
-                              className={`${cx('textarea')} ${classInput}`} />
+                    <textarea
+                        spellCheck="false"
+                        placeholder="Ghi chú thêm"
+                        className={`${cx('textarea')} ${classInput}`}
+                    />
                     <FormGroup>
                         <FormControlLabel
                             required

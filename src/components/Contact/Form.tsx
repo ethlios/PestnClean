@@ -116,16 +116,31 @@ export default function FormContactPage({ setData, setIsConfirm, data, setShowTo
     };
 
     return (
-        <div className={cx('form')} style={sizeX < 768 ? { width: '100%' } : { width: '50%' }}>
-            <h1>
+        <div className={cx('form')} style={sizeX < 768 ? { width: '100%' } : { width: '52%' }}>
+            <h1
+                style={{
+                    marginTop: sizeX < 768 ? '50px' : '',
+                }}
+            >
                 MỘT DỰ ÁN VỚI <br />
                 PESTNCLEAN?
             </h1>
 
             {/* Progress */}
-            <div className={cx('progress')}>
+            <div
+                className={cx('progress')}
+                style={{
+                    gap: sizeX < 500 ? '20px' : '',
+                }}
+            >
                 <div className={cx('progress-1')}>
-                    <p>1. NHẬP THÔNG TIN</p>
+                    <p
+                        style={{
+                            fontSize: sizeX < 500 ? '14.5px' : '',
+                        }}
+                    >
+                        1. NHẬP THÔNG TIN
+                    </p>
                     <div className={cx('progress-value')}>
                         <div
                             className={cx('progress-item-first')}
@@ -166,7 +181,13 @@ export default function FormContactPage({ setData, setIsConfirm, data, setShowTo
                     </div>
                 </div>
                 <div className={cx('progress-1')}>
-                    <p>2. XÁC NHẬN THÔNG TIN</p>
+                    <p
+                        style={{
+                            fontSize: sizeX < 500 ? '14.5px' : '',
+                        }}
+                    >
+                        2. XÁC NHẬN
+                    </p>
                     <div className={cx('progress-value')}></div>
                 </div>
             </div>
@@ -195,17 +216,17 @@ export default function FormContactPage({ setData, setIsConfirm, data, setShowTo
                 <div className={cx('service-title')}>
                     {lists.length > 0
                         ? lists.map((list: any, index: number) => {
-                            return (
-                                <ButtonCommon
-                                    key={list.id}
-                                    text={list.title}
-                                    rule2={defaulListValue === index ? 'rule-1' : 'rule-2'}
-                                    setDefaultListValue={setDefaultListValue}
-                                    index2={index}
-                                    setDefaultList={setDefaultList}
-                                />
-                            );
-                        })
+                              return (
+                                  <ButtonCommon
+                                      key={list.id}
+                                      text={list.title}
+                                      rule2={defaulListValue === index ? 'rule-1' : 'rule-2'}
+                                      setDefaultListValue={setDefaultListValue}
+                                      index2={index}
+                                      setDefaultList={setDefaultList}
+                                  />
+                              );
+                          })
                         : ''}
                 </div>
             </div>
@@ -323,6 +344,7 @@ export default function FormContactPage({ setData, setIsConfirm, data, setShowTo
                             flexDirection: 'row',
                             justifyContent: 'space-between',
                             marginTop: '20px',
+                            gap: '10px',
                         }}
                     >
                         <Button
@@ -331,6 +353,8 @@ export default function FormContactPage({ setData, setIsConfirm, data, setShowTo
                                 fontSize: '14px',
                                 fontWeight: '600',
                                 border: '2px solid',
+                                width: '50%',
+                                height: '45px',
                             }}
                             onClick={handleReset}
                         >
@@ -341,6 +365,8 @@ export default function FormContactPage({ setData, setIsConfirm, data, setShowTo
                             style={{
                                 fontSize: '14px',
                                 fontWeight: '600',
+                                height: '45px',
+                                width: '50%',
                             }}
                             type="submit"
                         >

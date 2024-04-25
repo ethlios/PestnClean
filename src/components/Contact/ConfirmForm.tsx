@@ -15,6 +15,7 @@ import logo from '../../../public/img/logo.png';
 import emailjs from '@emailjs/browser';
 import DialogSuccess from './dialogSuccess';
 import DialogError from './dialogError';
+import useSize from '~/libs/hooks/useSize';
 
 const cx = classNames.bind(styles);
 
@@ -29,6 +30,7 @@ export default function ConfirmForm({ data, setIsConfirm, setData }: IAppProps) 
     const formRef = useRef<any>();
     const [sendEmailSuccess, setSendEmailSuccess] = useState<boolean>(false);
     const [sendEmailError, setSendEmailError] = useState<boolean>(false);
+    const { sizeX } = useSize();
 
     const handleSubmit = () => {
         emailjs.sendForm('service_1my45v9', 'template_hbqvz21', formRef.current, 'YddtFQS5swpWShEm8').then(
@@ -44,20 +46,41 @@ export default function ConfirmForm({ data, setIsConfirm, setData }: IAppProps) 
     };
 
     return (
-        <div className={cx('form')}>
-            <h1>
+        <div className={cx('form')} style={sizeX < 768 ? { width: '100%' } : { width: '50%' }}>
+            <h1
+                style={{
+                    marginTop: sizeX < 768 ? '50px' : '',
+                }}
+            >
                 MỘT DỰ ÁN VỚI <br />
                 PESTNCLEAN?
             </h1>
 
             {/* Progress */}
-            <div className={cx('progress')}>
+            <div
+                className={cx('progress')}
+                style={{
+                    gap: sizeX < 500 ? '20px' : '',
+                }}
+            >
                 <div className={cx('progress-1')}>
-                    <p>1. NHẬP THÔNG TIN</p>
+                    <p
+                        style={{
+                            fontSize: sizeX < 500 ? '14.5px' : '',
+                        }}
+                    >
+                        1. NHẬP THÔNG TIN
+                    </p>
                     <div className={cx('progress-value-comple')}></div>
                 </div>
                 <div className={cx('progress-1')}>
-                    <p>2. XÁC NHẬN THÔNG TIN</p>
+                    <p
+                        style={{
+                            fontSize: sizeX < 500 ? '14.5px' : '',
+                        }}
+                    >
+                        2. XÁC NHẬN {sizeX < 480 ? '' : 'THÔNG TIN'}
+                    </p>
                     <div className={cx('progress-value-comple')}></div>
                 </div>
             </div>
@@ -83,7 +106,12 @@ export default function ConfirmForm({ data, setIsConfirm, setData }: IAppProps) 
 
                 <p className={cx('confirm-title')}>Thông tin cá nhân!</p>
                 <div className={cx('confirm-wrapper')}>
-                    <div className={cx('confirm-text')}>
+                    <div
+                        className={cx('confirm-text')}
+                        style={{
+                            flexDirection: sizeX < 900 ? 'column' : 'row',
+                        }}
+                    >
                         <div className={cx('confirm-item')}>
                             <AssignmentIndIcon />
                             <p>{data.name}</p>
@@ -134,6 +162,8 @@ export default function ConfirmForm({ data, setIsConfirm, setData }: IAppProps) 
                             fontSize: '14px',
                             fontWeight: '600',
                             border: '2px solid',
+                            width: '50%',
+                            height: '45px',
                         }}
                         onClick={() => setIsConfirm(false)}
                     >
@@ -144,6 +174,8 @@ export default function ConfirmForm({ data, setIsConfirm, setData }: IAppProps) 
                         sx={{
                             fontSize: '14px',
                             fontWeight: '600',
+                            height: '45px',
+                            width: '50%',
                         }}
                         onClick={handleSubmit}
                     >

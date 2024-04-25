@@ -1,26 +1,28 @@
-import * as React from 'react';
-import classNames from 'classnames/bind';
-import styles from './contact.module.scss';
-import Link from 'next/link';
-import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import FacebookIcon from '@mui/icons-material/Facebook';
-import YouTubeIcon from '@mui/icons-material/YouTube';
-import InstagramIcon from '@mui/icons-material/Instagram';
 import AttachEmailOutlinedIcon from '@mui/icons-material/AttachEmailOutlined';
-import PhoneAndroidOutlinedIcon from '@mui/icons-material/PhoneAndroidOutlined';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import InstagramIcon from '@mui/icons-material/Instagram';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import RingVolumeOutlinedIcon from '@mui/icons-material/RingVolumeOutlined';
+import YouTubeIcon from '@mui/icons-material/YouTube';
+import classNames from 'classnames/bind';
+import Link from 'next/link';
 import useSize from '~/libs/hooks/useSize';
+import styles from './contact.module.scss';
 
 const cx = classNames.bind(styles);
 
-export interface IAppProps {
-}
+export interface IAppProps {}
 
 export default function InformationContactPage(props: IAppProps) {
     const { sizeX } = useSize();
 
     return (
-        <div className={cx('information')} style={sizeX < 768 ? { width: '100%' } : { width: '35%' }}>
+        <div
+            className={cx('information')}
+            style={{
+                width: sizeX < 768 ? '100%' : sizeX < 1024 ? '43%' : '35%',
+            }}
+        >
             {/* Content 1 */}
             <div className={cx('information-1')}>
                 <p>LIÊN HỆ</p>

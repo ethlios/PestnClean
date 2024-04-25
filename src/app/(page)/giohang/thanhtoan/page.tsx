@@ -5,13 +5,15 @@ import CheckoutPanel from '~/components/Cart/Payment/CheckoutPanel';
 import PaymentForm from '~/components/Cart/Payment/PaymentForm';
 import styles from '../../../../components/Cart/Payment/payment.module.scss';
 import Tippy from '@tippyjs/react';
+import useSize from '~/libs/hooks/useSize';
 
 const cx = classNames.bind(styles);
 
-export interface IAppProps {
-}
+export interface IAppProps {}
 
 export default function PaymentPage(props: IAppProps) {
+    const { sizeX } = useSize();
+
     return (
         <div className={'container cpmount'}>
             {/*Main*/}
@@ -32,7 +34,12 @@ export default function PaymentPage(props: IAppProps) {
                     </Tippy>
                 </div>
             </div>
-            <div className={'grid grid-cols-12 gap-6 mb-10'}>
+            <div
+                className={'grid grid-cols-12 gap-6 mb-10'}
+                style={{
+                    padding: sizeX < 768 && sizeX > 640 ? '0 60px' : sizeX < 1050 ? '' : '0 100px',
+                }}
+            >
                 {/*Visual Content*/}
                 <div className={'col-span-12 md:col-span-7 lg:col-span-8 flex flex-col'}>
                     {/*Form*/}

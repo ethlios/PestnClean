@@ -16,7 +16,12 @@ export default function Home() {
             >
                 <BannerHomePage />
             </div>
-            <div className={'container'}>
+            <div
+                className={'container'}
+                style={{
+                    overflowX: 'hidden',
+                }}
+            >
                 <ServiceAds />
                 <WhyChooseMe />
                 <ImageWork />

@@ -9,10 +9,13 @@ import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import logo from '../../../public/img/logo.png';
 import Image from 'next/image';
+import useSize from '~/libs/hooks/useSize';
+import HeaderMobile from '~/common/Header/headerMobile';
 
 export default function ComponentConnectLayout({ children }: { children: React.ReactNode }) {
     const pathname = usePathname();
     const [openCp, setOpenCp] = useState<boolean>(false);
+    const { sizeX } = useSize();
 
     useEffect(() => {
         setTimeout(() => setOpenCp(true), 1000);
@@ -24,9 +27,9 @@ export default function ComponentConnectLayout({ children }: { children: React.R
                 children
             ) : (
                 <>
-                    <Header></Header>
+                    {sizeX < 950 ? <HeaderMobile /> : <Header />}
                     {children}
-                    <Footer></Footer>
+                    <Footer />
                 </>
             )}
         </div>

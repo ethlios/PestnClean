@@ -27,7 +27,6 @@
 
 // INFORMATION
 .information {
-
     .information-1 {
         display: flex;
         flex-direction: column;
@@ -99,7 +98,6 @@
 
 // FORM
 .form {
-
     h1 {
         font-size: 28px;
         font-weight: 500;
@@ -302,6 +300,7 @@
     flex-direction: row;
     justify-content: space-between;
     margin-top: 20px;
+    gap: 10px;
 }
 
 // Dialog
