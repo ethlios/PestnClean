@@ -1,34 +1,51 @@
+'use client';
+
 import * as React from 'react';
 import classNames from 'classnames/bind';
 import styles from '../product.module.scss';
 import Link from 'next/link';
+import useSize from '~/libs/hooks/useSize';
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+import 'swiper/css';
 
 const cx = classNames.bind(styles);
 
-export interface IAppProps {}
+export interface IAppProps {
+}
 
 export default function ProductHot(props: IAppProps) {
+    const { sizeX } = useSize();
+
     return (
         <div className={cx('product-event')}>
             <h1>Đang bán chạy</h1>
             <div className={cx('horizontal-decor')}></div>
             <div className={cx('product-item')}>
-                {Array.from({ length: 3 }).map((_, index) => {
-                    return (
-                        <Link href="/sanpham/detail" className={cx('content-item')} key={index}>
-                            <div className={cx('item-img')}>
-                                <div className={cx('item-event-hot')}>
-                                    <p>Hot</p>
-                                </div>
-                            </div>
-                            <p className={cx('item-category')}>SẢN PHẨM GIẢI PHÁP VỆ SINH</p>
-                            <p className={cx('item-name')}>Tinh dầu Chanh Viet Oils</p>
-                            <p className={cx('item-price')}>
-                                1.100.000 <u>đ</u>
-                            </p>
-                        </Link>
-                    );
-                })}
+                <Swiper
+                    slidesPerView={sizeX < 768 ? 2 : sizeX < 1024 ? 3 : 4}
+                    spaceBetween={sizeX < 768 ? 10 : sizeX < 1024 ? 20 : 30}
+                    style={{ padding: '0 0.45rem' }}
+                >
+                    {Array.from({ length: 6 }).map((_, index) => {
+                        return (
+                            <SwiperSlide key={index}>
+                                <Link href="/sanpham/detail" className={cx('content-item')}>
+                                    <div className={cx('item-img')}>
+                                        <div className={cx('item-event-hot')}>
+                                            <p>Hot</p>
+                                        </div>
+                                    </div>
+                                    <p className={cx('item-category')}>SẢN PHẨM GIẢI PHÁP VỆ SINH</p>
+                                    <p className={cx('item-name')}>Tinh dầu Chanh Viet Oils</p>
+                                    <p className={cx('item-price')}>
+                                        1.100.000 <u>đ</u>
+                                    </p>
+                                </Link>
+                            </SwiperSlide>
+                        );
+                    })}
+                </Swiper>
             </div>
         </div>
     );
