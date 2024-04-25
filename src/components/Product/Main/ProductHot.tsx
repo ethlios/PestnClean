@@ -6,6 +6,7 @@ import styles from '../product.module.scss';
 import Link from 'next/link';
 import useSize from '~/libs/hooks/useSize';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay } from 'swiper/modules';
 
 import 'swiper/css';
 
@@ -25,6 +26,13 @@ export default function ProductHot(props: IAppProps) {
                 <Swiper
                     slidesPerView={sizeX < 768 ? 2 : sizeX < 1024 ? 3 : 4}
                     spaceBetween={sizeX < 768 ? 10 : sizeX < 1024 ? 20 : 30}
+                    loop={true}
+                    autoplay={{
+                        delay: 3000,
+                        disableOnInteraction: false,
+                        pauseOnMouseEnter: true,
+                    }}
+                    modules={[Autoplay]}
                     style={{ padding: '0 0.45rem' }}
                 >
                     {Array.from({ length: 6 }).map((_, index) => {
