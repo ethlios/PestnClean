@@ -9,8 +9,10 @@ import BlogComment from '~/components/Blogs/BlogsDetail/BlogComment';
 import BlogSuggest from '~/components/Blogs/BlogsDetail/BlogSuggest';
 import BlogsBanner from '~/components/Blogs/BlogsDetail/BlogsBanner';
 import BlogDetails from '~/components/Blogs/BlogsDetail/BlogsDetail';
+import MenuMB from '~/components/Blogs/BlogsDetail/MenuMB';
 import styles from '~/components/Blogs/BlogsDetail/blogDetail.module.scss';
 import { blogs } from '~/constants/blogs';
+import useSize from '~/libs/hooks/useSize';
 import { nameToLink } from '~/libs/orthers/nameToLink';
 
 const cx = classNames.bind(styles);
@@ -20,6 +22,8 @@ export interface IAppProps {}
 export default function BlogsDetailPage(props: IAppProps) {
     const [blog, setBlog] = useState<any[]>([]);
     const pathname = usePathname();
+    const { sizeX } = useSize();
+    const [isOpen, setOpen] = useState<boolean>(false);
 
     useEffect(() => {
         const blogFilter = blogs.filter((blog) => {
@@ -54,6 +58,8 @@ export default function BlogsDetailPage(props: IAppProps) {
                         <p>Chi tiết</p>
                     </div>
                     <div className={cx('decoration')}></div>
+
+                    {sizeX < 780 && <MenuMB blogs={blog} isOpen={isOpen} setOpen={setOpen} />}
                     <BlogsBanner blog={blog} />
                     <BlogDetails blogs={blog} />
 

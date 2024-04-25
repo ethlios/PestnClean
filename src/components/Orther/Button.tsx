@@ -53,7 +53,7 @@ export default function ButtonCommon({
                 color: color === 'secondary' ? '#fff' : '',
                 textTransform: !!path ? 'uppercase' : 'initial',
                 fontWeight: '600',
-                fontSize: sizeX < 550 ? '11px' : path ? '' : '13px',
+                fontSize: sizeX < 550 ? '12.5px' : path ? '' : '13px',
                 ':hover': {
                     backgroundColor:
                         rule === 'rule-1' ? 'var(--primary)' : rule2 === 'rule-1' ? 'var(--primary)' : '#fff',

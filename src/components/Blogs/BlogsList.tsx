@@ -12,6 +12,7 @@ import styles from './blogs.module.scss';
 import Image from 'next/image';
 import { removeVietnameseTones } from '~/libs/orthers/removeVietnamese';
 import smoothScroll from '~/libs/orthers/smoothScroll';
+import useSize from '~/libs/hooks/useSize';
 
 const cx = classNames.bind(styles);
 
@@ -25,6 +26,7 @@ export default function BlogsList(props: IAppProps) {
     const [searchValue, setSearchValue] = useState<string>('');
     const [numberPage, setNumberPage] = useState<number>(0);
     const [numberPageValue, setNumberPageValue] = useState<number>(0);
+    const { sizeX } = useSize();
 
     // Filter
     useEffect(() => {
@@ -62,7 +64,12 @@ export default function BlogsList(props: IAppProps) {
 
     return (
         // All blogs
-        <div className={cx('blogs-lists')}>
+        <div
+            className={cx('blogs-lists')}
+            style={{
+                marginTop: sizeX < 800 ? '30px' : '50px',
+            }}
+        >
             <p className={cx('title')}>TẤT CẢ BÀI VIẾT</p>
             <div className={cx('btn-lists')}>
                 {btnLists.map((btn, index) => {
@@ -86,6 +93,9 @@ export default function BlogsList(props: IAppProps) {
                         placeholder="Tìm kiếm..."
                         value={searchValue}
                         onChange={(e) => setSearchValue(e.target.value)}
+                        style={{
+                            width: sizeX < 600 ? '100%' : sizeX < 800 ? '60%' : '',
+                        }}
                     />
                     <div className={cx('search-btn')}>
                         <SearchIcon />

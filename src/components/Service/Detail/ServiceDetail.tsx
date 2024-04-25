@@ -1,16 +1,21 @@
 'use client';
 
-import React, { useMemo } from 'react';
-import classNames from 'classnames/bind';
-import styles from './ServiceDetail.module.scss';
-import { serviceTest } from '~/constants/service';
-import dynamic from 'next/dynamic';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ChatOutlinedIcon from '@mui/icons-material/ChatOutlined';
-import FacebookIcon from '@mui/icons-material/Facebook';
-import XIcon from '@mui/icons-material/X';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import classNames from 'classnames/bind';
+import { useEffect, useState } from 'react';
+import useSize from '~/libs/hooks/useSize';
 import smoothScroll from '~/libs/orthers/smoothScroll';
+import styles from './ServiceDetail.module.scss';
+import {
+    FacebookIcon,
+    LinkedinIcon,
+    XIcon,
+    FacebookShareButton,
+    LinkedinShareButton,
+    TwitterShareButton,
+} from 'react-share';
 
 const cx = classNames.bind(styles);
 
@@ -19,28 +24,56 @@ export interface IAppProps {
 }
 
 export default function ServiceDetails({ blog }: IAppProps) {
+    const { sizeX } = useSize();
+    const [url, setUrl] = useState<string>('');
+
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            setUrl(window.location.href);
+        }
+    }, []);
+
     return (
         <div className={cx('blogs-detail')}>
-            <div className={cx('blogs-decor')}></div>
+            <div
+                className={cx('blogs-decor')}
+                style={{
+                    width: sizeX < 780 ? '100%' : ' ',
+                }}
+            ></div>
             <div className={cx('main-content')}>
-                <div className={cx('menu')}>
-                    <h1>MỤC LỤC</h1>
-                    {blog[0].menu.map((item: any, index: number) => {
-                        return (
-                            <p key={index} onClick={() => smoothScroll(`#header${index + 1}`)}>
-                                {`0${index + 1}. ${item}`}
-                            </p>
-                        );
-                    })}
-                    <div className={cx('hr-decor')}></div>
-                    <div className={cx('list-icon')}>
-                        <FavoriteBorderIcon />
-                        <ChatOutlinedIcon onClick={() => smoothScroll('#comment-blogs')} />
-                        <FacebookIcon />
-                        <XIcon />
+                {sizeX >= 780 && (
+                    <div className={cx('menu')}>
+                        <h1>MỤC LỤC</h1>
+                        {blog[0].menu.map((item: any, index: number) => {
+                            return (
+                                <p key={index} onClick={() => smoothScroll(`#header${index + 1}`)}>
+                                    {`0${index + 1}. ${item}`}
+                                </p>
+                            );
+                        })}
+                        <div className={cx('hr-decor')}></div>
+                        <div className={cx('list-icon')}>
+                            <FavoriteBorderIcon />
+                            <ChatOutlinedIcon onClick={() => smoothScroll('#comment-blogs')} />
+                            <FacebookShareButton url={url} hashtag="#Pestnclean">
+                                <FacebookIcon size={24} round={true} />
+                            </FacebookShareButton>
+                            <TwitterShareButton url={url}>
+                                <XIcon size={24} round={true} />
+                            </TwitterShareButton>
+                            <LinkedinShareButton url={url}>
+                                <LinkedinIcon size={24} round={true} />
+                            </LinkedinShareButton>
+                        </div>
                     </div>
-                </div>
-                <div className={cx('detail')}>
+                )}
+                <div
+                    className={cx('detail')}
+                    style={{
+                        width: sizeX < 780 ? '100%' : '',
+                    }}
+                >
                     <p className={cx('detail-title')}>{blog[0].title}</p>
                     <p className={cx('detail-create')}>
                         <AccessTimeIcon />

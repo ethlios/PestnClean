@@ -11,6 +11,7 @@ import useSize from '~/libs/hooks/useSize';
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 import { IconButton } from '@mui/material';
 import MenuMobile from './MenuMobile';
+import MoreBtn from './More';
 
 const cx = classNames.bind(styles);
 
@@ -34,6 +35,7 @@ export default function HeaderMobile(props: IAppProps) {
 
     return (
         <>
+            <MoreBtn />
             <div
                 className={cx('hdm-wrapper')}
                 style={{

@@ -1,7 +1,10 @@
+'use client';
+
 import * as React from 'react';
 import classNames from 'classnames/bind';
 import styles from './blogDetail.module.scss';
 import Image from 'next/image';
+import useSize from '~/libs/hooks/useSize';
 
 const cx = classNames.bind(styles);
 
@@ -10,6 +13,8 @@ export interface IAppProps {
 }
 
 export default function BlogsBanner({ blog }: IAppProps) {
+    const { sizeX } = useSize();
+
     return (
         blog.length > 0 && (
             <Image
@@ -18,6 +23,9 @@ export default function BlogsBanner({ blog }: IAppProps) {
                 className={cx('banner')}
                 width={1000}
                 height={1000}
+                style={{
+                    height: sizeX < 550 ? '250px' : sizeX < 800 ? '300px' : '',
+                }}
             />
         )
     );
