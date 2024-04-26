@@ -4,10 +4,22 @@ import classNames from 'classnames/bind';
 import useSize from '~/libs/hooks/useSize';
 import styles from './cart.module.scss';
 import CartItem from '~/components/Cart/CartItem';
+import { useState, useEffect } from 'react';
 
 const cx = classNames.bind(styles);
 
-const cart = [
+interface CartItem {
+    id: number;
+    name: string;
+    quantity: number;
+    price: number;
+    priceDefault: number | null;
+    currency: string;
+    category: string;
+    src: string;
+}
+
+const tempCartItem: CartItem[] = [
     {
         id: 1,
         name: 'Bả bẫy mối XTERM',
@@ -55,6 +67,11 @@ export interface IAppProps {
 
 export default function Cart(props: IAppProps) {
     const { sizeX } = useSize();
+    const [cartItems, setCartItems] = useState<CartItem[]>([]);
+
+    useEffect(() => {
+        setCartItems(tempCartItem);
+    }, []);
 
     return (
         <div className={'flex flex-col'}
@@ -62,11 +79,11 @@ export default function Cart(props: IAppProps) {
                  height: sizeX <= 800 ? '480px' : 'calc(100vh - 60px)',
                  width: sizeX <= 800 ? '100vw' : 'calc(100% - 350px)',
                  padding: sizeX <= 600 ? '0 0 1px 0' : '',
-                 justifyContent: cart.length === 0 ? 'center' : 'normal',
-                 alignItems: cart.length === 0 ? 'center' : 'normal',
+                 justifyContent: cartItems.length === 0 ? 'center' : 'normal',
+                 alignItems: cartItems.length === 0 ? 'center' : 'normal',
              }}
         >
-            {cart.length === 0 ? (
+            {cartItems.length === 0 ? (
                 <div
                     style={{
                         fontWeight: '500',
@@ -76,7 +93,7 @@ export default function Cart(props: IAppProps) {
                 </div>
             ) : (
                 <div className={'w-full h-full flex flex-col overflow-scroll'}>
-                    {cart.map((item) => {
+                    {cartItems.map((item) => {
                         return (
                             <CartItem key={item.id} item={item} />
                         );
