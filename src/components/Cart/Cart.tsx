@@ -5,64 +5,16 @@ import useSize from '~/libs/hooks/useSize';
 import styles from './cart.module.scss';
 import CartItem from '~/components/Cart/CartItem';
 import { useState, useEffect } from 'react';
+import { tempCart } from '~/constants/cart';
 
 const cx = classNames.bind(styles);
-
-interface CartItem {
-    id: number;
-    name: string;
-    quantity: number;
-    price: number;
-    currency: string;
-    category: string;
-    src: string;
-}
-
-const tempCart: CartItem[] = [
-    {
-        id: 1,
-        name: 'Bả bẫy mối XTERM',
-        quantity: 1,
-        price: 945000,
-        currency: 'đ',
-        category: 'Sản phẩm kiểm soát côn trùng',
-        src: '',
-    },
-    {
-        id: 2,
-        name: 'Tinh dầu Chanh Viet Oils',
-        quantity: 1,
-        price: 1062500,
-        currency: 'đ',
-        category: 'Sản phẩm giải pháp vệ sinh',
-        src: '',
-    },
-    {
-        id: 3,
-        name: 'Hóa chất tẩy kính',
-        quantity: 2,
-        price: 315000,
-        currency: 'đ',
-        category: 'Sản phẩm dịch vụ vệ sinh',
-        src: '',
-    },
-    {
-        id: 4,
-        name: 'Thuốc diệt kiến',
-        quantity: 2,
-        price: 300000,
-        currency: 'đ',
-        category: 'Sản phẩm kiểm soát côn trùng',
-        src: '',
-    },
-];
 
 export interface IAppProps {
 }
 
 export default function Cart(props: IAppProps) {
     const { sizeX } = useSize();
-    const [cart, setCart] = useState<CartItem[]>(tempCart);
+    const [cart, setCart] = useState(tempCart);
 
     useEffect(() => {
         setCart(tempCart);
