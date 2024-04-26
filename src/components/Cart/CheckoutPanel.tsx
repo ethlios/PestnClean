@@ -8,13 +8,25 @@ import DiscountCode from '~/components/Cart/DiscountCode';
 import ButtonCommon from '../Orther/Button';
 import styles from './cart.module.scss';
 import useSize from '~/libs/hooks/useSize';
+import { useEffect, useState } from 'react';
 
 const cx = classNames.bind(styles);
 
-export interface IAppProps {}
+export interface IAppProps {
+    cart: string[];
+}
 
-export default function CheckoutPanel(props: IAppProps) {
+export default function CheckoutPanel({ cart }: IAppProps) {
     const { sizeX } = useSize();
+    const [totalItem, setTotalItem] = useState(0);
+    const [totalPrice, setTotalPrice] = useState(0);
+    const [discount, setDiscount] = useState(0);
+    const [shipping, setShipping] = useState(0);
+
+    useEffect(() => {
+        setTotalItem(cart.reduce((acc, item) => acc + item.quantity, 0));
+        setTotalPrice(cart.reduce((acc, item) => acc + item.price * item.quantity, 0));
+    }, [cart]);
 
     return (
         <div
@@ -37,9 +49,9 @@ export default function CheckoutPanel(props: IAppProps) {
                     <p className={`${cx('title')} mb-3`}>Tóm tắt đơn hàng</p>
                     <div className={'*:flex *:justify-between *:items center'}>
                         <div className={cx('total-price')}>
-                            <span>4 Sản phẩm</span>
+                            <span>{totalItem} Sản phẩm</span>
                             <p>
-                                4.400.000 <u>đ</u>
+                                {totalPrice} <u>đ</u>
                             </p>
                         </div>
                         <div className={cx('total-price')}>
@@ -62,7 +74,7 @@ export default function CheckoutPanel(props: IAppProps) {
                 <div className={`${cx('total-price')} flex justify-between items center`}>
                     <span>Tổng cộng</span>
                     <p>
-                        4.400.000 <u>đ</u>
+                        {totalPrice + shipping - discount} <u>đ</u>
                     </p>
                 </div>
                 <div className={'my-5 flex flex-col gap-3'}>

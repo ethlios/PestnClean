@@ -5,20 +5,20 @@ import useSize from '~/libs/hooks/useSize';
 import styles from './cart.module.scss';
 import CartItem from '~/components/Cart/CartItem';
 import { useState, useEffect } from 'react';
-import { tempCart } from '~/constants/cart';
 
 const cx = classNames.bind(styles);
 
 export interface IAppProps {
+    cart: string[];
+    setCart: (cart: string[]) => void;
 }
 
-export default function Cart(props: IAppProps) {
+export default function Cart({ cart, setCart }: IAppProps) {
     const { sizeX } = useSize();
-    const [cart, setCart] = useState(tempCart);
 
     useEffect(() => {
-        setCart(tempCart);
-    }, []);
+        localStorage.setItem('cart', JSON.stringify(cart));
+    }, [cart]);
 
     return (
         <div className={'flex flex-col'}
@@ -40,9 +40,9 @@ export default function Cart(props: IAppProps) {
                 </div>
             ) : (
                 <div className={'w-full h-full flex flex-col overflow-scroll'}>
-                    {cart.map((item) => {
+                    {cart.map((item, index) => {
                         return (
-                            <CartItem key={item.id} item={item} />
+                            <CartItem key={index} item={item} setCart={setCart} />
                         );
                     })}
                 </div>

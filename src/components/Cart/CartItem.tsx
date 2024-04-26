@@ -13,22 +13,41 @@ import Link from 'next/link';
 const cx = classNames.bind(styles);
 
 export interface IAppProps {
-    item: any;
+    item: string[];
+    setCart: (cart: string[]) => void;
 }
 
-export default function CartItem({ item }: IAppProps) {
+export default function CartItem({ item, setCart }: IAppProps) {
     const [amount, setAmount] = useState(item.quantity);
     const { sizeX } = useSize();
 
-    const handleAdd = () => {
-        setAmount(amount + 1);
+    const onchangeAmount = (id: number, quantity: number) => {
+        setAmount(quantity);
+        const localStorageCart = JSON.parse(localStorage.getItem('cart') || '[]');
+        localStorageCart.find((item: any) => item.id === id).quantity = quantity;
+        setCart(localStorageCart);
     };
 
-    const handleRemove = () => {
+    const onchangeDelete = (id: number) => {
+        const localStorageCart = JSON.parse(localStorage.getItem('cart') || '[]');
+        const newCart = localStorageCart.filter((item: any) => item.id !== id);
+        setCart(newCart);
+    };
+
+    const handleAdd = (id: number) => {
+        onchangeAmount(id, amount + 1);
+    };
+
+    const handleRemove = (id: number) => {
         if (amount > 1) {
-            setAmount(amount - 1);
+            onchangeAmount(id, amount - 1);
         } else {
+            onchangeDelete(id);
         }
+    };
+
+    const handleDelete = (id: number) => {
+        onchangeDelete(id);
     };
 
     return (
@@ -121,7 +140,7 @@ export default function CartItem({ item }: IAppProps) {
                                 </p>
                             )}
                         </div>
-                        <IconButton>
+                        <IconButton onClick={() => handleDelete(item.id)}>
                             <DeleteIcon />
                         </IconButton>
                     </div>
@@ -147,7 +166,7 @@ export default function CartItem({ item }: IAppProps) {
                     className={cx({
                         productHover: sizeX > 992,
                     })}
-                    onClick={() => handleRemove()}
+                    onClick={() => handleRemove(item.id)}
                 >
                     <IconButton>
                         <RemoveIcon />
@@ -179,7 +198,7 @@ export default function CartItem({ item }: IAppProps) {
                     className={cx({
                         productHover: sizeX > 992,
                     })}
-                    onClick={() => handleAdd()}
+                    onClick={() => handleAdd(item.id)}
                 >
                     <IconButton>
                         <AddIcon />
