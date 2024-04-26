@@ -113,7 +113,7 @@ export default function CartItem({ item }: IAppProps) {
                         <div className={'flex gap-3'}>
                             <p className={cx('price')}>
                                 <b>Giá: </b>
-                                {item.price} <u>{item.currency}</u>
+                                {item.price * amount} <u>{item.currency}</u>
                             </p>
                             {item.priceDefault && (
                                 <p className={cx('price-default')}>
