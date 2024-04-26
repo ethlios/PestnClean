@@ -15,8 +15,7 @@ import { cardKiemSoatConTrung } from '~/constants/card';
 
 const cx = classNames.bind(styles);
 
-export interface IAppProps {
-}
+export interface IAppProps {}
 
 export default function DichVu1Page(props: IAppProps) {
     const { sizeX } = useSize();

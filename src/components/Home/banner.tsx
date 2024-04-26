@@ -9,8 +9,7 @@ import { homeBanner } from '~/constants/banner';
 
 const cx = classNames.bind(styles);
 
-export interface IAppProps {
-}
+export interface IAppProps {}
 
 const settings = {
     infinite: true,
@@ -36,7 +35,7 @@ export default function BannerHomePage(props: IAppProps) {
                                 <div
                                     className={'container'}
                                     style={{
-                                        // backgroundImage: `url('${banner1.src}')`,
+                                        backgroundImage: `url('${item.src}')`,
                                         backgroundPosition: 'center',
                                         backgroundSize: 'cover',
                                         width: '100%',
@@ -46,6 +45,7 @@ export default function BannerHomePage(props: IAppProps) {
                                         flexDirection: 'column',
                                         justifyContent: 'center',
                                         alignItems: sizeX < 640 ? 'center' : '',
+                                        color: index === 3 || index === 0 ? '#fff' : '',
                                     }}
                                 >
                                     <h1
@@ -67,9 +67,9 @@ export default function BannerHomePage(props: IAppProps) {
                                             fontSize: '14.6px',
                                             fontWeight: '600',
                                             letterSpacing: '-.5px',
-                                            color: 'var(--text-black)',
                                             marginBottom: '10px',
                                             textAlign: sizeX < 640 ? 'center' : 'left',
+                                            color: index === 3 || index === 0 ? '#fff' : 'var(--text-black)',
                                         }}
                                     >
                                         {item.description}

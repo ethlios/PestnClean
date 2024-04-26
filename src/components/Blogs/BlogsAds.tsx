@@ -8,6 +8,7 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import ButtonCommon from '../Orther/Button';
 import { nameToLink } from '~/libs/orthers/nameToLink';
 import useSize from '~/libs/hooks/useSize';
+import Image from 'next/image';
 
 const cx = classNames.bind(styles);
 
@@ -60,7 +61,20 @@ export default function BlogsAds(props: IAppProps) {
                     width: sizeX < 800 ? '100%' : '',
                     height: sizeX < 550 ? '250px' : '',
                 }}
-            ></div>
+            >
+                <Image
+                    src={blogsAds[0].img}
+                    alt={blogsAds[0].title}
+                    width={1000}
+                    height={1000}
+                    style={{
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'cover',
+                        objectPosition: 'center',
+                    }}
+                />
+            </div>
         </div>
     );
 }
