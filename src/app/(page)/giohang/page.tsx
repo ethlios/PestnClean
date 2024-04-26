@@ -1,7 +1,7 @@
 'use client';
 
 import classNames from 'classnames/bind';
-import BuyItem from '~/components/Cart/BuyItem';
+import Cart from '~/components/Cart/Cart';
 import CheckoutPanel from '~/components/Cart/CheckoutPanel';
 import useSize from '~/libs/hooks/useSize';
 import styles from '../../../components/Cart/cart.module.scss';
@@ -22,7 +22,7 @@ export default function CartPage(props: IAppProps) {
                  borderTop: 'solid 1.5px rgba(0,0,0,0.4)',
              }}
         >
-            <BuyItem />
+            <Cart />
             <CheckoutPanel />
         </div>
     );
