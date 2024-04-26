@@ -13,19 +13,17 @@ interface CartItem {
     name: string;
     quantity: number;
     price: number;
-    priceDefault: number | null;
     currency: string;
     category: string;
     src: string;
 }
 
-const tempCartItem: CartItem[] = [
+const tempCart: CartItem[] = [
     {
         id: 1,
         name: 'Bả bẫy mối XTERM',
         quantity: 1,
         price: 945000,
-        priceDefault: 1000000,
         currency: 'đ',
         category: 'Sản phẩm kiểm soát côn trùng',
         src: '',
@@ -35,7 +33,6 @@ const tempCartItem: CartItem[] = [
         name: 'Tinh dầu Chanh Viet Oils',
         quantity: 1,
         price: 1062500,
-        priceDefault: 1997500,
         currency: 'đ',
         category: 'Sản phẩm giải pháp vệ sinh',
         src: '',
@@ -45,7 +42,6 @@ const tempCartItem: CartItem[] = [
         name: 'Hóa chất tẩy kính',
         quantity: 2,
         price: 315000,
-        priceDefault: null,
         currency: 'đ',
         category: 'Sản phẩm dịch vụ vệ sinh',
         src: '',
@@ -55,7 +51,6 @@ const tempCartItem: CartItem[] = [
         name: 'Thuốc diệt kiến',
         quantity: 2,
         price: 300000,
-        priceDefault: null,
         currency: 'đ',
         category: 'Sản phẩm kiểm soát côn trùng',
         src: '',
@@ -67,10 +62,10 @@ export interface IAppProps {
 
 export default function Cart(props: IAppProps) {
     const { sizeX } = useSize();
-    const [cartItems, setCartItems] = useState<CartItem[]>([]);
+    const [cart, setCart] = useState<CartItem[]>(tempCart);
 
     useEffect(() => {
-        setCartItems(tempCartItem);
+        setCart(tempCart);
     }, []);
 
     return (
@@ -79,11 +74,11 @@ export default function Cart(props: IAppProps) {
                  height: sizeX <= 800 ? '480px' : 'calc(100vh - 60px)',
                  width: sizeX <= 800 ? '100vw' : 'calc(100% - 350px)',
                  padding: sizeX <= 600 ? '0 0 1px 0' : '',
-                 justifyContent: cartItems.length === 0 ? 'center' : 'normal',
-                 alignItems: cartItems.length === 0 ? 'center' : 'normal',
+                 justifyContent: cart.length === 0 ? 'center' : 'normal',
+                 alignItems: cart.length === 0 ? 'center' : 'normal',
              }}
         >
-            {cartItems.length === 0 ? (
+            {cart.length === 0 ? (
                 <div
                     style={{
                         fontWeight: '500',
@@ -93,7 +88,7 @@ export default function Cart(props: IAppProps) {
                 </div>
             ) : (
                 <div className={'w-full h-full flex flex-col overflow-scroll'}>
-                    {cartItems.map((item) => {
+                    {cart.map((item) => {
                         return (
                             <CartItem key={item.id} item={item} />
                         );

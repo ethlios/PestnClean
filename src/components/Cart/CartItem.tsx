@@ -115,9 +115,9 @@ export default function CartItem({ item }: IAppProps) {
                                 <b>Giá: </b>
                                 {item.price * amount} <u>{item.currency}</u>
                             </p>
-                            {item.priceDefault && (
+                            {amount > 1 && (
                                 <p className={cx('price-default')}>
-                                    ({item.priceDefault} <u>{item.currency}</u>)
+                                    ({item.price} <u>{item.currency}</u>)
                                 </p>
                             )}
                         </div>
