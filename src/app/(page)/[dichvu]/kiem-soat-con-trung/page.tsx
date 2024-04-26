@@ -21,7 +21,12 @@ export default function DichVu1Page(props: IAppProps) {
     const { sizeX } = useSize();
 
     return (
-        <div className={'container cpmount'}>
+        <div
+            className={'container cpmount'}
+            style={{
+                overflowX: 'hidden',
+            }}
+        >
             <ServiceBanner
                 src="https://res.cloudinary.com/dj2jarcxk/image/upload/v1713837564/person-disinfecting-dangerous-area-while-wearing-protective-suit_wj8knz.jpg"
                 alt="Dịch vụ kiểm soát côn trùng chuyên nghiệp tại pestnclean"

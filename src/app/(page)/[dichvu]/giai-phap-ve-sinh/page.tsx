@@ -11,12 +11,16 @@ import { cardGiaiPhapVeSinh } from '~/constants/card';
 
 const cx = classNames.bind(styles);
 
-export interface IAppProps {
-}
+export interface IAppProps {}
 
 export default function DichVu3Page(props: IAppProps) {
     return (
-        <div className={'container cpmount'}>
+        <div
+            className={'container cpmount'}
+            style={{
+                overflowX: 'hidden',
+            }}
+        >
             <ServiceBanner
                 src="https://res.cloudinary.com/dj2jarcxk/image/upload/v1713879055/vases-candles-blurred-background-home-interior_q2b1zw.jpg"
                 alt="Các giải pháp vệ sinh tại PetnClean"

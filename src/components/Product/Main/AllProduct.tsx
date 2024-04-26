@@ -19,8 +19,18 @@ export default function AllProduct({ setOpenFilter, openFilter }: IAppProps) {
     return (
         <div className={cx('product-event')}>
             <div className={`${cx('title-filter')}`}>
-                <div>
-                    <h1>Tất cả sản phẩm</h1>
+                <div
+                    style={{
+                        width: '60%',
+                    }}
+                >
+                    <h1
+                        style={{
+                            width: '100%',
+                        }}
+                    >
+                        Tất cả sản phẩm
+                    </h1>
                     <div className={cx('horizontal-decor')}></div>
                 </div>
                 <p className="opacity" onClick={() => setOpenFilter(!openFilter)}>
@@ -29,7 +39,13 @@ export default function AllProduct({ setOpenFilter, openFilter }: IAppProps) {
                 </p>
             </div>
             <div className={cx('filter-list')}>
-                <p>Bộ lọc:</p>
+                <p
+                    style={{
+                        width: '55px',
+                    }}
+                >
+                    Bộ lọc:
+                </p>
                 <div>
                     Tất cả <ClearOutlinedIcon />
                 </div>

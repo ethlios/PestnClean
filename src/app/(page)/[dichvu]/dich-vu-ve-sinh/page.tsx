@@ -13,14 +13,18 @@ import { linkDichVuVeSinh } from '~/constants/links';
 
 const cx = classNames.bind(styles);
 
-export interface IAppProps {
-}
+export interface IAppProps {}
 
 export default function DichVu3Page(props: IAppProps) {
     const { sizeX } = useSize();
 
     return (
-        <div className={'container cpmount'}>
+        <div
+            className={'container cpmount'}
+            style={{
+                overflowX: 'hidden',
+            }}
+        >
             <ServiceBanner
                 src="https://res.cloudinary.com/dj2jarcxk/image/upload/v1713844497/everdrop-gmbh-SqOMDOQb3ws-unsplash_cwbn5u.jpg"
                 alt="Công ty dịch vụ vệ sinh PetnClean"

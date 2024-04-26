@@ -49,18 +49,6 @@ h4 {
     font-family: 'Merriweather-2' !important;
 }
 
-p,
-b,
-a,
-input,
-span,
-button,
-label,
-li,
-textarea {
-    font-family: Montserrat, serif !important;
-}
-
 html *::-webkit-scrollbar {
     display: none;
     border-radius: 0;
