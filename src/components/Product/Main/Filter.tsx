@@ -135,39 +135,30 @@ export default function FilterProduct({ openFilter, setOpenFilter }: IAppProps) 
                     <div key={index} className={'flex flex-col gap-2'}>
                         <h2 className={cx('filter-title')}>{filter.title}</h2>
                         {filter.checkbox && (
-                            <FormGroup>
-                                {filter.checkbox.map((checkbox, index) => (
-                                    <FormControlLabel
-                                        key={index}
-                                        control={<Checkbox />}
-                                        label={<p className={cx('label')}>{checkbox}</p>}
-                                    />
-                                ))}
-                            </FormGroup>
+                            filter.checkbox.map((checkbox, index) => (
+                                <div className={'flex items-center gap-2'} key={index}>
+                                    <Checkbox />
+                                    <p className={cx('label')}>{checkbox}</p>
+                                </div>
+                            ))
                         )}
                         {filter.checkboxLeft && filter.checkboxRight && (
                             <div className={'flex justify-between *:flex *:flex-col *:gap-2 *:w-1/2'}>
                                 <div>
-                                    <FormGroup>
-                                        {filter.checkboxLeft.map((checkbox, index) => (
-                                            <FormControlLabel
-                                                key={index}
-                                                control={<Checkbox />}
-                                                label={<p className={cx('label')}>{checkbox}</p>}
-                                            />
-                                        ))}
-                                    </FormGroup>
+                                    {filter.checkboxLeft.map((checkbox, index) => (
+                                        <div className={'flex items-center gap-2'} key={index}>
+                                            <Checkbox />
+                                            <p className={cx('label')}>{checkbox}</p>
+                                        </div>
+                                    ))}
                                 </div>
                                 <div>
-                                    <FormGroup>
-                                        {filter.checkboxRight.map((checkbox, index) => (
-                                            <FormControlLabel
-                                                key={index}
-                                                control={<Checkbox />}
-                                                label={<p className={cx('label')}>{checkbox}</p>}
-                                            />
-                                        ))}
-                                    </FormGroup>
+                                    {filter.checkboxRight.map((checkbox, index) => (
+                                        <div className={'flex items-center gap-2'} key={index}>
+                                            <Checkbox />
+                                            <p className={cx('label')}>{checkbox}</p>
+                                        </div>
+                                    ))}
                                 </div>
                             </div>
                         )}

@@ -9,7 +9,8 @@ import { homeBanner } from '~/constants/banner';
 
 const cx = classNames.bind(styles);
 
-export interface IAppProps {}
+export interface IAppProps {
+}
 
 const settings = {
     infinite: true,
@@ -33,7 +34,6 @@ export default function BannerHomePage(props: IAppProps) {
                         return (
                             <div key={index}>
                                 <div
-                                    className={'container'}
                                     style={{
                                         backgroundImage: `url('${item.src}')`,
                                         backgroundPosition: 'center',
@@ -46,6 +46,7 @@ export default function BannerHomePage(props: IAppProps) {
                                         justifyContent: 'center',
                                         alignItems: sizeX < 640 ? 'center' : '',
                                         color: index === 3 || index === 0 ? '#fff' : '',
+                                        padding: sizeX < 768 ? '0 20px' : sizeX < 1100 ? '0 50px' : sizeX < 1280 ? '0 80px' : '0 100px',
                                     }}
                                 >
                                     <h1

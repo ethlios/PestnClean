@@ -8,6 +8,7 @@ import InformationContactPage from '~/components/Contact/Information';
 import FormContactPage from '~/components/Contact/Form';
 import ConfirmForm from '~/components/Contact/ConfirmForm';
 import Toast from '~/components/Orther/Toast';
+import useSize from '~/libs/hooks/useSize';
 
 const cx = classNames.bind(styles);
 
@@ -15,6 +16,7 @@ export interface IAppProps {
 }
 
 export default function ContactPage(props: IAppProps) {
+    const { sizeX } = useSize();
     const [data, setData] = useState<any>();
     const [isConfirm, setIsConfirm] = useState<boolean>(false);
     const [showToast, setShowToast] = useState<boolean>(false);
@@ -29,7 +31,8 @@ export default function ContactPage(props: IAppProps) {
                 showToast={showToast}
                 setShowToast={setShowToast}
             />
-            <div className={`${cx('content')} container`}>
+            <div className={cx('content')}
+                 style={{ padding: sizeX < 768 ? '0 20px' : sizeX < 1100 ? '0 50px' : sizeX < 1280 ? '0 80px' : '0 100px' }}>
                 <InformationContactPage />
                 {!isConfirm ? (
                     <FormContactPage

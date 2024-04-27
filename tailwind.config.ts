@@ -20,8 +20,8 @@ const config: Config = {
             //Breakpoints
             sm: '640px',
             md: '768px',
-            lg: '1024px',
             fix: '1100px',
+            lg: '1024px',
             xl: '1280px',
             '2xl': '1536px',
         },
@@ -30,6 +30,7 @@ const config: Config = {
                 DEFAULT: '1rem',
                 sm: '2rem',
                 md: '3rem',
+                fix: '3.5rem',
                 lg: '4rem',
                 xl: '5rem',
                 '2xl': '100px',

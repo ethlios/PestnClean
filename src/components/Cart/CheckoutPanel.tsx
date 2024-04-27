@@ -13,7 +13,8 @@ import { useEffect, useState } from 'react';
 const cx = classNames.bind(styles);
 
 export interface IAppProps {
-    cart: string[];
+    // cart: string[];
+    cart: any;
 }
 
 export default function CheckoutPanel({ cart }: IAppProps) {
@@ -24,8 +25,8 @@ export default function CheckoutPanel({ cart }: IAppProps) {
     const [shipping, setShipping] = useState(0);
 
     useEffect(() => {
-        setTotalItem(cart.reduce((acc, item) => acc + item.quantity, 0));
-        setTotalPrice(cart.reduce((acc, item) => acc + item.price * item.quantity, 0));
+        setTotalItem(cart.reduce((acc: any, item: any) => acc + item.quantity, 0));
+        setTotalPrice(cart.reduce((acc: any, item: any) => acc + item.price * item.quantity, 0));
     }, [cart]);
 
     return (

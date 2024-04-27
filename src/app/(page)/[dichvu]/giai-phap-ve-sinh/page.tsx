@@ -1,3 +1,5 @@
+'use client';
+
 import classNames from 'classnames/bind';
 import styles from '~/components/Service/service.module.scss';
 import ServiceBanner from '~/components/Service/Banner';
@@ -8,17 +10,22 @@ import TextImageImage from '~/components/Service/TextImageImage';
 import Video from '~/components/Service/Video';
 import { linkGiaiPhapVeSinh } from '~/constants/links';
 import { cardGiaiPhapVeSinh } from '~/constants/card';
+import useSize from '~/libs/hooks/useSize';
 
 const cx = classNames.bind(styles);
 
-export interface IAppProps {}
+export interface IAppProps {
+}
 
 export default function DichVu3Page(props: IAppProps) {
+    const { sizeX } = useSize();
+
     return (
         <div
-            className={'container cpmount'}
+            className={'cpmount'}
             style={{
                 overflowX: 'hidden',
+                padding: sizeX < 768 ? '0 20px' : sizeX < 1100 ? '0 50px' : sizeX < 1280 ? '0 80px' : '0 100px',
             }}
         >
             <ServiceBanner

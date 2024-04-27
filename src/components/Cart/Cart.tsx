@@ -9,8 +9,10 @@ import { useState, useEffect } from 'react';
 const cx = classNames.bind(styles);
 
 export interface IAppProps {
-    cart: string[];
-    setCart: (cart: string[]) => void;
+    // cart: string[];
+    // setCart: (cart: string[]) => void;
+    cart: any;
+    setCart: any;
 }
 
 export default function Cart({ cart, setCart }: IAppProps) {
@@ -40,7 +42,7 @@ export default function Cart({ cart, setCart }: IAppProps) {
                 </div>
             ) : (
                 <div className={'w-full h-full flex flex-col overflow-scroll'}>
-                    {cart.map((item, index) => {
+                    {cart.map((item: any, index: any) => {
                         return (
                             <CartItem key={index} item={item} setCart={setCart} />
                         );

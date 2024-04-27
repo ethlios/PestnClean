@@ -15,7 +15,7 @@ export interface IAppProps {
 
 export default function CartPage(props: IAppProps) {
     const { sizeX } = useSize();
-    const [cart, setCart] = useState<string[]>(tempCart);
+    const [cart, setCart] = useState<any>(tempCart);
 
     return (
         <div className={'w-full flex mb-5'}

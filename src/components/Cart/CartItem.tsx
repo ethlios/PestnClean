@@ -13,8 +13,10 @@ import Link from 'next/link';
 const cx = classNames.bind(styles);
 
 export interface IAppProps {
-    item: string[];
-    setCart: (cart: string[]) => void;
+    // item: string[];
+    // setCart: (cart: string[]) => void;
+    item: any;
+    setCart: any;
 }
 
 export default function CartItem({ item, setCart }: IAppProps) {

@@ -15,16 +15,18 @@ import { cardKiemSoatConTrung } from '~/constants/card';
 
 const cx = classNames.bind(styles);
 
-export interface IAppProps {}
+export interface IAppProps {
+}
 
 export default function DichVu1Page(props: IAppProps) {
     const { sizeX } = useSize();
 
     return (
         <div
-            className={'container cpmount'}
+            className={'cpmount'}
             style={{
                 overflowX: 'hidden',
+                padding: sizeX < 768 ? '0 20px' : sizeX < 1100 ? '0 50px' : sizeX < 1280 ? '0 80px' : '0 100px',
             }}
         >
             <ServiceBanner

@@ -72,7 +72,8 @@ export default function AboutCPPage(props: IAppProps) {
     }, []);
 
     return (
-        <div className={'container cpmount overflow-x-hidden'}>
+        <div className={'cpmount overflow-x-hidden'}
+             style={{ padding: sizeX < 768 ? '0 20px' : sizeX < 1100 ? '0 50px' : sizeX < 1280 ? '0 80px' : '0 100px' }}>
             <AboutBanner />
 
             {/*Header title*/}

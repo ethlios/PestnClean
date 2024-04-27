@@ -95,7 +95,8 @@ export default function Footer(props: FooterProps) {
                 </div>
             </div>
             {/* Footer */}
-            <div className={'container ' + cx('footer')}>
+            <div className={cx('footer')}
+                 style={{ padding: sizeX < 768 ? '0 20px' : sizeX < 1100 ? '0 50px' : sizeX < 1280 ? '0 80px' : '0 100px' }}>
                 <div className={cx('footer-head')}>
                     <Image
                         alt="Logo công ty PESTNCLEAN"
