@@ -3,7 +3,7 @@ import { createTheme, responsiveFontSizes } from '@mui/material';
 
 export let theme = createTheme({
     typography: {
-        // fontFamily: ['Arial'].join(','),
+        fontFamily: ['Montserrat'].join(','),
     },
     palette: {
         primary: {

@@ -31,14 +31,14 @@ export default function BlogSuggest(props: IAppProps) {
         <div
             className={cx('blog-suggest')}
             style={{
-                width: sizeX < 780 ? '100%' : sizeX < 900 ? '50%' : '',
+                width: sizeX < 810 ? '100%' : sizeX < 960 ? '50%' : '',
             }}
         >
             <h1>CÁC BÀI VIẾT KHÁC</h1>
             <div
                 className={cx('suggest-wrapper')}
                 style={{
-                    flexDirection: sizeX < 580 ? 'column' : sizeX < 780 ? 'row' : 'column',
+                    flexDirection: sizeX < 580 ? 'column' : sizeX < 810 ? 'row' : 'column',
                 }}
             >
                 {suggestBlog.map((blog, index) => {
@@ -47,7 +47,7 @@ export default function BlogSuggest(props: IAppProps) {
                             key={index}
                             className={cx('blog-item')}
                             style={{
-                                width: sizeX < 780 ? '100%' : '',
+                                width: sizeX < 810 ? '100%' : '',
                             }}
                         >
                             <div

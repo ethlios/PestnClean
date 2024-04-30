@@ -107,9 +107,26 @@ export default function ServiceAds(props: IAppProps) {
                                 style={{
                                     opacity: currentService === index ? 0 : 1,
                                     transition: 'all ease .5s',
+                                    width: '100%',
+                                    height: '100%',
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
                                 }}
                             >
-                                <p>{item.title}</p>
+                                <div
+                                    style={{
+                                        backgroundColor: 'rgba(0,0,0,0.35)',
+                                        width: '100%',
+                                        height: '110%',
+                                        position: 'absolute',
+                                        top: 0,
+                                        left: 0,
+                                        zIndex: '0',
+                                    }}
+                                ></div>
+
+                                <h1 style={{ fontSize: '18px', color: '#fff', zIndex: '1' }}>{item.title}</h1>
                             </div>
                         </Link>
                     );

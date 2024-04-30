@@ -84,13 +84,13 @@ export default function FilterProduct({ openFilter, setOpenFilter }: IAppProps) 
             className={cx('product-filter')}
             style={{
                 top: sizeX < 1024 ? 0 : wheel ? '10px' : '70px',
-                width: sizeX < 1024 && openFilter ? '100%' : !openFilter ? '0%' : '',
+                width: '100%',
                 padding: !openFilter ? '0' : '',
                 border: !openFilter ? 'none' : '',
                 position: sizeX < 1024 ? 'fixed' : 'sticky',
                 zIndex: sizeX < 1024 ? '5000' : '',
-                left: sizeX < 1024 ? '0' : '',
-                height: sizeX < 1024 ? '100%' : '',
+                left: sizeX < 1024 && !openFilter ? '-1024px' : sizeX < 1024 && openFilter ? '0px' : '',
+                height: sizeX < 1024 ? '100vh' : '',
             }}
         >
             <div
@@ -134,14 +134,13 @@ export default function FilterProduct({ openFilter, setOpenFilter }: IAppProps) 
                 {checkboxFilter.map((filter, index) => (
                     <div key={index} className={'flex flex-col gap-2'}>
                         <h2 className={cx('filter-title')}>{filter.title}</h2>
-                        {filter.checkbox && (
+                        {filter.checkbox &&
                             filter.checkbox.map((checkbox, index) => (
                                 <div className={'flex items-center gap-2'} key={index}>
                                     <Checkbox />
                                     <p className={cx('label')}>{checkbox}</p>
                                 </div>
-                            ))
-                        )}
+                            ))}
                         {filter.checkboxLeft && filter.checkboxRight && (
                             <div className={'flex justify-between *:flex *:flex-col *:gap-2 *:w-1/2'}>
                                 <div>
@@ -165,10 +164,20 @@ export default function FilterProduct({ openFilter, setOpenFilter }: IAppProps) 
                     </div>
                 ))}
                 <div className={cx('filter-button')}>
-                    <Button variant="contained" color="secondary" fullWidth>
+                    <Button
+                        variant="contained"
+                        color="secondary"
+                        fullWidth
+                        style={{ fontWeight: '600', height: '45px' }}
+                    >
                         Hủy bỏ
                     </Button>
-                    <Button variant="contained" color="primary" fullWidth>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        fullWidth
+                        style={{ fontWeight: '600', height: '45px' }}
+                    >
                         Xác nhận
                     </Button>
                 </div>

@@ -17,8 +17,7 @@ import { nameToLink } from '~/libs/orthers/nameToLink';
 
 const cx = classNames.bind(styles);
 
-export interface IAppProps {
-}
+export interface IAppProps {}
 
 export default function BlogsDetailPage(props: IAppProps) {
     const [blog, setBlog] = useState<any[]>([]);
@@ -50,8 +49,19 @@ export default function BlogsDetailPage(props: IAppProps) {
         <>
             <section>
                 {/* Main */}
-                <div className={'cpmount'}
-                     style={{ padding: sizeX < 768 ? '0 20px' : sizeX < 1100 ? '0 50px' : sizeX < 1280 ? '0 80px' : '0 100px' }}>
+                <div
+                    className={'cpmount'}
+                    style={{
+                        padding:
+                            sizeX < 768
+                                ? '0 20px'
+                                : sizeX < 1100
+                                ? '0 50px'
+                                : sizeX < 1280
+                                ? '0 80px'
+                                : '0 100px',
+                    }}
+                >
                     <div className={cx('link')}>
                         <Link href="/">Trang chủ</Link>
                         <p>|</p>
@@ -61,7 +71,7 @@ export default function BlogsDetailPage(props: IAppProps) {
                     </div>
                     <div className={cx('decoration')}></div>
 
-                    {sizeX < 780 && <MenuMB blogs={blog} isOpen={isOpen} setOpen={setOpen} />}
+                    {sizeX < 810 && <MenuMB blogs={blog} isOpen={isOpen} setOpen={setOpen} />}
                     <BlogsBanner blog={blog} />
                     <BlogDetails blogs={blog} />
 

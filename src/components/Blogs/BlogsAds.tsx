@@ -73,6 +73,7 @@ export default function BlogsAds(props: IAppProps) {
                         objectFit: 'cover',
                         objectPosition: 'center',
                     }}
+                    draggable={false}
                 />
             </div>
         </div>

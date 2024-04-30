@@ -15,8 +15,7 @@ import useSize from '~/libs/hooks/useSize';
 
 const cx = classNames.bind(styles);
 
-export interface IAppProps {
-}
+export interface IAppProps {}
 
 export default function BlogOthers(props: IAppProps) {
     const [blogHover, setBlogHover] = useState<number>(-1);
@@ -46,6 +45,7 @@ export default function BlogOthers(props: IAppProps) {
                 className={cx('other-wrapper')}
                 style={{
                     flexDirection: sizeX < 600 ? 'column' : 'row',
+                    padding: '0 0 30px 0',
                 }}
             >
                 {blogSuggest.map((item, index) => {
@@ -75,7 +75,7 @@ export default function BlogOthers(props: IAppProps) {
                                     }}
                                 >
                                     <p>
-                                        {item.created} <br />
+                                        09.04 <br />
                                         <u>2024</u>
                                     </p>
                                     <div className={cx('time-decor')}></div>

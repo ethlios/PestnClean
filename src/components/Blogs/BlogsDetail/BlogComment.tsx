@@ -15,11 +15,11 @@ export default function BlogComment(props: IAppProps) {
     const { sizeX } = useSize();
 
     return (
-        sizeX >= 780 && (
+        sizeX >= 810 && (
             <div
                 className={cx('comment-wrapper')}
                 style={{
-                    width: sizeX < 900 ? '50%' : '',
+                    width: sizeX < 960 ? '50%' : '',
                 }}
             >
                 <h1>ĐÁNH GIÁ</h1>

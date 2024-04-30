@@ -24,8 +24,9 @@ export default function BlogsBanner({ blog }: IAppProps) {
                 width={1000}
                 height={1000}
                 style={{
-                    height: sizeX < 550 ? '250px' : sizeX < 800 ? '300px' : '',
+                    height: sizeX < 550 ? '250px' : sizeX < 810 ? '300px' : '',
                 }}
+                draggable={false}
             />
         )
     );

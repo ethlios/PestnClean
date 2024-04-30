@@ -54,6 +54,8 @@ export default function ButtonCommon({
                 textTransform: !!path ? 'uppercase' : 'initial',
                 fontWeight: '600',
                 fontSize: sizeX < 550 ? '12.5px' : path ? '' : '13px',
+                height: sizeX < 550 ? '37px' : '40px',
+                transition: 'all ease .5s',
                 ':hover': {
                     backgroundColor:
                         rule === 'rule-1' ? 'var(--primary)' : rule2 === 'rule-1' ? 'var(--primary)' : '#fff',

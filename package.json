@@ -30,6 +30,7 @@
         "react-slick": "^0.30.2",
         "read-more-react": "^1.0.10",
         "sass": "^1.74.1",
+        "sharp": "^0.33.3",
         "slick-carousel": "^1.8.1",
         "swiper": "^11.1.1",
         "tss-react": "^4.9.6"

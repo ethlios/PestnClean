@@ -122,6 +122,15 @@ export default function MenuMobile({ open, setOpen }: IAppProps) {
                     <div className={cx('hdm-decor')}></div>
 
                     <div className={cx('hdm-link2')}>
+                        <h1
+                            style={{
+                                fontSize: sizeX < 500 ? '20px' : '23px',
+                                fontWeight: 700,
+                                letterSpacing: '-.5px',
+                            }}
+                        >
+                            Dịch vụ
+                        </h1>
                         {serviceMobile.map((item) => {
                             return (
                                 <Link

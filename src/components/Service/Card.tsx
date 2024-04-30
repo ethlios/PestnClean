@@ -50,6 +50,7 @@ export default function Card({ src, alt, width = 1680, height = 1050, title, pat
                     letterSpacing: '-.5px',
                     fontSize: '14.5px',
                     color: 'var(--text-black)',
+                    textAlign: 'justify',
                 }}
             >
                 {description}

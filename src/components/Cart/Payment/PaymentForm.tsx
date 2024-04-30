@@ -26,7 +26,7 @@ export default function PaymentForm(props: IAppProps) {
 
     return (
         <div>
-            <div className={'my-3'}>
+            <div>
                 <p className={cx('title')}>Phương thức thanh toán</p>
                 <div className={'my-5'}>
                     <div
@@ -103,28 +103,16 @@ export default function PaymentForm(props: IAppProps) {
                         placeholder="Ghi chú thêm"
                         className={`${cx('textarea')} ${classInput}`}
                     />
-                    <FormGroup
-                        style={{
-                            display: 'flex',
-                            flexDirection: 'row',
-                            alignItems: 'center',
-                            fontSize: '13px',
-                            fontWeight: 600,
-                            color: 'var(--text-black)',
+
+                    <FormControlLabel
+                        required
+                        control={<Checkbox />}
+                        label="Tôi đã đọc chính sách bảo mật và quyền riêng tư."
+                        sx={{
+                            marginTop: '5px',
+                            fontSize: '10px',
                         }}
-                    >
-                        <Checkbox id="checkboxid" />
-                        <label htmlFor="checkboxid">
-                            Tôi đã đọc{' '}
-                            <Link
-                                href={'/hoidap?q=chinh-sach-bao-mat-thong-tin'}
-                                rel="noopener nooreferrer"
-                                target="_blank"
-                            >
-                                <u>chính sách bảo mật và quyền riêng tư</u>
-                            </Link>
-                        </label>
-                    </FormGroup>
+                    />
                 </div>
             </div>
         </div>

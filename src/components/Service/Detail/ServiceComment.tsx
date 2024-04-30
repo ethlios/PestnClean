@@ -15,7 +15,7 @@ export default function ServiceComment(props: IAppProps) {
     const { sizeX } = useSize();
 
     return (
-        sizeX >= 780 && (
+        sizeX >= 810 && (
             <div className={cx('comment-wrapper')}>
                 <h1>ĐÁNH GIÁ</h1>
                 <div className={cx('input-list')} id="comment-blogs">

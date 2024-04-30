@@ -13,29 +13,6 @@ const cx = classNames.bind(styles);
 
 export interface IAppProps {}
 
-const settings = {
-    infinite: true,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 3000,
-    pauseOnHover: true,
-    classNames: 'fix-slick',
-    customPaging: function (i: any) {
-        return (
-            <Image
-                src={
-                    'https://res.cloudinary.com/dj2jarcxk/image/upload/v1713847497/person-taking-care-office-cleaning_nffmqy.jpg'
-                }
-                alt={''}
-                width={150}
-                height={150}
-            />
-        );
-    },
-    dotsClass: 'slick-dots slick-thumb',
-};
-
 // Demo
 const imgLists = ['', '', ''];
 
@@ -83,8 +60,8 @@ export default function ProductImage(props: IAppProps) {
                                     : '';
                             }}
                             style={{
-                                width: sizeX < 450 ? '60px' : sizeX < 950 ? '80px' : '',
-                                height: sizeX < 450 ? '60px' : sizeX < 950 ? '80px' : '',
+                                width: sizeX < 450 ? '60px' : sizeX < 950 ? '70px' : '',
+                                height: sizeX < 450 ? '60px' : sizeX < 950 ? '70px' : '',
                             }}
                         />
                     );
@@ -97,6 +74,9 @@ export default function ProductImage(props: IAppProps) {
                     width={1000}
                     height={1000}
                     className={`${currentImg !== imgEffect ? 'cpmount' : ''} bg-gray-200`}
+                    style={{
+                        maxHeight: '510px',
+                    }}
                 />
             ) : (
                 <div className={cx('img')}>
@@ -110,6 +90,7 @@ export default function ProductImage(props: IAppProps) {
                                 height={1000}
                                 className={'bg-gray-200'}
                                 id={`img-${index + 1}`}
+                                style={{}}
                             />
                         );
                     })}

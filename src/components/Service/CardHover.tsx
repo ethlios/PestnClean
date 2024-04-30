@@ -54,6 +54,7 @@ export default function CardHover({ title, description, path, id, src, alt }: IA
                                 fontWeight: '600',
                                 marginBottom: '10px',
                                 color: '#fff',
+                                textAlign: 'justify',
                             }}
                         >
                             {description}

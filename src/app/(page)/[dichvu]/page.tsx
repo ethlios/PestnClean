@@ -17,8 +17,7 @@ import MenuMB from '~/components/Service/Detail/MenuMB';
 
 const cx = classNames.bind(styles);
 
-export interface IAppProps {
-}
+export interface IAppProps {}
 
 export default function ServiceDetail(props: IAppProps) {
     const [blog, setBlog] = useState<any[]>([]);
@@ -48,8 +47,19 @@ export default function ServiceDetail(props: IAppProps) {
 
     return (
         <section>
-            <div className={'cpmount'}
-                 style={{ padding: sizeX < 768 ? '0 20px' : sizeX < 1100 ? '0 50px' : sizeX < 1280 ? '0 80px' : '0 100px' }}>
+            <div
+                className={'cpmount'}
+                style={{
+                    padding:
+                        sizeX < 768
+                            ? '0 20px'
+                            : sizeX < 1100
+                            ? '0 50px'
+                            : sizeX < 1280
+                            ? '0 80px'
+                            : '0 100px',
+                }}
+            >
                 <div className={cx('link')}>
                     <Link href="/">Trang chủ</Link>
                     <p>|</p>
@@ -58,7 +68,7 @@ export default function ServiceDetail(props: IAppProps) {
                     <p>Chi tiết</p>
                 </div>
                 <div className={cx('decoration')}></div>
-                {sizeX < 780 && <MenuMB blogs={blog} isOpen={isOpen} setOpen={setOpen} />}
+                {sizeX < 810 && <MenuMB blogs={blog} isOpen={isOpen} setOpen={setOpen} />}
                 {blog.length > 0 && <ServiceBanner src={blog[0].img} alt={blog[0].title} />}
                 {blog.length > 0 && <ServiceDetails blog={blog} />}
 

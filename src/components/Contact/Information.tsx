@@ -71,7 +71,7 @@ export default function InformationContactPage(props: IAppProps) {
                     mọi nơi. Liên hệ để được tư vấn và hỗ trợ cụ thể nhất qua email.
                 </p>
             </div>
-            <p className={cx('watermark')}>© PESTNCLEAN 2024</p>
+            <h1 className={cx('watermark')}>© PESTNCLEAN 2024</h1>
         </div>
     );
 }

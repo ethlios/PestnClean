@@ -40,11 +40,11 @@ export default function BlogDetails({ blogs }: IAppProps) {
             <div
                 className={cx('blogs-decor')}
                 style={{
-                    width: sizeX < 780 ? '100%' : ' ',
+                    width: sizeX < 810 ? '100%' : ' ',
                 }}
             ></div>
             <div className={cx('main-content')}>
-                {sizeX >= 780 && (
+                {sizeX >= 810 && (
                     <div className={cx('menu')}>
                         <h1>MỤC LỤC</h1>
                         {blogs[0].menu.map((item: any, index: number) => {
@@ -73,7 +73,7 @@ export default function BlogDetails({ blogs }: IAppProps) {
                 <div
                     className={cx('detail')}
                     style={{
-                        width: sizeX < 780 ? '100%' : '',
+                        width: sizeX < 810 ? '100%' : '',
                     }}
                 >
                     <p className={cx('detail-category')}>{blogs[0].category}</p>
