@@ -101,11 +101,12 @@ input:focus {
 
 .css-10hyoxo-MuiStack-root span,
 .css-9l3uo3,
-.css-1e0k9ig {
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: -0.5px;
-    color: rgba(0, 0, 0, 0.5);
+.css-1e0k9ig,
+.css-4ah17p span {
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    letter-spacing: -0.5px !important;
+    color: rgba(0, 0, 0, 0.5) !important;
 }
 
 .css-r47a1p-MuiFormControl-root,

@@ -3,6 +3,7 @@ import { Montserrat } from 'next/font/google';
 import Favicon from '../../public/favicon.ico';
 import MuiSetUp from '../common/Mui/MuiSetup';
 import './globals.css';
+import ReduxProvider from '~/redux/provider';
 
 const main = Montserrat({ subsets: ['latin'], weight: ['300', '400', '500', '600', '700'] });
 
@@ -58,7 +59,9 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body className={main.className}>
-                <MuiSetUp>{children}</MuiSetUp>
+                <ReduxProvider>
+                    <MuiSetUp>{children}</MuiSetUp>
+                </ReduxProvider>
             </body>
         </html>
     );
