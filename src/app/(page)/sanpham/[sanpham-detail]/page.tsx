@@ -7,14 +7,34 @@ import ProductSingle from '~/components/Product/Detail/ProductSingle';
 import ProductDescript from '~/components/Product/Detail/ProductDescript';
 import ProductRelated from '~/components/Product/Detail/ProductRelated';
 import useSize from '~/libs/hooks/useSize';
+import products from '~/constants/products';
+import { nameToLink } from '~/libs/orthers/nameToLink';
+import { useEffect, useState } from 'react';
+import { notFound, usePathname } from 'next/navigation';
+
 
 const cx = classNames.bind(styles);
 
 export interface IAppProps {
 }
 
+
 export default function ProductDetailPage(props: IAppProps) {
     const { sizeX } = useSize();
+    const pathname = usePathname();
+    const [product, setProduct] = useState<any[]>([]);
+
+    useEffect(() => {
+        const productFilter = products.filter((product) => {
+            return `/sanpham/${nameToLink(product.name)}` === pathname;
+        });
+
+        if (productFilter.length > 0) {
+            setProduct(productFilter);
+        } else {
+            return notFound();
+        }
+    }, [pathname]);
 
     return (
         <div className={'cpmount'}
@@ -27,10 +47,10 @@ export default function ProductDetailPage(props: IAppProps) {
                 <p>Chi tiết sản phẩm</p>
             </div>
             <div className={cx('wrapper')}>
-                <ProductSingle />
+                <ProductSingle product={product} />
             </div>
-            <ProductDescript />
-            <ProductRelated />
+            <ProductDescript product={product} />
+            <ProductRelated product={product} />
         </div>
     );
 }

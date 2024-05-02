@@ -14,7 +14,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import classNames from 'classnames/bind';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './product_detail.module.scss';
 import useScroll from '~/libs/hooks/useScroll';
 import smoothScroll from '~/libs/orthers/smoothScroll';
@@ -23,10 +23,13 @@ import useSize from '~/libs/hooks/useSize';
 
 const cx = classNames.bind(styles);
 
-export interface IAppProps {}
+export interface IAppProps {
+    product: any[];
+}
 
-export default function ProductInfo(props: IAppProps) {
+export default function ProductInfo({ product }: IAppProps) {
     const [type, setType] = useState('');
+    const [amount, setAmount] = useState(1);
     const wheel: boolean = useScroll();
     const { sizeX } = useSize();
 
@@ -37,6 +40,37 @@ export default function ProductInfo(props: IAppProps) {
     const handleClick = () => {
         $('#dropbox-2').show();
         smoothScroll('#dropbox-2');
+    };
+
+    const handleAdd = () => {
+        setAmount(amount + 1);
+    };
+
+    const handleSub = () => {
+        if (amount > 1) {
+            setAmount(amount - 1);
+        }
+    };
+
+    const handleAddToCart = () => {
+        const localCart = localStorage.getItem('cart');
+        let cart: any[] = [];
+        if (localCart) {
+            cart = JSON.parse(localCart);
+        }
+        const productIndex = cart.findIndex((item) => item.id === product[0].id);
+        if (productIndex !== -1) {
+            cart[productIndex].quantity += amount;
+        } else {
+            cart.push({
+                id: product[0].id,
+                name: product[0].name,
+                quantity: amount,
+                price: product[0].price,
+                currency: product[0].currency,
+            });
+        }
+        localStorage.setItem('cart', JSON.stringify(cart));
     };
 
     return (
@@ -54,7 +88,7 @@ export default function ProductInfo(props: IAppProps) {
                     fontSize: sizeX < 600 ? '28px' : '',
                 }}
             >
-                Tinh dầu chanh viet oils
+                {product[0].name}
             </h1>
             <p className={cx('rating')} onClick={handleClick}>
                 3 Đánh giá
@@ -108,7 +142,7 @@ export default function ProductInfo(props: IAppProps) {
                 </FormControl>
             </div>
             <div className={cx('quantity')}>
-                <IconButton>
+                <IconButton onClick={handleSub}>
                     <RemoveIcon />
                 </IconButton>
                 <p
@@ -118,13 +152,13 @@ export default function ProductInfo(props: IAppProps) {
                         fontWeight: '600',
                     }}
                 >
-                    1
+                    {amount}
                 </p>
-                <IconButton>
+                <IconButton onClick={handleAdd}>
                     <AddIcon />
                 </IconButton>
             </div>
-            <h1 className={cx('price')}>1.900.000đ</h1>
+            <h1 className={cx('price')}>{product[0].price}{product[0].currency}</h1>
             <div className={cx('other')}>
                 <div>
                     <ElectricRickshawOutlinedIcon />
@@ -136,7 +170,7 @@ export default function ProductInfo(props: IAppProps) {
                 </div>
             </div>
             <div className={cx('button-group')}>
-                <button className={cx('btn-add')}>Thêm vào giỏ hàng</button>
+                <button className={cx('btn-add')} onClick={handleAddToCart}>Thêm vào giỏ hàng</button>
                 <button className={cx('btn-buy')}>Mua ngay</button>
             </div>
         </div>

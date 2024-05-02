@@ -10,7 +10,9 @@ import useSize from '~/libs/hooks/useSize';
 
 const cx = classNames.bind(styles);
 
-export interface IAppProps {}
+export interface IAppProps {
+    product: any;
+}
 
 const settings = {
     infinite: true,

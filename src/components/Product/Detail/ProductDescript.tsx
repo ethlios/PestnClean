@@ -15,7 +15,9 @@ import useSize from '~/libs/hooks/useSize';
 
 const cx = classNames.bind(styles);
 
-export interface IAppProps {}
+export interface IAppProps {
+    product: any;
+}
 
 export default function ProductDescript(props: IAppProps) {
     const [isOpen1, setIsOpen1] = useState(false);
