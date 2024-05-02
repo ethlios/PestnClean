@@ -18,15 +18,20 @@ export interface IAppProps {
 export default function Cart({ cart, setCart }: IAppProps) {
     const { sizeX } = useSize();
 
+    useEffect(() => {
+        localStorage.setItem('cart', JSON.stringify(cart));
+    }, [cart]);
+
     return (
-        <div className={'flex flex-col'}
-             style={{
-                 height: sizeX <= 800 ? '480px' : 'calc(100vh - 60px)',
-                 width: sizeX <= 800 ? '100vw' : 'calc(100% - 350px)',
-                 padding: sizeX <= 600 ? '0 0 1px 0' : '',
-                 justifyContent: cart.length === 0 ? 'center' : 'normal',
-                 alignItems: cart.length === 0 ? 'center' : 'normal',
-             }}
+        <div
+            className={'flex flex-col'}
+            style={{
+                height: sizeX <= 800 ? '480px' : 'calc(100vh - 60px)',
+                width: sizeX <= 800 ? '100vw' : 'calc(100% - 350px)',
+                padding: sizeX <= 600 ? '0 0 1px 0' : '',
+                justifyContent: cart.length === 0 ? 'center' : 'normal',
+                alignItems: cart.length === 0 ? 'center' : 'normal',
+            }}
         >
             {cart.length === 0 ? (
                 <div
@@ -39,9 +44,7 @@ export default function Cart({ cart, setCart }: IAppProps) {
             ) : (
                 <div className={'w-full h-full flex flex-col overflow-scroll'}>
                     {cart.map((item: any) => {
-                        return (
-                            <CartItem key={item.id} item={item} setCart={setCart} />
-                        );
+                        return <CartItem key={item.id} item={item} setCart={setCart} />;
                     })}
                 </div>
             )}

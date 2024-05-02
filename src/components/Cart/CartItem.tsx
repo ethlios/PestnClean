@@ -27,14 +27,12 @@ export default function CartItem({ item, setCart }: IAppProps) {
         setAmount(quantity);
         const localStorageCart = JSON.parse(localStorage.getItem('cart') || '[]');
         localStorageCart.find((item: any) => item.id === id).quantity = quantity;
-        localStorage.setItem('cart', JSON.stringify(localStorageCart));
         setCart(localStorageCart);
     };
 
     const onchangeDelete = (id: number) => {
         const localStorageCart = JSON.parse(localStorage.getItem('cart') || '[]');
         const newCart = localStorageCart.filter((item: any) => item.id !== id);
-        localStorage.setItem('cart', JSON.stringify(newCart));
         setCart(newCart);
     };
 
@@ -84,10 +82,10 @@ export default function CartItem({ item, setCart }: IAppProps) {
                                 sizeX < 500
                                     ? '100px'
                                     : sizeX < 800
-                                        ? '120px'
-                                        : sizeX < 950
-                                            ? '100px'
-                                            : '110px',
+                                      ? '120px'
+                                      : sizeX < 950
+                                        ? '100px'
+                                        : '110px',
                         }}
                         className={cx({
                             imgHover: sizeX > 992,
@@ -95,13 +93,14 @@ export default function CartItem({ item, setCart }: IAppProps) {
                         })}
                     ></div>
                 </Link>
-                <div className={'flex flex-col justify-between'}
-                     style={{
-                         marginLeft: sizeX <= 440 ? '20px' : '30px',
-                         fontSize: sizeX <= 490 ? '15px' : '16px',
-                         wordBreak: 'break-word',
-                         width: 'calc(100% - 100px)',
-                     }}
+                <div
+                    className={'flex flex-col justify-between'}
+                    style={{
+                        marginLeft: sizeX <= 440 ? '20px' : '30px',
+                        fontSize: sizeX <= 490 ? '15px' : '16px',
+                        wordBreak: 'break-word',
+                        width: 'calc(100% - 100px)',
+                    }}
                 >
                     <div
                         style={{
@@ -112,9 +111,7 @@ export default function CartItem({ item, setCart }: IAppProps) {
                             flexDirection: 'column',
                         }}
                     >
-                        <p className={cx('product-category')}>
-                            {item.category}
-                        </p>
+                        <p className={cx('product-category')}>{item.category}</p>
                         <p className={cx('product-name')}>{item.name}</p>
                         <ul className={cx('cart-list')}>
                             <li>
@@ -128,10 +125,11 @@ export default function CartItem({ item, setCart }: IAppProps) {
                             </li>
                         </ul>
                     </div>
-                    <div className={'w-full flex justify-between items-center'}
-                         style={{
-                             height: '15px',
-                         }}
+                    <div
+                        className={'w-full flex justify-between items-center'}
+                        style={{
+                            height: '15px',
+                        }}
                     >
                         <div className={'flex gap-3'}>
                             <p className={cx('price')}>
@@ -176,17 +174,18 @@ export default function CartItem({ item, setCart }: IAppProps) {
                         <RemoveIcon />
                     </IconButton>
                 </div>
-                <div className={'flex justify-center items-center'}
-                     style={{
-                         height: sizeX <= 600 ? '50px' : 'calc(100% - 100px)',
-                         borderTop: sizeX <= 600 ? '' : 'solid 1.5px rgba(0,0,0,0.4)',
-                         borderBottom: sizeX <= 600 ? '' : 'solid 1.5px rgba(0,0,0,0.4)',
-                         borderLeft: sizeX <= 600 ? 'solid 1.5px rgba(0,0,0,0.4)' : '',
-                         borderRight: sizeX <= 600 ? 'solid 1.5px rgba(0,0,0,0.4)' : '',
-                         fontSize: '16px',
-                         fontWeight: '600',
-                         width: sizeX <= 600 ? 'calc(100vw - 100px)' : '',
-                     }}
+                <div
+                    className={'flex justify-center items-center'}
+                    style={{
+                        height: sizeX <= 600 ? '50px' : 'calc(100% - 100px)',
+                        borderTop: sizeX <= 600 ? '' : 'solid 1.5px rgba(0,0,0,0.4)',
+                        borderBottom: sizeX <= 600 ? '' : 'solid 1.5px rgba(0,0,0,0.4)',
+                        borderLeft: sizeX <= 600 ? 'solid 1.5px rgba(0,0,0,0.4)' : '',
+                        borderRight: sizeX <= 600 ? 'solid 1.5px rgba(0,0,0,0.4)' : '',
+                        fontSize: '16px',
+                        fontWeight: '600',
+                        width: sizeX <= 600 ? 'calc(100vw - 100px)' : '',
+                    }}
                 >
                     {amount}
                 </div>
