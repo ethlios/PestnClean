@@ -18,10 +18,6 @@ export interface IAppProps {
 export default function Cart({ cart, setCart }: IAppProps) {
     const { sizeX } = useSize();
 
-    useEffect(() => {
-        localStorage.setItem('cart', JSON.stringify(cart));
-    }, [cart]);
-
     return (
         <div className={'flex flex-col'}
              style={{
@@ -42,9 +38,9 @@ export default function Cart({ cart, setCart }: IAppProps) {
                 </div>
             ) : (
                 <div className={'w-full h-full flex flex-col overflow-scroll'}>
-                    {cart.map((item: any, index: any) => {
+                    {cart.map((item: any) => {
                         return (
-                            <CartItem key={index} item={item} setCart={setCart} />
+                            <CartItem key={item.id} item={item} setCart={setCart} />
                         );
                     })}
                 </div>

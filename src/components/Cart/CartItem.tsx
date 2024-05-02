@@ -27,12 +27,14 @@ export default function CartItem({ item, setCart }: IAppProps) {
         setAmount(quantity);
         const localStorageCart = JSON.parse(localStorage.getItem('cart') || '[]');
         localStorageCart.find((item: any) => item.id === id).quantity = quantity;
+        localStorage.setItem('cart', JSON.stringify(localStorageCart));
         setCart(localStorageCart);
     };
 
     const onchangeDelete = (id: number) => {
         const localStorageCart = JSON.parse(localStorage.getItem('cart') || '[]');
         const newCart = localStorageCart.filter((item: any) => item.id !== id);
+        localStorage.setItem('cart', JSON.stringify(newCart));
         setCart(newCart);
     };
 

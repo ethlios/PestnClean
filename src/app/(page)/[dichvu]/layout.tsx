@@ -12,7 +12,7 @@ export async function generateMetadata({ params }: Props) {
         return nameToLink(blog.title) === params.dichvu;
     });
 
-    const path = nameToLink(blog.lengt > 0 ? blog[0].title : '');
+    const path = nameToLink(blog.length > 0 ? blog[0].title : '');
 
     if (!blog[0]) {
         return {

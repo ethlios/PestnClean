@@ -5,15 +5,18 @@ import styles from './product_detail.module.scss';
 import ProductImage from '~/components/Product/Detail/ProductImage';
 import ProductInfo from '~/components/Product/Detail/ProductInfo';
 import useSize from '~/libs/hooks/useSize';
+import { useEffect } from 'react';
 
 const cx = classNames.bind(styles);
 
-export interface IAppProps {}
+export interface IAppProps {
+    product: any[];
+}
 
-export default function ProductSingle(props: IAppProps) {
+export default function ProductSingle({ product }: IAppProps) {
     const { sizeX } = useSize();
 
-    return (
+    return product.length > 0 && (
         <div
             className={cx('product-wrapper')}
             style={{
@@ -21,7 +24,7 @@ export default function ProductSingle(props: IAppProps) {
             }}
         >
             <ProductImage />
-            <ProductInfo />
+            <ProductInfo product={product} />
         </div>
     );
 }

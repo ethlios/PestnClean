@@ -5,6 +5,8 @@ import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
 import Link from 'next/link';
 import TuneIcon from '@mui/icons-material/Tune';
 import useSize from '~/libs/hooks/useSize';
+import products from '~/constants/products';
+import { nameToLink } from '~/libs/orthers/nameToLink';
 
 const cx = classNames.bind(styles);
 
@@ -56,21 +58,23 @@ export default function AllProduct({ setOpenFilter, openFilter }: IAppProps) {
                     gap: sizeX < 740 ? '8px' : '',
                 }}
             >
-                {Array.from({ length: 12 }).map((_, index) => {
+                {products.map((item) => {
+                    const path = nameToLink(item ? item.name : '');
+
                     return (
                         <Link
-                            href="/sanpham/detail"
+                            href={`/sanpham/${path}`}
                             className={cx('content-item2')}
-                            key={index}
+                            key={path}
                             style={{
                                 width:
                                     sizeX < 740
                                         ? 'calc(100% /2 - 5px)'
                                         : sizeX < 1024
-                                        ? ''
-                                        : !openFilter
-                                        ? 'calc(100% /4 - 19px)'
-                                        : '',
+                                            ? ''
+                                            : !openFilter
+                                                ? 'calc(100% /4 - 19px)'
+                                                : '',
                             }}
                         >
                             <div
@@ -85,11 +89,11 @@ export default function AllProduct({ setOpenFilter, openFilter }: IAppProps) {
                                     fontSize: sizeX < 400 ? '10.5px' : '',
                                 }}
                             >
-                                SẢN PHẨM GIẢI PHÁP VỆ SINH
+                                {item.category}
                             </p>
-                            <p className={cx('item-name')}>Tinh dầu Chanh Viet Oils</p>
+                            <p className={cx('item-name')}>{item.name}</p>
                             <p className={cx('item-price')}>
-                                1.100.000 <u>đ</u>
+                                {item.price} <u>{item.currency}</u>
                             </p>
                         </Link>
                     );
