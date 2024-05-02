@@ -14,7 +14,7 @@ export interface ResponseGenerator {
 }
 
 // Fecth Task
-function* FetchListTask({ payload }: any) {
+function* FetchUser({ payload }: any) {
     const {
         id,
         token,
@@ -267,7 +267,7 @@ function* DeleteEmail({ payload }: any) {
 }
 
 export default function* rootSaga() {
-    yield takeLatest(types.GET_USER, FetchListTask);
+    yield takeLatest(types.GET_USER, FetchUser);
     yield takeLatest(types.ADD_PRODUCT, AddProduct);
     yield takeLatest(types.REMOVE_PRODUCT, RemoveProduct);
     yield takeLatest(types.UPDATE_PRODUCT, UpdateProduct);

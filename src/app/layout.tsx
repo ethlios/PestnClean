@@ -8,7 +8,7 @@ import ReduxProvider from '~/redux/provider';
 const main = Montserrat({ subsets: ['latin'], weight: ['300', '400', '500', '600', '700'] });
 
 export const metadata: Metadata = {
-    metadataBase: new URL(`${process.env.BASE_URL}`),
+    metadataBase: new URL(`${process.env.NEXTAUTH_URL}`),
     title: {
         default: 'PestnClean - Chuyên cung cấp dịch vụ vệ sinh toàn diện',
         template: `%s | Pestnclean`,

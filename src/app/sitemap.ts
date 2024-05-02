@@ -3,7 +3,7 @@ import { allServices } from '~/constants/service';
 import { nameToLink } from '~/libs/orthers/nameToLink';
 
 export default async function sitemap() {
-    const baseUrl = process.env.BASE_URL;
+    const baseUrl = process.env.NEXTAUTH_URL;
 
     const blogUrl = blogs.map((blog) => ({
         url: `${baseUrl}/blogs/${nameToLink(blog.title)}`,

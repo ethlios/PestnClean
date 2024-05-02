@@ -28,6 +28,7 @@ model User {
     avatar String?
     discount Discount[]
     comment CommentBlogs[]
+    imgWork ImgWork[]
 }
 
 model Cart {
@@ -99,8 +100,6 @@ model CategoryThird {
 }
 
 
-
-
 model CommentBlogs {
   id Int @id @default(autoincrement())
   author User @relation(fields: [authorId], references: [id])
@@ -170,3 +169,10 @@ model Discount{
   description String?
 }
 
+model ImgWork{
+  id Int @id @default(autoincrement())
+  author User @relation(fields: [authorId], references: [id])
+  authorId String
+  img String?
+  type String?
+}

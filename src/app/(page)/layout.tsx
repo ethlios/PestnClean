@@ -11,15 +11,37 @@ import logo from '../../../public/img/logo.png';
 import Image from 'next/image';
 import useSize from '~/libs/hooks/useSize';
 import HeaderMobile from '~/common/Header/headerMobile';
+import { useSession } from 'next-auth/react';
+import { useDispatch } from 'react-redux';
+import { getUser } from '~/redux/actions';
 
 export default function ComponentConnectLayout({ children }: { children: React.ReactNode }) {
     const pathname = usePathname();
     const [openCp, setOpenCp] = useState<boolean>(false);
     const { sizeX } = useSize();
+    const dispatch = useDispatch();
 
     useEffect(() => {
         setTimeout(() => setOpenCp(true), 1000);
     }, []);
+
+    const { data: session } = useSession();
+
+    useEffect(() => {
+        if (session) {
+            dispatch(
+                getUser({
+                    id: session?.user.id.toString(),
+                    token: session.user.accessToken,
+                    email: session.user.email,
+                    name: session.user.name,
+                    img: session.user.picture ?? session.user.image,
+                }),
+            );
+        }
+    }, [dispatch, session]);
+
+    console.log(session);
 
     return openCp ? (
         <div>

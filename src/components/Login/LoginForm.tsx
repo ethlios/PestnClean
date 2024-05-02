@@ -12,6 +12,7 @@ import text2 from '../../../public/img/text-2.png';
 import text1 from '../../../public/img/text.png';
 import styles from './login.module.scss';
 import useSize from '~/libs/hooks/useSize';
+import { signIn } from 'next-auth/react';
 
 const cx = classNames.bind(styles);
 
@@ -33,14 +34,14 @@ export default function LoginForm({ theme, setTheme }: IAppProps) {
                     sizeX < 480
                         ? '100%'
                         : sizeX < 600
-                        ? '80%'
-                        : sizeX < 700
-                        ? '70%'
-                        : sizeX < 900
-                        ? '60%'
-                        : sizeX < 1150
-                        ? '50%'
-                        : '',
+                          ? '80%'
+                          : sizeX < 700
+                            ? '70%'
+                            : sizeX < 900
+                              ? '60%'
+                              : sizeX < 1150
+                                ? '50%'
+                                : '',
                 position: sizeX < 900 ? 'absolute' : 'fixed',
                 right: sizeX < 900 ? 'auto' : '',
             }}
@@ -172,6 +173,7 @@ export default function LoginForm({ theme, setTheme }: IAppProps) {
                         style={{
                             color: !theme ? '' : 'rgba(255,255,255,0.8)',
                         }}
+                        onClick={() => signIn('google')}
                     >
                         <GoogleIcon />
                         Đăng nhập với Gmail
