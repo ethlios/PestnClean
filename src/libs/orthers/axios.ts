@@ -1,28 +1,8 @@
 import axios from 'axios';
 
 const axiosRequest = axios.create({
-    baseURL: `https://huonghai.vercel.app/`,
+    baseURL: `http://localhost:3000/`,
 });
-
-// const AxiosAuth = () => {
-//     const { data: session } = useSession();
-
-//     useEffect(() => {
-//         const requestIntercept = axiosRequest.interceptors.request.use((config) => {
-//             if (!config.headers['Authorization']) {
-//                 config.headers['Authorization'] = `Bearer ${session?.user.accessToken}`;
-//             }
-
-//             return config;
-//         });
-
-//         return () => {
-//             axiosRequest.interceptors.request.eject(requestIntercept);
-//         };
-//     }, [session]);
-
-//     return axiosRequest;
-// };
 
 export const get = async (endpoint: string, body: any) => {
     const res = await axiosRequest.get(endpoint, body);
