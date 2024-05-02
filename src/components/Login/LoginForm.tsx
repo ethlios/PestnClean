@@ -102,7 +102,7 @@ export default function LoginForm({ theme, setTheme }: IAppProps) {
                 >
                     Lorem Ipsum is simply dummy text of the printing and typesetting industry.
                 </p>
-                <div
+                {/* <div
                     className={cx('input-list')}
                     style={{
                         color: !theme ? '' : '#fff',
@@ -167,13 +167,18 @@ export default function LoginForm({ theme, setTheme }: IAppProps) {
                             <i>Tạo tài khoản.</i>
                         </u>
                     </b>
-                </p>
+                </p> */}
                 <div className={cx('button-list')}>
                     <button
                         style={{
                             color: !theme ? '' : 'rgba(255,255,255,0.8)',
                         }}
-                        onClick={() => signIn('google')}
+                        onClick={() =>
+                            signIn('google', {
+                                redirect: true,
+                                callbackUrl: '/',
+                            })
+                        }
                     >
                         <GoogleIcon />
                         Đăng nhập với Gmail

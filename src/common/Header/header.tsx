@@ -17,6 +17,9 @@ import { IconButton } from '@mui/material';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import { headerMenu } from '~/constants/menu';
 import useSize from '~/libs/hooks/useSize';
+import { signOut, useSession } from 'next-auth/react';
+import Tippy from '@tippyjs/react/headless';
+import InputOutlinedIcon from '@mui/icons-material/InputOutlined';
 
 const cx = classNames.bind(styles);
 
@@ -31,6 +34,8 @@ export default function Header(props: HeaderProps) {
     const router = useRouter();
     const wheel: boolean = useScroll();
     const { sizeX } = useSize();
+    const { data: session } = useSession();
+    const [openAcc, setOpenAcc] = useState<boolean>(false);
 
     useEffect(() => {
         const scroll = () => {
@@ -45,6 +50,7 @@ export default function Header(props: HeaderProps) {
     useEffect(() => {
         if (wheel) {
             setOpenSearch(false);
+            setOpenAcc(false);
         }
     }, [wheel]);
 
@@ -64,10 +70,10 @@ export default function Header(props: HeaderProps) {
                         sizeX < 768
                             ? '0 20px'
                             : sizeX < 1100
-                            ? '0 50px'
-                            : sizeX < 1280
-                            ? '0 80px'
-                            : '0 100px',
+                              ? '0 50px'
+                              : sizeX < 1280
+                                ? '0 80px'
+                                : '0 100px',
                     backgroundColor: scrollToTop > 0 ? '#fff' : 'transparent',
                     boxShadow: scrollToTop > 0 ? 'rgba(0, 0, 0, 0.2) 0px 5px 15px' : '',
                     opacity: scrollToTop === 0 ? 1 : !wheel ? 1 : 0,
@@ -126,7 +132,7 @@ export default function Header(props: HeaderProps) {
                 <div
                     className={'flex items-center justify-center'}
                     style={{
-                        gap: '8px',
+                        gap: '9px',
                     }}
                 >
                     <SearchOutlinedIcon
@@ -140,9 +146,59 @@ export default function Header(props: HeaderProps) {
                     <Link href={'/giohang'} className="icon-hover">
                         <ShoppingBagOutlinedIcon />
                     </Link>
-                    <Link href="/login" className="icon-hover">
-                        <AccountCircleOutlinedIcon />
-                    </Link>
+                    {session ? (
+                        <Tippy
+                            visible={openAcc}
+                            onClickOutside={() => {
+                                setOpenAcc(false);
+                                // setChangeColor(false);
+                            }}
+                            appendTo={document.body}
+                            interactive
+                            placement="auto"
+                            offset={[-10, 10]}
+                            zIndex={2000}
+                            render={(attrs) => (
+                                <div tabIndex={-1} {...attrs} className={cx('tippy-box')}>
+                                    {session.user.rule === 'admin' ? (
+                                        <div onClick={() => setOpenAcc(false)}>
+                                            <Link href={'/admin'}>Dashboard</Link>
+                                        </div>
+                                    ) : (
+                                        <div onClick={() => setOpenAcc(false)}>
+                                            <Link href={'/account'}>Quản lý tài khoản</Link>
+                                        </div>
+                                    )}
+                                    {session.user.rule !== 'admin' && (
+                                        <div onClick={() => setOpenAcc(false)}>
+                                            <Link href={'/account?q=order'}>Kiểm tra đơn hàng</Link>
+                                        </div>
+                                    )}
+                                    <div onClick={() => signOut()}>
+                                        <InputOutlinedIcon />
+                                        Đăng xuất
+                                    </div>
+                                </div>
+                            )}
+                        >
+                            <div className={cx('avatar')} onClick={() => setOpenAcc(!openAcc)}>
+                                {session.user.image ? (
+                                    <Image
+                                        src={session.user.image}
+                                        alt={'Avatar'}
+                                        width={1000}
+                                        height={1000}
+                                    />
+                                ) : (
+                                    session.user.name.charAt(0).toUpperCase()
+                                )}
+                            </div>
+                        </Tippy>
+                    ) : (
+                        <Link href="/login" className="icon-hover">
+                            <AccountCircleOutlinedIcon />
+                        </Link>
+                    )}
                 </div>
             </div>
         </>

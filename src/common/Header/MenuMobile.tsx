@@ -16,6 +16,9 @@ import RingVolumeOutlinedIcon from '@mui/icons-material/RingVolumeOutlined';
 import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { headerMobile, serviceMobile } from '~/constants/menu';
+import { signOut, useSession } from 'next-auth/react';
+import InputOutlinedIcon from '@mui/icons-material/InputOutlined';
+import Tippy from '@tippyjs/react/headless';
 
 const cx = classNames.bind(styles);
 
@@ -32,6 +35,8 @@ export default function MenuMobile({ open, setOpen }: IAppProps) {
     const [openSearch, setOpenSearch] = useState<boolean>(false);
     const [searchValue, setSearchValue] = useState<string>('');
     const router = useRouter();
+    const [openAcc, setOpenAcc] = useState<boolean>(false);
+    const { data: session } = useSession();
 
     useGSAP(
         () => {
@@ -262,9 +267,59 @@ export default function MenuMobile({ open, setOpen }: IAppProps) {
                     <Link href="/giohang" className="icon-hover" onClick={() => setOpen(false)}>
                         <ShoppingBagOutlinedIcon />
                     </Link>
-                    <Link href="/login" className="icon-hover" onClick={() => setOpen(false)}>
-                        <AccountCircleOutlinedIcon />
-                    </Link>
+                    {session ? (
+                        <Tippy
+                            visible={openAcc}
+                            onClickOutside={() => {
+                                setOpenAcc(false);
+                                // setChangeColor(false);
+                            }}
+                            appendTo={document.body}
+                            interactive
+                            placement="auto"
+                            offset={[-10, 10]}
+                            zIndex={5000}
+                            render={(attrs) => (
+                                <div tabIndex={-1} {...attrs} className={cx('tippy-box')}>
+                                    {session.user.rule === 'admin' ? (
+                                        <div onClick={() => setOpenAcc(false)}>
+                                            <Link href={'/admin'}>Dashboard</Link>
+                                        </div>
+                                    ) : (
+                                        <div onClick={() => setOpenAcc(false)}>
+                                            <Link href={'/account'}>Quản lý tài khoản</Link>
+                                        </div>
+                                    )}
+                                    {session.user.rule !== 'admin' && (
+                                        <div onClick={() => setOpenAcc(false)}>
+                                            <Link href={'/account?q=order'}>Kiểm tra đơn hàng</Link>
+                                        </div>
+                                    )}
+                                    <div onClick={() => signOut()}>
+                                        <InputOutlinedIcon />
+                                        Đăng xuất
+                                    </div>
+                                </div>
+                            )}
+                        >
+                            <div className={cx('avatar')} onClick={() => setOpenAcc(!openAcc)}>
+                                {session.user.image ? (
+                                    <Image
+                                        src={session.user.image}
+                                        alt={'Avatar'}
+                                        width={1000}
+                                        height={1000}
+                                    />
+                                ) : (
+                                    session.user.name.charAt(0).toUpperCase()
+                                )}
+                            </div>
+                        </Tippy>
+                    ) : (
+                        <Link href="/login" className="icon-hover">
+                            <AccountCircleOutlinedIcon />
+                        </Link>
+                    )}
                 </div>
             </div>
         </div>

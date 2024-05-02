@@ -419,3 +419,45 @@
         font-weight: 600;
     }
 }
+
+.avatar {
+    background-color: var(--primary);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.tippy-box {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 15px;
+    overflow: hidden;
+
+    div {
+        padding: 12px 15px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all ease 0.5s;
+        letter-spacing: -0.3px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 7px;
+    }
+
+    svg {
+        font-size: 20px;
+    }
+
+    div:hover {
+        background-color: var(--primary);
+        color: #fff;
+    }
+}

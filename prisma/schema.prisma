@@ -73,6 +73,7 @@ model Product {
     pieces String?
     bag String?
     plate String?
+    quantity Int?
 }
 
 model CategoryMain {
