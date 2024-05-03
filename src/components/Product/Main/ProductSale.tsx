@@ -10,7 +10,6 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import { Autoplay } from 'swiper/modules';
 import formatter from '~/libs/orthers/formatMoney';
-import { nameToLink } from '~/libs/orthers/nameToLink';
 
 const cx = classNames.bind(styles);
 
@@ -40,11 +39,9 @@ export default function ProductSale({ openFilter, products }: IAppProps) {
                     style={{ padding: '0 3.2px 0 0' }}
                 >
                     {products.map((item: any) => {
-                        const path = nameToLink(item ? item.title : '');
-
                         return (
                             <SwiperSlide key={item.id}>
-                                <Link href={`/sanpham/${path}`} className={cx('content-item')}>
+                                <Link href="/sanpham/detail" className={cx('content-item')}>
                                     <div
                                         className={cx('item-img')}
                                         style={{
@@ -65,7 +62,9 @@ export default function ProductSale({ openFilter, products }: IAppProps) {
                                     </p>
                                     <p className={cx('item-name')}>{item.title}</p>
                                     <p className={cx('item-sale-price')}>{formatter.format(item.price)}</p>
-                                    <p className={cx('item-sale')}>{formatter.format(item.priceSales)}</p>
+                                    <p className={cx('item-sale')}>
+                                        {formatter.format(item.price - item.priceSales)}
+                                    </p>
                                 </Link>
                             </SwiperSlide>
                         );

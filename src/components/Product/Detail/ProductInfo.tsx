@@ -65,9 +65,10 @@ export default function ProductInfo({ product }: IAppProps) {
         } else {
             cart.push({
                 id: product[0].id,
-                name: product[0].title,
+                name: product[0].name,
                 quantity: amount,
                 price: product[0].price,
+                currency: product[0].currency,
             });
         }
         localStorage.setItem('cart', JSON.stringify(cart));
@@ -88,7 +89,7 @@ export default function ProductInfo({ product }: IAppProps) {
                     fontSize: sizeX < 600 ? '28px' : '',
                 }}
             >
-                {product[0].title}
+                {product[0].name}
             </h1>
             <p className={cx('rating')} onClick={handleClick}>
                 3 Đánh giá
@@ -158,7 +159,7 @@ export default function ProductInfo({ product }: IAppProps) {
                     <AddIcon />
                 </IconButton>
             </div>
-            <h1 className={cx('price')}>{formatter.format(product[0].priceSales || product[0].price)}</h1>
+            <h1 className={cx('price')}>{formatter.format(product[0].price)}</h1>
             <div className={cx('other')}>
                 <div>
                     <ElectricRickshawOutlinedIcon />

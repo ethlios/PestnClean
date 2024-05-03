@@ -93,7 +93,7 @@ export default function QuillEditor({ cb, value }: IAppProps) {
                 },
             }}
             style={{
-                height: 'calc(500px)',
+                height: '520px',
             }}
         />
     );

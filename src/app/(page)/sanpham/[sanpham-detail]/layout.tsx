@@ -1,4 +1,4 @@
-import { products } from '~/constants/products';
+import products from '~/constants/products';
 import { nameToLink } from '~/libs/orthers/nameToLink';
 
 interface Props {
@@ -8,11 +8,11 @@ interface Props {
 }
 
 export async function generateMetadata({ params }: Props) {
-    const productDetail: any = products.filter((product: any) => {
-        return nameToLink(product.title) === params['sanpham-detail'];
+    const productDetail: any = products.filter((product) => {
+        return nameToLink(product.name) === params['sanpham-detail'];
     });
 
-    const path = nameToLink(productDetail.length > 0 ? productDetail[0].title : '');
+    const path = nameToLink(productDetail.length > 0 ? productDetail[0].name : '');
 
     if (!productDetail[0]) {
         return {
@@ -22,14 +22,14 @@ export async function generateMetadata({ params }: Props) {
     }
 
     return {
-        title: productDetail[0].title,
+        title: productDetail[0].name,
         description: productDetail[0].description ?? '',
         alternates: {
             canonical: `/sanpham/${path}`,
         },
         keywords: `${productDetail[0].key}`,
         openGraph: {
-            title: productDetail[0].title + ' | Pestnclean',
+            title: productDetail[0].name + ' | Pestnclean',
             description: productDetail[0].description ?? '',
             images: [
                 {
@@ -37,14 +37,14 @@ export async function generateMetadata({ params }: Props) {
                     secureUrl: productDetail[0].img,
                     width: 900,
                     height: 450,
-                    alt: `ảnh ${productDetail[0].title?.toLowerCase()} | Pesnclean`,
+                    alt: `ảnh ${productDetail[0].name?.toLowerCase()} | Pesnclean`,
                     type: 'image/png',
                 },
             ],
             // tags: ,
             type: 'website',
             locale: 'vi_VN',
-            siteName: productDetail.title,
+            siteName: productDetail.name,
             url: `/sanpham/${path}`,
         },
     };
