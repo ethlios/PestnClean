@@ -17,11 +17,14 @@ import useSize from '~/libs/hooks/useSize';
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import RemoveOutlinedIcon from '@mui/icons-material/RemoveOutlined';
 import $ from 'jquery';
+import { useDispatch } from 'react-redux';
+import { addEmail } from '~/redux/actions';
+import { useSession } from 'next-auth/react';
+import Toast from '~/components/Orther/Toast';
 
 const cx = classNames.bind(styles);
 
-export interface FooterProps {
-}
+export interface FooterProps {}
 
 export default function Footer(props: FooterProps) {
     const [checked, setChecked] = useState<boolean>(false);
@@ -29,12 +32,34 @@ export default function Footer(props: FooterProps) {
     const [isOpen1, setIsOpen1] = useState(false);
     const [isOpen2, setIsOpen2] = useState(false);
     const [isOpen3, setIsOpen3] = useState(false);
+    const [showToast, setShowToast] = useState<boolean>(false);
+    const { data: session } = useSession();
+    const [valueEmail, setValueEmail] = useState('');
+    const dispatch = useDispatch();
 
     useEffect(() => {
         $('.sv-footer').hide();
         $('.cs-footer').hide();
         $('.other-footer').hide();
     }, []);
+
+    // XỬ LÝ SỰ KIỆN CLICK VÀO ĐĂNG KÝ EMAIL ĐỂ NHẬN MAIL KHUYỄN MÃ
+    const handleClickBtnSendEmail = () => {
+        if(valueEmail !== ""){
+            if(session?.user?.id){
+                dispatch(addEmail({ 
+                    email: valueEmail,
+                    authorId: session?.user?.id 
+                }));
+                setShowToast(true);
+            } else {
+                dispatch(addEmail({ 
+                    email: valueEmail
+                }));
+                setShowToast(true);
+            }
+        }
+    };
 
     const handleShowContent1 = () => {
         setIsOpen1(!isOpen1);
@@ -68,11 +93,23 @@ export default function Footer(props: FooterProps) {
                     className={cx('banner-img')}
                 />
                 <div className={cx('img-black')}></div>
+                {/* Toast */}
+                <Toast
+                    rule="normal"
+                    text="Đã đăng ký thành công"
+                    showToast={showToast}
+                    setShowToast={setShowToast}
+                />
                 <div className={cx('banner-content')}>
                     <h1>CẬP NHẬT TIN TỨC</h1>
                     <div className={cx('banner-input')}>
-                        <input type="email" placeholder="Địa chỉ email..."></input>
-                        <div className={cx('banner-btn')}>
+                        <input
+                            type="email"
+                            placeholder="Địa chỉ email..."
+                            value={valueEmail}
+                            onChange={(e) => setValueEmail(e.target.value)}
+                        />
+                        <div className={cx('banner-btn')} onClick={handleClickBtnSendEmail}>
                             <p>ĐĂNG KÝ</p>
                             <ChevronRightIcon />
                         </div>
@@ -95,8 +132,19 @@ export default function Footer(props: FooterProps) {
                 </div>
             </div>
             {/* Footer */}
-            <div className={cx('footer')}
-                 style={{ padding: sizeX < 768 ? '0 20px' : sizeX < 1100 ? '0 50px' : sizeX < 1280 ? '0 80px' : '0 100px' }}>
+            <div
+                className={cx('footer')}
+                style={{
+                    padding:
+                        sizeX < 768
+                            ? '0 20px'
+                            : sizeX < 1100
+                              ? '0 50px'
+                              : sizeX < 1280
+                                ? '0 80px'
+                                : '0 100px',
+                }}
+            >
                 <div className={cx('footer-head')}>
                     <Image
                         alt="Logo công ty PESTNCLEAN"

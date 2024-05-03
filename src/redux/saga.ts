@@ -249,7 +249,9 @@ function* DeleteBlogsComment({ payload }: any) {
 // Email
 function* AddEmail({ payload }: any) {
     try {
+        console.log(payload);
         const res: ResponseGenerator = yield call(request.post, 'api/email', payload);
+        console.log(res);
     } catch (err) {
         console.log(err);
     }
