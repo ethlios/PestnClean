@@ -14,12 +14,20 @@ import useSize from '~/libs/hooks/useSize';
 
 const cx = classNames.bind(styles);
 
-export interface IAppProps {
-}
+export interface IAppProps {}
 
 export default function ProductPage(props: IAppProps) {
     const { sizeX } = useSize();
     const [openFilter, setOpenFilter] = useState<boolean>(true);
+    const [products, setProducts] = useState<any>([]);
+
+    useEffect(() => {
+        fetch('/api/product')
+            .then((res) => res.json())
+            .then((data) => {
+                setProducts(data);
+            });
+    }, []);
 
     useEffect(() => {
         if (sizeX < 1024) {
@@ -30,8 +38,13 @@ export default function ProductPage(props: IAppProps) {
     }, [sizeX]);
 
     return (
-        <div className={'cpmount'}
-             style={{ padding: sizeX < 768 ? '0 20px' : sizeX < 1100 ? '0 50px' : sizeX < 1280 ? '0 80px' : '0 100px' }}>
+        <div
+            className={'cpmount'}
+            style={{
+                padding:
+                    sizeX < 768 ? '0 20px' : sizeX < 1100 ? '0 50px' : sizeX < 1280 ? '0 80px' : '0 100px',
+            }}
+        >
             <div className={cx('link')}>
                 <Link href="/">Trang chủ</Link>
                 <p>|</p>
@@ -53,9 +66,15 @@ export default function ProductPage(props: IAppProps) {
                 >
                     <BannerProduct />
                     <CategoryIconProduct openFilter={openFilter} />
-                    <ProductSale openFilter={openFilter} />
-                    <ProductHot openFilter={openFilter} />
-                    <AllProduct setOpenFilter={setOpenFilter} openFilter={openFilter} />
+                    <ProductSale
+                        openFilter={openFilter}
+                        products={products.filter((product: any) => product.status === 'sale')}
+                    />
+                    <ProductHot
+                        openFilter={openFilter}
+                        products={products.filter((product: any) => product.status === 'hot')}
+                    />
+                    <AllProduct setOpenFilter={setOpenFilter} openFilter={openFilter} products={products} />
                 </div>
             </div>
             <div className={cx('banner-auto')}></div>

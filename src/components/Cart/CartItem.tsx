@@ -9,6 +9,7 @@ import useSize from '~/libs/hooks/useSize';
 import styles from './cart.module.scss';
 import { useState } from 'react';
 import Link from 'next/link';
+import formatter from '~/libs/orthers/formatMoney';
 
 const cx = classNames.bind(styles);
 
@@ -134,12 +135,10 @@ export default function CartItem({ item, setCart }: IAppProps) {
                         <div className={'flex gap-3'}>
                             <p className={cx('price')}>
                                 <b>Giá: </b>
-                                {item.price * amount} <u>{item.currency}</u>
+                                {formatter.format(item.price * amount)}
                             </p>
                             {amount > 1 && (
-                                <p className={cx('price-default')}>
-                                    ({item.price} <u>{item.currency}</u>)
-                                </p>
+                                <p className={cx('price-default')}>({formatter.format(item.price)})</p>
                             )}
                         </div>
                         <IconButton onClick={() => handleDelete(item.id)}>

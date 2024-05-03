@@ -9,6 +9,7 @@ import ButtonCommon from '../Orther/Button';
 import styles from './cart.module.scss';
 import useSize from '~/libs/hooks/useSize';
 import { useEffect, useState } from 'react';
+import formatter from '~/libs/orthers/formatMoney';
 
 const cx = classNames.bind(styles);
 
@@ -51,9 +52,7 @@ export default function CheckoutPanel({ cart }: IAppProps) {
                     <div className={'*:flex *:justify-between *:items center'}>
                         <div className={cx('total-price')}>
                             <span>{totalItem} Sản phẩm</span>
-                            <p>
-                                {totalPrice} <u>đ</u>
-                            </p>
+                            <p>{formatter.format(totalPrice)}</p>
                         </div>
                         <div className={cx('total-price')}>
                             <span>Phí vận chuyển</span>
@@ -74,9 +73,7 @@ export default function CheckoutPanel({ cart }: IAppProps) {
 
                 <div className={`${cx('total-price')} flex justify-between items center`}>
                     <span>Tổng cộng</span>
-                    <p>
-                        {totalPrice + shipping - discount} <u>đ</u>
-                    </p>
+                    <p>{formatter.format(totalPrice + shipping - discount)}</p>
                 </div>
                 <div className={'my-5 flex flex-col gap-3'}>
                     <Link href={'/giohang/thanhtoan'}>
