@@ -1,6 +1,7 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { UploadButton } from '~/utils/uploadthing';
 import RemoveOutlinedIcon from '@mui/icons-material/RemoveOutlined';
+import { arrToStr } from '~/libs/orthers/removeImg';
 
 export interface IAppProps {
     imageList: String[];
@@ -37,7 +38,6 @@ export default function UploadImgProduct({ imageList, setImageList }: IAppProps)
                         // Do something with the response
 
                         setImageList((prev: any) => [...prev, res[0].url]);
-                        // alert('Upload Completed');
                     }}
                     onUploadError={(error: Error) => {
                         // Do something with the error.
@@ -59,6 +59,7 @@ export default function UploadImgProduct({ imageList, setImageList }: IAppProps)
                 }}
                 className="opacity"
                 onClick={() => fileRef.current.firstChild.childNodes[0].click()}
+                type="button"
             >
                 Hình ảnh
             </button>

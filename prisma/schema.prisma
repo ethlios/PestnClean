@@ -6,7 +6,7 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -60,9 +60,11 @@ model Product {
   detail     String?
   price      Int?
   comments   Comments[]
-  Image      Image[]
+  Image      String[]
   code       String?
-  category   CategoryMain[]
+  category1   String?
+  category2   String?
+  category3   String?
   status     String?
   priceSales Int?
   weight     String?
@@ -76,28 +78,6 @@ model Product {
   quantity   Int?
 }
 
-model CategoryMain {
-  id        Int              @id @default(autoincrement())
-  product   Product?         @relation(fields: [productId], references: [id]) // A comment can have one post
-  productId Int?
-  type      String?
-  category  CategorySecond[]
-}
-
-model CategorySecond {
-  id             Int             @id @default(autoincrement())
-  categoryMain   CategoryMain?   @relation(fields: [categoryMainId], references: [id]) // A comment can have one post
-  categoryMainId Int?
-  type           String?
-  category       CategoryThird[]
-}
-
-model CategoryThird {
-  id               Int             @id @default(autoincrement())
-  CategorySecond   CategorySecond? @relation(fields: [CategorySecondId], references: [id]) // A comment can have one post
-  CategorySecondId Int?
-  type             String?
-}
 
 model CommentBlogs {
   id        Int      @id @default(autoincrement())
@@ -125,13 +105,6 @@ model Comments {
   email     String?
 }
 
-model Image {
-  id        Int      @id @default(autoincrement())
-  product   Product? @relation(fields: [productId], references: [id]) // A comment can have one post
-  productId Int?
-  img       String?
-  createdAt DateTime @default(now())
-}
 
 model Order {
   id            Int      @id @default(autoincrement())

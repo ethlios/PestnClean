@@ -9,11 +9,10 @@ export async function POST(request: Request) {
         data: {
             authorId: body.authorId,
             title: body.title,
-            desHead: body.description,
+            desHead: body.desHead,
             price: body.price,
-            code: uid(),
+            code: body.code,
             status: body.status,
-            category: body.category,
             priceSales: body.priceSales,
             weight: body.weight,
             detail: body.detail,
@@ -23,6 +22,11 @@ export async function POST(request: Request) {
             plate: body.plate,
             bag: body.bag,
             Image: body.image,
+            category1: body.category1,
+            category2: body.category2,
+            category3: body.category3,
+            pieces: body.pieces,
+            quantity: body.quantity,
         },
     });
 
