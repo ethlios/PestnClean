@@ -249,13 +249,21 @@ function* DeleteBlogsComment({ payload }: any) {
 // Email
 function* AddEmail({ payload }: any) {
     try {
-        console.log(payload);
         const res: ResponseGenerator = yield call(request.post, 'api/email', payload);
-        console.log(res);
-    } catch (err) {
-        console.log(err);
+        if (res.status === 200) {
+            yield put(actions.addEmailSuccess(res.data));
+        } else {
+            throw new Error(`Unexpected status code: ${res.status}`);
+        }
+    } catch (err: any) {
+        if (err.response && err.response.status === 400) {
+            yield put(actions.addEmailFail(err.response.data));
+        } else {
+            console.log(err);
+        }
     }
 }
+
 
 function* DeleteEmail({ payload }: any) {
     try {

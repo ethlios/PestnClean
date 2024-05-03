@@ -48,7 +48,7 @@ model Email {
     id Int @id @default(autoincrement())
     author User @relation(fields: [authorId], references: [id])
     authorId String
-    email String?
+    email String
 }
 
 

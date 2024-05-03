@@ -33,6 +33,8 @@ import {
     updateBlogSuccess,
     updateOrderSuccess,
     updateProductSuccess,
+    addEmailFail,
+    addEmailSuccess
 } from './actions';
 
 interface RootState {
@@ -50,6 +52,7 @@ interface RootState {
     feedback: any[];
     blogCmt: any[];
     emails: any[];
+    message: string;
 }
 
 const initState: RootState = {
@@ -67,6 +70,7 @@ const initState: RootState = {
     feedback: [],
     blogCmt: [],
     emails: [],
+    message: ''
 };
 
 const findIndex = (state: any[], id: number) => {
@@ -227,9 +231,16 @@ const rootReducer = createReducer(initState, (builder) => {
         const index = findIndex(state.emails, action.payload);
         state.emails.splice(index, 1);
     });
-    builder.addCase(addEmail, (state, action) => {
+    builder.addCase(addEmailSuccess, (state, action) => {
         console.log(action.payload);
-        //state.emails.push(action.payload);
+        const {message,data} = action.payload;
+        state.message = message;
+        state.emails.push(data);
+    });
+    builder.addCase(addEmailFail, (state, action) => {
+        console.log(action.payload);
+        const {message} = action.payload;
+        state.message = message;
     });
 });
 

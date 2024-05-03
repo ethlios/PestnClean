@@ -17,49 +17,83 @@ import useSize from '~/libs/hooks/useSize';
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import RemoveOutlinedIcon from '@mui/icons-material/RemoveOutlined';
 import $ from 'jquery';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addEmail } from '~/redux/actions';
 import { useSession } from 'next-auth/react';
 import Toast from '~/components/Orther/Toast';
+import { customToast } from '~/components/Orther/customToast';
+import { RootState } from '~/redux/provider/store';
 
 const cx = classNames.bind(styles);
 
 export interface FooterProps {}
-
+interface MessageState {
+    message: string;
+    status: boolean | null;
+}
 export default function Footer(props: FooterProps) {
     const [checked, setChecked] = useState<boolean>(false);
     const { sizeX } = useSize();
     const [isOpen1, setIsOpen1] = useState(false);
     const [isOpen2, setIsOpen2] = useState(false);
     const [isOpen3, setIsOpen3] = useState(false);
-    const [showToast, setShowToast] = useState<boolean>(false);
     const { data: session } = useSession();
     const [valueEmail, setValueEmail] = useState('');
+    const [valueMessage, setValueMessage] = useState<MessageState>({
+        message: '',
+        status: null
+    });
     const dispatch = useDispatch();
+    const selector = useSelector((state : RootState) => state.main);
+
 
     useEffect(() => {
+        console.log(selector?.message);
+        const message = selector?.message;
+        if(message === "Đăng ký thành công email"){
+            customToast({
+                type: 'success',
+                position: 'bottom-right',
+                autoClose: 2000,
+                limit: 1,
+                toastMessage: message,
+            });
+        } else if (message === "Email đã được đăng ký") {
+            setValueMessage({ message: message, status: false });
+        }
+    },[selector.message]);
+
+    useEffect(() => {
+        setValueMessage({message: "",status: null});
         $('.sv-footer').hide();
         $('.cs-footer').hide();
         $('.other-footer').hide();
     }, []);
 
-    // XỬ LÝ SỰ KIỆN CLICK VÀO ĐĂNG KÝ EMAIL ĐỂ NHẬN MAIL KHUYỄN MÃ
+    // EVENT HANDLING CLICK ON REGISTER EMAIL TO RECEIVE PROMOTIONAL MAIL
     const handleClickBtnSendEmail = () => {
-        if(valueEmail !== ""){
-            if(session?.user?.id){
-                dispatch(addEmail({ 
+        if (valueEmail.trim() !== '') {
+            if (isEmail(valueEmail)) {
+                const emailData = {
                     email: valueEmail,
-                    authorId: session?.user?.id 
-                }));
-                setShowToast(true);
+                    authorId: session?.user?.id || undefined,
+                };
+                dispatch(addEmail(emailData));
+                setValueEmail('');
             } else {
-                dispatch(addEmail({ 
-                    email: valueEmail
-                }));
-                setShowToast(true);
+                setValueMessage({ message: "Nhập đúng định dạng email", status: false });
             }
+        } else {
+            setValueMessage({ message: "Vui lòng nhập email", status: false });
         }
     };
+    
+
+    function isEmail(val: string): boolean {
+        const regEmail: RegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return regEmail.test(val);
+    }
+    
 
     const handleShowContent1 = () => {
         setIsOpen1(!isOpen1);
@@ -93,13 +127,6 @@ export default function Footer(props: FooterProps) {
                     className={cx('banner-img')}
                 />
                 <div className={cx('img-black')}></div>
-                {/* Toast */}
-                <Toast
-                    rule="normal"
-                    text="Đã đăng ký thành công"
-                    showToast={showToast}
-                    setShowToast={setShowToast}
-                />
                 <div className={cx('banner-content')}>
                     <h1>CẬP NHẬT TIN TỨC</h1>
                     <div className={cx('banner-input')}>
@@ -107,13 +134,23 @@ export default function Footer(props: FooterProps) {
                             type="email"
                             placeholder="Địa chỉ email..."
                             value={valueEmail}
-                            onChange={(e) => setValueEmail(e.target.value)}
+                            onChange={(e) => {
+                                setValueEmail(e.target.value);
+                                setValueMessage({message: "",status:null})
+                            }}
                         />
                         <div className={cx('banner-btn')} onClick={handleClickBtnSendEmail}>
                             <p>ĐĂNG KÝ</p>
                             <ChevronRightIcon />
                         </div>
                     </div>
+                    {
+                        valueMessage?.message !=="" && (
+                            <div className={cx('banner-content-msg',
+                                valueMessage?.status !== null && valueMessage.status === true ? 'banner-content-msg-success' : 'banner-content-msg-error'
+                            )}>{valueMessage.message}</div>
+                        )
+                    }
                     <div className={cx('check')}>
                         {/* <input type="checkbox" /> */}
                         <Checkbox

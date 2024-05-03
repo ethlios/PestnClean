@@ -126,8 +126,11 @@ export const updateOrderSuccess = createAction<any>(type.UPDATE_ORDER_SUCCESS);
 export const removeOrderAll = createAction<any>(type.REMOVE_ORDER_ALL);
 
 // Email
+    // add email
+export const addEmail = createAction<any>(type.ADD_EMAIL);
+export const addEmailSuccess = createAction<any>(type.ADD_EMAIL_SUCCESS);
+export const addEmailFail = createAction<any>(type.ADD_EMAIL_FAIL);
 
 export const getEmail = createAction<any>(type.GET_EMAIL);
-export const addEmail = createAction<any>(type.ADD_EMAIL);
 export const removeEmail = createAction<any>(type.REMOVE_EMAIL);
 export const removeEmailSuccess = createAction<any>(type.REMOVE_EMAIL_SUCCESS);
