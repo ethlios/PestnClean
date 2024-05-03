@@ -1,5 +1,6 @@
 'use client';
 
+import { ToastContainer } from 'react-toastify';
 import BlogOthers from '~/components/Home/BlogsOrther';
 import Certification from '~/components/Home/Certification';
 import ImageWork from '~/components/Home/ImgWork';
@@ -8,6 +9,8 @@ import ServiceAds from '~/components/Home/ServiceOrther';
 import WhyChooseMe from '~/components/Home/WhyChoseMe';
 import BannerHomePage from '~/components/Home/banner';
 import useSize from '~/libs/hooks/useSize';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Home() {
     const { sizeX } = useSize();
@@ -26,6 +29,7 @@ export default function Home() {
                 <Certification />
                 <ProductOthers />
                 <BlogOthers />
+                <ToastContainer/>
             </div>
         </main>
     );

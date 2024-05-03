@@ -249,13 +249,39 @@ function* DeleteBlogsComment({ payload }: any) {
 // Email
 function* AddEmail({ payload }: any) {
     try {
-        console.log(payload);
         const res: ResponseGenerator = yield call(request.post, 'api/email', payload);
-        console.log(res);
-    } catch (err) {
-        console.log(err);
+        if (res.status === 200) {
+            yield put(actions.addEmailSuccess(res.data));
+        } else {
+            throw new Error(`Unexpected status code: ${res.status}`);
+        }
+    } catch (err: any) {
+        if (err.response && err.response.status === 400) {
+            yield put(actions.addEmailFail(err.response.data));
+        } else {
+            console.log(err);
+        }
     }
 }
+
+function* GetEmail({payload} : any) {
+    try {
+        const {id} = payload;
+        const res: ResponseGenerator = yield call(request.get, `api/email/getAll/${id}`,null);
+        if (res.status === 200) {
+            yield put(actions.getEmailSuccess(res.data));
+        } else {
+            throw new Error(`Unexpected status code: ${res.status}`);
+        }
+    } catch (err: any) {
+        if (err.response && err.response.status === 400) {
+            yield put(actions.getEmailFail(err.response.data));
+        } else {
+            console.log(err);
+        }
+    }
+}
+
 
 function* DeleteEmail({ payload }: any) {
     try {
@@ -288,4 +314,5 @@ export default function* rootSaga() {
     yield takeLatest(types.DELETE_BLOG_COMMENT, DeleteBlogsComment);
     yield takeLatest(types.ADD_EMAIL, AddEmail);
     yield takeLatest(types.REMOVE_EMAIL, DeleteEmail);
+    yield takeLatest(types.GET_EMAIL,GetEmail);
 }
