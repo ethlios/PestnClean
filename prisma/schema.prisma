@@ -11,37 +11,37 @@ datasource db {
 }
 
 model User {
-    id String @id
-    email String @unique
-    name String?
-    img String?
-    rule String?
-    product Product[]
-    cart Cart[]
-    order Order[]
-    emailkm Email[]
-    address String?
-    district String?
-    Ward String?
-    city String?
-    phone String?
-    avatar String?
-    discount Discount[]
-    comment CommentBlogs[]
-    imgWork ImgWork[]
-    notification Notification[]
+  id           String         @id
+  email        String         @unique
+  name         String?
+  img          String?
+  rule         String?
+  product      Product[]
+  cart         Cart[]
+  order        Order[]
+  emailkm      Email[]
+  address      String?
+  district     String?
+  Ward         String?
+  city         String?
+  phone        String?
+  avatar       String?
+  discount     Discount[]
+  comment      CommentBlogs[]
+  imgWork      ImgWork[]
+  notification Notification[]
 }
 
 model Cart {
-    id Int @id @default(autoincrement())
-    author User @relation(fields: [authorId], references: [id])
-    authorId String
-    title String?
-    description String?
-    price Int?
-    img String?
-    quantity Int?
-    code String?
+  id          Int     @id @default(autoincrement())
+  author      User    @relation(fields: [authorId], references: [id])
+  authorId    String
+  title       String?
+  description String?
+  price       Int?
+  img         String?
+  quantity    Int?
+  code        String?
 }
 
 model Email {
@@ -51,138 +51,133 @@ model Email {
     email String
 }
 
-
 model Product {
-    id Int @id @default(autoincrement())
-    author User @relation(fields: [authorId], references: [id])
-    authorId String
-    title String?
-    desHead String?
-    detail String?
-    price Int?
-    comments Comments[]
-    Image Image[]
-    code String?
-    category CategoryMain[]
-    status String?
-    priceSales Int?
-    weight String?
-    expiry String?
-    new Boolean?
-    box String?
-    package String?
-    pieces String?
-    bag String?
-    plate String?
-    quantity Int?
+  id         Int            @id @default(autoincrement())
+  author     User           @relation(fields: [authorId], references: [id])
+  authorId   String
+  title      String?
+  desHead    String?
+  detail     String?
+  price      Int?
+  comments   Comments[]
+  Image      Image[]
+  code       String?
+  category   CategoryMain[]
+  status     String?
+  priceSales Int?
+  weight     String?
+  expiry     String?
+  new        Boolean?
+  box        String?
+  package    String?
+  pieces     String?
+  bag        String?
+  plate      String?
+  quantity   Int?
 }
 
 model CategoryMain {
-    id Int @id @default(autoincrement())
-    product Product? @relation(fields: [productId], references: [id]) // A comment can have one post
-    productId Int?
-    type String?
-    category CategorySecond[]
-
+  id        Int              @id @default(autoincrement())
+  product   Product?         @relation(fields: [productId], references: [id]) // A comment can have one post
+  productId Int?
+  type      String?
+  category  CategorySecond[]
 }
 
 model CategorySecond {
-    id Int @id @default(autoincrement())
-    categoryMain CategoryMain? @relation(fields: [categoryMainId], references: [id]) // A comment can have one post
-    categoryMainId Int?
-    type String?
-    category CategoryThird[]
+  id             Int             @id @default(autoincrement())
+  categoryMain   CategoryMain?   @relation(fields: [categoryMainId], references: [id]) // A comment can have one post
+  categoryMainId Int?
+  type           String?
+  category       CategoryThird[]
 }
 
 model CategoryThird {
-    id Int @id @default(autoincrement())
-    CategorySecond CategorySecond? @relation(fields: [CategorySecondId], references: [id]) // A comment can have one post
-    CategorySecondId Int?
-    type String?
+  id               Int             @id @default(autoincrement())
+  CategorySecond   CategorySecond? @relation(fields: [CategorySecondId], references: [id]) // A comment can have one post
+  CategorySecondId Int?
+  type             String?
 }
-
 
 model CommentBlogs {
-  id Int @id @default(autoincrement())
-  author User @relation(fields: [authorId], references: [id])
-  authorId String
-  blogName String?
-  message String?
-  img String?
-  name String?
+  id        Int      @id @default(autoincrement())
+  author    User     @relation(fields: [authorId], references: [id])
+  authorId  String
+  blogName  String?
+  message   String?
+  img       String?
+  name      String?
   createdAt DateTime @default(now())
-  userId String?
-  type String?
-  email String?
-  avatar String?
+  userId    String?
+  type      String?
+  email     String?
+  avatar    String?
 }
 
-
 model Comments {
-  id Int @id @default(autoincrement())
-  product Product? @relation(fields: [productId], references: [id]) // A comment can have one post
+  id        Int      @id @default(autoincrement())
+  product   Product? @relation(fields: [productId], references: [id]) // A comment can have one post
   productId Int?
-  message String?
-  img String?
-  name String?
+  message   String?
+  img       String?
+  name      String?
   createdAt DateTime @default(now())
-  email String?
+  email     String?
 }
 
 model Image {
-  id Int @id @default(autoincrement())
-  product Product? @relation(fields: [productId], references: [id]) // A comment can have one post
+  id        Int      @id @default(autoincrement())
+  product   Product? @relation(fields: [productId], references: [id]) // A comment can have one post
   productId Int?
-  img String?
+  img       String?
   createdAt DateTime @default(now())
 }
 
 model Order {
-    id Int @id @default(autoincrement())
-    author User @relation(fields: [authorId], references: [id])
-    authorId String
-    userId String?
-    name String?
-    address String?
-    city String?
-    district String?
-    Ward String?
-    phone String?
-    email String?
-    message String?
-    product String?
-    orderAt DateTime @default(now())
-    code String?
-    status String?
-    payment String?
-    paymentStatus String?
+  id            Int      @id @default(autoincrement())
+  author        User     @relation(fields: [authorId], references: [id])
+  authorId      String
+  userId        String?
+  name          String?
+  address       String?
+  city          String?
+  district      String?
+  Ward          String?
+  phone         String?
+  email         String?
+  message       String?
+  product       String?
+  orderAt       DateTime @default(now())
+  code          String?
+  status        String?
+  payment       String?
+  paymentStatus String?
 }
 
-
-model Discount{
-  id Int @id @default(autoincrement())
-  author User @relation(fields: [authorId], references: [id])
-  authorId String
-  code String?
-  percent Int?
-  name String?
-  dateStart DateTime?
-  dateEnd DateTime?
+model Discount {
+  id          Int       @id @default(autoincrement())
+  author      User      @relation(fields: [authorId], references: [id])
+  authorId    String
+  code        String?
+  percent     Int?
+  name        String?
+  dateStart   DateTime?
+  dateEnd     DateTime?
   description String?
 }
 
-model ImgWork{
-  id Int @id @default(autoincrement())
-  author User @relation(fields: [authorId], references: [id])
+model ImgWork {
+  id       Int     @id @default(autoincrement())
+  author   User    @relation(fields: [authorId], references: [id])
   authorId String
-  img String?
-  type String?
+  img      String?
+  type     String?
 }
 
-model Notification{
-  id Int @id @default(autoincrement())
-  author User @relation(fields: [authorId], references: [id])
-  authorId String
-  message String?
+model Notification {
+  id        Int      @id @default(autoincrement())
+  author    User     @relation(fields: [authorId], references: [id])
+  authorId  String
+  message   String?
   createdAt DateTime @default(now())
 }

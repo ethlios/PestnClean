@@ -43,16 +43,16 @@ export default function UserCP(props: IAppProps) {
     }, [debouncedText]);
 
     return (
-        <div className={cx('user-wrapper')}>
-            <p className={cx('user-title')}>Users: {users?.length}</p>
+        <div className={cx('common-wrapper')}>
+            <p className={cx('common-title')}>Users: {users?.length}</p>
             <input
                 type="text"
                 placeholder="Search user..."
-                className={cx('users-inp')}
+                className={cx('common-inp')}
                 value={searchValue}
                 onChange={(e) => setSearchValue(e.target.value)}
             ></input>
-            <div className={cx('user-item-wrapper')}>
+            <div className={cx('common-item-wrapper')}>
                 {users?.map((item, index) => {
                     return (
                         <div key={index} className={cx('user-item')}>

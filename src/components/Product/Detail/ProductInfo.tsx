@@ -20,6 +20,7 @@ import useScroll from '~/libs/hooks/useScroll';
 import smoothScroll from '~/libs/orthers/smoothScroll';
 import $ from 'jquery';
 import useSize from '~/libs/hooks/useSize';
+import formatter from '~/libs/orthers/formatMoney';
 
 const cx = classNames.bind(styles);
 
@@ -158,7 +159,7 @@ export default function ProductInfo({ product }: IAppProps) {
                     <AddIcon />
                 </IconButton>
             </div>
-            <h1 className={cx('price')}>{product[0].price}{product[0].currency}</h1>
+            <h1 className={cx('price')}>{formatter.format(product[0].price)}</h1>
             <div className={cx('other')}>
                 <div>
                     <ElectricRickshawOutlinedIcon />
@@ -170,7 +171,9 @@ export default function ProductInfo({ product }: IAppProps) {
                 </div>
             </div>
             <div className={cx('button-group')}>
-                <button className={cx('btn-add')} onClick={handleAddToCart}>Thêm vào giỏ hàng</button>
+                <button className={cx('btn-add')} onClick={handleAddToCart}>
+                    Thêm vào giỏ hàng
+                </button>
                 <button className={cx('btn-buy')}>Mua ngay</button>
             </div>
         </div>

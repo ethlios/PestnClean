@@ -7,6 +7,7 @@ import Link from 'next/link';
 import useSize from '~/libs/hooks/useSize';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
+import formatter from '~/libs/orthers/formatMoney';
 
 import 'swiper/css';
 import Image from 'next/image';
@@ -15,9 +16,10 @@ const cx = classNames.bind(styles);
 
 export interface IAppProps {
     openFilter: boolean;
+    products: any;
 }
 
-export default function ProductHot({ openFilter }: IAppProps) {
+export default function ProductHot({ openFilter, products }: IAppProps) {
     const { sizeX } = useSize();
 
     return (
@@ -37,9 +39,9 @@ export default function ProductHot({ openFilter }: IAppProps) {
                     modules={[Autoplay]}
                     style={{ padding: '0 3.2px 0 0' }}
                 >
-                    {Array.from({ length: 6 }).map((_, index) => {
+                    {products.map((item: any) => {
                         return (
-                            <SwiperSlide key={index}>
+                            <SwiperSlide key={item.id}>
                                 <Link href="/sanpham/detail" className={cx('content-item')}>
                                     <div
                                         className={cx('item-img')}
@@ -58,12 +60,10 @@ export default function ProductHot({ openFilter }: IAppProps) {
                                             fontSize: sizeX < 400 ? '10.5px' : '',
                                         }}
                                     >
-                                        SẢN PHẨM GIẢI PHÁP VỆ SINH
+                                        {item.category || 'SẢN PHẨM GIẢI PHÁP VỆ SINH'}
                                     </p>
-                                    <p className={cx('item-name')}>Tinh dầu Chanh Viet Oils</p>
-                                    <p className={cx('item-price')}>
-                                        1.100.000 <u>đ</u>
-                                    </p>
+                                    <p className={cx('item-name')}>{item.title}</p>
+                                    <p className={cx('item-price')}>{formatter.format(item.price)}</p>
                                 </Link>
                             </SwiperSlide>
                         );
