@@ -9,14 +9,16 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 
 import 'swiper/css';
 import { Autoplay } from 'swiper/modules';
+import formatter from '~/libs/orthers/formatMoney';
 
 const cx = classNames.bind(styles);
 
 export interface IAppProps {
     openFilter: boolean;
+    products: any;
 }
 
-export default function ProductSale({ openFilter }: IAppProps) {
+export default function ProductSale({ openFilter, products }: IAppProps) {
     const { sizeX } = useSize();
 
     return (
@@ -36,9 +38,9 @@ export default function ProductSale({ openFilter }: IAppProps) {
                     modules={[Autoplay]}
                     style={{ padding: '0 3.2px 0 0' }}
                 >
-                    {Array.from({ length: 6 }).map((_, index) => {
+                    {products.map((item: any) => {
                         return (
-                            <SwiperSlide key={index}>
+                            <SwiperSlide key={item.id}>
                                 <Link href="/sanpham/detail" className={cx('content-item')}>
                                     <div
                                         className={cx('item-img')}
@@ -56,14 +58,12 @@ export default function ProductSale({ openFilter }: IAppProps) {
                                             fontSize: sizeX < 400 ? '10.5px' : '',
                                         }}
                                     >
-                                        SẢN PHẨM GIẢI PHÁP VỆ SINH
+                                        {item.category || 'SẢN PHẨM GIẢI PHÁP VỆ SINH'}
                                     </p>
-                                    <p className={cx('item-name')}>Tinh dầu Chanh Viet Oils</p>
-                                    <p className={cx('item-sale-price')}>
-                                        1.100.000 <u>đ</u>
-                                    </p>
+                                    <p className={cx('item-name')}>{item.title}</p>
+                                    <p className={cx('item-sale-price')}>{formatter.format(item.price)}</p>
                                     <p className={cx('item-sale')}>
-                                        1.000.000 <u>đ</u>
+                                        {formatter.format(item.price - item.priceSales)}
                                     </p>
                                 </Link>
                             </SwiperSlide>

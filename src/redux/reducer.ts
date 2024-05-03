@@ -6,6 +6,7 @@ import {
     addFeedbackSuccess,
     addOrderSuccess,
     addProductSuccess,
+    addEmail,
     deleteBlogCommentSuccess,
     deleteFeedbackSuccess,
     getAdminOrder,
@@ -225,6 +226,10 @@ const rootReducer = createReducer(initState, (builder) => {
     builder.addCase(removeEmailSuccess, (state, action) => {
         const index = findIndex(state.emails, action.payload);
         state.emails.splice(index, 1);
+    });
+    builder.addCase(addEmail, (state, action) => {
+        console.log(action.payload);
+        //state.emails.push(action.payload);
     });
 });
 

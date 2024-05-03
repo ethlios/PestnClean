@@ -5,17 +5,18 @@ import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
 import Link from 'next/link';
 import TuneIcon from '@mui/icons-material/Tune';
 import useSize from '~/libs/hooks/useSize';
-import products from '~/constants/products';
 import { nameToLink } from '~/libs/orthers/nameToLink';
+import formatter from '~/libs/orthers/formatMoney';
 
 const cx = classNames.bind(styles);
 
 export interface IAppProps {
     setOpenFilter: any;
     openFilter: boolean;
+    products: any;
 }
 
-export default function AllProduct({ setOpenFilter, openFilter }: IAppProps) {
+export default function AllProduct({ setOpenFilter, openFilter, products }: IAppProps) {
     const { sizeX } = useSize();
 
     return (
@@ -58,23 +59,23 @@ export default function AllProduct({ setOpenFilter, openFilter }: IAppProps) {
                     gap: sizeX < 740 ? '8px' : '',
                 }}
             >
-                {products.map((item) => {
-                    const path = nameToLink(item ? item.name : '');
+                {products.map((item: any) => {
+                    const path = nameToLink(item ? item.title : '');
 
                     return (
                         <Link
                             href={`/sanpham/${path}`}
                             className={cx('content-item2')}
-                            key={path}
+                            key={item.id}
                             style={{
                                 width:
                                     sizeX < 740
                                         ? 'calc(100% /2 - 5px)'
                                         : sizeX < 1024
-                                            ? ''
-                                            : !openFilter
-                                                ? 'calc(100% /4 - 19px)'
-                                                : '',
+                                          ? ''
+                                          : !openFilter
+                                            ? 'calc(100% /4 - 19px)'
+                                            : '',
                             }}
                         >
                             <div
@@ -91,10 +92,8 @@ export default function AllProduct({ setOpenFilter, openFilter }: IAppProps) {
                             >
                                 {item.category}
                             </p>
-                            <p className={cx('item-name')}>{item.name}</p>
-                            <p className={cx('item-price')}>
-                                {item.price} <u>{item.currency}</u>
-                            </p>
+                            <p className={cx('item-name')}>{item.title}</p>
+                            <p className={cx('item-price')}>{formatter.format(item.price)}</p>
                         </Link>
                     );
                 })}
