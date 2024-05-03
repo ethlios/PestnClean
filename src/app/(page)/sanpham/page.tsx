@@ -11,6 +11,7 @@ import ProductHot from '~/components/Product/Main/ProductHot';
 import AllProduct from '~/components/Product/Main/AllProduct';
 import { useEffect, useState } from 'react';
 import useSize from '~/libs/hooks/useSize';
+import { products as mockupProduct } from '~/constants/products';
 
 const cx = classNames.bind(styles);
 
@@ -25,7 +26,7 @@ export default function ProductPage(props: IAppProps) {
         fetch('/api/product')
             .then((res) => res.json())
             .then((data) => {
-                setProducts(data);
+                setProducts([...data, ...mockupProduct]);
             });
     }, []);
 
