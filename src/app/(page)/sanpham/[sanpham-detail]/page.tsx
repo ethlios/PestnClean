@@ -7,17 +7,14 @@ import ProductSingle from '~/components/Product/Detail/ProductSingle';
 import ProductDescript from '~/components/Product/Detail/ProductDescript';
 import ProductRelated from '~/components/Product/Detail/ProductRelated';
 import useSize from '~/libs/hooks/useSize';
-import products from '~/constants/products';
+import { products } from '~/constants/products';
 import { nameToLink } from '~/libs/orthers/nameToLink';
 import { useEffect, useState } from 'react';
 import { notFound, usePathname } from 'next/navigation';
 
-
 const cx = classNames.bind(styles);
 
-export interface IAppProps {
-}
-
+export interface IAppProps {}
 
 export default function ProductDetailPage(props: IAppProps) {
     const { sizeX } = useSize();
@@ -25,8 +22,8 @@ export default function ProductDetailPage(props: IAppProps) {
     const [product, setProduct] = useState<any[]>([]);
 
     useEffect(() => {
-        const productFilter = products.filter((product) => {
-            return `/sanpham/${nameToLink(product.name)}` === pathname;
+        const productFilter = products.filter((product: any) => {
+            return `/sanpham/${nameToLink(product.title)}` === pathname;
         });
 
         if (productFilter.length > 0) {
@@ -37,8 +34,13 @@ export default function ProductDetailPage(props: IAppProps) {
     }, [pathname]);
 
     return (
-        <div className={'cpmount'}
-             style={{ padding: sizeX < 768 ? '0 20px' : sizeX < 1100 ? '0 50px' : sizeX < 1280 ? '0 80px' : '0 100px' }}>
+        <div
+            className={'cpmount'}
+            style={{
+                padding:
+                    sizeX < 768 ? '0 20px' : sizeX < 1100 ? '0 50px' : sizeX < 1280 ? '0 80px' : '0 100px',
+            }}
+        >
             <div className={cx('link')}>
                 <Link href="/">Trang chủ</Link>
                 <p>|</p>
