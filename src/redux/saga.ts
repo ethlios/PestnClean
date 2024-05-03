@@ -55,6 +55,8 @@ function* FetchUser({ payload }: any) {
     }
 }
 
+// Product
+
 function* AddProduct({ payload }: any) {
     try {
         const res: ResponseGenerator = yield call(request.post, 'api/product', payload);
