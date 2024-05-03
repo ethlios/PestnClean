@@ -63,8 +63,8 @@ export default function ProductSale({ openFilter, products }: IAppProps) {
                                         {item.category || 'SẢN PHẨM GIẢI PHÁP VỆ SINH'}
                                     </p>
                                     <p className={cx('item-name')}>{item.title}</p>
-                                    <p className={cx('item-sale-price')}>{formatter.format(item.price)}</p>
-                                    <p className={cx('item-sale')}>{formatter.format(item.priceSales)}</p>
+                                    <p className={cx('item-sale-price')}>{formatter.format(+item.price)}</p>
+                                    <p className={cx('item-sale')}>{formatter.format(+item.priceSales)}</p>
                                 </Link>
                             </SwiperSlide>
                         );

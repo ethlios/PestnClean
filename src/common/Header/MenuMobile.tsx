@@ -4,7 +4,6 @@ import classNames from 'classnames/bind';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
-import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import logo2 from '../../../public/img/logo2.png';
 import Image from 'next/image';
@@ -19,6 +18,7 @@ import { headerMobile, serviceMobile } from '~/constants/menu';
 import { signOut, useSession } from 'next-auth/react';
 import InputOutlinedIcon from '@mui/icons-material/InputOutlined';
 import Tippy from '@tippyjs/react/headless';
+import ShoppingCart from '~/common/Header/ShoppingCart';
 
 const cx = classNames.bind(styles);
 
@@ -264,9 +264,7 @@ export default function MenuMobile({ open, setOpen }: IAppProps) {
                         onClick={() => setOpenSearch(true)}
                     />
 
-                    <Link href="/giohang" className="icon-hover" onClick={() => setOpen(false)}>
-                        <ShoppingBagOutlinedIcon />
-                    </Link>
+                    <ShoppingCart />
                     {session ? (
                         <Tippy
                             visible={openAcc}

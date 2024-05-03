@@ -14,9 +14,9 @@ import formatter from '~/libs/orthers/formatMoney';
 const cx = classNames.bind(styles);
 
 export interface IAppProps {
-    // item: string[];
-    // setCart: (cart: string[]) => void;
-    item: any;
+    // item: { id: number; src: string; category: string; title: string; price: number; quantity: number};
+    // setCart: (cart: any[]) => void;
+    item: any; //Item in cart
     setCart: any;
 }
 
@@ -25,16 +25,18 @@ export default function CartItem({ item, setCart }: IAppProps) {
     const { sizeX } = useSize();
 
     const onchangeAmount = (id: number, quantity: number) => {
-        setAmount(quantity);
-        const localStorageCart = JSON.parse(localStorage.getItem('cart') || '[]');
-        localStorageCart.find((item: any) => item.id === id).quantity = quantity;
-        setCart(localStorageCart);
+        setAmount(quantity); //Update amount
+        const localStorageCart = JSON.parse(localStorage.getItem('cart') || '[]'); //Get cart from local storage
+        localStorageCart.find((item: any) => item.id === id).quantity = quantity; //Update quantity
+        localStorage.setItem('cart', JSON.stringify(localStorageCart)); //Save to local storage
+        setCart(localStorageCart); //Update cart
     };
 
     const onchangeDelete = (id: number) => {
-        const localStorageCart = JSON.parse(localStorage.getItem('cart') || '[]');
-        const newCart = localStorageCart.filter((item: any) => item.id !== id);
-        setCart(newCart);
+        const localStorageCart = JSON.parse(localStorage.getItem('cart') || '[]'); //Get cart from local storage
+        const newCart = localStorageCart.filter((item: any) => item.id !== id); //Remove item
+        localStorage.setItem('cart', JSON.stringify(newCart)); //Save to local storage
+        setCart(newCart); //Update cart
     };
 
     const handleAdd = (id: number) => {
@@ -135,10 +137,10 @@ export default function CartItem({ item, setCart }: IAppProps) {
                         <div className={'flex gap-3'}>
                             <p className={cx('price')}>
                                 <b>Giá: </b>
-                                {formatter.format(item.price * amount)}
+                                {formatter.format(+item.price * amount)}
                             </p>
                             {amount > 1 && (
-                                <p className={cx('price-default')}>({formatter.format(item.price)})</p>
+                                <p className={cx('price-default')}>({formatter.format(+item.price)})</p>
                             )}
                         </div>
                         <IconButton onClick={() => handleDelete(item.id)}>

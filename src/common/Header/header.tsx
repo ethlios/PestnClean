@@ -8,7 +8,6 @@ import { useEffect, useState } from 'react';
 import logo from '../../../public/img/logo.png';
 import styles from './header.module.scss';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
-import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import Services from './service';
 import MoreBtn from './More';
@@ -20,6 +19,7 @@ import useSize from '~/libs/hooks/useSize';
 import { signOut, useSession } from 'next-auth/react';
 import Tippy from '@tippyjs/react/headless';
 import InputOutlinedIcon from '@mui/icons-material/InputOutlined';
+import ShoppingCart from '~/common/Header/ShoppingCart';
 
 const cx = classNames.bind(styles);
 
@@ -143,9 +143,7 @@ export default function Header(props: HeaderProps) {
                         className="icon-hover"
                         onClick={() => setOpenSearch(true)}
                     />
-                    <Link href={'/giohang'} className="icon-hover">
-                        <ShoppingBagOutlinedIcon />
-                    </Link>
+                    <ShoppingCart />
                     {session ? (
                         <Tippy
                             visible={openAcc}

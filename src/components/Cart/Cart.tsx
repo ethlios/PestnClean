@@ -9,8 +9,8 @@ import { useState, useEffect } from 'react';
 const cx = classNames.bind(styles);
 
 export interface IAppProps {
-    // cart: string[];
-    // setCart: (cart: string[]) => void;
+    // cart: any[];
+    // setCart: (cart: any[]) => void;
     cart: any;
     setCart: any;
 }
@@ -18,9 +18,7 @@ export interface IAppProps {
 export default function Cart({ cart, setCart }: IAppProps) {
     const { sizeX } = useSize();
 
-    useEffect(() => {
-        localStorage.setItem('cart', JSON.stringify(cart));
-    }, [cart]);
+    useEffect(() => {}, [cart]); //Re-render when cart change
 
     return (
         <div

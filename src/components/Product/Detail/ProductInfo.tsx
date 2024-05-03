@@ -54,15 +54,17 @@ export default function ProductInfo({ product }: IAppProps) {
     };
 
     const handleAddToCart = () => {
-        const localCart = localStorage.getItem('cart');
+        const localCart = localStorage.getItem('cart'); //Get cart from local storage
         let cart: any[] = [];
         if (localCart) {
             cart = JSON.parse(localCart);
         }
-        const productIndex = cart.findIndex((item) => item.id === product[0].id);
+        const productIndex = cart.findIndex((item) => item.id === product[0].id); //Find product in cart
+        //If product exist in cart, increase quantity
         if (productIndex !== -1) {
             cart[productIndex].quantity += amount;
         } else {
+            //If product not exist in cart, add new product
             cart.push({
                 id: product[0].id,
                 name: product[0].title,
@@ -70,7 +72,7 @@ export default function ProductInfo({ product }: IAppProps) {
                 price: product[0].price,
             });
         }
-        localStorage.setItem('cart', JSON.stringify(cart));
+        localStorage.setItem('cart', JSON.stringify(cart)); //Save to local storage
     };
 
     return (
@@ -158,7 +160,7 @@ export default function ProductInfo({ product }: IAppProps) {
                     <AddIcon />
                 </IconButton>
             </div>
-            <h1 className={cx('price')}>{formatter.format(product[0].priceSales || product[0].price)}</h1>
+            <h1 className={cx('price')}>{formatter.format(+product[0].priceSales || +product[0].price)}</h1>
             <div className={cx('other')}>
                 <div>
                     <ElectricRickshawOutlinedIcon />

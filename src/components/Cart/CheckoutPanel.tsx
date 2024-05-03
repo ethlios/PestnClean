@@ -14,7 +14,7 @@ import formatter from '~/libs/orthers/formatMoney';
 const cx = classNames.bind(styles);
 
 export interface IAppProps {
-    // cart: string[];
+    // cart: any[];
     cart: any;
 }
 
@@ -52,7 +52,7 @@ export default function CheckoutPanel({ cart }: IAppProps) {
                     <div className={'*:flex *:justify-between *:items center'}>
                         <div className={cx('total-price')}>
                             <span>{totalItem} Sản phẩm</span>
-                            <p>{formatter.format(totalPrice)}</p>
+                            <p>{formatter.format(+totalPrice)}</p>
                         </div>
                         <div className={cx('total-price')}>
                             <span>Phí vận chuyển</span>

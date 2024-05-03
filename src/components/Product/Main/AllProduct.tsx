@@ -103,7 +103,7 @@ export default function AllProduct({ setOpenFilter, openFilter, products }: IApp
                                 {item.category}
                             </p>
                             <p className={cx('item-name')}>{item.title}</p>
-                            <p className={cx('item-price')}>{formatter.format(item.price)}</p>
+                            <p className={cx('item-price')}>{formatter.format(+item.price)}</p>
                         </Link>
                     );
                 })}
