@@ -29,6 +29,7 @@ model User {
     discount Discount[]
     comment CommentBlogs[]
     imgWork ImgWork[]
+    notification Notification[]
 }
 
 model Cart {
@@ -176,4 +177,12 @@ model ImgWork{
   authorId String
   img String?
   type String?
+}
+
+model Notification{
+  id Int @id @default(autoincrement())
+  author User @relation(fields: [authorId], references: [id])
+  authorId String
+  message String?
+  createdAt DateTime @default(now())
 }

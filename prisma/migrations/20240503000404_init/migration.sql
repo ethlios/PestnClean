@@ -53,6 +53,7 @@ CREATE TABLE "Product" (
     "pieces" TEXT,
     "bag" TEXT,
     "plate" TEXT,
+    "quantity" INTEGER,
     CONSTRAINT "Product_authorId_fkey" FOREIGN KEY ("authorId") REFERENCES "User" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
@@ -159,6 +160,15 @@ CREATE TABLE "ImgWork" (
     "img" TEXT,
     "type" TEXT,
     CONSTRAINT "ImgWork_authorId_fkey" FOREIGN KEY ("authorId") REFERENCES "User" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+);
+
+-- CreateTable
+CREATE TABLE "Notification" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "authorId" TEXT NOT NULL,
+    "message" TEXT,
+    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT "Notification_authorId_fkey" FOREIGN KEY ("authorId") REFERENCES "User" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 -- CreateIndex

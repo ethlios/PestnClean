@@ -41,11 +41,9 @@ export default function ComponentConnectLayout({ children }: { children: React.R
         }
     }, [dispatch, session]);
 
-    console.log(session);
-
     return openCp ? (
         <div>
-            {pathname === '/login' ? (
+            {pathname === '/login' || pathname === '/admin' ? (
                 children
             ) : (
                 <>

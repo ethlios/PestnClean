@@ -41,7 +41,6 @@ interface RootState {
     products: any[];
     blogs: any[];
     cart: any[];
-    management: any[];
     productsPage: any[];
     blogsPage: any[];
     order: any[];
@@ -59,7 +58,6 @@ const initState: RootState = {
     products: [],
     blogs: [],
     cart: [],
-    management: [],
     productsPage: [],
     blogsPage: [],
     order: [],
@@ -195,11 +193,6 @@ const rootReducer = createReducer(initState, (builder) => {
         if (newCart.length === 0) {
             localStorage.removeItem('huonghai-cart');
         }
-    });
-
-    // Management
-    builder.addCase(getManagement, (state, action) => {
-        state.management = action.payload;
     });
 
     // Order
