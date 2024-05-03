@@ -13,6 +13,8 @@ import UserCP from '~/components/Admin/User/user';
 import AdminProduct from '~/components/Admin/Product/page';
 import AdminNotification from '~/components/Admin/Notification/page';
 import AdminOder from '~/components/Admin/Order/page';
+import AdminEmail from '~/components/Admin/Email/page';
+import AdminImage from '~/components/Admin/Image/page';
 
 const cx = classNames.bind(styles);
 
@@ -51,7 +53,9 @@ export default function Admin(props: IAppProps) {
             </div>
             <div className={cx('admin-content')}>
                 <div className={cx('content-header')}>
-                    <button onClick={() => router.back()}>Exit</button>
+                    <button onClick={() => router.back()} className={cx('commom-button')}>
+                        Exit
+                    </button>
                 </div>
                 <div className={cx('content-wrapper')}>
                     {currentContent === 0 ? (
@@ -62,6 +66,10 @@ export default function Admin(props: IAppProps) {
                         <AdminNotification />
                     ) : currentContent === 3 ? (
                         <AdminOder />
+                    ) : currentContent === 4 ? (
+                        <AdminEmail />
+                    ) : currentContent === 5 ? (
+                        <AdminImage />
                     ) : (
                         ''
                     )}
