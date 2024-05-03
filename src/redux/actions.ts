@@ -132,5 +132,7 @@ export const addEmailSuccess = createAction<any>(type.ADD_EMAIL_SUCCESS);
 export const addEmailFail = createAction<any>(type.ADD_EMAIL_FAIL);
 
 export const getEmail = createAction<any>(type.GET_EMAIL);
+export const getEmailSuccess = createAction<any>(type.GET_EMAIL_SUCCESS);
+export const getEmailFail = createAction<any>(type.GET_EMAIL_FAIL);
 export const removeEmail = createAction<any>(type.REMOVE_EMAIL);
 export const removeEmailSuccess = createAction<any>(type.REMOVE_EMAIL_SUCCESS);

@@ -34,7 +34,9 @@ import {
     updateOrderSuccess,
     updateProductSuccess,
     addEmailFail,
-    addEmailSuccess
+    addEmailSuccess,
+    getEmailSuccess,
+    getEmailFail
 } from './actions';
 
 interface RootState {
@@ -238,6 +240,16 @@ const rootReducer = createReducer(initState, (builder) => {
         state.emails.push(data);
     });
     builder.addCase(addEmailFail, (state, action) => {
+        console.log(action.payload);
+        const {message} = action.payload;
+        state.message = message;
+    });
+    builder.addCase(getEmailSuccess, (state, action) => {
+        console.log(action.payload);
+        const newEmails = action.payload; // Dữ liệu được lấy ra từ action payload
+        state.emails = state.emails.concat(newEmails); // Thêm dữ liệu vào mảng hiện tại
+    });
+    builder.addCase(getEmailFail, (state, action) => {
         console.log(action.payload);
         const {message} = action.payload;
         state.message = message;

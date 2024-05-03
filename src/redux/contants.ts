@@ -73,6 +73,8 @@ export const REMOVE_ORDER_ALL = 'REMOVE_ORDER_ALL';
 
 // Email
 export const GET_EMAIL = 'GET_EMAIL';
+export const GET_EMAIL_SUCCESS = 'GET_EMAIL_SUCCESS';
+export const GET_EMAIL_FAIL = 'GET_EMAIL_FAIL';
 export const ADD_EMAIL = 'ADD_EMAIL';
 export const ADD_EMAIL_SUCCESS = 'ADD_EMAIL_SUCCESS';
 export const ADD_EMAIL_FAIL = 'ADD_EMAIL_FAIL';
