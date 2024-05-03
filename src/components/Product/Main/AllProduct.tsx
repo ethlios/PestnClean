@@ -7,6 +7,8 @@ import TuneIcon from '@mui/icons-material/Tune';
 import useSize from '~/libs/hooks/useSize';
 import { nameToLink } from '~/libs/orthers/nameToLink';
 import formatter from '~/libs/orthers/formatMoney';
+import { useState } from 'react';
+import smoothScroll from '~/libs/orthers/smoothScroll';
 
 const cx = classNames.bind(styles);
 
@@ -18,6 +20,14 @@ export interface IAppProps {
 
 export default function AllProduct({ setOpenFilter, openFilter, products }: IAppProps) {
     const { sizeX } = useSize();
+    const [currentPage, setCurrentPage] = useState(1);
+    const productsPerPage = 9;
+    const totalPages = Math.ceil(products.length / productsPerPage);
+
+    const displayedProducts = products.slice(
+        (currentPage - 1) * productsPerPage,
+        currentPage * productsPerPage,
+    );
 
     return (
         <div className={cx('product-event')}>
@@ -41,7 +51,7 @@ export default function AllProduct({ setOpenFilter, openFilter, products }: IApp
                     <TuneIcon />
                 </p>
             </div>
-            <div className={cx('filter-list')}>
+            <div className={cx('filter-list')} id={'listAllProduct'}>
                 <p
                     style={{
                         width: '55px',
@@ -59,7 +69,7 @@ export default function AllProduct({ setOpenFilter, openFilter, products }: IApp
                     gap: sizeX < 740 ? '8px' : '',
                 }}
             >
-                {products.map((item: any) => {
+                {displayedProducts.map((item: any) => {
                     const path = nameToLink(item ? item.title : '');
 
                     return (
@@ -99,11 +109,18 @@ export default function AllProduct({ setOpenFilter, openFilter, products }: IApp
                 })}
             </div>
             <div className={cx('number-page')}>
-                <p>1</p>
-                <p>2</p>
-                <p>3</p>
-                <p>4</p>
-                <p>5</p>
+                {Array.from({ length: totalPages }).map((_, index) => (
+                    <p
+                        className={'cursor-pointer'}
+                        key={index}
+                        onClick={() => {
+                            setCurrentPage(index + 1);
+                            smoothScroll('div#listAllProduct');
+                        }}
+                    >
+                        {index + 1}
+                    </p>
+                ))}
             </div>
         </div>
     );
