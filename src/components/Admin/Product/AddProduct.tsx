@@ -5,6 +5,7 @@ import classNames from 'classnames/bind';
 import styles from '../admin.module.scss';
 import dynamic from 'next/dynamic';
 import UploadImgProduct from './UploadImg';
+import { useForm, SubmitHandler } from 'react-hook-form';
 
 const cx = classNames.bind(styles);
 
@@ -37,13 +38,23 @@ export default function AdminAddProduct({ setAddProduct }: IAppProps) {
     const [isNew, setIsNew] = useState<boolean>(false);
     const [imageList, setImageList] = useState<string[]>([]);
 
+    const {
+        register,
+        handleSubmit,
+        watch,
+        formState: { errors },
+    } = useForm<any>();
+
     const QuillEditor = useMemo(() => {
         return dynamic(() => import('~/components/Orther/quii'), {
             loading: () => <p>loading...</p>,
-
             ssr: false,
         });
     }, []);
+
+    const onSubmit = (data: any) => {
+        console.log(data);
+    };
 
     return (
         <div className={`${cx('add-wrapper')} cpmount`}>
@@ -54,7 +65,7 @@ export default function AdminAddProduct({ setAddProduct }: IAppProps) {
                         EXIT
                     </button>
                 </div>
-                <div className={cx('add-body')}>
+                <form className={cx('add-body')} onSubmit={handleSubmit(onSubmit)}>
                     <div className={cx('add-body-1')}>
                         <input type="text" placeholder="Tên sản phẩm..." className={cx('add-inp')}></input>
                         <input type="text" placeholder="Mô tả..." className={cx('add-inp')}></input>
@@ -103,11 +114,24 @@ export default function AdminAddProduct({ setAddProduct }: IAppProps) {
                         <input type="text" placeholder="Miếng..." className={cx('add-inp')}></input>
                         <input type="text" placeholder="Túi..." className={cx('add-inp')}></input>
                         <input type="text" placeholder="Tấm..." className={cx('add-inp')}></input>
+                        <button
+                            className={cx('commom-button')}
+                            type="submit"
+                            style={{
+                                backgroundColor: 'var(--primary)',
+                                height: '42px',
+                                color: '#fff',
+                                fontSize: '13px',
+                                letterSpacing: '-.2px',
+                            }}
+                        >
+                            THÊM SẢN PHẨM
+                        </button>
                     </div>
                     <div className={cx('add-body-2')}>
                         <QuillEditor cb={setContent} value={content} />
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     );

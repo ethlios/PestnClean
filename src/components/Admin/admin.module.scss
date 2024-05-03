@@ -186,19 +186,23 @@
 
 .add-content {
     width: 90%;
-    height: 90%;
+    max-height: 90%;
     background-color: #fff;
     border-radius: 10px;
-    padding: 10px 15px;
     overflow: scroll;
 }
 
 .add-header {
-    margin-bottom: 10px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    height: 50px;
+    position: sticky;
+    z-index: 1;
+    top: 0px;
+    background-color: #fff;
+    padding: 10px 15px;
 
     p {
         font-weight: 600;
@@ -213,11 +217,15 @@
     display: flex;
     flex-direction: row;
     gap: 20px;
+    padding: 0 15px 10px 15px;
 }
 
 .add-body-2 {
     width: 55%;
     height: 100%;
+    position: sticky;
+    top: 50px;
+    z-index: 1;
 }
 
 .add-body-1 {
@@ -230,7 +238,7 @@
 
 .add-inp {
     width: 100%;
-    height: 40px;
+    height: 50px;
     border: solid 1.5px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
     font-size: 13.5px;
