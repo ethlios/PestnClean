@@ -14,7 +14,7 @@ export interface IAppProps {
 
 // rule: normal | error
 
-export default function Toast({ text, rule, showToast, setShowToast }: IAppProps) {
+export default function Toast({ text, rule = 'normal', showToast, setShowToast }: IAppProps) {
     useEffect(() => {
         const toastTime = setTimeout(() => setShowToast(false), 3000);
 

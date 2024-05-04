@@ -40,7 +40,7 @@ const status = [
 ];
 
 export default function AdminAddProduct({ setAddProduct, updateProduct, setUpdateProduct }: IAppProps) {
-    const [content, setContent] = useState<string>('');
+    const [detail, setDetail] = useState<string>('');
     const [statusValue, setStatusValue] = useState<string>('');
     const [isNew, setIsNew] = useState<boolean>(false);
     const [imageList, setImageList] = useState<string[]>([]);
@@ -76,7 +76,7 @@ export default function AdminAddProduct({ setAddProduct, updateProduct, setUpdat
             setValue('title', updateProduct.title);
             setValue('desHead', updateProduct.desHead);
             setValue('price', updateProduct.price);
-            setContent(updateProduct.detail);
+            setDetail(updateProduct.detail);
             setStatusValue(updateProduct.status);
             setImageList(updateProduct.Image);
             setValue('category1', updateProduct.category1);
@@ -98,7 +98,7 @@ export default function AdminAddProduct({ setAddProduct, updateProduct, setUpdat
         const product = {
             ...data,
             authorId: session?.user.id,
-            detail: content,
+            detail,
             image: imageList,
             code: uid(),
             price: +data.price,
@@ -270,7 +270,7 @@ export default function AdminAddProduct({ setAddProduct, updateProduct, setUpdat
                         </button>
                     </div>
                     <div className={cx('add-body-2')}>
-                        <QuillEditor cb={setContent} value={content} />
+                        <QuillEditor cb={setDetail} value={detail} />
                     </div>
                 </form>
             </div>

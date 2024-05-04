@@ -386,3 +386,72 @@
     font-weight: 700;
     color: var(--primary);
 }
+
+// Email
+.email-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border: solid 1.5px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    font-size: 14.2px;
+    font-weight: 600;
+    letter-spacing: -0.1px;
+    background-color: rgb(245, 245, 245);
+
+    p {
+        padding: 10px 15px;
+        width: calc(100% - 150px);
+        height: 100%;
+        display: flex;
+        align-items: center;
+    }
+}
+
+.email-index {
+    width: 50px;
+    border-right: solid 1.5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.email-button {
+    height: 100%;
+    width: 100px;
+    display: flex;
+    flex-direction: row;
+
+    button {
+        font-size: 14px;
+        font-weight: 600;
+        background-color: rgba($color: #000000, $alpha: 0.05);
+        padding: 6px 14px;
+        border-left: solid 1.5px rgba(0, 0, 0, 0.1);
+        transition: all ease 0.5s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        width: 50%;
+        transition: all ease 0.5s;
+    }
+
+    button:hover {
+        background-color: rgba($color: #000000, $alpha: 0.15);
+    }
+}
+
+.email-header {
+    p {
+        font-weight: 600;
+        text-decoration: 2px underline;
+    }
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}

@@ -1,16 +1,13 @@
-import React, { useCallback, useRef } from 'react';
-import ReactQuill, { Quill } from 'react-quill';
+import { useCallback, useRef } from 'react';
+import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import uploadToCloudinary from '~/libs/orthers/uploadClound';
 import useSize from '~/libs/hooks/useSize';
-import { ImageResize } from 'quill-image-resize-module-ts';
+import uploadToCloudinary from '~/libs/orthers/uploadClound';
 
 export interface IAppProps {
     value: string;
     cb: any;
 }
-
-Quill.register('modules/imageResize', ImageResize);
 
 export default function QuillEditor({ cb, value }: IAppProps) {
     const reactQuillRef = useRef<any>();
@@ -54,7 +51,6 @@ export default function QuillEditor({ cb, value }: IAppProps) {
                 'strike',
                 'blockquote',
                 'list',
-                'bullet',
                 'indent',
                 'align',
                 'link',
@@ -85,11 +81,6 @@ export default function QuillEditor({ cb, value }: IAppProps) {
                 },
                 clipboard: {
                     matchVisual: false,
-                },
-
-                imageResize: {
-                    parchment: Quill.import('parchment'),
-                    modules: ['Resize', 'DisplaySize'],
                 },
             }}
             style={{

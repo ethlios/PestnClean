@@ -39,11 +39,11 @@ function* FetchUser({ payload }: any) {
                 const { cart, product, management, blog, order, emailkm } = person.data[0] ?? [];
                 if (person.data[0].rule === 'admin') {
                     yield put(actions.getProduct(product ?? []));
+                    yield put(actions.getEmail(emailkm ?? []));
                     // yield put(actions.getCart(cart ?? []));
                     yield put(actions.getManagement(management ?? []));
                     yield put(actions.getBlog(blog ?? []));
                     yield put(actions.getAdminOrder(order ?? []));
-                    yield put(actions.getEmail(emailkm ?? []));
                 } else {
                     yield put(actions.getManagement(management ?? []));
                     // yield put(actions.getCart(cart ?? []));
@@ -266,25 +266,6 @@ function* AddEmail({ payload }: any) {
     }
 }
 
-function* GetEmail({payload} : any) {
-    try {
-        const {id} = payload;
-        const res: ResponseGenerator = yield call(request.get, `api/email/getAll/${id}`,null);
-        if (res.status === 200) {
-            yield put(actions.getEmailSuccess(res.data));
-        } else {
-            throw new Error(`Unexpected status code: ${res.status}`);
-        }
-    } catch (err: any) {
-        if (err.response && err.response.status === 400) {
-            yield put(actions.getEmailFail(err.response.data));
-        } else {
-            console.log(err);
-        }
-    }
-}
-
-
 function* DeleteEmail({ payload }: any) {
     try {
         const res: ResponseGenerator = yield call(request.remove, `api/email/${payload}`);
@@ -316,5 +297,4 @@ export default function* rootSaga() {
     yield takeLatest(types.DELETE_BLOG_COMMENT, DeleteBlogsComment);
     yield takeLatest(types.ADD_EMAIL, AddEmail);
     yield takeLatest(types.REMOVE_EMAIL, DeleteEmail);
-    yield takeLatest(types.GET_EMAIL,GetEmail);
 }

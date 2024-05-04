@@ -41,16 +41,14 @@ export default function Footer(props: FooterProps) {
     const [valueEmail, setValueEmail] = useState('');
     const [valueMessage, setValueMessage] = useState<MessageState>({
         message: '',
-        status: null
+        status: null,
     });
     const dispatch = useDispatch();
-    const selector = useSelector((state : RootState) => state.main);
-
+    const selector = useSelector((state: RootState) => state.main);
 
     useEffect(() => {
-        console.log(selector?.message);
         const message = selector?.message;
-        if(message === "Đăng ký thành công email"){
+        if (message === 'Đăng ký thành công email') {
             customToast({
                 type: 'success',
                 position: 'bottom-right',
@@ -58,13 +56,13 @@ export default function Footer(props: FooterProps) {
                 limit: 1,
                 toastMessage: message,
             });
-        } else if (message === "Email đã được đăng ký") {
+        } else if (message === 'Email đã được đăng ký') {
             setValueMessage({ message: message, status: false });
         }
-    },[selector.message]);
+    }, [selector.message]);
 
     useEffect(() => {
-        setValueMessage({message: "",status: null});
+        setValueMessage({ message: '', status: null });
         $('.sv-footer').hide();
         $('.cs-footer').hide();
         $('.other-footer').hide();
@@ -81,19 +79,18 @@ export default function Footer(props: FooterProps) {
                 dispatch(addEmail(emailData));
                 setValueEmail('');
             } else {
-                setValueMessage({ message: "Nhập đúng định dạng email", status: false });
+                setValueMessage({ message: 'Nhập đúng định dạng email', status: false });
             }
         } else {
-            setValueMessage({ message: "Vui lòng nhập email", status: false });
+            setValueMessage({ message: 'Vui lòng nhập email', status: false });
         }
     };
-    
 
     function isEmail(val: string): boolean {
-        const regEmail: RegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        const regEmail: RegExp =
+            /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return regEmail.test(val);
     }
-    
 
     const handleShowContent1 = () => {
         setIsOpen1(!isOpen1);
@@ -136,7 +133,7 @@ export default function Footer(props: FooterProps) {
                             value={valueEmail}
                             onChange={(e) => {
                                 setValueEmail(e.target.value);
-                                setValueMessage({message: "",status:null})
+                                setValueMessage({ message: '', status: null });
                             }}
                         />
                         <div className={cx('banner-btn')} onClick={handleClickBtnSendEmail}>
@@ -144,13 +141,18 @@ export default function Footer(props: FooterProps) {
                             <ChevronRightIcon />
                         </div>
                     </div>
-                    {
-                        valueMessage?.message !=="" && (
-                            <div className={cx('banner-content-msg',
-                                valueMessage?.status !== null && valueMessage.status === true ? 'banner-content-msg-success' : 'banner-content-msg-error'
-                            )}>{valueMessage.message}</div>
-                        )
-                    }
+                    {valueMessage?.message !== '' && (
+                        <div
+                            className={cx(
+                                'banner-content-msg',
+                                valueMessage?.status !== null && valueMessage.status === true
+                                    ? 'banner-content-msg-success'
+                                    : 'banner-content-msg-error',
+                            )}
+                        >
+                            {valueMessage.message}
+                        </div>
+                    )}
                     <div className={cx('check')}>
                         {/* <input type="checkbox" /> */}
                         <Checkbox

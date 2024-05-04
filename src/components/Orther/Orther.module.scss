@@ -2,20 +2,25 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    display: flex;
+    width: 100vw;
+    position: absolute;
+    left: 0;
 }
 
 .toast {
-    padding: 15px 30px;
+    padding: 15px 25px;
     position: fixed;
     color: #fff;
     font-size: 14px;
     font-weight: 600;
-    border-radius: 10px;
+    border-radius: 5px;
     cursor: pointer;
     z-index: 100;
     transition: all ease 0.5s;
     display: flex;
     flex-direction: row;
     justify-content: center;
+    letter-spacing: -0.2px;
     align-items: center;
 }
