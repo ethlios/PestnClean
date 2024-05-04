@@ -63,18 +63,18 @@ export default function UploadImgProduct({ imageList, setImageList }: IAppProps)
             >
                 Hình ảnh
             </button>
-            <div
-                style={{
-                    display: 'flex',
-                    flex: 1,
-                    flexWrap: 'wrap',
-                    flexDirection: 'row',
-                    gap: '10px',
-                    marginTop: '10px',
-                }}
-            >
-                {imageList.length > 0 &&
-                    imageList.map((item, index) => {
+            {typeof imageList !== 'undefined' && (
+                <div
+                    style={{
+                        display: 'flex',
+                        flex: 1,
+                        flexWrap: 'wrap',
+                        flexDirection: 'row',
+                        gap: '10px',
+                        marginTop: '10px',
+                    }}
+                >
+                    {imageList.map((item, index) => {
                         return (
                             <div
                                 key={index}
@@ -119,7 +119,8 @@ export default function UploadImgProduct({ imageList, setImageList }: IAppProps)
                             </div>
                         );
                     })}
-            </div>
+                </div>
+            )}
         </div>
     );
 }

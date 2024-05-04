@@ -10,6 +10,7 @@ export async function PUT(request: Request, { params }: { params: { id: number }
             authorId: body.authorId,
             title: body.title,
             desHead: body.desHead,
+            description: body.description,
             price: body.price,
             code: body.code,
             status: body.status,

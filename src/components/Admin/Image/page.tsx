@@ -2,6 +2,6 @@ import * as React from 'react';
 
 export interface IAppProps {}
 
-export default function AdminImage(props: IAppProps) {
-    return <div>Image</div>;
+export default function AdminDiscount(props: IAppProps) {
+    return <div>Discount</div>;
 }

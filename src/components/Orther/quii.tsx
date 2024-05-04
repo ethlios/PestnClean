@@ -1,8 +1,8 @@
-import { useCallback, useRef } from 'react';
-import ReactQuill from 'react-quill';
+import React, { useCallback, useRef } from 'react';
+import ReactQuill, { Quill } from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import useSize from '~/libs/hooks/useSize';
 import uploadToCloudinary from '~/libs/orthers/uploadClound';
+import useSize from '~/libs/hooks/useSize';
 
 export interface IAppProps {
     value: string;
@@ -33,12 +33,11 @@ export default function QuillEditor({ cb, value }: IAppProps) {
 
     return (
         <ReactQuill
-            placeholder="Mô tả chi tiết..."
             ref={reactQuillRef}
             theme="snow"
             value={value}
             onChange={cb}
-            id="Desciption"
+            id="Detail"
             formats={[
                 'header',
                 'font',
@@ -50,6 +49,7 @@ export default function QuillEditor({ cb, value }: IAppProps) {
                 'underline',
                 'strike',
                 'blockquote',
+                'bullet',
                 'list',
                 'indent',
                 'align',

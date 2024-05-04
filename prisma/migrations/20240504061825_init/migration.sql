@@ -33,7 +33,7 @@ CREATE TABLE "Cart" (
 CREATE TABLE "Email" (
     "id" SERIAL NOT NULL,
     "authorId" TEXT NOT NULL,
-    "email" TEXT,
+    "email" TEXT NOT NULL,
 
     CONSTRAINT "Email_pkey" PRIMARY KEY ("id")
 );
@@ -44,6 +44,7 @@ CREATE TABLE "Product" (
     "authorId" TEXT NOT NULL,
     "title" TEXT,
     "desHead" TEXT,
+    "description" TEXT,
     "detail" TEXT,
     "price" INTEGER,
     "Image" TEXT[],
