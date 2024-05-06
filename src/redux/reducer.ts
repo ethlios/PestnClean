@@ -43,6 +43,10 @@ import {
     getDiscount,
     getNotification,
     getAllProducts,
+    deleteImgWorkSuccess,
+    deleteImgWorkFail,
+    updateImgWorkSuccess,
+    updateImgWorkFail,
 } from './actions';
 
 interface RootState {
@@ -273,14 +277,39 @@ const rootReducer = createReducer(initState, (builder) => {
     builder.addCase(getImgWork, (state, action) => {
         state.imageWork = action.payload;
     });
+    // Add Img Work
     builder.addCase(addImgWorkSuccess, (state, action) => {
-        console.log(action.payload);
-        const { message, data, success } = action.payload;
+        const { message, data , success } = action.payload;
         state.message = message;
         state.imageWork.push(data);
     });
     builder.addCase(addImgWorkFail, (state, action) => {
-        console.log(action.payload);
+        const { message } = action.payload;
+        state.message = message;
+    });
+    // Delete Img Work
+    builder.addCase(deleteImgWorkSuccess, (state, action) => {
+        const { message, data } = action.payload;
+        state.message = message;
+        const index = state.imageWork.findIndex((img) => img.id === data.id);
+        state.imageWork.splice(index, 1);
+    });
+    builder.addCase(deleteImgWorkFail, (state, action) => {
+        const { message } = action.payload;
+        state.message = message;
+    });
+    // Update Img Work
+    builder.addCase(updateImgWorkSuccess, (state, action) => {
+        const { message, data } = action.payload;
+        state.message = message;
+        // Tìm chỉ mục của phần tử cần cập nhật trong mảng
+        const index = state.imageWork.findIndex((img) => img.id === data.id);
+        if (index !== -1) { // Kiểm tra xem phần tử có tồn tại trong mảng không
+            // Cập nhật phần tử tại chỉ mục index bằng dữ liệu mới từ action.payload.data
+            state.imageWork[index] = data;
+        }
+    });
+    builder.addCase(updateImgWorkFail, (state, action) => {
         const { message } = action.payload;
         state.message = message;
     });

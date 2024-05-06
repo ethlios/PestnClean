@@ -67,3 +67,12 @@
 .tableTableCell{
     font-family: 'Merriweather-2 sa' !important;
 }
+
+.btn-control{
+    padding: 1px;
+    &:hover{
+        cursor: pointer;
+        background: #e7e2e2cc;
+        border-radius: 50%;
+    }
+}

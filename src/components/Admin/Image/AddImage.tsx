@@ -11,10 +11,9 @@ import { ClientUploadedFileData } from 'uploadthing/types';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '~/redux/provider/store';
 import { useSession } from 'next-auth/react';
-import Toast from '~/components/Orther/Toast';
-import { addImgWork } from '~/redux/actions';
+import { addImgWork, clearMessage, updateImgWork } from '~/redux/actions';
 import Loader from '~/components/Orther/Loader/Loader';
-import { flushAllTraces } from 'next/dist/trace';
+import axios from 'axios';
 const cx = classNames.bind(styles);
 
 export interface IAppProps {
@@ -23,11 +22,6 @@ export interface IAppProps {
     valueUpdate: any;
 }
 
-export interface resUploadImage {
-    url: string;
-    size: Int32Array;
-    name: string;
-}
 const style = {
     position: 'absolute',
     top: '50%',
@@ -40,40 +34,44 @@ const style = {
     p: '10px',
 };
 
-type EndpointType = 'imageUploader' | 'otherEndpoint';
-export default function AdminAddProduct({
-    isOpen,
-    isClose,
-    valueUpdate
-}: IAppProps) {
+export default function AdminAddProduct({ isOpen, isClose, valueUpdate }: IAppProps) {
     const [open, setOpen] = useState(false);
-
     const [files, setFiles] = useState<File[]>([]);
     const [imageURL, setImageURL] = useState<string | null>(null);
-    const [selectedOption, setSelectedOption] = useState<string>('Vệ sinh');
-    const [loader,setLoader] = useState<boolean>(false);
+    const [selectedOption, setSelectedOption] = useState('');
+    const [isClicked, setIsClicked] = useState(false);
+    const [loader, setLoader] = useState<boolean>(false);
     const dispatch = useDispatch();
     const session = useSession();
     const selector = useSelector((state: RootState) => state.main);
-    
+
     const handleClose = () => {
         setOpen(false);
         isClose(false);
+        resetValue();
     };
 
     const { startUpload } = useUploadThing('imageUploader', {
         onClientUploadComplete: (res: ClientUploadedFileData<null>[]) => {
+            console.log(res);
             if (res && res.length > 0) {
                 const { url } = res[0];
-                console.log({
-                    url: url,
-                    authorId: session?.data?.user?.id,
-                })
-                dispatch(addImgWork({
-                    authorId: session?.data?.user.id,
-                    img: url,
-                    type: selectedOption.trim()
-                }));
+                if(valueUpdate?.id){
+                    dispatch(updateImgWork({
+                        id: valueUpdate.id,
+                        authorId: session?.data?.user.id,
+                        img: url,
+                        type: selectedOption.trim(),
+                    }));
+                } else {
+                    dispatch(
+                        addImgWork({
+                            authorId: session?.data?.user.id,
+                            img: url,
+                            type: selectedOption.trim(),
+                        }),
+                    );
+                }
                 setLoader(true);
             } else {
                 console.error('No data received after upload.');
@@ -87,11 +85,25 @@ export default function AdminAddProduct({
             setLoader(true);
         },
     });
-    
 
     const handleSave = () => {
-        if(imageURL !== ""){
-            startUpload(files);
+        if (imageURL !== '' && selectedOption !== '') {
+            if(valueUpdate?.id){
+                if(files.length === 0){
+                    dispatch(updateImgWork({
+                        id: valueUpdate.id,
+                        authorId: session?.data?.user.id,
+                        img: valueUpdate.img,
+                        type: selectedOption.trim(),
+                    }));
+                    setLoader(true);
+                } else {
+                    startUpload(files);
+                }
+            } else {
+                startUpload(files);
+                setIsClicked(true);
+            }
         }
     };
 
@@ -104,36 +116,67 @@ export default function AdminAddProduct({
         }
     };
 
+    const deleteImageUploadThing = async (url: string) => {
+        try {
+            const res = await axios.delete('api/uploadthing/delete', {
+                data: {
+                    url: url,
+                },
+            });
+            if(res.data && res.data.message === "Success"){
+                resetValue();
+            }
+        } catch (error) {
+            // Xử lý lỗi ở đây
+            console.error('Đã xảy ra lỗi khi xóa tệp:', error);
+        }
+    };
+
     const handleChangeSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setSelectedOption(event.target.value);
     };
 
+    const resetValue = () => {
+        setLoader(false);
+        setIsClicked(false);
+        setOpen(false);
+        isClose(false);
+        setImageURL('');
+        setFiles([]);
+        dispatch(clearMessage());
+    }
+
     useEffect(() => {
-        console.log(selector.message);
-        if(selector.message === "Thêm hình ảnh mới thành công"){
-            setLoader(false);
-            setFiles([]);
-            setImageURL("");
-            setTimeout(() => {
-                setOpen(false);
-            },1000);
+        if (selector.message === 'Thêm hình ảnh mới thành công') {
+            resetValue();
+        } else if(selector.message === 'Cập nhập hình ảnh thành công') {
+            console.log(files.length === 0);
+            if(files.length === 0){
+                resetValue();
+                
+            } else {
+                deleteImageUploadThing(valueUpdate.img);
+            }
         }
-    },[selector.message])
+    }, [selector.message]);
 
     useEffect(() => {
         if (isOpen) {
             setOpen(true);
+            setSelectedOption('Vệ sinh');
+            setIsClicked(false);
         } else {
             setOpen(false);
         }
     }, [isOpen]);
 
     useEffect(() => {
-        if(valueUpdate){
+        if (valueUpdate) {
             setImageURL(valueUpdate.img);
             setSelectedOption(valueUpdate.type);
+            setIsClicked(false);
         }
-    },[valueUpdate]);
+    }, [valueUpdate]);
     return (
         <>
             <Modal
@@ -149,18 +192,31 @@ export default function AdminAddProduct({
                     <div className={cx('wrapper')}>
                         <div className={cx('wrapper-header', 'flex items-center justify-between h-10')}>
                             <p className="font-medium underline">THÊM HÌNH ẢNH</p>
-                            <button type="button" onClick={handleClose}>Exit</button>
+                            <button type="button" onClick={handleClose}>
+                                Exit
+                            </button>
                         </div>
                         <div className="h-300 flex items-center justify-around mt-1">
                             <div className="w-2/4">
                                 <div className={cx('wrapper-content', 'mt-4')}>
                                     <select value={selectedOption} onChange={handleChangeSelect}>
-                                        <option className={cx('wrapper-content-option')} value="Vệ sinh">Vệ sinh</option>
-                                        <option className={cx('wrapper-content-option')} value="Diệt côn trùng">Diệt côn trùng</option>
-                                        <option className={cx('wrapper-content-option')} value="Đào tạo">Đào tạo</option>
+                                        <option className={cx('wrapper-content-option')} value="Vệ sinh">
+                                            Vệ sinh
+                                        </option>
+                                        <option
+                                            className={cx('wrapper-content-option')}
+                                            value="Diệt côn trùng"
+                                        >
+                                            Diệt côn trùng
+                                        </option>
+                                        <option className={cx('wrapper-content-option')} value="Đào tạo">
+                                            Đào tạo
+                                        </option>
                                     </select>
                                     <label htmlFor="upload-button" className="upload-label">
-                                        <div className={cx('wrapper-content-choose', 'mt-4')}>Chọn hình ảnh</div>
+                                        <div className={cx('wrapper-content-choose', 'mt-4')}>
+                                            Chọn hình ảnh
+                                        </div>
                                     </label>
                                     <input
                                         id="upload-button"
@@ -173,6 +229,7 @@ export default function AdminAddProduct({
                             </div>
                             <div className="w-2/4 p-4 flex items-center justify-center">
                                 <img
+                                    loading="lazy"
                                     src={imageURL ? imageURL : images.chooseCamera.src}
                                     alt="Ảnh được chọn"
                                     className={cx('wrapper-img')}
@@ -180,8 +237,18 @@ export default function AdminAddProduct({
                             </div>
                         </div>
                         <div className="flex justify-center">
-                            <button className={cx('wrapper-btnSubmit', 'mt-6')} onClick={handleSave}>
-                                {loader ? <Loader/> : "Thêm hình ảnh"}
+                            <button
+                                className={cx('wrapper-btnSubmit', 'mt-6')}
+                                onClick={handleSave}
+                                disabled={isClicked}
+                            >
+                                {loader ? (
+                                    <Loader />
+                                ) : valueUpdate?.id ? (
+                                    'Chỉnh sửa hình ảnh'
+                                ) : (
+                                    'Thêm hình ảnh'
+                                )}
                             </button>
                         </div>
                     </div>

@@ -10,10 +10,11 @@ import DriveFileRenameOutlineOutlinedIcon from '@mui/icons-material/DriveFileRen
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import { styled } from '@mui/material';
 import styles from './Image.module.scss';
-import classNames from 'classnames';
+import classNames from 'classnames/bind';
 export interface IAppProps {
     arrImgWork: any[];
     updateImageWork: any;
+    deleteImageWork: any;
 }
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -27,10 +28,8 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     },
 }));
 
-const cx = classNames.bind(styles);
-
 export default function TableImgWork(props: IAppProps) {
-
+    const cx = classNames.bind(styles);
     return (
         <TableContainer component={Paper}>
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -45,7 +44,12 @@ export default function TableImgWork(props: IAppProps) {
                     {props.arrImgWork.map((row, index) => (
                         <TableRow key={index} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                             <StyledTableCell component="th" scope="row">
-                                <img className="w-40 h-40 object-cover" src={row.img} alt="Ảnh được chọn" />
+                                <img
+                                    loading="lazy"
+                                    className="w-40 h-40 object-cover"
+                                    src={row.img}
+                                    alt="Ảnh được chọn"
+                                />
                             </StyledTableCell>
                             <StyledTableCell align="left">
                                 <div className={cx('font-semibold font-system', 'tableTableCell')}>
@@ -54,11 +58,16 @@ export default function TableImgWork(props: IAppProps) {
                             </StyledTableCell>
                             <StyledTableCell align="center">
                                 <div className="flex items-center justify-center">
-                                    <div 
-                                        onClick={() => props.updateImageWork(row)}>
+                                    <div
+                                        className={cx('btn-control')}
+                                        onClick={() => props.updateImageWork(row)}
+                                    >
                                         <DriveFileRenameOutlineOutlinedIcon />
                                     </div>
-                                    <div className="ml-4">
+                                    <div
+                                        className={cx('btn-control', 'ml-2')}
+                                        onClick={() => props.deleteImageWork(row)}
+                                    >
                                         <DeleteOutlinedIcon />
                                     </div>
                                 </div>

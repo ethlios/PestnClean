@@ -138,12 +138,18 @@ export const removeEmail = createAction<any>(type.REMOVE_EMAIL);
 export const removeEmailSuccess = createAction<any>(type.REMOVE_EMAIL_SUCCESS);
 export const removeEmailFail = createAction<any>(type.REMOVE_EMAIL_FAIL);
 
-// Email
+// Image Work
 // add imageWork
 export const getImgWork = createAction<any>(type.GET_IMG_WORK);
 export const addImgWork = createAction<any>(type.ADD_IMG_WORK);
 export const addImgWorkSuccess = createAction<any>(type.ADD_IMG_WORK_SUCCESS);
 export const addImgWorkFail = createAction<any>(type.ADD_IMG_WORK_FAIL);
+export const deleteImgWork = createAction<any>(type.DELETE_IMG_WORK);
+export const deleteImgWorkSuccess = createAction<any>(type.DELETE_IMG_WORK_SUCCESS);
+export const deleteImgWorkFail = createAction<any>(type.DELETE_IMG_WORK_FAIL);
+export const updateImgWork = createAction<any>(type.UPDATE_IMG_WORK);
+export const updateImgWorkSuccess = createAction<any>(type.UPDATE_IMG_WORK_SUCCESS);
+export const updateImgWorkFail = createAction<any>(type.UPDATE_IMG_WORK_FAIL);
 
 // Message
 export const clearMessage = createAction<void>(type.CLEAR_MESSAGE);
