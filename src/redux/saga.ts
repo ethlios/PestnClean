@@ -59,6 +59,16 @@ function* FetchUser({ payload }: any) {
     }
 }
 
+// Update user
+function* updateSessionUser({ payload }: any) {
+    try {
+        const { id, ...person }: { id: string } = payload;
+        const res: ResponseGenerator = yield call(request.put, `api/user/${id}`, person);
+    } catch (err) {
+        console.log(err);
+    }
+}
+
 // Product
 
 function* AddProduct({ payload }: any) {
@@ -342,10 +352,14 @@ function* UpdateImgWork({ payload }: any) {
 
 export default function* rootSaga() {
     yield takeLatest(types.GET_USER, FetchUser);
+
+    // Product
     yield takeLatest(types.ADD_PRODUCT, AddProduct);
     yield takeLatest(types.REMOVE_PRODUCT, RemoveProduct);
     yield takeLatest(types.UPDATE_PRODUCT, UpdateProduct);
     yield takeLatest(types.GET_PRODUCT_PAGE, GetProductPage);
+
+    //
     yield takeLatest(types.GET_BLOG_PAGE, GetBlogPage);
     yield takeLatest(types.ADD_FEEDBACK, AddFeedback);
     yield takeLatest(types.DELETE_FEEDBACK, DeleteFeedback);
@@ -360,8 +374,12 @@ export default function* rootSaga() {
     yield takeLatest(types.DELETE_BLOG_COMMENT, DeleteBlogsComment);
     yield takeLatest(types.ADD_EMAIL, AddEmail);
     yield takeLatest(types.REMOVE_EMAIL, DeleteEmail);
+
     // IMG WORK
     yield takeLatest(types.ADD_IMG_WORK, CreateImgWork);
     yield takeLatest(types.DELETE_IMG_WORK, DeleteImgWork);
     yield takeLatest(types.UPDATE_IMG_WORK, UpdateImgWork);
+
+    // User
+    yield takeLatest(types.UPDATE_SESSION_USER, updateSessionUser);
 }
