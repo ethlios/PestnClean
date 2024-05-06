@@ -7,6 +7,9 @@ export const ORDER_BEHAVIOR = 'ORDER_BEHAVIOR';
 export const GET_BLOG_PAGE = 'GET_BLOG_PAGE';
 export const GET_BLOG_PAGE_SUCCESS = 'GET_BLOG_PAGE_SUCCESS';
 
+// Update user
+export const UPDATE_SESSION_USER = 'UPDATE_SESSION_USER';
+
 // all product
 export const GET_ALL_PRODUCTS = 'GET_ALL_PRODUCTS';
 

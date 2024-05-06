@@ -19,6 +19,10 @@ export const getBlogPageSuccess = createAction<any>(type.GET_BLOG_PAGE_SUCCESS);
 
 export const getAllProducts = createAction<any>(type.GET_ALL_PRODUCTS);
 
+// Update user
+
+export const updateSessionUser = createAction<any>(type.UPDATE_SESSION_USER);
+
 // Product
 export const getProduct = createAction<any>(type.GET_PRODUCT);
 

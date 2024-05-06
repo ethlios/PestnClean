@@ -12,7 +12,7 @@ export async function PUT(request: Request, { params }: { params: { id: string }
             img: body.img,
             address: body.address,
             district: body.district,
-            Ward: body.Ward,
+            Ward: body.ward,
             city: body.city,
             phone: body.phone,
             avatar: body.avatar,

@@ -21,9 +21,24 @@
     letter-spacing: -0.1px;
 }
 
+.user-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+}
+
+.inp-wrapper {
+    label {
+        font-weight: 700;
+        width: 150px;
+        font-size: 14.5px;
+    }
+}
+
 .add-inp {
-    width: 100%;
-    height: 50px;
+    width: 50%;
+    height: 45px;
     border: solid 1.5px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
     font-size: 13px;
@@ -46,4 +61,20 @@
     flex-direction: row;
     align-items: center;
     gap: 10px;
+}
+
+.commom-button {
+    font-size: 14.5px;
+    font-weight: 600;
+    background-color: rgba($color: #000000, $alpha: 0.05);
+    border-radius: 5px;
+    padding: 6px 14px;
+    border: solid 1.5px rgba(0, 0, 0, 0.1);
+    transition: all ease 0.5s;
+    height: 45px;
+    width: calc(50% + 160px);
+
+    &:hover {
+        background-color: rgba($color: #000000, $alpha: 0.15);
+    }
 }
