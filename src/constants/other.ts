@@ -44,4 +44,23 @@ const admins = [
     },
 ];
 
-export { admins };
+const profiles = [
+    {
+        id: 1,
+        title: 'Tài khoản của tôi',
+        icon: PeopleAltOutlinedIcon,
+    },
+
+    {
+        id: 2,
+        title: 'Thông báo',
+        icon: NotificationsActiveOutlinedIcon,
+    },
+    {
+        id: 3,
+        title: 'Đơn đặt hàng',
+        icon: LocalMallOutlinedIcon,
+    },
+];
+
+export { admins, profiles };

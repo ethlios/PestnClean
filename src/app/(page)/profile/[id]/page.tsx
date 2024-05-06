@@ -1,21 +1,17 @@
 'use client';
 
-import React, { useState } from 'react';
-import useSize from '~/libs/hooks/useSize';
 import classNames from 'classnames/bind';
-import styles from '~/components/Admin/admin.module.scss';
-import { admins } from '~/constants/other';
-import Link from 'next/link';
 import Image from 'next/image';
-import logo from '../../../../public/img/logo.png';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import UserCP from '~/components/Admin/User/user';
-import AdminProduct from '~/components/Admin/Product/page';
-import AdminNotification from '~/components/Admin/Notification/page';
-import AdminOder from '~/components/Admin/Order/page';
-import AdminEmail from '~/components/Admin/Email/page';
-import AdminImage from '~/components/Admin/Image/page';
-import AdminDiscount from '~/components/Admin/Discount/page';
+import { useState } from 'react';
+import styles from '~/components/Admin/admin.module.scss';
+import UserAccount from '~/components/Profile/Account/page';
+import UserNotification from '~/components/Profile/Notification/page';
+import UserOrder from '~/components/Profile/Order/page';
+import { profiles } from '~/constants/other';
+import useSize from '~/libs/hooks/useSize';
+import logo from '../../../../../public/img/logo.png';
 
 const cx = classNames.bind(styles);
 
@@ -35,7 +31,7 @@ export default function Admin(props: IAppProps) {
                     </Link>
                 </div>
                 <div className={cx('panel-wrapper')}>
-                    {admins.map((item, index) => {
+                    {profiles.map((item, index) => {
                         return (
                             <div
                                 key={index}
@@ -60,19 +56,11 @@ export default function Admin(props: IAppProps) {
                 </div>
                 <div className={cx('content-wrapper')}>
                     {currentContent === 0 ? (
-                        <UserCP />
+                        <UserAccount />
                     ) : currentContent === 1 ? (
-                        <AdminProduct />
+                        <UserNotification />
                     ) : currentContent === 2 ? (
-                        <AdminDiscount />
-                    ) : currentContent === 3 ? (
-                        <AdminNotification />
-                    ) : currentContent === 4 ? (
-                        <AdminOder />
-                    ) : currentContent === 5 ? (
-                        <AdminEmail />
-                    ) : currentContent === 6 ? (
-                        <AdminImage />
+                        <UserOrder />
                     ) : (
                         ''
                     )}

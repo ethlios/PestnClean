@@ -1,0 +1,49 @@
+.avatar {
+    background-color: var(--primary);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.user-account {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px 10px;
+    font-size: 14.5px;
+    font-weight: 600;
+    letter-spacing: -0.1px;
+}
+
+.add-inp {
+    width: 100%;
+    height: 50px;
+    border: solid 1.5px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 0 10px;
+    letter-spacing: -0.2px;
+    transition: all ease 0.5s;
+
+    &:focus {
+        border: solid 1.5px var(--primary);
+    }
+
+    &::placeholder {
+        color: rgba(0, 0, 0, 0.55);
+    }
+}
+
+.inp-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}

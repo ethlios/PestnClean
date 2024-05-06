@@ -1,17 +1,18 @@
 'use client';
 
 import classNames from 'classnames/bind';
-import styles from '../../../components/Product/product.module.scss';
-import FilterProduct from '~/components/Product/Main/Filter';
-import BannerProduct from '~/components/Product/Main/Banner';
 import Link from 'next/link';
-import CategoryIconProduct from '~/components/Product/Main/CategoryIcon';
-import ProductSale from '~/components/Product/Main/ProductSale';
-import ProductHot from '~/components/Product/Main/ProductHot';
-import AllProduct from '~/components/Product/Main/AllProduct';
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import AllProduct from '~/components/Product/Main/AllProduct';
+import BannerProduct from '~/components/Product/Main/Banner';
+import CategoryIconProduct from '~/components/Product/Main/CategoryIcon';
+import FilterProduct from '~/components/Product/Main/Filter';
+import ProductHot from '~/components/Product/Main/ProductHot';
+import ProductSale from '~/components/Product/Main/ProductSale';
 import useSize from '~/libs/hooks/useSize';
-import { products as mockupProduct } from '~/constants/products';
+import { RootState } from '~/redux/provider/store';
+import styles from '../../../components/Product/product.module.scss';
 
 const cx = classNames.bind(styles);
 
@@ -20,15 +21,7 @@ export interface IAppProps {}
 export default function ProductPage(props: IAppProps) {
     const { sizeX } = useSize();
     const [openFilter, setOpenFilter] = useState<boolean>(true);
-    const [products, setProducts] = useState<any>([]);
-
-    useEffect(() => {
-        fetch('/api/product')
-            .then((res) => res.json())
-            .then((data) => {
-                setProducts([...data, ...mockupProduct]);
-            });
-    }, []);
+    const products = useSelector((state: RootState) => state.main.allProducts);
 
     useEffect(() => {
         if (sizeX < 1024) {

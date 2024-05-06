@@ -7,10 +7,11 @@ import ProductSingle from '~/components/Product/Detail/ProductSingle';
 import ProductDescript from '~/components/Product/Detail/ProductDescript';
 import ProductRelated from '~/components/Product/Detail/ProductRelated';
 import useSize from '~/libs/hooks/useSize';
-import { products } from '~/constants/products';
 import { nameToLink } from '~/libs/orthers/nameToLink';
 import { useEffect, useState } from 'react';
 import { notFound, usePathname } from 'next/navigation';
+import { useSelector } from 'react-redux';
+import { RootState } from '~/redux/provider/store';
 
 const cx = classNames.bind(styles);
 
@@ -20,6 +21,7 @@ export default function ProductDetailPage(props: IAppProps) {
     const { sizeX } = useSize();
     const pathname = usePathname();
     const [product, setProduct] = useState<any[]>([]);
+    const products = useSelector((state: RootState) => state.main.allProducts);
 
     useEffect(() => {
         const productFilter = products.filter((product: any) => {
@@ -31,7 +33,7 @@ export default function ProductDetailPage(props: IAppProps) {
         } else {
             return notFound();
         }
-    }, [pathname]);
+    }, [pathname, products]);
 
     return (
         <div

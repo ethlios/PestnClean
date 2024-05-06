@@ -17,6 +17,8 @@ export const getBlogPage = createAction<any>(type.GET_BLOG_PAGE);
 
 export const getBlogPageSuccess = createAction<any>(type.GET_BLOG_PAGE_SUCCESS);
 
+export const getAllProducts = createAction<any>(type.GET_ALL_PRODUCTS);
+
 // Product
 export const getProduct = createAction<any>(type.GET_PRODUCT);
 
@@ -145,3 +147,9 @@ export const addImgWorkFail = createAction<any>(type.ADD_IMG_WORK_FAIL);
 
 // Message
 export const clearMessage = createAction<void>(type.CLEAR_MESSAGE);
+
+// Discount
+export const getDiscount = createAction<any>(type.GET_DISCOUNT);
+
+// Discount
+export const getNotification = createAction<any>(type.GET_NOTIFICATION);
