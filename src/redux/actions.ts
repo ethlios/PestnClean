@@ -145,6 +145,7 @@ export const removeEmailFail = createAction<any>(type.REMOVE_EMAIL_FAIL);
 // Image Work
 // add imageWork
 export const getImgWork = createAction<any>(type.GET_IMG_WORK);
+export const getImgWorkByType = createAction<any>(type.GET_IMG_WORK_BY_TYPE);
 export const addImgWork = createAction<any>(type.ADD_IMG_WORK);
 export const addImgWorkSuccess = createAction<any>(type.ADD_IMG_WORK_SUCCESS);
 export const addImgWorkFail = createAction<any>(type.ADD_IMG_WORK_FAIL);

@@ -350,6 +350,22 @@ function* UpdateImgWork({ payload }: any) {
     }
 }
 
+function* GetImageWorkByType({ payload }: any) {
+    try {
+        const { id } = payload;
+        if(id !== undefined){
+            const res: ResponseGenerator = yield call(request.get, `api/imagework/type/${id}`, payload);
+            if (res.status === 200) {
+                yield put(actions.getImgWorkByType(res.data));
+            } else {
+                throw new Error(`Unexpected status code: ${res.status}`);
+            }
+        }
+    } catch (err: any) {
+        console.log(err);
+    }
+}
+
 export default function* rootSaga() {
     yield takeLatest(types.GET_USER, FetchUser);
 
@@ -379,6 +395,7 @@ export default function* rootSaga() {
     yield takeLatest(types.ADD_IMG_WORK, CreateImgWork);
     yield takeLatest(types.DELETE_IMG_WORK, DeleteImgWork);
     yield takeLatest(types.UPDATE_IMG_WORK, UpdateImgWork);
+    yield takeLatest(types.GET_IMG_WORK_BY_TYPE, GetImageWorkByType);
 
     // User
     yield takeLatest(types.UPDATE_SESSION_USER, updateSessionUser);

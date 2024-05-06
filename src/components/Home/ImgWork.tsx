@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
 import styles from './home.module.scss';
 import ButtonCommon from '../Orther/Button';
@@ -22,6 +22,9 @@ import img5 from '../../../public/img/img_5.jpg';
 import img6 from '../../../public/img/img_6.jpg';
 import img7 from '../../../public/img/img_3.jpg';
 import useSize from '~/libs/hooks/useSize';
+import { useDispatch, useSelector } from 'react-redux';
+import { getImgWorkByType } from '~/redux/actions';
+import { RootState } from '~/redux/provider/store';
 
 const listImg = [img1.src, img2.src, img3.src, img4.src, img5.src, img6.src, img7.src];
 
@@ -46,11 +49,31 @@ const settings = {
     pauseOnHover: true,
 };
 
-export default function ImageWork(props: IAppProps) {
-    const [defaulListValue, setDefaultListValue] = useState<number>(0);
-    const [defaultList, setDefaultList] = useState<string>('Tất cả');
-    const { sizeX } = useSize();
+export interface propsImgWork {
+    url: string;
+}
 
+export default function ImageWork(props: IAppProps) {
+    const [defaultListValue, setDefaultListValue] = useState<number>(0);
+    const [defaultList, setDefaultList] = useState<string>('Tất cả');
+    const [arrImgWork, setValueImgWork] = useState<string[]>([]);
+    const { sizeX } = useSize();
+    const dispatch = useDispatch();
+    const selector = useSelector((state: RootState) => state.main);
+
+    useEffect(() => {
+        if (selector.message === 'Lấy ra thành công' && selector.imageWork.length > 0) {
+            const arrayOfUrls = selector.imageWork.map((obj) => obj.img);
+            setValueImgWork(arrayOfUrls);
+        }
+    }, [selector.message]);
+
+    useEffect(() => {
+        console.log(defaultListValue);
+        if (defaultListValue !== undefined) {
+            dispatch(getImgWorkByType({ id: defaultListValue }));
+        }
+    }, [defaultListValue]);
     return (
         <div className={cx('work-wrapper')}>
             <h1
@@ -64,34 +87,6 @@ export default function ImageWork(props: IAppProps) {
                 Hình ảnh làm việc
             </h1>
 
-            {/* <div className={cx('btn-lists')}>
-                    {imgTypes.map((btn, index) => {
-                        return (
-                            <ButtonCommon
-                                key={index}
-                                text={btn}
-                                setDefaultListValue={setDefaultListValue}
-                                rule2={defaulListValue === index ? 'rule-1' : 'rule-2'}
-                                index2={index}
-                                setDefaultList={setDefaultList}
-                            />
-                        );
-                    })}
-                </div>
-                <div className={cx('img-wrapper')}>
-                    <div className={`${cx('slick-fix')} slider-container`}>
-                        <Slider {...settings}>
-                            {Array.from({ length: 24 }).map((_, index) => {
-                                return (
-                                    <div key={index} className={cx('img-item')}>
-                                        <div className={cx('img-item-main')}>{index + 1}</div>
-                                    </div>
-                                );
-                            })}
-                        </Slider>
-                    </div>
-                </div> */}
-
             <div
                 className={cx('btn-lists')}
                 style={{
@@ -104,7 +99,7 @@ export default function ImageWork(props: IAppProps) {
                             key={index}
                             text={btn}
                             setDefaultListValue={setDefaultListValue}
-                            rule2={defaulListValue === index ? 'rule-1' : 'rule-2'}
+                            rule2={defaultListValue === index ? 'rule-1' : 'rule-2'}
                             index2={index}
                             setDefaultList={setDefaultList}
                         />
@@ -138,7 +133,7 @@ export default function ImageWork(props: IAppProps) {
                     padding: '30px 0',
                 }}
             >
-                {listImg.map((item, index) => {
+                {arrImgWork.map((item, index) => {
                     return (
                         <SwiperSlide key={index}>
                             <div className={cx('img-item')}>

@@ -52,7 +52,7 @@ export default function TableImgWork(props: IAppProps) {
                                 />
                             </StyledTableCell>
                             <StyledTableCell align="left">
-                                <div className={cx('font-semibold font-system', 'tableTableCell')}>
+                                <div className={cx('font-semibold', 'tableTableCell')}>
                                     {row.type}
                                 </div>
                             </StyledTableCell>
