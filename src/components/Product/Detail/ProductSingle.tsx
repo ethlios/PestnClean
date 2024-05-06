@@ -16,15 +16,17 @@ export interface IAppProps {
 export default function ProductSingle({ product }: IAppProps) {
     const { sizeX } = useSize();
 
-    return product.length > 0 && (
-        <div
-            className={cx('product-wrapper')}
-            style={{
-                flexDirection: sizeX < 768 ? 'column' : 'row',
-            }}
-        >
-            <ProductImage />
-            <ProductInfo product={product} />
-        </div>
+    return (
+        product.length > 0 && (
+            <div
+                className={cx('product-wrapper')}
+                style={{
+                    flexDirection: sizeX < 768 ? 'column' : 'row',
+                }}
+            >
+                <ProductImage product={product} />
+                <ProductInfo product={product} />
+            </div>
+        )
     );
 }

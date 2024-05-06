@@ -11,16 +11,16 @@ import { useEffect, useState } from 'react';
 
 const cx = classNames.bind(styles);
 
-export interface IAppProps {}
+export interface IAppProps {
+    product: any[];
+}
 
-// Demo
-const imgLists = ['', '', ''];
-
-export default function ProductImage(props: IAppProps) {
+export default function ProductImage({ product }: IAppProps) {
     const wheel: boolean = useScroll();
     const { sizeX } = useSize();
     const [currentImg, setCurrentImg] = useState<number>(0);
     const [imgEffect, setImgEffect] = useState<number>(-1);
+    const imgLists = product[0].Image || ['', '', ''];
 
     return (
         <div
@@ -42,7 +42,7 @@ export default function ProductImage(props: IAppProps) {
                     width: sizeX < 950 ? '100%' : '',
                 }}
             >
-                {imgLists.map((img, index) => {
+                {imgLists.map((img: string, index: number) => {
                     return (
                         <Image
                             key={index}
@@ -80,7 +80,7 @@ export default function ProductImage(props: IAppProps) {
                 />
             ) : (
                 <div className={cx('img')}>
-                    {imgLists.map((img, index) => {
+                    {imgLists.map((img: string, index: number) => {
                         return (
                             <Image
                                 key={index}

@@ -14,19 +14,7 @@ export interface IAppProps {}
 export default function CartPage(props: IAppProps) {
     const { sizeX } = useSize();
     const localStorageCart = JSON.parse(localStorage.getItem('cart') || '[]');
-    const [cart, setCart] = useState<any>([]);
-
-    useEffect(() => {
-        fetch('/api/cart')
-            .then((res) => res.json())
-            .then((data) => {
-                if (data.length > 0) {
-                    setCart(data);
-                } else {
-                    setCart(localStorageCart);
-                }
-            });
-    }, []);
+    const [cart, setCart] = useState<any>(localStorageCart);
 
     return (
         <div

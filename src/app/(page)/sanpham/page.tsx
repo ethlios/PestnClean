@@ -8,8 +8,7 @@ import AllProduct from '~/components/Product/Main/AllProduct';
 import BannerProduct from '~/components/Product/Main/Banner';
 import CategoryIconProduct from '~/components/Product/Main/CategoryIcon';
 import FilterProduct from '~/components/Product/Main/Filter';
-import ProductHot from '~/components/Product/Main/ProductHot';
-import ProductSale from '~/components/Product/Main/ProductSale';
+import ProductStatus from '~/components/Product/Main/ProductStatus';
 import useSize from '~/libs/hooks/useSize';
 import { RootState } from '~/redux/provider/store';
 import styles from '~/components/Product/product.module.scss';
@@ -60,13 +59,15 @@ export default function ProductPage(props: IAppProps) {
                 >
                     <BannerProduct />
                     <CategoryIconProduct openFilter={openFilter} />
-                    <ProductSale
+                    <ProductStatus
                         openFilter={openFilter}
                         products={products.filter((product: any) => product.status === 'SALE')}
+                        status="Đang giảm giá"
                     />
-                    <ProductHot
+                    <ProductStatus
                         openFilter={openFilter}
                         products={products.filter((product: any) => product.status === 'HOT')}
+                        status="Đang bán chạy"
                     />
                     <AllProduct setOpenFilter={setOpenFilter} openFilter={openFilter} products={products} />
                 </div>

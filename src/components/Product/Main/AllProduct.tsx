@@ -9,6 +9,7 @@ import { nameToLink } from '~/libs/orthers/nameToLink';
 import formatter from '~/libs/orthers/formatMoney';
 import { useState } from 'react';
 import smoothScroll from '~/libs/orthers/smoothScroll';
+import Image from 'next/image';
 
 const cx = classNames.bind(styles);
 
@@ -93,7 +94,15 @@ export default function AllProduct({ setOpenFilter, openFilter, products }: IApp
                                 style={{
                                     height: sizeX < 430 ? '160px' : '',
                                 }}
-                            ></div>
+                            >
+                                <Image
+                                    src={item.Image[0]}
+                                    alt={item.title}
+                                    width={160}
+                                    height={160}
+                                    className={'h-full w-full object-cover'}
+                                />
+                            </div>
                             <p
                                 className={cx('item-category')}
                                 style={{
