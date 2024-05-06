@@ -57,6 +57,7 @@ model Product {
   authorId   String
   title      String?
   desHead    String?
+  description String?
   detail     String?
   price      Int?
   comments   Comments[]

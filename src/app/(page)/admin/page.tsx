@@ -15,6 +15,7 @@ import AdminNotification from '~/components/Admin/Notification/page';
 import AdminOder from '~/components/Admin/Order/page';
 import AdminEmail from '~/components/Admin/Email/page';
 import AdminImage from '~/components/Admin/Image/page';
+import AdminDiscount from '~/components/Admin/Image/page';
 
 const cx = classNames.bind(styles);
 
@@ -63,12 +64,14 @@ export default function Admin(props: IAppProps) {
                     ) : currentContent === 1 ? (
                         <AdminProduct />
                     ) : currentContent === 2 ? (
-                        <AdminNotification />
+                        <AdminDiscount />
                     ) : currentContent === 3 ? (
-                        <AdminOder />
+                        <AdminNotification />
                     ) : currentContent === 4 ? (
-                        <AdminEmail />
+                        <AdminOder />
                     ) : currentContent === 5 ? (
+                        <AdminEmail />
+                    ) : currentContent === 6 ? (
                         <AdminImage />
                     ) : (
                         ''

@@ -4,6 +4,7 @@ import NotificationsActiveOutlinedIcon from '@mui/icons-material/NotificationsAc
 import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import CameraAltOutlinedIcon from '@mui/icons-material/CameraAltOutlined';
+import DiscountOutlinedIcon from '@mui/icons-material/DiscountOutlined';
 
 const admins = [
     {
@@ -18,21 +19,26 @@ const admins = [
     },
     {
         id: 3,
+        title: 'Mã giảm giá',
+        icon: DiscountOutlinedIcon,
+    },
+    {
+        id: 4,
         title: 'Thông báo',
         icon: NotificationsActiveOutlinedIcon,
     },
     {
-        id: 4,
+        id: 5,
         title: 'Đơn đặt hàng',
         icon: LocalMallOutlinedIcon,
     },
     {
-        id: 5,
+        id: 6,
         title: 'Email khuyến mãi',
         icon: EmailOutlinedIcon,
     },
     {
-        id: 6,
+        id: 7,
         title: 'Hình ảnh',
         icon: CameraAltOutlinedIcon,
     },

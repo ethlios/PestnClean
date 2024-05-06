@@ -91,6 +91,7 @@ export default function AdminAddProduct({ setAddProduct, updateProduct, setUpdat
             setValue('plate', updateProduct.plate);
             setValue('quantity', +updateProduct.quantity);
             setIsNew(updateProduct.new);
+            setValue('description', updateProduct.description);
         }
     }, [isUpdate, setValue, updateProduct]);
 
@@ -146,6 +147,13 @@ export default function AdminAddProduct({ setAddProduct, updateProduct, setUpdat
                             className={cx('add-inp')}
                             {...register('desHead')}
                         ></input>
+
+                        <textarea
+                            className={cx('textarea')}
+                            spellCheck={false}
+                            placeholder="Chi tiết..."
+                            {...register('description')}
+                        />
                         <input
                             type="text"
                             placeholder="Price..."

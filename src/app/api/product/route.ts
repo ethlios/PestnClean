@@ -10,6 +10,7 @@ export async function POST(request: Request) {
             authorId: body.authorId,
             title: body.title,
             desHead: body.desHead,
+            description: body.description,
             price: body.price,
             code: body.code,
             status: body.status,
