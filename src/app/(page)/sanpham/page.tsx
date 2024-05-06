@@ -26,7 +26,11 @@ export default function ProductPage(props: IAppProps) {
         fetch('/api/product')
             .then((res) => res.json())
             .then((data) => {
-                setProducts([...data, ...mockupProduct]);
+                if (data.length > 0) {
+                    setProducts(data);
+                } else {
+                    setProducts(mockupProduct);
+                }
             });
     }, []);
 
@@ -69,11 +73,11 @@ export default function ProductPage(props: IAppProps) {
                     <CategoryIconProduct openFilter={openFilter} />
                     <ProductSale
                         openFilter={openFilter}
-                        products={products.filter((product: any) => product.status === 'sale')}
+                        products={products.filter((product: any) => product.status === 'SALE')}
                     />
                     <ProductHot
                         openFilter={openFilter}
-                        products={products.filter((product: any) => product.status === 'hot')}
+                        products={products.filter((product: any) => product.status === 'HOT')}
                     />
                     <AllProduct setOpenFilter={setOpenFilter} openFilter={openFilter} products={products} />
                 </div>

@@ -1,4 +1,4 @@
-import { products } from '~/constants/products';
+import { products as mockupProduct } from '~/constants/products';
 import { nameToLink } from '~/libs/orthers/nameToLink';
 
 interface Props {
@@ -8,7 +8,7 @@ interface Props {
 }
 
 export async function generateMetadata({ params }: Props) {
-    const productDetail: any = products.filter((product: any) => {
+    const productDetail: any = mockupProduct.filter((product: any) => {
         return nameToLink(product.title) === params['sanpham-detail'];
     });
 
