@@ -24,14 +24,16 @@ export default function ProductDetailPage(props: IAppProps) {
     const products = useSelector((state: RootState) => state.main.allProducts);
 
     useEffect(() => {
-        const productFilter = products.filter((product: any) => {
-            return `/sanpham/${nameToLink(product.title)}` === pathname;
-        });
+        if (products.length > 0) {
+            const productFilter = products.filter((product: any) => {
+                return `/sanpham/${nameToLink(product.title)}` === pathname;
+            });
 
-        if (productFilter.length > 0) {
-            setProduct(productFilter);
-        } else {
-            return notFound();
+            if (productFilter.length > 0) {
+                setProduct(productFilter);
+            } else {
+                return notFound();
+            }
         }
     }, [pathname, products]);
 

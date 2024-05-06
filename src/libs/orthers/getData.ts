@@ -10,10 +10,8 @@ async function getAllUsers() {
     return res.json();
 }
 
-async function getAllProdcut() {
-    const product = await prisma.product.findMany();
-
-    return product;
+export async function getAllProducts() {
+    return prisma.product.findMany();
 }
 
-export { getAllUsers, getAllProdcut };
+export { getAllUsers };
