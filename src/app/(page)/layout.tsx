@@ -13,7 +13,7 @@ import useSize from '~/libs/hooks/useSize';
 import HeaderMobile from '~/common/Header/headerMobile';
 import { useSession } from 'next-auth/react';
 import { useDispatch } from 'react-redux';
-import { getUser } from '~/redux/actions';
+import { getAllProducts, getUser } from '~/redux/actions';
 
 export default function ComponentConnectLayout({ children }: { children: React.ReactNode }) {
     const pathname = usePathname();
@@ -41,9 +41,19 @@ export default function ComponentConnectLayout({ children }: { children: React.R
         }
     }, [dispatch, session]);
 
+    useEffect(() => {
+        const allProdcuts = async () => {
+            const products = await fetch('/api/product/all').then((res) => res.json());
+
+            dispatch(getAllProducts(products[0].product));
+        };
+
+        allProdcuts();
+    }, [dispatch]);
+
     return openCp ? (
         <div>
-            {pathname === '/login' || pathname === '/admin' ? (
+            {pathname === '/login' || pathname === '/admin' || pathname.includes('/profile/') ? (
                 children
             ) : (
                 <>

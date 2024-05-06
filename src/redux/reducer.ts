@@ -40,6 +40,9 @@ import {
     addImgWorkSuccess,
     addImgWorkFail,
     getImgWork,
+    getDiscount,
+    getNotification,
+    getAllProducts,
 } from './actions';
 
 interface RootState {
@@ -59,6 +62,9 @@ interface RootState {
     blogCmt: any[];
     emails: any[];
     message: string;
+    notification: any[];
+    discount: any[];
+    allProducts: any[];
 }
 
 const initState: RootState = {
@@ -78,6 +84,9 @@ const initState: RootState = {
     blogCmt: [],
     emails: [],
     message: '',
+    notification: [],
+    discount: [],
+    allProducts: [],
 };
 
 const findIndex = (state: any[], id: number) => {
@@ -115,6 +124,11 @@ const rootReducer = createReducer(initState, (builder) => {
     });
     builder.addCase(orderBehavior, (state, action) => {
         state.orderBehavior = action.payload;
+    });
+
+    // All Prodcut
+    builder.addCase(getAllProducts, (state, action) => {
+        state.allProducts = action.payload;
     });
 
     // Orther
@@ -234,7 +248,7 @@ const rootReducer = createReducer(initState, (builder) => {
     builder.addCase(getEmail, (state, action) => {
         state.emails = action.payload;
     });
-        // remove email
+    // remove email
     builder.addCase(removeEmailSuccess, (state, action) => {
         const { message, data } = action.payload;
         const index = state.emails.findIndex((email) => email.id === data.id);
@@ -261,7 +275,7 @@ const rootReducer = createReducer(initState, (builder) => {
     });
     builder.addCase(addImgWorkSuccess, (state, action) => {
         console.log(action.payload);
-        const { message, data , success } = action.payload;
+        const { message, data, success } = action.payload;
         state.message = message;
         state.imageWork.push(data);
     });
@@ -273,6 +287,16 @@ const rootReducer = createReducer(initState, (builder) => {
     // Message
     builder.addCase(clearMessage, (state, action) => {
         state.message = '';
+    });
+
+    // Discount
+    builder.addCase(getDiscount, (state, action) => {
+        state.discount = action.payload;
+    });
+
+    // Notifications
+    builder.addCase(getNotification, (state, action) => {
+        state.notification = action.payload;
     });
 });
 

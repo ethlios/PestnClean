@@ -7,6 +7,9 @@ export const ORDER_BEHAVIOR = 'ORDER_BEHAVIOR';
 export const GET_BLOG_PAGE = 'GET_BLOG_PAGE';
 export const GET_BLOG_PAGE_SUCCESS = 'GET_BLOG_PAGE_SUCCESS';
 
+// all product
+export const GET_ALL_PRODUCTS = 'GET_ALL_PRODUCTS';
+
 // Product
 
 export const GET_PRODUCT = 'GET_PRODUCT';
@@ -80,7 +83,6 @@ export const REMOVE_EMAIL = 'REMOVE_EMAIL';
 export const REMOVE_EMAIL_SUCCESS = 'REMOVE_EMAIL_SUCCESS';
 export const REMOVE_EMAIL_FAIL = 'REMOVE_EMAIL_FAIL';
 
-
 // ImageWorK
 export const ADD_IMG_WORK = 'ADD_IMG_WORK';
 export const ADD_IMG_WORK_SUCCESS = 'ADD_IMG_WORK_SUCCESS';
@@ -88,3 +90,9 @@ export const ADD_IMG_WORK_FAIL = 'ADD_IMG_WORK_FAIL';
 export const GET_IMG_WORK = 'GET_IMG_WORK';
 // Message
 export const CLEAR_MESSAGE = 'CLEAR_MESSAGE';
+
+// GET Notification
+export const GET_NOTIFICATION = 'GET_NOTIFICATION';
+
+// GET Discount
+export const GET_DISCOUNT = 'GET_DISCOUNT';

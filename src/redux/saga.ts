@@ -36,7 +36,8 @@ function* FetchUser({ payload }: any) {
             }
 
             if (person.data.length > 0) {
-                const { cart, product, management, blog, order, emailkm , imgWork } = person.data[0] ?? [];
+                const { cart, product, management, blog, order, emailkm, imgWork, discount, notification } =
+                    person.data[0] ?? [];
                 if (person.data[0].rule === 'admin') {
                     yield put(actions.getProduct(product ?? []));
                     yield put(actions.getEmail(emailkm ?? []));
@@ -45,6 +46,8 @@ function* FetchUser({ payload }: any) {
                     yield put(actions.getBlog(blog ?? []));
                     yield put(actions.getAdminOrder(order ?? []));
                     yield put(actions.getImgWork(imgWork ?? []));
+                    yield put(actions.getDiscount(discount ?? []));
+                    yield put(actions.getNotification(notification ?? []));
                 } else {
                     yield put(actions.getManagement(management ?? []));
                     // yield put(actions.getCart(cart ?? []));
@@ -269,10 +272,10 @@ function* AddEmail({ payload }: any) {
 
 function* DeleteEmail({ payload }: any) {
     try {
-        const res: ResponseGenerator = yield call(request.post, 'api/email/remove',payload);
+        const res: ResponseGenerator = yield call(request.post, 'api/email/remove', payload);
         if (res.status === 200) {
             yield put(actions.removeEmailSuccess(res.data));
-        }else {
+        } else {
             throw new Error(`Unexpected status code: ${res.status}`);
         }
     } catch (err: any) {
@@ -287,10 +290,10 @@ function* DeleteEmail({ payload }: any) {
 // IMAGE WORK
 function* createImgWork({ payload }: any) {
     try {
-        const res: ResponseGenerator = yield call(request.post, 'api/imagework/create',payload);
+        const res: ResponseGenerator = yield call(request.post, 'api/imagework/create', payload);
         if (res.status === 200) {
             yield put(actions.addImgWorkSuccess(res.data));
-        }else {
+        } else {
             throw new Error(`Unexpected status code: ${res.status}`);
         }
     } catch (err: any) {
@@ -323,5 +326,5 @@ export default function* rootSaga() {
     yield takeLatest(types.ADD_EMAIL, AddEmail);
     yield takeLatest(types.REMOVE_EMAIL, DeleteEmail);
     // IMG WORK
-    yield takeLatest(types.ADD_IMG_WORK,createImgWork);
+    yield takeLatest(types.ADD_IMG_WORK, createImgWork);
 }

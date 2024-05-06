@@ -285,12 +285,16 @@ export default function MenuMobile({ open, setOpen }: IAppProps) {
                                         </div>
                                     ) : (
                                         <div onClick={() => setOpenAcc(false)}>
-                                            <Link href={'/account'}>Quản lý tài khoản</Link>
+                                            <Link href={`/profile/${session.user.id}`}>
+                                                Quản lý tài khoản
+                                            </Link>
                                         </div>
                                     )}
                                     {session.user.rule !== 'admin' && (
                                         <div onClick={() => setOpenAcc(false)}>
-                                            <Link href={'/account?q=order'}>Kiểm tra đơn hàng</Link>
+                                            <Link href={`/profile/${session.user.id}?q=order`}>
+                                                Kiểm tra đơn hàng
+                                            </Link>
                                         </div>
                                     )}
                                     <div onClick={() => signOut()}>

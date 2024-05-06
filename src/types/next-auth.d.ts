@@ -11,6 +11,11 @@ declare module 'next-auth' {
             picture: string;
             image: string;
             rule: string;
+            address: string;
+            phone: string;
+            ward: string;
+            city: string;
+            district: string;
         };
     }
 }

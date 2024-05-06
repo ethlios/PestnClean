@@ -1,3 +1,5 @@
+import { prisma } from './prisma';
+
 async function getAllUsers() {
     const res = await fetch(`/api/user/all`);
 
@@ -8,4 +10,10 @@ async function getAllUsers() {
     return res.json();
 }
 
-export { getAllUsers };
+async function getAllProdcut() {
+    const product = await prisma.product.findMany();
+
+    return product;
+}
+
+export { getAllUsers, getAllProdcut };
