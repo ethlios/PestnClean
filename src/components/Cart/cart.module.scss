@@ -61,6 +61,8 @@
 .cart-list {
     list-style-type: initial;
     margin-left: 10px;
+    overflow-y: scroll;
+    margin-bottom: 5px;
 
     li {
         font-size: 14.5px;

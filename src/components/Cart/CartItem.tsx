@@ -10,6 +10,9 @@ import styles from './cart.module.scss';
 import { useState } from 'react';
 import Link from 'next/link';
 import formatter from '~/libs/orthers/formatMoney';
+import Image from 'next/image';
+import * as React from 'react';
+import { nameToLink } from '~/libs/orthers/nameToLink';
 
 const cx = classNames.bind(styles);
 
@@ -77,10 +80,9 @@ export default function CartItem({ item, setCart }: IAppProps) {
                     productHover: sizeX > 992,
                 })}
             >
-                <Link href={``}>
+                <Link href={`sanpham/${nameToLink(item.title)}`}>
                     <div
                         style={{
-                            backgroundImage: item.src,
                             width:
                                 sizeX < 500
                                     ? '100px'
@@ -94,7 +96,15 @@ export default function CartItem({ item, setCart }: IAppProps) {
                             imgHover: sizeX > 992,
                             productImg: true,
                         })}
-                    ></div>
+                    >
+                        <Image
+                            src={item.img}
+                            alt={item.title}
+                            width={160}
+                            height={160}
+                            className={'h-full w-full object-cover'}
+                        />
+                    </div>
                 </Link>
                 <div
                     className={'flex flex-col justify-between'}
@@ -115,17 +125,13 @@ export default function CartItem({ item, setCart }: IAppProps) {
                         }}
                     >
                         <p className={cx('product-category')}>{item.category}</p>
-                        <p className={cx('product-name')}>{item.name}</p>
+                        <p className={cx('product-name')}>{item.title}</p>
                         <ul className={cx('cart-list')}>
-                            <li>
-                                <p>Dung tích:</p>
-                            </li>
-                            <li>
-                                <p>Thành phần:</p>
-                            </li>
-                            <li>
-                                <p>Xuất sứ:</p>
-                            </li>
+                            {item.description &&
+                                sizeX > 600 &&
+                                item.description
+                                    .split('\n')
+                                    .map((item: string, index: number) => <li key={index}>{item}</li>)}
                         </ul>
                     </div>
                     <div
@@ -134,7 +140,13 @@ export default function CartItem({ item, setCart }: IAppProps) {
                             height: '15px',
                         }}
                     >
-                        <div className={'flex gap-3'}>
+                        <div
+                            style={{
+                                display: 'flex',
+                                gap: '3px',
+                                flexDirection: sizeX <= 600 ? 'column' : 'row',
+                            }}
+                        >
                             <p className={cx('price')}>
                                 <b>Giá: </b>
                                 {formatter.format(+item.price * amount)}

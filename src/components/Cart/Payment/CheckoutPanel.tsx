@@ -7,12 +7,18 @@ import DiscountCode from '~/components/Cart/DiscountCode';
 import SummaryProduct from '~/components/Cart/Payment/SummaryProduct';
 import ButtonCommon from '~/components/Orther/Button';
 import styles from './payment.module.scss';
+import formatter from '~/libs/orthers/formatMoney';
 
 const cx = classNames.bind(styles);
 
-export interface IAppProps {}
+export interface IAppProps {
+    cart?: any;
+}
 
-export default function CheckoutPanel(props: IAppProps) {
+export default function CheckoutPanel({ cart }: IAppProps) {
+    const totalAmount = cart.reduce((acc: number, item: any) => acc + item.quantity, 0);
+    const totalPrice = cart.reduce((acc: number, item: any) => acc + item.price * item.quantity, 0);
+
     return (
         <div className={cx('panel')}>
             {/*Discount code*/}
@@ -20,28 +26,22 @@ export default function CheckoutPanel(props: IAppProps) {
             {/*Summary*/}
             <div className={'my-5'}>
                 <p className={cx('title')}>Tóm tắt đơn hàng</p>
-                {Array.from({ length: 3 }).map((_, index) => (
-                    <SummaryProduct key={index} />
+                {cart.map((item: any, index: number) => (
+                    <SummaryProduct key={index} item={item} />
                 ))}
                 <div className={cx('hr-decor')}></div>
                 <div className={'*:flex *:justify-between *:items center'}>
                     <div className={cx('total-price')}>
-                        <span>6 Sản phẩm</span>
-                        <p>
-                            4.400.000 <u>đ</u>
-                        </p>
+                        <span>{totalAmount} Sản phẩm</span>
+                        <p>{formatter.format(+totalPrice)}</p>
                     </div>
                     <div className={cx('total-price')}>
                         <span>Phí vận chuyển</span>
-                        <p>
-                            0 <u>đ</u>
-                        </p>
+                        <p>{formatter.format(0)}</p>
                     </div>
                     <div className={cx('total-price')}>
                         <span>Mã giảm giá</span>
-                        <p>
-                            0 <u>đ</u>
-                        </p>
+                        <p>{formatter.format(0)}</p>
                     </div>
                 </div>
             </div>
@@ -49,9 +49,7 @@ export default function CheckoutPanel(props: IAppProps) {
             <div className={cx('hr-decor')}></div>
             <div className={`${cx('total-price')} flex justify-between items center`}>
                 <span>Tổng cộng</span>
-                <p>
-                    4.400.000 <u>đ</u>
-                </p>
+                <p>{formatter.format(+totalPrice)}</p>
             </div>
             <div className="my-5">
                 <ButtonCommon text="ĐẶT HÀNG" fullWidth />
