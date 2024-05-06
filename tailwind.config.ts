@@ -36,6 +36,9 @@ const config: Config = {
                 '2xl': '100px',
             },
         },
+        fontFamily: {
+            'system': "Merriweather",
+        },
     },
     plugins: [],
 };

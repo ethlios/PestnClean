@@ -35,8 +35,11 @@ import {
     updateProductSuccess,
     addEmailFail,
     addEmailSuccess,
-    getEmailSuccess,
-    getEmailFail
+    removeEmailFail,
+    clearMessage,
+    addImgWorkSuccess,
+    addImgWorkFail,
+    getImgWork,
 } from './actions';
 
 interface RootState {
@@ -47,6 +50,7 @@ interface RootState {
     blogs: any[];
     cart: any[];
     productsPage: any[];
+    imageWork: any[];
     blogsPage: any[];
     order: any[];
     adminOrder: any[];
@@ -65,6 +69,7 @@ const initState: RootState = {
     blogs: [],
     cart: [],
     productsPage: [],
+    imageWork: [],
     blogsPage: [],
     order: [],
     adminOrder: [],
@@ -72,7 +77,7 @@ const initState: RootState = {
     feedback: [],
     blogCmt: [],
     emails: [],
-    message: ''
+    message: '',
 };
 
 const findIndex = (state: any[], id: number) => {
@@ -229,30 +234,45 @@ const rootReducer = createReducer(initState, (builder) => {
     builder.addCase(getEmail, (state, action) => {
         state.emails = action.payload;
     });
+        // remove email
     builder.addCase(removeEmailSuccess, (state, action) => {
-        const index = findIndex(state.emails, action.payload);
+        const { message, data } = action.payload;
+        const index = state.emails.findIndex((email) => email.id === data.id);
         state.emails.splice(index, 1);
+        state.message = message;
     });
+    builder.addCase(removeEmailFail, (state, action) => {
+        const { message } = action.payload;
+        state.message = message;
+    });
+    //  add email
     builder.addCase(addEmailSuccess, (state, action) => {
-        console.log(action.payload);
-        const {message,data} = action.payload;
+        const { message, data } = action.payload;
         state.message = message;
         state.emails.push(data);
     });
     builder.addCase(addEmailFail, (state, action) => {
-        console.log(action.payload);
-        const {message} = action.payload;
+        const { message } = action.payload;
         state.message = message;
     });
-    builder.addCase(getEmailSuccess, (state, action) => {
-        console.log(action.payload);
-        const newEmails = action.payload; // Dữ liệu được lấy ra từ action payload
-        state.emails = state.emails.concat(newEmails); // Thêm dữ liệu vào mảng hiện tại
+    // IMG WORK
+    builder.addCase(getImgWork, (state, action) => {
+        state.imageWork = action.payload;
     });
-    builder.addCase(getEmailFail, (state, action) => {
+    builder.addCase(addImgWorkSuccess, (state, action) => {
         console.log(action.payload);
-        const {message} = action.payload;
+        const { message, data , success } = action.payload;
         state.message = message;
+        state.imageWork.push(data);
+    });
+    builder.addCase(addImgWorkFail, (state, action) => {
+        console.log(action.payload);
+        const { message } = action.payload;
+        state.message = message;
+    });
+    // Message
+    builder.addCase(clearMessage, (state, action) => {
+        state.message = '';
     });
 });
 

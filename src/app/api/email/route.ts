@@ -20,45 +20,45 @@ export async function POST(request: Request) {
         })
     } else {
         // Nếu email chưa tồn tại, tiến hành tạo mới bản ghi
-        if(body.authorId) {
-            const checkUser = await prisma.user.findUnique({
-                where: { 
-                    id: body.authorId
-                },
-            });
+        // if(body.authorId) {
+        //     const checkUser = await prisma.user.findUnique({
+        //         where: { 
+        //             id: body.authorId
+        //         },
+        //     });
 
-            if(checkUser) {
-                const { id } = checkUser;
-                const newEmail = await prisma.email.create({
-                    data: {
-                        authorId: id,
-                        email: body.email,
-                    },
-                });
+        //     if(checkUser) {
+        //         const { id } = checkUser;
+        //         const newEmail = await prisma.email.create({
+        //             data: {
+        //                 authorId: id,
+        //                 email: body.email,
+        //             },
+        //         });
 
-                return NextResponse.json({
-                    message: "Đăng ký thành công email",
-                    data: newEmail
-                }, {
-                    status: 200,
-                });
-            }
-        } else {
-            const defaultAuthorId = "104399638902286280553";
-            const newEmail = await prisma.email.create({
-                data: {
-                    authorId: defaultAuthorId,
-                    email: body.email,
-                },
-            });
-            
-            return NextResponse.json({
-                message: "Đăng ký thành công email",
-                data: newEmail
-            }, {
-                status: 200,
-            });
-        }
+        //         return NextResponse.json({
+        //             message: "Đăng ký thành công email",
+        //             data: newEmail
+        //         }, {
+        //             status: 200,
+        //         });
+        //     }
+        // } else {
+        const defaultAuthorId = "104399638902286280553";
+        const newEmail = await prisma.email.create({
+            data: {
+                authorId: defaultAuthorId,
+                email: body.email,
+            },
+        });
+        
+        return NextResponse.json({
+            message: "Đăng ký thành công email",
+            data: newEmail
+        }, {
+            status: 200,
+        });
+        //}
     }
 }
 
