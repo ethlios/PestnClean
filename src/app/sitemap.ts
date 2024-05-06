@@ -1,5 +1,6 @@
 import { blogs } from '~/constants/blogs';
 import { allServices } from '~/constants/service';
+import { getAllProducts } from '~/libs/orthers/getData';
 import { nameToLink } from '~/libs/orthers/nameToLink';
 
 export default async function sitemap() {
@@ -12,6 +13,13 @@ export default async function sitemap() {
 
     const serviceUrl = allServices.map((service) => ({
         url: `${baseUrl}/${nameToLink(service.title)}`,
+        lastModified: new Date(),
+    }));
+
+    const products = await getAllProducts();
+
+    const productUrl = products.map((product) => ({
+        url: `${baseUrl}/sanpham/${nameToLink(product.title ?? '')}`,
         lastModified: new Date(),
     }));
 
@@ -28,5 +36,6 @@ export default async function sitemap() {
         { url: `${baseUrl}/dichvu/giai-phap-ve-sinh`, lastModified: new Date() },
         ...serviceUrl,
         ...blogUrl,
+        ...productUrl,
     ];
 }

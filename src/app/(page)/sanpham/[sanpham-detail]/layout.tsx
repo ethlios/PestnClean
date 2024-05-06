@@ -1,4 +1,4 @@
-import { products } from '~/constants/products';
+import { getAllProducts } from '~/libs/orthers/getData';
 import { nameToLink } from '~/libs/orthers/nameToLink';
 
 interface Props {
@@ -8,6 +8,8 @@ interface Props {
 }
 
 export async function generateMetadata({ params }: Props) {
+    const products = await getAllProducts();
+
     const productDetail: any = products.filter((product: any) => {
         return nameToLink(product.title) === params['sanpham-detail'];
     });
@@ -27,14 +29,14 @@ export async function generateMetadata({ params }: Props) {
         alternates: {
             canonical: `/sanpham/${path}`,
         },
-        keywords: `${productDetail[0].key}`,
+        keywords: `${productDetail[0].description}`,
         openGraph: {
             title: productDetail[0].title + ' | Pestnclean',
             description: productDetail[0].description ?? '',
             images: [
                 {
-                    url: productDetail[0].img,
-                    secureUrl: productDetail[0].img,
+                    url: productDetail[0].Image[0],
+                    secureUrl: productDetail[0].Image[0],
                     width: 900,
                     height: 450,
                     alt: `ảnh ${productDetail[0].title?.toLowerCase()} | Pesnclean`,
