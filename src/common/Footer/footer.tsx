@@ -18,10 +18,9 @@ import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import RemoveOutlinedIcon from '@mui/icons-material/RemoveOutlined';
 import $ from 'jquery';
 import { useDispatch, useSelector } from 'react-redux';
-import { addEmail } from '~/redux/actions';
+import { addEmail, clearMessage } from '~/redux/actions';
 import { useSession } from 'next-auth/react';
 import Toast from '~/components/Orther/Toast';
-import { customToast } from '~/components/Orther/customToast';
 import { RootState } from '~/redux/provider/store';
 
 const cx = classNames.bind(styles);
@@ -37,7 +36,8 @@ export default function Footer(props: FooterProps) {
     const [isOpen1, setIsOpen1] = useState(false);
     const [isOpen2, setIsOpen2] = useState(false);
     const [isOpen3, setIsOpen3] = useState(false);
-    const { data: session } = useSession();
+    const [showToast, setShowToast] = useState<boolean>(false);
+    // const { data: session } = useSession();
     const [valueEmail, setValueEmail] = useState('');
     const [valueMessage, setValueMessage] = useState<MessageState>({
         message: '',
@@ -49,15 +49,12 @@ export default function Footer(props: FooterProps) {
     useEffect(() => {
         const message = selector?.message;
         if (message === 'Đăng ký thành công email') {
-            customToast({
-                type: 'success',
-                position: 'bottom-right',
-                autoClose: 2000,
-                limit: 1,
-                toastMessage: message,
-            });
+            setShowToast(true);
+            setValueEmail('');
+            dispatch(clearMessage());
         } else if (message === 'Email đã được đăng ký') {
             setValueMessage({ message: message, status: false });
+            dispatch(clearMessage());
         }
     }, [selector.message]);
 
@@ -74,10 +71,9 @@ export default function Footer(props: FooterProps) {
             if (isEmail(valueEmail)) {
                 const emailData = {
                     email: valueEmail,
-                    authorId: session?.user?.id || undefined,
+                    // authorId: session?.user?.id || undefined,
                 };
                 dispatch(addEmail(emailData));
-                setValueEmail('');
             } else {
                 setValueMessage({ message: 'Nhập đúng định dạng email', status: false });
             }
@@ -112,6 +108,12 @@ export default function Footer(props: FooterProps) {
 
     return (
         <div>
+            <Toast
+                text="Đăng ký email thành công"
+                showToast={showToast}
+                setShowToast={setShowToast}
+                rule="normal"
+            />
             {/* Email Register */}
             <div className={cx('banner-footer')}>
                 <Image

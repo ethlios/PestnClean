@@ -21,6 +21,7 @@ export async function GET(request: Request, { params }: { params: { id: string }
             discount: true,
             comment: true,
             cart: true,
+            imgWork: true,
         },
     });
 

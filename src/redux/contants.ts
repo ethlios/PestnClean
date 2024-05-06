@@ -73,10 +73,18 @@ export const REMOVE_ORDER_ALL = 'REMOVE_ORDER_ALL';
 
 // Email
 export const GET_EMAIL = 'GET_EMAIL';
-export const GET_EMAIL_SUCCESS = 'GET_EMAIL_SUCCESS';
-export const GET_EMAIL_FAIL = 'GET_EMAIL_FAIL';
 export const ADD_EMAIL = 'ADD_EMAIL';
 export const ADD_EMAIL_SUCCESS = 'ADD_EMAIL_SUCCESS';
 export const ADD_EMAIL_FAIL = 'ADD_EMAIL_FAIL';
 export const REMOVE_EMAIL = 'REMOVE_EMAIL';
 export const REMOVE_EMAIL_SUCCESS = 'REMOVE_EMAIL_SUCCESS';
+export const REMOVE_EMAIL_FAIL = 'REMOVE_EMAIL_FAIL';
+
+
+// ImageWorK
+export const ADD_IMG_WORK = 'ADD_IMG_WORK';
+export const ADD_IMG_WORK_SUCCESS = 'ADD_IMG_WORK_SUCCESS';
+export const ADD_IMG_WORK_FAIL = 'ADD_IMG_WORK_FAIL';
+export const GET_IMG_WORK = 'GET_IMG_WORK';
+// Message
+export const CLEAR_MESSAGE = 'CLEAR_MESSAGE';
