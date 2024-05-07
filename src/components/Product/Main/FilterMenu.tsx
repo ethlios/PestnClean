@@ -10,29 +10,37 @@ const cx = classNames.bind(styles);
 
 export interface IAppProps {
     title: string;
-    subMenu: string[];
+    subMenu?: any;
+    className?: string;
 }
 
-export default function FilterMenu({ title, subMenu }: IAppProps) {
+export default function FilterMenu({ title, subMenu, className }: IAppProps) {
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleOpen = () => {
         setIsOpen(!isOpen);
     };
 
-    return (
+    return subMenu && subMenu.length > 0 ? (
         <>
-            <div className={cx('menu-title')} onClick={toggleOpen}>
+            <div className={cx(className)} onClick={toggleOpen}>
                 <p>{title}</p>
                 {isOpen ? <KeyboardArrowDownIcon /> : <KeyboardArrowRightIcon />}
             </div>
             {isOpen && (
                 <ul className={cx('drop-menu')}>
-                    {subMenu.map((subMenu, index) => (
-                        <li key={index}>{subMenu}</li>
+                    {subMenu.map((subMenu: any, index: number) => (
+                        <FilterMenu
+                            key={index}
+                            title={subMenu.title}
+                            subMenu={subMenu.subMenu}
+                            className={cx('title2')}
+                        />
                     ))}
                 </ul>
             )}
         </>
+    ) : (
+        <p>{title}</p>
     );
 }

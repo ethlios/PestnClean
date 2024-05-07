@@ -97,31 +97,43 @@
     align-items: center;
 }
 
-.menu-title {
+//Menu filter
+@mixin menu-tile {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-bottom: 0.6rem;
-    border-bottom: 3px solid var(--secondary);
     cursor: pointer;
     -webkit-user-select: none;
     user-select: none;
     transition: all ease 0.5s;
+}
+
+.title {
+    @include menu-tile;
+    padding-bottom: 0.6rem;
+    border-bottom: 3px solid var(--secondary);
     font-size: 16px;
     font-weight: 600;
 }
+
+.title2 {
+    @include menu-tile;
+}
+
 
 .drop-menu {
     display: flex;
     flex-direction: column;
     gap: 10px;
     font-size: 16px;
-    font-weight: 600;
+    font-weight: 500;
     transition: all ease 0.5s;
+    padding-left: 5px;
 
     & > * {
         -webkit-user-select: none;
         user-select: none;
+        cursor: pointer;
     }
 }
 
