@@ -16,10 +16,10 @@ import useSize from '~/libs/hooks/useSize';
 const cx = classNames.bind(styles);
 
 export interface IAppProps {
-    product: any;
+    product: any[];
 }
 
-export default function ProductDescript(props: IAppProps) {
+export default function ProductDescript({ product }: IAppProps) {
     const [isOpen1, setIsOpen1] = useState(false);
     const [isOpen2, setIsOpen2] = useState(false);
     const [isOpen3, setIsOpen3] = useState(false);
@@ -64,16 +64,7 @@ export default function ProductDescript(props: IAppProps) {
                         <IconButton>{isOpen1 ? <RemoveIcon /> : <AddIcon />}</IconButton>
                     </div>
                     <div className={cx('tab-content')} id="dropbox-1">
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in nisi ac nisl
-                            ultricies tincidunt. Nunc sit amet turpis nec nisl luctus ultricies. Nullam
-                            ultricies, purus nec ultricies fermentum, nunc nisl ultricies mi, ac tincidunt
-                            nunc mauris sit amet sapien. Donec nec nisl ut nisl ultricies luctus. Nullam
-                            ultricies, purus nec ultricies fermentum, nunc nisl ultricies mi, ac tincidunt
-                            nunc mauris sit amet sapien. Donec nec nisl ut nisl ultricies luctus. Nullam
-                            ultricies, purus nec ultricies fermentum, nunc nisl ultricies mi, ac tincidunt
-                            nunc mauris sit amet sapien. Donec nec nisl ut nisl ultricies luctus.
-                        </p>
+                        {product.length > 0 && <p dangerouslySetInnerHTML={{ __html: product[0].detail }} />}
                     </div>
                 </div>
                 {/*  */}

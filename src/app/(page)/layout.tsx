@@ -42,13 +42,13 @@ export default function ComponentConnectLayout({ children }: { children: React.R
     }, [dispatch, session]);
 
     useEffect(() => {
-        const allProdcuts = async () => {
+        const allProducts = async () => {
             const products = await fetch('/api/product/all').then((res) => res.json());
 
             dispatch(getAllProducts(products[0].product));
         };
 
-        allProdcuts();
+        allProducts();
     }, [dispatch]);
 
     return openCp ? (

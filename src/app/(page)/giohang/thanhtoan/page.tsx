@@ -6,18 +6,25 @@ import PaymentForm from '~/components/Cart/Payment/PaymentForm';
 import styles from '../../../../components/Cart/Payment/payment.module.scss';
 import Tippy from '@tippyjs/react';
 import useSize from '~/libs/hooks/useSize';
+import { useState } from 'react';
 
 const cx = classNames.bind(styles);
 
-export interface IAppProps {
-}
+export interface IAppProps {}
 
 export default function PaymentPage(props: IAppProps) {
     const { sizeX } = useSize();
+    const localStorageCart = JSON.parse(localStorage.getItem('cart') || '[]');
+    const [cart, setCart] = useState<any>(localStorageCart);
 
     return (
-        <div className={'cpmount'}
-             style={{ padding: sizeX < 768 ? '0 20px' : sizeX < 1100 ? '0 50px' : sizeX < 1280 ? '0 80px' : '0 100px' }}>
+        <div
+            className={'cpmount'}
+            style={{
+                padding:
+                    sizeX < 768 ? '0 20px' : sizeX < 1100 ? '0 50px' : sizeX < 1280 ? '0 80px' : '0 100px',
+            }}
+        >
             {/*Main*/}
             <div className={cx('progress-wrapper')}>
                 <div className={cx('progress')}>
@@ -49,7 +56,7 @@ export default function PaymentPage(props: IAppProps) {
                 </div>
                 <div className={'col-span-12 md:col-span-5 lg:col-span-4'}>
                     {/*Checkout panel*/}
-                    <CheckoutPanel />
+                    <CheckoutPanel cart={cart} />
                 </div>
             </div>
         </div>

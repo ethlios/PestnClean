@@ -67,7 +67,9 @@ export default function ProductInfo({ product }: IAppProps) {
             //If product not exist in cart, add new product
             cart.push({
                 id: product[0].id,
-                name: product[0].title,
+                title: product[0].title,
+                img: product[0].Image[0],
+                description: product[0].description,
                 quantity: amount,
                 price: product[0].price,
             });
@@ -97,21 +99,9 @@ export default function ProductInfo({ product }: IAppProps) {
             </p>
             <div className={cx('decoration')} />
             <ul className={cx('summary')}>
-                <li>
-                    <b>Thương hiệu: </b>Viet oil
-                </li>
-                <li>
-                    <b>Không gian phù hợp: </b>Quán cafe,Buồng phòng khách sạn, Văn phòng, Spa,Gym, Nhà ở
-                </li>
-                <li>
-                    <b>Đặc tính mùi: </b>Thanh mát, khử khuẩn, thư giãn, ngọt dịu
-                </li>
-                <li>
-                    <b>Hương: </b>Chanh
-                </li>
-                <li>
-                    <b>Dung tích: </b>500m, 1000ml
-                </li>
+                {product[0].description.split('\n').map((item: string, index: number) => (
+                    <li key={index}>{item}</li>
+                ))}
             </ul>
             <div className={cx('decoration')} />
             <div className={cx('share')}>
