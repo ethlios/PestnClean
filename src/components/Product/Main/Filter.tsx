@@ -9,6 +9,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import { Button, Checkbox, IconButton } from '@mui/material';
 import useSize from '~/libs/hooks/useSize';
 import DisabledByDefaultIcon from '@mui/icons-material/DisabledByDefault';
+import { filterMenu, checkboxFilter } from '~/constants/productFilter';
 
 const cx = classNames.bind(styles);
 
@@ -16,64 +17,6 @@ export interface IAppProps {
     openFilter: boolean;
     setOpenFilter: any;
 }
-
-const filterMenu = [
-    {
-        title: 'Kiểm soát côn trùng',
-        subMenu: ['Dụng cụ vệ sinh', 'Dung dịch hóa chất', 'Máy chà sàn liên hợp', 'Máy vệ sinh', 'Phụ kiện'],
-    },
-    {
-        title: 'Giải pháp vệ sinh',
-        subMenu: ['Dụng cụ vệ sinh', 'Dung dịch hóa chất', 'Máy chà sàn liên hợp', 'Máy vệ sinh', 'Phụ kiện'],
-    },
-    {
-        title: 'Dịch vụ vệ sinh',
-        subMenu: ['Dụng cụ vệ sinh', 'Dung dịch hóa chất', 'Máy chà sàn liên hợp', 'Máy vệ sinh', 'Phụ kiện'],
-    },
-];
-
-const checkboxFilter = [
-    {
-        title: 'Sắp xếp theo',
-        checkbox: ['Tất cả', 'Sản phẩm mới'],
-    },
-    {
-        title: 'Giảm giá',
-        checkbox: ['Đang giảm giá'],
-    },
-    {
-        title: 'Theo mức giá',
-        checkbox: ['Dưới 1.000.000đ', 'Từ 1.000.000đ - 5.000.000đ', 'Trên 5.000.000đ'],
-    },
-    {
-        title: 'Dung tích',
-        checkboxLeft: ['50ML', '100ML', '500ML'],
-        checkboxRight: ['1L', '5L', '20L'],
-    },
-    {
-        title: 'Gói',
-        checkboxLeft: ['10gr', '20gr', '100gr', '200gr'],
-        checkboxRight: ['500gr', 'Gói 20 viên', 'Hũ 400gr'],
-    },
-    {
-        title: 'Hộp',
-        checkboxLeft: ['Hộp 12 cục'],
-        checkboxRight: ['360gr'],
-    },
-    {
-        title: 'Miếng',
-        checkboxLeft: ['1 miếng'],
-        checkboxRight: ['10 miếng'],
-    },
-    {
-        title: 'Túi',
-        checkbox: ['1 túi', '1 bộ (5 túi bả và 1 trạm AGS)'],
-    },
-    {
-        title: 'Tấm',
-        checkbox: ['1 tấm'],
-    },
-];
 
 export default function FilterProduct({ openFilter, setOpenFilter }: IAppProps) {
     const wheel: boolean = useScroll();
@@ -126,7 +69,12 @@ export default function FilterProduct({ openFilter, setOpenFilter }: IAppProps) 
                         </h2>
                         <div className={'flex flex-col gap-2'}>
                             {filterMenu.map((menu, index) => (
-                                <FilterMenu key={index} title={menu.title} subMenu={menu.subMenu} />
+                                <FilterMenu
+                                    key={index}
+                                    title={menu.title}
+                                    subMenu={menu.subMenu}
+                                    className={'title'}
+                                />
                             ))}
                         </div>
                     </div>

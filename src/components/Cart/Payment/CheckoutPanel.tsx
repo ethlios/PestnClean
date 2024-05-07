@@ -8,16 +8,24 @@ import SummaryProduct from '~/components/Cart/Payment/SummaryProduct';
 import ButtonCommon from '~/components/Orther/Button';
 import styles from './payment.module.scss';
 import formatter from '~/libs/orthers/formatMoney';
+import { Button } from '@mui/material';
+import { useEffect } from 'react';
 
 const cx = classNames.bind(styles);
 
 export interface IAppProps {
     cart?: any;
+    handleSubmit?: any;
+    setTotalAllPrice?: any;
 }
 
-export default function CheckoutPanel({ cart }: IAppProps) {
+export default function CheckoutPanel({ cart, handleSubmit, setTotalAllPrice }: IAppProps) {
     const totalAmount = cart.reduce((acc: number, item: any) => acc + item.quantity, 0);
     const totalPrice = cart.reduce((acc: number, item: any) => acc + item.price * item.quantity, 0);
+
+    useEffect(() => {
+        setTotalAllPrice(totalPrice);
+    }, []);
 
     return (
         <div className={cx('panel')}>
@@ -52,7 +60,10 @@ export default function CheckoutPanel({ cart }: IAppProps) {
                 <p>{formatter.format(+totalPrice)}</p>
             </div>
             <div className="my-5">
-                <ButtonCommon text="ĐẶT HÀNG" fullWidth />
+                {/*<ButtonCommon text="ĐẶT HÀNG" fullWidth />*/}
+                <Button color="primary" variant="contained" fullWidth onClick={handleSubmit}>
+                    ĐẶT HÀNG
+                </Button>
             </div>
 
             {/*Back to cart*/}

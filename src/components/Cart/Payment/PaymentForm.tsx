@@ -2,27 +2,78 @@
 
 import classNames from 'classnames/bind';
 import styles from './payment.module.scss';
-import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import SelectField from '~/components/Cart/Payment/SelectField';
 import MenuItem from '@mui/material/MenuItem';
-import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import PaymentsIcon from '@mui/icons-material/Payments';
 import PaymentIcon from '@mui/icons-material/Payment';
 import PaymentsOutlinedIcon from '@mui/icons-material/PaymentsOutlined';
 import useSize from '~/libs/hooks/useSize';
-import Link from 'next/link';
+import { useEffect, useRef, useState } from 'react';
+import InputLabel from '@mui/material/InputLabel';
+import Select from '@mui/material/Select';
+import FormControl from '@mui/material/FormControl';
+import { useSession } from 'next-auth/react';
 
 const cx = classNames.bind(styles);
 
-export interface IAppProps {}
+export interface IAppProps {
+    setFormData?: any;
+    formInfoRef?: any;
+}
 
 const classInput = 'w-full lg:w-5/6';
 
-export default function PaymentForm(props: IAppProps) {
+export default function PaymentForm({ setFormData, formInfoRef }: IAppProps) {
     const { sizeX } = useSize();
+    const [name, setName] = useState<string>('');
+    const [email, setEmail] = useState<string>('');
+    const [phone, setPhone] = useState<string>('');
+    const [address, setAddress] = useState<string>('');
+    const [city, setCity] = useState<string>('');
+    const [district, setDistrict] = useState<string>('');
+    const [ward, setWard] = useState<string>('');
+    const [message, setMessage] = useState<string>('');
+    const [province, setProvince] = useState<any>([]);
+    const validateEmailRegex = /^\S+@\S+\.\S+$/;
+    const isPhone = /(84|0[3|5|7|8|9])+([0-9]{8})\b/g;
+    const { data: session } = useSession();
+
+    useEffect(() => {
+        const fetchProvince = async () => {
+            const res = await fetch(
+                'https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json',
+            ).then((res) => res.json());
+            setProvince(res);
+        };
+
+        fetchProvince();
+    }, []);
+
+    useEffect(() => {
+        setFormData({
+            name,
+            email,
+            phone,
+            address,
+            city,
+            district,
+            ward,
+            message,
+        });
+    }, [name, email, phone, address, city, district, ward, message]);
+
+    useEffect(() => {
+        if (session) {
+            setName(session.user.name);
+            setEmail(session.user.email);
+            setPhone(session.user.phone);
+            setAddress(session.user.address);
+            setCity(session.user.city);
+            setDistrict(session.user.district);
+            setWard(session.user.ward);
+        }
+    }, []);
 
     return (
         <div>
@@ -48,71 +99,116 @@ export default function PaymentForm(props: IAppProps) {
             <div className={'my-3'}>
                 <p className={cx('title')}>Thông tin giao hàng</p>
                 <div className={'my-5'}>
-                    <Box
-                        component="form"
-                        sx={{
+                    <form
+                        ref={formInfoRef}
+                        style={{
                             display: 'flex',
                             gap: '10px',
                             flexDirection: 'column',
                         }}
-                        noValidate
-                        autoComplete="off"
                     >
                         <TextField
-                            id="name"
                             label="Tên..."
                             className={classInput}
                             sx={{ marginBottom: '10px' }}
+                            onChange={(e) => setName(e.target.value)}
+                            required={true}
+                            defaultValue={name}
                         />
                         <TextField
-                            id="email"
                             label="Email..."
                             className={classInput}
                             sx={{ marginBottom: '10px' }}
+                            onChange={(e) => setEmail(e.target.value)}
+                            error={email !== null && email !== '' && !validateEmailRegex.test(email)}
+                            type={'email'}
+                            defaultValue={email}
                         />
                         <TextField
-                            id="phone"
                             label="Số điện thoại..."
                             className={classInput}
                             sx={{ marginBottom: '10px' }}
+                            onChange={(e) => setPhone(e.target.value)}
+                            error={phone !== null && phone !== '' && !isPhone.test(phone)}
+                            required={true}
+                            type={'tel'}
+                            defaultValue={phone}
                         />
                         <TextField
-                            id="address"
                             label="Địa chỉ..."
                             className={classInput}
                             sx={{ marginBottom: '10px' }}
+                            onChange={(e) => setAddress(e.target.value)}
+                            required={true}
+                            defaultValue={address}
                         />
-                        <SelectField id="city" label="Tỉnh thành" className={classInput}>
-                            <MenuItem value={'hn'}>Hà Nội</MenuItem>
-                            <MenuItem value={'dn'}>Đà Nẵng</MenuItem>
-                            <MenuItem value={'hcm'}>Hồ Chí Minh</MenuItem>
-                        </SelectField>
-                        <SelectField id="district" label="Quận huyện" className={classInput}>
-                            <MenuItem value={'q1'}>Quận 1</MenuItem>
-                            <MenuItem value={'binhthanh'}>Bình Thạnh</MenuItem>
-                            <MenuItem value={'thuduc'}>Thủ Đức</MenuItem>
-                        </SelectField>
-                        <SelectField id="street" label="Phường xã" className={classInput}>
-                            <MenuItem value={'phuong1'}>Phường 1</MenuItem>
-                            <MenuItem value={'phuong2'}>Phường 2</MenuItem>
-                            <MenuItem value={'phuong3'}>Phường 3</MenuItem>
-                        </SelectField>
-                    </Box>
-                    <textarea
-                        spellCheck="false"
-                        placeholder="Ghi chú thêm"
-                        className={`${cx('textarea')} ${classInput}`}
-                    />
+                        <FormControl sx={{ mb: 1 }} className={classInput}>
+                            <InputLabel>Tỉnh thành</InputLabel>
+                            <Select
+                                label="Tỉnh thành"
+                                onChange={(e) => {
+                                    setCity(e.target.value);
+                                    setDistrict('');
+                                    setWard('');
+                                }}
+                                value={city}
+                            >
+                                {province.map((item: any, index: number) => (
+                                    <MenuItem key={index} value={item.Name}>
+                                        {item.Name}
+                                    </MenuItem>
+                                ))}
+                            </Select>
+                        </FormControl>
+                        <FormControl sx={{ mb: 1 }} className={classInput}>
+                            <InputLabel>Quận huyện</InputLabel>
+                            <Select
+                                label="Quận huyện"
+                                onChange={(e) => {
+                                    setDistrict(e.target.value);
+                                    setWard('');
+                                }}
+                                value={district}
+                            >
+                                {province
+                                    .find((item: any) => item.Name === city)
+                                    ?.Districts.map((item: any, index: number) => (
+                                        <MenuItem key={index} value={item.Name}>
+                                            {item.Name}
+                                        </MenuItem>
+                                    ))}
+                            </Select>
+                        </FormControl>
+                        <FormControl sx={{ mb: 1 }} className={classInput}>
+                            <InputLabel>Phường xã</InputLabel>
+                            <Select label="Phường xã" onChange={(e) => setWard(e.target.value)} value={ward}>
+                                {province
+                                    .find((item: any) => item.Name === city)
+                                    ?.Districts.find((item: any) => item.Name === district)
+                                    ?.Wards.map((item: any, index: number) => (
+                                        <MenuItem key={index} value={item.Name}>
+                                            {item.Name}
+                                        </MenuItem>
+                                    ))}
+                            </Select>
+                        </FormControl>
+                        <textarea
+                            spellCheck="false"
+                            placeholder="Ghi chú thêm"
+                            className={`${cx('textarea')} ${classInput}`}
+                            onChange={(e) => setMessage(e.target.value)}
+                        />
 
-                    <FormControlLabel
-                        required
-                        control={<Checkbox />}
-                        label="Tôi đã đọc chính sách bảo mật và quyền riêng tư."
-                        sx={{
-                            marginTop: '5px',
-                            fontSize: '10px',
-                        }}
-                    />
+                        <FormControlLabel
+                            required
+                            control={<Checkbox />}
+                            label="Tôi đã đọc chính sách bảo mật và quyền riêng tư."
+                            sx={{
+                                marginTop: '5px',
+                                fontSize: '10px',
+                            }}
+                        />
+                    </form>
                 </div>
             </div>
         </div>
