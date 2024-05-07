@@ -47,6 +47,7 @@ import {
     deleteImgWorkFail,
     updateImgWorkSuccess,
     updateImgWorkFail,
+    getImgWorkByType,
 } from './actions';
 
 interface RootState {
@@ -311,6 +312,12 @@ const rootReducer = createReducer(initState, (builder) => {
     });
     builder.addCase(updateImgWorkFail, (state, action) => {
         const { message } = action.payload;
+        state.message = message;
+    });
+    // get image work by type
+    builder.addCase(getImgWorkByType, (state, action) => {
+        const { message , data } = action.payload;
+        state.imageWork = data;
         state.message = message;
     });
     // Message
