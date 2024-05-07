@@ -256,3 +256,8 @@ input:focus {
     margin-right: 20px !important;
     margin-top: 20px;
 }
+
+.css-10zdtnx-MuiTypography-root{
+    font-size: 13px !important;
+    font-family: 'Merriweather' !important;
+}

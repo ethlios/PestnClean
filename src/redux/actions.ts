@@ -3,6 +3,8 @@ import * as type from './contants';
 
 export const getUser = createAction<any>(type.GET_USER);
 
+export const getUserByRule = createAction<void>(type.GET_USER_BY_RULE);
+
 export const signIn = createAction<boolean>(type.SIGN_IN);
 
 export const getButton = createAction<any>(type.GET_BUTTON);

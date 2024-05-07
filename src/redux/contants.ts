@@ -1,4 +1,5 @@
 export const GET_USER = 'GET_USER';
+export const GET_USER_BY_RULE = "GET_USER_BY_RULE";
 export const SIGN_IN = 'SIGN_IN';
 export const GET_BUTTON = 'GET_BUTTON';
 export const GET_PRODUCT_PAGE = 'GET_PRODUCT_PAGE';

@@ -366,8 +366,24 @@ function* GetImageWorkByType({ payload }: any) {
     }
 }
 
+// get all user not admin
+function* GetUserByRule({ payload }: any) {
+    try {
+        const res: ResponseGenerator = yield call(request.get, 'api/user/all/ruleUser', null);
+        if (res.status === 200) {
+            yield put(actions.getUserByRule(res.data));
+        } else {
+            throw new Error(`Unexpected status code: ${res.status}`);
+        }
+    } catch (err: any) {
+        console.log(err);
+    }
+}
+
+
 export default function* rootSaga() {
     yield takeLatest(types.GET_USER, FetchUser);
+    yield takeLatest(types.GET_USER_BY_RULE,GetUserByRule);
 
     // Product
     yield takeLatest(types.ADD_PRODUCT, AddProduct);

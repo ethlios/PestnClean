@@ -48,6 +48,7 @@ import {
     updateImgWorkSuccess,
     updateImgWorkFail,
     getImgWorkByType,
+    getUserByRule,
 } from './actions';
 
 interface RootState {
@@ -70,6 +71,7 @@ interface RootState {
     notification: any[];
     discount: any[];
     allProducts: any[];
+    users: any[];
 }
 
 const initState: RootState = {
@@ -92,6 +94,7 @@ const initState: RootState = {
     notification: [],
     discount: [],
     allProducts: [],
+    users: [],
 };
 
 const findIndex = (state: any[], id: number) => {
@@ -280,7 +283,7 @@ const rootReducer = createReducer(initState, (builder) => {
     });
     // Add Img Work
     builder.addCase(addImgWorkSuccess, (state, action) => {
-        const { message, data , success } = action.payload;
+        const { message, data, success } = action.payload;
         state.message = message;
         state.imageWork.push(data);
     });
@@ -305,7 +308,8 @@ const rootReducer = createReducer(initState, (builder) => {
         state.message = message;
         // Tìm chỉ mục của phần tử cần cập nhật trong mảng
         const index = state.imageWork.findIndex((img) => img.id === data.id);
-        if (index !== -1) { // Kiểm tra xem phần tử có tồn tại trong mảng không
+        if (index !== -1) {
+            // Kiểm tra xem phần tử có tồn tại trong mảng không
             // Cập nhật phần tử tại chỉ mục index bằng dữ liệu mới từ action.payload.data
             state.imageWork[index] = data;
         }
@@ -316,13 +320,26 @@ const rootReducer = createReducer(initState, (builder) => {
     });
     // get image work by type
     builder.addCase(getImgWorkByType, (state, action) => {
-        const { message , data } = action.payload;
+        const { message, data } = action.payload;
         state.imageWork = data;
         state.message = message;
     });
     // Message
     builder.addCase(clearMessage, (state, action) => {
         state.message = '';
+    });
+
+    // get user not admin
+    builder.addCase(getUserByRule, (state, action) => {
+        const payload: any = action.payload; // Sử dụng kiểu any
+        if (payload && payload.message !== undefined) {
+            const message = payload.message; // message có kiểu any
+            const data = payload.data; // data có kiểu any
+            if (data) {
+                state.users = data;
+            }
+            state.message = message;
+        }
     });
 
     // Discount
