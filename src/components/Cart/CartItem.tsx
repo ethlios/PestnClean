@@ -126,7 +126,7 @@ export default function CartItem({ item, setCart }: IAppProps) {
                     >
                         <p className={cx('product-category')}>{item.category}</p>
                         <p className={cx('product-name')}>{item.title}</p>
-                        <ul className={cx('cart-list')}>
+                        <ul className={cx('cart-list')} style={{ marginLeft: 0 }}>
                             {item.description &&
                                 sizeX > 600 &&
                                 item.description
