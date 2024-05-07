@@ -9,17 +9,23 @@ import ButtonCommon from '~/components/Orther/Button';
 import styles from './payment.module.scss';
 import formatter from '~/libs/orthers/formatMoney';
 import { Button } from '@mui/material';
+import { useEffect } from 'react';
 
 const cx = classNames.bind(styles);
 
 export interface IAppProps {
     cart?: any;
     handleSubmit?: any;
+    setTotalAllPrice?: any;
 }
 
-export default function CheckoutPanel({ cart, handleSubmit }: IAppProps) {
+export default function CheckoutPanel({ cart, handleSubmit, setTotalAllPrice }: IAppProps) {
     const totalAmount = cart.reduce((acc: number, item: any) => acc + item.quantity, 0);
     const totalPrice = cart.reduce((acc: number, item: any) => acc + item.price * item.quantity, 0);
+
+    useEffect(() => {
+        setTotalAllPrice(totalPrice);
+    }, []);
 
     return (
         <div className={cx('panel')}>

@@ -7,7 +7,6 @@ import styles from '../../../../components/Cart/Payment/payment.module.scss';
 import Tippy from '@tippyjs/react';
 import useSize from '~/libs/hooks/useSize';
 import React, { useRef, useState } from 'react';
-import Toast from '~/components/Orther/Toast';
 import DialogConfirm from '~/components/Cart/Payment/DialogConfirm';
 
 const cx = classNames.bind(styles);
@@ -17,13 +16,18 @@ export interface IAppProps {}
 export default function PaymentPage(props: IAppProps) {
     const { sizeX } = useSize();
     const localStorageCart = JSON.parse(localStorage.getItem('cart') || '[]');
+    const [totalAllPrice, setTotalAllPrice] = useState<number>(0);
     const [cart, setCart] = useState<any>(localStorageCart);
     const [formData, setFormData] = useState<any>();
     const formInfo = useRef<any>('');
     const [showDialog, setShowDialog] = useState<boolean>(false);
 
     const handleSubmit = () => {
-        setShowDialog(true);
+        if (formInfo.current.checkValidity()) {
+            setShowDialog(true);
+        } else {
+            formInfo.current.reportValidity();
+        }
     };
 
     return (
@@ -52,6 +56,16 @@ export default function PaymentPage(props: IAppProps) {
                     </Tippy>
                 </div>
             </div>
+            {/*Dialog*/}
+            {showDialog && (
+                <DialogConfirm
+                    setShowDialog={setShowDialog}
+                    formData={formData}
+                    cart={cart}
+                    totalAllPrice={totalAllPrice}
+                />
+            )}
+            {/*Content*/}
             <div
                 className={'grid grid-cols-12 gap-6 mb-10'}
                 style={{
@@ -61,11 +75,15 @@ export default function PaymentPage(props: IAppProps) {
                 {/*Visual Content*/}
                 <div className={'col-span-12 md:col-span-7 lg:col-span-8 flex flex-col'}>
                     {/*Form*/}
-                    <PaymentForm formInfo={formInfo} />
+                    <PaymentForm formInfo={formInfo} setFormData={setFormData} />
                 </div>
                 <div className={'col-span-12 md:col-span-5 lg:col-span-4'}>
                     {/*Checkout panel*/}
-                    <CheckoutPanel cart={cart} handleSubmit={handleSubmit} />
+                    <CheckoutPanel
+                        cart={cart}
+                        handleSubmit={handleSubmit}
+                        setTotalAllPrice={setTotalAllPrice}
+                    />
                 </div>
             </div>
         </div>

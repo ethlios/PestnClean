@@ -48,6 +48,19 @@ export default function PaymentForm({ setFormData, formInfo }: IAppProps) {
         fetchProvince();
     }, []);
 
+    useEffect(() => {
+        setFormData({
+            name,
+            email,
+            phone,
+            address,
+            city,
+            district,
+            ward,
+            message,
+        });
+    }, [name, email, phone, address, city, district, ward, message]);
+
     return (
         <div>
             <div>
@@ -73,7 +86,6 @@ export default function PaymentForm({ setFormData, formInfo }: IAppProps) {
                 <p className={cx('title')}>Thông tin giao hàng</p>
                 <div className={'my-5'}>
                     <form
-                        onSubmit={(e) => e.preventDefault()}
                         ref={formInfo}
                         style={{
                             display: 'flex',
