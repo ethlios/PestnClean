@@ -19,14 +19,14 @@ export default function PaymentPage(props: IAppProps) {
     const [totalAllPrice, setTotalAllPrice] = useState<number>(0);
     const [cart, setCart] = useState<any>(localStorageCart);
     const [formData, setFormData] = useState<any>();
-    const formInfo = useRef<any>('');
+    const formInfoRef = useRef<any>('');
     const [showDialog, setShowDialog] = useState<boolean>(false);
 
     const handleSubmit = () => {
-        if (formInfo.current.checkValidity()) {
+        if (formInfoRef.current.checkValidity() && cart.length > 0) {
             setShowDialog(true);
         } else {
-            formInfo.current.reportValidity();
+            formInfoRef.current.reportValidity();
         }
     };
 
@@ -63,6 +63,7 @@ export default function PaymentPage(props: IAppProps) {
                     formData={formData}
                     cart={cart}
                     totalAllPrice={totalAllPrice}
+                    formInfoRef={formInfoRef}
                 />
             )}
             {/*Content*/}
@@ -75,7 +76,7 @@ export default function PaymentPage(props: IAppProps) {
                 {/*Visual Content*/}
                 <div className={'col-span-12 md:col-span-7 lg:col-span-8 flex flex-col'}>
                     {/*Form*/}
-                    <PaymentForm formInfo={formInfo} setFormData={setFormData} />
+                    <PaymentForm formInfoRef={formInfoRef} setFormData={setFormData} />
                 </div>
                 <div className={'col-span-12 md:col-span-5 lg:col-span-4'}>
                     {/*Checkout panel*/}

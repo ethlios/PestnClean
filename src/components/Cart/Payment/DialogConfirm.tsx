@@ -3,6 +3,12 @@ import styles from './payment.module.scss';
 import classNames from 'classnames/bind';
 import useSize from '~/libs/hooks/useSize';
 import formatter from '~/libs/orthers/formatMoney';
+import emailjs from '@emailjs/browser';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { addOrder } from '~/redux/actions';
+import { useSession } from 'next-auth/react';
+import { uidOrder } from '~/libs/orthers/generatedCode';
 
 const cx = classNames.bind(styles);
 
@@ -11,18 +17,55 @@ export interface IAppProps {
     formData?: any;
     cart?: any;
     totalAllPrice?: number;
+    formInfoRef?: any;
 }
 
-export default function DialogConfirm({ setShowDialog, formData, cart, totalAllPrice }: IAppProps) {
+export default function DialogConfirm({
+    setShowDialog,
+    formData,
+    cart,
+    totalAllPrice,
+    formInfoRef,
+}: IAppProps) {
     const { sizeX } = useSize();
+    const dispatch = useDispatch();
+    const { data: session } = useSession();
 
     const handleClose = () => {
         setShowDialog(false);
     };
 
+    const sendEmail = () => {
+        // emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', formInfoRef.current, 'YOUR_USER_ID').then(
+        //     (result) => {
+        //         console.log('SUCCESS!');
+        //     },
+        //     (error) => {
+        //         console.log('FAILED...', error);
+        //     },
+        // );
+    };
+
+    const order = {
+        authorId: 104399638902286280553,
+        userId: session?.user.id,
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        address: formData.address,
+        city: formData.city,
+        district: formData.district,
+        ward: formData.ward,
+        message: formData.message,
+        code: uidOrder(),
+        payment: 'COD',
+        product: JSON.stringify(cart),
+    };
+
     const handleConfirm = () => {
-        console.log('Confirm');
-        // Do something
+        dispatch(addOrder(order));
+        // console.log(order);
+        sendEmail();
     };
 
     return (
@@ -45,13 +88,13 @@ export default function DialogConfirm({ setShowDialog, formData, cart, totalAllP
                         Xác nhận thông tin đơn hàng?
                     </p>
                     <div
-                        className={'flex justify-between items-center my-2'}
+                        className={'flex justify-between my-2'}
                         style={{
                             flexDirection: sizeX < 500 ? 'column' : 'row',
                         }}
                     >
                         <div style={{ width: sizeX < 500 ? '100%' : '50%' }}>
-                            <b>Thông tin giao hàng</b>
+                            <p className={cx('dialog-title')}>Thông tin giao hàng</p>
                             <p className={cx('dialog-info')}>
                                 <span>Tên: </span>
                                 <span>{formData.name}</span>
@@ -86,7 +129,7 @@ export default function DialogConfirm({ setShowDialog, formData, cart, totalAllP
                             </p>
                         </div>
                         <div style={{ width: sizeX < 500 ? '100%' : '50%' }}>
-                            <b>Thông tin đơn hàng</b>
+                            <p className={cx('dialog-title')}>Thông tin đơn hàng</p>
                             {cart.map((item: any, index: number) => (
                                 <div key={index} className={cx('dialog-info')}>
                                     <span>{item.quantity}</span>
@@ -94,7 +137,7 @@ export default function DialogConfirm({ setShowDialog, formData, cart, totalAllP
                                     <span>{item.title}</span>
                                 </div>
                             ))}
-                            <b>Tổng : {formatter.format(totalAllPrice)}</b>
+                            <b>Tổng : {totalAllPrice ? formatter.format(+totalAllPrice) : 0}</b>
                         </div>
                     </div>
                     <div className={cx('dialog-button')}>

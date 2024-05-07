@@ -143,12 +143,10 @@ function* DeleteFeedback({ payload }: any) {
 // ORDER
 function* AddOrder({ payload }: any) {
     try {
-        yield put(actions.orderBehavior('1'));
-        const res: ResponseGenerator = yield call(request.put, `api/order`, payload);
+        const res: ResponseGenerator = yield call(request.post, `api/order`, payload);
 
         if (res.status === 200) {
-            yield delay(1000);
-            yield put(actions.orderBehavior('2'));
+            yield put(actions.addOrder(res.data));
         }
     } catch (err) {
         console.log(err);
@@ -353,7 +351,7 @@ function* UpdateImgWork({ payload }: any) {
 function* GetImageWorkByType({ payload }: any) {
     try {
         const { id } = payload;
-        if(id !== undefined){
+        if (id !== undefined) {
             const res: ResponseGenerator = yield call(request.get, `api/imagework/type/${id}`, payload);
             if (res.status === 200) {
                 yield put(actions.getImgWorkByType(res.data));

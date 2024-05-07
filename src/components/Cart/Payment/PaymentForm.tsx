@@ -13,17 +13,18 @@ import { useEffect, useRef, useState } from 'react';
 import InputLabel from '@mui/material/InputLabel';
 import Select from '@mui/material/Select';
 import FormControl from '@mui/material/FormControl';
+import { useSession } from 'next-auth/react';
 
 const cx = classNames.bind(styles);
 
 export interface IAppProps {
     setFormData?: any;
-    formInfo?: any;
+    formInfoRef?: any;
 }
 
 const classInput = 'w-full lg:w-5/6';
 
-export default function PaymentForm({ setFormData, formInfo }: IAppProps) {
+export default function PaymentForm({ setFormData, formInfoRef }: IAppProps) {
     const { sizeX } = useSize();
     const [name, setName] = useState<string>('');
     const [email, setEmail] = useState<string>('');
@@ -36,6 +37,7 @@ export default function PaymentForm({ setFormData, formInfo }: IAppProps) {
     const [province, setProvince] = useState<any>([]);
     const validateEmailRegex = /^\S+@\S+\.\S+$/;
     const isPhone = /(84|0[3|5|7|8|9])+([0-9]{8})\b/g;
+    const { data: session } = useSession();
 
     useEffect(() => {
         const fetchProvince = async () => {
@@ -60,6 +62,18 @@ export default function PaymentForm({ setFormData, formInfo }: IAppProps) {
             message,
         });
     }, [name, email, phone, address, city, district, ward, message]);
+
+    useEffect(() => {
+        if (session) {
+            setName(session.user.name);
+            setEmail(session.user.email);
+            setPhone(session.user.phone);
+            setAddress(session.user.address);
+            setCity(session.user.city);
+            setDistrict(session.user.district);
+            setWard(session.user.ward);
+        }
+    }, []);
 
     return (
         <div>
@@ -86,7 +100,7 @@ export default function PaymentForm({ setFormData, formInfo }: IAppProps) {
                 <p className={cx('title')}>Thông tin giao hàng</p>
                 <div className={'my-5'}>
                     <form
-                        ref={formInfo}
+                        ref={formInfoRef}
                         style={{
                             display: 'flex',
                             gap: '10px',
@@ -99,23 +113,26 @@ export default function PaymentForm({ setFormData, formInfo }: IAppProps) {
                             sx={{ marginBottom: '10px' }}
                             onChange={(e) => setName(e.target.value)}
                             required={true}
+                            defaultValue={name}
                         />
                         <TextField
                             label="Email..."
                             className={classInput}
                             sx={{ marginBottom: '10px' }}
                             onChange={(e) => setEmail(e.target.value)}
-                            error={email !== '' && !validateEmailRegex.test(email)}
+                            error={email !== null && email !== '' && !validateEmailRegex.test(email)}
                             type={'email'}
+                            defaultValue={email}
                         />
                         <TextField
                             label="Số điện thoại..."
                             className={classInput}
                             sx={{ marginBottom: '10px' }}
                             onChange={(e) => setPhone(e.target.value)}
-                            error={phone !== '' && !isPhone.test(phone)}
+                            error={phone !== null && phone !== '' && !isPhone.test(phone)}
                             required={true}
                             type={'tel'}
+                            defaultValue={phone}
                         />
                         <TextField
                             label="Địa chỉ..."
@@ -123,6 +140,7 @@ export default function PaymentForm({ setFormData, formInfo }: IAppProps) {
                             sx={{ marginBottom: '10px' }}
                             onChange={(e) => setAddress(e.target.value)}
                             required={true}
+                            defaultValue={address}
                         />
                         <FormControl sx={{ mb: 1 }} className={classInput}>
                             <InputLabel>Tỉnh thành</InputLabel>
