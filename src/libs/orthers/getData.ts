@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { prisma } from './prisma';
 
 async function getAllUsers() {
@@ -10,8 +11,17 @@ async function getAllUsers() {
     return res.json();
 }
 
+async function getAllUsersNotAdmin() {
+    const res = await axios.get(`/api/user/all/ruleUser`);
+
+    if (res.status === 400) {
+        throw new Error('Failed to fetch data');
+    }
+
+    return res.data;
+}
 export async function getAllProducts() {
     return prisma.product.findMany();
 }
 
-export { getAllUsers };
+export { getAllUsers , getAllUsersNotAdmin };

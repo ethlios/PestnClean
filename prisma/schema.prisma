@@ -24,7 +24,7 @@ model User {
   discount     Discount[]
   emailkm      Email[]
   imgWork      ImgWork[]
-  notification Notification[]
+  notifications  Notification[]
   order        Order[]
   product      Product[]
 }
@@ -144,9 +144,11 @@ model ImgWork {
 }
 
 model Notification {
-  id        Int      @id @default(autoincrement())
-  authorId  String
-  message   String?
-  createdAt DateTime @default(now())
-  author    User     @relation(fields: [authorId], references: [id])
+  id          Int         @id @default(autoincrement())
+  title       String
+  recipientId  String
+  message     String?
+  state       Boolean
+  createdAt   DateTime    @default(now())
+  recipient   User    @relation(fields: [recipientId ], references: [id])
 }
