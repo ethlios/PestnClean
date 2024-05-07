@@ -18,7 +18,6 @@ import {
     getEmail,
     getFeedback,
     getManagement,
-    addOrder,
     getOrder,
     getOrderSuccess,
     getProduct,
@@ -240,10 +239,6 @@ const rootReducer = createReducer(initState, (builder) => {
         state.order.push(action.payload);
     });
 
-    builder.addCase(addOrder, (state, action) => {
-        state.order.push(action.payload);
-    });
-
     builder.addCase(removeOrderSuccess, (state, action) => {
         const index = findIndex(state.order, action.payload);
         state.order.splice(index, 1);
@@ -285,7 +280,7 @@ const rootReducer = createReducer(initState, (builder) => {
     });
     // Add Img Work
     builder.addCase(addImgWorkSuccess, (state, action) => {
-        const { message, data, success } = action.payload;
+        const { message, data , success } = action.payload;
         state.message = message;
         state.imageWork.push(data);
     });
@@ -310,8 +305,7 @@ const rootReducer = createReducer(initState, (builder) => {
         state.message = message;
         // Tìm chỉ mục của phần tử cần cập nhật trong mảng
         const index = state.imageWork.findIndex((img) => img.id === data.id);
-        if (index !== -1) {
-            // Kiểm tra xem phần tử có tồn tại trong mảng không
+        if (index !== -1) { // Kiểm tra xem phần tử có tồn tại trong mảng không
             // Cập nhật phần tử tại chỉ mục index bằng dữ liệu mới từ action.payload.data
             state.imageWork[index] = data;
         }
@@ -322,7 +316,7 @@ const rootReducer = createReducer(initState, (builder) => {
     });
     // get image work by type
     builder.addCase(getImgWorkByType, (state, action) => {
-        const { message, data } = action.payload;
+        const { message , data } = action.payload;
         state.imageWork = data;
         state.message = message;
     });
