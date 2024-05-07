@@ -6,7 +6,9 @@ import PaymentForm from '~/components/Cart/Payment/PaymentForm';
 import styles from '../../../../components/Cart/Payment/payment.module.scss';
 import Tippy from '@tippyjs/react';
 import useSize from '~/libs/hooks/useSize';
-import { useState } from 'react';
+import React, { useRef, useState } from 'react';
+import Toast from '~/components/Orther/Toast';
+import DialogConfirm from '~/components/Cart/Payment/DialogConfirm';
 
 const cx = classNames.bind(styles);
 
@@ -16,6 +18,13 @@ export default function PaymentPage(props: IAppProps) {
     const { sizeX } = useSize();
     const localStorageCart = JSON.parse(localStorage.getItem('cart') || '[]');
     const [cart, setCart] = useState<any>(localStorageCart);
+    const [formData, setFormData] = useState<any>();
+    const formInfo = useRef<any>('');
+    const [showDialog, setShowDialog] = useState<boolean>(false);
+
+    const handleSubmit = () => {
+        setShowDialog(true);
+    };
 
     return (
         <div
@@ -52,11 +61,11 @@ export default function PaymentPage(props: IAppProps) {
                 {/*Visual Content*/}
                 <div className={'col-span-12 md:col-span-7 lg:col-span-8 flex flex-col'}>
                     {/*Form*/}
-                    <PaymentForm />
+                    <PaymentForm formInfo={formInfo} />
                 </div>
                 <div className={'col-span-12 md:col-span-5 lg:col-span-4'}>
                     {/*Checkout panel*/}
-                    <CheckoutPanel cart={cart} />
+                    <CheckoutPanel cart={cart} handleSubmit={handleSubmit} />
                 </div>
             </div>
         </div>
