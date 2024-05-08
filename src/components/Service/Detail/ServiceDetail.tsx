@@ -41,33 +41,44 @@ export default function ServiceDetails({ blog }: IAppProps) {
                     width: sizeX < 810 ? '100%' : ' ',
                 }}
             ></div>
-            <div className={cx('main-content')}>
-                {sizeX >= 810 && (
-                    <div className={cx('menu')}>
-                        <h1>MỤC LỤC</h1>
-                        {blog[0].menu.map((item: any, index: number) => {
-                            return (
-                                <p key={index} onClick={() => smoothScroll(`#header${index + 1}`)}>
-                                    {`0${index + 1}. ${item}`}
-                                </p>
-                            );
-                        })}
-                        <div className={cx('hr-decor')}></div>
-                        <div className={cx('list-icon')}>
-                            <FavoriteBorderIcon />
-                            <ChatOutlinedIcon onClick={() => smoothScroll('#comment-blogs')} />
-                            <FacebookShareButton url={url} hashtag="#Pestnclean">
-                                <FacebookIcon size={24} round={true} />
-                            </FacebookShareButton>
-                            <TwitterShareButton url={url}>
-                                <XIcon size={24} round={true} />
-                            </TwitterShareButton>
-                            <LinkedinShareButton url={url}>
-                                <LinkedinIcon size={24} round={true} />
-                            </LinkedinShareButton>
-                        </div>
+            <div
+                className={cx('main-content')}
+                style={{
+                    flexDirection: sizeX < 810 ? 'column' : 'row',
+                }}
+            >
+                <div
+                    className={cx('menu')}
+                    style={{
+                        width: sizeX < 810 ? '100%' : ' ',
+                        backgroundColor: '#fff',
+                        position: sizeX < 810 ? 'relative' : 'sticky',
+                        top: sizeX < 810 ? '0' : '',
+                        marginBottom: sizeX < 810 ? '30px' : '',
+                    }}
+                >
+                    <h1>MỤC LỤC</h1>
+                    {blog[0].menu.map((item: any, index: number) => {
+                        return (
+                            <p key={index} onClick={() => smoothScroll(`#header${index + 1}`)}>
+                                {`0${index + 1}. ${item}`}
+                            </p>
+                        );
+                    })}
+                    <div className={cx('hr-decor')}></div>
+                    <div className={cx('list-icon')}>
+                        <ChatOutlinedIcon onClick={() => smoothScroll('#comment-blogs')} />
+                        <FacebookShareButton url={url} hashtag="#Pestnclean">
+                            <FacebookIcon size={24} round={true} />
+                        </FacebookShareButton>
+                        <TwitterShareButton url={url}>
+                            <XIcon size={24} round={true} />
+                        </TwitterShareButton>
+                        <LinkedinShareButton url={url}>
+                            <LinkedinIcon size={24} round={true} />
+                        </LinkedinShareButton>
                     </div>
-                )}
+                </div>
                 <div
                     className={cx('detail')}
                     style={{

@@ -5,15 +5,16 @@ import Link from 'next/link';
 import { notFound, usePathname } from 'next/navigation';
 import Script from 'next/script';
 import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import BlogComment from '~/components/Blogs/BlogsDetail/BlogComment';
 import BlogSuggest from '~/components/Blogs/BlogsDetail/BlogSuggest';
 import BlogsBanner from '~/components/Blogs/BlogsDetail/BlogsBanner';
 import BlogDetails from '~/components/Blogs/BlogsDetail/BlogsDetail';
-import MenuMB from '~/components/Blogs/BlogsDetail/MenuMB';
 import styles from '~/components/Blogs/BlogsDetail/blogDetail.module.scss';
 import { blogs } from '~/constants/blogs';
 import useSize from '~/libs/hooks/useSize';
 import { nameToLink } from '~/libs/orthers/nameToLink';
+import { getBlogComment } from '~/redux/actions';
 
 const cx = classNames.bind(styles);
 
@@ -23,7 +24,7 @@ export default function BlogsDetailPage(props: IAppProps) {
     const [blog, setBlog] = useState<any[]>([]);
     const pathname = usePathname();
     const { sizeX } = useSize();
-    const [isOpen, setOpen] = useState<boolean>(false);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         const blogFilter = blogs.filter((blog) => {
@@ -45,6 +46,18 @@ export default function BlogsDetailPage(props: IAppProps) {
         description: blog.length > 0 ? blog[0].desHead : '',
     };
 
+    useEffect(() => {
+        const getComment = async () => {
+            if (blog.length > 0) {
+                const cmts = await fetch(`/api/cmtblog/blog/${blog[0].title}`).then((res) => res.json());
+
+                dispatch(getBlogComment(cmts));
+            }
+        };
+
+        getComment();
+    }, [blog, dispatch]);
+
     return (
         <>
             <section>
@@ -56,10 +69,10 @@ export default function BlogsDetailPage(props: IAppProps) {
                             sizeX < 768
                                 ? '0 20px'
                                 : sizeX < 1100
-                                ? '0 50px'
-                                : sizeX < 1280
-                                ? '0 80px'
-                                : '0 100px',
+                                  ? '0 50px'
+                                  : sizeX < 1280
+                                    ? '0 80px'
+                                    : '0 100px',
                     }}
                 >
                     <div className={cx('link')}>
@@ -71,13 +84,18 @@ export default function BlogsDetailPage(props: IAppProps) {
                     </div>
                     <div className={cx('decoration')}></div>
 
-                    {sizeX < 810 && <MenuMB blogs={blog} isOpen={isOpen} setOpen={setOpen} />}
                     <BlogsBanner blog={blog} />
                     <BlogDetails blogs={blog} />
 
                     {/* comment & suggest */}
-                    <div className={cx('blogs-last')}>
-                        <BlogComment />
+                    <div
+                        className={cx('blogs-last')}
+                        style={{
+                            flexDirection: sizeX < 810 ? 'column' : 'row',
+                            marginTop: sizeX < 810 ? '30px' : '',
+                        }}
+                    >
+                        <BlogComment blog={blog} />
                         <BlogSuggest />
                     </div>
                 </div>

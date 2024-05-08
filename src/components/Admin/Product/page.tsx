@@ -11,6 +11,8 @@ import Image from 'next/image';
 import formatter from '~/libs/orthers/formatMoney';
 import { useDebounce } from '@react-hooks-library/core';
 import { removeVietnameseTones } from '~/libs/orthers/removeVietnamese';
+import Link from 'next/link';
+import { nameToLink } from '~/libs/orthers/nameToLink';
 
 const cx = classNames.bind(styles);
 
@@ -67,7 +69,10 @@ export default function AdminProduct(props: IAppProps) {
                             {products.map((product: any, index: number) => {
                                 return (
                                     <div key={index} className={cx('product-item')}>
-                                        <div className={cx('product-img')}>
+                                        <Link
+                                            href={`/sanpham/${nameToLink(product.title)}`}
+                                            className={cx('product-img')}
+                                        >
                                             {product.Image ? (
                                                 <Image
                                                     src={!!product.Image ? product.Image[0] : ''}
@@ -78,7 +83,7 @@ export default function AdminProduct(props: IAppProps) {
                                             ) : (
                                                 <div></div>
                                             )}
-                                        </div>
+                                        </Link>
                                         <div className={cx('product-info')}>
                                             <p className={cx('product-title')}>{product.title}</p>
                                             <p className={cx('product-des')}>{product.desHead}</p>

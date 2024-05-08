@@ -28,6 +28,8 @@ export async function POST(request: Request) {
             category3: body.category3,
             pieces: body.pieces,
             quantity: body.quantity,
+            hastags: body.hastags,
+            categoryMain: body.categoryMain,
         },
     });
 

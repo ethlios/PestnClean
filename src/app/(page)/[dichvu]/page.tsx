@@ -13,7 +13,8 @@ import { allServices } from '~/constants/service';
 import { nameToLink } from '~/libs/orthers/nameToLink';
 import Script from 'next/script';
 import useSize from '~/libs/hooks/useSize';
-import MenuMB from '~/components/Service/Detail/MenuMB';
+import { useDispatch } from 'react-redux';
+import { getBlogComment } from '~/redux/actions';
 
 const cx = classNames.bind(styles);
 
@@ -23,7 +24,7 @@ export default function ServiceDetail(props: IAppProps) {
     const [blog, setBlog] = useState<any[]>([]);
     const pathname = usePathname();
     const { sizeX } = useSize();
-    const [isOpen, setOpen] = useState<boolean>(false);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         const blogFilter = allServices.filter((blog) => {
@@ -45,6 +46,18 @@ export default function ServiceDetail(props: IAppProps) {
         description: blog.length > 0 ? blog[0].desHead : '',
     };
 
+    useEffect(() => {
+        const getComment = async () => {
+            if (blog.length > 0) {
+                const cmts = await fetch(`/api/cmtblog/blog/${blog[0].title}`).then((res) => res.json());
+
+                dispatch(getBlogComment(cmts));
+            }
+        };
+
+        getComment();
+    }, [blog, dispatch]);
+
     return (
         <section>
             <div
@@ -54,10 +67,10 @@ export default function ServiceDetail(props: IAppProps) {
                         sizeX < 768
                             ? '0 20px'
                             : sizeX < 1100
-                            ? '0 50px'
-                            : sizeX < 1280
-                            ? '0 80px'
-                            : '0 100px',
+                              ? '0 50px'
+                              : sizeX < 1280
+                                ? '0 80px'
+                                : '0 100px',
                 }}
             >
                 <div className={cx('link')}>
@@ -68,13 +81,18 @@ export default function ServiceDetail(props: IAppProps) {
                     <p>Chi tiết</p>
                 </div>
                 <div className={cx('decoration')}></div>
-                {sizeX < 810 && <MenuMB blogs={blog} isOpen={isOpen} setOpen={setOpen} />}
                 {blog.length > 0 && <ServiceBanner src={blog[0].img} alt={blog[0].title} />}
                 {blog.length > 0 && <ServiceDetails blog={blog} />}
 
                 {/* comment & suggest */}
-                <div className={cx('blogs-last')}>
-                    <ServiceComment />
+                <div
+                    className={cx('blogs-last')}
+                    style={{
+                        flexDirection: sizeX < 810 ? 'column' : 'row',
+                        marginTop: sizeX < 810 ? '30px' : '',
+                    }}
+                >
+                    <ServiceComment blog={blog} />
                     <ServiceSuggest />
                 </div>
             </div>

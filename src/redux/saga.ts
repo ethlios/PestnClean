@@ -37,8 +37,18 @@ function* FetchUser({ payload }: any) {
             }
 
             if (person.data.length > 0) {
-                const { cart, product, management, blog, order, emailkm, imgWork, discount, notifications } =
-                    person.data[0] ?? [];
+                const {
+                    cart,
+                    product,
+                    management,
+                    blog,
+                    order,
+                    emailkm,
+                    imgWork,
+                    discount,
+                    notification,
+                    comment,
+                } = person.data[0] ?? [];
                 if (person.data[0].rule === 'admin') {
                     yield put(actions.getProduct(product ?? []));
                     yield put(actions.getEmail(emailkm ?? []));
@@ -51,6 +61,7 @@ function* FetchUser({ payload }: any) {
                 } else {
                     yield put(actions.getManagement(management ?? []));
                     // yield put(actions.getCart(cart ?? []));
+                    yield put(actions.getBlogComment(comment ?? []));
                 }
             }
         }
@@ -469,6 +480,4 @@ export default function* rootSaga() {
 
     // User
     yield takeLatest(types.UPDATE_SESSION_USER, updateSessionUser);
-
-  
 }

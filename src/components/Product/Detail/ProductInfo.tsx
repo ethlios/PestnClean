@@ -2,7 +2,6 @@
 
 import AddIcon from '@mui/icons-material/Add';
 import ElectricRickshawOutlinedIcon from '@mui/icons-material/ElectricRickshawOutlined';
-import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import KeyboardBackspaceOutlinedIcon from '@mui/icons-material/KeyboardBackspaceOutlined';
 import RemoveIcon from '@mui/icons-material/Remove';
@@ -21,6 +20,16 @@ import smoothScroll from '~/libs/orthers/smoothScroll';
 import $ from 'jquery';
 import useSize from '~/libs/hooks/useSize';
 import formatter from '~/libs/orthers/formatMoney';
+import {
+    FacebookIcon,
+    LinkedinIcon,
+    XIcon,
+    FacebookShareButton,
+    LinkedinShareButton,
+    TwitterShareButton,
+} from 'react-share';
+import { useSelector } from 'react-redux';
+import { RootState } from '~/redux/provider/store';
 
 const cx = classNames.bind(styles);
 
@@ -33,6 +42,8 @@ export default function ProductInfo({ product }: IAppProps) {
     const [amount, setAmount] = useState(1);
     const wheel: boolean = useScroll();
     const { sizeX } = useSize();
+    const [url, setUrl] = useState<string>('');
+    const comments = useSelector((state: RootState) => state.main.feedback);
 
     const handleChange = (event: SelectChangeEvent) => {
         setType(event.target.value as string);
@@ -77,6 +88,12 @@ export default function ProductInfo({ product }: IAppProps) {
         localStorage.setItem('cart', JSON.stringify(cart)); //Save to local storage
     };
 
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            setUrl(window.location.href);
+        }
+    }, []);
+
     return (
         <div
             className={cx('product-info')}
@@ -85,7 +102,15 @@ export default function ProductInfo({ product }: IAppProps) {
                 width: sizeX < 768 ? '100%' : sizeX < 950 ? '55%' : '',
             }}
         >
-            <p className={cx('sale')}>Đang giảm giá</p>
+            <p className={cx('sale')}>
+                {product[0].status === 'sale'
+                    ? 'Đang giảm giá'
+                    : product[0].status === 'hot'
+                      ? 'Đang bán chạy'
+                      : product[0].status
+                        ? 'Sản phẩm mới'
+                        : product[0].category1}
+            </p>
             <h1
                 className={cx('name')}
                 style={{
@@ -95,44 +120,59 @@ export default function ProductInfo({ product }: IAppProps) {
                 {product[0].title}
             </h1>
             <p className={cx('rating')} onClick={handleClick}>
-                3 Đánh giá
+                {comments.length} Đánh giá
             </p>
             <div className={cx('decoration')} />
             <ul className={cx('summary')}>
-                {product[0].description.split('\n').map((item: string, index: number) => (
-                    <li key={index}>{item}</li>
-                ))}
+                {product[0].description
+                    ? product[0].description
+                          .split('\n')
+                          .map((item: string, index: number) => <li key={index}>{item}</li>)
+                    : ''}
             </ul>
             <div className={cx('decoration')} />
             <div className={cx('share')}>
                 <p className={cx('text')}>Chia sẻ:</p>
-                <FacebookIcon />
-                <InstagramIcon />
+                <FacebookShareButton url={url} hashtag="#Pestnclean">
+                    <FacebookIcon size={28} round={true} />
+                </FacebookShareButton>
+                <TwitterShareButton url={url}>
+                    <XIcon size={28} round={true} />
+                </TwitterShareButton>
+                <LinkedinShareButton url={url}>
+                    <LinkedinIcon size={28} round={true} />
+                </LinkedinShareButton>
             </div>
-            <div className={'type'}>
-                <p
-                    className={cx('text')}
-                    style={{
-                        marginBottom: '15px',
-                    }}
-                >
-                    Phân loại:
-                </p>
-                <FormControl fullWidth>
-                    <InputLabel id="demo-simple-select-label">Loại</InputLabel>
-                    <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        value={type}
-                        label="Loại"
-                        onChange={handleChange}
+            {product[0].categoryMain.length > 0 && (
+                <div className={'type'}>
+                    <p
+                        className={cx('text')}
+                        style={{
+                            marginBottom: '15px',
+                        }}
                     >
-                        <MenuItem value={'1l'}>1L</MenuItem>
-                        <MenuItem value={'2l'}>2L</MenuItem>
-                        <MenuItem value={'3l'}>3L</MenuItem>
-                    </Select>
-                </FormControl>
-            </div>
+                        Phân loại:
+                    </p>
+                    <FormControl fullWidth>
+                        <InputLabel id="demo-simple-select-label">Loại</InputLabel>
+                        <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            value={type}
+                            label="Loại"
+                            onChange={handleChange}
+                        >
+                            {product[0].categoryMain.map((value: string, index: number) => {
+                                return (
+                                    <MenuItem value={value} key={index}>
+                                        {value.toUpperCase()}
+                                    </MenuItem>
+                                );
+                            })}
+                        </Select>
+                    </FormControl>
+                </div>
+            )}
             <div className={cx('quantity')}>
                 <IconButton onClick={handleSub}>
                     <RemoveIcon />

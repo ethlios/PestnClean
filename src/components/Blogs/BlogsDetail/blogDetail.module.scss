@@ -255,14 +255,25 @@
     gap: 10px;
     min-height: 80px;
     align-items: center;
+    background-color: rgba(0, 0, 0, 0.05);
+    padding: 10px;
+    border-radius: 10px;
+    border: solid 1.5px rgba(0, 0, 0, 0.2);
 }
 
 .avatar {
-    background-color: rgba(0, 0, 0, 0.05);
+    background-color: var(--secondary);
     border-radius: 5px;
     border: solid 1.5px;
-    width: 80px;
-    height: 80px;
+    width: 60px;
+    height: 60px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    font-weight: 600;
+    color: #fff;
 }
 
 .comment-content {
@@ -472,4 +483,45 @@
     align-items: center;
     justify-content: center;
     color: var(--text-black);
+}
+
+.delete-cmt {
+    width: 30px;
+    height: 30px;
+    border: solid 1.5px rgba(0, 0, 0, 0.1);
+    background-color: rgb(245, 245, 245);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all ease 0.5s;
+    border-radius: 5px;
+
+    svg {
+        color: var(--text-black);
+        font-size: 20px;
+    }
+
+    &:hover {
+        background-color: rgba($color: #000000, $alpha: 0.15);
+    }
+}
+
+.cmt-btn {
+    background-color: var(--primary);
+    font-size: 15px;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: 8px 15px;
+    border-radius: 5px;
+    color: #fff;
+    letter-spacing: -0.2px;
+    border: solid 2px var(--primary);
+    transition: all ease 0.5s;
+
+    &:hover {
+        background-color: #fff;
+        color: var(--primary);
+        border: solid 2px var(--primary);
+    }
 }

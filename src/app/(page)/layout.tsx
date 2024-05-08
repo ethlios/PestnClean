@@ -1,19 +1,19 @@
 'use client';
 
-import 'tippy.js/dist/tippy.css';
-import 'slick-carousel/slick/slick-theme.css';
-import 'slick-carousel/slick/slick.css';
-import Header from '~/common/Header/header';
-import Footer from '~/common/Footer/footer';
+import { useSession } from 'next-auth/react';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import logo from '../../../public/img/logo.png';
-import Image from 'next/image';
-import useSize from '~/libs/hooks/useSize';
-import HeaderMobile from '~/common/Header/headerMobile';
-import { useSession } from 'next-auth/react';
 import { useDispatch } from 'react-redux';
+import 'slick-carousel/slick/slick-theme.css';
+import 'slick-carousel/slick/slick.css';
+import 'tippy.js/dist/tippy.css';
+import Footer from '~/common/Footer/footer';
+import Header from '~/common/Header/header';
+import HeaderMobile from '~/common/Header/headerMobile';
+import useSize from '~/libs/hooks/useSize';
 import { getAllProducts, getUser } from '~/redux/actions';
+import logo from '../../../public/img/logo.png';
 
 export default function ComponentConnectLayout({ children }: { children: React.ReactNode }) {
     const pathname = usePathname();

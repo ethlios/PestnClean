@@ -28,6 +28,8 @@ export async function PUT(request: Request, { params }: { params: { id: number }
             category3: body.category3,
             pieces: body.pieces,
             quantity: body.quantity,
+            categoryMain: body.categoryMain,
+            hastags: body.hastags,
         },
     });
 
