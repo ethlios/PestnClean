@@ -99,6 +99,11 @@ input:focus {
 
 /* CUSTOM MUI */
 
+html input {
+    font-size: 14px !important;
+    font-weight: 600 !important;
+}
+
 .css-10hyoxo-MuiStack-root span,
 .css-9l3uo3,
 .css-1e0k9ig,
@@ -257,7 +262,7 @@ input:focus {
     margin-top: 20px;
 }
 
-.css-10zdtnx-MuiTypography-root{
+.css-10zdtnx-MuiTypography-root {
     font-size: 13px !important;
     font-family: 'Merriweather' !important;
 }

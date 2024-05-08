@@ -14,6 +14,7 @@ import InputLabel from '@mui/material/InputLabel';
 import Select from '@mui/material/Select';
 import FormControl from '@mui/material/FormControl';
 import { useSession } from 'next-auth/react';
+import Link from 'next/link';
 
 const cx = classNames.bind(styles);
 
@@ -61,7 +62,7 @@ export default function PaymentForm({ setFormData, formInfoRef }: IAppProps) {
             ward,
             message,
         });
-    }, [name, email, phone, address, city, district, ward, message]);
+    }, [name, email, phone, address, city, district, ward, message, setFormData]);
 
     useEffect(() => {
         if (session) {
@@ -73,7 +74,7 @@ export default function PaymentForm({ setFormData, formInfoRef }: IAppProps) {
             setDistrict(session.user.district);
             setWard(session.user.ward);
         }
-    }, []);
+    }, [session]);
 
     return (
         <div>
@@ -198,16 +199,36 @@ export default function PaymentForm({ setFormData, formInfoRef }: IAppProps) {
                             className={`${cx('textarea')} ${classInput}`}
                             onChange={(e) => setMessage(e.target.value)}
                         />
-
-                        <FormControlLabel
-                            required
-                            control={<Checkbox />}
-                            label="Tôi đã đọc chính sách bảo mật và quyền riêng tư."
-                            sx={{
-                                marginTop: '5px',
-                                fontSize: '10px',
+                        <div
+                            style={{
+                                display: 'flex',
+                                flexDirection: 'row',
+                                marginTop: '10px',
+                                gap: '10px',
+                                alignItems: 'center',
                             }}
-                        />
+                        >
+                            <input
+                                type="checkbox"
+                                required
+                                style={{ accentColor: 'var(--primary)', width: '16px', height: '16px' }}
+                                id="checkboxid"
+                            />
+                            <label
+                                style={{
+                                    fontSize: '12px',
+                                    fontWeight: 600,
+                                    color: 'var(--text-black)',
+                                }}
+                                htmlFor="checkboxid"
+                            >
+                                Tôi đã đọc{' '}
+                                <Link href="/hoidap?q=chinh-sach-bao-mat-thong-tin">
+                                    chính sách bảo mật và quyền riêng tư
+                                </Link>
+                                .
+                            </label>
+                        </div>
                     </form>
                 </div>
             </div>
