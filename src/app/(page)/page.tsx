@@ -10,10 +10,13 @@ import WhyChooseMe from '~/components/Home/WhyChoseMe';
 import BannerHomePage from '~/components/Home/banner';
 import useSize from '~/libs/hooks/useSize';
 import 'react-toastify/dist/ReactToastify.css';
+import { socket } from '~/websocket/socket';
+import { useEffect, useState } from 'react';
+import { useSession } from 'next-auth/react';
 
 export default function Home() {
     const { sizeX } = useSize();
-
+    
     return (
         <main className="cpmount">
             <div className={'overflow-x-hidden'}>

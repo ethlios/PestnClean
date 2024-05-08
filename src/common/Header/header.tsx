@@ -20,7 +20,12 @@ import { signOut, useSession } from 'next-auth/react';
 import Tippy from '@tippyjs/react/headless';
 import InputOutlinedIcon from '@mui/icons-material/InputOutlined';
 import ShoppingCart from '~/common/Header/ShoppingCart';
-
+import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
+import SettingsIcon from '@mui/icons-material/Settings';
+import { socket } from '~/websocket/socket';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '~/redux/provider/store';
+import { clearMessage, getAllNotificationsById } from '~/redux/actions';
 const cx = classNames.bind(styles);
 
 export interface HeaderProps {}
@@ -36,11 +41,98 @@ export default function Header(props: HeaderProps) {
     const { sizeX } = useSize();
     const { data: session } = useSession();
     const [openAcc, setOpenAcc] = useState<boolean>(false);
+    const [openNotifications, setOpenNotifications] = useState<boolean>(false);
+    const [isConnected, setIsConnected] = useState(false);
+    const [transport, setTransport] = useState('N/A');
+    const [listNotifications,setListNotifications] = useState<any[]>([]);
+    const dispatch = useDispatch();
+    const selector = useSelector((state: RootState) => state.main);
+
+   
+    const handleSubmit = () => {
+        if (searchValue) {
+            router.push(`search?q=${searchValue}`);
+        }
+    };
+
+    // KẾT NỐI TỚI SOCKET
+    const connectSocket = () => {
+        if (socket.connected) {
+            onConnect();
+        }
+
+        function onConnect() {
+            setIsConnected(true);
+        }
+
+        function onDisconnect() {
+            setIsConnected(false);
+            setTransport('N/A');
+        }
+
+        socket.on('connect', onConnect);
+        socket.on('disconnect', onDisconnect);
+        return () => {
+            socket.off('connect', onConnect);
+            socket.off('disconnect', onDisconnect);
+        };
+    };
+
+    // HÀM TÍNH THỜI GIAN ĐẾN HIỆN TẠI
+    function calculateTimeDifference(startTime: string, endTime?: string): string {
+        const startDate = new Date(startTime);
+        const endDate = endTime ? new Date(endTime) : new Date();
+    
+        const timeDifference = Math.abs(endDate.getTime() - startDate.getTime());
+    
+        const secondsDifference = Math.floor(timeDifference / 1000);
+        const minutesDifference = Math.floor(secondsDifference / 60);
+        const hoursDifference = Math.floor(minutesDifference / 60);
+        const daysDifference = Math.floor(hoursDifference / 24);
+    
+        let displayString = '';
+    
+        if (daysDifference > 0) {
+            displayString = `${daysDifference} ngày`;
+        } else if (hoursDifference > 0) {
+            displayString = `${hoursDifference} giờ`;
+        } else if (minutesDifference > 0) {
+            displayString = `${minutesDifference} phút`;
+        } else {
+            displayString = `${secondsDifference} giây`;
+        }
+    
+        return displayString.trim() + " trước";
+    }
+
+
+    useEffect(() => {
+        if (session?.user.id) {
+            console.log(session?.user.id);
+            dispatch(getAllNotificationsById({ id: session.user.id }));
+        }
+    }, [session]);
+
+    useEffect(() => {
+        if (selector.message === 'Get All Notifications By Id Success') {
+            setListNotifications(selector.notificationAll);
+            dispatch(clearMessage());
+        }
+    }, [selector.message]);
+
+    useEffect(() => {
+        if (isConnected && session?.user.id) {
+            socket.on('respMessageAddNotify', (value) => {
+                dispatch(getAllNotificationsById({ id: session.user.id }));
+            });
+        }
+    }, [isConnected]);
 
     useEffect(() => {
         const scroll = () => {
             setScrollToTop(window.scrollY);
         };
+        connectSocket();
 
         window.addEventListener('scroll', scroll);
 
@@ -49,16 +141,11 @@ export default function Header(props: HeaderProps) {
 
     useEffect(() => {
         if (wheel) {
+            setOpenNotifications(false);
             setOpenSearch(false);
             setOpenAcc(false);
         }
     }, [wheel]);
-
-    const handleSubmit = () => {
-        if (searchValue) {
-            router.push(`search?q=${searchValue}`);
-        }
-    };
 
     return (
         <>
@@ -144,6 +231,50 @@ export default function Header(props: HeaderProps) {
                         onClick={() => setOpenSearch(true)}
                     />
                     <ShoppingCart />
+                    {session && session.user.rule !== 'admin' && (
+                        <Tippy
+                            visible={openNotifications}
+                            onClickOutside={() => {
+                                setOpenNotifications(false);
+                                // setChangeColor(false);
+                            }}
+                            appendTo={document.body}
+                            interactive
+                            placement="bottom"
+                            offset={[-10, 10]}
+                            zIndex={2000}
+                            render={(attrs) => (
+                                <div tabIndex={-1} {...attrs} className={cx('tippy-boxNotifications', '')}>
+                                    <div
+                                        className={cx(
+                                            'flex items-center justify-between',
+                                            'tippy-boxNotifications-header',
+                                        )}
+                                    >
+                                        <p className='font-semibold'>Thông báo</p>
+                                        <SettingsIcon />
+                                    </div>
+                                    <div>
+                                        {
+                                            listNotifications.map((item,index) => {
+                                                return (
+                                                    <div key={index} className={cx('flex items-center justify-between','tippy-boxNotifications-content')}>
+                                                        <div className={cx('tippy-boxNotifications-title')}>
+                                                            <p className={cx('font-medium','tippy-boxNotifications-content-title')}>{item.title}</p>
+                                                            <p className={cx('tippy-boxNotifications-content-message')}>{item.message}</p>
+                                                        </div>
+                                                        <p className={cx('tippy-boxNotifications-content-createdAt')}>{calculateTimeDifference(item.createdAt)}</p>
+                                                    </div>
+                                                )
+                                            })
+                                        }
+                                    </div>
+                                </div>
+                            )}
+                        >
+                            <NotificationsNoneIcon onClick={() => setOpenNotifications(!openNotifications)} />
+                        </Tippy>
+                    )}
                     {session ? (
                         <Tippy
                             visible={openAcc}

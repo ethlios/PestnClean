@@ -4,50 +4,172 @@ import React, { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '~/redux/provider/store';
-import { useSession } from 'next-auth/react';
 import styles from './Notification.module.scss';
 import ChooseObjectCustomer from './ChooseObjectCustomer';
+import { addNotification, clearMessage } from '~/redux/actions';
+import { useSession } from 'next-auth/react';
+import { socket } from '~/websocket/socket';
+import Toast from '~/components/Orther/Toast';
 const cx = classNames.bind(styles);
 
 export interface IAppProps {
     isOpen: boolean;
     isClose: Function;
     valueUpdate: any;
+    addSuccess: Function
 }
 
-const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 700,
-    bgcolor: 'background.paper',
-    boxShadow: 24,
-    borderRadius: '5px',
-    p: '10px',
-};
-
-export default function AddNotification({ isOpen, isClose, valueUpdate }: IAppProps) {
+export default function AddNotification({ isOpen, isClose, valueUpdate , addSuccess }: IAppProps) {
     const [open, setOpen] = useState(false);
     const [openChooseObjectCustomer, setOpenChooseObjectCustomer] = useState(false);
+    const [showToast, setShowToast] = useState<boolean>(false);
+    const [isConnected, setIsConnected] = useState(false);
+    const [transport, setTransport] = useState('N/A');
+    const [valueTitleNotify, setValueTitleNotify] = useState<string>('');
+    const [valueDesNotify, setValueDesNotify] = useState<string>('');
+    const [listUsersSelected, setListUsersSelected] = useState<any[]>([]);
     const [selectedOption, setSelectedOption] = useState<string>('');
-    const [timeStart, setTimeStart] = useState<string>('');
-    const [timeEnd, setTimeEnd] = useState<string>('');
-    const session = useSession();
+    const [isClicked, setIsClicked] = useState<boolean>(false);
+    const [dataMessageNotifySuccess, setDataMessageNotifySuccess] = useState<any>({});
+    const dispatch = useDispatch();
     const selector = useSelector((state: RootState) => state.main);
+    const session = useSession();
 
+    const reset = () => {
+        setValueTitleNotify("");
+        setValueDesNotify("");
+        setListUsersSelected([]);
+        setIsClicked(false);
+        setOpen(false);
+        isClose(false);
+        dispatch(clearMessage());
+    };
     const handleClose = () => {
         setOpen(false);
         isClose(false);
     };
 
-    const handleClickOpenChooseObject = () => {
-        setOpenChooseObjectCustomer(true);
+    function formatISODate(date: Date): string {
+        const year = date.getUTCFullYear();
+        const month = String(date.getUTCMonth() + 1).padStart(2, '0'); // Thêm '0' phía trước nếu cần
+        const day = String(date.getUTCDate()).padStart(2, '0');
+        const hours = String(date.getUTCHours()).padStart(2, '0');
+        const minutes = String(date.getUTCMinutes()).padStart(2, '0');
+        const seconds = String(date.getUTCSeconds()).padStart(2, '0');
+        const milliseconds = String(date.getUTCMilliseconds()).padStart(3, '0');
+
+        return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}.${milliseconds}Z`;
     }
 
+    // Xử lí sự kiện lưu notify vào database
+    const handleSave = () => {
+        if (valueDesNotify !== '' && valueTitleNotify !== '' && selectedOption !== '') {
+            const currentDate = new Date();
+            const formattedDate = formatISODate(currentDate);
+            if (selectedOption === 'Không giới hạn') {
+                if (session.data && session.data?.user.rule === 'admin') {
+                    dispatch(
+                        addNotification({
+                            title: valueTitleNotify,
+                            message: valueDesNotify,
+                            recipientId: session.data?.user.id,
+                            createdAt: formattedDate,
+                            state: false,
+                        }),
+                    );
+                    setDataMessageNotifySuccess({
+                        title: valueTitleNotify,
+                        message: valueDesNotify,
+                        recipientId: session.data?.user.id,
+                        createdAt: formattedDate,
+                        state: false,
+                    });
+                    setIsClicked(true);
+                }
+            } else {
+                if (listUsersSelected.length > 0) {
+                    listUsersSelected.map((item) => {
+                        dispatch(
+                            addNotification({
+                                title: valueTitleNotify,
+                                message: valueDesNotify,
+                                recipientId: item.id,
+                                createdAt: formattedDate,
+                                state: false,
+                            }),
+                        );
+                    });
+                    setDataMessageNotifySuccess({
+                        title: valueTitleNotify,
+                        message: valueDesNotify,
+                        recipientId: listUsersSelected,
+                        createdAt: formattedDate,
+                        state: false,
+                    });
+                    setIsClicked(true);
+                }
+            }
+        }
+    };
+
+    // Xử lí open khi model Lựa chọn khách hàng
+    const handleClickOpenChooseObject = () => {
+        setOpenChooseObjectCustomer(true);
+    };
+
+    // Xử lí sự kiên thay đổi option
     const handleOptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        if (event.target.value === 'Không giới hạn') {
+            setListUsersSelected([]);
+        }
         setSelectedOption(event.target.value);
     };
+
+    useEffect(() => {
+        if(showToast) {
+            setTimeout(() => {
+                reset();
+                addSuccess(true);
+            },500);
+        }
+    },[showToast])
+
+    // Xử lí khi thêm notify success vào db thì send toàn bộ notify đến client được chọn qua socket.io
+    useEffect(() => {
+        if (selector.message === 'Đã gửi thông báo đến user!') {
+            if (isConnected) {
+                setShowToast(true);
+                socket.emit('addNotification', dataMessageNotifySuccess);
+            }
+        }
+    }, [selector.message]);
+
+    const connectSocket = () => {
+        if (socket.connected) {
+            onConnect();
+        }
+
+        function onConnect() {
+            setIsConnected(true);
+        }
+
+        function onDisconnect() {
+            setIsConnected(false);
+            setTransport('N/A');
+        }
+
+        socket.on('connect', onConnect);
+        socket.on('disconnect', onDisconnect);
+        return () => {
+            socket.off('connect', onConnect);
+            socket.off('disconnect', onDisconnect);
+        };
+    };
+
+    useEffect(() => {
+        connectSocket();
+    }, []);
+
 
     useEffect(() => {
         if (isOpen) {
@@ -57,90 +179,107 @@ export default function AddNotification({ isOpen, isClose, valueUpdate }: IAppPr
         }
     }, [isOpen]);
 
+    // Xử lý nếu người dùng chọn option bằng Tùy chọn thì mở model LỰA CHỌN KHÁCH HÀNG
     useEffect(() => {
-        // Lấy ngày và giờ hiện tại
-        const now = new Date();
-        // Format ngày và giờ thành chuỗi YYYY-MM-DDThh:mm (định dạng datetime-local)
-        const formattedDateTime = now.toISOString().slice(0, 16);
-        setTimeStart(formattedDateTime);
-        setTimeEnd(formattedDateTime);
-    }, []); 
-
-    useEffect(() => {
-        if(selectedOption === "Tùy chọn"){
+        if (selectedOption === 'Tùy chọn') {
             setOpenChooseObjectCustomer(true);
+        } else {
+            setOpenChooseObjectCustomer(false);
         }
-    },[selectedOption]);
+    }, [selectedOption]);
 
     return (
-        <div className={cx('wrapper')}>
-            <div className={cx('wrapper-header', 'flex items-center justify-between h-10')}>
-                <p className="font-medium underline">TẠO THÔNG BÁO</p>
-                <button className={cx('wrapper-header-btnExit')} type="button" onClick={handleClose}>
-                    Exit
-                </button>
-            </div>
-            <div className={cx('wrapper-content', 'mt-2')}>
-                <div className="mt-4">
-                    <p className="font-semibold text-sm">Tiêu đề thông báo</p>
-                    <input
-                        className={cx('wrapper-content-inputName', 'mt-2')}
-                        placeholder="Nhập tiêu đề thông báo"
-                    />
+        <>
+            <Toast
+                text= "Thêm thành công"
+                showToast={showToast}
+                setShowToast={setShowToast}
+                rule="normal"
+            />
+            <div className={cx('wrapper')}>
+                <div className={cx('wrapper-header', 'flex items-center justify-between h-10')}>
+                    <p className="font-medium underline">TẠO THÔNG BÁO</p>
+                    <button className={cx('wrapper-header-btnExit')} type="button" onClick={handleClose}>
+                        Exit
+                    </button>
                 </div>
-                <div className="mt-4">
-                    <p className="font-semibold text-sm">Mô tả</p>
-                    <textarea
-                        className={cx('wrapper-content-textarea', 'mt-2')}
-                        id="w3review"
-                        name="w3review"
-                        rows={4}
-                        placeholder="Nhập mô tả thông báo"
-                    ></textarea>
-                </div>
-                <div className="mt-2">
-                    <p className="font-semibold text-sm">Đối tượng thông báo</p>
+                <div className={cx('wrapper-content', 'mt-2')}>
+                    <div className="mt-4">
+                        <p className="font-semibold text-sm">Tiêu đề thông báo</p>
+                        <input
+                            className={cx('wrapper-content-inputName', 'mt-2')}
+                            placeholder="Nhập tiêu đề thông báo"
+                            value={valueTitleNotify}
+                            onChange={(e) => setValueTitleNotify(e.target.value)}
+                        />
+                    </div>
+                    <div className="mt-4">
+                        <p className="font-semibold text-sm">Mô tả</p>
+                        <textarea
+                            className={cx('wrapper-content-textarea', 'mt-2')}
+                            id="w3review"
+                            name="w3review"
+                            rows={4}
+                            placeholder="Nhập mô tả thông báo"
+                            value={valueDesNotify}
+                            onChange={(e) => setValueDesNotify(e.target.value)}
+                        ></textarea>
+                    </div>
                     <div className="mt-2">
-                        <div className={cx('wrapper-content-object', 'flex items-center')}>
-                            <input
-                                type="radio"
-                                id="unlimited"
-                                name="chooseObject"
-                                value="Không giới hạn"
-                                checked={selectedOption === 'Không giới hạn'}
-                                onChange={handleOptionChange}
-                            />
-                            <label htmlFor="unlimited">Không giới hạn khách hàng</label>
-                        </div>
-                        <div className={cx('wrapper-content-object', 'flex items-center mt-2')}>
-                            <input
-                                type="radio"
-                                id="option"
-                                name="chooseObject"
-                                value="Tùy chọn"
-                                checked={selectedOption === 'Tùy chọn'}
-                                onClick={handleClickOpenChooseObject}
-                                onChange={handleOptionChange}
-                            />
-                            <label htmlFor="option">Tùy chọn khách hàng</label>
-                            <ChooseObjectCustomer
-                                valueUpdate={null}
-                                isOpen={openChooseObjectCustomer}
-                                isClose={(e: boolean) => setOpenChooseObjectCustomer(e)}
-                            />
+                        <p className="font-semibold text-sm">Đối tượng thông báo</p>
+                        <div className="mt-2">
+                            <div className={cx('wrapper-content-object', 'flex items-center')}>
+                                <input
+                                    type="radio"
+                                    id="unlimited"
+                                    name="chooseObject"
+                                    value="Không giới hạn"
+                                    checked={selectedOption === 'Không giới hạn'}
+                                    onChange={handleOptionChange}
+                                />
+                                <label htmlFor="unlimited">Không giới hạn khách hàng</label>
+                            </div>
+                            <div className={cx('wrapper-content-object', 'flex items-center mt-2')}>
+                                <input
+                                    type="radio"
+                                    id="option"
+                                    name="chooseObject"
+                                    value="Tùy chọn"
+                                    checked={selectedOption === 'Tùy chọn'}
+                                    onClick={handleClickOpenChooseObject}
+                                    onChange={handleOptionChange}
+                                />
+                                <label htmlFor="option">Tùy chọn khách hàng</label>
+                                {listUsersSelected.length > 0 && (
+                                    <div
+                                        className={cx(
+                                            'flex items-center justify-start',
+                                            'wrapper-content-object-seenDetail',
+                                        )}
+                                    >
+                                        <p>(Đã chọn: {listUsersSelected.length})</p>
+                                    </div>
+                                )}
+                                <ChooseObjectCustomer
+                                    sendListUser={listUsersSelected}
+                                    valueUpdate={null}
+                                    isOpen={openChooseObjectCustomer}
+                                    isClose={(e: boolean) => setOpenChooseObjectCustomer(e)}
+                                    setListUser={(e: any[]) => {
+                                        const arr = e.length > 0 ? e : [];
+                                        setListUsersSelected([...arr]);
+                                    }}
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>
+                <div className="flex justify-center">
+                    <button className={cx(isClicked ? "wrapper-unClicked" : 'wrapper-btnSubmit', 'mt-6')} onClick={handleSave} disabled={isClicked}>
+                        Thêm thông báo
+                    </button>
+                </div>
             </div>
-            <div className="flex justify-center">
-                <button
-                    className={cx('wrapper-btnSubmit', 'mt-6')}
-                    // onClick={handleSave}
-                    // disabled={isClicked}
-                >
-                    Thêm thông báo
-                </button>
-            </div>
-        </div>
+        </>
     );
 }

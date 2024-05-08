@@ -49,6 +49,11 @@ import {
     updateImgWorkFail,
     getImgWorkByType,
     getUserByRule,
+    addNotificationSuccess,
+    addNotificationFail,
+    getAllNotifications,
+    getAllNotificationsByIdSuccess,
+    getAllNotificationsByIdFail,
 } from './actions';
 
 interface RootState {
@@ -72,6 +77,7 @@ interface RootState {
     discount: any[];
     allProducts: any[];
     users: any[];
+    notificationAll: any[];
 }
 
 const initState: RootState = {
@@ -95,6 +101,7 @@ const initState: RootState = {
     discount: [],
     allProducts: [],
     users: [],
+    notificationAll: []
 };
 
 const findIndex = (state: any[], id: number) => {
@@ -342,14 +349,41 @@ const rootReducer = createReducer(initState, (builder) => {
         }
     });
 
+    // NOTIFICATIONS
+    builder.addCase(addNotificationSuccess, (state, action) => {
+        const {message} = action.payload;
+        state.message = message;
+    });
+    builder.addCase(addNotificationFail, (state, action) => {
+        const {message} = action.payload;
+        state.message = message;
+    });
+    builder.addCase(getAllNotifications, (state, action) => {
+        const payload: any = action.payload; // Sử dụng kiểu any
+        if (payload && payload.message !== undefined) {
+            const message = payload.message; // message có kiểu any
+            const data = payload.data; // data có kiểu any
+            if (data) {
+                state.notification = data;
+            }
+            state.message = message;
+        }
+    }); 
+
+    builder.addCase(getAllNotificationsByIdSuccess, (state, action) => {
+        const { message, data } = action.payload;
+        console.log(data);
+        state.notificationAll = data;
+        state.message = message;
+    }); 
+    builder.addCase(getAllNotificationsByIdFail, (state, action) => {
+        const { message } = action.payload;
+        state.message = message;
+    }); 
+
     // Discount
     builder.addCase(getDiscount, (state, action) => {
         state.discount = action.payload;
-    });
-
-    // Notifications
-    builder.addCase(getNotification, (state, action) => {
-        state.notification = action.payload;
     });
 });
 

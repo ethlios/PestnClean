@@ -18,9 +18,9 @@ app.prepare().then(() => {
 
     io.on('connection', (socket) => {
         // console.log(socket.id);
-        socket.on(("sendMessage"),(data) => {
-            console.log(data);
-            socket.emit("respMessage", "Hello Client!");
+
+        socket.on("addNotification",(data) => {
+            io.emit("respMessageAddNotify", data);
         })
     });
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Tippy from '@tippyjs/react/headless';
 import classNames from 'classnames/bind';
 import styles from '../Discount.module.scss';
@@ -22,7 +22,6 @@ const BoxSearch: React.FC<BoxSearchProps> = ({ items }: BoxSearchProps) => {
             <FlyOutsMenuItem key={index} data={item} onClick={() => handleClickMenuItem(item.userId)} />
         ));
     };
-
     return (
         <Tippy
             content={'Hello'}

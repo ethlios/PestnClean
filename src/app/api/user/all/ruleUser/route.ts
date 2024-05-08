@@ -7,7 +7,6 @@ export async function GET(request: Request) {
             rule: null
         },
     });
-    console.log(user);
     return NextResponse.json({
         message: 'Success',
         data: user,
