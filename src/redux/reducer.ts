@@ -49,6 +49,9 @@ import {
     updateImgWorkFail,
     getImgWorkByType,
     getUserByRule,
+    addNotificationSuccess,
+    addNotificationFail,
+    getAllNotifications,
 } from './actions';
 
 interface RootState {
@@ -342,14 +345,30 @@ const rootReducer = createReducer(initState, (builder) => {
         }
     });
 
+    // NOTIFICATIONS
+    builder.addCase(addNotificationSuccess, (state, action) => {
+        const {message} = action.payload;
+        state.message = message;
+    });
+    builder.addCase(addNotificationFail, (state, action) => {
+        const {message} = action.payload;
+        state.message = message;
+    });
+    builder.addCase(getAllNotifications, (state, action) => {
+        const payload: any = action.payload; // Sử dụng kiểu any
+        if (payload && payload.message !== undefined) {
+            const message = payload.message; // message có kiểu any
+            const data = payload.data; // data có kiểu any
+            if (data) {
+                state.notification = data;
+            }
+            state.message = message;
+        }
+    }); 
+
     // Discount
     builder.addCase(getDiscount, (state, action) => {
         state.discount = action.payload;
-    });
-
-    // Notifications
-    builder.addCase(getNotification, (state, action) => {
-        state.notification = action.payload;
     });
 });
 

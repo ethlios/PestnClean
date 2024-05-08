@@ -166,3 +166,9 @@ export const getDiscount = createAction<any>(type.GET_DISCOUNT);
 
 // Discount
 export const getNotification = createAction<any>(type.GET_NOTIFICATION);
+
+// NOTIFICATIONS
+export const addNotification = createAction<any>(type.ADD_NOTIFICATION);
+export const addNotificationSuccess = createAction<any>(type.ADD_NOTIFICATION_SUCCESS);
+export const addNotificationFail = createAction<any>(type.ADD_NOTIFICATION_FAIL);
+export const getAllNotifications = createAction<void>(type.GET_ALL_NOTIFICATIONS);

@@ -18,6 +18,20 @@ export async function PUT(request: Request, { params }: { params: { id: string }
             avatar: body.avatar,
         },
     });
-
     return NextResponse.json(user);
+}
+
+export async function GET(request: Request, { params }: { params: { id: string } }) {
+    const person = await prisma.user.findFirst({
+        where: { id: params.id },
+        select: {
+            email: true,
+            name: true,
+        },
+    });
+
+    return NextResponse.json({
+        data: person,
+        message: "Success"
+    });
 }

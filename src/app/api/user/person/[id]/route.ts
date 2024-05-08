@@ -22,7 +22,7 @@ export async function GET(request: Request, { params }: { params: { id: string }
             comment: true,
             cart: true,
             imgWork: true,
-            notification: true,
+            notifications: true,
         },
     });
 

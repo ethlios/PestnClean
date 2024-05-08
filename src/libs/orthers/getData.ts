@@ -20,8 +20,17 @@ async function getAllUsersNotAdmin() {
 
     return res.data;
 }
+
+async function getUserById(payload: any) {
+    const res = await axios.get(`/api/user/${payload.id}`);
+    if (res.status === 400) {
+        throw new Error('Failed to fetch data');
+    }
+
+    return res.data;
+}
 export async function getAllProducts() {
     return prisma.product.findMany();
 }
 
-export { getAllUsers , getAllUsersNotAdmin };
+export { getAllUsers , getAllUsersNotAdmin , getUserById };

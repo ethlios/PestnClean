@@ -36,7 +36,7 @@ function* FetchUser({ payload }: any) {
             }
 
             if (person.data.length > 0) {
-                const { cart, product, management, blog, order, emailkm, imgWork, discount, notification } =
+                const { cart, product, management, blog, order, emailkm, imgWork, discount, notifications } =
                     person.data[0] ?? [];
                 if (person.data[0].rule === 'admin') {
                     yield put(actions.getProduct(product ?? []));
@@ -47,7 +47,6 @@ function* FetchUser({ payload }: any) {
                     yield put(actions.getAdminOrder(order ?? []));
                     yield put(actions.getImgWork(imgWork ?? []));
                     yield put(actions.getDiscount(discount ?? []));
-                    yield put(actions.getNotification(notification ?? []));
                 } else {
                     yield put(actions.getManagement(management ?? []));
                     // yield put(actions.getCart(cart ?? []));
@@ -353,7 +352,7 @@ function* UpdateImgWork({ payload }: any) {
 function* GetImageWorkByType({ payload }: any) {
     try {
         const { id } = payload;
-        if(id !== undefined){
+        if (id !== undefined) {
             const res: ResponseGenerator = yield call(request.get, `api/imagework/type/${id}`, payload);
             if (res.status === 200) {
                 yield put(actions.getImgWorkByType(res.data));
@@ -380,10 +379,44 @@ function* GetUserByRule({ payload }: any) {
     }
 }
 
+// NOTIFICATIONS
+function* AddNotify({ payload }: any) {
+    try {
+        const res: ResponseGenerator = yield call(request.post, 'api/notification', payload);
+        if (res.status === 200) {
+            yield put(actions.addNotificationSuccess(res.data));
+        } else {
+            throw new Error(`Unexpected status code: ${res.status}`);
+        }
+    } catch (err: any) {
+        if (err.response && err.response.status === 400) {
+            yield put(actions.addNotificationFail(err.response.data));
+        } else {
+            console.log(err);
+        }
+    }
+}
+
+function* GetAllNotifications() {
+    try {
+        const res: ResponseGenerator = yield call(request.get, 'api/notification', null);
+        if (res.status === 200) {
+            yield put(actions.getAllNotifications(res.data));
+        } else {
+            throw new Error(`Unexpected status code: ${res.status}`);
+        }
+    } catch (err: any) {
+        if (err.response && err.response.status === 400) {
+            yield put(actions.addNotificationFail(err.response.data));
+        } else {
+            console.log(err);
+        }
+    }
+}
 
 export default function* rootSaga() {
     yield takeLatest(types.GET_USER, FetchUser);
-    yield takeLatest(types.GET_USER_BY_RULE,GetUserByRule);
+    yield takeLatest(types.GET_USER_BY_RULE, GetUserByRule);
 
     // Product
     yield takeLatest(types.ADD_PRODUCT, AddProduct);
@@ -412,6 +445,10 @@ export default function* rootSaga() {
     yield takeLatest(types.DELETE_IMG_WORK, DeleteImgWork);
     yield takeLatest(types.UPDATE_IMG_WORK, UpdateImgWork);
     yield takeLatest(types.GET_IMG_WORK_BY_TYPE, GetImageWorkByType);
+
+    // NOTIFICATIONS
+    yield takeLatest(types.ADD_NOTIFICATION, AddNotify);
+    yield takeLatest(types.GET_ALL_NOTIFICATIONS,GetAllNotifications);
 
     // User
     yield takeLatest(types.UPDATE_SESSION_USER, updateSessionUser);
