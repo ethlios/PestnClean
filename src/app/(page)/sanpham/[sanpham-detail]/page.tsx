@@ -10,8 +10,9 @@ import useSize from '~/libs/hooks/useSize';
 import { nameToLink } from '~/libs/orthers/nameToLink';
 import { useEffect, useState } from 'react';
 import { notFound, usePathname } from 'next/navigation';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '~/redux/provider/store';
+import { getFeedback } from '~/redux/actions';
 
 const cx = classNames.bind(styles);
 
@@ -22,6 +23,8 @@ export default function ProductDetailPage(props: IAppProps) {
     const pathname = usePathname();
     const [product, setProduct] = useState<any[]>([]);
     const products = useSelector((state: RootState) => state.main.allProducts);
+    const [comments, setComments] = useState<any[]>([]);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         if (products.length > 0) {
@@ -36,6 +39,18 @@ export default function ProductDetailPage(props: IAppProps) {
             }
         }
     }, [pathname, products]);
+
+    useEffect(() => {
+        const getComment = async () => {
+            if (product.length > 0) {
+                const cmts = await fetch(`/api/product/name/${product[0].code}`).then((res) => res.json());
+
+                dispatch(getFeedback(cmts[0].comments));
+            }
+        };
+
+        getComment();
+    }, [dispatch, product]);
 
     return (
         <div

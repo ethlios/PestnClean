@@ -6,7 +6,7 @@ interface RequestDelete {
 }
 
 export async function DELETE(request: Request, { params }: { params: RequestDelete }) {
-    const res = await prisma.comments.delete({
+    const res = await prisma.commentBlogs.delete({
         where: { id: +params.id },
     });
 

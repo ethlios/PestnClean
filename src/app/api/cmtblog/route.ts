@@ -4,13 +4,16 @@ import { prisma } from '~/libs/orthers/prisma';
 export async function POST(request: Request) {
     const body = await request.json();
 
-    const res = await prisma.comments.create({
+    const res = await prisma.commentBlogs.create({
         data: {
-            productId: body.productId,
-            img: body.img,
+            authorId: body.authorId,
+            blogName: body.blogName,
+            img: body.img ?? '',
             message: body.message,
             name: body.name,
             email: body.email,
+            avatar: body.avatar ?? '',
+            userId: body.userId ?? '',
         },
     });
 

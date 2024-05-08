@@ -104,6 +104,19 @@ html input {
     font-weight: 600 !important;
 }
 
+html textarea {
+    font-size: 14px !important;
+    font-weight: 600 !important;
+}
+
+html input::placeholder {
+    font-weight: 500 !important;
+}
+
+html textarea::placeholder {
+    font-weight: 500 !important;
+}
+
 .css-10hyoxo-MuiStack-root span,
 .css-9l3uo3,
 .css-1e0k9ig,

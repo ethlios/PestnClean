@@ -63,6 +63,8 @@ CREATE TABLE "Product" (
     "bag" TEXT,
     "plate" TEXT,
     "quantity" INTEGER,
+    "hastags" TEXT[],
+    "categoryMain" TEXT[],
 
     CONSTRAINT "Product_pkey" PRIMARY KEY ("id")
 );
@@ -147,8 +149,10 @@ CREATE TABLE "ImgWork" (
 -- CreateTable
 CREATE TABLE "Notification" (
     "id" SERIAL NOT NULL,
-    "authorId" TEXT NOT NULL,
+    "title" TEXT NOT NULL,
+    "recipientId" TEXT NOT NULL,
     "message" TEXT,
+    "state" BOOLEAN NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "Notification_pkey" PRIMARY KEY ("id")
@@ -182,4 +186,4 @@ ALTER TABLE "Discount" ADD CONSTRAINT "Discount_authorId_fkey" FOREIGN KEY ("aut
 ALTER TABLE "ImgWork" ADD CONSTRAINT "ImgWork_authorId_fkey" FOREIGN KEY ("authorId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Notification" ADD CONSTRAINT "Notification_authorId_fkey" FOREIGN KEY ("authorId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Notification" ADD CONSTRAINT "Notification_recipientId_fkey" FOREIGN KEY ("recipientId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

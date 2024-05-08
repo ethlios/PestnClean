@@ -12,6 +12,14 @@ import styles from './product_detail.module.scss';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import ButtonCommon from '~/components/Orther/Button';
 import useSize from '~/libs/hooks/useSize';
+import Image from 'next/image';
+import { useForm } from 'react-hook-form';
+import { useSession } from 'next-auth/react';
+import { useDispatch, useSelector } from 'react-redux';
+import { addFeedback, deleteFeedback } from '~/redux/actions';
+import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
+import { root } from 'postcss';
+import { RootState } from '~/redux/provider/store';
 
 const cx = classNames.bind(styles);
 
@@ -24,6 +32,18 @@ export default function ProductDescript({ product }: IAppProps) {
     const [isOpen2, setIsOpen2] = useState(false);
     const [isOpen3, setIsOpen3] = useState(false);
     const { sizeX } = useSize();
+    const { data: session } = useSession();
+    const dispatch = useDispatch();
+    const comments = useSelector((state: RootState) => state.main.feedback);
+
+    const {
+        register,
+        handleSubmit,
+        watch,
+        setValue,
+        reset,
+        formState: { errors },
+    } = useForm<any>();
 
     useEffect(() => {
         $('#dropbox-1').hide();
@@ -49,6 +69,32 @@ export default function ProductDescript({ product }: IAppProps) {
         $('#dropbox-3').slideToggle();
     };
 
+    const onSubmit = (data: any) => {
+        const cmts = {
+            ...data,
+            productId: product[0].id,
+            name: !!session?.user ? session.user.name : data.name,
+            email: !!session?.user ? session.user.email : data.email,
+            img: !!session?.user ? session.user.image : '',
+        };
+
+        if (!!cmts) {
+            dispatch(
+                addFeedback({
+                    ...cmts,
+                }),
+            );
+
+            reset();
+        }
+    };
+
+    const handleDeleteFeedBack = (id: number) => {
+        if (confirm('Bạn có chắc chắn muốn xóa lời góp ý này?')) {
+            dispatch(deleteFeedback(id));
+        }
+    };
+
     return (
         <div className={cx('product-descript')}>
             <div
@@ -70,7 +116,7 @@ export default function ProductDescript({ product }: IAppProps) {
                 {/*  */}
                 <div className={cx('tab-item')}>
                     <div className={cx('tab-title')} onClick={handleShowContent2}>
-                        <p>Đánh giá (3)</p>
+                        <p>Đánh giá ({comments.length})</p>
                         <IconButton>{isOpen2 ? <RemoveIcon /> : <AddIcon />}</IconButton>
                     </div>
                     <div className={cx('tab-content-2')} id="dropbox-2">
@@ -80,58 +126,66 @@ export default function ProductDescript({ product }: IAppProps) {
                                 padding: sizeX < 560 ? '20px 15px' : '',
                             }}
                         >
-                            <div className={cx('input-list')} id="comment-blogs">
-                                <input type="text" placeholder="Tên..." />
-                                <input type="email" placeholder="Email..." />
-                            </div>
-                            <textarea
-                                spellCheck={false}
-                                placeholder="Nhập góp ý của bạn..."
-                                className={cx('textarea')}
-                            />
-                            <button className={cx('cmt-btn')}>Đánh giá</button>
+                            <form onSubmit={handleSubmit(onSubmit)}>
+                                {!session?.user && (
+                                    <div className={cx('input-list')} id="comment-blogs">
+                                        <input type="text" placeholder="Tên..." {...register('name')} />
+                                        <input type="email" placeholder="Email..." {...register('email')} />
+                                    </div>
+                                )}
+                                <textarea
+                                    spellCheck={false}
+                                    placeholder="Nhập góp ý của bạn..."
+                                    className={cx('textarea')}
+                                    {...register('message')}
+                                />
+                                <button className={cx('cmt-btn')} type="submit">
+                                    Đánh giá
+                                </button>
+                            </form>
 
                             {/* Comment */}
                             <div className={cx('all-comment')}>
-                                <div className={cx('person-comment')}>
-                                    <div className={cx('avatar')}></div>
-                                    <div className={cx('comment-content')}>
-                                        <p className={cx('person-name')}>VÕ THẾ LỢI</p>
-                                        <p
-                                            className={cx('person-cmt')}
-                                        >{`Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text.`}</p>
-                                        <p className={cx('person-created')}>
-                                            <AccessTimeIcon />
-                                            09 Tháng 4, 2024
-                                        </p>
-                                    </div>
-                                </div>
-                                <div className={cx('person-comment')}>
-                                    <div className={cx('avatar')}></div>
-                                    <div className={cx('comment-content')}>
-                                        <p className={cx('person-name')}>VÕ THẾ LỢI</p>
-                                        <p
-                                            className={cx('person-cmt')}
-                                        >{`Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text.`}</p>
-                                        <p className={cx('person-created')}>
-                                            <AccessTimeIcon />
-                                            09 Tháng 4, 2024
-                                        </p>
-                                    </div>
-                                </div>
-                                <div className={cx('person-comment')}>
-                                    <div className={cx('avatar')}></div>
-                                    <div className={cx('comment-content')}>
-                                        <p className={cx('person-name')}>VÕ THẾ LỢI</p>
-                                        <p
-                                            className={cx('person-cmt')}
-                                        >{`Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text.`}</p>
-                                        <p className={cx('person-created')}>
-                                            <AccessTimeIcon />
-                                            09 Tháng 4, 2024
-                                        </p>
-                                    </div>
-                                </div>
+                                {comments.length > 0 ? (
+                                    comments.map((cmt, ind) => {
+                                        return (
+                                            <div className={cx('person-comment')} key={ind}>
+                                                <div className={cx('avatar')}>
+                                                    {cmt.img ? (
+                                                        <Image
+                                                            src={cmt.img}
+                                                            alt={'Avatar'}
+                                                            width={1000}
+                                                            height={1000}
+                                                        />
+                                                    ) : (
+                                                        cmt.name.charAt(0).toUpperCase()
+                                                    )}
+                                                </div>
+                                                <div className={cx('comment-content')}>
+                                                    <p className={cx('person-name')}>{cmt.name}</p>
+                                                    <p className={cx('person-cmt')}>{cmt.message}</p>
+                                                    <p className={cx('person-created')}>
+                                                        <AccessTimeIcon />
+                                                        {cmt.createdAt
+                                                            ? new Date(cmt.createdAt).toLocaleDateString()
+                                                            : new Date(Date.now()).toLocaleDateString()}
+                                                    </p>
+                                                </div>
+                                                {session?.user.email === cmt.email && (
+                                                    <div
+                                                        className={cx('delete-cmt')}
+                                                        onClick={() => handleDeleteFeedBack(cmt.id)}
+                                                    >
+                                                        <CloseOutlinedIcon />
+                                                    </div>
+                                                )}
+                                            </div>
+                                        );
+                                    })
+                                ) : (
+                                    <p>Chưa có đánh giá nào.</p>
+                                )}
                             </div>
                         </div>
                     </div>

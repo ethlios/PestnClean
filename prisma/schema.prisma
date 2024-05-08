@@ -74,6 +74,8 @@ model Product {
   quantity    Int?
   comments    Comments[]
   author      User       @relation(fields: [authorId], references: [id])
+  hastags String[]
+  categoryMain String[]
 }
 
 model CommentBlogs {

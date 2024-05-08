@@ -36,8 +36,18 @@ function* FetchUser({ payload }: any) {
             }
 
             if (person.data.length > 0) {
-                const { cart, product, management, blog, order, emailkm, imgWork, discount, notification } =
-                    person.data[0] ?? [];
+                const {
+                    cart,
+                    product,
+                    management,
+                    blog,
+                    order,
+                    emailkm,
+                    imgWork,
+                    discount,
+                    notification,
+                    comment,
+                } = person.data[0] ?? [];
                 if (person.data[0].rule === 'admin') {
                     yield put(actions.getProduct(product ?? []));
                     yield put(actions.getEmail(emailkm ?? []));
@@ -51,6 +61,7 @@ function* FetchUser({ payload }: any) {
                 } else {
                     yield put(actions.getManagement(management ?? []));
                     // yield put(actions.getCart(cart ?? []));
+                    yield put(actions.getBlogComment(comment ?? []));
                 }
             }
         }
@@ -353,7 +364,7 @@ function* UpdateImgWork({ payload }: any) {
 function* GetImageWorkByType({ payload }: any) {
     try {
         const { id } = payload;
-        if(id !== undefined){
+        if (id !== undefined) {
             const res: ResponseGenerator = yield call(request.get, `api/imagework/type/${id}`, payload);
             if (res.status === 200) {
                 yield put(actions.getImgWorkByType(res.data));
@@ -380,10 +391,9 @@ function* GetUserByRule({ payload }: any) {
     }
 }
 
-
 export default function* rootSaga() {
     yield takeLatest(types.GET_USER, FetchUser);
-    yield takeLatest(types.GET_USER_BY_RULE,GetUserByRule);
+    yield takeLatest(types.GET_USER_BY_RULE, GetUserByRule);
 
     // Product
     yield takeLatest(types.ADD_PRODUCT, AddProduct);
