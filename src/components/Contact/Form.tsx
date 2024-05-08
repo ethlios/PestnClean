@@ -216,17 +216,17 @@ export default function FormContactPage({ setData, setIsConfirm, data, setShowTo
                 <div className={cx('service-title')}>
                     {lists.length > 0
                         ? lists.map((list: any, index: number) => {
-                            return (
-                                <ButtonCommon
-                                    key={list.id}
-                                    text={list.title}
-                                    rule2={defaulListValue === index ? 'rule-1' : 'rule-2'}
-                                    setDefaultListValue={setDefaultListValue}
-                                    index2={index}
-                                    setDefaultList={setDefaultList}
-                                />
-                            );
-                        })
+                              return (
+                                  <ButtonCommon
+                                      key={list.id}
+                                      text={list.title}
+                                      rule2={defaulListValue === index ? 'rule-1' : 'rule-2'}
+                                      setDefaultListValue={setDefaultListValue}
+                                      index2={index}
+                                      setDefaultList={setDefaultList}
+                                  />
+                              );
+                          })
                         : ''}
                 </div>
             </div>
@@ -329,15 +329,33 @@ export default function FormContactPage({ setData, setIsConfirm, data, setShowTo
                         value={message}
                         spellCheck={false}
                     />
-                    <FormControlLabel
-                        required
-                        control={<Checkbox />}
-                        label="Chúng tôi cam kết thông tin của bạn sẽ được bảo mật một cách trọn vẹn. Việc bạn chọn vào ô này cũng đồng nghĩa với việc chấp thuận các cam kết của chúng tôi!"
-                        sx={{
+                    <div
+                        style={{
+                            display: 'flex',
+                            flexDirection: 'row',
                             marginTop: '10px',
-                            fontSize: '10px',
+                            gap: '10px',
+                            alignItems: 'center',
                         }}
-                    />
+                    >
+                        <input
+                            type="checkbox"
+                            required
+                            style={{ accentColor: 'var(--primary)', width: '30px', height: '30px' }}
+                            id="checkboxid"
+                        />
+                        <label
+                            style={{
+                                fontSize: '12px',
+                                fontWeight: 600,
+                                color: 'var(--text-black)',
+                            }}
+                            htmlFor="checkboxid"
+                        >
+                            Chúng tôi cam kết thông tin của bạn sẽ được bảo mật một cách trọn vẹn. Việc bạn
+                            chọn vào ô này cũng đồng nghĩa với việc chấp thuận các cam kết của chúng tôi!
+                        </label>
+                    </div>
                     <div
                         style={{
                             display: 'flex',
