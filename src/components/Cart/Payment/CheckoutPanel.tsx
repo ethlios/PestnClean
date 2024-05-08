@@ -9,23 +9,71 @@ import ButtonCommon from '~/components/Orther/Button';
 import styles from './payment.module.scss';
 import formatter from '~/libs/orthers/formatMoney';
 import { Button } from '@mui/material';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useSession } from 'next-auth/react';
+import { addOrder } from '~/redux/actions';
 
 const cx = classNames.bind(styles);
 
 export interface IAppProps {
     cart?: any;
-    handleSubmit?: any;
-    setTotalAllPrice?: any;
+    formData?: any;
+    formInfoRef?: any;
+    setShowDialog?: any;
+    setShowToast?: any;
 }
 
-export default function CheckoutPanel({ cart, handleSubmit, setTotalAllPrice }: IAppProps) {
+export default function CheckoutPanel({
+    cart,
+    formData,
+    formInfoRef,
+    setShowDialog,
+    setShowToast,
+}: IAppProps) {
+    const dispatch = useDispatch();
+    const { data: session } = useSession();
+    const [admin, setAdmin] = useState<any>(); // admin info
     const totalAmount = cart.reduce((acc: number, item: any) => acc + item.quantity, 0);
     const totalPrice = cart.reduce((acc: number, item: any) => acc + item.price * item.quantity, 0);
 
     useEffect(() => {
-        setTotalAllPrice(totalPrice);
+        const fetchAdmin = async () => {
+            await fetch('/api/user/all/ruleAdmin')
+                .then((res) => res.json())
+                .then((data) => setAdmin(data[0]));
+        };
+        fetchAdmin();
     }, []);
+
+    const order = {
+        authorId: session?.user.rule === 'admin' ? session?.user.id : admin?.id,
+        userId: session?.user.id,
+        name: formData?.name,
+        email: formData?.email,
+        phone: formData?.phone,
+        address: formData?.address,
+        city: formData?.city,
+        district: formData?.district,
+        ward: formData?.ward,
+        message: formData?.message,
+        payment: String(totalPrice),
+        product: JSON.stringify(cart),
+    };
+
+    const handleSubmit = () => {
+        if (formInfoRef.current.reportValidity()) {
+            if (cart.length > 0) {
+                dispatch(addOrder(order));
+                // console.log('Order:', order);
+                setShowDialog(true);
+            } else {
+                setShowToast(true);
+            }
+        } else {
+            formInfoRef.current.reportValidity();
+        }
+    };
 
     return (
         <div className={cx('panel')}>

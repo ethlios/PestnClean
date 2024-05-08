@@ -47,9 +47,20 @@ export default function PaymentForm({ setFormData, formInfoRef }: IAppProps) {
             ).then((res) => res.json());
             setProvince(res);
         };
-
         fetchProvince();
     }, []);
+
+    useEffect(() => {
+        if (session) {
+            setName(session.user.name || '');
+            setEmail(session.user.email || '');
+            setPhone(session.user.phone || '');
+            setAddress(session.user.address || '');
+            setCity(session.user.city || '');
+            setDistrict(session.user.district || '');
+            setWard(session.user.ward || '');
+        }
+    }, [session]);
 
     useEffect(() => {
         setFormData({
@@ -63,18 +74,6 @@ export default function PaymentForm({ setFormData, formInfoRef }: IAppProps) {
             message,
         });
     }, [name, email, phone, address, city, district, ward, message, setFormData]);
-
-    useEffect(() => {
-        if (session) {
-            setName(session.user.name);
-            setEmail(session.user.email);
-            setPhone(session.user.phone);
-            setAddress(session.user.address);
-            setCity(session.user.city);
-            setDistrict(session.user.district);
-            setWard(session.user.ward);
-        }
-    }, [session]);
 
     return (
         <div>
@@ -114,7 +113,7 @@ export default function PaymentForm({ setFormData, formInfoRef }: IAppProps) {
                             sx={{ marginBottom: '10px' }}
                             onChange={(e) => setName(e.target.value)}
                             required={true}
-                            defaultValue={name}
+                            value={name}
                         />
                         <TextField
                             label="Email..."
@@ -123,7 +122,7 @@ export default function PaymentForm({ setFormData, formInfoRef }: IAppProps) {
                             onChange={(e) => setEmail(e.target.value)}
                             error={email !== null && email !== '' && !validateEmailRegex.test(email)}
                             type={'email'}
-                            defaultValue={email}
+                            value={email}
                         />
                         <TextField
                             label="Số điện thoại..."
@@ -133,7 +132,7 @@ export default function PaymentForm({ setFormData, formInfoRef }: IAppProps) {
                             error={phone !== null && phone !== '' && !isPhone.test(phone)}
                             required={true}
                             type={'tel'}
-                            defaultValue={phone}
+                            value={phone}
                         />
                         <TextField
                             label="Địa chỉ..."
@@ -141,7 +140,7 @@ export default function PaymentForm({ setFormData, formInfoRef }: IAppProps) {
                             sx={{ marginBottom: '10px' }}
                             onChange={(e) => setAddress(e.target.value)}
                             required={true}
-                            defaultValue={address}
+                            value={address}
                         />
                         <FormControl sx={{ mb: 1 }} className={classInput}>
                             <InputLabel>Tỉnh thành</InputLabel>

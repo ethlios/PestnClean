@@ -6,8 +6,11 @@ import PaymentForm from '~/components/Cart/Payment/PaymentForm';
 import styles from '../../../../components/Cart/Payment/payment.module.scss';
 import Tippy from '@tippyjs/react';
 import useSize from '~/libs/hooks/useSize';
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import DialogConfirm from '~/components/Cart/Payment/DialogConfirm';
+import Toast from '~/components/Orther/Toast';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '~/redux/provider/store';
 
 const cx = classNames.bind(styles);
 
@@ -16,19 +19,11 @@ export interface IAppProps {}
 export default function PaymentPage(props: IAppProps) {
     const { sizeX } = useSize();
     const localStorageCart = JSON.parse(localStorage.getItem('cart') || '[]');
-    const [totalAllPrice, setTotalAllPrice] = useState<number>(0);
     const [cart, setCart] = useState<any>(localStorageCart);
     const [formData, setFormData] = useState<any>();
     const formInfoRef = useRef<any>('');
     const [showDialog, setShowDialog] = useState<boolean>(false);
-
-    const handleSubmit = () => {
-        if (formInfoRef.current.checkValidity() && cart.length > 0) {
-            setShowDialog(true);
-        } else {
-            formInfoRef.current.reportValidity();
-        }
-    };
+    const [showToast, setShowToast] = useState<boolean>(false);
 
     return (
         <div
@@ -58,13 +53,7 @@ export default function PaymentPage(props: IAppProps) {
             </div>
             {/*Dialog*/}
             {showDialog && (
-                <DialogConfirm
-                    setShowDialog={setShowDialog}
-                    formData={formData}
-                    cart={cart}
-                    totalAllPrice={totalAllPrice}
-                    formInfoRef={formInfoRef}
-                />
+                <DialogConfirm setShowDialog={setShowDialog} setCart={setCart} formInfoRef={formInfoRef} />
             )}
             {/*Content*/}
             <div
@@ -82,11 +71,14 @@ export default function PaymentPage(props: IAppProps) {
                     {/*Checkout panel*/}
                     <CheckoutPanel
                         cart={cart}
-                        handleSubmit={handleSubmit}
-                        setTotalAllPrice={setTotalAllPrice}
+                        formData={formData}
+                        formInfoRef={formInfoRef}
+                        setShowDialog={setShowDialog}
+                        setShowToast={setShowToast}
                     />
                 </div>
             </div>
+            <Toast rule="error" text="Giỏ hàng trống" showToast={showToast} setShowToast={setShowToast} />
         </div>
     );
 }
