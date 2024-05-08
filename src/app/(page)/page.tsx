@@ -16,44 +16,7 @@ import { useSession } from 'next-auth/react';
 
 export default function Home() {
     const { sizeX } = useSize();
-    const [isConnected, setIsConnected] = useState(false);
-    const [transport, setTransport] = useState('N/A');
-    const session = useSession();
-
-    const connectSocket = () => {
-        if (socket.connected) {
-            onConnect();
-        }
-
-        function onConnect() {
-            setIsConnected(true);
-        }
-
-        function onDisconnect() {
-            setIsConnected(false);
-            setTransport('N/A');
-        }
-
-        socket.on('connect', onConnect);
-        socket.on('disconnect', onDisconnect);
-        return () => {
-            socket.off('connect', onConnect);
-            socket.off('disconnect', onDisconnect);
-        };
-    };
-
-    useEffect(() => {
-        connectSocket();
-    }, []);
-
-    useEffect(() => {
-        if(isConnected){
-            socket.on('respMessageAddNotify', (value) => {
-                console.log(value);
-            });
-        }
-    },[isConnected])
-
+    
     return (
         <main className="cpmount">
             <div className={'overflow-x-hidden'}>

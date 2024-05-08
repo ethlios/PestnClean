@@ -172,3 +172,7 @@ export const addNotification = createAction<any>(type.ADD_NOTIFICATION);
 export const addNotificationSuccess = createAction<any>(type.ADD_NOTIFICATION_SUCCESS);
 export const addNotificationFail = createAction<any>(type.ADD_NOTIFICATION_FAIL);
 export const getAllNotifications = createAction<void>(type.GET_ALL_NOTIFICATIONS);
+
+export const getAllNotificationsById = createAction<any>(type.GET_ALL_NOTIFICATIONS_BY_ID);
+export const getAllNotificationsByIdSuccess = createAction<any>(type.GET_ALL_NOTIFICATIONS_BY_ID_SUCCESS);
+export const getAllNotificationsByIdFail = createAction<any>(type.GET_ALL_NOTIFICATIONS_BY_ID_FAIL);

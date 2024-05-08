@@ -52,6 +52,8 @@ import {
     addNotificationSuccess,
     addNotificationFail,
     getAllNotifications,
+    getAllNotificationsByIdSuccess,
+    getAllNotificationsByIdFail,
 } from './actions';
 
 interface RootState {
@@ -75,6 +77,7 @@ interface RootState {
     discount: any[];
     allProducts: any[];
     users: any[];
+    notificationAll: any[];
 }
 
 const initState: RootState = {
@@ -98,6 +101,7 @@ const initState: RootState = {
     discount: [],
     allProducts: [],
     users: [],
+    notificationAll: []
 };
 
 const findIndex = (state: any[], id: number) => {
@@ -364,6 +368,17 @@ const rootReducer = createReducer(initState, (builder) => {
             }
             state.message = message;
         }
+    }); 
+
+    builder.addCase(getAllNotificationsByIdSuccess, (state, action) => {
+        const { message, data } = action.payload;
+        console.log(data);
+        state.notificationAll = data;
+        state.message = message;
+    }); 
+    builder.addCase(getAllNotificationsByIdFail, (state, action) => {
+        const { message } = action.payload;
+        state.message = message;
     }); 
 
     // Discount

@@ -406,8 +406,23 @@ function* GetAllNotifications() {
             throw new Error(`Unexpected status code: ${res.status}`);
         }
     } catch (err: any) {
+        console.log(err);
+    }
+}
+
+function* GetAllNotificationsById({payload}: any) {
+    try {
+        if(payload.id !== undefined){
+            const res: ResponseGenerator = yield call(request.get, `api/notification/${payload.id}`, null);
+            if (res.status === 200) {
+                yield put(actions.getAllNotificationsByIdSuccess(res.data));
+            } else {
+                throw new Error(`Unexpected status code: ${res.status}`);
+            }
+        }
+    } catch (err: any) {
         if (err.response && err.response.status === 400) {
-            yield put(actions.addNotificationFail(err.response.data));
+            yield put(actions.getAllNotificationsByIdFail(err.response.data));
         } else {
             console.log(err);
         }
@@ -449,6 +464,7 @@ export default function* rootSaga() {
     // NOTIFICATIONS
     yield takeLatest(types.ADD_NOTIFICATION, AddNotify);
     yield takeLatest(types.GET_ALL_NOTIFICATIONS,GetAllNotifications);
+    yield takeLatest(types.GET_ALL_NOTIFICATIONS_BY_ID,GetAllNotificationsById);
 
     // User
     yield takeLatest(types.UPDATE_SESSION_USER, updateSessionUser);
