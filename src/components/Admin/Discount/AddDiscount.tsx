@@ -35,6 +35,10 @@ export default function AddDiscount({ isOpen, isClose, valueUpdate }: IAppProps)
     const [timeEnd, setTimeEnd] = useState<string>('');
     const session = useSession();
     const selector = useSelector((state: RootState) => state.main);
+    const [tenKhuyenMai, setTenKhuyenMai] = useState('');
+    const [moTa, setMoTa] = useState('');
+    const [maKhuyenMai, setMaKhuyenMai] = useState('');
+    const [mucGiamGia, setMucGiamGia] = useState('');
 
     const handleClose = () => {
         setOpen(false);
@@ -44,10 +48,40 @@ export default function AddDiscount({ isOpen, isClose, valueUpdate }: IAppProps)
     const handleClickOpenChooseObject = () => {
         setOpenChooseObjectCustomer(true);
     }
+    
+    const handleSave = () => {
+        console.log('Tên khuyến mãi:', tenKhuyenMai);
+        console.log('Mô tả:', moTa);
+        console.log('Selected option:', selectedOption);
+        console.log('Thời gian bắt đầu:', timeStart);
+        console.log('Thời gian kết thúc:', timeEnd);
+        console.log('Mã khuyến mãi:', maKhuyenMai);
+        console.log('Mức giảm giá:', mucGiamGia);
+        
+        // Đóng modal sau khi lưu thành công
+        isClose(false);
+    
+        // Truyền dữ liệu đã lưu thông qua props
+         // Truyền dữ liệu đã lưu thông qua props
+    valueUpdate({
+        tenKhuyenMai,
+        moTa,
+        selectedOption,
+        timeStart,
+        timeEnd,
+        maKhuyenMai,
+        mucGiamGia
+    });
+    }
 
     const handleOptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSelectedOption(event.target.value);
     };
+
+    const generateMaKhuyenMai = () => {
+        const randomString = Math.random().toString(36).substring(2, 8); // Sinh chuỗi ngẫu nhiên 6 ký tự
+        setMaKhuyenMai(randomString);
+      };
 
     useEffect(() => {
         if (isOpen) {
@@ -85,8 +119,10 @@ export default function AddDiscount({ isOpen, isClose, valueUpdate }: IAppProps)
                 <div className="mt-4">
                     <p className="font-semibold text-sm">Tên khuyến mãi</p>
                     <input
-                        className={cx('wrapper-content-inputName', 'mt-2')}
-                        placeholder="Nhập tên khuyễn mãi"
+                    className={cx('wrapper-content-inputName', 'mt-2')}
+                    placeholder="Nhập tên khuyến mãi"
+                    value={tenKhuyenMai}
+                    onChange={(e) => setTenKhuyenMai(e.target.value)}
                     />
                 </div>
                 <div className="mt-4">
@@ -97,6 +133,8 @@ export default function AddDiscount({ isOpen, isClose, valueUpdate }: IAppProps)
                         name="w3review"
                         rows={4}
                         placeholder="Nhập mô tả mã khuyễn mãi"
+                        value={moTa}
+                        onChange={(e) => setMoTa(e.target.value)}
                     ></textarea>
                 </div>
                 <div className="mt-2">
@@ -137,17 +175,25 @@ export default function AddDiscount({ isOpen, isClose, valueUpdate }: IAppProps)
                 <div className="mt-4">
                     <div className="flex items-center justify-between">
                         <p className="font-semibold text-sm">Mã khuyến mãi</p>
-                        <p className="font-semibold text-sm underline text-primaryColor">Tạo tự động</p>
+                        <p className="font-semibold text-sm underline text-primaryColor" onClick={generateMaKhuyenMai}>
+                        Tạo tự động
+                        </p>
                     </div>
                     <input
                         className={cx('wrapper-content-inputName', 'mt-2')}
                         placeholder="Nhập mã khuyễn mãi hoặc tạo tự động"
+                        value={maKhuyenMai}
+                        onChange={(e) => setMaKhuyenMai(e.target.value)}
                     />
                 </div>
                 <div className="mt-4">
                     <p className="font-semibold text-sm">Mức giảm</p>
                     <div className={cx('wrapper-content-discount', 'mt-2')}>
-                        <input placeholder="Nhập số phần trăm" />
+                    <input
+                        placeholder="Nhập số phần trăm"
+                        value={mucGiamGia}
+                        onChange={(e) => setMucGiamGia(e.target.value)}
+                    />
                     </div>
                 </div>
                 <div className="mt-2">
@@ -181,7 +227,7 @@ export default function AddDiscount({ isOpen, isClose, valueUpdate }: IAppProps)
             <div className="flex justify-center">
                 <button
                     className={cx('wrapper-btnSubmit', 'mt-6')}
-                    // onClick={handleSave}
+                    onClick={handleSave}
                     // disabled={isClicked}
                 >
                     Thêm mã khuyễn mãi

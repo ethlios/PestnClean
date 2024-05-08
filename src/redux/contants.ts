@@ -107,3 +107,4 @@ export const GET_NOTIFICATION = 'GET_NOTIFICATION';
 
 // GET Discount
 export const GET_DISCOUNT = 'GET_DISCOUNT';
+export const ADD_DISCOUNT = 'ADD_DISCOUNT';

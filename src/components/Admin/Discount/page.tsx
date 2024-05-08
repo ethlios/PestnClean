@@ -15,6 +15,7 @@ export interface showToast {
 export default function AdminDiscount(props: IAppProps) {
     let discounts: any = useSelector((state: RootState) => state.main.discount);
     const [openAddDiscount, setOpenAddDiscount] = useState<boolean>(false);
+    const arrDiscount = useSelector((state:RootState) => state.main.discount)
     const dispatch = useDispatch();
     const [updateProduct, setUpdateProduct] = useState<any>({});
     const [showToast, setShowToast] = useState<showToast>({
