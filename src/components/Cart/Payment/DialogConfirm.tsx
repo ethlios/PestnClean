@@ -31,6 +31,7 @@ export default function DialogConfirm({ setShowDialog, setCart, formInfoRef }: I
             )
             .then(() => {
                 setCart([]);
+                localStorage.setItem('cart', JSON.stringify([]));
                 handleClose();
             });
     };
