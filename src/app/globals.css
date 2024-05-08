@@ -279,3 +279,9 @@ html textarea::placeholder {
     font-size: 13px !important;
     font-family: 'Merriweather' !important;
 }
+
+/* Zoom */
+.medium-zoom-overlay,
+.medium-zoom-image--opened {
+    z-index: 9999 !important;
+}

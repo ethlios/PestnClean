@@ -8,6 +8,7 @@ import useScroll from '~/libs/hooks/useScroll';
 import Slider from 'react-slick';
 import useSize from '~/libs/hooks/useSize';
 import { useEffect, useState } from 'react';
+import { ImageZoom } from '~/components/Orther/Zoom';
 
 const cx = classNames.bind(styles);
 
@@ -82,7 +83,7 @@ export default function ProductImage({ product }: IAppProps) {
                 <div className={cx('img')}>
                     {imgLists.map((img: string, index: number) => {
                         return (
-                            <Image
+                            <ImageZoom
                                 key={index}
                                 src={img}
                                 alt={`${index}`}
@@ -90,7 +91,9 @@ export default function ProductImage({ product }: IAppProps) {
                                 height={1000}
                                 className={'bg-gray-200'}
                                 id={`img-${index + 1}`}
-                                style={{}}
+                                options={{
+                                    background: '#2f292f',
+                                }}
                             />
                         );
                     })}

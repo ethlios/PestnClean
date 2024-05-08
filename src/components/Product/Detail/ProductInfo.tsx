@@ -94,8 +94,6 @@ export default function ProductInfo({ product }: IAppProps) {
         }
     }, []);
 
-    console.log(product[0]);
-
     return (
         <div
             className={cx('product-info')}

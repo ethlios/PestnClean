@@ -73,7 +73,7 @@ export default function FilterProduct({ openFilter, setOpenFilter }: IAppProps) 
                                     key={index}
                                     title={menu.title}
                                     subMenu={menu.subMenu}
-                                    className={'title'}
+                                    className={cx('title')}
                                 />
                             ))}
                         </div>

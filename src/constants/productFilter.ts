@@ -99,20 +99,6 @@ const filterMenu = [
             },
         ],
     },
-    {
-        title: 'Giải pháp vệ sinh Initial',
-        subMenu: [
-            {
-                title: 'Buồng vệ sinh',
-                subMenu: [
-                    { title: 'Thiết bị thanh khuẩn bồn vệ sinh' },
-                    { title: 'Thiết bị thanh khuẩn bồn vệ sinh hẹn giờ' },
-                    { title: ' Dung dịch thanh khuẩn bồn vệ sinh' },
-                ],
-            },
-            { title: 'Vệ sinh không khí' },
-        ],
-    },
 ];
 
 const checkboxFilter = [
