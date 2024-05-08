@@ -2,6 +2,7 @@ import { call, delay, put, takeLatest } from 'redux-saga/effects';
 import * as types from './contants';
 import * as request from '../libs/orthers/axios';
 import * as actions from './actions';
+import AddDiscount from '~/components/Admin/Discount/AddDiscount';
 
 export interface ResponseGenerator {
     config?: any;
@@ -415,4 +416,6 @@ export default function* rootSaga() {
 
     // User
     yield takeLatest(types.UPDATE_SESSION_USER, updateSessionUser);
+
+  
 }
