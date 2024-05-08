@@ -11,6 +11,8 @@ import { uid } from '~/libs/orthers/generatedCode';
 import { useDispatch } from 'react-redux';
 import { addProduct, updateProduct as update } from '~/redux/actions';
 import { arrToStr, removeImg } from '~/libs/orthers/removeImg';
+import HastagList from './Hastag';
+import CategoryMain from './CategoryMain';
 
 const cx = classNames.bind(styles);
 
@@ -47,6 +49,10 @@ export default function AdminAddProduct({ setAddProduct, updateProduct, setUpdat
     const { data: session } = useSession();
     const dispatch = useDispatch();
     const [isUpdate, setIsUpdate] = useState<boolean>(false);
+    const [hastagList, setHastagList] = useState<any[]>([]);
+    const [hastag, setHastag] = useState<string>('');
+    const [phanloaiList, setPhanloaiList] = useState<any[]>([]);
+    const [phanloai, setPhanloai] = useState<string>('');
 
     const {
         register,
@@ -92,6 +98,8 @@ export default function AdminAddProduct({ setAddProduct, updateProduct, setUpdat
             setValue('quantity', +updateProduct.quantity);
             setIsNew(updateProduct.new);
             setValue('description', updateProduct.description);
+            setHastagList(updateProduct.hastags);
+            setPhanloaiList(updateProduct.categoryMain);
         }
     }, [isUpdate, setValue, updateProduct]);
 
@@ -107,6 +115,8 @@ export default function AdminAddProduct({ setAddProduct, updateProduct, setUpdat
             status: statusValue,
             new: isNew,
             quantity: +data.quantity,
+            hastags: hastagList,
+            categoryMain: phanloaiList,
         };
 
         if (!isUpdate) {
@@ -193,6 +203,18 @@ export default function AdminAddProduct({ setAddProduct, updateProduct, setUpdat
                             ></input>
                         )}
                         <UploadImgProduct imageList={imageList} setImageList={setImageList} />
+                        <HastagList
+                            hastag={hastag}
+                            setHastag={setHastag}
+                            hastagList={hastagList}
+                            setHastagList={setHastagList}
+                        />
+                        <CategoryMain
+                            hastag={phanloai}
+                            setHastag={setPhanloai}
+                            hastagList={phanloaiList}
+                            setHastagList={setPhanloaiList}
+                        />
                         <input
                             type="text"
                             placeholder="Danh mục chính..."

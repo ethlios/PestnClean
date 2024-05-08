@@ -94,6 +94,8 @@ export default function ProductInfo({ product }: IAppProps) {
         }
     }, []);
 
+    console.log(product[0]);
+
     return (
         <div
             className={cx('product-info')}
@@ -102,7 +104,15 @@ export default function ProductInfo({ product }: IAppProps) {
                 width: sizeX < 768 ? '100%' : sizeX < 950 ? '55%' : '',
             }}
         >
-            <p className={cx('sale')}>Đang giảm giá</p>
+            <p className={cx('sale')}>
+                {product[0].status === 'sale'
+                    ? 'Đang giảm giá'
+                    : product[0].status === 'hot'
+                      ? 'Đang bán chạy'
+                      : product[0].status
+                        ? 'Sản phẩm mới'
+                        : product[0].category1}
+            </p>
             <h1
                 className={cx('name')}
                 style={{
@@ -135,30 +145,36 @@ export default function ProductInfo({ product }: IAppProps) {
                     <LinkedinIcon size={28} round={true} />
                 </LinkedinShareButton>
             </div>
-            <div className={'type'}>
-                <p
-                    className={cx('text')}
-                    style={{
-                        marginBottom: '15px',
-                    }}
-                >
-                    Phân loại:
-                </p>
-                <FormControl fullWidth>
-                    <InputLabel id="demo-simple-select-label">Loại</InputLabel>
-                    <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        value={type}
-                        label="Loại"
-                        onChange={handleChange}
+            {product[0].categoryMain.length > 0 && (
+                <div className={'type'}>
+                    <p
+                        className={cx('text')}
+                        style={{
+                            marginBottom: '15px',
+                        }}
                     >
-                        <MenuItem value={'1l'}>1L</MenuItem>
-                        <MenuItem value={'2l'}>2L</MenuItem>
-                        <MenuItem value={'3l'}>3L</MenuItem>
-                    </Select>
-                </FormControl>
-            </div>
+                        Phân loại:
+                    </p>
+                    <FormControl fullWidth>
+                        <InputLabel id="demo-simple-select-label">Loại</InputLabel>
+                        <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            value={type}
+                            label="Loại"
+                            onChange={handleChange}
+                        >
+                            {product[0].categoryMain.map((value: string, index: number) => {
+                                return (
+                                    <MenuItem value={value} key={index}>
+                                        {value.toUpperCase()}
+                                    </MenuItem>
+                                );
+                            })}
+                        </Select>
+                    </FormControl>
+                </div>
+            )}
             <div className={cx('quantity')}>
                 <IconButton onClick={handleSub}>
                     <RemoveIcon />
