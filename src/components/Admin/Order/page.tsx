@@ -15,15 +15,15 @@ export interface IAppProps {}
 
 export default function AdminOder(props: IAppProps) {
     const [searchValue, setSearchValue] = useState<string>('');
-    let adminOrder: any = useSelector((state: RootState) => state.main.adminOrder);
-    let userOrder: any = useSelector((state: RootState) => state.main.order);
     const [order, setOrder] = useState<any>({}); // order update
     const [openAddOrder, setOpenAddOrder] = useState<boolean>(false);
     const [isUpdate, setIsUpdate] = useState<boolean>(false);
     const dispatch = useDispatch();
-    const [allOrders, setAllOrders] = useState<any>();
+    const [allOrders, setAllOrders] = useState<any>([]);
     const { data: session } = useSession();
     const [isAdmin, setIsAdmin] = useState<boolean>(false);
+    let adminOrder: any = useSelector((state: RootState) => state.main.adminOrder);
+    let userOrder: any = useSelector((state: RootState) => state.main.order);
 
     const handleDelete = (order: any) => {
         dispatch(removeOrder(order));

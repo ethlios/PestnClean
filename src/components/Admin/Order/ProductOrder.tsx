@@ -5,36 +5,37 @@ import classNames from 'classnames/bind';
 import styles from './order.module.scss';
 import Image from 'next/image';
 import formatter from '~/libs/orthers/formatMoney';
-import { useState } from 'react';
-// import { useSelector } from 'react-redux';
-// import { RootState } from '~/redux/provider/store';
+import { useEffect, useState } from 'react';
 import RemoveIcon from '@mui/icons-material/Remove';
 import IconButton from '@mui/material/IconButton';
 import AddIcon from '@mui/icons-material/Add';
+// import { useSelector } from 'react-redux';
+// import { RootState } from '~/redux/provider/store';
 
 const cx = classNames.bind(styles);
 
 interface ProductOrderProps {
     products?: any;
     setProducts?: any;
+    isAdmin?: boolean;
 }
 
-export default function ProductOrder({ products, setProducts }: ProductOrderProps) {
+export default function ProductOrder({ products, setProducts, isAdmin }: ProductOrderProps) {
     // let allProducts: any = useSelector((state: RootState) => state.main.products);
     const [editListProduct, setEditListProduct] = useState<boolean>(false);
 
     return (
         <div className={'flex flex-col gap-2'}>
-            <div className={cx('panel')}>
-                <button className={cx('commom-button')} onClick={() => setEditListProduct(true)}>
-                    Sửa
-                </button>
-                {editListProduct && (
-                    <button className={cx('commom-button')} onClick={() => setEditListProduct(false)}>
-                        Done
+            {isAdmin && (
+                <div className={cx('panel')}>
+                    <button
+                        className={cx('commom-button')}
+                        onClick={() => setEditListProduct((prev) => !prev)}
+                    >
+                        {editListProduct ? 'Xong' : 'Sửa'}
                     </button>
-                )}
-            </div>
+                </div>
+            )}
             <div className={`p-2 ${editListProduct ? 'border' : ''}`}>
                 {products.length > 0 && (
                     <>
