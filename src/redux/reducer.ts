@@ -50,7 +50,8 @@ import {
     getAllNotificationsByIdSuccess,
     getAllNotificationsByIdFail,
     addDiscountSuccess,
-    removeDiscountSuccess,
+    deleteDiscount,
+    deleteDiscountSuccess,
     getProvince,
 } from './actions';
 
@@ -377,8 +378,8 @@ const rootReducer = createReducer(initState, (builder) => {
     builder.addCase(addDiscountSuccess, (state, action) => {
         state.discount.push(action.payload);
     });
-    builder.addCase(removeDiscountSuccess, (state, action) => {
-        const index = findIndex2(state.discount, action.payload);
+    builder.addCase(deleteDiscountSuccess, (state, action) => {
+        const index = findIndex(state.products, action.payload);
         state.discount.splice(index, 1);
     });
 });

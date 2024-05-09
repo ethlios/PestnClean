@@ -438,12 +438,12 @@ function* AddDiscount({ payload }: any) {
     } catch (err: any) {}
 }
 
-function* deleteDiscount({ payload }: any) {
+
+function* DeleteDiscount({ payload }: any) {
     try {
+        yield put(actions.deleteDiscountSuccess(payload));
         const res: ResponseGenerator = yield call(request.remove, `api/discount/${payload}`);
-        if (res.status === 200) {
-            yield put(actions.removeDiscountSuccess(payload));
-        }
+        const { status, data }: ResponseGenerator = res;
     } catch (err) {
         console.log(err);
     }
@@ -483,11 +483,12 @@ export default function* rootSaga() {
 
     // NOTIFICATIONS
     yield takeLatest(types.ADD_NOTIFICATION, AddNotify);
-    yield takeLatest(types.GET_ALL_NOTIFICATIONS_BY_ID,GetAllNotificationsById);
+    yield takeLatest(types.GET_ALL_NOTIFICATIONS_BY_ID, GetAllNotificationsById);
 
     // User
     yield takeLatest(types.UPDATE_SESSION_USER, updateSessionUser);
 
     // DISCOUNT
     yield takeLatest(types.ADD_DISCOUNT, AddDiscount);
+    yield takeLatest(types.DELETE_DISCOUNT, DeleteDiscount);
 }
