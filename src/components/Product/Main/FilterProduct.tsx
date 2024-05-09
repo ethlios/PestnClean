@@ -4,23 +4,38 @@ import classNames from 'classnames/bind';
 import styles from '../product.module.scss';
 import useScroll from '~/libs/hooks/useScroll';
 import FilterMenu from '~/components/Product/Main/FilterMenu';
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
 import { Button, Checkbox, IconButton } from '@mui/material';
 import useSize from '~/libs/hooks/useSize';
 import DisabledByDefaultIcon from '@mui/icons-material/DisabledByDefault';
 import { filterMenu, checkboxFilter } from '~/constants/productFilter';
+import { useEffect, useState } from 'react';
+import CheckboxMenu from '~/components/Product/Main/CheckboxMenu';
 
 const cx = classNames.bind(styles);
 
 export interface IAppProps {
     openFilter: boolean;
     setOpenFilter: any;
+    setProducts: any;
+    allProducts: any;
 }
 
-export default function FilterProduct({ openFilter, setOpenFilter }: IAppProps) {
+export default function FilterProduct({ openFilter, setOpenFilter, setProducts, allProducts }: IAppProps) {
     const wheel: boolean = useScroll();
     const { sizeX } = useSize();
+    const [selected, setSelected] = useState<any>([]);
+    const [checked, setChecked] = useState<any>([]);
+
+    useEffect(() => {
+        // console.log(selected);
+        // console.log(checked);
+    }, [selected, checked]);
+
+    const handleCancel = () => {
+        // setProducts(allProducts);
+        setSelected([]);
+        setChecked([]);
+    };
 
     return (
         <div
@@ -74,42 +89,14 @@ export default function FilterProduct({ openFilter, setOpenFilter }: IAppProps) 
                                     title={menu.title}
                                     subMenu={menu.subMenu}
                                     className={cx('title')}
+                                    setSelected={setSelected}
                                 />
                             ))}
                         </div>
                     </div>
                 )}
                 {checkboxFilter.map((filter, index) => (
-                    <div key={index} className={'flex flex-col gap-2'}>
-                        <h2 className={cx('filter-title')}>{filter.title}</h2>
-                        {filter.checkbox &&
-                            filter.checkbox.map((checkbox, index) => (
-                                <div className={'flex items-center gap-2'} key={index}>
-                                    <Checkbox />
-                                    <p className={cx('label')}>{checkbox}</p>
-                                </div>
-                            ))}
-                        {filter.checkboxLeft && filter.checkboxRight && (
-                            <div className={'flex justify-between *:flex *:flex-col *:gap-2 *:w-1/2'}>
-                                <div>
-                                    {filter.checkboxLeft.map((checkbox, index) => (
-                                        <div className={'flex items-center gap-2'} key={index}>
-                                            <Checkbox />
-                                            <p className={cx('label')}>{checkbox}</p>
-                                        </div>
-                                    ))}
-                                </div>
-                                <div>
-                                    {filter.checkboxRight.map((checkbox, index) => (
-                                        <div className={'flex items-center gap-2'} key={index}>
-                                            <Checkbox />
-                                            <p className={cx('label')}>{checkbox}</p>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        )}
-                    </div>
+                    <CheckboxMenu filter={filter} key={index} />
                 ))}
                 <div className={cx('filter-button')}>
                     <Button
@@ -117,6 +104,7 @@ export default function FilterProduct({ openFilter, setOpenFilter }: IAppProps) 
                         color="secondary"
                         fullWidth
                         style={{ fontWeight: '600', height: '45px' }}
+                        onClick={handleCancel}
                     >
                         Hủy bỏ
                     </Button>

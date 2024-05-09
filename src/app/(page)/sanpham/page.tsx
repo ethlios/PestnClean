@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 import AllProduct from '~/components/Product/Main/AllProduct';
 import BannerProduct from '~/components/Product/Main/Banner';
 import CategoryIconProduct from '~/components/Product/Main/CategoryIcon';
-import FilterProduct from '~/components/Product/Main/Filter';
+import FilterProduct from '~/components/Product/Main/FilterProduct';
 import ProductStatus from '~/components/Product/Main/ProductStatus';
 import useSize from '~/libs/hooks/useSize';
 import { RootState } from '~/redux/provider/store';
@@ -20,7 +20,8 @@ export interface IAppProps {}
 export default function ProductPage(props: IAppProps) {
     const { sizeX } = useSize();
     const [openFilter, setOpenFilter] = useState<boolean>(true);
-    const products = useSelector((state: RootState) => state.main.allProducts);
+    const allProducts = useSelector((state: RootState) => state.main.allProducts);
+    const [products, setProducts] = useState<any>(allProducts);
 
     useEffect(() => {
         if (sizeX < 1024) {
@@ -49,7 +50,12 @@ export default function ProductPage(props: IAppProps) {
                     gap: !openFilter ? '0px' : '',
                 }}
             >
-                <FilterProduct openFilter={openFilter} setOpenFilter={setOpenFilter} />
+                <FilterProduct
+                    openFilter={openFilter}
+                    setOpenFilter={setOpenFilter}
+                    setProducts={setProducts}
+                    allProducts={allProducts}
+                />
                 <div
                     className={cx('product-main')}
                     style={{

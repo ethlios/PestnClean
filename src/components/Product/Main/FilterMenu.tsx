@@ -12,20 +12,32 @@ export interface IAppProps {
     title: string;
     subMenu?: any;
     className?: string;
+    setSelected?: any;
 }
 
-export default function FilterMenu({ title, subMenu, className }: IAppProps) {
+export default function FilterMenu({ title, subMenu, className, setSelected }: IAppProps) {
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleOpen = () => {
         setIsOpen(!isOpen);
     };
 
+    const handleFilter = (e: any) => {
+        const value = e.target.innerText || e.target.innerHTML;
+        setSelected(value);
+    };
+
     return subMenu && subMenu.length > 0 ? (
         <>
-            <div className={cx(className)} onClick={toggleOpen}>
-                <p>{title}</p>
-                {isOpen ? <KeyboardArrowDownIcon /> : <KeyboardArrowRightIcon />}
+            <div className={cx(className)}>
+                <p defaultValue={title} onClick={handleFilter}>
+                    {title}
+                </p>
+                {isOpen ? (
+                    <KeyboardArrowDownIcon onClick={toggleOpen} />
+                ) : (
+                    <KeyboardArrowRightIcon onClick={toggleOpen} />
+                )}
             </div>
             {isOpen && (
                 <ul className={cx('drop-menu')}>
@@ -41,6 +53,8 @@ export default function FilterMenu({ title, subMenu, className }: IAppProps) {
             )}
         </>
     ) : (
-        <p>{title}</p>
+        <p defaultValue={title} onClick={handleFilter}>
+            {title}
+        </p>
     );
 }
