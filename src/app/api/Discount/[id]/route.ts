@@ -1,9 +1,13 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '~/libs/orthers/prisma';
 
-export async function DELETE({ params }: { params: { id: number } }) {
+interface RequestDelete {
+    id: number;
+}
+
+export async function DELETE(request: Request, { params }: { params: RequestDelete }) {
     const res = await prisma.discount.delete({
-        where: { id: +params.id },
+        where: { id: params.id },
     });
 
     return NextResponse.json(res);
