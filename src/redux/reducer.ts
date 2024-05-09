@@ -55,6 +55,7 @@ import {
     getAllNotificationsByIdSuccess,
     getAllNotificationsByIdFail,
     addDiscountSuccess,
+    getProvince,
 } from './actions';
 
 interface RootState {
@@ -79,6 +80,7 @@ interface RootState {
     allProducts: any[];
     users: any[];
     notificationAll: any[];
+    province: any[];
 }
 
 const initState: RootState = {
@@ -103,6 +105,7 @@ const initState: RootState = {
     allProducts: [],
     users: [],
     notificationAll: [],
+    province: [],
 };
 
 const findIndex = (state: any[], id: number) => {
@@ -160,7 +163,9 @@ const rootReducer = createReducer(initState, (builder) => {
         const index = findIndex(state.feedback, action.payload);
         state.feedback.splice(index, 1);
     });
-
+    builder.addCase(getProvince, (state, action) => {
+        state.province = action.payload;
+    });
     //////////////////////////////////////////
 
     builder.addCase(getBlogComment, (state, action) => {

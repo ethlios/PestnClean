@@ -1,10 +1,9 @@
 import classNames from 'classnames/bind';
 import styles from './order.module.scss';
-import { useSelector } from 'react-redux';
-import { RootState } from '~/redux/provider/store';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import TableOrder from './TableOrder';
 import UserOpenOrder from './UserOpenOrder';
+import { useSession } from 'next-auth/react';
 
 const cx = classNames.bind(styles);
 
@@ -14,7 +13,16 @@ export default function UserOder(props: IAppProps) {
     const [searchValue, setSearchValue] = useState<string>('');
     const [order, setOrder] = useState<any>({});
     const [openOrder, setOpenOrder] = useState<boolean>(false);
-    let allOrders: any = useSelector((state: RootState) => state.main.order);
+    const [allOrders, setAllOrders] = useState<any>([]);
+    const { data: session } = useSession();
+
+    useEffect(() => {
+        const getOrder = async () => {
+            const data = await fetch(`/api/order/user/${session?.user.id}`).then((res) => res.json());
+            setAllOrders(data);
+        };
+        getOrder();
+    }, []);
 
     return (
         <>

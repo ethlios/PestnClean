@@ -61,7 +61,6 @@ function* FetchUser({ payload }: any) {
                     yield put(actions.getManagement(management ?? []));
                     // yield put(actions.getCart(cart ?? []));
                     yield put(actions.getBlogComment(comment ?? []));
-                    yield put(actions.getOrder(order ?? []));
                 }
             }
         }

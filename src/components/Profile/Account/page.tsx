@@ -4,9 +4,11 @@ import styles from '../profile.module.scss';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { updateSessionUser } from '~/redux/actions';
 import Toast from '~/components/Orther/Toast';
+import { RootState } from '~/redux/provider/store';
+import MenuItem from '@mui/material/MenuItem';
 
 const cx = classNames.bind(styles);
 
@@ -17,12 +19,14 @@ export default function UserAccount(props: IAppProps) {
     const {
         register,
         handleSubmit,
+        watch,
         formState: { errors },
     } = useForm<any>();
     const dispatch = useDispatch();
     const [showToast, setShowToast] = useState<boolean>(false);
     const [message, setShowMessage] = useState<string>('');
     const isPhone = /(84|0[3|5|7|8|9])+([0-9]{8})\b/g;
+    const province = useSelector((state: RootState) => state.main.province);
 
     const onSubmit = (data: any) => {
         if (isPhone.test(data.phone)) {
@@ -78,28 +82,54 @@ export default function UserAccount(props: IAppProps) {
                         />
                     </div>
                     <div className={cx('inp-wrapper')}>
-                        <label>Phường/Xã:</label>
-                        <input
+                        <label>Tỉnh/Thành phố:</label>
+                        <select
                             className={cx('add-inp')}
-                            defaultValue={session?.user.ward}
-                            {...register('ward')}
-                        />
+                            defaultValue={''}
+                            value={session?.user.city}
+                            {...register('city')}
+                        >
+                            {province.map((item: any, index: number) => (
+                                <option key={index} value={item.Name}>
+                                    {item.Name}
+                                </option>
+                            ))}
+                        </select>
                     </div>
                     <div className={cx('inp-wrapper')}>
                         <label>Huyện/Thị trấn:</label>
-                        <input
+                        <select
                             className={cx('add-inp')}
-                            defaultValue={session?.user.district}
+                            defaultValue={''}
+                            value={session?.user.district}
                             {...register('district')}
-                        />
+                        >
+                            {province
+                                .find((item: any) => item.Name === watch('city'))
+                                ?.Districts.map((item: any, index: number) => (
+                                    <option key={index} value={item.Name}>
+                                        {item.Name}
+                                    </option>
+                                ))}
+                        </select>
                     </div>
                     <div className={cx('inp-wrapper')}>
-                        <label>Tỉnh/Thành phố:</label>
-                        <input
+                        <label>Phường/Xã:</label>
+                        <select
                             className={cx('add-inp')}
-                            defaultValue={session?.user.city}
-                            {...register('city')}
-                        />
+                            defaultValue={''}
+                            value={session?.user.ward}
+                            {...register('ward')}
+                        >
+                            {province
+                                .find((item: any) => item.Name === watch('city'))
+                                ?.Districts.find((item: any) => item.Name === watch('district'))
+                                ?.Wards.map((item: any, index: number) => (
+                                    <option key={index} value={item.Name}>
+                                        {item.Name}
+                                    </option>
+                                ))}
+                        </select>
                     </div>
                     <div className={cx('inp-wrapper')}>
                         <label>Địa chỉ:</label>

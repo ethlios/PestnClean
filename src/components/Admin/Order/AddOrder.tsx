@@ -12,6 +12,8 @@ import MenuItem from '@mui/material/MenuItem';
 import { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
 import ProductOrder from './ProductOrder';
+import { useSelector } from 'react-redux';
+import { RootState } from '~/redux/provider/store';
 
 const cx = classNames.bind(styles);
 
@@ -46,22 +48,12 @@ export default function AdminAddOrder({
     const [paymentStatus, setPaymentStatus] = useState<string>('');
     const [orderAt, setOrderAt] = useState<string>('');
     const [code, setCode] = useState<string>('');
-    const [province, setProvince] = useState<any>([]);
     const validateEmailRegex = /^\S+@\S+\.\S+$/;
     const isPhone = /(84|0[3|5|7|8|9])+([0-9]{8})\b/g;
     const [products, setProducts] = useState<any>([]);
     const [newOrderData, setNewOrderData] = useState<any>(null);
     const { data: session } = useSession();
-
-    useEffect(() => {
-        const fetchProvince = async () => {
-            const res = await fetch(
-                'https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json',
-            ).then((res) => res.json());
-            setProvince(res);
-        };
-        fetchProvince();
-    }, []);
+    const province = useSelector((state: RootState) => state.main.province);
 
     useEffect(() => {
         if (isUpdate) {
@@ -168,6 +160,7 @@ export default function AdminAddOrder({
                                             setDistrict('');
                                             setWard('');
                                         }}
+                                        defaultValue={''}
                                         value={city}
                                     >
                                         {province.map((item: any, index: number) => (
@@ -185,6 +178,7 @@ export default function AdminAddOrder({
                                             setDistrict(e.target.value);
                                             setWard('');
                                         }}
+                                        defaultValue={''}
                                         value={district}
                                     >
                                         {province
@@ -201,6 +195,7 @@ export default function AdminAddOrder({
                                     <Select
                                         label="Phường xã"
                                         onChange={(e) => setWard(e.target.value)}
+                                        defaultValue={''}
                                         value={ward}
                                     >
                                         {province
@@ -224,6 +219,7 @@ export default function AdminAddOrder({
                                     <Select
                                         label="Trạng thái"
                                         onChange={(e) => setStatus(e.target.value)}
+                                        defaultValue={''}
                                         value={status}
                                     >
                                         <MenuItem value={'Đang xử lý'}>Đang xử lý</MenuItem>
@@ -237,6 +233,7 @@ export default function AdminAddOrder({
                                     <Select
                                         label="Phương thức thanh toán"
                                         onChange={(e) => setPaymentStatus(e.target.value)}
+                                        defaultValue={''}
                                         value={paymentStatus}
                                     >
                                         <MenuItem value={'Thanh toán khi nhận hàng'}>

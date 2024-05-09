@@ -12,7 +12,7 @@ import Footer from '~/common/Footer/footer';
 import Header from '~/common/Header/header';
 import HeaderMobile from '~/common/Header/headerMobile';
 import useSize from '~/libs/hooks/useSize';
-import { getAllProducts, getUser } from '~/redux/actions';
+import { getAllProducts, getProvince, getUser } from '~/redux/actions';
 import logo from '../../../public/img/logo.png';
 
 export default function ComponentConnectLayout({ children }: { children: React.ReactNode }) {
@@ -49,6 +49,16 @@ export default function ComponentConnectLayout({ children }: { children: React.R
         };
 
         allProducts();
+    }, [dispatch]);
+
+    useEffect(() => {
+        const allProvince = async () => {
+            const province = await fetch(
+                'https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json',
+            ).then((res) => res.json());
+            dispatch(getProvince(province));
+        };
+        allProvince();
     }, [dispatch]);
 
     return openCp ? (

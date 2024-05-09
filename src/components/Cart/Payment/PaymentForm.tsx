@@ -15,6 +15,8 @@ import Select from '@mui/material/Select';
 import FormControl from '@mui/material/FormControl';
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
+import { useSelector } from 'react-redux';
+import { RootState } from '~/redux/provider/store';
 
 const cx = classNames.bind(styles);
 
@@ -35,20 +37,10 @@ export default function PaymentForm({ setFormData, formInfoRef }: IAppProps) {
     const [district, setDistrict] = useState<string>('');
     const [ward, setWard] = useState<string>('');
     const [message, setMessage] = useState<string>('');
-    const [province, setProvince] = useState<any>([]);
     const validateEmailRegex = /^\S+@\S+\.\S+$/;
     const isPhone = /(84|0[3|5|7|8|9])+([0-9]{8})\b/g;
     const { data: session } = useSession();
-
-    useEffect(() => {
-        const fetchProvince = async () => {
-            const res = await fetch(
-                'https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json',
-            ).then((res) => res.json());
-            setProvince(res);
-        };
-        fetchProvince();
-    }, []);
+    const province = useSelector((state: RootState) => state.main.province);
 
     useEffect(() => {
         if (session) {
@@ -151,6 +143,7 @@ export default function PaymentForm({ setFormData, formInfoRef }: IAppProps) {
                                     setDistrict('');
                                     setWard('');
                                 }}
+                                defaultValue={''}
                                 value={city}
                             >
                                 {province.map((item: any, index: number) => (
@@ -168,6 +161,7 @@ export default function PaymentForm({ setFormData, formInfoRef }: IAppProps) {
                                     setDistrict(e.target.value);
                                     setWard('');
                                 }}
+                                defaultValue={''}
                                 value={district}
                             >
                                 {province
@@ -181,7 +175,12 @@ export default function PaymentForm({ setFormData, formInfoRef }: IAppProps) {
                         </FormControl>
                         <FormControl sx={{ mb: 1 }} className={classInput}>
                             <InputLabel>Phường xã</InputLabel>
-                            <Select label="Phường xã" onChange={(e) => setWard(e.target.value)} value={ward}>
+                            <Select
+                                label="Phường xã"
+                                onChange={(e) => setWard(e.target.value)}
+                                defaultValue={''}
+                                value={ward}
+                            >
                                 {province
                                     .find((item: any) => item.Name === city)
                                     ?.Districts.find((item: any) => item.Name === district)

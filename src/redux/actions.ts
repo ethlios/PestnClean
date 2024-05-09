@@ -111,6 +111,8 @@ export const deleteBlogComment = createAction<any>(type.DELETE_BLOG_COMMENT);
 
 export const deleteBlogCommentSuccess = createAction<any>(type.DELETE_BLOG_COMMENT_SUCCESS);
 
+export const getProvince = createAction<any>(type.GET_PROVINCE);
+
 // Order
 
 export const getOrder = createAction<any>(type.GET_ORDER);
