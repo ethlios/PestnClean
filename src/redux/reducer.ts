@@ -6,7 +6,6 @@ import {
     addFeedbackSuccess,
     addOrderSuccess,
     addProductSuccess,
-    addEmail,
     deleteBlogCommentSuccess,
     deleteFeedbackSuccess,
     getAdminOrder,
@@ -17,8 +16,6 @@ import {
     getCart,
     getEmail,
     getFeedback,
-    getManagement,
-    getOrder,
     getOrderSuccess,
     getProduct,
     getProductPageSuccess,
@@ -41,7 +38,6 @@ import {
     addImgWorkFail,
     getImgWork,
     getDiscount,
-    getNotification,
     getAllProducts,
     deleteImgWorkSuccess,
     deleteImgWorkFail,
@@ -51,7 +47,6 @@ import {
     getUserByRule,
     addNotificationSuccess,
     addNotificationFail,
-    getAllNotifications,
     getAllNotificationsByIdSuccess,
     getAllNotificationsByIdFail,
 } from './actions';
@@ -358,21 +353,8 @@ const rootReducer = createReducer(initState, (builder) => {
         const {message} = action.payload;
         state.message = message;
     });
-    builder.addCase(getAllNotifications, (state, action) => {
-        const payload: any = action.payload; // Sử dụng kiểu any
-        if (payload && payload.message !== undefined) {
-            const message = payload.message; // message có kiểu any
-            const data = payload.data; // data có kiểu any
-            if (data) {
-                state.notification = data;
-            }
-            state.message = message;
-        }
-    }); 
-
     builder.addCase(getAllNotificationsByIdSuccess, (state, action) => {
         const { message, data } = action.payload;
-        console.log(data);
         state.notificationAll = data;
         state.message = message;
     }); 

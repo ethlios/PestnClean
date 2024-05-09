@@ -26,10 +26,14 @@ import { socket } from '~/websocket/socket';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '~/redux/provider/store';
 import { clearMessage, getAllNotificationsById } from '~/redux/actions';
+import Toast from '~/components/Orther/Toast';
 const cx = classNames.bind(styles);
 
 export interface HeaderProps {}
-
+interface ShowToast {
+    message: string;
+    status: boolean
+}
 export default function Header(props: HeaderProps) {
     const path = usePathname();
     const [scrollToTop, setScrollToTop] = useState<number>(0);
@@ -44,14 +48,19 @@ export default function Header(props: HeaderProps) {
     const [openNotifications, setOpenNotifications] = useState<boolean>(false);
     const [isConnected, setIsConnected] = useState(false);
     const [transport, setTransport] = useState('N/A');
-    const [listNotifications,setListNotifications] = useState<any[]>([]);
+    const [listNotifications, setListNotifications] = useState<any[]>([]);
+    const [isShowToast,setShowToast] = useState<ShowToast>({
+        message: "",
+        status: false
+    });
     const dispatch = useDispatch();
     const selector = useSelector((state: RootState) => state.main);
 
-   
-    const handleSubmit = () => {
-        if (searchValue) {
-            router.push(`search?q=${searchValue}`);
+    const handleSubmit = (event: React.FormEvent) => {
+        event.preventDefault();
+        if(searchValue !== ''){
+            const encodedSearchQuery = encodeURI(searchValue);
+            router.push(`search?q=${encodedSearchQuery}`);
         }
     };
 
@@ -82,16 +91,16 @@ export default function Header(props: HeaderProps) {
     function calculateTimeDifference(startTime: string, endTime?: string): string {
         const startDate = new Date(startTime);
         const endDate = endTime ? new Date(endTime) : new Date();
-    
+
         const timeDifference = Math.abs(endDate.getTime() - startDate.getTime());
-    
+
         const secondsDifference = Math.floor(timeDifference / 1000);
         const minutesDifference = Math.floor(secondsDifference / 60);
         const hoursDifference = Math.floor(minutesDifference / 60);
         const daysDifference = Math.floor(hoursDifference / 24);
-    
+
         let displayString = '';
-    
+
         if (daysDifference > 0) {
             displayString = `${daysDifference} ngày`;
         } else if (hoursDifference > 0) {
@@ -101,14 +110,12 @@ export default function Header(props: HeaderProps) {
         } else {
             displayString = `${secondsDifference} giây`;
         }
-    
-        return displayString.trim() + " trước";
-    }
 
+        return displayString.trim() + ' trước';
+    }
 
     useEffect(() => {
         if (session?.user.id) {
-            console.log(session?.user.id);
             dispatch(getAllNotificationsById({ id: session.user.id }));
         }
     }, [session]);
@@ -123,6 +130,11 @@ export default function Header(props: HeaderProps) {
     useEffect(() => {
         if (isConnected && session?.user.id) {
             socket.on('respMessageAddNotify', (value) => {
+                const shortenedMessage = value.title.substring(0, 40 - 3) + '...';
+                setShowToast({
+                    message: "Bạn vừa nhận được thông báo mới: " +shortenedMessage,
+                    status: true
+                })
                 dispatch(getAllNotificationsById({ id: session.user.id }));
             });
         }
@@ -141,14 +153,32 @@ export default function Header(props: HeaderProps) {
 
     useEffect(() => {
         if (wheel) {
-            setOpenNotifications(false);
             setOpenSearch(false);
             setOpenAcc(false);
         }
     }, [wheel]);
-
+    useEffect(() => {
+        const handleScroll = () => {
+            const scrollTopValue = window.scrollY || document.documentElement.scrollTop;
+            if(scrollTopValue > 33){
+                setOpenNotifications(false);
+            }
+        };
+    
+        window.addEventListener('scroll', handleScroll);
+    
+        return () => {
+          window.removeEventListener('scroll', handleScroll);
+        };
+      }, []);
     return (
         <>
+            <Toast
+                text= {isShowToast.message}
+                showToast={isShowToast.status}
+                setShowToast={setShowToast}
+                rule="normal"
+            />
             <Services setOpenService={setOpenService} openService={openService} />
             <MoreBtn />
             <div
@@ -251,23 +281,47 @@ export default function Header(props: HeaderProps) {
                                             'tippy-boxNotifications-header',
                                         )}
                                     >
-                                        <p className='font-semibold'>Thông báo</p>
+                                        <p className="font-semibold">Thông báo</p>
                                         <SettingsIcon />
                                     </div>
-                                    <div>
-                                        {
-                                            listNotifications.map((item,index) => {
-                                                return (
-                                                    <div key={index} className={cx('flex items-center justify-between','tippy-boxNotifications-content')}>
-                                                        <div className={cx('tippy-boxNotifications-title')}>
-                                                            <p className={cx('font-medium','tippy-boxNotifications-content-title')}>{item.title}</p>
-                                                            <p className={cx('tippy-boxNotifications-content-message')}>{item.message}</p>
-                                                        </div>
-                                                        <p className={cx('tippy-boxNotifications-content-createdAt')}>{calculateTimeDifference(item.createdAt)}</p>
+                                    <div className={cx('tippy-boxNotifications-scroll')}>
+                                        {listNotifications.map((item, index) => {
+                                            return (
+                                                <div
+                                                    key={index}
+                                                    className={cx(
+                                                        'flex items-center justify-between',
+                                                        'tippy-boxNotifications-content',
+                                                    )}
+                                                >
+                                                    <div className={cx('tippy-boxNotifications-title')}>
+                                                        <p
+                                                            className={cx(
+                                                                'font-medium',
+                                                                'tippy-boxNotifications-content-title',
+                                                            )}
+                                                        >
+                                                            {item.title}
+                                                        </p>
+                                                        <p></p>
+                                                        <p
+                                                            className={cx(
+                                                                'tippy-boxNotifications-content-message',
+                                                            )}
+                                                        >
+                                                            {item.message}
+                                                        </p>
                                                     </div>
-                                                )
-                                            })
-                                        }
+                                                    <p
+                                                        className={cx(
+                                                            'tippy-boxNotifications-content-createdAt',
+                                                        )}
+                                                    >
+                                                        {calculateTimeDifference(item.createdAt)}
+                                                    </p>
+                                                </div>
+                                            );
+                                        })}
                                     </div>
                                 </div>
                             )}

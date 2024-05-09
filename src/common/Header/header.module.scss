@@ -464,15 +464,17 @@
 
 .tippy-boxNotifications{
     background-color: #fff;
-    width: 350px;
-    max-height: 500px;
-    overflow-y: auto;
     border-radius: 10px;
+    width: 400px;
     box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 15px;
     overflow: hidden;
     &-header{
         border-bottom: 1px solid #ccc;
         padding: 10px 15px;
+    }
+    &-scroll{
+        max-height: 350px;
+        overflow-y: auto !important;
     }
     &-content{
         padding: 10px 15px;
@@ -485,6 +487,11 @@
         }
         &-message{
             font-size: 12px;
+            max-width: 220px;
+            max-height: 50px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis,
         }
         &-createdAt{
             font-size: 12px;
