@@ -2,7 +2,6 @@ import { call, delay, put, takeLatest } from 'redux-saga/effects';
 import * as types from './contants';
 import * as request from '../libs/orthers/axios';
 import * as actions from './actions';
-import AddDiscount from '~/components/Admin/Discount/AddDiscount';
 
 export interface ResponseGenerator {
     config?: any;
@@ -422,9 +421,9 @@ function* GetAllNotifications() {
     }
 }
 
-function* GetAllNotificationsById({payload}: any) {
+function* GetAllNotificationsById({ payload }: any) {
     try {
-        if(payload.id !== undefined){
+        if (payload.id !== undefined) {
             const res: ResponseGenerator = yield call(request.get, `api/notification/${payload.id}`, null);
             if (res.status === 200) {
                 yield put(actions.getAllNotificationsByIdSuccess(res.data));
@@ -438,6 +437,28 @@ function* GetAllNotificationsById({payload}: any) {
         } else {
             console.log(err);
         }
+    }
+}
+
+function* AddDiscount({ payload }: any) {
+    try {
+        const res: ResponseGenerator = yield call(request.post, `api/discount`, payload);
+
+        const { data, status } = res;
+        if (status === 200) {
+            yield put(actions.addDiscountSuccess(data));
+        }
+    } catch (err: any) {}
+}
+
+function* deleteDiscount({ payload }: any) {
+    try {
+        const res: ResponseGenerator = yield call(request.remove, `api/discount/${payload}`);
+        if (res.status === 200) {
+            yield put(actions.removeDiscountSuccess(payload));
+        }
+    } catch (err) {
+        console.log(err);
     }
 }
 
@@ -475,9 +496,12 @@ export default function* rootSaga() {
 
     // NOTIFICATIONS
     yield takeLatest(types.ADD_NOTIFICATION, AddNotify);
-    yield takeLatest(types.GET_ALL_NOTIFICATIONS,GetAllNotifications);
-    yield takeLatest(types.GET_ALL_NOTIFICATIONS_BY_ID,GetAllNotificationsById);
+    yield takeLatest(types.GET_ALL_NOTIFICATIONS, GetAllNotifications);
+    yield takeLatest(types.GET_ALL_NOTIFICATIONS_BY_ID, GetAllNotificationsById);
 
     // User
     yield takeLatest(types.UPDATE_SESSION_USER, updateSessionUser);
+
+    // DISCOUNT
+    yield takeLatest(types.ADD_DISCOUNT, AddDiscount);
 }

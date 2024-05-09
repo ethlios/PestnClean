@@ -54,6 +54,8 @@ import {
     getAllNotifications,
     getAllNotificationsByIdSuccess,
     getAllNotificationsByIdFail,
+    addDiscountSuccess,
+    removeDiscountSuccess,
 } from './actions';
 
 interface RootState {
@@ -101,7 +103,7 @@ const initState: RootState = {
     discount: [],
     allProducts: [],
     users: [],
-    notificationAll: []
+    notificationAll: [],
 };
 
 const findIndex = (state: any[], id: number) => {
@@ -351,11 +353,11 @@ const rootReducer = createReducer(initState, (builder) => {
 
     // NOTIFICATIONS
     builder.addCase(addNotificationSuccess, (state, action) => {
-        const {message} = action.payload;
+        const { message } = action.payload;
         state.message = message;
     });
     builder.addCase(addNotificationFail, (state, action) => {
-        const {message} = action.payload;
+        const { message } = action.payload;
         state.message = message;
     });
     builder.addCase(getAllNotifications, (state, action) => {
@@ -368,22 +370,28 @@ const rootReducer = createReducer(initState, (builder) => {
             }
             state.message = message;
         }
-    }); 
+    });
 
     builder.addCase(getAllNotificationsByIdSuccess, (state, action) => {
         const { message, data } = action.payload;
-        console.log(data);
         state.notificationAll = data;
         state.message = message;
-    }); 
+    });
     builder.addCase(getAllNotificationsByIdFail, (state, action) => {
         const { message } = action.payload;
         state.message = message;
-    }); 
+    });
 
     // Discount
     builder.addCase(getDiscount, (state, action) => {
         state.discount = action.payload;
+    });
+    builder.addCase(addDiscountSuccess, (state, action) => {
+        state.discount.push(action.payload);
+    });
+    builder.addCase(removeDiscountSuccess, (state, action) => {
+        const index = findIndex2(state.discount, action.payload);
+        state.discount.splice(index, 1);
     });
 });
 

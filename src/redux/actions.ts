@@ -163,7 +163,9 @@ export const clearMessage = createAction<void>(type.CLEAR_MESSAGE);
 
 // Discount
 export const getDiscount = createAction<any>(type.GET_DISCOUNT);
-
+export const addDiscount = createAction<any>(type.ADD_DISCOUNT);
+export const addDiscountSuccess = createAction<any>(type.ADD_DISCOUNT_SUCCESS);
+export const removeDiscountSuccess = createAction<any>(type.REMOVE_DISCOUNT_SUCCESS);
 // Discount
 export const getNotification = createAction<any>(type.GET_NOTIFICATION);
 
