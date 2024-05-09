@@ -13,9 +13,10 @@ export interface IAppProps {
     subMenu?: any;
     className?: string;
     setSelected?: any;
+    selected?: any;
 }
 
-export default function FilterMenu({ title, subMenu, className, setSelected }: IAppProps) {
+export default function FilterMenu({ title, subMenu, className, selected, setSelected }: IAppProps) {
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleOpen = () => {
@@ -24,13 +25,18 @@ export default function FilterMenu({ title, subMenu, className, setSelected }: I
 
     const handleFilter = (e: any) => {
         const value = e.target.innerText || e.target.innerHTML;
+        if (selected === value) return setSelected([]);
         setSelected(value);
     };
 
     return subMenu && subMenu.length > 0 ? (
         <>
             <div className={cx(className)}>
-                <p defaultValue={title} onClick={handleFilter}>
+                <p
+                    defaultValue={title}
+                    onClick={handleFilter}
+                    style={{ color: selected === title ? 'var(--primary)' : 'black' }}
+                >
                     {title}
                 </p>
                 {isOpen ? (
@@ -47,13 +53,19 @@ export default function FilterMenu({ title, subMenu, className, setSelected }: I
                             title={subMenu.title}
                             subMenu={subMenu.subMenu}
                             className={cx('title2')}
+                            selected={selected}
+                            setSelected={setSelected}
                         />
                     ))}
                 </ul>
             )}
         </>
     ) : (
-        <p defaultValue={title} onClick={handleFilter}>
+        <p
+            defaultValue={title}
+            onClick={handleFilter}
+            style={{ color: selected === title ? 'var(--primary)' : 'black' }}
+        >
             {title}
         </p>
     );

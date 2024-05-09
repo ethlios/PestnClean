@@ -29,7 +29,9 @@ export default function ProductStatus({ openFilter, products, status }: IAppProp
             <h1>{status}</h1>
             <div className={cx('horizontal-decor')}></div>
             <div className={cx('product-item')}>
-                {products.length > 3 ? (
+                {products.length === 0 ? (
+                    <div className={'w-full text-center'}>Không tìm thấy sản phẩm</div>
+                ) : products.length > 3 ? (
                     <Swiper
                         slidesPerView={sizeX < 740 ? 2 : sizeX < 1024 ? 3 : !openFilter ? 4 : 3}
                         spaceBetween={sizeX < 768 ? 10 : sizeX < 1024 ? 20 : 30}

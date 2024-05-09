@@ -25,14 +25,46 @@ export default function FilterProduct({ openFilter, setOpenFilter, setProducts, 
     const { sizeX } = useSize();
     const [selected, setSelected] = useState<any>([]);
     const [checked, setChecked] = useState<any>([]);
+    // const [checkboxFilter, setCheckboxFilter] = useState<any>([]);
 
     useEffect(() => {
-        // console.log(selected);
-        // console.log(checked);
+        let filterProducts = allProducts.filter((product: any) => {
+            if (selected.length === 0) return allProducts;
+            return (
+                selected.includes(product.category1) ||
+                selected.includes(product.category2) ||
+                selected.includes(product.category3)
+            );
+        });
+        checked.forEach((check: any) => {
+            filterProducts = filterProducts.filter((product: any) => {
+                return (
+                    check.includes(product.weight) ||
+                    check.includes(product.box) ||
+                    check.includes(product.package) ||
+                    check.includes(product.pieces) ||
+                    check.includes(product.bag) ||
+                    check.includes(product.plate)
+                );
+            });
+        });
+
+        // let checkboxList: { title: string; checkbox: any[] }[] = [];
+        // filterProducts.forEach((item: any) => {
+        //     item.weight && checkboxList.push({ title: 'Dung tích', checkbox: [item.weight] });
+        //     item.box && checkboxList.push({ title: 'Hộp', checkbox: [item.box] });
+        //     item.package && checkboxList.push({ title: 'Gói', checkbox: [item.package] });
+        //     item.pieces && checkboxList.push({ title: 'Túi', checkbox: [item.pieces] });
+        //     item.bag && checkboxList.push({ title: 'Bao', checkbox: [item.bag] });
+        //     item.plate && checkboxList.push({ title: 'Đĩa', checkbox: [item.plate] });
+        //     item.categoryMain && checkboxList.push({ title: 'Danh mục', checkbox: item.categoryMain });
+        // });
+        //
+        // setCheckboxFilter(checkboxList);
+        setProducts(filterProducts);
     }, [selected, checked]);
 
     const handleCancel = () => {
-        // setProducts(allProducts);
         setSelected([]);
         setChecked([]);
     };
@@ -89,14 +121,15 @@ export default function FilterProduct({ openFilter, setOpenFilter, setProducts, 
                                     title={menu.title}
                                     subMenu={menu.subMenu}
                                     className={cx('title')}
+                                    selected={selected}
                                     setSelected={setSelected}
                                 />
                             ))}
                         </div>
                     </div>
                 )}
-                {checkboxFilter.map((filter, index) => (
-                    <CheckboxMenu filter={filter} key={index} />
+                {checkboxFilter.map((filter: any, index: any) => (
+                    <CheckboxMenu filter={filter} key={index} checked={checked} setChecked={setChecked} />
                 ))}
                 <div className={cx('filter-button')}>
                     <Button
