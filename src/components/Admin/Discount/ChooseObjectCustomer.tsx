@@ -54,14 +54,13 @@ export default function ChooseObjectCustomer({ isOpen, isClose, valueUpdate }: I
 
     useEffect(() => {
         if (selector.message === 'Success') {
-            console.log(selector.users);
             setListUsers(selector.users);
         }
-    }, [selector.message]);
+    }, [selector.message, selector.users]);
 
     useEffect(() => {
         dispatch(getUserByRule());
-    }, []);
+    }, [dispatch]);
 
     return (
         <>
