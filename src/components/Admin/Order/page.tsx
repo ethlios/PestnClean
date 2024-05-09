@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import TableOrder from './TableOrder';
 import AdminAddOrder from './AddOrder';
 import { removeOrder, updateOrder, addOrder } from '~/redux/actions';
+import { useSession } from 'next-auth/react';
 
 const cx = classNames.bind(styles);
 
@@ -14,11 +15,15 @@ export interface IAppProps {}
 
 export default function AdminOder(props: IAppProps) {
     const [searchValue, setSearchValue] = useState<string>('');
-    let allOrders: any = useSelector((state: RootState) => state.main.adminOrder);
+    let adminOrder: any = useSelector((state: RootState) => state.main.adminOrder);
+    let userOrder: any = useSelector((state: RootState) => state.main.order);
     const [order, setOrder] = useState<any>({}); // order update
     const [openAddOrder, setOpenAddOrder] = useState<boolean>(false);
     const [isUpdate, setIsUpdate] = useState<boolean>(false);
     const dispatch = useDispatch();
+    const [allOrders, setAllOrders] = useState<any>();
+    const { data: session } = useSession();
+    const [isAdmin, setIsAdmin] = useState<boolean>(false);
 
     const handleDelete = (order: any) => {
         dispatch(removeOrder(order));
@@ -32,7 +37,15 @@ export default function AdminOder(props: IAppProps) {
         dispatch(addOrder(order));
     };
 
-    useEffect(() => {}, [dispatch]);
+    useEffect(() => {
+        if (session?.user.rule === 'admin') {
+            setAllOrders(adminOrder);
+            setIsAdmin(true);
+        } else {
+            setAllOrders(userOrder);
+            setIsAdmin(false);
+        }
+    }, [session, dispatch]);
 
     return (
         <>
@@ -45,21 +58,24 @@ export default function AdminOder(props: IAppProps) {
                     handleDelete={handleDelete}
                     handleUpdate={handleUpdate}
                     handleAdd={handleAdd}
+                    isAdmin={isAdmin}
                 />
             )}
             <div className={cx('common-wrapper')}>
-                <div className={cx('panel')}>
-                    <button
-                        className={cx('commom-button')}
-                        onClick={() => {
-                            setIsUpdate(false);
-                            setOrder({});
-                            setOpenAddOrder(true);
-                        }}
-                    >
-                        Thêm đơn hàng
-                    </button>
-                </div>
+                {isAdmin && (
+                    <div className={cx('panel')}>
+                        <button
+                            className={cx('commom-button')}
+                            onClick={() => {
+                                setIsUpdate(false);
+                                setOrder({});
+                                setOpenAddOrder(true);
+                            }}
+                        >
+                            Thêm đơn hàng
+                        </button>
+                    </div>
+                )}
                 <p className={cx('common-title')}>Order: {allOrders.length}</p>
                 <input
                     type="text"

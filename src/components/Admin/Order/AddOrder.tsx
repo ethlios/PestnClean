@@ -23,6 +23,7 @@ interface IAppProps {
     handleUpdate?: any;
     handleDelete?: any;
     handleAdd?: any;
+    isAdmin?: boolean;
 }
 
 export default function AdminAddOrder({
@@ -32,6 +33,7 @@ export default function AdminAddOrder({
     handleUpdate,
     handleDelete,
     handleAdd,
+    isAdmin,
 }: IAppProps) {
     const [name, setName] = useState<string>('');
     const [email, setEmail] = useState<string>('');
