@@ -20,7 +20,7 @@ export default function BundleCard(props: IAppProps) {
     }, []);
 
     return (
-        <div className={props.className} ref={ref}>
+        <div className={props.className} ref={ref} style={{ backgroundColor: 'rgba(0,0,0,0.05)' }}>
             <div className={cx('bundle-card')}>
                 <div className={'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 fix:grid-cols-3 gap-6'}>
                     {props.children}
