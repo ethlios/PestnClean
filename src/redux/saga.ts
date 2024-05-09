@@ -408,7 +408,7 @@ function* AddNotify({ payload }: any) {
     }
 }
 
-function* GetAllNotificationsById({payload}: any) {
+function* GetAllNotificationsById({ payload }: any) {
     try {
         if (payload.id !== undefined) {
             const res: ResponseGenerator = yield call(request.get, `api/notification/${payload.id}`, null);
@@ -436,6 +436,17 @@ function* AddDiscount({ payload }: any) {
             yield put(actions.addDiscountSuccess(data));
         }
     } catch (err: any) {}
+}
+
+function* deleteDiscount({ payload }: any) {
+    try {
+        const res: ResponseGenerator = yield call(request.remove, `api/discount/${payload}`);
+        if (res.status === 200) {
+            yield put(actions.removeDiscountSuccess(payload));
+        }
+    } catch (err) {
+        console.log(err);
+    }
 }
 
 export default function* rootSaga() {

@@ -50,6 +50,7 @@ import {
     getAllNotificationsByIdSuccess,
     getAllNotificationsByIdFail,
     addDiscountSuccess,
+    removeDiscountSuccess,
     getProvince,
 } from './actions';
 
@@ -363,11 +364,11 @@ const rootReducer = createReducer(initState, (builder) => {
         const { message, data } = action.payload;
         state.notificationAll = data;
         state.message = message;
-    }); 
+    });
     builder.addCase(getAllNotificationsByIdFail, (state, action) => {
         const { message } = action.payload;
         state.message = message;
-    }); 
+    });
 
     // Discount
     builder.addCase(getDiscount, (state, action) => {
@@ -376,10 +377,10 @@ const rootReducer = createReducer(initState, (builder) => {
     builder.addCase(addDiscountSuccess, (state, action) => {
         state.discount.push(action.payload);
     });
-    // builder.addCase(removeCart, (state, action) => {
-    //     const index = findIndex2(state.cart, action.payload);
-    //     state.cart.splice(index, 1);
-    // });
+    builder.addCase(removeDiscountSuccess, (state, action) => {
+        const index = findIndex2(state.discount, action.payload);
+        state.discount.splice(index, 1);
+    });
 });
 
 export default rootReducer;
