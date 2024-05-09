@@ -408,20 +408,7 @@ function* AddNotify({ payload }: any) {
     }
 }
 
-function* GetAllNotifications() {
-    try {
-        const res: ResponseGenerator = yield call(request.get, 'api/notification', null);
-        if (res.status === 200) {
-            yield put(actions.getAllNotifications(res.data));
-        } else {
-            throw new Error(`Unexpected status code: ${res.status}`);
-        }
-    } catch (err: any) {
-        console.log(err);
-    }
-}
-
-function* GetAllNotificationsById({ payload }: any) {
+function* GetAllNotificationsById({payload}: any) {
     try {
         if (payload.id !== undefined) {
             const res: ResponseGenerator = yield call(request.get, `api/notification/${payload.id}`, null);
@@ -485,8 +472,7 @@ export default function* rootSaga() {
 
     // NOTIFICATIONS
     yield takeLatest(types.ADD_NOTIFICATION, AddNotify);
-    yield takeLatest(types.GET_ALL_NOTIFICATIONS, GetAllNotifications);
-    yield takeLatest(types.GET_ALL_NOTIFICATIONS_BY_ID, GetAllNotificationsById);
+    yield takeLatest(types.GET_ALL_NOTIFICATIONS_BY_ID,GetAllNotificationsById);
 
     // User
     yield takeLatest(types.UPDATE_SESSION_USER, updateSessionUser);

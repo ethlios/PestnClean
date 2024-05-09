@@ -51,6 +51,7 @@
         "socket.io": "^4.7.5",
         "socket.io-client": "^4.7.5",
         "swiper": "^11.1.1",
+        "swr": "^2.2.5",
         "tss-react": "^4.9.6",
         "uploadthing": "^6.10.1"
     },

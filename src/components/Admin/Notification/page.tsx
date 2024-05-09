@@ -7,36 +7,23 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import AddIcon from '@mui/icons-material/Add';
 import AddNotification from './AddNotification';
-import { getUserById } from '~/libs/orthers/getData';
 import CogWheel from '~/components/Orther/Loader/CogWheel/CogWheel';
-import { clearMessage, getAllNotifications } from '~/redux/actions';
+import { useSession } from 'next-auth/react';
+import { GetAllNotification } from '~/libs/orthers/getData';
 
 const cx = classNames.bind(styles);
 
 export interface IAppProps {}
 
-interface Notification {
-    id: number;
-    title: string;
-    recipientId: string;
-    message: string;
-    state: boolean;
-    createdAt: string;
-}
-interface MergedNotification {
-    title: string;
-    recipientId: string[];
-    message: string;
-    state: boolean;
-    createdAt: string;
-}
 export default function AdminNotification(props: IAppProps) {
     const [openAddNotifications, setOpenNotifications] = useState<boolean>(false);
     const [listNotifications, setListNotifications] = useState<any[]>([]);
-    const [listDBNotifications, setListDbNotifications] = useState<any[]>([]);
     const [isLoader, setIsLoader] = useState<boolean>(true);
     const selector = useSelector((state: RootState) => state.main);
     const dispatch = useDispatch();
+    const session = useSession();
+
+    // XỬ LÝ FORMAT DATE KHI LẤY CREATED AT TỪ DATABASE
     function formatDate(dateString: string) {
         // Tạo một đối tượng Date từ chuỗi thời gian
         const date = new Date(dateString);
@@ -62,81 +49,31 @@ export default function AdminNotification(props: IAppProps) {
         return `${formattedTime} ${formattedDate}`;
     }
 
-    // XỬ LÍ LẤY TẤT CẢ CÁC THÔNG BÁO
-    useEffect(() => {
-        dispatch(getAllNotifications());
-    }, []);
-
-    // KIỂM TRA LẤY RA THÀNH CÔNG HAY KHÔNG RỒI SET LIST
-    useEffect(() => {
-        if (selector.message === 'Success' && selector.notification.length > 0) {
-            setListDbNotifications(selector.notification);
-        }
-    }, [selector.message]);
-
-    // XỬ LÍ LẤY ID NGƯỜI NHẬN CHUYỂN QUA THÔNG TIN NGƯỜI NHẬN
-    useEffect(() => {
-        if(listDBNotifications.length > 0){
-            const getNotifications = async () => {
-                const mergedNotifications: MergedNotification[] = Object.values(
-                    listDBNotifications.reduce((acc: { [key: string]: MergedNotification }, curr: Notification) => {
-                        const existingTitle = acc[curr.title];
-
-                        if (existingTitle) {
-                            if (!existingTitle.recipientId.includes(curr.recipientId)) {
-                                existingTitle.recipientId.push(curr.recipientId);
-                            }
-                        } else {
-                            acc[curr.title] = {
-                                createdAt: curr.createdAt,
-                                message: curr.message,
-                                state: curr.state,
-                                title: curr.title,
-                                recipientId: [curr.recipientId],
-                            };
-                        }
-                        return acc;
-                    }, {}),
-                );
-                const newArr = await Promise.all(
-                    mergedNotifications.map(async (item: MergedNotification) => {
-                        // Lấy thông tin người dùng cho tất cả các recipientId
-                        const newRecipientId = await Promise.all(
-                            item.recipientId.map(async (temp: string) => {
-                                const user = await getUserById({ id: temp });
-                                const { data } = user;
-                                return {
-                                    id: temp,
-                                    name: data.name,
-                                    email: data.email,
-                                };
-                            }),
-                        );
-
-                        // Trả về một đối tượng mới với các giá trị đã cập nhật
-                        return {
-                            ...item,
-                            createdAt: formatDate(item.createdAt),
-                            recipientId: newRecipientId,
-                        };
-                    }),
-                );
-                setListNotifications(newArr);
+    const getData = async () => {
+        const resp = await GetAllNotification();
+        if(resp){
+            const {data , message} = resp;
+            if(message === 'Success'){
+                setListNotifications(data);
                 setIsLoader(false);
-            };
-            getNotifications();
-            dispatch(clearMessage());
+            }
+            
         }
-    },[listDBNotifications.length]);
+    }
+
+    useEffect(() => {
+        setIsLoader(true);
+        getData();
+    }, []);
 
     return (
         <>
             {openAddNotifications ? (
                 <AddNotification
-                    addSuccess={(e:boolean) => {
-                        if(e){
+                    addSuccess={(e: boolean) => {
+                        if (e) {
                             setIsLoader(true);
-                            dispatch(getAllNotifications());
+                            getData();
                         }
                     }}
                     isOpen={openAddNotifications}
@@ -187,7 +124,9 @@ export default function AdminNotification(props: IAppProps) {
                                             <tr key={index}>
                                                 <td className={cx('font-semibold')}>{item.title}</td>
                                                 <td className={cx('font-medium')}>{item.message}</td>
-                                                <td className={cx('font-medium')}>{formatDate(item.createdAt)}</td>
+                                                <td className={cx('font-medium')}>
+                                                    {formatDate(item.createdAt)}
+                                                </td>
                                                 <td className={cx('font-medium')}>
                                                     <ul>
                                                         {item.recipientId.map(
