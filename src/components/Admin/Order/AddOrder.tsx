@@ -23,7 +23,6 @@ interface IAppProps {
     handleUpdate?: any;
     handleDelete?: any;
     handleAdd?: any;
-    isAdmin?: boolean;
 }
 
 export default function AdminAddOrder({
@@ -33,7 +32,6 @@ export default function AdminAddOrder({
     handleUpdate,
     handleDelete,
     handleAdd,
-    isAdmin,
 }: IAppProps) {
     const [name, setName] = useState<string>('');
     const [email, setEmail] = useState<string>('');
@@ -141,7 +139,6 @@ export default function AdminAddOrder({
                                     label="Tên..."
                                     onChange={(e) => setName(e.target.value)}
                                     value={name}
-                                    disabled={!isAdmin}
                                 />
                                 <TextField
                                     label="Email..."
@@ -149,7 +146,6 @@ export default function AdminAddOrder({
                                     error={email !== null && email !== '' && !validateEmailRegex.test(email)}
                                     type={'email'}
                                     value={email}
-                                    disabled={!isAdmin}
                                 />
                                 <TextField
                                     label="Số điện thoại..."
@@ -157,13 +153,11 @@ export default function AdminAddOrder({
                                     error={phone !== null && phone !== '' && !isPhone.test(phone)}
                                     type={'tel'}
                                     value={phone}
-                                    disabled={!isAdmin}
                                 />
                                 <TextField
                                     label="Địa chỉ..."
                                     onChange={(e) => setAddress(e.target.value)}
                                     value={address}
-                                    disabled={!isAdmin}
                                 />
                                 <FormControl sx={{ mb: 1 }}>
                                     <InputLabel>Tỉnh thành</InputLabel>
@@ -175,7 +169,6 @@ export default function AdminAddOrder({
                                             setWard('');
                                         }}
                                         value={city}
-                                        disabled={!isAdmin}
                                     >
                                         {province.map((item: any, index: number) => (
                                             <MenuItem key={index} value={item.Name}>
@@ -193,7 +186,6 @@ export default function AdminAddOrder({
                                             setWard('');
                                         }}
                                         value={district}
-                                        disabled={!isAdmin}
                                     >
                                         {province
                                             .find((item: any) => item.Name === city)
@@ -210,7 +202,6 @@ export default function AdminAddOrder({
                                         label="Phường xã"
                                         onChange={(e) => setWard(e.target.value)}
                                         value={ward}
-                                        disabled={!isAdmin}
                                     >
                                         {province
                                             .find((item: any) => item.Name === city)
@@ -234,7 +225,6 @@ export default function AdminAddOrder({
                                         label="Trạng thái"
                                         onChange={(e) => setStatus(e.target.value)}
                                         value={status}
-                                        disabled={!isAdmin}
                                     >
                                         <MenuItem value={'Đang xử lý'}>Đang xử lý</MenuItem>
                                         <MenuItem value={'Đã xác nhận'}>Đã xác nhận</MenuItem>
@@ -248,7 +238,6 @@ export default function AdminAddOrder({
                                         label="Phương thức thanh toán"
                                         onChange={(e) => setPaymentStatus(e.target.value)}
                                         value={paymentStatus}
-                                        disabled={!isAdmin}
                                     >
                                         <MenuItem value={'Thanh toán khi nhận hàng'}>
                                             Thanh toán khi nhận hàng
@@ -264,51 +253,48 @@ export default function AdminAddOrder({
                                     className={cx('textarea')}
                                     onChange={(e) => setMessage(e.target.value)}
                                     value={message}
-                                    disabled={!isAdmin}
                                 />
                             </div>
                         </div>
                         <div className={'col-span-12 md:col-span-4'}>
-                            <ProductOrder products={products} setProducts={setProducts} isAdmin={isAdmin} />
+                            <ProductOrder products={products} setProducts={setProducts} />
                         </div>
                     </div>
                 </div>
-                {isAdmin && (
-                    <div className={'m-2.5 flex justify-end gap-2'}>
-                        {isUpdate ? (
-                            <>
-                                <Button
-                                    variant={'outlined'}
-                                    onClick={() => {
-                                        handleDelete(order);
-                                        setOpenAddOrder(false);
-                                    }}
-                                >
-                                    Xóa đơn hàng
-                                </Button>
-                                <Button
-                                    variant={'contained'}
-                                    onClick={() => {
-                                        handleUpdate(newOrderData);
-                                        setOpenAddOrder(false);
-                                    }}
-                                >
-                                    Cập nhật đơn hàng
-                                </Button>
-                            </>
-                        ) : (
+                <div className={'m-2.5 flex justify-end gap-2'}>
+                    {isUpdate ? (
+                        <>
                             <Button
-                                variant={'contained'}
+                                variant={'outlined'}
                                 onClick={() => {
-                                    handleAdd(newOrderData);
+                                    handleDelete(order);
                                     setOpenAddOrder(false);
                                 }}
                             >
-                                Thêm đơn hàng
+                                Xóa đơn hàng
                             </Button>
-                        )}
-                    </div>
-                )}
+                            <Button
+                                variant={'contained'}
+                                onClick={() => {
+                                    handleUpdate(newOrderData);
+                                    setOpenAddOrder(false);
+                                }}
+                            >
+                                Cập nhật đơn hàng
+                            </Button>
+                        </>
+                    ) : (
+                        <Button
+                            variant={'contained'}
+                            onClick={() => {
+                                handleAdd(newOrderData);
+                                setOpenAddOrder(false);
+                            }}
+                        >
+                            Thêm đơn hàng
+                        </Button>
+                    )}
+                </div>
             </div>
         </div>
     );

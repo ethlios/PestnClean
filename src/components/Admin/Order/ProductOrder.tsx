@@ -17,25 +17,19 @@ const cx = classNames.bind(styles);
 interface ProductOrderProps {
     products?: any;
     setProducts?: any;
-    isAdmin?: boolean;
 }
 
-export default function ProductOrder({ products, setProducts, isAdmin }: ProductOrderProps) {
+export default function ProductOrder({ products, setProducts }: ProductOrderProps) {
     // let allProducts: any = useSelector((state: RootState) => state.main.products);
     const [editListProduct, setEditListProduct] = useState<boolean>(false);
 
     return (
         <div className={'flex flex-col gap-2'}>
-            {isAdmin && (
-                <div className={cx('panel')}>
-                    <button
-                        className={cx('commom-button')}
-                        onClick={() => setEditListProduct((prev) => !prev)}
-                    >
-                        {editListProduct ? 'Xong' : 'Sửa'}
-                    </button>
-                </div>
-            )}
+            <div className={cx('panel')}>
+                <button className={cx('commom-button')} onClick={() => setEditListProduct((prev) => !prev)}>
+                    {editListProduct ? 'Xong' : 'Sửa'}
+                </button>
+            </div>
             <div className={`p-2 ${editListProduct ? 'border' : ''}`}>
                 {products.length > 0 && (
                     <>
