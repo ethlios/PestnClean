@@ -13,8 +13,7 @@ import { linkDichVuVeSinh } from '~/constants/links';
 
 const cx = classNames.bind(styles);
 
-export interface IAppProps {
-}
+export interface IAppProps {}
 
 export default function DichVu3Page(props: IAppProps) {
     const { sizeX } = useSize();
@@ -24,7 +23,8 @@ export default function DichVu3Page(props: IAppProps) {
             className={'cpmount'}
             style={{
                 overflowX: 'hidden',
-                padding: sizeX < 768 ? '0 20px' : sizeX < 1100 ? '0 50px' : sizeX < 1280 ? '0 80px' : '0 100px',
+                padding:
+                    sizeX < 768 ? '0 20px' : sizeX < 1100 ? '0 50px' : sizeX < 1280 ? '0 80px' : '0 100px',
             }}
         >
             <ServiceBanner
