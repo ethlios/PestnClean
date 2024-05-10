@@ -135,6 +135,7 @@ model Discount {
   dateEnd     DateTime?
   description String?
   author      User      @relation(fields: [authorId], references: [id])
+  status      Boolean
 }
 
 model ImgWork {

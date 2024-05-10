@@ -2,14 +2,12 @@
 import React, { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
 import styles from './Notification.module.scss';
-import { RootState } from '~/redux/provider/store';
-import { useDispatch, useSelector } from 'react-redux';
 
 import AddIcon from '@mui/icons-material/Add';
 import AddNotification from './AddNotification';
 import CogWheel from '~/components/Orther/Loader/CogWheel/CogWheel';
-import { useSession } from 'next-auth/react';
 import { GetAllNotification } from '~/libs/orthers/getData';
+import { formatDate } from '~/libs/orthers/formatDate';
 
 const cx = classNames.bind(styles);
 
@@ -19,47 +17,17 @@ export default function AdminNotification(props: IAppProps) {
     const [openAddNotifications, setOpenNotifications] = useState<boolean>(false);
     const [listNotifications, setListNotifications] = useState<any[]>([]);
     const [isLoader, setIsLoader] = useState<boolean>(true);
-    const selector = useSelector((state: RootState) => state.main);
-    const dispatch = useDispatch();
-    const session = useSession();
-
-    // XỬ LÝ FORMAT DATE KHI LẤY CREATED AT TỪ DATABASE
-    function formatDate(dateString: string) {
-        // Tạo một đối tượng Date từ chuỗi thời gian
-        const date = new Date(dateString);
-
-        // Lấy giờ và phút
-        const hours = date.getHours();
-        const minutes = date.getMinutes();
-
-        // Định dạng giờ theo chuẩn 12 giờ và AM/PM
-        const ampm = hours >= 12 ? 'PM' : 'AM';
-        const formattedHours = hours % 12 || 12; // Chuyển đổi giờ sang định dạng 12 giờ
-        const formattedTime = `${formattedHours}:${minutes < 10 ? '0' : ''}${minutes} ${ampm}`;
-
-        // Lấy ngày, tháng và năm
-        const day = date.getDate();
-        const month = date.getMonth() + 1; // Tháng bắt đầu từ 0 nên cần cộng thêm 1
-        const year = date.getFullYear();
-
-        // Định dạng ngày tháng năm
-        const formattedDate = `${day}/${month < 10 ? '0' : ''}${month}/${year}`;
-
-        // Kết hợp giờ và ngày tháng năm
-        return `${formattedTime} ${formattedDate}`;
-    }
 
     const getData = async () => {
         const resp = await GetAllNotification();
-        if(resp){
-            const {data , message} = resp;
-            if(message === 'Success'){
+        if (resp) {
+            const { data, message } = resp;
+            if (message === 'Success') {
                 setListNotifications(data);
                 setIsLoader(false);
             }
-            
         }
-    }
+    };
 
     useEffect(() => {
         setIsLoader(true);

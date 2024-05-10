@@ -10,6 +10,7 @@ import { addNotification, clearMessage } from '~/redux/actions';
 import { useSession } from 'next-auth/react';
 import { socket } from '~/websocket/socket';
 import Toast from '~/components/Orther/Toast';
+import { formatISODate } from '~/libs/orthers/formatDate';
 const cx = classNames.bind(styles);
 
 export interface IAppProps {
@@ -40,26 +41,13 @@ export default function AddNotification({ isOpen, isClose, valueUpdate , addSucc
         setValueDesNotify("");
         setListUsersSelected([]);
         setIsClicked(false);
-        setOpen(false);
-        isClose(false);
+        handleClose()
         dispatch(clearMessage());
     };
     const handleClose = () => {
         setOpen(false);
         isClose(false);
     };
-
-    function formatISODate(date: Date): string {
-        const year = date.getUTCFullYear();
-        const month = String(date.getUTCMonth() + 1).padStart(2, '0'); // Thêm '0' phía trước nếu cần
-        const day = String(date.getUTCDate()).padStart(2, '0');
-        const hours = String(date.getUTCHours()).padStart(2, '0');
-        const minutes = String(date.getUTCMinutes()).padStart(2, '0');
-        const seconds = String(date.getUTCSeconds()).padStart(2, '0');
-        const milliseconds = String(date.getUTCMilliseconds()).padStart(3, '0');
-
-        return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}.${milliseconds}Z`;
-    }
 
     // Xử lí sự kiện lưu notify vào database
     const handleSave = () => {

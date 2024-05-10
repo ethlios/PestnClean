@@ -44,7 +44,6 @@ import {
     updateImgWorkSuccess,
     updateImgWorkFail,
     getImgWorkByType,
-    getUserByRule,
     addNotificationSuccess,
     addNotificationFail,
     getAllNotificationsByIdSuccess,
@@ -339,17 +338,6 @@ const rootReducer = createReducer(initState, (builder) => {
     });
 
     // get user not admin
-    builder.addCase(getUserByRule, (state, action) => {
-        const payload: any = action.payload; // Sử dụng kiểu any
-        if (payload && payload.message !== undefined) {
-            const message = payload.message; // message có kiểu any
-            const data = payload.data; // data có kiểu any
-            if (data) {
-                state.users = data;
-            }
-            state.message = message;
-        }
-    });
 
     // NOTIFICATIONS
     builder.addCase(addNotificationSuccess, (state, action) => {
@@ -375,7 +363,9 @@ const rootReducer = createReducer(initState, (builder) => {
         state.discount = action.payload;
     });
     builder.addCase(addDiscountSuccess, (state, action) => {
-        state.discount.push(action.payload);
+        const {data , message} = action.payload;
+        state.message = message;
+        state.discount.push(data);
     });
     builder.addCase(removeDiscountSuccess, (state, action) => {
         const index = findIndex2(state.discount, action.payload);
