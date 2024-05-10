@@ -424,6 +424,24 @@ function* AddDiscount({ payload }: any) {
     } catch (err: any) {}
 }
 
+function* UpdateStatusDiscount({ payload }: any) {
+    try {
+        const { id } = payload;
+        const res: ResponseGenerator = yield call(request.put, `api/Discount/${id}`, payload);
+        if (res.status === 200) {
+            yield put(actions.updateStatusDiscountSuccess(res.data));
+        } else {
+            throw new Error(`Unexpected status code: ${res.status}`);
+        }
+    } catch (err: any) {
+        if (err.response && err.response.status === 400) {
+            yield put(actions.updateImgWorkFail(err.response.data));
+        } else {
+            console.log(err);
+        }
+    }
+}
+
 function* deleteDiscount({ payload }: any) {
     try {
         const res: ResponseGenerator = yield call(request.remove, `api/Discount/${payload}`);
@@ -475,4 +493,5 @@ export default function* rootSaga() {
 
     // DISCOUNT
     yield takeLatest(types.ADD_DISCOUNT, AddDiscount);
+    yield takeLatest(types.UPDATE_STATUS_DISCOUNT, UpdateStatusDiscount);
 }

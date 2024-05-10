@@ -51,6 +51,7 @@ import {
     addDiscountSuccess,
     removeDiscountSuccess,
     getProvince,
+    updateStatusDiscountSuccess,
 } from './actions';
 
 interface RootState {
@@ -366,6 +367,10 @@ const rootReducer = createReducer(initState, (builder) => {
         const {data , message} = action.payload;
         state.message = message;
         state.discount.push(data);
+    });
+    builder.addCase(updateStatusDiscountSuccess, (state, action) => {
+        const { message} = action.payload;
+        state.message = message;
     });
     builder.addCase(removeDiscountSuccess, (state, action) => {
         const index = findIndex2(state.discount, action.payload);

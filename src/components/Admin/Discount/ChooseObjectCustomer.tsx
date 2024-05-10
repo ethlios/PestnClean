@@ -9,6 +9,10 @@ import { useDebounce } from '@react-hooks-library/core';
 import { removeVietnameseTones } from '~/libs/orthers/removeVietnamese';
 import { getAllUsersNotAdmin } from '~/libs/orthers/getData';
 import { sendEmail } from '~/actions/sendEmails';
+import { useDispatch, useSelector } from 'react-redux';
+import { clearMessage, updateStatusDiscount } from '~/redux/actions';
+import { RootState } from '~/redux/provider/store';
+import Toast from '~/components/Orther/Toast';
 const cx = classNames.bind(styles);
 
 export interface IAppProps {
@@ -33,16 +37,25 @@ const style = {
 export default function ChooseObjectCustomer({ isOpen, isClose, valueUpdate, dataSendMail }: IAppProps) {
     const [open, setOpen] = useState(false);
     const [isClicked, setIsClicked] = useState(false);
+    const [showToast, setShowToast] = useState<boolean>(false);
     const [listUsersSelected, setListUsersSelected] = useState<any[]>([]);
     const [listUsers, setListUsers] = useState<any[]>([]);
     const [searchValue, setSearchValue] = useState<string>('');
     const [isLoader, setIsLoader] = useState<boolean>(false);
     const debouncedText = useDebounce(searchValue, 200);
-
+    const dispatch = useDispatch();
+    const selector = useSelector((state:RootState) => state.main);
     const handleClose = () => {
         setOpen(false);
         isClose(false);
+    };
+
+    const reset =() => {
+        setIsLoader(false);
+        setIsClicked(false);
+        dispatch(clearMessage());
         setListUsersSelected([]);
+        handleClose();
     };
 
     // Xử ý sự kiện khi click vào checkbox === true thì thêm vào listSelected và ngược lại
@@ -58,8 +71,6 @@ export default function ChooseObjectCustomer({ isOpen, isClose, valueUpdate, dat
             setListUsersSelected(filteredList);
         }
     };
-
-
 
     // Xử lý kiểm tra email được chọn với email đã gửi được gửi xem có trùng khớp không?
     function arraysAreEqual(array1: string[], array2: string[]): boolean {
@@ -92,12 +103,19 @@ export default function ChooseObjectCustomer({ isOpen, isClose, valueUpdate, dat
             }
             const emails: string[] = listUsersSelected.map((user) => user.email);
             if(arraysAreEqual(emailAccepts, emails)){
-                setIsLoader(false);
-                setIsClicked(false);
-                handleClose();
+                dispatch(updateStatusDiscount({id: dataSendMail.id , status: true}));
             };
         }
     };
+
+    useEffect(() => {
+        if(selector.message === 'Update Status Success'){
+            reset();
+            setTimeout(() => {
+                setShowToast(true);
+            },500);
+        }
+    },[selector.message]);
 
     useEffect(() => {
         if (isOpen) {
@@ -136,6 +154,12 @@ export default function ChooseObjectCustomer({ isOpen, isClose, valueUpdate, dat
 
     return (
         <>
+            <Toast
+                text= "Đã gửi mail đến tất cả người được chọn"
+                showToast={showToast}
+                setShowToast={setShowToast}
+                rule="normal"
+            />
             <Modal
                 open={open}
                 onClose={handleClose}
@@ -208,7 +232,7 @@ export default function ChooseObjectCustomer({ isOpen, isClose, valueUpdate, dat
                             </div>
                         </div>
                         <div className="flex justify-center">
-                            <form action={() => sendMailToUser()}>
+                            <form className='w-full' action={() => sendMailToUser()}>
                                 <button
                                     className={cx(
                                         'wrapper-btnSubmit',
@@ -217,6 +241,7 @@ export default function ChooseObjectCustomer({ isOpen, isClose, valueUpdate, dat
                                     )}
                                     type="submit"
                                     disabled={isClicked}
+                                    onClick={() => setIsLoader(true)}
                                 >
                                     {isLoader ? '...' : 'Gửi Mail'}
                                 </button>

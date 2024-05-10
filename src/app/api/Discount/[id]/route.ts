@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '~/libs/orthers/prisma';
 
 interface RequestDelete {
@@ -13,16 +13,18 @@ export async function DELETE(request: Request, { params }: { params: RequestDele
     return NextResponse.json(res);
 }
 
-export async function PUT(request: Request, { params }: { params: { id: number } }) {
+export async function PUT(request: NextRequest, { params }: { params: { id: string } }) {
     const body = await request.json();
-
+    const numberId = parseInt(params.id);
     const res = await prisma.discount.update({
-        where: { id: body.id },
+        where: { id:numberId },
         data: {
             status: body.status,
         },
     });
 
-    return NextResponse.json(res);
+    return NextResponse.json({
+        message: "Update Status Success",
+        data: res
+    });
 }
-
