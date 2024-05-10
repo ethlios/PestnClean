@@ -55,18 +55,18 @@ const aboutBanner = [
 const productBanner = [
     {
         id: 1,
-        img: '',
-        alt: '',
+        img: 'https://res.cloudinary.com/dj2jarcxk/image/upload/v1714114163/michel-bosma-XgF9e93Tkt0-unsplash_jl480i.jpg',
+        alt: 'Kiểm soát côn trùng',
     },
     {
         id: 2,
-        img: '',
-        alt: '',
+        img: 'https://res.cloudinary.com/dj2jarcxk/image/upload/v1714114157/verne-ho-MwW-zrkYSIU-unsplash_1_kpunuu.jpg',
+        alt: 'Vệ sinh công nghiệp',
     },
     {
         id: 3,
-        img: '',
-        alt: '',
+        img: 'https://res.cloudinary.com/dj2jarcxk/image/upload/v1714114152/kelly-sikkema-W1XbZLRdk8o-unsplash_y5nk6z.jpg',
+        alt: 'Giải pháp vệ sinh',
     },
 ];
 

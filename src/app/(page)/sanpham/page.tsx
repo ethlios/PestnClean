@@ -12,6 +12,8 @@ import ProductStatus from '~/components/Product/Main/ProductStatus';
 import useSize from '~/libs/hooks/useSize';
 import { RootState } from '~/redux/provider/store';
 import styles from '~/components/Product/product.module.scss';
+import productBannerFooter from '../../../../public/img/productBannerFooter.jpg';
+import Image from 'next/image';
 
 const cx = classNames.bind(styles);
 
@@ -78,7 +80,15 @@ export default function ProductPage(props: IAppProps) {
                     <AllProduct setOpenFilter={setOpenFilter} openFilter={openFilter} products={products} />
                 </div>
             </div>
-            <div className={cx('banner-auto')}></div>
+            <div className={cx('banner-auto')}>
+                <Image
+                    src={productBannerFooter}
+                    alt={'product banner footer'}
+                    width={1980}
+                    height={1000}
+                    className={'h-full w-full object-cover'}
+                />
+            </div>
         </div>
     );
 }
