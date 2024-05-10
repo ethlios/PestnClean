@@ -12,11 +12,11 @@ import { nameToLink } from '~/libs/orthers/nameToLink';
 const cx = classNames.bind(styles);
 
 export interface IFaqProps {
-    text: string;
-    answer?: string;
+    title: string;
+    content?: string;
 }
 
-export default function Question({ text, answer }: IFaqProps) {
+export default function Question({ title, content }: IFaqProps) {
     const [isOpen, setIsOpen] = useState(false);
     const searchParams = useSearchParams();
     const mainRef = useRef<any>();
@@ -28,7 +28,7 @@ export default function Question({ text, answer }: IFaqProps) {
     useEffect(() => {
         const q = searchParams.get('q');
 
-        if (nameToLink(text).slice(0, -1) === q) {
+        if (nameToLink(title).slice(0, -1) === q) {
             setIsOpen(true);
 
             mainRef.current.scrollIntoView({
@@ -36,7 +36,7 @@ export default function Question({ text, answer }: IFaqProps) {
                 block: 'center',
             });
         }
-    }, [searchParams, text]);
+    }, [searchParams, title]);
 
     return (
         <div
@@ -53,7 +53,7 @@ export default function Question({ text, answer }: IFaqProps) {
                         color: isOpen ? 'var(--primary)' : 'black',
                     }}
                 >
-                    {text}
+                    {title}
                 </div>
                 <IconButton
                     sx={{
@@ -63,16 +63,8 @@ export default function Question({ text, answer }: IFaqProps) {
                     {isOpen ? <RemoveIcon /> : <AddIcon />}
                 </IconButton>
             </div>
-            {isOpen && (
-                <div className={cx('faq-answer')}>
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-                    been the standard dummy text ever since the 1500s, when an unknown printer took a galley
-                    of type and scrambled it to make a type specimen book. Lorem Ipsum is simply dummy text of
-                    the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing
-                    and typesetting industry. Lorem Ipsum has been the standard dummy text ever since the
-                    1500s, when an unknown printer took a galley of type and scrambled it to make a type
-                    specimen book.
-                </div>
+            {isOpen && content && (
+                <div className={cx('faq-answer')} dangerouslySetInnerHTML={{ __html: content }} />
             )}
         </div>
     );

@@ -7,8 +7,7 @@ import { questionsDaily, questionsCommon } from '~/constants/faq';
 
 const cx = classNames.bind(styles);
 
-export interface IFaqProps {
-}
+export interface IFaqProps {}
 
 export default function FaqCPPage(props: IFaqProps) {
     return (
@@ -23,7 +22,7 @@ export default function FaqCPPage(props: IFaqProps) {
                         <p className={cx('title')}>Câu hỏi thường gặp</p>
                         <div className={'my-5'}>
                             {questionsDaily.map((question, index) => (
-                                <Question key={index} text={question.text} />
+                                <Question key={index} title={question.title} content={question.content} />
                             ))}
                         </div>
                     </div>
@@ -31,7 +30,7 @@ export default function FaqCPPage(props: IFaqProps) {
                         <p className={cx('title')}>Câu hỏi chung</p>
                         <div className={'my-5'}>
                             {questionsCommon.map((question, index) => (
-                                <Question key={index} text={question.text} />
+                                <Question key={index} title={question.title} content={question.content} />
                             ))}
                         </div>
                     </div>
