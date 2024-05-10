@@ -1,3 +1,5 @@
+'use client';
+
 import classNames from 'classnames/bind';
 import styles from '../product.module.scss';
 import useSize from '~/libs/hooks/useSize';

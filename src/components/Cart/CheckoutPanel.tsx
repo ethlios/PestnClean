@@ -45,7 +45,7 @@ export default function CheckoutPanel({ cart }: IAppProps) {
         >
             <div className={cx('panel')}>
                 {/*Discount code*/}
-                <DiscountCode />
+                <DiscountCode setDiscount={setDiscount} />
                 {/*Summary*/}
                 <div className={'my-5'}>
                     <p className={`${cx('title')} mb-3`}>Tóm tắt đơn hàng</p>
