@@ -52,6 +52,7 @@ import {
     addDiscountSuccess,
     deleteDiscount,
     deleteDiscountSuccess,
+    updateDiscountSuccess,
     getProvince,
 } from './actions';
 
@@ -376,11 +377,15 @@ const rootReducer = createReducer(initState, (builder) => {
         state.discount = action.payload;
     });
     builder.addCase(addDiscountSuccess, (state, action) => {
-        state.discount.push(action.payload);
+        state.products.push(action.payload);
     });
     builder.addCase(deleteDiscountSuccess, (state, action) => {
-        const index = findIndex(state.products, action.payload);
+        const index = findIndex(state.discount, action.payload);
         state.discount.splice(index, 1);
+    });
+    builder.addCase(updateDiscountSuccess, (state, action) => {
+        const index: number = findIndex(state.discount, action.payload.id);
+        state.discount[index] = action.payload;
     });
 });
 

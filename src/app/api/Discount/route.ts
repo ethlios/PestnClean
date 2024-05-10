@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { uid } from '~/libs/orthers/generatedCode';
 import { prisma } from '~/libs/orthers/prisma';
 
 export async function POST(request: Request) {

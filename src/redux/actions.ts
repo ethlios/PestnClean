@@ -171,6 +171,11 @@ export const addDiscountSuccess = createAction<any>(type.ADD_DISCOUNT_SUCCESS);
 export const deleteDiscount = createAction<any>(type.DELETE_DISCOUNT);
 
 export const deleteDiscountSuccess = createAction<any>(type.DELETE_DISCOUNT_SUCCESS);
+
+export const updateDiscount = createAction<any>(type.UPDATE_DISCOUNT);
+
+export const updateDiscountSuccess = createAction<any>(type.UPDATE_DISCOUNT_SUCCESS);
+
 // Discount
 export const getNotification = createAction<any>(type.GET_NOTIFICATION);
 

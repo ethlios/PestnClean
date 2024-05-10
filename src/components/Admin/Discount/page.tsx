@@ -26,7 +26,7 @@ export interface showToast {
 export default function AdminDiscount(props: IAppProps) {
     const discounts: any = useSelector((state: RootState) => state.main.discount);
     const [openAddDiscount, setOpenAddDiscount] = useState<boolean>(false);
-    const [updateProduct, setUpdateProduct] = useState<any>({});
+    const [updateDiscount, setUpdateDiscount] = useState<any>({});
     const [showToast, setShowToast] = useState<showToast>({
         message: '',
         status: false,
@@ -49,9 +49,9 @@ export default function AdminDiscount(props: IAppProps) {
                     isOpen={openAddDiscount}
                     isClose={(e: boolean) => {
                         setOpenAddDiscount(e);
-                        setUpdateProduct({});
+                        setUpdateDiscount({});
                     }}
-                    valueUpdate={updateProduct}
+                    valueUpdate={updateDiscount}
                 />
             ) : (
                 <>
@@ -94,9 +94,8 @@ export default function AdminDiscount(props: IAppProps) {
                                                 <div className="flex items-center justify-center">
                                                 <IconButton
                                         onClick={() => {
-                                            // setIsUpdate(true);
-                                            // setOpenAddOrder(true);
-                                            // setOrder(order);
+                                            setOpenAddDiscount(item);
+                                            setUpdateDiscount(true);
                                         }}
                                     >
                                         <DriveFileRenameOutlineOutlinedIcon />
