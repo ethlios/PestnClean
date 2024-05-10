@@ -1,12 +1,13 @@
 'use client';
 
 import classNames from 'classnames/bind';
-import Link from 'next/link';
 import ButtonCommon from '../Orther/Button';
 import OwlCarouselCP from '../Orther/Carousel';
 import styles from './home.module.scss';
-import Image from 'next/image';
 import useSize from '~/libs/hooks/useSize';
+import { useSelector } from 'react-redux';
+import { RootState } from '~/redux/provider/store';
+import ProductItem from '~/components/Product/Main/ProductItem';
 
 const cx = classNames.bind(styles);
 
@@ -14,6 +15,8 @@ export interface IAppProps {}
 
 export default function ProductOthers(props: IAppProps) {
     const { sizeX } = useSize();
+    const allProducts = useSelector((state: RootState) => state.main.allProducts);
+    const randomProducts = [...allProducts].sort(() => 0.5 - Math.random()).slice(0, 10);
 
     return (
         <div className={cx('blog-wrapper')}>
@@ -36,26 +39,8 @@ export default function ProductOthers(props: IAppProps) {
 
             <OwlCarouselCP>
                 <>
-                    {Array.from({ length: 10 }).map((_, index) => {
-                        return (
-                            <Link href="/sanpham/detail" className={cx('content-item')} key={index}>
-                                <Image
-                                    src={
-                                        'https://res.cloudinary.com/dj2jarcxk/image/upload/v1713752119/tinh-dau-sweet-dream-viet-oils_rj89xg.jpg'
-                                    }
-                                    alt=""
-                                    width={1000}
-                                    height={1000}
-                                    className={cx('item-img')}
-                                    draggable={false}
-                                ></Image>
-                                <p className={cx('item-category')}>SẢN PHẨM GIẢI PHÁP VỆ SINH</p>
-                                <p className={cx('item-name')}>Tinh dầu Chanh Viet Oils</p>
-                                <p className={cx('item-price')}>
-                                    1.100.000 <u>đ</u>
-                                </p>
-                            </Link>
-                        );
+                    {randomProducts.map((product, index) => {
+                        return <ProductItem item={product} key={index} />;
                     })}
                 </>
             </OwlCarouselCP>

@@ -1,6 +1,5 @@
 'use client';
 
-import * as React from 'react';
 import classNames from 'classnames/bind';
 import styles from '../product.module.scss';
 import Link from 'next/link';
@@ -11,7 +10,7 @@ import { Autoplay } from 'swiper/modules';
 import formatter from '~/libs/orthers/formatMoney';
 import { nameToLink } from '~/libs/orthers/nameToLink';
 import Image from 'next/image';
-import { width } from '@mui/system';
+import ProductItem from './ProductItem';
 
 const cx = classNames.bind(styles);
 
@@ -45,123 +44,19 @@ export default function ProductStatus({ openFilter, products, status }: IAppProp
                         style={{ padding: '0 3.2px 0 0' }}
                     >
                         {products.map((item: any) => {
-                            const path = nameToLink(item ? item.title : '');
-
                             return (
                                 <SwiperSlide key={item.id}>
-                                    <Link
-                                        href={`/sanpham/${path}`}
-                                        key={item.id}
-                                        className={cx('content-item')}
-                                    >
-                                        <div
-                                            className={cx('item-img')}
-                                            style={{
-                                                height: sizeX < 430 ? '160px' : '',
-                                            }}
-                                        >
-                                            {item.status === 'SALE' && (
-                                                <div className={cx('item-event-sale')}>
-                                                    <p>14%</p>
-                                                </div>
-                                            )}
-                                            {item.status === 'HOT' && (
-                                                <div className={cx('item-event-hot')}>
-                                                    <p>Hot</p>
-                                                </div>
-                                            )}
-                                            <Image
-                                                src={item.Image[0]}
-                                                alt={item.title}
-                                                width={160}
-                                                height={160}
-                                                className={'h-full w-full object-cover'}
-                                            />
-                                        </div>
-                                        <p
-                                            className={cx('item-category')}
-                                            style={{
-                                                fontSize: sizeX < 400 ? '10.5px' : '',
-                                            }}
-                                        >
-                                            {item.category || 'SẢN PHẨM GIẢI PHÁP VỆ SINH'}
-                                        </p>
-                                        <p className={cx('item-name')}>{item.title}</p>
-                                        {item.status === 'SALE' && (
-                                            <>
-                                                <p className={cx('item-sale-price')}>
-                                                    {formatter.format(+item.price)}
-                                                </p>
-                                                <p className={cx('item-sale')}>
-                                                    {formatter.format(+item.priceSales)}
-                                                </p>
-                                            </>
-                                        )}
-                                        {item.status === 'HOT' && (
-                                            <p className={cx('item-price')}>
-                                                {formatter.format(+item.price)}
-                                            </p>
-                                        )}
-                                    </Link>
+                                    <ProductItem item={item} />
                                 </SwiperSlide>
                             );
                         })}
                     </Swiper>
                 ) : (
-                    products.map((item: any) => {
-                        const path = nameToLink(item ? item.title : '');
-
-                        return (
-                            <Link href={`/sanpham/${path}`} key={item.id} className={cx('content-item2')}>
-                                <div
-                                    className={cx('item-img')}
-                                    style={{
-                                        height: sizeX < 430 ? '160px' : '',
-                                    }}
-                                >
-                                    {item.status === 'SALE' && (
-                                        <div className={cx('item-event-sale')}>
-                                            <p>14%</p>
-                                        </div>
-                                    )}
-                                    {item.status === 'HOT' && (
-                                        <div className={cx('item-event-hot')}>
-                                            <p>Hot</p>
-                                        </div>
-                                    )}
-                                    <Image
-                                        src={item.Image[0]}
-                                        alt={item.title}
-                                        width={160}
-                                        height={160}
-                                        className={'h-full w-full object-cover'}
-                                    />
-                                </div>
-                                <p
-                                    className={cx('item-category')}
-                                    style={{
-                                        fontSize: sizeX < 400 ? '10.5px' : '',
-                                    }}
-                                >
-                                    {item.category || 'SẢN PHẨM GIẢI PHÁP VỆ SINH'}
-                                </p>
-                                <p className={cx('item-name')}>{item.title}</p>
-                                {item.status === 'SALE' && (
-                                    <>
-                                        <p className={cx('item-sale-price')}>
-                                            {formatter.format(+item.price)}
-                                        </p>
-                                        <p className={cx('item-sale')}>
-                                            {formatter.format(+item.priceSales)}
-                                        </p>
-                                    </>
-                                )}
-                                {item.status === 'HOT' && (
-                                    <p className={cx('item-price')}>{formatter.format(+item.price)}</p>
-                                )}
-                            </Link>
-                        );
-                    })
+                    <div className={'flex gap-2 w-full *:w-1/3'}>
+                        {products.map((item: any) => {
+                            return <ProductItem item={item} key={item.id} />;
+                        })}
+                    </div>
                 )}
             </div>
         </div>
