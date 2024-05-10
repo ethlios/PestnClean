@@ -30,9 +30,26 @@ async function GetAllNotification() {
 
     return res.data;
 }
+async function GetAllCodeInDiscount() {
+    const res = await axios.get(`api/Discount/getCode`);
 
+    if (res.status === 400) {
+        throw new Error('Failed to fetch data');
+    }
+
+    return res.data;
+}
+async function GetAllDiscount() {
+    const res = await axios.get(`api/Discount`);
+
+    if (res.status === 400) {
+        throw new Error('Failed to fetch data');
+    }
+
+    return res.data;
+}
 export async function getAllProducts() {
     return prisma.product.findMany();
 }
 
-export { getAllUsers, getAllUsersNotAdmin , GetAllNotification };
+export { getAllUsers, getAllUsersNotAdmin , GetAllNotification , GetAllCodeInDiscount , GetAllDiscount };

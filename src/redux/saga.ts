@@ -376,20 +376,6 @@ function* GetImageWorkByType({ payload }: any) {
     }
 }
 
-// get all user not admin
-function* GetUserByRule({ payload }: any) {
-    try {
-        const res: ResponseGenerator = yield call(request.get, 'api/user/all/ruleUser', null);
-        if (res.status === 200) {
-            yield put(actions.getUserByRule(res.data));
-        } else {
-            throw new Error(`Unexpected status code: ${res.status}`);
-        }
-    } catch (err: any) {
-        console.log(err);
-    }
-}
-
 // NOTIFICATIONS
 function* AddNotify({ payload }: any) {
     try {
@@ -429,7 +415,7 @@ function* GetAllNotificationsById({ payload }: any) {
 
 function* AddDiscount({ payload }: any) {
     try {
-        const res: ResponseGenerator = yield call(request.post, `api/discount`, payload);
+        const res: ResponseGenerator = yield call(request.post, `api/Discount`, payload);
 
         const { data, status } = res;
         if (status === 200) {
@@ -438,9 +424,27 @@ function* AddDiscount({ payload }: any) {
     } catch (err: any) {}
 }
 
+function* UpdateStatusDiscount({ payload }: any) {
+    try {
+        const { id } = payload;
+        const res: ResponseGenerator = yield call(request.put, `api/Discount/${id}`, payload);
+        if (res.status === 200) {
+            yield put(actions.updateStatusDiscountSuccess(res.data));
+        } else {
+            throw new Error(`Unexpected status code: ${res.status}`);
+        }
+    } catch (err: any) {
+        if (err.response && err.response.status === 400) {
+            yield put(actions.updateImgWorkFail(err.response.data));
+        } else {
+            console.log(err);
+        }
+    }
+}
+
 function* deleteDiscount({ payload }: any) {
     try {
-        const res: ResponseGenerator = yield call(request.remove, `api/discount/${payload}`);
+        const res: ResponseGenerator = yield call(request.remove, `api/Discount/${payload}`);
         if (res.status === 200) {
             yield put(actions.removeDiscountSuccess(payload));
         }
@@ -451,7 +455,6 @@ function* deleteDiscount({ payload }: any) {
 
 export default function* rootSaga() {
     yield takeLatest(types.GET_USER, FetchUser);
-    yield takeLatest(types.GET_USER_BY_RULE, GetUserByRule);
 
     // Product
     yield takeLatest(types.ADD_PRODUCT, AddProduct);
@@ -490,4 +493,5 @@ export default function* rootSaga() {
 
     // DISCOUNT
     yield takeLatest(types.ADD_DISCOUNT, AddDiscount);
+    yield takeLatest(types.UPDATE_STATUS_DISCOUNT, UpdateStatusDiscount);
 }

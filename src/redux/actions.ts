@@ -3,8 +3,6 @@ import * as type from './contants';
 
 export const getUser = createAction<any>(type.GET_USER);
 
-export const getUserByRule = createAction<void>(type.GET_USER_BY_RULE);
-
 export const signIn = createAction<boolean>(type.SIGN_IN);
 
 export const getButton = createAction<any>(type.GET_BUTTON);
@@ -170,6 +168,8 @@ export const addDiscountSuccess = createAction<any>(type.ADD_DISCOUNT_SUCCESS);
 export const removeDiscountSuccess = createAction<any>(type.REMOVE_DISCOUNT_SUCCESS);
 // Discount
 export const getNotification = createAction<any>(type.GET_NOTIFICATION);
+export const updateStatusDiscount = createAction<any>(type.UPDATE_STATUS_DISCOUNT);
+export const updateStatusDiscountSuccess = createAction<any>(type.UPDATE_STATUS_DISCOUNT_SUCCESS);
 
 // NOTIFICATIONS
 export const addNotification = createAction<any>(type.ADD_NOTIFICATION);
