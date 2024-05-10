@@ -88,9 +88,7 @@ export default function AdminAddOrder({
                 message: message,
                 product: JSON.stringify(products),
                 status: status,
-                payment: String(
-                    products.reduce((acc: number, item: any) => acc + +item.price * +item.quantity, 0),
-                ),
+                payment: payment,
                 paymentStatus: paymentStatus,
             });
         } else {

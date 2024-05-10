@@ -34,8 +34,14 @@ export default function CheckoutPanel({
     const dispatch = useDispatch();
     const { data: session } = useSession();
     const [admin, setAdmin] = useState<any>(); // admin info
+    const [discount, setDiscount] = useState<number>(0);
+    const [totalPrice, setTotalPrice] = useState<number>(0);
     const totalAmount = cart.reduce((acc: number, item: any) => acc + item.quantity, 0);
-    const totalPrice = cart.reduce((acc: number, item: any) => acc + item.price * item.quantity, 0);
+    const totalProductPrice = cart.reduce((acc: number, item: any) => acc + item.price * item.quantity, 0);
+
+    useEffect(() => {
+        setTotalPrice(totalProductPrice * (1 - discount / 100));
+    }, [discount]);
 
     useEffect(() => {
         const fetchAdmin = async () => {
@@ -78,7 +84,7 @@ export default function CheckoutPanel({
     return (
         <div className={cx('panel')}>
             {/*Discount code*/}
-            <DiscountCode />
+            <DiscountCode setDiscount={setDiscount} />
             {/*Summary*/}
             <div className={'my-5'}>
                 <p className={cx('title')}>Tóm tắt đơn hàng</p>
@@ -89,7 +95,7 @@ export default function CheckoutPanel({
                 <div className={'*:flex *:justify-between *:items center'}>
                     <div className={cx('total-price')}>
                         <span>{totalAmount} Sản phẩm</span>
-                        <p>{formatter.format(+totalPrice)}</p>
+                        <p>{formatter.format(+totalProductPrice)}</p>
                     </div>
                     <div className={cx('total-price')}>
                         <span>Phí vận chuyển</span>
@@ -97,7 +103,7 @@ export default function CheckoutPanel({
                     </div>
                     <div className={cx('total-price')}>
                         <span>Mã giảm giá</span>
-                        <p>{formatter.format(0)}</p>
+                        <p>{formatter.format(+(totalProductPrice * (discount / 100)))}</p>
                     </div>
                 </div>
             </div>

@@ -134,7 +134,7 @@ export default function UserOpenOrder({ setOpenAddOrder, order }: IAppProps) {
                             </div>
                         </div>
                         <div className={'col-span-12 md:col-span-4'}>
-                            <ProductOrder products={products} />
+                            <ProductOrder products={products} payment={payment} />
                         </div>
                     </div>
                 </div>

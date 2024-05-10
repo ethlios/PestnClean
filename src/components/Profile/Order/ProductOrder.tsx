@@ -14,9 +14,10 @@ const cx = classNames.bind(styles);
 
 interface ProductOrderProps {
     products?: any;
+    payment?: any;
 }
 
-export default function ProductOrder({ products }: ProductOrderProps) {
+export default function ProductOrder({ products, payment }: ProductOrderProps) {
     return (
         <div className={'flex flex-col gap-2'}>
             <div className={'p-2'}>
@@ -26,15 +27,7 @@ export default function ProductOrder({ products }: ProductOrderProps) {
                             <ProductItem item={item} key={item.id} />
                         ))}
                         <div className={'flex justify-end my-2'}>
-                            <p className={cx('total-price')}>
-                                Tổng tiền:{' '}
-                                {formatter.format(
-                                    products.reduce(
-                                        (acc: number, item: any) => acc + +item.price * +item.quantity,
-                                        0,
-                                    ),
-                                )}
-                            </p>
+                            <p className={cx('total-price')}>Tổng tiền: {formatter.format(+payment)}</p>
                         </div>
                     </>
                 )}
