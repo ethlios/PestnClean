@@ -18,8 +18,8 @@ const cx = classNames.bind(styles);
 export interface IAppProps {
     isOpen: boolean;
     isClose: Function;
-    valueUpdate: any;
     dataSendMail: any;
+    showToast: any;
 }
 
 const style = {
@@ -34,23 +34,23 @@ const style = {
     p: '10px',
 };
 
-export default function ChooseObjectCustomer({ isOpen, isClose, valueUpdate, dataSendMail }: IAppProps) {
+export default function ChooseObjectCustomer({ isOpen, isClose, dataSendMail, showToast }: IAppProps) {
     const [open, setOpen] = useState(false);
     const [isClicked, setIsClicked] = useState(false);
-    const [showToast, setShowToast] = useState<boolean>(false);
     const [listUsersSelected, setListUsersSelected] = useState<any[]>([]);
     const [listUsers, setListUsers] = useState<any[]>([]);
     const [searchValue, setSearchValue] = useState<string>('');
     const [isLoader, setIsLoader] = useState<boolean>(false);
     const debouncedText = useDebounce(searchValue, 200);
     const dispatch = useDispatch();
-    const selector = useSelector((state:RootState) => state.main);
+    const selector = useSelector((state: RootState) => state.main);
+
     const handleClose = () => {
         setOpen(false);
         isClose(false);
     };
 
-    const reset =() => {
+    const reset = () => {
         setIsLoader(false);
         setIsClicked(false);
         dispatch(clearMessage());
@@ -101,21 +101,22 @@ export default function ChooseObjectCustomer({ isOpen, isClose, valueUpdate, dat
                 const resp = await sendEmail({ data: dataSendMail, user: item });
                 emailAccepts.push(resp.accepted[0]);
             }
-            const emails: string[] = listUsersSelected.map((user) => user.email);
-            if(arraysAreEqual(emailAccepts, emails)){
-                dispatch(updateStatusDiscount({id: dataSendMail.id , status: true}));
-            };
+            const emails: string[] = listUsersSelected.map((user: any) => user.email);
+            if (arraysAreEqual(emailAccepts, emails)) {
+                dispatch(updateStatusDiscount({ id: dataSendMail.id, status: true }));
+            }
         }
     };
 
     useEffect(() => {
-        if(selector.message === 'Update Status Success'){
+        if (selector.message === 'Update Status Success') {
             reset();
-            setTimeout(() => {
-                setShowToast(true);
-            },500);
+            showToast({
+                message: 'Đã gửi email thông báo khuyến mãi đến các người dùng được chọn',
+                status: true,
+            });
         }
-    },[selector.message]);
+    }, [selector.message]);
 
     useEffect(() => {
         if (isOpen) {
@@ -154,12 +155,6 @@ export default function ChooseObjectCustomer({ isOpen, isClose, valueUpdate, dat
 
     return (
         <>
-            <Toast
-                text= "Đã gửi mail đến tất cả người được chọn"
-                showToast={showToast}
-                setShowToast={setShowToast}
-                rule="normal"
-            />
             <Modal
                 open={open}
                 onClose={handleClose}
@@ -232,7 +227,7 @@ export default function ChooseObjectCustomer({ isOpen, isClose, valueUpdate, dat
                             </div>
                         </div>
                         <div className="flex justify-center">
-                            <form className='w-full' action={() => sendMailToUser()}>
+                            <form className="w-full" action={() => sendMailToUser()}>
                                 <button
                                     className={cx(
                                         'wrapper-btnSubmit',

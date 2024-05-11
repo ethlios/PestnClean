@@ -12,7 +12,9 @@ import {
     Section,
     Text,
 } from '@react-email/components';
+import moment from 'moment';
 import * as React from 'react';
+import { formatDate } from '~/libs/orthers/formatDate';
 interface DisCountProps {
     code: string;
     dateEnd: string;
@@ -38,8 +40,11 @@ export const ContactFormEmail = ({
             <Preview>Thông báo bạn được tặng 1 mã khuyễn mãi!</Preview>
             <Body style={main}>
                 <Container>
-                    <Section style={logo} >
-                        <Img width={100}  src="https://res.cloudinary.com/dj2jarcxk/image/upload/v1715334923/logo_xc5esd.png" />
+                    <Section style={logo}>
+                        <Img
+                            width={100}
+                            src="https://res.cloudinary.com/dj2jarcxk/image/upload/v1715334923/logo_xc5esd.png"
+                        />
                     </Section>
 
                     <Section style={content}>
@@ -84,7 +89,7 @@ export const ContactFormEmail = ({
                                 </Text>
                                 <Text style={{ ...paragraph, marginTop: -5 }}>
                                     <b>Tỷ lệ giảm: </b>
-                                    {percent}
+                                    {percent + '%'}
                                 </Text>
                                 <Text
                                     style={{
@@ -93,8 +98,9 @@ export const ContactFormEmail = ({
                                         marginTop: -5,
                                     }}
                                 >
-                                    Lưu ý chương trình áp dụng vào khoảng thời gian từ {dateStart} và kết thúc
-                                    từ {dateEnd}
+                                    Lưu ý chương trình áp dụng vào khoảng thời gian từ{' '}
+                                    {moment(dateStart).format('DD/MM/YYYY')} và kết thúc từ{' '}
+                                    {moment(dateEnd).format('DD/MM/YYYY')}
                                 </Text>
 
                                 <Text style={paragraph}>{description}</Text>

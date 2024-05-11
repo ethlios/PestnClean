@@ -6,13 +6,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '~/redux/provider/store';
 import { useSession } from 'next-auth/react';
 import styles from './Discount.module.scss';
-import ChooseObjectCustomer from './ChooseObjectCustomer';
 import { addDiscount, clearMessage } from '~/redux/actions';
 import { GetAllCodeInDiscount } from '~/libs/orthers/getData';
 import { generateUniqueCodeInDiscount } from '~/libs/orthers/generatedCode';
 import Toast from '~/components/Orther/Toast';
 import { formatISODate } from '~/libs/orthers/formatDate';
-
+import moment from 'moment';
 const cx = classNames.bind(styles);
 
 export interface IAppProps {
@@ -37,8 +36,12 @@ export default function AddDiscount({ isOpen, isClose, valueUpdate }: IAppProps)
     const [open, setOpen] = useState(false);
     const [showToast, setShowToast] = useState<boolean>(false);
     const [isLoader, setIsLoader] = useState<boolean>(false);
-    const [timeStart, setTimeStart] = useState<string>('');
-    const [timeEnd, setTimeEnd] = useState<string>('');
+    const [timeStart, setTimeStart] = useState<string>(() => {
+        return moment().format('YYYY-MM-DD');
+    });
+    const [timeEnd, setTimeEnd] = useState<string>(() => {
+        return moment().format('YYYY-MM-DD');
+    });
     const [tenKhuyenMai, setTenKhuyenMai] = useState('');
     const [moTa, setMoTa] = useState('');
     const [maKhuyenMai, setMaKhuyenMai] = useState('');
@@ -60,7 +63,7 @@ export default function AddDiscount({ isOpen, isClose, valueUpdate }: IAppProps)
         setMucGiamGia('');
         handleClose();
         dispatch(clearMessage());
-    }
+    };
 
     const handleSave = () => {
         if (
@@ -88,7 +91,7 @@ export default function AddDiscount({ isOpen, isClose, valueUpdate }: IAppProps)
 
     const generateMaKhuyenMai = async () => {
         const resp = await GetAllCodeInDiscount();
-        if(resp){
+        if (resp) {
             setMaKhuyenMai(generateUniqueCodeInDiscount(resp));
         }
     };
@@ -107,29 +110,15 @@ export default function AddDiscount({ isOpen, isClose, valueUpdate }: IAppProps)
             setShowToast(true);
             setTimeout(() => {
                 reset();
-            },1000);
+            }, 1000);
         } else {
             setOpen(false);
         }
     }, [selector.message]);
 
-    useEffect(() => {
-        // Lấy ngày và giờ hiện tại
-        const now = new Date();
-        // Format ngày và giờ thành chuỗi YYYY-MM-DDThh:mm (định dạng datetime-local)
-        const formattedDateTime = now.toISOString().slice(0, 16);
-        setTimeStart(formattedDateTime);
-        setTimeEnd(formattedDateTime);
-    }, []);
-
     return (
         <>
-            <Toast
-                text= "Thêm thành công"
-                showToast={showToast}
-                setShowToast={setShowToast}
-                rule="normal"
-            />
+            <Toast text="Thêm thành công" showToast={showToast} setShowToast={setShowToast} rule="normal" />
             <div className={cx('wrapper')}>
                 <div className={cx('wrapper-header', 'flex items-center justify-between h-10')}>
                     <p className="font-medium underline">TẠO MÃ KHUYẾN MÃI</p>
@@ -174,8 +163,9 @@ export default function AddDiscount({ isOpen, isClose, valueUpdate }: IAppProps)
                         </div>
                         <input
                             className={cx('wrapper-content-inputName', 'mt-2')}
-                            placeholder="Nhập mã khuyễn mãi hoặc tạo tự động"
+                            placeholder="Bấm tạo tự động"
                             value={maKhuyenMai}
+                            disabled={true}
                             onChange={(e) => setMaKhuyenMai(e.target.value)}
                         />
                     </div>
@@ -196,9 +186,7 @@ export default function AddDiscount({ isOpen, isClose, valueUpdate }: IAppProps)
                                 <p className="text-xs font-medium">Thời gian bắt đầu</p>
                                 <input
                                     className={cx('wrapper-content-inputTimeStart', 'mt-2')}
-                                    type="datetime-local"
-                                    id="birthdaytime"
-                                    name="birthdaytime"
+                                    type="date"
                                     value={timeStart}
                                     onChange={(e) => setTimeStart(e.target.value)}
                                 />
@@ -207,9 +195,7 @@ export default function AddDiscount({ isOpen, isClose, valueUpdate }: IAppProps)
                                 <p className="text-xs font-medium">Thời gian kết thúc</p>
                                 <input
                                     className={cx('wrapper-content-inputTimeEnd', 'mt-2')}
-                                    type="datetime-local"
-                                    id="birthdaytime"
-                                    name="birthdaytime"
+                                    type="date"
                                     value={timeEnd}
                                     onChange={(e) => setTimeEnd(e.target.value)}
                                 />
@@ -219,11 +205,15 @@ export default function AddDiscount({ isOpen, isClose, valueUpdate }: IAppProps)
                 </div>
                 <div className="flex justify-center">
                     <button
-                        className={cx('wrapper-btnSubmit', 'mt-6',isLoader ? "wrapper-btnSubmit-loader" : 'wrapper-btnSubmit-success')}
+                        className={cx(
+                            'wrapper-btnSubmit',
+                            'mt-6',
+                            isLoader ? 'wrapper-btnSubmit-loader' : 'wrapper-btnSubmit-success',
+                        )}
                         onClick={handleSave}
                         // disabled={isClicked}
                     >
-                        {isLoader ? "..." : 'Thêm mã khuyễn mãi'}
+                        {isLoader ? '...' : 'Thêm mã khuyễn mãi'}
                     </button>
                 </div>
             </div>
