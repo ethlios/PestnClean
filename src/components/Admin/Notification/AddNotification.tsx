@@ -11,6 +11,7 @@ import { useSession } from 'next-auth/react';
 import { socket } from '~/websocket/socket';
 import Toast from '~/components/Orther/Toast';
 import { formatISODate } from '~/libs/orthers/formatDate';
+import moment from 'moment';
 const cx = classNames.bind(styles);
 
 export interface IAppProps {
@@ -52,8 +53,7 @@ export default function AddNotification({ isOpen, isClose, valueUpdate , addSucc
     // Xử lí sự kiện lưu notify vào database
     const handleSave = () => {
         if (valueDesNotify !== '' && valueTitleNotify !== '' && selectedOption !== '') {
-            const currentDate = new Date();
-            const formattedDate = formatISODate(currentDate);
+            const currentDate= formatISODate(new Date(moment().format("DD/MM/YYYY")));
             if (selectedOption === 'Không giới hạn') {
                 if (session.data && session.data?.user.rule === 'admin') {
                     dispatch(
@@ -61,7 +61,7 @@ export default function AddNotification({ isOpen, isClose, valueUpdate , addSucc
                             title: valueTitleNotify,
                             message: valueDesNotify,
                             recipientId: session.data?.user.id,
-                            createdAt: formattedDate,
+                            createdAt: currentDate,
                             state: false,
                         }),
                     );
@@ -69,7 +69,7 @@ export default function AddNotification({ isOpen, isClose, valueUpdate , addSucc
                         title: valueTitleNotify,
                         message: valueDesNotify,
                         recipientId: session.data?.user.id,
-                        createdAt: formattedDate,
+                        createdAt: currentDate,
                         state: false,
                     });
                     setIsClicked(true);
@@ -82,7 +82,7 @@ export default function AddNotification({ isOpen, isClose, valueUpdate , addSucc
                                 title: valueTitleNotify,
                                 message: valueDesNotify,
                                 recipientId: item.id,
-                                createdAt: formattedDate,
+                                createdAt: currentDate,
                                 state: false,
                             }),
                         );
@@ -91,7 +91,7 @@ export default function AddNotification({ isOpen, isClose, valueUpdate , addSucc
                         title: valueTitleNotify,
                         message: valueDesNotify,
                         recipientId: listUsersSelected,
-                        createdAt: formattedDate,
+                        createdAt: currentDate,
                         state: false,
                     });
                     setIsClicked(true);

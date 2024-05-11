@@ -8,6 +8,7 @@ import AddNotification from './AddNotification';
 import CogWheel from '~/components/Orther/Loader/CogWheel/CogWheel';
 import { GetAllNotification } from '~/libs/orthers/getData';
 import { formatDate } from '~/libs/orthers/formatDate';
+import moment from 'moment';
 
 const cx = classNames.bind(styles);
 
@@ -67,6 +68,14 @@ export default function AdminNotification(props: IAppProps) {
                             </button>
                         </div>
                     </div>
+                    <p className={cx('text-sm font-semibold')}>Số lượng: {listNotifications.length}</p>
+                    <div>
+                        <input
+                            className={cx('wrapper-inputSearch')}
+                            type="text"
+                            placeholder="Tìm kiếm thông báo..."
+                        ></input>
+                    </div>
                     {isLoader ? (
                         <div className="flex items-center justify-center relative">
                             <CogWheel />
@@ -93,7 +102,7 @@ export default function AdminNotification(props: IAppProps) {
                                                 <td className={cx('font-semibold')}>{item.title}</td>
                                                 <td className={cx('font-medium')}>{item.message}</td>
                                                 <td className={cx('font-medium')}>
-                                                    {formatDate(item.createdAt)}
+                                                    {moment(item.createdAt).format("DD/MM/YYYY")}
                                                 </td>
                                                 <td className={cx('font-medium')}>
                                                     <ul>
