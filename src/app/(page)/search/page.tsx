@@ -77,10 +77,20 @@ export default function FaqPage(props: IAppProps) {
                                     : '0 100px',
                     }}
                 >
-                    <div className={cx('wrapper-search')}>
+                    <div
+                        className={cx('wrapper-search')}
+                        style={{
+                            paddingTop: '30px',
+                        }}
+                    >
                         <div className="flex items-center">
                             <p className="font-semibold pl-4">Kết quả tìm kiếm:</p>
-                            <ul className={cx('flex items-center ml-4', 'wrapper-search-ul')}>
+                            <ul
+                                className={cx('flex items-center ml-4', 'wrapper-search-ul')}
+                                style={{
+                                    fontWeight: 600,
+                                }}
+                            >
                                 <li>
                                     Sản phẩm:
                                     {resultQueryProducts
@@ -117,6 +127,9 @@ export default function FaqPage(props: IAppProps) {
                                         setCheckedBlogs(false);
                                         setCheckedService(false);
                                     }}
+                                    style={{
+                                        fontWeight: '600',
+                                    }}
                                 >
                                     Sản phẩm
                                 </button>
@@ -133,6 +146,9 @@ export default function FaqPage(props: IAppProps) {
                                         setCheckedBlogs(true);
                                         setCheckedService(false);
                                     }}
+                                    style={{
+                                        fontWeight: '600',
+                                    }}
                                 >
                                     Bài viết
                                 </button>
@@ -148,6 +164,9 @@ export default function FaqPage(props: IAppProps) {
                                         setCheckedProducts(false);
                                         setCheckedBlogs(false);
                                         setCheckedService(true);
+                                    }}
+                                    style={{
+                                        fontWeight: '600',
                                     }}
                                 >
                                     Dịch vụ
@@ -175,7 +194,13 @@ export default function FaqPage(props: IAppProps) {
                                                         }}
                                                     >
                                                         {item.status !== null && (
-                                                            <div className={cx('wrapper-search-product-img')}>
+                                                            <div
+                                                                className={cx('wrapper-search-product-img')}
+                                                                style={{
+                                                                    fontSize: '13.5',
+                                                                    fontWeight: '600',
+                                                                }}
+                                                            >
                                                                 {item.status}
                                                             </div>
                                                         )}
@@ -273,7 +298,7 @@ export default function FaqPage(props: IAppProps) {
                                                     style={{
                                                         backgroundColor:
                                                             currentBlog === index ? '#fff' : 'transparent',
-                                                        padding: currentBlog === index ? '5px' : '',
+                                                        padding: currentBlog === index ? '10px' : '5px',
                                                         transition: 'all ease .5s',
                                                     }}
                                                 >
@@ -339,7 +364,7 @@ export default function FaqPage(props: IAppProps) {
                                                         {currentBlog === index && (
                                                             <ButtonCommon
                                                                 text="XEM"
-                                                                path={`blogs/${nameToLink(service.title)}`}
+                                                                path={`/${nameToLink(service.title)}`}
                                                             />
                                                         )}
                                                     </div>
@@ -350,12 +375,12 @@ export default function FaqPage(props: IAppProps) {
                                                     style={{
                                                         backgroundColor:
                                                             currentBlog === index ? '#fff' : 'transparent',
-                                                        padding: currentBlog === index ? '5px' : '',
+                                                        padding: currentBlog === index ? '10px' : '5px',
                                                         transition: 'all ease .5s',
                                                     }}
                                                 >
                                                     <p>{service.category}</p>
-                                                    <Link href={`services/${nameToLink(service.title)}`}>
+                                                    <Link href={`/${nameToLink(service.title)}`}>
                                                         {service.title}
                                                     </Link>
                                                     <p>

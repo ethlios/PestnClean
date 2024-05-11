@@ -66,7 +66,7 @@ export default function ProductPage(props: IAppProps) {
                     }}
                 >
                     <BannerProduct />
-                    <CategoryIconProduct openFilter={openFilter} />
+                    {/* <CategoryIconProduct openFilter={openFilter} /> */}
                     <ProductStatus
                         openFilter={openFilter}
                         products={products.filter((product: any) => product.status === 'SALE')}

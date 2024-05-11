@@ -32,7 +32,7 @@ const cx = classNames.bind(styles);
 export interface HeaderProps {}
 interface ShowToast {
     message: string;
-    status: boolean
+    status: boolean;
 }
 export default function Header(props: HeaderProps) {
     const path = usePathname();
@@ -49,18 +49,18 @@ export default function Header(props: HeaderProps) {
     const [isConnected, setIsConnected] = useState(false);
     const [transport, setTransport] = useState('N/A');
     const [listNotifications, setListNotifications] = useState<any[]>([]);
-    const [isShowToast,setShowToast] = useState<ShowToast>({
-        message: "",
-        status: false
+    const [isShowToast, setShowToast] = useState<ShowToast>({
+        message: '',
+        status: false,
     });
     const dispatch = useDispatch();
     const selector = useSelector((state: RootState) => state.main);
 
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
-        if(searchValue !== ''){
+        if (searchValue !== '') {
             const encodedSearchQuery = encodeURI(searchValue);
-            router.push(`search?q=${encodedSearchQuery}`);
+            router.push(`/search?q=${encodedSearchQuery}`);
         }
     };
 
@@ -118,27 +118,27 @@ export default function Header(props: HeaderProps) {
         if (session?.user.id) {
             dispatch(getAllNotificationsById({ id: session.user.id }));
         }
-    }, [session]);
+    }, [dispatch, session]);
 
     useEffect(() => {
         if (selector.message === 'Get All Notifications By Id Success') {
             setListNotifications(selector.notificationAll);
             dispatch(clearMessage());
         }
-    }, [selector.message]);
+    }, [dispatch, selector.message, selector.notificationAll]);
 
     useEffect(() => {
         if (isConnected && session?.user.id) {
             socket.on('respMessageAddNotify', (value) => {
                 const shortenedMessage = value.title.substring(0, 40 - 3) + '...';
                 setShowToast({
-                    message: "Bạn vừa nhận được thông báo mới: " +shortenedMessage,
-                    status: true
-                })
+                    message: 'Bạn vừa nhận được thông báo mới: ' + shortenedMessage,
+                    status: true,
+                });
                 dispatch(getAllNotificationsById({ id: session.user.id }));
             });
         }
-    }, [isConnected]);
+    }, [dispatch, isConnected, session?.user.id]);
 
     useEffect(() => {
         const scroll = () => {
@@ -160,21 +160,21 @@ export default function Header(props: HeaderProps) {
     useEffect(() => {
         const handleScroll = () => {
             const scrollTopValue = window.scrollY || document.documentElement.scrollTop;
-            if(scrollTopValue > 33){
+            if (scrollTopValue > 33) {
                 setOpenNotifications(false);
             }
         };
-    
+
         window.addEventListener('scroll', handleScroll);
-    
+
         return () => {
-          window.removeEventListener('scroll', handleScroll);
+            window.removeEventListener('scroll', handleScroll);
         };
-      }, []);
+    }, []);
     return (
         <>
             <Toast
-                text= {isShowToast.message}
+                text={isShowToast.message}
                 showToast={isShowToast.status}
                 setShowToast={setShowToast}
                 rule="normal"

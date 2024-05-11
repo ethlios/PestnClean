@@ -50,13 +50,14 @@ export default function LoginPage(props: IAppProps) {
                         }}
                     >
                         <FormatQuoteOutlinedIcon />
-                        <h1>Title</h1>
+                        <h1>Sứ Mệnh Bảo Vệ Môi Trường, Bảo Vệ Sức Khỏe</h1>
                         <p
                             style={{
                                 color: !theme ? 'var(--text-black)' : 'rgba(255,255,255,0.8)',
                             }}
                         >
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                            PestnClean cam kết mang đến cho bạn không gian sống an toàn, sạch sẽ và thơm mát
+                            thông qua dịch vụ mà chúng tôi cung cấp.
                         </p>
                         <div className={cx('decor')}></div>
                     </div>

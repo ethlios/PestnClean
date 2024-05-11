@@ -37,17 +37,29 @@ export default function InformationContactPage(props: IAppProps) {
             <div className={cx('information-2')}>
                 <p>MẠNG XÃ HỘI</p>
                 <div className={cx('social-icon')}>
-                    <Link href={''} className="opacity">
+                    <Link
+                        href={'https://www.facebook.com/pestncleancare'}
+                        className="opacity"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
                         <FacebookIcon />
                     </Link>
-                    <Link href={''} className="opacity">
+                    <Link
+                        href={'https://www.linkedin.com/company/pestnclean/?viewAsMember=true'}
+                        className="opacity"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
                         <LinkedInIcon />
                     </Link>
-                    <Link href={''} className="opacity">
+                    <Link
+                        href={'https://www.youtube.com/channel/UCetBg-JrnHttmuF0wiZflww'}
+                        className="opacity"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
                         <YouTubeIcon />
-                    </Link>
-                    <Link href={''} className="opacity">
-                        <InstagramIcon />
                     </Link>
                 </div>
             </div>

@@ -100,7 +100,7 @@ export default function LoginForm({ theme, setTheme }: IAppProps) {
                         width: '100%',
                     }}
                 >
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                    Đăng nhập để đặt hàng trực tiếp trên Website và có cơ hội nhận nhiều ưu đãi hấp dẫn!
                 </p>
                 {/* <div
                     className={cx('input-list')}
@@ -183,14 +183,14 @@ export default function LoginForm({ theme, setTheme }: IAppProps) {
                         <GoogleIcon />
                         Đăng nhập với Gmail
                     </button>
-                    <button
+                    {/* <button
                         style={{
                             color: !theme ? '' : 'rgba(255,255,255,0.8)',
                         }}
                     >
                         <FacebookOutlinedIcon />
                         Đăng nhập với Facebook
-                    </button>
+                    </button> */}
                 </div>
             </div>
         </div>

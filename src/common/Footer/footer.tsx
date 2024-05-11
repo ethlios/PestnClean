@@ -56,7 +56,7 @@ export default function Footer(props: FooterProps) {
             setValueMessage({ message: message, status: false });
             dispatch(clearMessage());
         }
-    }, [selector.message]);
+    }, [dispatch, selector?.message]);
 
     useEffect(() => {
         setValueMessage({ message: '', status: null });
@@ -221,17 +221,29 @@ export default function Footer(props: FooterProps) {
                             <b>Email:</b> sales@pestnclean.vn
                         </Link>
                         <div className={cx('social')}>
-                            <Link href={''} className="opacity">
+                            <Link
+                                href={'https://www.facebook.com/pestncleancare'}
+                                className="opacity"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
                                 <FacebookIcon />
                             </Link>
-                            <Link href={''} className="opacity">
+                            <Link
+                                href={'https://www.linkedin.com/company/pestnclean/?viewAsMember=true'}
+                                className="opacity"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
                                 <LinkedInIcon />
                             </Link>
-                            <Link href={''} className="opacity">
+                            <Link
+                                href={'https://www.youtube.com/channel/UCetBg-JrnHttmuF0wiZflww'}
+                                className="opacity"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
                                 <YouTubeIcon />
-                            </Link>
-                            <Link href={''} className="opacity">
-                                <InstagramIcon />
                             </Link>
                         </div>
                     </div>
