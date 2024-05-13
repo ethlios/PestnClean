@@ -27,6 +27,7 @@ export async function PUT(request: Request) {
                     payment: body.payment,
                     paymentStatus: body.paymentStatus,
                     Ward: body.ward,
+                    discount: body.discount,
                 },
             },
         },

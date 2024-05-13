@@ -24,6 +24,7 @@ export async function PUT(request: Request, { params }: { params: RequestDelete 
             payment: body.payment,
             paymentStatus: body.paymentStatus,
             Ward: body.ward,
+            discount: body.discount,
         },
     });
 
