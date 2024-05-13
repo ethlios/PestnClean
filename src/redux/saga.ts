@@ -153,7 +153,6 @@ function* DeleteFeedback({ payload }: any) {
 // ORDER
 function* AddOrder({ payload }: any) {
     try {
-        yield put(actions.orderBehavior('1'));
         const res: ResponseGenerator = yield call(request.put, `api/order`, payload);
 
         if (res.status === 200) {
@@ -162,6 +161,7 @@ function* AddOrder({ payload }: any) {
         }
     } catch (err) {
         console.log(err);
+        yield put(actions.orderBehavior('1'));
     }
 }
 
@@ -486,7 +486,7 @@ export default function* rootSaga() {
 
     // NOTIFICATIONS
     yield takeLatest(types.ADD_NOTIFICATION, AddNotify);
-    yield takeLatest(types.GET_ALL_NOTIFICATIONS_BY_ID,GetAllNotificationsById);
+    yield takeLatest(types.GET_ALL_NOTIFICATIONS_BY_ID, GetAllNotificationsById);
 
     // User
     yield takeLatest(types.UPDATE_SESSION_USER, updateSessionUser);

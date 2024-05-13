@@ -5,6 +5,9 @@ import useSize from '~/libs/hooks/useSize';
 import { useSelector } from 'react-redux';
 import { RootState } from '~/redux/provider/store';
 import emailjs from '@emailjs/browser';
+import CircularProgress from '@mui/material/CircularProgress';
+import { useEffect } from 'react';
+import Link from 'next/link';
 
 const cx = classNames.bind(styles);
 
@@ -19,77 +22,96 @@ export default function DialogConfirm({ setShowDialog, setCart, formInfoRef }: I
     let orderBehavior = useSelector((state: RootState) => state.main.orderBehavior);
 
     const sendEmail = () => {
-        emailjs
-            .sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', formInfoRef.current, 'YOUR_USER_ID')
-            .then(
-                (result) => {
-                    console.log('SEND EMAIL SUCCESS!');
-                },
-                (error) => {
-                    console.log('SEND EMAIL FAILED...', error);
-                },
-            )
-            .then(() => {
-                setCart([]);
-                localStorage.setItem('cart', JSON.stringify([]));
-                handleClose();
-            });
+        emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', formInfoRef.current, 'YOUR_USER_ID').then(
+            (result) => {
+                console.log('SEND EMAIL SUCCESS!');
+            },
+            (error) => {
+                console.log('SEND EMAIL FAILED...', error);
+            },
+        );
     };
+
+    useEffect(() => {
+        if (orderBehavior === '2') {
+            setCart([]);
+            localStorage.setItem('cart', JSON.stringify([]));
+            sendEmail();
+        }
+    }, [orderBehavior]);
 
     const handleClose = () => {
         setShowDialog(false);
     };
 
-    const handleConfirm = () => {
-        sendEmail();
-    };
-
     return (
         <div className="cpmount">
-            <div className={cx('dialog-wrapper')} onClick={handleClose}>
-                <div
-                    className={cx('dialog-content')}
-                    style={{
-                        padding: sizeX < 500 ? '20px' : '',
-                    }}
-                    onClick={(e) => e.stopPropagation()}
-                >
-                    <p
-                        className={cx('dialog-title')}
+            <div className={cx('dialog-wrapper')}>
+                {orderBehavior === '0' ? (
+                    <CircularProgress color="success" />
+                ) : (
+                    <div
+                        className={cx('dialog-content')}
                         style={{
-                            fontSize: sizeX < 500 ? '16px' : '',
-                            textAlign: 'center',
+                            padding: sizeX < 500 ? '20px' : '',
                         }}
+                        onClick={(e) => e.stopPropagation()}
                     >
-                        {orderBehavior === '2' ? 'Đặt hàng thành công' : 'Đặt hàng thất bại'}
-                    </p>
-                    <div className={cx('dialog-button')}>
-                        {orderBehavior === '2' ? (
-                            <Button
-                                variant="contained"
-                                sx={{
-                                    fontSize: '14px',
-                                    fontWeight: '600',
-                                }}
-                                onClick={handleConfirm}
-                            >
-                                {sizeX < 580 ? 'Confirm' : 'Xác nhận'}
-                            </Button>
-                        ) : (
-                            <Button
-                                variant="outlined"
-                                sx={{
-                                    fontSize: '14px',
-                                    fontWeight: '600',
-                                    outline: '2px solid',
-                                }}
-                                onClick={handleClose}
-                            >
-                                {sizeX < 580 ? 'Back' : 'Quay lại thông tin'}
-                            </Button>
+                        <p
+                            className={cx('dialog-title')}
+                            style={{
+                                fontSize: sizeX < 500 ? '16px' : '',
+                                textAlign: 'center',
+                            }}
+                        >
+                            {orderBehavior === '2' ? 'Đặt hàng thành công' : 'Đặt hàng thất bại'}
+                        </p>
+                        {orderBehavior === '2' && (
+                            <p>
+                                Cảm ơn bạn đã mua hàng tại cửa hàng chúng tôi, chúng tôi sẽ liên hệ với bạn
+                                trong thời gian sớm nhất.
+                            </p>
                         )}
+                        <div className={cx('dialog-button')}>
+                            {orderBehavior === '2' ? (
+                                <>
+                                    <Button
+                                        variant="outlined"
+                                        sx={{
+                                            fontSize: '14px',
+                                            fontWeight: '600',
+                                        }}
+                                    >
+                                        <Link href={'/sanpham'}>
+                                            {sizeX < 580 ? 'Shop' : 'Tiếp tục mua hàng'}
+                                        </Link>
+                                    </Button>
+                                    <Button
+                                        variant="contained"
+                                        sx={{
+                                            fontSize: '14px',
+                                            fontWeight: '600',
+                                        }}
+                                    >
+                                        <Link href={'/'}>{sizeX < 580 ? 'Home' : 'Quay về trang chủ'}</Link>
+                                    </Button>
+                                </>
+                            ) : (
+                                <Button
+                                    variant="outlined"
+                                    sx={{
+                                        fontSize: '14px',
+                                        fontWeight: '600',
+                                        outline: '2px solid',
+                                    }}
+                                    onClick={handleClose}
+                                >
+                                    {sizeX < 580 ? 'Back' : 'Quay lại thông tin'}
+                                </Button>
+                            )}
+                        </div>
                     </div>
-                </div>
+                )}
             </div>
         </div>
     );

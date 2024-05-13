@@ -12,7 +12,7 @@ import { Button } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useSession } from 'next-auth/react';
-import { addOrder } from '~/redux/actions';
+import { addOrder, orderBehavior } from '~/redux/actions';
 
 const cx = classNames.bind(styles);
 
@@ -70,8 +70,8 @@ export default function CheckoutPanel({
     const handleSubmit = () => {
         if (formInfoRef.current.reportValidity()) {
             if (cart.length > 0) {
+                dispatch(orderBehavior('0'));
                 dispatch(addOrder(order));
-                // console.log('Order:', order);
                 setShowDialog(true);
             } else {
                 setShowToast(true);
