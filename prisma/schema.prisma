@@ -8,30 +8,31 @@ datasource db {
 }
 
 model User {
-  id           String         @id
-  email        String         @unique
-  name         String?
-  img          String?
-  rule         String?
-  address      String?
-  district     String?
-  Ward         String?
-  city         String?
-  phone        String?
-  avatar       String?
-  cart         Cart[]
-  comment      CommentBlogs[]
-  discount     Discount[]
-  emailkm      Email[]
-  imgWork      ImgWork[]
-  notifications  Notification[]
-  order        Order[]
-  product      Product[]
+  id            String         @id
+  email         String         @unique
+  name          String?
+  img           String?
+  rule          String?
+  address       String?
+  district      String?
+  Ward          String?
+  city          String?
+  phone         String?
+  avatar        String?
+  cart          Cart[]
+  comment       CommentBlogs[]
+  discount      Discount[]
+  emailkm       Email[]
+  imgWork       ImgWork[]
+  notifications Notification[]
+  order         Order[]
+  product       Product[]
 }
 
 model Cart {
   id          Int     @id @default(autoincrement())
   authorId    String
+  productId   Int?
   title       String?
   description String?
   price       Int?
@@ -49,32 +50,32 @@ model Email {
 }
 
 model Product {
-  id          Int        @id @default(autoincrement())
-  authorId    String
-  title       String?
-  desHead     String?
-  description String?
-  detail      String?
-  price       Int?
-  Image       String[]
-  code        String?
-  category1   String?
-  category2   String?
-  category3   String?
-  status      String?
-  priceSales  Int?
-  weight      String?
-  expiry      String?
-  new         Boolean?
-  box         String?
-  package     String?
-  pieces      String?
-  bag         String?
-  plate       String?
-  quantity    Int?
-  comments    Comments[]
-  author      User       @relation(fields: [authorId], references: [id])
-  hastags String[]
+  id           Int        @id @default(autoincrement())
+  authorId     String
+  title        String?
+  desHead      String?
+  description  String?
+  detail       String?
+  price        Int?
+  Image        String[]
+  code         String?
+  category1    String?
+  category2    String?
+  category3    String?
+  status       String?
+  priceSales   Int?
+  weight       String?
+  expiry       String?
+  new          Boolean?
+  box          String?
+  package      String?
+  pieces       String?
+  bag          String?
+  plate        String?
+  quantity     Int?
+  comments     Comments[]
+  author       User       @relation(fields: [authorId], references: [id])
+  hastags      String[]
   categoryMain String[]
 }
 
@@ -122,6 +123,7 @@ model Order {
   status        String?
   payment       String?
   paymentStatus String?
+  discount      Int?
   author        User     @relation(fields: [authorId], references: [id])
 }
 
@@ -147,11 +149,11 @@ model ImgWork {
 }
 
 model Notification {
-  id          Int         @id @default(autoincrement())
+  id          Int      @id @default(autoincrement())
   title       String
-  recipientId  String
+  recipientId String
   message     String?
   state       Boolean
-  createdAt   DateTime    @default(now())
-  recipient   User    @relation(fields: [recipientId ], references: [id])
+  createdAt   DateTime @default(now())
+  recipient   User     @relation(fields: [recipientId], references: [id])
 }
