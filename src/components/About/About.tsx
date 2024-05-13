@@ -15,8 +15,7 @@ const cx = classNames.bind(styles);
 
 gsap.registerPlugin(ScrollTrigger);
 
-export interface IAppProps {
-}
+export interface IAppProps {}
 
 export default function AboutCPPage(props: IAppProps) {
     const titleRef = useRef<any>();
@@ -72,8 +71,13 @@ export default function AboutCPPage(props: IAppProps) {
     }, []);
 
     return (
-        <div className={'cpmount overflow-x-hidden'}
-             style={{ padding: sizeX < 768 ? '0 20px' : sizeX < 1100 ? '0 50px' : sizeX < 1280 ? '0 80px' : '0 100px' }}>
+        <div
+            className={'cpmount overflow-x-hidden'}
+            style={{
+                padding:
+                    sizeX < 768 ? '0 20px' : sizeX < 1100 ? '0 50px' : sizeX < 1280 ? '0 80px' : '0 100px',
+            }}
+        >
             <AboutBanner />
 
             {/*Header title*/}
@@ -82,8 +86,8 @@ export default function AboutCPPage(props: IAppProps) {
                     <h1
                         className={`${cx('head-title')} md:w-3/5`}
                         style={{
-                            fontSize: sizeX < 550 ? '24px' : sizeX < 768 ? '28px' : '',
-                            width: sizeX < 900 ? '100%' : '',
+                            fontSize: sizeX < 550 ? '24px' : sizeX < 1024 ? '28px' : '',
+                            width: sizeX < 1050 ? '100%' : '',
                         }}
                     >
                         HỆ SINH THÁI GIẢI PHÁP VỆ SINH VÀ KIỂM SOÁT CÔN TRÙNG TOÀN DIỆN
@@ -91,16 +95,16 @@ export default function AboutCPPage(props: IAppProps) {
                     <p
                         className={cx('text-common')}
                         style={{
-                            textAlign: sizeX < 768 ? 'justify' : 'left',
+                            textAlign: 'justify',
                             fontSize: sizeX < 550 ? '14.5px' : '',
+                            width: sizeX < 1000 ? '100%' : '',
                         }}
                     >
                         Đến với PestnClean, bạn sẽ được cung cấp dịch vụ vệ sinh và kiểm soát côn trùng uy tín
-                        hàng đầu Việt Nam. <br />
-                        <br /> Được sáng lập bởi ông Nguyễn Thanh Duy – Người với nhiều năm kinh nghiệm trong
-                        lĩnh vực. PestnClean hiểu rõ những nỗi lo lắng, các vấn đề mà những người điều hành
-                        các Hotels & Resorts, F&B Retail và Nhà máy gặp phải và những thách thức để xử lý
-                        chúng.
+                        hàng đầu Việt Nam. Được sáng lập bởi ông Nguyễn Thanh Duy – Người với nhiều năm kinh
+                        nghiệm trong lĩnh vực. PestnClean hiểu rõ những nỗi lo lắng, các vấn đề mà những người
+                        điều hành các Hotels & Resorts, F&B Retail và Nhà máy gặp phải và những thách thức để
+                        xử lý chúng.
                     </p>
                 </div>
             </div>

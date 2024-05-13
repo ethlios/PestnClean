@@ -18,13 +18,13 @@ export interface ProductItemProps {
 export default function ProductItem({ item }: ProductItemProps) {
     const { sizeX } = useSize();
     return (
-        <Link href={`/sanpham/${nameToLink(item.title)}`} className={cx('content-item')}>
-            <div
-                className={cx('item-img')}
-                style={{
-                    height: sizeX < 430 ? '160px' : '',
-                }}
-            >
+        <div
+            className={cx('content-item')}
+            style={{
+                marginRight: '15px',
+            }}
+        >
+            <div className={cx('item-img')}>
                 {item.status === 'SALE' && (
                     <div className={cx('item-event-sale')}>
                         <p>{((1 - item.priceSales / item.price) * 100).toFixed(1)}%</p>
@@ -38,13 +38,15 @@ export default function ProductItem({ item }: ProductItemProps) {
                 <Image
                     src={item.Image[0]}
                     alt={item.title}
-                    width={160}
-                    height={160}
+                    width={1000}
+                    height={1000}
                     className={'h-full w-full object-cover'}
                 />
             </div>
             <p className={cx('item-category')}>{item.category1}</p>
-            <p className={cx('item-name')}>{item.title}</p>
+            <Link href={`/sanpham/${nameToLink(item.title)}`}>
+                <p className={cx('item-name')}>{item.title}</p>
+            </Link>
             {item.priceSales ? (
                 <>
                     <p className={cx('item-sale-price')}>{formatter.format(+item.price)}</p>
@@ -53,6 +55,6 @@ export default function ProductItem({ item }: ProductItemProps) {
             ) : (
                 <p className={cx('item-price')}>{formatter.format(+item.price)}</p>
             )}
-        </Link>
+        </div>
     );
 }
