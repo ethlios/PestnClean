@@ -62,7 +62,7 @@ export default function FilterProduct({ openFilter, setOpenFilter, setProducts, 
         //
         // setCheckboxFilter(checkboxList);
         setProducts(filterProducts);
-    }, [selected, checked]);
+    }, [selected, checked, allProducts, setProducts]);
 
     const handleCancel = () => {
         setSelected([]);
@@ -80,7 +80,7 @@ export default function FilterProduct({ openFilter, setOpenFilter, setProducts, 
                 position: sizeX < 1024 ? 'fixed' : 'sticky',
                 zIndex: sizeX < 1024 ? '5000' : '',
                 left: sizeX < 1024 && !openFilter ? '-1024px' : sizeX < 1024 && openFilter ? '0px' : '',
-                height: sizeX < 1024 ? '100vh' : '',
+                height: sizeX < 1024 ? '1300px' : '',
             }}
         >
             <div
@@ -131,25 +131,27 @@ export default function FilterProduct({ openFilter, setOpenFilter, setProducts, 
                 {checkboxFilter.map((filter: any, index: any) => (
                     <CheckboxMenu filter={filter} key={index} checked={checked} setChecked={setChecked} />
                 ))}
-                <div className={cx('filter-button')}>
-                    <Button
-                        variant="contained"
-                        color="secondary"
-                        fullWidth
-                        style={{ fontWeight: '600', height: '45px' }}
-                        onClick={handleCancel}
-                    >
-                        Hủy bỏ
-                    </Button>
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        fullWidth
-                        style={{ fontWeight: '600', height: '45px' }}
-                    >
-                        Xác nhận
-                    </Button>
-                </div>
+                {sizeX < 1024 && (
+                    <div className={cx('filter-button')}>
+                        <Button
+                            variant="contained"
+                            color="secondary"
+                            fullWidth
+                            style={{ fontWeight: '600', height: '45px' }}
+                            onClick={handleCancel}
+                        >
+                            Hủy bỏ
+                        </Button>
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            fullWidth
+                            style={{ fontWeight: '600', height: '45px' }}
+                        >
+                            Xác nhận
+                        </Button>
+                    </div>
+                )}
             </div>
         </div>
     );

@@ -35,15 +35,15 @@ export default function DichVu3Page(props: IAppProps) {
                 <h1
                     className={cx('title')}
                     style={{
-                        fontSize: sizeX < 560 ? '25px' : sizeX < 768 ? '30px' : '',
+                        fontSize: sizeX < 550 ? '24px' : sizeX < 1024 ? '28px' : '',
                     }}
                 >
-                    Công ty dịch vụ vệ sinh PetnClean
+                    Công ty dịch vụ vệ sinh PestnClean
                 </h1>
                 <p
                     className={`${cx('text-common')}`}
                     style={{
-                        textAlign: sizeX < 768 ? 'justify' : 'left',
+                        textAlign: 'justify',
                     }}
                 >
                     PestnClean là công ty dịch vụ vệ sinh chuyên nghiệp, cung cấp các dịch vụ vệ sinh công

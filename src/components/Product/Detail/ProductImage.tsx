@@ -28,7 +28,7 @@ export default function ProductImage({ product }: IAppProps) {
             className={cx('product-img')}
             style={{
                 flexDirection: sizeX < 950 ? 'column-reverse' : 'row',
-                width: sizeX < 768 ? '100%' : sizeX < 950 ? '45%' : '',
+                width: sizeX < 768 ? '100%' : sizeX < 950 ? '45%' : sizeX < 1300 ? '57%' : '50%',
                 position: sizeX < 768 ? 'inherit' : sizeX < 950 ? 'sticky' : 'static',
                 top: sizeX < 768 ? '0px' : sizeX < 950 && !wheel ? '70px' : sizeX < 950 ? '0px' : '',
                 zIndex: sizeX < 950 ? 1 : '',

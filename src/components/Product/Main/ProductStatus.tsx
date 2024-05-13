@@ -41,7 +41,7 @@ export default function ProductStatus({ openFilter, products, status }: IAppProp
                             pauseOnMouseEnter: true,
                         }}
                         modules={[Autoplay]}
-                        style={{ padding: '0 3.2px 0 0' }}
+                        style={{ padding: '0 3px 0 0' }}
                     >
                         {products.map((item: any) => {
                             return (

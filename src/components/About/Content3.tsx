@@ -11,8 +11,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import useSize from '~/libs/hooks/useSize';
 
-export interface IAppProps {
-}
+export interface IAppProps {}
 
 const cx = classNames.bind(styles);
 
@@ -20,6 +19,9 @@ const settings = {
     infinite: true,
     speed: 500,
     slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 2000,
+    pauseOnHover: true,
 };
 
 const content3 = [

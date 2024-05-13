@@ -30,6 +30,7 @@ import {
 } from 'react-share';
 import { useSelector } from 'react-redux';
 import { RootState } from '~/redux/provider/store';
+import Toast from '~/components/Orther/Toast';
 
 const cx = classNames.bind(styles);
 
@@ -44,6 +45,7 @@ export default function ProductInfo({ product }: IAppProps) {
     const { sizeX } = useSize();
     const [url, setUrl] = useState<string>('');
     const comments = useSelector((state: RootState) => state.main.feedback);
+    const [openToast, setOpenToast] = useState<boolean>(false);
 
     const handleChange = (event: SelectChangeEvent) => {
         setType(event.target.value as string);
@@ -86,6 +88,7 @@ export default function ProductInfo({ product }: IAppProps) {
             });
         }
         localStorage.setItem('cart', JSON.stringify(cart)); //Save to local storage
+        setOpenToast(true);
     };
 
     useEffect(() => {
@@ -95,118 +98,128 @@ export default function ProductInfo({ product }: IAppProps) {
     }, []);
 
     return (
-        <div
-            className={cx('product-info')}
-            style={{
-                top: wheel ? '-180px' : '-120px',
-                width: sizeX < 768 ? '100%' : sizeX < 950 ? '55%' : '',
-            }}
-        >
-            <p className={cx('sale')}>
-                {product[0].status === 'sale'
-                    ? 'Đang giảm giá'
-                    : product[0].status === 'hot'
-                      ? 'Đang bán chạy'
-                      : product[0].status
-                        ? 'Sản phẩm mới'
-                        : product[0].category1}
-            </p>
-            <h1
-                className={cx('name')}
+        <>
+            <Toast
+                text="Thêm vào giỏ hàng thành công."
+                rule="normal"
+                setShowToast={setOpenToast}
+                showToast={openToast}
+            />
+            <div
+                className={cx('product-info')}
                 style={{
-                    fontSize: sizeX < 600 ? '28px' : '',
+                    top: wheel ? '-180px' : '-120px',
+                    width: sizeX < 768 ? '100%' : sizeX < 950 ? '55%' : '',
                 }}
             >
-                {product[0].title}
-            </h1>
-            <p className={cx('rating')} onClick={handleClick}>
-                {comments.length} Đánh giá
-            </p>
-            <div className={cx('decoration')} />
-            <ul className={cx('summary')}>
-                {product[0].description
-                    ? product[0].description
-                          .split('\n')
-                          .map((item: string, index: number) => <li key={index}>{item}</li>)
-                    : ''}
-            </ul>
-            <div className={cx('decoration')} />
-            <div className={cx('share')}>
-                <p className={cx('text')}>Chia sẻ:</p>
-                <FacebookShareButton url={url} hashtag="#Pestnclean">
-                    <FacebookIcon size={28} round={true} />
-                </FacebookShareButton>
-                <TwitterShareButton url={url}>
-                    <XIcon size={28} round={true} />
-                </TwitterShareButton>
-                <LinkedinShareButton url={url}>
-                    <LinkedinIcon size={28} round={true} />
-                </LinkedinShareButton>
-            </div>
-            {product[0].categoryMain.length > 0 && (
-                <div className={'type'}>
+                <p className={cx('sale')}>
+                    {product[0].status === 'sale'
+                        ? 'Đang giảm giá'
+                        : product[0].status === 'hot'
+                          ? 'Đang bán chạy'
+                          : product[0].status
+                            ? 'Sản phẩm mới'
+                            : product[0].category1}
+                </p>
+                <h1
+                    className={cx('name')}
+                    style={{
+                        fontSize: sizeX < 600 ? '28px' : '',
+                    }}
+                >
+                    {product[0].title}
+                </h1>
+                <p className={cx('rating')} onClick={handleClick}>
+                    {comments.length} Đánh giá
+                </p>
+                <div className={cx('decoration')} />
+                <ul className={cx('summary')}>
+                    {product[0].description
+                        ? product[0].description
+                              .split('\n')
+                              .map((item: string, index: number) => <li key={index}>{item}</li>)
+                        : ''}
+                </ul>
+                <div className={cx('decoration')} />
+                <div className={cx('share')}>
+                    <p className={cx('text')}>Chia sẻ:</p>
+                    <FacebookShareButton url={url} hashtag="#Pestnclean">
+                        <FacebookIcon size={28} round={true} />
+                    </FacebookShareButton>
+                    <TwitterShareButton url={url}>
+                        <XIcon size={28} round={true} />
+                    </TwitterShareButton>
+                    <LinkedinShareButton url={url}>
+                        <LinkedinIcon size={28} round={true} />
+                    </LinkedinShareButton>
+                </div>
+                {product[0].categoryMain.length > 0 && (
+                    <div className={'type'}>
+                        <p
+                            className={cx('text')}
+                            style={{
+                                marginBottom: '15px',
+                            }}
+                        >
+                            Phân loại:
+                        </p>
+                        <FormControl fullWidth>
+                            <InputLabel id="demo-simple-select-label">Loại</InputLabel>
+                            <Select
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                value={type}
+                                label="Loại"
+                                onChange={handleChange}
+                            >
+                                {product[0].categoryMain.map((value: string, index: number) => {
+                                    return (
+                                        <MenuItem value={value} key={index}>
+                                            {value.toUpperCase()}
+                                        </MenuItem>
+                                    );
+                                })}
+                            </Select>
+                        </FormControl>
+                    </div>
+                )}
+                <div className={cx('quantity')}>
+                    <IconButton onClick={handleSub}>
+                        <RemoveIcon />
+                    </IconButton>
                     <p
                         className={cx('text')}
                         style={{
-                            marginBottom: '15px',
+                            fontSize: '16px',
+                            fontWeight: '600',
                         }}
                     >
-                        Phân loại:
+                        {amount}
                     </p>
-                    <FormControl fullWidth>
-                        <InputLabel id="demo-simple-select-label">Loại</InputLabel>
-                        <Select
-                            labelId="demo-simple-select-label"
-                            id="demo-simple-select"
-                            value={type}
-                            label="Loại"
-                            onChange={handleChange}
-                        >
-                            {product[0].categoryMain.map((value: string, index: number) => {
-                                return (
-                                    <MenuItem value={value} key={index}>
-                                        {value.toUpperCase()}
-                                    </MenuItem>
-                                );
-                            })}
-                        </Select>
-                    </FormControl>
+                    <IconButton onClick={handleAdd}>
+                        <AddIcon />
+                    </IconButton>
                 </div>
-            )}
-            <div className={cx('quantity')}>
-                <IconButton onClick={handleSub}>
-                    <RemoveIcon />
-                </IconButton>
-                <p
-                    className={cx('text')}
-                    style={{
-                        fontSize: '16px',
-                        fontWeight: '600',
-                    }}
-                >
-                    {amount}
-                </p>
-                <IconButton onClick={handleAdd}>
-                    <AddIcon />
-                </IconButton>
-            </div>
-            <h1 className={cx('price')}>{formatter.format(+product[0].priceSales || +product[0].price)}</h1>
-            <div className={cx('other')}>
-                <div>
-                    <ElectricRickshawOutlinedIcon />
-                    <p>Giao hàng nhanh chóng, an toàn, tiết kiệm</p>
+                <h1 className={cx('price')}>
+                    {formatter.format(+product[0].priceSales || +product[0].price)}
+                </h1>
+                <div className={cx('other')}>
+                    <div>
+                        <ElectricRickshawOutlinedIcon />
+                        <p>Giao hàng nhanh chóng, an toàn, tiết kiệm</p>
+                    </div>
+                    <div>
+                        <KeyboardBackspaceOutlinedIcon />
+                        <Link href="/sanpham">Quay lại mua hàng</Link>
+                    </div>
                 </div>
-                <div>
-                    <KeyboardBackspaceOutlinedIcon />
-                    <Link href="/sanpham">Quay lại mua hàng</Link>
+                <div className={cx('button-group')}>
+                    <button className={cx('btn-add')} onClick={handleAddToCart}>
+                        Thêm vào giỏ hàng
+                    </button>
+                    <button className={cx('btn-buy')}>Mua ngay</button>
                 </div>
             </div>
-            <div className={cx('button-group')}>
-                <button className={cx('btn-add')} onClick={handleAddToCart}>
-                    Thêm vào giỏ hàng
-                </button>
-                <button className={cx('btn-buy')}>Mua ngay</button>
-            </div>
-        </div>
+        </>
     );
 }
