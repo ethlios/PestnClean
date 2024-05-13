@@ -26,7 +26,7 @@ export async function POST(request: Request) {
 
         // Trả về kết quả thành công
         return NextResponse.json({
-            message: "Add Discount Success",
+            message: "Thêm mã khuyến mãi thành công",
             data: res
         });
     } catch (error) {

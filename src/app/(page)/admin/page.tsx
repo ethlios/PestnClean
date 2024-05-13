@@ -16,7 +16,8 @@ import AdminOder from '~/components/Admin/Order/page';
 import AdminEmail from '~/components/Admin/Email/page';
 import AdminImage from '~/components/Admin/Image/page';
 import AdminDiscount from '~/components/Admin/Discount/page';
-
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const cx = classNames.bind(styles);
 
 export interface IAppProps {}
@@ -78,6 +79,7 @@ export default function Admin(props: IAppProps) {
                     )}
                 </div>
             </div>
+            <ToastContainer/>
         </div>
     );
 }

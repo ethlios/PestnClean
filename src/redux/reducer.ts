@@ -52,6 +52,7 @@ import {
     removeDiscountSuccess,
     getProvince,
     updateStatusDiscountSuccess,
+    updateDiscountSuccess,
 } from './actions';
 
 interface RootState {
@@ -369,12 +370,26 @@ const rootReducer = createReducer(initState, (builder) => {
         state.discount.push(data);
     });
     builder.addCase(updateStatusDiscountSuccess, (state, action) => {
-        const { message} = action.payload;
+        const { message , data} = action.payload;
+        let index = state.discount.findIndex(item => item.id === data.id);
+        if (index !== -1) {
+            state.discount[index].status = data.status;
+        }
+        state.message = message;
+    });
+    builder.addCase(updateDiscountSuccess, (state, action) => {
+        const { message, data} = action.payload;
+        let index = state.discount.findIndex(item => item.id === data.id);
+        if (index !== -1) {
+            state.discount[index] = data;
+        }
         state.message = message;
     });
     builder.addCase(removeDiscountSuccess, (state, action) => {
-        const index = findIndex2(state.discount, action.payload);
+        const {data ,message} = action.payload;
+        const index = findIndex2(state.discount, data);
         state.discount.splice(index, 1);
+        state.message = message;
     });
 });
 

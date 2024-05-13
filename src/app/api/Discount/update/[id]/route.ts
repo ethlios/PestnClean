@@ -1,18 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '~/libs/orthers/prisma';
 
-
-export async function DELETE(request: Request, { params }: { params: { id: string} }) {
-    const convertId = parseInt(params.id);
-    const res = await prisma.discount.delete({
-        where: { id: convertId },
-    });
-    return NextResponse.json({
-        message: "Delete Success",
-        data:res
-    });
-}
-
 export async function PUT(request: NextRequest, { params }: { params: { id: string } }) {
     const body = await request.json();
     const numberId = parseInt(params.id);
@@ -20,11 +8,17 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
         where: { id:numberId },
         data: {
             status: body.status,
+            code: body.code,
+            dateEnd: body.dateEnd,
+            dateStart: body.dateStart,
+            name: body.name,
+            percent: body.percent,
+            description: body.description
         },
     });
 
     return NextResponse.json({
-        message: "Update Status Success",
+        message: "Chỉnh sửa mã khuyến mãi thành công",
         data: res
     });
 }

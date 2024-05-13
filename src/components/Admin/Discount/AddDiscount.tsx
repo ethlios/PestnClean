@@ -6,47 +6,34 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '~/redux/provider/store';
 import { useSession } from 'next-auth/react';
 import styles from './Discount.module.scss';
-import { addDiscount, clearMessage } from '~/redux/actions';
+import { addDiscount, clearMessage, updateDiscount } from '~/redux/actions';
 import { GetAllCodeInDiscount } from '~/libs/orthers/getData';
 import { generateUniqueCodeInDiscount } from '~/libs/orthers/generatedCode';
-import Toast from '~/components/Orther/Toast';
 import { formatISODate } from '~/libs/orthers/formatDate';
 import moment from 'moment';
+import Tippy from '@tippyjs/react';
+import { toast, Zoom } from 'react-toastify';
 const cx = classNames.bind(styles);
 
 export interface IAppProps {
     isOpen: boolean;
     isClose: Function;
     valueUpdate: any;
+    showToast: any;
 }
 
-const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 700,
-    bgcolor: 'background.paper',
-    boxShadow: 24,
-    borderRadius: '5px',
-    p: '10px',
-};
-
-export default function AddDiscount({ isOpen, isClose, valueUpdate }: IAppProps) {
-    const [open, setOpen] = useState(false);
-    const [showToast, setShowToast] = useState<boolean>(false);
+export default function AddDiscount({ isOpen, isClose, valueUpdate, showToast }: IAppProps) {
+    const [open, setOpen] = useState<boolean>(false);
     const [isLoader, setIsLoader] = useState<boolean>(false);
-    const [timeStart, setTimeStart] = useState<string>(() => {
-        return moment().format('YYYY-MM-DD');
-    });
-    const [timeEnd, setTimeEnd] = useState<string>(() => {
-        return moment().format('YYYY-MM-DD');
-    });
-    const [tenKhuyenMai, setTenKhuyenMai] = useState('');
-    const [moTa, setMoTa] = useState('');
-    const [maKhuyenMai, setMaKhuyenMai] = useState('');
-    const [mucGiamGia, setMucGiamGia] = useState('');
-
+    const [timeStart, setTimeStart] = useState<string>(moment().format('YYYY-MM-DD'));
+    const [timeEnd, setTimeEnd] = useState<string>(moment().format('YYYY-MM-DD'));
+    
+    const [tenKhuyenMai, setTenKhuyenMai] = useState<string>('');
+    const [moTa, setMoTa] = useState<string>('');
+    const [maKhuyenMai, setMaKhuyenMai] = useState<string>('');
+    const [mucGiamGia, setMucGiamGia] = useState<string>('');
+    
+    const [valueUpdateState, setValueUpdateState] = useState<any>(valueUpdate ? valueUpdate : null);
     const selector = useSelector((state: RootState) => state.main);
     const { data: session } = useSession();
     const dispatch = useDispatch();
@@ -57,6 +44,7 @@ export default function AddDiscount({ isOpen, isClose, valueUpdate }: IAppProps)
     };
 
     const reset = () => {
+        setIsLoader(false);
         setMoTa('');
         setTenKhuyenMai('');
         setMaKhuyenMai('');
@@ -65,36 +53,82 @@ export default function AddDiscount({ isOpen, isClose, valueUpdate }: IAppProps)
         dispatch(clearMessage());
     };
 
-    const handleSave = () => {
-        if (
-            tenKhuyenMai !== '' &&
-            moTa !== '' &&
-            timeStart !== '' &&
-            timeEnd !== '' &&
-            maKhuyenMai !== '' &&
-            mucGiamGia
-        ) {
-            dispatch(
-                addDiscount({
+    // xử lý thêm hoặc chỉnh sửa mã khuyễn mãi
+    const handleClickBtn = () => {
+        const isFormValid =
+            tenKhuyenMai.trim() !== '' &&
+            moTa.trim() !== '' &&
+            maKhuyenMai.trim() !== '' &&
+            mucGiamGia &&
+            timeStart.trim() !== '' &&
+            timeEnd.trim() !== '';
+        if (isFormValid) {
+            const dateStart = formatISODate(new Date(timeStart));
+            const dateEnd = formatISODate(new Date(timeEnd));
+    
+            if (dateEnd > dateStart) {
+                const discountData = {
                     authorId: session?.user.id,
                     name: tenKhuyenMai,
                     description: moTa,
-                    dateStart: formatISODate(new Date(timeStart)),
-                    dateEnd: formatISODate(new Date(timeEnd)),
+                    dateStart,
+                    dateEnd,
                     code: maKhuyenMai,
                     percent: +mucGiamGia,
-                }),
-            );
-            setIsLoader(true);
+                };
+    
+                const action = valueUpdate && valueUpdate.id ? updateDiscount : addDiscount;
+    
+                dispatch(action(valueUpdate?.id ? { ...discountData, id: valueUpdate.id } : discountData));
+                setIsLoader(true);
+            } else {
+                toast.warning('Ngày kết thúc phải lớn hơn ngày bắt đầu!', {
+                    position: 'bottom-right',
+                    autoClose: 1000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: 'dark',
+                    transition: Zoom,
+                });
+            }
+        } else {
+            toast.warning('Vui lòng nhập đầy đủ các thông tin!', {
+                position: 'bottom-right',
+                autoClose: 1000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: 'dark',
+                transition: Zoom,
+            });
         }
     };
+    
 
+    // tạo tự động các mã khuyễn mãi
     const generateMaKhuyenMai = async () => {
         const resp = await GetAllCodeInDiscount();
         if (resp) {
             setMaKhuyenMai(generateUniqueCodeInDiscount(resp));
         }
     };
+
+    // XỬ LÝ LẤY GIÁ TRỊ KHI NGƯỜI DÙNG NHẤN CHỈNH SỬA HIỂN THỊ LÊN FORM
+    useEffect(() => {
+        if (valueUpdateState !== null) {
+            setTimeStart(moment(valueUpdateState.dateStart).format('YYYY-MM-DD'));
+            setTimeEnd(moment(valueUpdateState.dateEnd).format('YYYY-MM-DD'));
+            setTenKhuyenMai(valueUpdateState.name);
+            setMaKhuyenMai(valueUpdateState.code);
+            setMucGiamGia(valueUpdateState.percent);
+            setMoTa(valueUpdateState.description);
+        }
+    }, [valueUpdateState]);
 
     useEffect(() => {
         if (isOpen) {
@@ -104,21 +138,22 @@ export default function AddDiscount({ isOpen, isClose, valueUpdate }: IAppProps)
         }
     }, [isOpen]);
 
+    // XỬ lý kiểm tra khi thêm hoặc chỉnh sửa sẽ thông báo 1 toast và open = false
     useEffect(() => {
-        if (selector.message === 'Add Discount Success') {
-            setIsLoader(false);
-            setShowToast(true);
-            setTimeout(() => {
-                reset();
-            }, 1000);
-        } else {
-            setOpen(false);
+        if (
+            selector.message === 'Thêm mã khuyến mãi thành công' ||
+            selector.message === 'Chỉnh sửa mã khuyến mãi thành công'
+        ) {
+            reset();
+            showToast({
+                message: selector.message,
+                status: true,
+            });
         }
     }, [selector.message]);
 
     return (
         <>
-            <Toast text="Thêm thành công" showToast={showToast} setShowToast={setShowToast} rule="normal" />
             <div className={cx('wrapper')}>
                 <div className={cx('wrapper-header', 'flex items-center justify-between h-10')}>
                     <p className="font-medium underline">TẠO MÃ KHUYẾN MÃI</p>
@@ -133,7 +168,7 @@ export default function AddDiscount({ isOpen, isClose, valueUpdate }: IAppProps)
                         <input
                             className={cx('wrapper-content-inputName', 'mt-2')}
                             placeholder="Nhập tên khuyến mãi"
-                            value={tenKhuyenMai}
+                            value={tenKhuyenMai || ''}
                             onChange={(e) => setTenKhuyenMai(e.target.value)}
                         />
                     </div>
@@ -145,7 +180,7 @@ export default function AddDiscount({ isOpen, isClose, valueUpdate }: IAppProps)
                             name="w3review"
                             rows={4}
                             placeholder="Nhập mô tả mã khuyễn mãi"
-                            value={moTa}
+                            value={moTa || ''}
                             onChange={(e) => setMoTa(e.target.value)}
                         ></textarea>
                     </div>
@@ -154,17 +189,19 @@ export default function AddDiscount({ isOpen, isClose, valueUpdate }: IAppProps)
                     <div className="mt-4">
                         <div className="flex items-center justify-between">
                             <p className="font-semibold text-sm">Mã khuyến mãi</p>
-                            <p
-                                className="font-semibold text-sm underline text-primaryColor hover:cursor-pointer"
-                                onClick={generateMaKhuyenMai}
-                            >
-                                Tạo tự động
-                            </p>
+                            <Tippy content="Tạo mã khuyễn mãi tự động">
+                                <p
+                                    className="font-semibold text-sm underline text-primaryColor hover:cursor-pointer"
+                                    onClick={generateMaKhuyenMai}
+                                >
+                                    Tạo tự động
+                                </p>
+                            </Tippy>
                         </div>
                         <input
                             className={cx('wrapper-content-inputName', 'mt-2')}
                             placeholder="Bấm tạo tự động"
-                            value={maKhuyenMai}
+                            value={maKhuyenMai || ''}
                             disabled={true}
                             onChange={(e) => setMaKhuyenMai(e.target.value)}
                         />
@@ -174,7 +211,7 @@ export default function AddDiscount({ isOpen, isClose, valueUpdate }: IAppProps)
                         <div className={cx('wrapper-content-discount', 'mt-2')}>
                             <input
                                 placeholder="Nhập số phần trăm"
-                                value={mucGiamGia}
+                                value={mucGiamGia || ''}
                                 onChange={(e) => setMucGiamGia(e.target.value)}
                             />
                         </div>
@@ -187,7 +224,7 @@ export default function AddDiscount({ isOpen, isClose, valueUpdate }: IAppProps)
                                 <input
                                     className={cx('wrapper-content-inputTimeStart', 'mt-2')}
                                     type="date"
-                                    value={timeStart}
+                                    value={timeStart || ''}
                                     onChange={(e) => setTimeStart(e.target.value)}
                                 />
                             </div>
@@ -196,7 +233,7 @@ export default function AddDiscount({ isOpen, isClose, valueUpdate }: IAppProps)
                                 <input
                                     className={cx('wrapper-content-inputTimeEnd', 'mt-2')}
                                     type="date"
-                                    value={timeEnd}
+                                    value={timeEnd  || ''}
                                     onChange={(e) => setTimeEnd(e.target.value)}
                                 />
                             </div>
@@ -210,10 +247,14 @@ export default function AddDiscount({ isOpen, isClose, valueUpdate }: IAppProps)
                             'mt-6',
                             isLoader ? 'wrapper-btnSubmit-loader' : 'wrapper-btnSubmit-success',
                         )}
-                        onClick={handleSave}
+                        onClick={handleClickBtn}
                         // disabled={isClicked}
                     >
-                        {isLoader ? '...' : 'Thêm mã khuyễn mãi'}
+                        {isLoader
+                            ? '...'
+                            : valueUpdate && valueUpdate.id
+                              ? 'Chỉnh sửa mã khuyễn mãi'
+                              : 'Thêm mã khuyễn mãi'}
                     </button>
                 </div>
             </div>
