@@ -23,7 +23,11 @@ export default function ProductPage(props: IAppProps) {
     const { sizeX } = useSize();
     const [openFilter, setOpenFilter] = useState<boolean>(true);
     const allProducts = useSelector((state: RootState) => state.main.allProducts);
+    const saleProducts = allProducts.filter((product: any) => product.status === 'SALE');
+    const hotProducts = allProducts.filter((product: any) => product.status === 'HOT');
     const [products, setProducts] = useState<any>(allProducts);
+    const [selectedCategory, setSelectedCategory] = useState<any>([]);
+    const [checkedFilter, setCheckedFilter] = useState<any>([]);
 
     useEffect(() => {
         if (sizeX < 1024) {
@@ -57,6 +61,10 @@ export default function ProductPage(props: IAppProps) {
                     setOpenFilter={setOpenFilter}
                     setProducts={setProducts}
                     allProducts={allProducts}
+                    selectedCategory={selectedCategory}
+                    setSelectedCategory={setSelectedCategory}
+                    checkedFilter={checkedFilter}
+                    setCheckedFilter={setCheckedFilter}
                 />
                 <div
                     className={cx('product-main')}
@@ -67,17 +75,17 @@ export default function ProductPage(props: IAppProps) {
                 >
                     <BannerProduct />
                     {/* <CategoryIconProduct openFilter={openFilter} /> */}
-                    <ProductStatus
+                    <ProductStatus openFilter={openFilter} products={saleProducts} status="Đang giảm giá" />
+                    <ProductStatus openFilter={openFilter} products={hotProducts} status="Đang bán chạy" />
+                    <AllProduct
+                        setOpenFilter={setOpenFilter}
                         openFilter={openFilter}
-                        products={products.filter((product: any) => product.status === 'SALE')}
-                        status="Đang giảm giá"
+                        products={products}
+                        selectedCategory={selectedCategory}
+                        setSelectedCategory={setSelectedCategory}
+                        checkedFilter={checkedFilter}
+                        setCheckedFilter={setCheckedFilter}
                     />
-                    <ProductStatus
-                        openFilter={openFilter}
-                        products={products.filter((product: any) => product.status === 'HOT')}
-                        status="Đang bán chạy"
-                    />
-                    <AllProduct setOpenFilter={setOpenFilter} openFilter={openFilter} products={products} />
                 </div>
             </div>
             <div className={cx('banner-auto')}>

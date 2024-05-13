@@ -18,55 +18,53 @@ export interface IAppProps {
     setOpenFilter: any;
     setProducts: any;
     allProducts: any;
+    selectedCategory: any;
+    setSelectedCategory: any;
+    checkedFilter: any;
+    setCheckedFilter: any;
 }
 
-export default function FilterProduct({ openFilter, setOpenFilter, setProducts, allProducts }: IAppProps) {
+export default function FilterProduct({
+    openFilter,
+    setOpenFilter,
+    setProducts,
+    allProducts,
+    selectedCategory,
+    setSelectedCategory,
+    checkedFilter,
+    setCheckedFilter,
+}: IAppProps) {
     const wheel: boolean = useScroll();
     const { sizeX } = useSize();
-    const [selected, setSelected] = useState<any>([]);
-    const [checked, setChecked] = useState<any>([]);
-    // const [checkboxFilter, setCheckboxFilter] = useState<any>([]);
 
     useEffect(() => {
         let filterProducts = allProducts.filter((product: any) => {
-            if (selected.length === 0) return allProducts;
+            if (selectedCategory.length === 0) return allProducts;
             return (
-                selected.includes(product.category1) ||
-                selected.includes(product.category2) ||
-                selected.includes(product.category3)
+                selectedCategory.includes(product.category1) ||
+                selectedCategory.includes(product.category2) ||
+                selectedCategory.includes(product.category3)
             );
         });
-        checked.forEach((check: any) => {
+        checkedFilter.forEach((checked: any) => {
             filterProducts = filterProducts.filter((product: any) => {
                 return (
-                    check.includes(product.weight) ||
-                    check.includes(product.box) ||
-                    check.includes(product.package) ||
-                    check.includes(product.pieces) ||
-                    check.includes(product.bag) ||
-                    check.includes(product.plate)
+                    (product.weight && product.weight.includes(checked)) ||
+                    (product.box && product.box.includes(checked)) ||
+                    (product.package && product.package.includes(checked)) ||
+                    (product.pieces && product.pieces.includes(checked)) ||
+                    (product.bag && product.bag.includes(checked)) ||
+                    (product.plate && product.plate.includes(checked)) ||
+                    (product.categoryMain && product.categoryMain.includes(checked))
                 );
             });
         });
-
-        // let checkboxList: { title: string; checkbox: any[] }[] = [];
-        // filterProducts.forEach((item: any) => {
-        //     item.weight && checkboxList.push({ title: 'Dung tích', checkbox: [item.weight] });
-        //     item.box && checkboxList.push({ title: 'Hộp', checkbox: [item.box] });
-        //     item.package && checkboxList.push({ title: 'Gói', checkbox: [item.package] });
-        //     item.pieces && checkboxList.push({ title: 'Túi', checkbox: [item.pieces] });
-        //     item.bag && checkboxList.push({ title: 'Bao', checkbox: [item.bag] });
-        //     item.plate && checkboxList.push({ title: 'Đĩa', checkbox: [item.plate] });
-        //     item.categoryMain && checkboxList.push({ title: 'Danh mục', checkbox: item.categoryMain });
-        // });
-        //
-        // setCheckboxFilter(checkboxList);
         setProducts(filterProducts);
-    }, [selected, checked, allProducts, setProducts]);
+    }, [selectedCategory, checkedFilter]);
 
     const handleCancel = () => {
-        setSelected([]);
-        setChecked([]);
+        setSelectedCategory([]);
+        setCheckedFilter([]);
     };
 
     return (
@@ -121,15 +119,20 @@ export default function FilterProduct({ openFilter, setOpenFilter, setProducts, 
                                     title={menu.title}
                                     subMenu={menu.subMenu}
                                     className={cx('title')}
-                                    selected={selected}
-                                    setSelected={setSelected}
+                                    selected={selectedCategory}
+                                    setSelected={setSelectedCategory}
                                 />
                             ))}
                         </div>
                     </div>
                 )}
                 {checkboxFilter.map((filter: any, index: any) => (
-                    <CheckboxMenu filter={filter} key={index} checked={checked} setChecked={setChecked} />
+                    <CheckboxMenu
+                        filter={filter}
+                        key={index}
+                        checked={checkedFilter}
+                        setChecked={setCheckedFilter}
+                    />
                 ))}
                 {sizeX < 1024 && (
                     <div className={cx('filter-button')}>

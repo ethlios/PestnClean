@@ -35,7 +35,7 @@ export default function FilterMenu({ title, subMenu, className, selected, setSel
                 <p
                     defaultValue={title}
                     onClick={handleFilter}
-                    style={{ color: selected === title ? 'var(--primary)' : 'black' }}
+                    style={{ color: selected.includes(title) ? 'var(--primary)' : 'black' }}
                 >
                     {title}
                 </p>

@@ -103,40 +103,24 @@ const filterMenu = [
 
 const checkboxFilter = [
     {
-        title: 'Sắp xếp theo',
-        checkbox: ['Tất cả', 'Sản phẩm mới'],
-    },
-    {
-        title: 'Giảm giá',
-        checkbox: ['Đang giảm giá'],
-    },
-    {
-        title: 'Theo mức giá',
-        checkbox: ['Dưới 1.000.000đ', 'Từ 1.000.000đ - 5.000.000đ', 'Trên 5.000.000đ'],
-    },
-    {
         title: 'Dung tích',
-        checkboxLeft: ['50ML', '100ML', '500ML'],
-        checkboxRight: ['1L', '5L', '20L'],
+        checkbox: ['1l', '2l', '3l', '4l'],
     },
     {
         title: 'Gói',
-        checkboxLeft: ['10gr', '20gr', '100gr', '200gr'],
-        checkboxRight: ['500gr', 'Gói 20 viên', 'Hũ 400gr'],
+        checkbox: ['10g', '12g', '50g', '100g'],
     },
     {
         title: 'Hộp',
-        checkboxLeft: ['Hộp 12 cục'],
-        checkboxRight: ['360gr'],
+        checkbox: ['6 cục', '12 cục'],
     },
     {
         title: 'Miếng',
-        checkboxLeft: ['1 miếng'],
-        checkboxRight: ['10 miếng'],
+        checkbox: ['1 miếng', '10 miếng'],
     },
     {
         title: 'Túi',
-        checkbox: ['1 túi', '1 bộ (5 túi bả và 1 trạm AGS)'],
+        checkbox: ['1 túi', '5 túi'],
     },
     {
         title: 'Tấm',

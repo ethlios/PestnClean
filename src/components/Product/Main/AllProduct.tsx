@@ -17,9 +17,21 @@ export interface IAppProps {
     setOpenFilter: any;
     openFilter: boolean;
     products: any;
+    selectedCategory: any;
+    setSelectedCategory: any;
+    checkedFilter: any;
+    setCheckedFilter: any;
 }
 
-export default function AllProduct({ setOpenFilter, openFilter, products }: IAppProps) {
+export default function AllProduct({
+    setOpenFilter,
+    openFilter,
+    products,
+    selectedCategory,
+    setSelectedCategory,
+    checkedFilter,
+    setCheckedFilter,
+}: IAppProps) {
     const { sizeX } = useSize();
     const [currentPage, setCurrentPage] = useState(1);
     const productsPerPage = 9;
@@ -60,9 +72,25 @@ export default function AllProduct({ setOpenFilter, openFilter, products }: IApp
                 >
                     Bộ lọc:
                 </p>
-                <div>
-                    Tất cả <ClearOutlinedIcon />
-                </div>
+                {selectedCategory.length > 0 ? (
+                    <div onClick={() => setSelectedCategory([])}>
+                        {selectedCategory} <ClearOutlinedIcon />
+                    </div>
+                ) : (
+                    <div>Tất cả</div>
+                )}
+                {checkedFilter.map((item: any, index: number) => {
+                    return (
+                        <div
+                            key={index}
+                            onClick={() => {
+                                setCheckedFilter(checkedFilter.filter((i: any) => i !== item));
+                            }}
+                        >
+                            {item} <ClearOutlinedIcon />
+                        </div>
+                    );
+                })}
             </div>
             <div
                 className={cx('product-item-all2')}

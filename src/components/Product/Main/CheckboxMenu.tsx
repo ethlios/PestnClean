@@ -17,32 +17,16 @@ export default function CheckboxMenu({ filter, checked, setChecked }: CheckboxMe
     return (
         <div className={'flex flex-col gap-2'}>
             <h2 className={cx('filter-title')}>{filter.title}</h2>
-            {filter.checkbox &&
-                filter.checkbox.map((checkbox: any, index: any) => (
-                    <CheckboxItem key={index} checkbox={checkbox} checked={checked} setChecked={setChecked} />
-                ))}
-            {filter.checkboxLeft && filter.checkboxRight && (
-                <div className={'flex justify-between *:flex *:flex-col *:gap-2 *:w-1/2'}>
-                    <div>
-                        {filter.checkboxLeft.map((checkbox: any, index: any) => (
-                            <CheckboxItem
-                                key={index}
-                                checkbox={checkbox}
-                                checked={checked}
-                                setChecked={setChecked}
-                            />
-                        ))}
-                    </div>
-                    <div>
-                        {filter.checkboxRight.map((checkbox: any, index: any) => (
-                            <CheckboxItem
-                                key={index}
-                                checkbox={checkbox}
-                                checked={checked}
-                                setChecked={setChecked}
-                            />
-                        ))}
-                    </div>
+            {filter.checkbox && (
+                <div className={'flex justify-between flex-wrap *:w-1/2'}>
+                    {filter.checkbox.map((checkbox: any, index: any) => (
+                        <CheckboxItem
+                            key={index}
+                            checkbox={checkbox}
+                            checked={checked}
+                            setChecked={setChecked}
+                        />
+                    ))}
                 </div>
             )}
         </div>
