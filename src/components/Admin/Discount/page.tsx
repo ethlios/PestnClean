@@ -13,6 +13,8 @@ import DriveFileRenameOutlineOutlinedIcon from '@mui/icons-material/DriveFileRen
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import moment from 'moment';
 import CogWheel from '~/components/Orther/Loader/CogWheel/CogWheel';
+import DialogDeleteDiscount from './DialogDeleteDiscount';
+import Tippy from '@tippyjs/react';
 const cx = classNames.bind(styles);
 
 export interface IAppProps {}
@@ -26,8 +28,8 @@ export default function AdminDiscount(props: IAppProps) {
     const [openAddDiscount, setOpenAddDiscount] = useState<boolean>(false);
     const [openChooseObjectCustomer, setOpenChooseObjectCustomer] = useState(false);
     const [openDialogSendAll, setOpenDialogSendAll] = useState(false);
+    const [openDialogDeleteDiscount, setOpenDialogDeleteDiscount] = useState(false);
     const [dataSendMail, setDataSendMail] = useState<any>({});
-    const [updateProduct, setUpdateProduct] = useState<any>({});
     const [showToast, setShowToast] = useState<showToast>({
         message: '',
         status: false,
@@ -50,9 +52,10 @@ export default function AdminDiscount(props: IAppProps) {
                     isOpen={openAddDiscount}
                     isClose={(e: boolean) => {
                         setOpenAddDiscount(e);
-                        setUpdateProduct({});
+                        setDataSendMail({});
                     }}
-                    valueUpdate={updateProduct}
+                    valueUpdate={dataSendMail}
+                    showToast={(e: any) => setShowToast(e)}
                 />
             ) : (
                 <>
@@ -66,19 +69,27 @@ export default function AdminDiscount(props: IAppProps) {
                                 )}
                             >
                                 <AddIcon />
-                                <button className={cx('', 'mr-2')} onClick={() => setOpenAddDiscount(true)}>
+                                <button
+                                    className={cx('', 'mr-2')}
+                                    onClick={() => {
+                                        setOpenAddDiscount(true);
+                                        setDataSendMail({});
+                                    }}
+                                >
                                     Thêm mã khuyến mãi
                                 </button>
                             </div>
                         </div>
                         <p className={cx('text-sm font-semibold')}>Số lượng: {discounts.length}</p>
-                        <div>
+                        {/* <div>
                             <input
                                 className={cx('wrapper-inputSearch')}
                                 type="text"
                                 placeholder="Tìm kiếm mã khuyến mãi..."
+                                value=""
+                                onChange={() => console.log('123')}
                             ></input>
-                        </div>
+                        </div> */}
                     </div>
                     {isLoader ? (
                         <div className="flex items-center justify-center relative">
@@ -155,12 +166,35 @@ export default function AdminDiscount(props: IAppProps) {
                                                 </td>
                                                 <td>
                                                     <div className="flex items-center justify-center">
-                                                        <div className={cx('btn-control')}>
-                                                            <DriveFileRenameOutlineOutlinedIcon />
-                                                        </div>
-                                                        <div className={cx('btn-control', 'ml-2')}>
-                                                            <DeleteOutlinedIcon />
-                                                        </div>
+                                                        <Tippy
+                                                            content={
+                                                                item.status
+                                                                    ? 'Mã khuyến mã đã được gửi không được chỉnh sửa'
+                                                                    : 'Chỉnh sửa mã khuyễn mãi'
+                                                            }
+                                                        >
+                                                            <div
+                                                                className={cx('wrapper-btnControl')}
+                                                                onClick={() => {
+                                                                    if (item.status) return false;
+                                                                    setDataSendMail(item);
+                                                                    setOpenAddDiscount(true);
+                                                                }}
+                                                            >
+                                                                <DriveFileRenameOutlineOutlinedIcon />
+                                                            </div>
+                                                        </Tippy>
+                                                        <Tippy content="Xóa mã khuyễn mãi">
+                                                            <div
+                                                                className={cx('wrapper-btnControl', 'ml-2')}
+                                                                onClick={() => {
+                                                                    setOpenDialogDeleteDiscount(true);
+                                                                    setDataSendMail(item);
+                                                                }}
+                                                            >
+                                                                <DeleteOutlinedIcon />
+                                                            </div>
+                                                        </Tippy>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -187,6 +221,14 @@ export default function AdminDiscount(props: IAppProps) {
                             dataSendMail={dataSendMail}
                             isOpen={openDialogSendAll}
                             isClose={(e: boolean) => setOpenDialogSendAll(e)}
+                            showToast={(e: any) => setShowToast(e)}
+                        />
+                    )}
+                    {openDialogDeleteDiscount && (
+                        <DialogDeleteDiscount
+                            dataSendMail={dataSendMail}
+                            isOpen={openDialogDeleteDiscount}
+                            isClose={(e: boolean) => setOpenDialogDeleteDiscount(e)}
                             showToast={(e: any) => setShowToast(e)}
                         />
                     )}

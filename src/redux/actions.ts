@@ -165,13 +165,15 @@ export const clearMessage = createAction<void>(type.CLEAR_MESSAGE);
 export const getDiscount = createAction<any>(type.GET_DISCOUNT);
 export const addDiscount = createAction<any>(type.ADD_DISCOUNT);
 export const addDiscountSuccess = createAction<any>(type.ADD_DISCOUNT_SUCCESS);
+export const removeDiscount = createAction<any>(type.REMOVE_DISCOUNT);
 export const removeDiscountSuccess = createAction<any>(type.REMOVE_DISCOUNT_SUCCESS);
-// Discount
-export const getNotification = createAction<any>(type.GET_NOTIFICATION);
 export const updateStatusDiscount = createAction<any>(type.UPDATE_STATUS_DISCOUNT);
 export const updateStatusDiscountSuccess = createAction<any>(type.UPDATE_STATUS_DISCOUNT_SUCCESS);
+export const updateDiscount = createAction<any>(type.UPDATE_DISCOUNT);
+export const updateDiscountSuccess = createAction<any>(type.UPDATE_DISCOUNT_SUCCESS);
 
 // NOTIFICATIONS
+export const getNotification = createAction<any>(type.GET_NOTIFICATION);
 export const addNotification = createAction<any>(type.ADD_NOTIFICATION);
 export const addNotificationSuccess = createAction<any>(type.ADD_NOTIFICATION_SUCCESS);
 export const addNotificationFail = createAction<any>(type.ADD_NOTIFICATION_FAIL);

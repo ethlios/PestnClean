@@ -4,10 +4,9 @@ import { formatDate } from '~/libs/orthers/formatDate';
 import classNames from 'classnames/bind';
 import styles from './Discount.module.scss';
 import { getAllUsersNotAdmin } from '~/libs/orthers/getData';
-import Toast from '~/components/Orther/Toast';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '~/redux/provider/store';
-import { updateStatusDiscount } from '~/redux/actions';
+import { clearMessage, updateStatusDiscount } from '~/redux/actions';
 import { sendEmail } from '~/actions/sendEmails';
 export interface IAppProps {
     isOpen: boolean;
@@ -31,6 +30,7 @@ export default function DialogSendAll({ isOpen, isClose, dataSendMail , showToas
     const reset = () => {
         setIsClicked(false);
         setIsLoader(false);
+        dispatch(clearMessage());
         handleClose();
     };
 

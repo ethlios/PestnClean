@@ -210,4 +210,13 @@
             background-color: #444444;
         }
     }
+    &-btnControl{
+        border-radius: 50%;
+        padding: 1px;
+
+        &:hover{
+            cursor: pointer;
+            background: #d9d9d7;
+        }
+    }
 }
