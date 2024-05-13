@@ -5,6 +5,7 @@ import classNames from 'classnames/bind';
 import styles from '../product.module.scss';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import smoothScroll from '~/libs/orthers/smoothScroll';
 
 const cx = classNames.bind(styles);
 
@@ -25,6 +26,7 @@ export default function FilterMenu({ title, subMenu, className, selected, setSel
 
     const handleFilter = (e: any) => {
         const value = e.target.innerText || e.target.innerHTML;
+        smoothScroll('div#listAllProduct');
         if (selected === value) return setSelected([]);
         setSelected(value);
     };

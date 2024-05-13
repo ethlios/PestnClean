@@ -4,6 +4,7 @@ import classNames from 'classnames/bind';
 import styles from '../product.module.scss';
 import { Checkbox } from '@mui/material';
 import { useEffect } from 'react';
+import smoothScroll from '~/libs/orthers/smoothScroll';
 
 const cx = classNames.bind(styles);
 
@@ -46,6 +47,7 @@ export function CheckboxItem({ checkbox, checked, setChecked }: CheckboxItemProp
         } else {
             setChecked(checked.filter((item: any) => item !== checkbox));
         }
+        smoothScroll('div#listAllProduct');
     };
 
     useEffect(() => {}, [checked]);
