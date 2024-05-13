@@ -4,12 +4,9 @@ import classNames from 'classnames/bind';
 import styles from './payment.module.scss';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import PaymentIcon from '@mui/icons-material/Payment';
 import PaymentsOutlinedIcon from '@mui/icons-material/PaymentsOutlined';
-import useSize from '~/libs/hooks/useSize';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import InputLabel from '@mui/material/InputLabel';
 import Select from '@mui/material/Select';
 import FormControl from '@mui/material/FormControl';
@@ -28,7 +25,6 @@ export interface IAppProps {
 const classInput = 'w-full lg:w-5/6';
 
 export default function PaymentForm({ setFormData, formInfoRef }: IAppProps) {
-    const { sizeX } = useSize();
     const [name, setName] = useState<string>('');
     const [email, setEmail] = useState<string>('');
     const [phone, setPhone] = useState<string>('');
@@ -41,18 +37,6 @@ export default function PaymentForm({ setFormData, formInfoRef }: IAppProps) {
     const isPhone = /(84|0[3|5|7|8|9])+([0-9]{8})\b/g;
     const { data: session } = useSession();
     const province = useSelector((state: RootState) => state.main.province);
-
-    useEffect(() => {
-        if (session) {
-            setName(session.user.name || '');
-            setEmail(session.user.email || '');
-            setPhone(session.user.phone || '');
-            setAddress(session.user.address || '');
-            setCity(session.user.city || '');
-            setDistrict(session.user.district || '');
-            setWard(session.user.ward || '');
-        }
-    }, [session]);
 
     useEffect(() => {
         setFormData({
@@ -105,7 +89,7 @@ export default function PaymentForm({ setFormData, formInfoRef }: IAppProps) {
                             sx={{ marginBottom: '10px' }}
                             onChange={(e) => setName(e.target.value)}
                             required={true}
-                            value={name}
+                            value={session?.user.name || name}
                         />
                         <TextField
                             label="Email..."
@@ -114,7 +98,7 @@ export default function PaymentForm({ setFormData, formInfoRef }: IAppProps) {
                             onChange={(e) => setEmail(e.target.value)}
                             error={email !== null && email !== '' && !validateEmailRegex.test(email)}
                             type={'email'}
-                            value={email}
+                            value={session?.user.email || email}
                         />
                         <TextField
                             label="Số điện thoại..."
@@ -124,7 +108,7 @@ export default function PaymentForm({ setFormData, formInfoRef }: IAppProps) {
                             error={phone !== null && phone !== '' && !isPhone.test(phone)}
                             required={true}
                             type={'tel'}
-                            value={phone}
+                            value={session?.user.phone || phone}
                         />
                         <TextField
                             label="Địa chỉ..."
@@ -132,7 +116,7 @@ export default function PaymentForm({ setFormData, formInfoRef }: IAppProps) {
                             sx={{ marginBottom: '10px' }}
                             onChange={(e) => setAddress(e.target.value)}
                             required={true}
-                            value={address}
+                            value={session?.user.address || address}
                         />
                         <FormControl sx={{ mb: 1 }} className={classInput}>
                             <InputLabel>Tỉnh thành</InputLabel>
@@ -144,7 +128,7 @@ export default function PaymentForm({ setFormData, formInfoRef }: IAppProps) {
                                     setWard('');
                                 }}
                                 defaultValue={''}
-                                value={city}
+                                value={session?.user.city || city}
                             >
                                 {province.map((item: any, index: number) => (
                                     <MenuItem key={index} value={item.Name}>
@@ -162,7 +146,7 @@ export default function PaymentForm({ setFormData, formInfoRef }: IAppProps) {
                                     setWard('');
                                 }}
                                 defaultValue={''}
-                                value={district}
+                                value={session?.user.district || district}
                             >
                                 {province
                                     .find((item: any) => item.Name === city)
@@ -179,7 +163,7 @@ export default function PaymentForm({ setFormData, formInfoRef }: IAppProps) {
                                 label="Phường xã"
                                 onChange={(e) => setWard(e.target.value)}
                                 defaultValue={''}
-                                value={ward}
+                                value={session?.user.ward || ward}
                             >
                                 {province
                                     .find((item: any) => item.Name === city)
@@ -221,7 +205,10 @@ export default function PaymentForm({ setFormData, formInfoRef }: IAppProps) {
                                 htmlFor="checkboxid"
                             >
                                 Tôi đã đọc{' '}
-                                <Link href="/hoidap?q=chinh-sach-bao-mat-thong-tin">
+                                <Link
+                                    href="/hoidap?q=chinh-sach-bao-mat-thong-tin"
+                                    style={{ color: 'var(--primary)' }}
+                                >
                                     chính sách bảo mật và quyền riêng tư
                                 </Link>
                                 .

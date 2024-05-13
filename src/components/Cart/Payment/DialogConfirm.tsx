@@ -13,11 +13,11 @@ const cx = classNames.bind(styles);
 
 export interface IAppProps {
     setShowDialog?: any;
-    setCart?: any;
     formInfoRef?: any;
+    cartOrder?: any;
 }
 
-export default function DialogConfirm({ setShowDialog, setCart, formInfoRef }: IAppProps) {
+export default function DialogConfirm({ setShowDialog, formInfoRef, cartOrder }: IAppProps) {
     const { sizeX } = useSize();
     let orderBehavior = useSelector((state: RootState) => state.main.orderBehavior);
 
@@ -34,8 +34,15 @@ export default function DialogConfirm({ setShowDialog, setCart, formInfoRef }: I
 
     useEffect(() => {
         if (orderBehavior === '2') {
-            setCart([]);
-            localStorage.setItem('cart', JSON.stringify([]));
+            localStorage.setItem('cartOrder', JSON.stringify([]));
+            const localStorageCart = JSON.parse(localStorage.getItem('cart') || '[]');
+            const filteredCart = localStorageCart.filter((cartItem: any) => {
+                // Kiểm tra xem cartItem có tồn tại trong cartOrder hay không
+                const existsInCartOrder = cartOrder.some((orderItem: any) => orderItem.id === cartItem.id);
+                // Nếu không tồn tại trong cartOrder, giữ lại item
+                return !existsInCartOrder;
+            });
+            localStorage.setItem('cart', JSON.stringify(filteredCart));
             sendEmail();
         }
     }, [orderBehavior]);

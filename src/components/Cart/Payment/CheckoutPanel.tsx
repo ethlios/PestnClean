@@ -5,12 +5,11 @@ import classNames from 'classnames/bind';
 import Link from 'next/link';
 import DiscountCode from '~/components/Cart/DiscountCode';
 import SummaryProduct from '~/components/Cart/Payment/SummaryProduct';
-import ButtonCommon from '~/components/Orther/Button';
 import styles from './payment.module.scss';
 import formatter from '~/libs/orthers/formatMoney';
 import { Button } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useSession } from 'next-auth/react';
 import { addOrder, orderBehavior } from '~/redux/actions';
 
@@ -37,7 +36,10 @@ export default function CheckoutPanel({
     const [discount, setDiscount] = useState<number>(0);
     const [totalPrice, setTotalPrice] = useState<number>(0);
     const totalAmount = cart.reduce((acc: number, item: any) => acc + item.quantity, 0);
-    const totalProductPrice = cart.reduce((acc: number, item: any) => acc + item.price * item.quantity, 0);
+    const totalProductPrice = cart.reduce(
+        (acc: number, item: any) => acc + (item.priceSales || item.price) * item.quantity,
+        0,
+    );
 
     useEffect(() => {
         setTotalPrice(totalProductPrice * (1 - discount / 100));

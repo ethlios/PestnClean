@@ -13,13 +13,12 @@ import formatter from '~/libs/orthers/formatMoney';
 import Image from 'next/image';
 import * as React from 'react';
 import { nameToLink } from '~/libs/orthers/nameToLink';
+import { Checkbox } from '@mui/material';
 
 const cx = classNames.bind(styles);
 
 export interface IAppProps {
-    // item: { id: number; src: string; category: string; title: string; price: number; quantity: number};
-    // setCart: (cart: any[]) => void;
-    item: any; //Item in cart
+    item: any;
     setCart: any;
 }
 
@@ -40,6 +39,13 @@ export default function CartItem({ item, setCart }: IAppProps) {
         const newCart = localStorageCart.filter((item: any) => item.id !== id); //Remove item
         localStorage.setItem('cart', JSON.stringify(newCart)); //Save to local storage
         setCart(newCart); //Update cart
+    };
+
+    const handleCheck = (id: number) => {
+        const localStorageCart = JSON.parse(localStorage.getItem('cart') || '[]');
+        localStorageCart.find((item: any) => item.id === id).checked = !item.checked;
+        localStorage.setItem('cart', JSON.stringify(localStorageCart)); //Save to local storage
+        setCart(localStorageCart); //Update cart
     };
 
     const handleAdd = (id: number) => {
@@ -80,6 +86,9 @@ export default function CartItem({ item, setCart }: IAppProps) {
                     productHover: sizeX > 992,
                 })}
             >
+                <div className={'flex justify-center items-center'}>
+                    <Checkbox onChange={() => handleCheck(item.id)} checked={item.checked} />
+                </div>
                 <Link href={`sanpham/${nameToLink(item.title)}`}>
                     <div
                         style={{
@@ -149,10 +158,12 @@ export default function CartItem({ item, setCart }: IAppProps) {
                         >
                             <p className={cx('price')}>
                                 <b>Giá: </b>
-                                {formatter.format(+item.price * amount)}
+                                {formatter.format((+item.priceSales || +item.price) * amount)}
                             </p>
                             {amount > 1 && (
-                                <p className={cx('price-default')}>({formatter.format(+item.price)})</p>
+                                <p className={cx('price-default')}>
+                                    ({formatter.format(+item.priceSales || +item.price)})
+                                </p>
                             )}
                         </div>
                         <IconButton onClick={() => handleDelete(item.id)}>

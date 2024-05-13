@@ -18,8 +18,7 @@ export interface IAppProps {}
 
 export default function PaymentPage(props: IAppProps) {
     const { sizeX } = useSize();
-    const localStorageCart = JSON.parse(localStorage.getItem('cart') || '[]');
-    const [cart, setCart] = useState<any>(localStorageCart);
+    const cartOrder = JSON.parse(localStorage.getItem('cartOrder') || '[]');
     const [formData, setFormData] = useState<any>();
     const formInfoRef = useRef<any>('');
     const [showDialog, setShowDialog] = useState<boolean>(false);
@@ -53,7 +52,11 @@ export default function PaymentPage(props: IAppProps) {
             </div>
             {/*Dialog*/}
             {showDialog && (
-                <DialogConfirm setShowDialog={setShowDialog} setCart={setCart} formInfoRef={formInfoRef} />
+                <DialogConfirm
+                    setShowDialog={setShowDialog}
+                    formInfoRef={formInfoRef}
+                    cartOrder={cartOrder}
+                />
             )}
             {/*Content*/}
             <div
@@ -70,7 +73,7 @@ export default function PaymentPage(props: IAppProps) {
                 <div className={'col-span-12 md:col-span-5 lg:col-span-4'}>
                     {/*Checkout panel*/}
                     <CheckoutPanel
-                        cart={cart}
+                        cart={cartOrder}
                         formData={formData}
                         formInfoRef={formInfoRef}
                         setShowDialog={setShowDialog}

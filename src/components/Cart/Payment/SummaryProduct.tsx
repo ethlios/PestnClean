@@ -16,7 +16,7 @@ export default function SummaryProduct({ item }: IAppProps) {
             <div className={`${cx('product-detail')} flex flex-col justify-center ml-2`}>
                 <p className={cx('product-name')}>{item.title}</p>
                 <div className="flex">
-                    <p>{formatter.format(+item.price)}</p>
+                    <p>{formatter.format(+item.priceSales || +item.price)}</p>
                     <p className={'ml-2'}>x{``}</p>
                     <p className={'ml-2'}>{item.quantity}</p>
                 </div>

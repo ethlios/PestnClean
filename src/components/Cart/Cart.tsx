@@ -9,8 +9,6 @@ import { useState, useEffect } from 'react';
 const cx = classNames.bind(styles);
 
 export interface IAppProps {
-    // cart: any[];
-    // setCart: (cart: any[]) => void;
     cart: any;
     setCart: any;
 }

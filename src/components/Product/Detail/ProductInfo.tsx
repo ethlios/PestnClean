@@ -31,6 +31,7 @@ import {
 import { useSelector } from 'react-redux';
 import { RootState } from '~/redux/provider/store';
 import Toast from '~/components/Orther/Toast';
+import { useRouter } from 'next/navigation';
 
 const cx = classNames.bind(styles);
 
@@ -43,6 +44,7 @@ export default function ProductInfo({ product }: IAppProps) {
     const [amount, setAmount] = useState(1);
     const wheel: boolean = useScroll();
     const { sizeX } = useSize();
+    const router = useRouter();
     const [url, setUrl] = useState<string>('');
     const comments = useSelector((state: RootState) => state.main.feedback);
     const [openToast, setOpenToast] = useState<boolean>(false);
@@ -85,10 +87,28 @@ export default function ProductInfo({ product }: IAppProps) {
                 description: product[0].description,
                 quantity: amount,
                 price: product[0].price,
+                priceSales: product[0].priceSales,
+                checked: false,
             });
         }
         localStorage.setItem('cart', JSON.stringify(cart)); //Save to local storage
         setOpenToast(true);
+    };
+
+    const handleBuyNow = () => {
+        let cartOrder = [];
+        cartOrder.push({
+            id: product[0].id,
+            title: product[0].title,
+            img: product[0].Image[0],
+            description: product[0].description,
+            quantity: amount,
+            price: product[0].price,
+            priceSales: product[0].priceSales,
+            checked: true,
+        });
+        localStorage.setItem('cartOrder', JSON.stringify(cartOrder));
+        router.push('/giohang/thanhtoan');
     };
 
     useEffect(() => {
@@ -217,7 +237,9 @@ export default function ProductInfo({ product }: IAppProps) {
                     <button className={cx('btn-add')} onClick={handleAddToCart}>
                         Thêm vào giỏ hàng
                     </button>
-                    <button className={cx('btn-buy')}>Mua ngay</button>
+                    <button className={cx('btn-buy')} onClick={handleBuyNow}>
+                        Mua ngay
+                    </button>
                 </div>
             </div>
         </>

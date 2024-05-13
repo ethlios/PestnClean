@@ -4,31 +4,55 @@ import CreditCardIcon from '@mui/icons-material/CreditCard';
 import PublishedWithChangesIcon from '@mui/icons-material/PublishedWithChanges';
 import classNames from 'classnames/bind';
 import Link from 'next/link';
-import DiscountCode from '~/components/Cart/DiscountCode';
 import ButtonCommon from '../Orther/Button';
 import styles from './cart.module.scss';
 import useSize from '~/libs/hooks/useSize';
 import { useEffect, useState } from 'react';
 import formatter from '~/libs/orthers/formatMoney';
+import { Button } from '@mui/material';
+import { useRouter } from 'next/navigation';
 
 const cx = classNames.bind(styles);
 
 export interface IAppProps {
-    // cart: any[];
-    cart: any;
+    cartOrder: any;
+    setCart: any;
+    setShowToast: any;
 }
 
-export default function CheckoutPanel({ cart }: IAppProps) {
+export default function CheckoutPanel({ cartOrder, setCart, setShowToast }: IAppProps) {
     const { sizeX } = useSize();
+    const router = useRouter();
     const [totalItem, setTotalItem] = useState(0);
     const [totalPrice, setTotalPrice] = useState(0);
-    const [discount, setDiscount] = useState(0);
-    const [shipping, setShipping] = useState(0);
 
     useEffect(() => {
-        setTotalItem(cart.reduce((acc: any, item: any) => acc + item.quantity, 0));
-        setTotalPrice(cart.reduce((acc: any, item: any) => acc + item.price * item.quantity, 0));
-    }, [cart]);
+        setTotalItem(cartOrder.reduce((acc: any, item: any) => acc + item.quantity, 0));
+        setTotalPrice(
+            cartOrder.reduce(
+                (acc: any, item: any) => acc + (item.priceSales || item.price) * item.quantity,
+                0,
+            ),
+        );
+    }, [cartOrder]);
+
+    const handlePayment = () => {
+        if (cartOrder.length === 0) {
+            setShowToast(true);
+        } else {
+            localStorage.setItem('cartOrder', JSON.stringify(cartOrder));
+            router.push('/giohang/thanhtoan');
+        }
+    };
+
+    const handleCheckAll = (checked: boolean) => {
+        const localStorageCart = JSON.parse(localStorage.getItem('cart') || '[]');
+        const newCart = localStorageCart.map((item: any) => {
+            return { ...item, checked: checked };
+        });
+        localStorage.setItem('cart', JSON.stringify(newCart));
+        setCart(newCart);
+    };
 
     return (
         <div
@@ -44,41 +68,41 @@ export default function CheckoutPanel({ cart }: IAppProps) {
             }}
         >
             <div className={cx('panel')}>
-                {/*Discount code*/}
-                <DiscountCode setDiscount={setDiscount} />
                 {/*Summary*/}
                 <div className={'my-5'}>
-                    <p className={`${cx('title')} mb-3`}>Tóm tắt đơn hàng</p>
-                    <div className={'*:flex *:justify-between *:items center'}>
-                        <div className={cx('total-price')}>
-                            <span>{totalItem} Sản phẩm</span>
-                            <p>{formatter.format(+totalPrice)}</p>
-                        </div>
-                        <div className={cx('total-price')}>
-                            <span>Phí vận chuyển</span>
-                            <p>
-                                0 <u>đ</u>
-                            </p>
-                        </div>
-                        <div className={cx('total-price')}>
-                            <span>Mã giảm giá</span>
-                            <p>
-                                0 <u>đ</u>
-                            </p>
-                        </div>
+                    <div
+                        className={
+                            'flex justify-between gap-1 my-2 *:underline *:text-primaryColor *:cursor-pointer'
+                        }
+                    >
+                        <p onClick={() => handleCheckAll(true)}>Chọn tất cả</p>
+                        <p onClick={() => handleCheckAll(false)}>Bỏ tất cả</p>
                     </div>
+                    {cartOrder.length > 0 ? (
+                        <>
+                            <p className={`${cx('title')} mb-3`}>Tóm tắt đơn hàng</p>
+                            <div className={'*:flex *:justify-between *:items center'}>
+                                <div className={cx('total-price')}>
+                                    <span>{totalItem} Sản phẩm</span>
+                                    <p>{formatter.format(+totalPrice)}</p>
+                                </div>
+                            </div>
+                        </>
+                    ) : (
+                        <p>Chọn sản phẩm để thanh toán</p>
+                    )}
                 </div>
                 {/*Payment*/}
                 <div className={cx('hr-decor')}></div>
 
                 <div className={`${cx('total-price')} flex justify-between items center`}>
                     <span>Tổng cộng</span>
-                    <p>{formatter.format(totalPrice + shipping - discount)}</p>
+                    <p>{formatter.format(totalPrice)}</p>
                 </div>
                 <div className={'my-5 flex flex-col gap-3'}>
-                    <Link href={'/giohang/thanhtoan'}>
-                        <ButtonCommon text="THANH TOÁN" fullWidth />
-                    </Link>
+                    <Button variant="contained" onClick={handlePayment}>
+                        Thanh toán
+                    </Button>
                     <Link href={'/sanpham'}>
                         <ButtonCommon text="TIẾP TỤC MUA SẮM" fullWidth color="secondary" />
                     </Link>
