@@ -1,6 +1,6 @@
 import AttachEmailOutlinedIcon from '@mui/icons-material/AttachEmailOutlined';
 import FacebookIcon from '@mui/icons-material/Facebook';
-import InstagramIcon from '@mui/icons-material/Instagram';
+import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import RingVolumeOutlinedIcon from '@mui/icons-material/RingVolumeOutlined';
 import YouTubeIcon from '@mui/icons-material/YouTube';
@@ -29,6 +29,10 @@ export default function InformationContactPage(props: IAppProps) {
                 <Link href="mailto:sales@pestnclean.vn" target="_blank" rel="noopener noreferrer">
                     <AttachEmailOutlinedIcon className="mr-2" />
                     sales@pestnclean.vn
+                </Link>
+                <Link href="mailto:info@pestnclean.vn" target="_blank" rel="noopener noreferrer">
+                    <AlternateEmailIcon className="mr-2" />
+                    info@pestnclean.vn
                 </Link>
                 <Link href="tel:0868363600" target="_blank" rel="noopener noreferrer">
                     <RingVolumeOutlinedIcon className="mr-1" /> 0868 36 36 00

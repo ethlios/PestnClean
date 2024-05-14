@@ -26,10 +26,12 @@ import { RootState } from '~/redux/provider/store';
 const cx = classNames.bind(styles);
 
 export interface FooterProps {}
+
 interface MessageState {
     message: string;
     status: boolean | null;
 }
+
 export default function Footer(props: FooterProps) {
     const [checked, setChecked] = useState<boolean>(false);
     const { sizeX } = useSize();
@@ -205,6 +207,7 @@ export default function Footer(props: FooterProps) {
                         className={cx('infor')}
                         style={{
                             width: sizeX < 900 ? '100%' : '50%',
+                            fontSize: sizeX < 576 ? '14px' : '16px',
                         }}
                     >
                         <Link
@@ -218,7 +221,10 @@ export default function Footer(props: FooterProps) {
                             <b>Điện thoại:</b> 0868 36 36 00
                         </Link>
                         <Link href="mailto:sales@pestnclean.vn" target="_blank" rel="noopener noreferrer">
-                            <b>Email:</b> sales@pestnclean.vn
+                            <b>Hỗ trợ:</b> sales@pestnclean.vn
+                        </Link>
+                        <Link href="mailto:info@pestnclean.vn" target="_blank" rel="noopener noreferrer">
+                            <b>Liên hệ:</b> info@pestnclean.vn
                         </Link>
                         <div className={cx('social')}>
                             <Link
@@ -315,11 +321,15 @@ export default function Footer(props: FooterProps) {
                             ) : (
                                 <>
                                     <Link href={'/hoidap?q=chinh-sach-bao-mat-thong-tin'}>
-                                        Bảo mật, thông tin
+                                        Chính sách bảo mật thông tin
+                                    </Link>
+                                    <Link href={'/hoidap?q=bao-lau-toi-nhan-duoc-hang'}>
+                                        Chính sách giao nhận hàng
                                     </Link>
                                     <Link href={'/hoidap?q=chinh-sach-bao-hanh-doi-tra'}>
-                                        Bảo hành, đổi trả
+                                        Chính sách bảo hành đổi trả
                                     </Link>
+                                    <Link href={'/hoidap?q=hinh-thuc-thanh-toan'}>Chính sách thanh toán</Link>
                                 </>
                             )}
                         </div>

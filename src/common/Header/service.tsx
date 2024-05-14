@@ -25,6 +25,7 @@ import CleanHandsOutlinedIcon from '@mui/icons-material/CleanHandsOutlined';
 import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
 import AutoFixHighOutlinedIcon from '@mui/icons-material/AutoFixHighOutlined';
 import FitnessCenterOutlinedIcon from '@mui/icons-material/FitnessCenterOutlined';
+import FoundationIcon from '@mui/icons-material/Foundation';
 import useSize from '~/libs/hooks/useSize';
 
 const cx = classNames.bind(styles);
@@ -62,10 +63,10 @@ export default function Services({ setOpenService, openService }: IAppProps) {
                             openService && sizeX < 420
                                 ? '350px'
                                 : openService && sizeX < 500
-                                ? '380px'
-                                : openService
-                                ? '400px'
-                                : '-50px',
+                                  ? '380px'
+                                  : openService
+                                    ? '400px'
+                                    : '-50px',
                     }}
                     onClick={() => setOpenService(false)}
                 >
@@ -199,7 +200,7 @@ export default function Services({ setOpenService, openService }: IAppProps) {
                                     href={'/dich-vu-ve-sinh-sau-xay-dung'}
                                     onClick={() => setOpenService(false)}
                                 >
-                                    <AdjustOutlinedIcon />
+                                    <FoundationIcon />
                                     Vệ sinh sau xây dựng
                                 </Link>
                                 <Link href={'/dich-vu-ve-sinh-toa-nha'} onClick={() => setOpenService(false)}>

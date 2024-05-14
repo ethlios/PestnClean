@@ -164,9 +164,7 @@ export default function AboutCPPage(props: IAppProps) {
                             style={{
                                 fontSize: sizeX < 500 ? '60px' : sizeX < 900 ? '75px' : '',
                             }}
-                        >
-                            2024
-                        </p>
+                        ></p>
                         <h1
                             className={cx('title')}
                             style={{
@@ -205,9 +203,7 @@ export default function AboutCPPage(props: IAppProps) {
                             style={{
                                 fontSize: sizeX < 500 ? '60px' : sizeX < 900 ? '75px' : '',
                             }}
-                        >
-                            2024
-                        </p>
+                        ></p>
                         <h1
                             className={cx('title')}
                             style={{

@@ -19,6 +19,7 @@ import { signOut, useSession } from 'next-auth/react';
 import InputOutlinedIcon from '@mui/icons-material/InputOutlined';
 import Tippy from '@tippyjs/react/headless';
 import ShoppingCart from '~/common/Header/ShoppingCart';
+import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
 
 const cx = classNames.bind(styles);
 
@@ -220,6 +221,15 @@ export default function MenuMobile({ open, setOpen }: IAppProps) {
                             }}
                         />
                         sales@pestnclean.vn
+                    </Link>
+                    <Link href="mailto:info@pestnclean.vn" target="_blank" rel="noopener noreferrer">
+                        <AlternateEmailIcon
+                            className="mr-2"
+                            sx={{
+                                fontSize: sizeX < 500 ? '20px' : '',
+                            }}
+                        />
+                        info@pestnclean.vn
                     </Link>
                     <Link href="tel:0868363600" target="_blank" rel="noopener noreferrer">
                         <RingVolumeOutlinedIcon

@@ -15,7 +15,7 @@ const cx = classNames.bind(styles);
 export interface IAppProps {}
 
 export default function MoreBtn(props: IAppProps) {
-    const [isOpen, setIsOpen] = useState<boolean>(false);
+    const [isOpen, setIsOpen] = useState<boolean>(true);
 
     const handleClick = () => {
         if (typeof window !== 'undefined') {

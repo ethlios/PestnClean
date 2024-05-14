@@ -12,6 +12,10 @@ import logo2 from '../../../public/img/logo2.png';
 import { gsap } from 'gsap';
 import { slideFromX, slideFromY, rotate } from '~/libs/orthers/animation';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+import ContactSupportIcon from '@mui/icons-material/ContactSupport';
+import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
+import QueryStatsIcon from '@mui/icons-material/QueryStats';
+import SpeedIcon from '@mui/icons-material/Speed';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -21,6 +25,7 @@ const solutions = [
     {
         id: 1,
         title: 'HỖ TRỢ 24/7',
+        icon: 'ContactSupportIcon',
         img: '',
         description:
             'Hotline tư vấn và chăm sóc khách hàng hoạt động 24/7. Tiến hành cấp dịch vụ theo khung thời gian theo yêu cầu của khách hàng 24/7',
@@ -28,6 +33,7 @@ const solutions = [
     {
         id: 2,
         title: 'ĐỘI NGŨ GIÀU KINH NGHIỆM',
+        icon: 'ThumbUpAltIcon',
         img: '',
         description:
             'Đội ngũ chuyên gia tư vấn giàu kinh nghiệm, am hiểu sâu sắc về ngành, đảm bảo cung cấp đến khách hàng dịch vụ với tiêu chuẩn tốt nhất',
@@ -35,6 +41,7 @@ const solutions = [
     {
         id: 3,
         title: 'PHÂN TÍCH CHUẨN BRC, HACCP',
+        icon: 'QueryStatsIcon',
         img: '',
         description:
             'Pestnclean sẵn sàng hỗ trợ các doanh nghiệp có yêu cầu tuân thủ các tiêu chuẩn: BRC, HACCP, ISO,… cùng các dịch vụ báo cáo.',
@@ -42,6 +49,7 @@ const solutions = [
     {
         id: 4,
         title: 'TRIỂN KHAI DỊCH VỤ NHANH',
+        icon: 'SpeedIcon',
         img: '',
         description:
             'Với đội ngũ nhân viên được đào tạo chuyên sâu, PestnClean luôn sẵn sàng đáp ứng nhanh chóng và kịp thời với mọi yêu cầu từ khách hàng.',
@@ -53,6 +61,12 @@ export default function WhyChooseMe() {
     const chooseImg = useRef<any>();
     const logoCompany = useRef<any>();
     const { sizeX } = useSize();
+    const iconComponents = {
+        ContactSupportIcon: <ContactSupportIcon />,
+        ThumbUpAltIcon: <ThumbUpAltIcon />,
+        QueryStatsIcon: <QueryStatsIcon />,
+        SpeedIcon: <SpeedIcon />,
+    };
 
     useEffect(() => {
         gsap.fromTo(
@@ -118,14 +132,17 @@ export default function WhyChooseMe() {
                                             padding: sizeX < 550 ? '10px' : '',
                                         }}
                                     >
-                                        <p
+                                        <div
                                             className={cx('choose-title')}
                                             style={{
                                                 fontSize: sizeX < 550 ? '15px' : '',
+                                                display: 'flex',
+                                                gap: '10px',
                                             }}
                                         >
-                                            {item.title}
-                                        </p>
+                                            {iconComponents[item.icon as keyof typeof iconComponents]}
+                                            <p>{item.title}</p>
+                                        </div>
                                         <p
                                             className={cx('choose-description')}
                                             style={{

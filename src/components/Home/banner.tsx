@@ -57,7 +57,7 @@ export default function BannerHomePage(props: IAppProps) {
                                 >
                                     <h1
                                         style={{
-                                            width: sizeX < 640 ? '100%' : item.id === 1 ? '450px' : '380px',
+                                            width: sizeX < 640 ? '100%' : '450px',
                                             fontSize: sizeX < 550 ? '28px' : '34px',
                                             fontWeight: '600',
                                             textTransform: 'uppercase',
@@ -71,7 +71,7 @@ export default function BannerHomePage(props: IAppProps) {
                                     <p
                                         style={{
                                             width: sizeX < 640 ? '100%' : item.id === 1 ? '450px' : '380px',
-                                            fontSize: '14.6px',
+                                            fontSize: '16px',
                                             fontWeight: '600',
                                             letterSpacing: '-.5px',
                                             marginBottom: '10px',

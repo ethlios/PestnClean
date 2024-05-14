@@ -108,9 +108,7 @@ export default function Content3(props: IAppProps) {
                             style={{
                                 fontSize: sizeX < 500 ? '60px' : sizeX < 900 ? '75px' : '',
                             }}
-                        >
-                            2024
-                        </p>
+                        ></p>
                         <h1
                             className={cx('title')}
                             style={{
