@@ -28,11 +28,15 @@ const uidOrder = function () {
 // TẠO CODE CHO DIS COUNT
 // Hàm kiểm tra mã code đã tồn tại hay chưa
 const isCodeExist = (code: string, existingCodes: { code: string }[]): boolean => {
+    // Kiểm tra nếu existingCodes là mảng, nếu không trả về false
+    if (!Array.isArray(existingCodes)) {
+        return false;
+    }
     return existingCodes.some((existingCode) => existingCode.code === code);
 };
 
 // Hàm tạo mã code ngẫu nhiên và kiểm tra
-const generateUniqueCodeInDiscount = (existingCodes: { code: string }[]): string => {
+const generateUniqueCodeInDiscount = (existingCodes: { code: string }[] = []): string => {
     let newCode: string;
     do {
         newCode = uuidv4().substr(0, 6); // Tạo một mã code ngẫu nhiên
