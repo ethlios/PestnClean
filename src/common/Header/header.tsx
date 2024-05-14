@@ -220,7 +220,7 @@ export default function Header(props: HeaderProps) {
                     </div>
                 </div>
                 <Link href={'/'}>
-                    <Image alt="Logo công ty PESTNCLEAN" src={logo.src} width={176} height={100} />
+                    <Image alt="Logo công ty PESTNCLEAN" src={logo.src} width={176} height={100} priority />
                 </Link>
                 <div className={'flex items-center'}>
                     <ul className={cx('link')}>

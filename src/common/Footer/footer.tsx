@@ -194,6 +194,7 @@ export default function Footer(props: FooterProps) {
                         src={logo.src}
                         width={sizeX < 576 ? 150 : 176}
                         height={100}
+                        priority
                     />
                     <ButtonCommon text="Liên hệ" path="lienhe" />
                 </div>
@@ -207,7 +208,7 @@ export default function Footer(props: FooterProps) {
                         className={cx('infor')}
                         style={{
                             width: sizeX < 900 ? '100%' : '50%',
-                            fontSize: sizeX < 576 ? '14px' : '16px',
+                            fontSize: sizeX < 576 ? '14px' : '15px',
                         }}
                     >
                         <Link

@@ -462,7 +462,7 @@ function* UpdateDiscount({ payload }: any) {
 
 function* DeleteDiscount({ payload }: any) {
     try {
-        const {id} = payload;
+        const { id } = payload;
         const res: ResponseGenerator = yield call(request.remove, `api/Discount/${id}`);
         if (res.status === 200) {
             yield put(actions.removeDiscountSuccess(res.data));
@@ -513,6 +513,6 @@ export default function* rootSaga() {
     // DISCOUNT
     yield takeLatest(types.ADD_DISCOUNT, AddDiscount);
     yield takeLatest(types.UPDATE_STATUS_DISCOUNT, UpdateStatusDiscount);
-    yield takeLatest(types.UPDATE_DISCOUNT,UpdateDiscount);
-    yield takeLatest(types.REMOVE_DISCOUNT,DeleteDiscount);
+    yield takeLatest(types.UPDATE_DISCOUNT, UpdateDiscount);
+    yield takeLatest(types.REMOVE_DISCOUNT, DeleteDiscount);
 }

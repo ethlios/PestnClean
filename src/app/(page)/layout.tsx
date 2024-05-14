@@ -14,6 +14,13 @@ import HeaderMobile from '~/common/Header/headerMobile';
 import useSize from '~/libs/hooks/useSize';
 import { getAllProducts, getProvince, getUser } from '~/redux/actions';
 import logo from '../../../public/img/logo.png';
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+
+ScrollTrigger.addEventListener('refresh', function () {
+    if (document.body.getAttribute('style') === '') {
+        document.body.removeAttribute('style');
+    }
+});
 
 export default function ComponentConnectLayout({ children }: { children: React.ReactNode }) {
     const pathname = usePathname();
@@ -43,9 +50,11 @@ export default function ComponentConnectLayout({ children }: { children: React.R
 
     useEffect(() => {
         const allProducts = async () => {
-            const products = await fetch('/api/product/all').then((res) => res.json());
+            const products = (await fetch('/api/product/all').then((res) => res.json())) ?? [];
 
-            dispatch(getAllProducts(products[0].product));
+            if (typeof products[0] !== 'undefined') {
+                dispatch(getAllProducts(products[0].product));
+            }
         };
 
         allProducts();
@@ -75,7 +84,7 @@ export default function ComponentConnectLayout({ children }: { children: React.R
         </div>
     ) : (
         <div className="loader cpmount">
-            <Image src={logo.src} alt="logo pestnclean png" width={200} height={200} />
+            <Image src={logo.src} alt="logo pestnclean png" width={200} height={200} priority />
         </div>
     );
 }
