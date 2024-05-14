@@ -29,45 +29,45 @@ export default function AboutCPPage(props: IAppProps) {
     const { sizeX } = useSize();
 
     useEffect(() => {
-        const tl = titleRef.current;
+        setTimeout(() => {
+            const tl = titleRef.current;
 
-        gsap.fromTo(
-            imgAbout1.current,
-            slideFromX(imgAbout1.current, -500)[0],
-            slideFromX(imgAbout1.current, -500)[1],
-        );
-        gsap.fromTo(
-            textAbout2.current,
-            slideFromX(textAbout2.current, -500)[0],
-            slideFromX(textAbout2.current, -500)[1],
-        );
-        gsap.fromTo(
-            textAbout1.current,
-            slideFromX(textAbout1.current, 2000)[0],
-            slideFromX(textAbout1.current, 2000)[1],
-        );
-        gsap.fromTo(
-            imgAbout2.current,
-            slideFromX(imgAbout2.current, 2000)[0],
-            slideFromX(imgAbout2.current, 2000)[1],
-        );
-        gsap.fromTo(about1Ref.current, slideFromX(-500)[0], slideFromX()[1]);
-        gsap.fromTo(about2Ref.current, slideFromX(2000)[0], slideFromX()[1]);
+            gsap.fromTo(
+                imgAbout1.current,
+                slideFromX(imgAbout1.current, -500)[0],
+                slideFromX(imgAbout1.current, -500)[1],
+            );
+            gsap.fromTo(
+                textAbout2.current,
+                slideFromX(textAbout2.current, -500)[0],
+                slideFromX(textAbout2.current, -500)[1],
+            );
+            gsap.fromTo(
+                textAbout1.current,
+                slideFromX(textAbout1.current, 2000)[0],
+                slideFromX(textAbout1.current, 2000)[1],
+            );
+            gsap.fromTo(
+                imgAbout2.current,
+                slideFromX(imgAbout2.current, 2000)[0],
+                slideFromX(imgAbout2.current, 2000)[1],
+            );
 
-        gsap.fromTo(videoRef.current, fadeIn(videoRef.current)[0], fadeIn(videoRef.current)[1]);
+            gsap.fromTo(videoRef.current, fadeIn(videoRef.current)[0], fadeIn(videoRef.current)[1]);
 
-        gsap.fromTo(
-            tl,
-            {
-                x: -400,
-                opacity: 0,
-            },
-            {
-                x: 0,
-                opacity: 1,
-                duration: 0.5,
-            },
-        );
+            gsap.fromTo(
+                tl,
+                {
+                    x: -400,
+                    opacity: 0,
+                },
+                {
+                    x: 0,
+                    opacity: 1,
+                    duration: 0.5,
+                },
+            );
+        }, 1);
     }, []);
 
     return (

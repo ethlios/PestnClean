@@ -11,7 +11,7 @@ import useSize from '~/libs/hooks/useSize';
 
 export default function Home() {
     const { sizeX } = useSize();
-    
+
     return (
         <main className="cpmount">
             <div className={'overflow-x-hidden'}>

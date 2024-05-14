@@ -44,6 +44,7 @@ export default function MoreBtn(props: IAppProps) {
                             filter: 'sepia(100%)',
                             WebkitFilter: 'sepia(100%)',
                         }}
+                        priority
                     />
                 </Link>
             </div>

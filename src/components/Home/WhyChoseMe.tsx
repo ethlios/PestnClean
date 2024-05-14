@@ -138,6 +138,7 @@ export default function WhyChooseMe() {
                                                 fontSize: sizeX < 550 ? '15px' : '',
                                                 display: 'flex',
                                                 gap: '10px',
+                                                alignItems: 'center',
                                             }}
                                         >
                                             {iconComponents[item.icon as keyof typeof iconComponents]}
