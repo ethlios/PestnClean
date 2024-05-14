@@ -31,40 +31,28 @@ export default function DichVu3Page(props: IAppProps) {
                 src="https://res.cloudinary.com/dj2jarcxk/image/upload/v1713844497/everdrop-gmbh-SqOMDOQb3ws-unsplash_cwbn5u.jpg"
                 alt="Công ty dịch vụ vệ sinh PetnClean"
             />
-            <ParagraphAlignLeft>
-                <h1
-                    className={cx('title')}
-                    style={{
-                        fontSize: sizeX < 550 ? '24px' : sizeX < 1024 ? '28px' : '',
-                    }}
-                >
-                    Công ty dịch vụ vệ sinh PestnClean
-                </h1>
-                <p
-                    className={`${cx('text-common')}`}
-                    style={{
-                        textAlign: 'justify',
-                    }}
-                >
-                    PestnClean là công ty dịch vụ vệ sinh chuyên nghiệp, cung cấp các dịch vụ vệ sinh công
+            <div>
+                <h1 className={cx('title')}>Công ty dịch vụ vệ sinh PESTNCLEAN</h1>
+                <p className={cx('text-common')}>
+                    PESTNCLEAN là công ty dịch vụ vệ sinh chuyên nghiệp, cung cấp các dịch vụ vệ sinh công
                     nghiệp và vệ sinh dân dụng chất lượng cao, được thiết kế linh hoạt nhằm đáp ứng tối ưu yêu
                     cầu của khách hàng, góp phần nâng cao chất lượng môi trường sống và làm việc, đáp ứng đầy
                     đủ các điều kiện pháp lý và tiêu chuẩn ngành để đảm bảo quá trình kinh doanh hiệu quả,
                     nâng cao danh tiếng thương hiệu.
                 </p>
-            </ParagraphAlignLeft>
+            </div>
             <TextImageImage />
             <Video
                 title="Dịch vụ vệ sinh công nghiệp tại PetnClean."
                 src="https://res.cloudinary.com/dj2jarcxk/video/upload/v1713531630/Ve%CC%A3%CC%82_Sinh_Co%CC%82ng_Nghie%CC%A3%CC%82p_yqfytu.mp4"
             />
-            <h1 className={`${cx('content-title')} text-center`}>Dịch vụ vệ sinh chuyên biệt</h1>
+            <h1 className={cx('content-title')}>Dịch vụ vệ sinh chuyên biệt</h1>
             <BundleCard className={'rounded-xl bg-gray-200 p-10'}>
                 {linkDichVuVeSinh.map((item, index) => (
                     <Card
                         key={index}
                         src={item.src}
-                        alt={item.name + 'tại Pestnclean'}
+                        alt={item.name + 'tại PESTNCLEAN'}
                         title={item.name}
                         path={item.path}
                         description={item.description}

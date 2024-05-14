@@ -104,27 +104,8 @@ export default function Content3(props: IAppProps) {
                             paddingLeft: sizeX < 768 ? '0' : sizeX < 800 ? '20px' : '50px',
                         }}
                     >
-                        <p
-                            style={{
-                                fontSize: sizeX < 500 ? '60px' : sizeX < 900 ? '75px' : '',
-                            }}
-                        ></p>
-                        <h1
-                            className={cx('title')}
-                            style={{
-                                fontSize: sizeX < 768 ? '20px' : '',
-                            }}
-                        >
-                            3. GIÁ TRỊ CỐT LÕI
-                        </h1>
-                        <p
-                            className={cx('text-common')}
-                            ref={about1DesRef}
-                            style={{
-                                fontSize: sizeX < 900 ? '13px' : '',
-                                textAlign: 'justify',
-                            }}
-                        >
+                        <h1 className={cx('title')}>3. GIÁ TRỊ CỐT LÕI</h1>
+                        <p className={cx('text-common')} ref={about1DesRef}>
                             {
                                 'Sự cam kết với khách hàng - Chất lượng của dịch vụ - Chuyên nghiệp về thái độ - Trách nhiệm với xã hội.'
                             }

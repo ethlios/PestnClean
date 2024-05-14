@@ -5,20 +5,37 @@
     margin-bottom: 20px;
     line-height: normal;
     letter-spacing: 0.5px;
+
+    @media (max-width: 1024px) {
+        font-size: 28px;
+    }
+
+    @media (max-width: 550px) {
+        font-size: 24px;
+    }
 }
 
 .text-common {
-    font-size: 15.5px;
+    font-size: 18px;
     font-weight: 600;
     letter-spacing: -0.2px;
+    text-align: justify;
+
+    @media (max-width: 550px) {
+        font-size: 15.5px;
+    }
 }
 
 .title {
-    font-size: 23px;
+    font-size: 28px;
     font-weight: 700;
     margin-bottom: 10px;
     text-decoration: 2px underline;
     color: var(--primary);
+
+    @media (max-width: 768px) {
+        font-size: 20px;
+    }
 }
 
 .img {

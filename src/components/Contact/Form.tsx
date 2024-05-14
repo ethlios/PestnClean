@@ -122,8 +122,7 @@ export default function FormContactPage({ setData, setIsConfirm, data, setShowTo
                     marginTop: sizeX < 768 ? '50px' : '',
                 }}
             >
-                MỘT DỰ ÁN VỚI <br />
-                PESTNCLEAN?
+                ĐĂNG KÝ NHẬN TƯ VẤN DỊCH VỤ TỪ PESTNCLEAN:
             </h1>
 
             {/* Progress */}

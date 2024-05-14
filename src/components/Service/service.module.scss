@@ -3,13 +3,27 @@
     font-weight: 700;
     margin-bottom: 10px;
     text-transform: uppercase;
+    text-align: center;
+
+    @media (max-width: 1024px) {
+        font-size: 28px;
+    }
+
+    @media (max-width: 550px) {
+        font-size: 24px;
+    }
 }
 
 .text-common {
-    font-size: 14.5px;
+    font-size: 18px;
     color: var(--text-black);
     font-weight: 600;
     letter-spacing: -0.3px;
+    text-align: justify;
+
+    @media (max-width: 550px) {
+        font-size: 15.5px;
+    }
 }
 
 .bg-text {
@@ -103,21 +117,20 @@
 }
 
 .content-title {
-    font-size: 18px;
+    font-size: 2rem;
     font-weight: 600;
     letter-spacing: -0.2px;
     text-transform: uppercase;
     text-decoration: 2px underline;
     margin-top: 60px;
     margin-bottom: 30px;
-}
+    text-align: center;
 
-.content-title-fix {
-    font-size: 18px;
-    font-weight: 600;
-    letter-spacing: -0.2px;
-    text-transform: uppercase;
-    text-decoration: 2px underline;
-    margin-top: 50px;
-    margin-bottom: 40px;
+    @media (max-width: 1024px) {
+        font-size: 28px;
+    }
+
+    @media (max-width: 550px) {
+        font-size: 24px;
+    }
 }

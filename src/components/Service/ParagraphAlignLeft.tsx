@@ -23,7 +23,7 @@ export default function ParagraphAlignLeft(props: IAppProps) {
     }, []);
 
     return (
-        <div className={'grid grid-cols-5 my-10'} ref={ref}>
+        <div className={'grid grid-cols-5 mb-10'} ref={ref}>
             <div className={'col-span-5 lg:col-span-3'}>
                 <div className={'text-left'}>{props.children}</div>
             </div>

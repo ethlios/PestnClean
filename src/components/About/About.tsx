@@ -82,27 +82,14 @@ export default function AboutCPPage(props: IAppProps) {
 
             {/*Header title*/}
             <div className={sizeX < 768 ? 'my-8' : 'my-14'}>
-                <div className={''} ref={titleRef}>
-                    <h1
-                        className={`${cx('head-title')} md:w-3/5`}
-                        style={{
-                            fontSize: sizeX < 550 ? '24px' : sizeX < 1024 ? '28px' : '',
-                            width: sizeX < 1050 ? '100%' : '',
-                        }}
-                    >
+                <div ref={titleRef}>
+                    <h1 className={cx('head-title')}>
                         HỆ SINH THÁI GIẢI PHÁP VỆ SINH VÀ KIỂM SOÁT CÔN TRÙNG TOÀN DIỆN
                     </h1>
-                    <p
-                        className={cx('text-common')}
-                        style={{
-                            textAlign: 'justify',
-                            fontSize: sizeX < 550 ? '14.5px' : '',
-                            width: sizeX < 1000 ? '100%' : '',
-                        }}
-                    >
-                        Đến với PestnClean, bạn sẽ được cung cấp dịch vụ vệ sinh và kiểm soát côn trùng uy tín
+                    <p className={cx('text-common')}>
+                        Đến với PESTNCLEAN, bạn sẽ được cung cấp dịch vụ vệ sinh và kiểm soát côn trùng uy tín
                         hàng đầu Việt Nam. Được sáng lập bởi ông Nguyễn Thanh Duy – Người với nhiều năm kinh
-                        nghiệm trong lĩnh vực. PestnClean hiểu rõ những nỗi lo lắng, các vấn đề mà những người
+                        nghiệm trong lĩnh vực. PESTNCLEAN hiểu rõ những nỗi lo lắng, các vấn đề mà những người
                         điều hành các Hotels & Resorts, F&B Retail và Nhà máy gặp phải và những thách thức để
                         xử lý chúng.
                     </p>
@@ -140,8 +127,8 @@ export default function AboutCPPage(props: IAppProps) {
                         src={
                             'https://res.cloudinary.com/dj2jarcxk/image/upload/v1713627833/sean-pollock-PhYq704ffdA-unsplash_tdg5pg.jpg'
                         }
-                        alt="Hình ảnh tầm nhìn của Pestnclean"
-                        key="pestnclean about page "
+                        alt="Hình ảnh tầm nhìn của PESTNCLEAN"
+                        key="PESTNCLEAN about page "
                         width={3000}
                         height={1000}
                         style={{
@@ -160,27 +147,9 @@ export default function AboutCPPage(props: IAppProps) {
                             padding: sizeX < 900 ? '20px 0 40px 25px' : '',
                         }}
                     >
-                        <p
-                            style={{
-                                fontSize: sizeX < 500 ? '60px' : sizeX < 900 ? '75px' : '',
-                            }}
-                        ></p>
-                        <h1
-                            className={cx('title')}
-                            style={{
-                                fontSize: sizeX < 768 ? '20px' : '',
-                            }}
-                        >
-                            1. TẦM NHÌN
-                        </h1>
-                        <p
-                            className={cx('text-common')}
-                            style={{
-                                fontSize: sizeX < 900 ? '13px' : '',
-                                textAlign: 'justify',
-                            }}
-                        >
-                            PestnClean khát vọng trở thành đối tác đáng tin cậy, đồng hành cùng quá trình phát
+                        <h1 className={cx('title')}>1. TẦM NHÌN</h1>
+                        <p className={cx('text-common')}>
+                            PESTNCLEAN khát vọng trở thành đối tác đáng tin cậy, đồng hành cùng quá trình phát
                             triển của các doanh nghiệp trong ngành Hotels & Resorts, F&B Retail và Nhà máy.
                             Phấn đấu đạt mục tiêu xây dựng thương hiệu hàng đầu trong ngành Dịch vụ vệ sinh và
                             Kiểm soát côn trùng – Đem lại hệ sinh thái toàn diện, bền vững.
@@ -199,28 +168,10 @@ export default function AboutCPPage(props: IAppProps) {
                             padding: sizeX < 900 ? '20px 25px 40px 0' : '',
                         }}
                     >
-                        <p
-                            style={{
-                                fontSize: sizeX < 500 ? '60px' : sizeX < 900 ? '75px' : '',
-                            }}
-                        ></p>
-                        <h1
-                            className={cx('title')}
-                            style={{
-                                fontSize: sizeX < 768 ? '20px' : '',
-                            }}
-                        >
-                            2. SỨ MỆNH
-                        </h1>
-                        <p
-                            className={cx('text-common')}
-                            style={{
-                                fontSize: sizeX < 900 ? '13px' : '',
-                                textAlign: 'justify',
-                            }}
-                        >
+                        <h1 className={cx('title')}>2. SỨ MỆNH</h1>
+                        <p className={cx('text-common')}>
                             “ Nâng cao chất lượng môi trường làm việc, đảm bảo giá trị kinh doanh hiệu quả bền
-                            vững ”. PestnClean tin rằng việc cung cấp mô hình dịch vụ giải pháp toàn diện về
+                            vững ”. PESTNCLEAN tin rằng việc cung cấp mô hình dịch vụ giải pháp toàn diện về
                             vệ sinh và kiểm soát côn trùng sẽ mang lại những giá trị tốt đẹp cho công việc
                             kinh doanh của khách hàng, đối tác và xã hội.
                         </p>
@@ -229,8 +180,8 @@ export default function AboutCPPage(props: IAppProps) {
                         src={
                             'https://res.cloudinary.com/dj2jarcxk/image/upload/v1713627832/hunters-race-MYbhN8KaaEc-unsplash_qxi4nb.jpg'
                         }
-                        alt="Hình ảnh sứ mệnh của Pestnclean"
-                        key="pestnclean about page "
+                        alt="Hình ảnh sứ mệnh của PESTNCLEAN"
+                        key="PESTNCLEAN about page "
                         width={3000}
                         height={1000}
                         style={{

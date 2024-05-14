@@ -115,7 +115,7 @@ export default function TextImageImage(props: IAppProps) {
                         href={
                             pathname === '/dichvu/dich-vu-ve-sinh'
                                 ? '/dich-vu-ve-sinh-nha-o'
-                                : '/dichvu/giai-phap-mui-huong-cho-doanh-nghiep'
+                                : '/giai-phap-mui-huong-cho-doanh-nghiep'
                         }
                     >
                         <p className={cx('bg-text')}>
