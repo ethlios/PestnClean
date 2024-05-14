@@ -52,4 +52,4 @@ export async function getAllProducts() {
     return prisma.product.findMany();
 }
 
-export { getAllUsers, getAllUsersNotAdmin , GetAllNotification , GetAllCodeInDiscount , GetAllDiscount };
+export { getAllUsers, getAllUsersNotAdmin, GetAllNotification, GetAllCodeInDiscount, GetAllDiscount };

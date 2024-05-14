@@ -46,7 +46,7 @@ export default function ProductPage(props: IAppProps) {
         });
         // Gửi giá trị checkboxFilter lên store
         dispatch(addCheckboxFilterProductPage(checkboxFilter));
-    }, [dispatch]);
+    }, [allProducts, dispatch]);
 
     useEffect(() => {
         if (sizeX < 1024) {

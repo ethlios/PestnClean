@@ -1,7 +1,7 @@
 'use client';
 
 import classNames from 'classnames/bind';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Autoplay, EffectCoverflow, Navigation, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import ButtonCommon from '../Orther/Button';
@@ -14,7 +14,6 @@ import 'swiper/css/pagination';
 
 import { useDispatch, useSelector } from 'react-redux';
 import useSize from '~/libs/hooks/useSize';
-import { getImgWorkByType } from '~/redux/actions';
 import { RootState } from '~/redux/provider/store';
 import { ImageZoom } from '../Orther/Zoom';
 
@@ -31,9 +30,7 @@ export interface propsImgWork {
 export default function ImageWork(props: IAppProps) {
     const [defaultListValue, setDefaultListValue] = useState<number>(0);
     const [defaultList, setDefaultList] = useState<string>('Tất cả');
-    const [arrImgWork, setValueImgWork] = useState<string[]>([]);
     const { sizeX } = useSize();
-    const dispatch = useDispatch();
     let imageWork = useSelector((state: RootState) => state.main.imageWork);
 
     if (defaultListValue === 1) {
