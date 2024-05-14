@@ -33,7 +33,7 @@ export default function BlogsList(props: IAppProps) {
         if (defaultList === 'Tất cả') {
             // setBlogsList(blogs);
             const newList = blogs.filter((a) => {
-                return 8 * numberPageValue < a.id && a.id <= 8 * (numberPageValue + 1);
+                return 12 * numberPageValue < a.id && a.id <= 12 * (numberPageValue + 1);
             });
 
             setBlogsList(newList);
@@ -59,7 +59,7 @@ export default function BlogsList(props: IAppProps) {
     }, [defaultList, numberPageValue, searchValue]);
 
     useEffect(() => {
-        setNumberPage(Math.ceil(blogs.length / 8));
+        setNumberPage(Math.ceil(blogs.length / 12));
     }, []);
 
     return (
@@ -139,10 +139,21 @@ export default function BlogsList(props: IAppProps) {
                                                 }}
                                             >
                                                 {currentBlog === index && (
-                                                    <ButtonCommon
-                                                        text="XEM"
-                                                        path={`blogs/${nameToLink(blog.title)}`}
-                                                    />
+                                                    <Link
+                                                        href={`blogs/${nameToLink(blog.title)}`}
+                                                        style={{
+                                                            backgroundColor: 'var(--primary)',
+                                                            color: '#fff',
+                                                            fontWeight: 600,
+                                                            fontSize: sizeX < 550 ? '12.5px' : '14px',
+                                                            padding: '8px 14px',
+                                                            borderRadius: '5px',
+                                                            border: 'solid 1.5px var(--primary)',
+                                                        }}
+                                                        className={cx('button-hover')}
+                                                    >
+                                                        XEM
+                                                    </Link>
                                                 )}
                                             </div>
                                         </div>

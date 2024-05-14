@@ -104,12 +104,21 @@ html input {
     font-weight: 600 !important;
 }
 
+html select {
+    font-size: 14px !important;
+    font-weight: 600 !important;
+}
+
 html textarea {
     font-size: 14px !important;
     font-weight: 600 !important;
 }
 
 html input::placeholder {
+    font-weight: 500 !important;
+}
+
+html select::placeholder {
     font-weight: 500 !important;
 }
 

@@ -82,7 +82,11 @@ export default function BannerHomePage(props: IAppProps) {
                                         {item.description}
                                     </p>
                                     <div>
-                                        <ButtonCommon text={'XEM THÊM'} path={item.path}></ButtonCommon>
+                                        <ButtonCommon
+                                            text={'XEM THÊM'}
+                                            path={item.path}
+                                            rule="rule-1"
+                                        ></ButtonCommon>
                                     </div>
                                 </div>
                             </div>

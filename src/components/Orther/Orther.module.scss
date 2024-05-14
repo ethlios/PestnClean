@@ -24,3 +24,11 @@
     letter-spacing: -0.2px;
     align-items: center;
 }
+
+.button-hover {
+    &:hover {
+        outline: solid 1.5px var(--primary);
+        outline-offset: 3px;
+        transition: all ease 0.5s;
+    }
+}

@@ -145,10 +145,15 @@
 }
 
 .lists-inside {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(13em, 1fr));
-    grid-template-rows: 1fr;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
     gap: 20px;
+    width: 100%;
+}
+
+.blog-item {
+    width: calc(100% / 4 - 15px);
 }
 
 .blog-text-wrapper {
@@ -253,5 +258,13 @@
 
     &:hover {
         background-color: rgba(0, 0, 0, 0.05);
+    }
+}
+
+.button-hover {
+    &:hover {
+        outline: solid 1.5px var(--primary);
+        outline-offset: 3px;
+        transition: all ease 0.5s;
     }
 }

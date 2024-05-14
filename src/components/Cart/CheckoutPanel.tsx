@@ -69,18 +69,36 @@ export default function CheckoutPanel({ cartOrder, setCart, setShowToast }: IApp
         >
             <div className={cx('panel')}>
                 {/*Summary*/}
-                <div className={'my-5'}>
+                <div className={'mb-5'}>
                     <div
                         className={
                             'flex justify-between gap-1 my-2 *:underline *:text-primaryColor *:cursor-pointer'
                         }
                     >
-                        <p onClick={() => handleCheckAll(true)}>Chọn tất cả</p>
-                        <p onClick={() => handleCheckAll(false)}>Bỏ tất cả</p>
+                        <p
+                            onClick={() => handleCheckAll(true)}
+                            style={{
+                                fontWeight: 600,
+                                textDecoration: '2px underline',
+                                textUnderlineOffset: '4px',
+                            }}
+                        >
+                            Chọn tất cả
+                        </p>
+                        <p
+                            onClick={() => handleCheckAll(false)}
+                            style={{
+                                fontWeight: 600,
+                                textDecoration: '2px underline',
+                                textUnderlineOffset: '4px',
+                            }}
+                        >
+                            Bỏ tất cả
+                        </p>
                     </div>
                     {cartOrder.length > 0 ? (
                         <>
-                            <p className={`${cx('title')} mb-3`}>Tóm tắt đơn hàng</p>
+                            <p className={`${cx('title')} mb-3 mt-6`}>Tóm tắt đơn hàng</p>
                             <div className={'*:flex *:justify-between *:items center'}>
                                 <div className={cx('total-price')}>
                                     <span>{totalItem} Sản phẩm</span>
@@ -89,7 +107,13 @@ export default function CheckoutPanel({ cartOrder, setCart, setShowToast }: IApp
                             </div>
                         </>
                     ) : (
-                        <p>Chọn sản phẩm để thanh toán</p>
+                        <p
+                            style={{
+                                fontWeight: 600,
+                            }}
+                        >
+                            Chọn sản phẩm để thanh toán
+                        </p>
                     )}
                 </div>
                 {/*Payment*/}
@@ -100,9 +124,23 @@ export default function CheckoutPanel({ cartOrder, setCart, setShowToast }: IApp
                     <p>{formatter.format(totalPrice)}</p>
                 </div>
                 <div className={'my-5 flex flex-col gap-3'}>
-                    <Button variant="contained" onClick={handlePayment}>
+                    <button
+                        onClick={handlePayment}
+                        style={{
+                            backgroundColor: 'var(--primary)',
+                            color: '#fff',
+                            fontWeight: 600,
+                            fontSize: sizeX < 550 ? '12.5px' : '14px',
+                            padding: '8px 14px',
+                            borderRadius: '5px',
+                            border: 'solid 1.5px var(--primary)',
+                            width: '100%',
+                            textTransform: 'uppercase',
+                        }}
+                        className={cx('button-hover')}
+                    >
                         Thanh toán
-                    </Button>
+                    </button>
                     <Link href={'/sanpham'}>
                         <ButtonCommon text="TIẾP TỤC MUA SẮM" fullWidth color="secondary" />
                     </Link>

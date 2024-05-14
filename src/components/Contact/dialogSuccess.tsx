@@ -100,32 +100,37 @@ export default function DialogSuccess({ setIsConfirm, setData, item }: IAppProps
                         . Chân thành cảm ơn thái độ làm việc chăm chỉ của bạn!
                     </p>
                     <div className={cx('dialog-button')}>
-                        <Button
-                            variant="outlined"
-                            sx={{
+                        <button
+                            style={{
                                 fontSize: '14px',
                                 fontWeight: '600',
-                                outline: '2px solid',
+                                border: '2px solid',
                                 width: '50%',
+                                borderRadius: ' 5px',
                             }}
                             onClick={handleDowloadImg}
+                            className={cx('button-hover')}
                         >
                             {sizeX < 580 ? 'Print' : 'In thông tin cuộc hẹn'}
-                        </Button>
-                        <Button
-                            variant="contained"
-                            sx={{
+                        </button>
+                        <button
+                            style={{
                                 fontSize: '14px',
                                 fontWeight: '600',
                                 width: '50%',
+                                height: '45px',
+                                borderRadius: ' 5px',
+                                backgroundColor: 'var(--primary)',
+                                color: '#fff',
                             }}
+                            className={cx('button-hover')}
                             onClick={() => {
                                 setData('');
                                 setIsConfirm(false);
                             }}
                         >
-                            {sizeX < 580 ? 'Back' : 'quay Trở lại'}
-                        </Button>
+                            {sizeX < 580 ? 'Back' : 'Quay trở lại'}
+                        </button>
                     </div>
                 </div>
             </div>
