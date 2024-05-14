@@ -208,7 +208,7 @@ export default function Footer(props: FooterProps) {
                         className={cx('infor')}
                         style={{
                             width: sizeX < 900 ? '100%' : '50%',
-                            fontSize: sizeX < 576 ? '14px' : '15px',
+                            fontSize: sizeX < 576 ? '14px' : '15.5px',
                         }}
                     >
                         <Link

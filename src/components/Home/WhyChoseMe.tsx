@@ -299,10 +299,10 @@ export default function WhyChooseMe() {
                     </div>
                     <p
                         style={{
-                            fontSize: sizeX < 768 ? '11.5px' : '12.7px',
-                            fontWeight: '500',
+                            fontSize: sizeX < 768 ? '11.5px' : '13.5px',
+                            fontWeight: '600',
                             letterSpacing: '-.5px',
-                            color: 'rgba(0,0,0,0.5)',
+                            color: 'rgba(0,0,0,0.7)',
                             textAlign: 'justify',
                             borderTop: 'solid 3px var(--secondary)',
                             paddingTop: '20px',

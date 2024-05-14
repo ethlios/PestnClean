@@ -50,28 +50,34 @@ export default function Content3(props: IAppProps) {
     const { sizeX } = useSize();
 
     useEffect(() => {
-        gsap.fromTo(about1DesRef.current, fadeIn(about1DesRef.current)[0], fadeIn(about1DesRef.current)[1]);
+        setTimeout(() => {
+            gsap.fromTo(
+                about1DesRef.current,
+                fadeIn(about1DesRef.current)[0],
+                fadeIn(about1DesRef.current)[1],
+            );
 
-        gsap.fromTo(
-            '.card-about',
-            {
-                opacity: 0,
-                scale: 0.1,
-            },
-            {
-                opacity: 1,
-                scale: 1,
-                durations: 0.5,
-                delay: 0.1,
-                stagger: {
-                    amount: 1,
+            gsap.fromTo(
+                '.card-about',
+                {
+                    opacity: 0,
+                    scale: 0.1,
                 },
-                scrollTrigger: {
-                    trigger: '.card-about',
-                    start: 'top bottom-=-50px',
+                {
+                    opacity: 1,
+                    scale: 1,
+                    durations: 0.5,
+                    delay: 0.1,
+                    stagger: {
+                        amount: 1,
+                    },
+                    scrollTrigger: {
+                        trigger: '.card-about',
+                        start: 'top bottom-=-50px',
+                    },
                 },
-            },
-        );
+            );
+        }, 1);
     }, []);
 
     return (

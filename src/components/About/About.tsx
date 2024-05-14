@@ -170,10 +170,10 @@ export default function AboutCPPage(props: IAppProps) {
                     >
                         <h1 className={cx('title')}>2. SỨ MỆNH</h1>
                         <p className={cx('text-common')}>
-                            “ Nâng cao chất lượng môi trường làm việc, đảm bảo giá trị kinh doanh hiệu quả bền
-                            vững ”. PESTNCLEAN tin rằng việc cung cấp mô hình dịch vụ giải pháp toàn diện về
-                            vệ sinh và kiểm soát côn trùng sẽ mang lại những giá trị tốt đẹp cho công việc
-                            kinh doanh của khách hàng, đối tác và xã hội.
+                            “Nâng cao chất lượng môi trường làm việc, đảm bảo giá trị kinh doanh hiệu quả bền
+                            vững”. PESTNCLEAN tin rằng việc cung cấp mô hình dịch vụ giải pháp toàn diện về vệ
+                            sinh và kiểm soát côn trùng sẽ mang lại những giá trị tốt đẹp cho công việc kinh
+                            doanh của khách hàng, đối tác và xã hội.
                         </p>
                     </div>
                     <Image

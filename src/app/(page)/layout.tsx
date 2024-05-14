@@ -70,6 +70,14 @@ export default function ComponentConnectLayout({ children }: { children: React.R
         allProvince();
     }, [dispatch]);
 
+    useEffect(() => {
+        const error = console.error;
+        console.error = (...args: any) => {
+            if (/defaultProps/.test(args[0])) return;
+            error(...args);
+        };
+    }, []);
+
     return openCp ? (
         <div>
             {pathname === '/login' || pathname === '/admin' || pathname.includes('/profile/') ? (

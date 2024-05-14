@@ -34,7 +34,7 @@ export default function BannerHomePage(props: IAppProps) {
                             <div key={index}>
                                 <div
                                     style={{
-                                        backgroundImage: `url('${item.src}')`,
+                                        // backgroundImage: `url('${item.src}')`,
                                         backgroundPosition: 'center',
                                         backgroundSize: 'cover',
                                         width: '100%',
@@ -44,7 +44,7 @@ export default function BannerHomePage(props: IAppProps) {
                                         flexDirection: 'column',
                                         justifyContent: 'center',
                                         alignItems: sizeX < 640 ? 'center' : '',
-                                        color: index === 3 || index === 0 ? '#fff' : '',
+                                        // color: index === 3 || index === 0 ? '#fff' : '',
                                         padding:
                                             sizeX < 768
                                                 ? '0 20px'
@@ -76,7 +76,7 @@ export default function BannerHomePage(props: IAppProps) {
                                             letterSpacing: '-.5px',
                                             marginBottom: '10px',
                                             textAlign: sizeX < 640 ? 'center' : 'left',
-                                            color: index === 3 || index === 0 ? '#fff' : 'var(--text-black)',
+                                            // color: index === 3 || index === 0 ? '#fff' : 'var(--text-black)',
                                         }}
                                     >
                                         {item.description}
