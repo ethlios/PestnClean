@@ -53,6 +53,7 @@ import {
     getProvince,
     updateStatusDiscountSuccess,
     updateDiscountSuccess,
+    addCheckboxFilterProductPage,
 } from './actions';
 
 interface RootState {
@@ -78,6 +79,7 @@ interface RootState {
     users: any[];
     notificationAll: any[];
     province: any[];
+    checkboxFilterProductPage: any[];
 }
 
 const initState: RootState = {
@@ -103,6 +105,7 @@ const initState: RootState = {
     users: [],
     notificationAll: [],
     province: [],
+    checkboxFilterProductPage: [],
 };
 
 const findIndex = (state: any[], id: number) => {
@@ -365,31 +368,36 @@ const rootReducer = createReducer(initState, (builder) => {
         state.discount = action.payload;
     });
     builder.addCase(addDiscountSuccess, (state, action) => {
-        const {data , message} = action.payload;
+        const { data, message } = action.payload;
         state.message = message;
         state.discount.push(data);
     });
     builder.addCase(updateStatusDiscountSuccess, (state, action) => {
-        const { message , data} = action.payload;
-        let index = state.discount.findIndex(item => item.id === data.id);
+        const { message, data } = action.payload;
+        let index = state.discount.findIndex((item) => item.id === data.id);
         if (index !== -1) {
             state.discount[index].status = data.status;
         }
         state.message = message;
     });
     builder.addCase(updateDiscountSuccess, (state, action) => {
-        const { message, data} = action.payload;
-        let index = state.discount.findIndex(item => item.id === data.id);
+        const { message, data } = action.payload;
+        let index = state.discount.findIndex((item) => item.id === data.id);
         if (index !== -1) {
             state.discount[index] = data;
         }
         state.message = message;
     });
     builder.addCase(removeDiscountSuccess, (state, action) => {
-        const {data ,message} = action.payload;
+        const { data, message } = action.payload;
         const index = findIndex2(state.discount, data);
         state.discount.splice(index, 1);
         state.message = message;
+    });
+
+    //Filter Product Page
+    builder.addCase(addCheckboxFilterProductPage, (state, action) => {
+        state.checkboxFilterProductPage = action.payload;
     });
 });
 

@@ -27,7 +27,7 @@ export default function ProductItem({ item }: ProductItemProps) {
             <div className={cx('item-img')}>
                 {item.status === 'SALE' && (
                     <div className={cx('item-event-sale')}>
-                        <p>{((1 - item.priceSales / item.price) * 100).toFixed(1)}%</p>
+                        <p>-{((1 - item.priceSales / item.price) * 100).toFixed(1)}%</p>
                     </div>
                 )}
                 {item.status === 'HOT' && (

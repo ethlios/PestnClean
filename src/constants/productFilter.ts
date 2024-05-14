@@ -1,8 +1,9 @@
+import { cons } from 'effect/List';
+
 const filterMenu = [
     {
         title: 'Kiểm soát côn trùng',
         subMenu: [
-            { title: 'Mối' },
             {
                 title: 'Thiết bị máy móc',
                 subMenu: [{ title: 'Đèn' }, { title: 'Máy phun xịt' }],
@@ -104,28 +105,46 @@ const filterMenu = [
 const checkboxFilter = [
     {
         title: 'Dung tích',
-        checkbox: ['1l', '2l', '3l', '4l'],
+        field: 'weight',
+        checkbox: [],
     },
     {
         title: 'Gói',
-        checkbox: ['10g', '12g', '50g', '100g'],
+        field: 'package',
+        checkbox: [],
     },
     {
         title: 'Hộp',
-        checkbox: ['6 cục', '12 cục'],
+        field: 'box',
+        checkbox: [],
     },
     {
         title: 'Miếng',
-        checkbox: ['1 miếng', '10 miếng'],
+        field: 'pieces',
+        checkbox: [],
     },
     {
         title: 'Túi',
-        checkbox: ['1 túi', '5 túi'],
+        field: 'bag',
+        checkbox: [],
     },
     {
         title: 'Tấm',
-        checkbox: ['1 tấm'],
+        field: 'plate',
+        checkbox: [],
     },
 ];
 
-export { filterMenu, checkboxFilter };
+const filterPrice = [
+    {
+        title: 'Theo giá',
+        field: 'price',
+        checkbox: [
+            { title: 'Dưới 1.000.000', max: 1000000 },
+            { title: 'Từ 1.000.000đ - 5.000.000đ', min: 1000000, max: 5000000 },
+            { title: 'Trên 5.000.000đ', min: 5000000 },
+        ],
+    },
+];
+
+export { filterMenu, checkboxFilter, filterPrice };

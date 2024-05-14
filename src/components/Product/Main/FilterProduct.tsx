@@ -4,12 +4,16 @@ import classNames from 'classnames/bind';
 import styles from '../product.module.scss';
 import useScroll from '~/libs/hooks/useScroll';
 import FilterMenu from '~/components/Product/Main/FilterMenu';
-import { Button, Checkbox, IconButton } from '@mui/material';
+import { Button, IconButton } from '@mui/material';
 import useSize from '~/libs/hooks/useSize';
 import DisabledByDefaultIcon from '@mui/icons-material/DisabledByDefault';
-import { filterMenu, checkboxFilter } from '~/constants/productFilter';
-import { useEffect, useState } from 'react';
+import { filterMenu, checkboxFilter, filterPrice } from '~/constants/productFilter';
+import { useEffect } from 'react';
 import CheckboxMenu from '~/components/Product/Main/CheckboxMenu';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '~/redux/provider/store';
+import { addCheckboxFilterProductPage } from '~/redux/actions';
+import CheckboxPrice from '~/components/Product/Main/CheckboxPrice';
 
 const cx = classNames.bind(styles);
 
@@ -36,6 +40,26 @@ export default function FilterProduct({
 }: IAppProps) {
     const wheel: boolean = useScroll();
     const { sizeX } = useSize();
+    let checkboxFilterProduct = useSelector((state: RootState) => state.main.checkboxFilterProductPage);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        if (checkboxFilterProduct.length === 0) {
+            // Duyệt qua tất cả sản phẩm
+            allProducts.forEach((product: any) => {
+                // Duyệt qua từng thuộc tính trong checkboxFilter
+                checkboxFilter.map((filter: any) => {
+                    // Nếu thuộc tính của sản phẩm có giá trị và chưa tồn tại trong checkboxFilter
+                    if (product[filter.field] && !filter.checkbox.includes(product[filter.field])) {
+                        // Thêm giá trị thuộc tính vào checkboxFilter
+                        filter.checkbox.push(product[filter.field]);
+                    }
+                });
+            });
+            // Gửi giá trị checkboxFilter lên store
+            dispatch(addCheckboxFilterProductPage(checkboxFilter));
+        }
+    }, [checkboxFilterProduct]);
 
     useEffect(() => {
         let filterProducts = allProducts.filter((product: any) => {
@@ -46,17 +70,20 @@ export default function FilterProduct({
                 selectedCategory.includes(product.category3)
             );
         });
-        checkedFilter.forEach((checked: any) => {
+        checkedFilter.map((item: any) => {
             filterProducts = filterProducts.filter((product: any) => {
-                return (
-                    (product.weight && product.weight.includes(checked)) ||
-                    (product.box && product.box.includes(checked)) ||
-                    (product.package && product.package.includes(checked)) ||
-                    (product.pieces && product.pieces.includes(checked)) ||
-                    (product.bag && product.bag.includes(checked)) ||
-                    (product.plate && product.plate.includes(checked)) ||
-                    (product.categoryMain && product.categoryMain.includes(checked))
-                );
+                if (item.field === 'price') {
+                    return (
+                        (product.price && product.price > item.min && product.price < item.max) ||
+                        (product.price && product.price > item.min && !item.max) ||
+                        (product.price && !item.min && product.price < item.max)
+                    );
+                } else {
+                    return (
+                        (product[item.field] && product[item.field].includes(item.checkbox)) ||
+                        (product.categoryMain && product.categoryMain.includes(item.checkbox))
+                    );
+                }
             });
         });
         setProducts(filterProducts);
@@ -126,14 +153,33 @@ export default function FilterProduct({
                         </div>
                     </div>
                 )}
-                {checkboxFilter.map((filter: any, index: any) => (
-                    <CheckboxMenu
-                        filter={filter}
-                        key={index}
-                        checked={checkedFilter}
-                        setChecked={setCheckedFilter}
-                    />
-                ))}
+                <div className={'flex flex-col gap-2'}>
+                    <h2 className={cx('filter-title')}>Theo giá</h2>
+                    {filterPrice[0].checkbox && (
+                        <div className={'flex flex-col'}>
+                            {filterPrice[0].checkbox.map((checkbox: any, index: any) => (
+                                <CheckboxPrice
+                                    key={index}
+                                    filterField={filterPrice[0].field}
+                                    checkbox={checkbox}
+                                    checked={checkedFilter}
+                                    setChecked={setCheckedFilter}
+                                />
+                            ))}
+                        </div>
+                    )}
+                </div>
+                {checkboxFilterProduct.map(
+                    (filter: any, index: any) =>
+                        filter.checkbox.length > 0 && (
+                            <CheckboxMenu
+                                filter={filter}
+                                key={index}
+                                checked={checkedFilter}
+                                setChecked={setCheckedFilter}
+                            />
+                        ),
+                )}
                 {sizeX < 1024 && (
                     <div className={cx('filter-button')}>
                         <Button
