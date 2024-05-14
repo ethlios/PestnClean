@@ -12,6 +12,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSession } from 'next-auth/react';
 import { addOrder, orderBehavior } from '~/redux/actions';
+import useSize from '~/libs/hooks/useSize';
 
 const cx = classNames.bind(styles);
 
@@ -40,10 +41,11 @@ export default function CheckoutPanel({
         (acc: number, item: any) => acc + (item.priceSales || item.price) * item.quantity,
         0,
     );
+    const { sizeX } = useSize();
 
     useEffect(() => {
         setTotalPrice(totalProductPrice * (1 - discount / 100));
-    }, [discount]);
+    }, [discount, totalProductPrice]);
 
     useEffect(() => {
         const fetchAdmin = async () => {
@@ -117,9 +119,22 @@ export default function CheckoutPanel({
             </div>
             <div className="my-5">
                 {/*<ButtonCommon text="ĐẶT HÀNG" fullWidth />*/}
-                <Button color="primary" variant="contained" fullWidth onClick={handleSubmit}>
+                <button
+                    onClick={handleSubmit}
+                    style={{
+                        backgroundColor: 'var(--primary)',
+                        color: '#fff',
+                        fontWeight: 600,
+                        fontSize: sizeX < 550 ? '12.5px' : '14px',
+                        padding: '8px 14px',
+                        borderRadius: '5px',
+                        border: 'solid 1.5px var(--primary)',
+                        width: '100%',
+                    }}
+                    className={cx('button-hover')}
+                >
                     ĐẶT HÀNG
-                </Button>
+                </button>
             </div>
 
             {/*Back to cart*/}

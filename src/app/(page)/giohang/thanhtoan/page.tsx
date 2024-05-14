@@ -11,6 +11,7 @@ import DialogConfirm from '~/components/Cart/Payment/DialogConfirm';
 import Toast from '~/components/Orther/Toast';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '~/redux/provider/store';
+import { notFound } from 'next/navigation';
 
 const cx = classNames.bind(styles);
 
@@ -23,6 +24,12 @@ export default function PaymentPage(props: IAppProps) {
     const formInfoRef = useRef<any>('');
     const [showDialog, setShowDialog] = useState<boolean>(false);
     const [showToast, setShowToast] = useState<boolean>(false);
+
+    useEffect(() => {
+        if (cartOrder.length === 0) {
+            return notFound();
+        }
+    });
 
     return (
         <div

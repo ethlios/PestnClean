@@ -2,6 +2,10 @@ import { Button } from '@mui/material';
 import Link from 'next/link';
 import * as React from 'react';
 import useSize from '~/libs/hooks/useSize';
+import styles from './Orther.module.scss';
+import classNames from 'classnames/bind';
+
+const cx = classNames.bind(styles);
 
 export interface IAppProps {
     text: string;
@@ -35,48 +39,65 @@ export default function ButtonCommon({
     const { sizeX } = useSize();
 
     return (
-        <Button
-            variant={
-                rule === 'rule-1'
-                    ? 'contained'
-                    : rule === 'rule-2'
-                    ? 'outlined'
-                    : rule2 === 'rule-1'
-                    ? 'contained'
-                    : rule2 === 'rule-2'
-                    ? 'outlined'
-                    : 'contained'
-            }
-            fullWidth={fullWidth}
-            color={color === 'secondary' ? 'secondary' : 'primary'}
-            sx={{
-                color: color === 'secondary' ? '#fff' : '',
+        <button
+            style={{
+                color:
+                    color === 'secondary'
+                        ? '#000'
+                        : rule === 'rule-1'
+                          ? '#fff'
+                          : rule2 === 'rule-1'
+                            ? '#fff'
+                            : rule === 'rule-2'
+                              ? 'var(--primary)'
+                              : rule2 === 'rule-2'
+                                ? 'var(--primary)'
+                                : !!rule
+                                  ? '#fff'
+                                  : 'var(--primary)',
                 textTransform: !!path ? 'uppercase' : 'initial',
                 fontWeight: '600',
-                fontSize: sizeX < 550 ? '12.5px' : path ? '' : '13px',
+                fontSize: sizeX < 550 ? '12.5px' : path ? '14px' : '13px',
                 height: sizeX < 550 ? '37px' : '40px',
                 transition: 'all ease .5s',
-                ':hover': {
-                    backgroundColor:
-                        rule === 'rule-1' ? 'var(--primary)' : rule2 === 'rule-1' ? 'var(--primary)' : '#fff',
-                    outline:
-                        color === 'secondary'
-                            ? 'solid 2px var(--secondary)'
-                            : rule === 'rule-1'
-                            ? ''
-                            : rule2 === 'rule-1'
-                            ? ''
-                            : 'solid 2px var(--primary)',
-                    color:
-                        color === 'secondary'
-                            ? 'var(--secondary)'
-                            : rule === 'rule-1'
-                            ? '#fff'
-                            : rule2 === 'rule-1'
-                            ? '#fff'
-                            : 'var(--primary)',
-                },
+                backgroundColor:
+                    rule === 'rule-1'
+                        ? 'var(--primary)'
+                        : rule === 'rule-2'
+                          ? '#fff'
+                          : rule2 === 'rule-1'
+                            ? 'var(--primary)'
+                            : rule2 === 'rule-2'
+                              ? '#fff'
+                              : color === 'secondary'
+                                ? 'var(--secondary)'
+                                : '',
+                padding: '8px 14px',
+                borderRadius: '5px',
+                border: color === 'secondary' ? '' : 'solid 1.5px var(--primary)',
+                width: fullWidth ? '100%' : '',
+                // ':hover': {
+                //     backgroundColor:
+                //         rule === 'rule-1' ? 'var(--primary)' : rule2 === 'rule-1' ? 'var(--primary)' : '#fff',
+                //     outline:
+                //         color === 'secondary'
+                //             ? 'solid 2px var(--secondary)'
+                //             : rule === 'rule-1'
+                //               ? ''
+                //               : rule2 === 'rule-1'
+                //                 ? ''
+                //                 : 'solid 2px var(--primary)',
+                //     color:
+                //         color === 'secondary'
+                //             ? 'var(--secondary)'
+                //             : rule === 'rule-1'
+                //               ? '#fff'
+                //               : rule2 === 'rule-1'
+                //                 ? '#fff'
+                //                 : 'var(--primary)',
+                // },
             }}
+            className={cx('button-hover')}
             onClick={() => {
                 !!rule ? setDefaultServiceValue(index) : '';
                 !!rule ? setDefaultService(text) : '';
@@ -84,7 +105,13 @@ export default function ButtonCommon({
                 !!rule2 ? setDefaultList(text) : '';
             }}
         >
-            {!!path ? <Link href={`/${path}`}>{text}</Link> : text}
-        </Button>
+            {!!path ? (
+                <Link href={`/${path}`} style={{ margin: '0px' }}>
+                    {text}
+                </Link>
+            ) : (
+                text
+            )}
+        </button>
     );
 }

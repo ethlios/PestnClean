@@ -75,7 +75,21 @@ export default function BlogSuggest(props: IAppProps) {
                                     }}
                                 >
                                     {currentBlog === index && (
-                                        <ButtonCommon text="XEM" path={`blogs/${nameToLink(blog.title)}`} />
+                                        <Link
+                                            href={`blogs/${nameToLink(blog.title)}`}
+                                            style={{
+                                                backgroundColor: 'var(--primary)',
+                                                color: '#fff',
+                                                fontWeight: 600,
+                                                fontSize: sizeX < 550 ? '12.5px' : '14px',
+                                                padding: '8px 14px',
+                                                borderRadius: '5px',
+                                                border: 'solid 1.5px var(--primary)',
+                                            }}
+                                            className={cx('button-hover')}
+                                        >
+                                            XEM
+                                        </Link>
                                     )}
                                 </div>
                             </div>

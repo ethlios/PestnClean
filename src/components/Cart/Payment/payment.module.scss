@@ -200,7 +200,7 @@
 .dialog-content {
     box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 15px;
     background-color: #fff;
-    border-radius: 30px;
+    border-radius: 15px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -232,4 +232,12 @@
     margin-top: 15px;
     gap: 20px;
     width: 100%;
+}
+
+.button-hover {
+    &:hover {
+        outline: solid 1.5px var(--primary);
+        outline-offset: 3px;
+        transition: all ease 0.5s;
+    }
 }

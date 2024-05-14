@@ -206,3 +206,11 @@
         background-color: rgba($color: #000000, $alpha: 0.08);
     }
 }
+
+.button-hover {
+    &:hover {
+        outline: solid 1.5px var(--primary);
+        outline-offset: 3px;
+        transition: all ease 0.5s;
+    }
+}

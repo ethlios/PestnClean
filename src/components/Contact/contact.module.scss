@@ -355,3 +355,11 @@
     gap: 20px;
     width: 100%;
 }
+
+.button-hover {
+    &:hover {
+        outline: solid 1.5px var(--primary);
+        outline-offset: 3px;
+        transition: all ease 0.5s;
+    }
+}

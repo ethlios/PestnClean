@@ -365,31 +365,35 @@ export default function FormContactPage({ setData, setIsConfirm, data, setShowTo
                             gap: '10px',
                         }}
                     >
-                        <Button
-                            variant="outlined"
+                        <button
                             style={{
                                 fontSize: '14px',
                                 fontWeight: '600',
                                 border: '2px solid',
                                 width: '50%',
                                 height: '45px',
+                                borderRadius: ' 5px',
                             }}
                             onClick={handleReset}
+                            className={cx('button-hover')}
                         >
                             Làm lại
-                        </Button>
-                        <Button
-                            variant="contained"
+                        </button>
+                        <button
                             style={{
                                 fontSize: '14px',
                                 fontWeight: '600',
                                 height: '45px',
                                 width: '50%',
+                                backgroundColor: 'var(--primary)',
+                                borderRadius: ' 5px',
+                                color: '#fff',
                             }}
                             type="submit"
+                            className={cx('button-hover')}
                         >
                             Tiếp tục
-                        </Button>
+                        </button>
                     </div>
                 </form>
             </div>

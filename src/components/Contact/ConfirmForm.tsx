@@ -155,31 +155,35 @@ export default function ConfirmForm({ data, setIsConfirm, setData }: IAppProps) 
                     <HandshakeIcon /> <p>Thông tin của cuộc hẹn là thỏa thuận chung giữa chúng ta!</p>
                 </div>
                 <div className={cx('btn-wrapper')}>
-                    <Button
-                        variant="outlined"
-                        sx={{
+                    <button
+                        style={{
                             fontSize: '14px',
                             fontWeight: '600',
                             border: '2px solid',
                             width: '50%',
                             height: '45px',
+                            borderRadius: ' 5px',
                         }}
                         onClick={() => setIsConfirm(false)}
+                        className={cx('button-hover')}
                     >
                         Chỉnh sửa
-                    </Button>
-                    <Button
-                        variant="contained"
-                        sx={{
+                    </button>
+                    <button
+                        style={{
                             fontSize: '14px',
                             fontWeight: '600',
-                            height: '45px',
                             width: '50%',
+                            height: '45px',
+                            borderRadius: ' 5px',
+                            backgroundColor: 'var(--primary)',
+                            color: '#fff',
                         }}
                         onClick={handleSubmit}
+                        className={cx('button-hover')}
                     >
                         Gửi thông tin
-                    </Button>
+                    </button>
                 </div>
                 <form
                     ref={formRef}
