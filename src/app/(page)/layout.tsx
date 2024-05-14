@@ -1,5 +1,6 @@
 'use client';
 
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
@@ -12,9 +13,8 @@ import Footer from '~/common/Footer/footer';
 import Header from '~/common/Header/header';
 import HeaderMobile from '~/common/Header/headerMobile';
 import useSize from '~/libs/hooks/useSize';
-import { getAllProducts, getProvince, getUser } from '~/redux/actions';
+import { getAllProducts, getImgWork, getProvince, getUser } from '~/redux/actions';
 import logo from '../../../public/img/logo.png';
-import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 
 ScrollTrigger.addEventListener('refresh', function () {
     if (document.body.getAttribute('style') === '') {
@@ -49,6 +49,20 @@ export default function ComponentConnectLayout({ children }: { children: React.R
     }, [dispatch, session]);
 
     useEffect(() => {
+        if (session?.user.rule !== 'admin' || !session.user) {
+            const allImg = async () => {
+                const imgWorks = (await fetch('/api/imagework/all').then((res) => res.json())) ?? [];
+
+                if (typeof imgWorks[0] !== 'undefined') {
+                    dispatch(getImgWork(imgWorks[0].imgWork));
+                }
+            };
+
+            allImg();
+        }
+    }, [dispatch, session?.user]);
+
+    useEffect(() => {
         const allProducts = async () => {
             const products = (await fetch('/api/product/all').then((res) => res.json())) ?? [];
 
@@ -69,14 +83,6 @@ export default function ComponentConnectLayout({ children }: { children: React.R
         };
         allProvince();
     }, [dispatch]);
-
-    useEffect(() => {
-        const error = console.error;
-        console.error = (...args: any) => {
-            if (/defaultProps/.test(args[0])) return;
-            error(...args);
-        };
-    }, []);
 
     return openCp ? (
         <div>
