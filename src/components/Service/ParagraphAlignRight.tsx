@@ -22,7 +22,7 @@ export default function ParagraphAlignRight(props: IAppProps) {
     }, []);
 
     return (
-        <div className={'grid grid-cols-5 my-10'} ref={ref}>
+        <div className={'grid grid-cols-5 mb-10'} ref={ref}>
             <div className={'col-span-5 lg:col-span-3 lg:col-start-3'}>
                 <div className={'text-right'}>{props.children}</div>
             </div>

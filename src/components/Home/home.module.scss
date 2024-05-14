@@ -376,7 +376,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    cursor: pointer;
 }
 
 .service-img {
@@ -413,9 +412,11 @@
     padding: 10px 20px;
     text-align: justify;
     flex-direction: column;
+    z-index: 1;
 
     p:nth-child(2) {
         margin-top: 10px;
+        cursor: pointer;
     }
 
     svg {

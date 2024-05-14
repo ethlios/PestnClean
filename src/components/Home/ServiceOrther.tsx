@@ -64,8 +64,7 @@ export default function ServiceAds(props: IAppProps) {
             <div className={'grid grid-cols-12 mt-8 gap-6'}>
                 {otherService.map((item, index) => {
                     return (
-                        <Link
-                            href={`/dichvu/${nameToLink(item.title)}`}
+                        <div
                             key={index}
                             className={`${cx('service-item')} col-span-12 md:col-span-4`}
                             onMouseOver={() => setCurrentService(index)}
@@ -98,8 +97,10 @@ export default function ServiceAds(props: IAppProps) {
                             >
                                 <p>{item.description}</p>
                                 <p>
-                                    Xem thêm
-                                    <EastOutlinedIcon />
+                                    <Link href={`/dichvu/${nameToLink(item.title)}`}>
+                                        Xem thêm
+                                        <EastOutlinedIcon />
+                                    </Link>
                                 </p>
                             </div>
                             <div
@@ -137,7 +138,7 @@ export default function ServiceAds(props: IAppProps) {
                                     {item.title}
                                 </h1>
                             </div>
-                        </Link>
+                        </div>
                     );
                 })}
             </div>
