@@ -19,6 +19,7 @@ CREATE TABLE "User" (
 CREATE TABLE "Cart" (
     "id" SERIAL NOT NULL,
     "authorId" TEXT NOT NULL,
+    "productId" INTEGER,
     "title" TEXT,
     "description" TEXT,
     "price" INTEGER,
@@ -118,6 +119,7 @@ CREATE TABLE "Order" (
     "status" TEXT,
     "payment" TEXT,
     "paymentStatus" TEXT,
+    "discount" INTEGER,
 
     CONSTRAINT "Order_pkey" PRIMARY KEY ("id")
 );
@@ -132,6 +134,7 @@ CREATE TABLE "Discount" (
     "dateStart" TIMESTAMP(3),
     "dateEnd" TIMESTAMP(3),
     "description" TEXT,
+    "status" BOOLEAN NOT NULL,
 
     CONSTRAINT "Discount_pkey" PRIMARY KEY ("id")
 );

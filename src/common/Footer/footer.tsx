@@ -312,24 +312,24 @@ export default function Footer(props: FooterProps) {
                             {sizeX < 576 ? (
                                 <div className="cs-footer flex flex-col gap-3">
                                     <Link href={'/hoidap?q=chinh-sach-bao-mat-thong-tin'}>
-                                        Bảo mật, thông tin
+                                        Bảo mật thông tin
                                     </Link>
+                                    <Link href={'/hoidap?q=bao-lau-toi-nhan-duoc-hang'}>Giao nhận hàng</Link>
                                     <Link href={'/hoidap?q=chinh-sach-bao-hanh-doi-tra'}>
-                                        Bảo hành, đổi trả
+                                        Bảo hành đổi trả
                                     </Link>
+                                    <Link href={'/hoidap?q=hinh-thuc-thanh-toan'}>Thanh toán</Link>
                                 </div>
                             ) : (
                                 <>
                                     <Link href={'/hoidap?q=chinh-sach-bao-mat-thong-tin'}>
-                                        Chính sách bảo mật thông tin
+                                        Bảo mật thông tin
                                     </Link>
-                                    <Link href={'/hoidap?q=bao-lau-toi-nhan-duoc-hang'}>
-                                        Chính sách giao nhận hàng
-                                    </Link>
+                                    <Link href={'/hoidap?q=bao-lau-toi-nhan-duoc-hang'}>Giao nhận hàng</Link>
                                     <Link href={'/hoidap?q=chinh-sach-bao-hanh-doi-tra'}>
-                                        Chính sách bảo hành đổi trả
+                                        Bảo hành đổi trả
                                     </Link>
-                                    <Link href={'/hoidap?q=hinh-thuc-thanh-toan'}>Chính sách thanh toán</Link>
+                                    <Link href={'/hoidap?q=hinh-thuc-thanh-toan'}>Thanh toán</Link>
                                 </>
                             )}
                         </div>
