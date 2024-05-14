@@ -8,7 +8,8 @@
     li {
         cursor: pointer;
 
-        a, p {
+        a,
+        p {
             font-weight: 600;
             letter-spacing: -0.5px !important;
             font-size: 18px;
@@ -486,7 +487,7 @@
             max-height: 50px;
             overflow: hidden;
             white-space: nowrap;
-            text-overflow: ellipsis,
+            text-overflow: ellipsis;
         }
 
         &-createdAt {

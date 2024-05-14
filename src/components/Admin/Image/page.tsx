@@ -11,8 +11,8 @@ export interface IAppProps {}
 const cx = classNames.bind(styles);
 
 export interface showToast {
-    message: string,
-    status: boolean
+    message: string;
+    status: boolean;
 }
 export default function AdminImage(props: IAppProps) {
     const [openAddImage, setOpenAddImage] = useState<boolean>(false);
@@ -23,7 +23,7 @@ export default function AdminImage(props: IAppProps) {
     const [valueDelete, setValueDelete] = useState<any>({});
     const [showToast, setShowToast] = useState<showToast>({
         message: '',
-        status: false
+        status: false,
     });
 
     const handleUpdate = (props: any) => {
@@ -43,7 +43,7 @@ export default function AdminImage(props: IAppProps) {
     return (
         <>
             <Toast
-                text= {showToast.message}
+                text={showToast.message}
                 showToast={showToast.status}
                 setShowToast={setShowToast}
                 rule="normal"
@@ -51,8 +51,8 @@ export default function AdminImage(props: IAppProps) {
             <AdminAddImage
                 isOpen={openAddImage}
                 isClose={(e: boolean) => {
-                    setOpenAddImage(e)
-                    setUpdateProduct({})
+                    setOpenAddImage(e);
+                    setUpdateProduct({});
                 }}
                 valueUpdate={updateProduct}
             />
@@ -66,18 +66,16 @@ export default function AdminImage(props: IAppProps) {
                 <input type="text" placeholder="Search image..." className={cx('common-inp')}></input>
                 <div className={cx('common-item-wrapper')}></div>
             </div>
-            {
-                imgWorks.length > 0 ? (
-                    <TableImgWork
-                        arrImgWork={imgWorks}
-                        updateImageWork={(e: any) => handleUpdate(e)}
-                        deleteImageWork={(e: any) => handleDelete(e)}
-                    />
-                ) : (
-                    <div>Không có hình ảnh</div>
-                )
-            }
-            
+            {imgWorks.length > 0 ? (
+                <TableImgWork
+                    arrImgWork={imgWorks}
+                    updateImageWork={(e: any) => handleUpdate(e)}
+                    deleteImageWork={(e: any) => handleDelete(e)}
+                />
+            ) : (
+                <div className={cx('common-p')}>Không có hình ảnh</div>
+            )}
+
             <DialogDelete
                 isOpen={openDialogDelete}
                 imageWorkItem={valueDelete}
@@ -85,8 +83,8 @@ export default function AdminImage(props: IAppProps) {
                 messageDeleteSuccess={(e: boolean) => {
                     setShowToast({
                         message: 'Xóa hình ảnh thành công',
-                        status: true
-                    })
+                        status: true,
+                    });
                 }}
             />
         </>

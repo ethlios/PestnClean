@@ -80,7 +80,7 @@ export default function AdminOder(props: IAppProps) {
                         </div>
                     ) : (
                         <div className={cx('product-wrapper')}>
-                            <p>No order</p>
+                            <p className={cx('common-p')}>No order</p>
                         </div>
                     )}
                 </div>
