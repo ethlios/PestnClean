@@ -7,12 +7,11 @@ import FilterMenu from '~/components/Product/Main/FilterMenu';
 import { Button, IconButton } from '@mui/material';
 import useSize from '~/libs/hooks/useSize';
 import DisabledByDefaultIcon from '@mui/icons-material/DisabledByDefault';
-import { filterMenu, checkboxFilter, filterPrice } from '~/constants/productFilter';
+import { filterMenu, filterPrice } from '~/constants/productFilter';
 import { useEffect } from 'react';
 import CheckboxMenu from '~/components/Product/Main/CheckboxMenu';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { RootState } from '~/redux/provider/store';
-import { addCheckboxFilterProductPage } from '~/redux/actions';
 import CheckboxPrice from '~/components/Product/Main/CheckboxPrice';
 
 const cx = classNames.bind(styles);
@@ -41,25 +40,6 @@ export default function FilterProduct({
     const wheel: boolean = useScroll();
     const { sizeX } = useSize();
     let checkboxFilterProduct = useSelector((state: RootState) => state.main.checkboxFilterProductPage);
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-        if (checkboxFilterProduct.length === 0) {
-            // Duyệt qua tất cả sản phẩm
-            allProducts.forEach((product: any) => {
-                // Duyệt qua từng thuộc tính trong checkboxFilter
-                checkboxFilter.map((filter: any) => {
-                    // Nếu thuộc tính của sản phẩm có giá trị và chưa tồn tại trong checkboxFilter
-                    if (product[filter.field] && !filter.checkbox.includes(product[filter.field])) {
-                        // Thêm giá trị thuộc tính vào checkboxFilter
-                        filter.checkbox.push(product[filter.field]);
-                    }
-                });
-            });
-            // Gửi giá trị checkboxFilter lên store
-            dispatch(addCheckboxFilterProductPage(checkboxFilter));
-        }
-    }, [checkboxFilterProduct]);
 
     useEffect(() => {
         let filterProducts = allProducts.filter((product: any) => {
