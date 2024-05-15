@@ -44,7 +44,7 @@ export default function DichVu3Page(props: IAppProps) {
             <TextImageImage />
             <Video
                 title="Dịch vụ vệ sinh công nghiệp tại PetnClean."
-                src="https://drive.google.com/file/d/1WA_XS9KZN3tkSnUczvdJfI7kH9mR0VeT/preview"
+                src="https://res.cloudinary.com/dj2jarcxk/video/upload/v1713531630/Ve%CC%A3%CC%82_Sinh_Co%CC%82ng_Nghie%CC%A3%CC%82p_yqfytu.mp4"
             />
             <h1 className={cx('content-title')}>Dịch vụ vệ sinh chuyên biệt</h1>
             <BundleCard className={'rounded-xl bg-gray-200 p-10'}>

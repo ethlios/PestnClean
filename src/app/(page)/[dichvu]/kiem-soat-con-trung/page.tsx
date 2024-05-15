@@ -31,31 +31,92 @@ export default function DichVu1Page(props: IAppProps) {
                 src="https://res.cloudinary.com/dj2jarcxk/image/upload/v1713837564/person-disinfecting-dangerous-area-while-wearing-protective-suit_wj8knz.jpg"
                 alt="Dịch vụ kiểm soát côn trùng chuyên nghiệp tại PESTNCLEAN"
             />
-            <div>
-                <h1 className={cx('title')}>Dịch vụ kiểm soát côn trùng tại PESTNCLEAN</h1>
-                <p className={cx('text-common')}>
-                    Việc tìm được một công ty kiểm soát côn trùng hiệu quả cho nhà ở, các cơ sở, đơn vị kinh
-                    doanh là hết sức cần thiết. PESTNCLEAN tự hào là một đơn vị có nhiều năm kinh nghiệm trong
-                    lĩnh vực kiểm soát côn trùng. Chúng tôi với đội ngũ nhân viên lành nghề, được đào tạo kỹ
-                    càng về nhiều mặt (chuyên môn và thái độ phục vụ) cam kết sẽ cung cấp tới Quý khách hàng
-                    một dịch vụ chất lượng nhất.
-                </p>
-            </div>
-            <Video
-                title="Dịch vụ kiểm soát côn trùng tại PetnClean."
-                src="https://drive.google.com/file/d/1HkD4rSw7Nhlk_6vmJQtZWKEtFLseEjrW/preview"
-            />
             <div className={'mb-10'}>
-                <h1 className={`${cx('title')}`}>Báo cáo phân tích chuẩn BRC, HACCP, ISO</h1>
-                <p className={cx('text-common')}>
-                    PESTNCLEAN hỗ trợ các doanh nghiệp có yêu cầu tuân thủ các tiêu chuẩn: BRC, HACCP, ISO,…
-                    cùng các dịch vụ báo cáo phân tích chuyên sâu. Hệ thống báo cáo kỹ thật số của chúng tôi
-                    là một công cụ để theo dõi báo cáo thông tin về chương trình kiểm soát côn trùng, bao gồm
-                    tất cả thông tin về phương pháp, thiết bị và sản phẩm sử dụng trong chương trình kiểm soát
-                    côn trùng. Đây là một cách để PESTNCLEAN đơn giản hóa việc kiểm soát côn trùng cho khách
-                    hàng. Chúng tôi cam kết liên tục theo dõi & điều chỉnh chương trình kiểm soát côn trùng
-                    khi cần thiết.
-                </p>
+                <div
+                    style={{
+                        display: 'flex',
+                        width: '100%',
+                        gap: '30px',
+                        alignItems: 'center',
+                    }}
+                >
+                    <div
+                        style={{
+                            width: '45%',
+                        }}
+                    >
+                        <h1
+                            className={cx('title')}
+                            style={{
+                                color: '#000',
+                                textAlign: 'left',
+                            }}
+                        >
+                            Dịch vụ kiểm soát côn trùng tại PESTNCLEAN
+                        </h1>
+                        <p className={cx('text-common')}>
+                            Việc tìm được một công ty kiểm soát côn trùng hiệu quả cho nhà ở, các cơ sở, đơn
+                            vị kinh doanh là hết sức cần thiết. PESTNCLEAN tự hào là một đơn vị có nhiều năm
+                            kinh nghiệm trong lĩnh vực kiểm soát côn trùng. Chúng tôi với đội ngũ nhân viên
+                            lành nghề, được đào tạo kỹ càng về nhiều mặt (chuyên môn và thái độ phục vụ) cam
+                            kết sẽ cung cấp tới Quý khách hàng một dịch vụ chất lượng nhất.
+                        </p>
+                    </div>
+                    <div
+                        style={{
+                            width: '55%',
+                        }}
+                    >
+                        <Video
+                            title="Dịch vụ kiểm soát côn trùng tại PetnClean."
+                            src="https://res.cloudinary.com/dj2jarcxk/video/upload/v1713528846/Termite_bw08jg.mp4"
+                            orther
+                        />
+                    </div>
+                </div>
+            </div>
+
+            <div className={'mb-16'}>
+                <div
+                    style={{
+                        display: 'flex',
+                        width: '100%',
+                        gap: '30px',
+                        alignItems: 'center',
+                    }}
+                >
+                    <div
+                        style={{
+                            width: '55%',
+                            backgroundColor: 'rgba(0,0,0,0.05)',
+                            height: '400px',
+                        }}
+                    ></div>
+                    <div
+                        style={{
+                            width: '45%',
+                        }}
+                    >
+                        <h1
+                            className={cx('title')}
+                            style={{
+                                color: '#000',
+                                textAlign: 'right',
+                            }}
+                        >
+                            Báo cáo phân tích chuẩn BRC, HACCP, ISO
+                        </h1>
+                        <p className={cx('text-common')}>
+                            PESTNCLEAN hỗ trợ các doanh nghiệp có yêu cầu tuân thủ các tiêu chuẩn: BRC, HACCP,
+                            ISO,… cùng các dịch vụ báo cáo phân tích chuyên sâu. Hệ thống báo cáo kỹ thật số
+                            của chúng tôi là một công cụ để theo dõi báo cáo thông tin về chương trình kiểm
+                            soát côn trùng, bao gồm tất cả thông tin về phương pháp, thiết bị và sản phẩm sử
+                            dụng trong chương trình kiểm soát côn trùng. Đây là một cách để PESTNCLEAN đơn
+                            giản hóa việc kiểm soát côn trùng cho khách hàng. Chúng tôi cam kết liên tục theo
+                            dõi & điều chỉnh chương trình kiểm soát côn trùng khi cần thiết.
+                        </p>
+                    </div>
+                </div>
             </div>
             <BundleCard>
                 {cardKiemSoatConTrung.map((item, index) => (

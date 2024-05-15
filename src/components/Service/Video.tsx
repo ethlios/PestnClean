@@ -15,6 +15,7 @@ const cx = classNames.bind(styles);
 export interface IAppProps {
     title?: string;
     src: string;
+    orther?: boolean;
 }
 
 export default function Video(props: IAppProps) {
@@ -30,21 +31,21 @@ export default function Video(props: IAppProps) {
             className={'my-10'}
             style={{
                 width: '100%',
-                height: sizeX < 1024 ? 'auto' : '450px',
+                height: sizeX < 1024 ? 'auto' : 'auto',
                 backgroundColor: 'rgba(0,0,0,1)',
             }}
             ref={ref}
         >
-            {/*<video*/}
-            {/*    style={{ width: '100%', height: '100%' }}*/}
-            {/*    controls*/}
-            {/*    preload="none"*/}
-            {/*    draggable={false}*/}
-            {/*    title={props.title}*/}
-            {/*>*/}
-            {/*    <source src={props.src} type="video/mp4" />*/}
-            {/*</video>*/}
-            <iframe src={props.src} width="100%" height="100%" allow="autoplay"></iframe>
+            <video
+                style={{ width: '100%', height: '100%' }}
+                controls
+                preload="none"
+                draggable={false}
+                title={props.title}
+            >
+                <source src={props.src} type="video/mp4" />
+            </video>
+            {/* <iframe src={props.src} width="100%" height="100%"></iframe> */}
         </div>
     );
 }
