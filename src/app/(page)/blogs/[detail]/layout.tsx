@@ -1,4 +1,5 @@
 import { blogs } from '~/constants/blogs';
+import { getAllBlogs } from '~/libs/orthers/getData';
 
 interface Props {
     params: {
@@ -7,11 +8,13 @@ interface Props {
 }
 
 export async function generateMetadata({ params }: Props) {
-    const blog: any = blogs.filter((blog) => {
+    const blog2 = await getAllBlogs();
+
+    const allBlogs = [...blogs, ...blog2];
+
+    const blog: any = allBlogs.filter((blog) => {
         return blog.path === params.detail;
     });
-
-    const path = blog.path;
 
     if (!blog[0]) {
         return {
@@ -24,7 +27,7 @@ export async function generateMetadata({ params }: Props) {
         title: blog[0].title,
         description: blog[0].desHead ?? '',
         alternates: {
-            canonical: `/blogs/${path}`,
+            canonical: `/blogs/${params.detail}`,
         },
         keywords: `${blog[0].key}`,
         openGraph: {
@@ -44,7 +47,7 @@ export async function generateMetadata({ params }: Props) {
             type: 'website',
             locale: 'vi_VN',
             siteName: blog.title,
-            url: `/blogs/${path}`,
+            url: `/blogs/${params.detail}`,
         },
     };
 }

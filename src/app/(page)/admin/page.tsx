@@ -21,6 +21,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import ReorderIcon from '@mui/icons-material/Reorder';
+import AdminBlog from '~/components/Admin/Blog/page';
 
 const cx = classNames.bind(styles);
 
@@ -93,7 +94,7 @@ export default function Admin(props: IAppProps) {
                     ) : currentContent === 6 ? (
                         <AdminImage />
                     ) : (
-                        ''
+                        <AdminBlog />
                     )}
                 </div>
             </div>

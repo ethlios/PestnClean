@@ -13,6 +13,9 @@ export const UPDATE_SESSION_USER = 'UPDATE_SESSION_USER';
 // all product
 export const GET_ALL_PRODUCTS = 'GET_ALL_PRODUCTS';
 
+// all blog
+export const GET_ALL_BLOGS = 'GET_ALL_BLOGS';
+
 // Product
 
 export const GET_PRODUCT = 'GET_PRODUCT';

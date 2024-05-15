@@ -27,7 +27,8 @@
         "**/*.tsx",
         ".next/types/**/*.ts",
         "src/websocket/server.js",
-        "src/libs/orthers/zoom.js"
+        "src/libs/orthers/zoom.js",
+        "src/components/Orther/ckeditor.js"
     ],
     "exclude": ["node_modules"]
 }

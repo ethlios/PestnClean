@@ -27,6 +27,23 @@ model User {
   notifications Notification[]
   order         Order[]
   product       Product[]
+  blog          Blog[]
+}
+
+model Blog {
+  id           Int        @id @default(autoincrement())
+  authorId     String
+  title        String?
+  desHead      String?
+  description  String?
+  detail       String?
+  img          String?
+  author       User       @relation(fields: [authorId], references: [id])
+  path         String?
+  createdAt    DateTime @default(now())
+  menu         String[]
+  key          String[]
+  category     String?
 }
 
 model Cart {

@@ -75,7 +75,11 @@ export default function ServiceSuggest(props: IAppProps) {
                                     }}
                                 >
                                     {currentBlog === index && (
-                                        <ButtonCommon text="XEM" path={`blogs/${nameToLink(blog.title)}`} />
+                                        <ButtonCommon
+                                            text="XEM"
+                                            path={`blogs/${nameToLink(blog.title)}`}
+                                            rule="rule-1"
+                                        />
                                     )}
                                 </div>
                             </div>

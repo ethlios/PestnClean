@@ -7,7 +7,7 @@ const blogsAds = [
         path: 'bang-gia-ve-sinh-cong-nghiep-pestnclean',
         createdAt: '09 tháng 4, 2024',
         category: 'Dịch vụ',
-        descHead: `PestnClean – dịch vụ vệ sinh công nghiệp hàng đầu, chuyên cung cấp các giải pháp làm sạch môi trường làm việc. Với dịch vụ chuyên nghiệp, nhanh chóng và hiệu quả, PestnClean luôn là lựa chọn tối ưu cho mọi công trình.`,
+        desHead: `PestnClean – dịch vụ vệ sinh công nghiệp hàng đầu, chuyên cung cấp các giải pháp làm sạch môi trường làm việc. Với dịch vụ chuyên nghiệp, nhanh chóng và hiệu quả, PestnClean luôn là lựa chọn tối ưu cho mọi công trình.`,
         description: `PestnClean – dịch vụ vệ sinh công nghiệp hàng đầu, chuyên cung cấp các giải pháp làm sạch môi trường làm việc. Với dịch vụ chuyên nghiệp, nhanh chóng và hiệu quả, PestnClean luôn là lựa chọn tối ưu cho mọi công trình.`,
         img: 'https://res.cloudinary.com/dj2jarcxk/image/upload/v1714114170/annie-spratt-tuJ3tXSayco-unsplash_gbvvd7.jpg',
         key: [

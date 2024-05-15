@@ -39,7 +39,7 @@ export default function BlogComment({ blog }: IAppProps) {
     const onSubmit = (data: any) => {
         const cmts = {
             ...data,
-            blogName: blog[0].title,
+            blogName: blog[0].path,
             name: !!session?.user ? session.user.name : data.name,
             email: !!session?.user ? session.user.email : data.email,
             img: !!session?.user ? session.user.image : '',

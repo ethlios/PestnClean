@@ -1,7 +1,7 @@
 import { call, delay, put, takeLatest } from 'redux-saga/effects';
-import * as types from './contants';
 import * as request from '../libs/orthers/axios';
 import * as actions from './actions';
+import * as types from './contants';
 
 export interface ResponseGenerator {
     config?: any;
@@ -49,17 +49,14 @@ function* FetchUser({ payload }: any) {
                     comment,
                 } = person.data[0] ?? [];
                 if (person.data[0].rule === 'admin') {
-                    yield put(actions.getProduct(product ?? []));
                     yield put(actions.getEmail(emailkm ?? []));
                     // yield put(actions.getCart(cart ?? []));
                     yield put(actions.getManagement(management ?? []));
-                    yield put(actions.getBlog(blog ?? []));
                     yield put(actions.getAdminOrder(order ?? []));
                     yield put(actions.getImgWork(imgWork ?? []));
                     yield put(actions.getDiscount(discount ?? []));
                 } else {
                     yield put(actions.getManagement(management ?? []));
-                    // yield put(actions.getCart(cart ?? []));
                     yield put(actions.getBlogComment(comment ?? []));
                 }
             }

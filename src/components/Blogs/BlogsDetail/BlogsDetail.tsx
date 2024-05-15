@@ -93,7 +93,17 @@ export default function BlogDetails({ blogs }: IAppProps) {
                     <p className={cx('detail-title')}>{blogs[0].title}</p>
                     <p className={cx('detail-create')}>
                         <AccessTimeIcon />
-                        {blogs[0].createdAt}
+                        {new Date(blogs[0].createdAt).toLocaleDateString() !== 'Invalid Date'
+                            ? `${
+                                  new Date(blogs[0].createdAt).getDate() < 10
+                                      ? '0' + new Date(blogs[0].createdAt).getDate()
+                                      : new Date(blogs[0].createdAt).getDate()
+                              } tháng ${
+                                  new Date(blogs[0].createdAt).getMonth() < 10
+                                      ? '0' + `${new Date(blogs[0].createdAt).getMonth() + 1}`
+                                      : `${new Date(blogs[0].createdAt).getMonth() + 1}`
+                              }, ${new Date(blogs[0].createdAt).getFullYear()}`
+                            : blogs[0].createdAt}
                     </p>
                     <p className={cx('detail-description')}>{blogs[0].description}</p>
                     <div dangerouslySetInnerHTML={{ __html: blogs[0].detail }} className="ql-editor"></div>

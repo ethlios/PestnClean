@@ -52,4 +52,8 @@ export async function getAllProducts() {
     return prisma.product.findMany();
 }
 
+export async function getAllBlogs() {
+    return prisma.blog.findMany();
+}
+
 export { getAllUsers, getAllUsersNotAdmin, GetAllNotification, GetAllCodeInDiscount, GetAllDiscount };

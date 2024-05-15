@@ -5,15 +5,15 @@ import Link from 'next/link';
 import { notFound, usePathname } from 'next/navigation';
 import Script from 'next/script';
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import BlogComment from '~/components/Blogs/BlogsDetail/BlogComment';
 import BlogSuggest from '~/components/Blogs/BlogsDetail/BlogSuggest';
 import BlogsBanner from '~/components/Blogs/BlogsDetail/BlogsBanner';
 import BlogDetails from '~/components/Blogs/BlogsDetail/BlogsDetail';
 import styles from '~/components/Blogs/BlogsDetail/blogDetail.module.scss';
-import { blogs } from '~/constants/blogs';
 import useSize from '~/libs/hooks/useSize';
 import { getBlogComment } from '~/redux/actions';
+import { RootState } from '~/redux/provider/store';
 
 const cx = classNames.bind(styles);
 
@@ -24,9 +24,10 @@ export default function BlogsDetailPage(props: IAppProps) {
     const pathname = usePathname();
     const { sizeX } = useSize();
     const dispatch = useDispatch();
+    let allBlogs: any = useSelector((state: RootState) => state.main.allBlogs);
 
     useEffect(() => {
-        const blogFilter = blogs.filter((blog) => {
+        const blogFilter = allBlogs.filter((blog: any) => {
             return `/blogs/${blog.path}` === pathname;
         });
 
@@ -35,7 +36,7 @@ export default function BlogsDetailPage(props: IAppProps) {
         } else {
             return notFound();
         }
-    }, [pathname]);
+    }, [allBlogs, pathname]);
 
     const jsonLd = {
         '@context': 'https://schema.org',

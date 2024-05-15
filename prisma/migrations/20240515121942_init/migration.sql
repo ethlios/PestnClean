@@ -16,6 +16,24 @@ CREATE TABLE "User" (
 );
 
 -- CreateTable
+CREATE TABLE "Blog" (
+    "id" SERIAL NOT NULL,
+    "authorId" TEXT NOT NULL,
+    "title" TEXT,
+    "desHead" TEXT,
+    "description" TEXT,
+    "detail" TEXT,
+    "img" TEXT,
+    "path" TEXT,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "menu" TEXT[],
+    "key" TEXT[],
+    "category" TEXT,
+
+    CONSTRAINT "Blog_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "Cart" (
     "id" SERIAL NOT NULL,
     "authorId" TEXT NOT NULL,
@@ -163,6 +181,9 @@ CREATE TABLE "Notification" (
 
 -- CreateIndex
 CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
+
+-- AddForeignKey
+ALTER TABLE "Blog" ADD CONSTRAINT "Blog_authorId_fkey" FOREIGN KEY ("authorId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Cart" ADD CONSTRAINT "Cart_authorId_fkey" FOREIGN KEY ("authorId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

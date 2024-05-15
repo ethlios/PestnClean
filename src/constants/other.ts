@@ -5,6 +5,7 @@ import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import CameraAltOutlinedIcon from '@mui/icons-material/CameraAltOutlined';
 import DiscountOutlinedIcon from '@mui/icons-material/DiscountOutlined';
+import NoteAltOutlinedIcon from '@mui/icons-material/NoteAltOutlined';
 
 const admins = [
     {
@@ -41,6 +42,11 @@ const admins = [
         id: 7,
         title: 'Hình ảnh',
         icon: CameraAltOutlinedIcon,
+    },
+    {
+        id: 8,
+        title: 'Blogs',
+        icon: NoteAltOutlinedIcon,
     },
 ];
 

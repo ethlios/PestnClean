@@ -54,6 +54,7 @@ import {
     updateDiscountSuccess,
     addCheckboxFilterProductPage,
     saveDataOrder,
+    getAllBlogs,
 } from './actions';
 
 interface RootState {
@@ -76,6 +77,7 @@ interface RootState {
     notification: any[];
     discount: any[];
     allProducts: any[];
+    allBlogs: any[];
     users: any[];
     notificationAll: any[];
     province: any[];
@@ -103,6 +105,7 @@ const initState: RootState = {
     notification: [],
     discount: [],
     allProducts: [],
+    allBlogs: [],
     users: [],
     notificationAll: [],
     province: [],
@@ -152,6 +155,11 @@ const rootReducer = createReducer(initState, (builder) => {
         state.allProducts = action.payload;
     });
 
+    // All Blog
+    builder.addCase(getAllBlogs, (state, action) => {
+        state.allBlogs = action.payload;
+    });
+
     // Orther
     builder.addCase(getFeedback, (state, action) => {
         state.feedback = action.payload;
@@ -184,9 +192,6 @@ const rootReducer = createReducer(initState, (builder) => {
     });
 
     // Product
-    builder.addCase(getProduct, (state, action) => {
-        state.products = action.payload;
-    });
 
     builder.addCase(addProductSuccess, (state, action) => {
         state.allProducts.push(action.payload);
@@ -203,22 +208,19 @@ const rootReducer = createReducer(initState, (builder) => {
     });
 
     // Blog
-    builder.addCase(getBlog, (state, action) => {
-        state.blogs = action.payload;
-    });
 
     builder.addCase(addBlogSuccess, (state, action) => {
-        state.blogs.push(action.payload);
+        state.allBlogs.push(action.payload);
     });
 
     builder.addCase(removeBlogSuccess, (state, action) => {
-        const index = findIndex(state.blogs, action.payload);
-        state.blogs.splice(index, 1);
+        const index = findIndex(state.allBlogs, action.payload);
+        state.allBlogs.splice(index, 1);
     });
 
     builder.addCase(updateBlogSuccess, (state, action) => {
-        const index: number = findIndex(state.blogs, action.payload.id);
-        state.blogs[index] = action.payload;
+        const index: number = findIndex(state.allBlogs, action.payload.id);
+        state.allBlogs[index] = action.payload;
     });
 
     // Cart

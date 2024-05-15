@@ -12,6 +12,9 @@ import Image from 'next/image';
 import { removeVietnameseTones } from '~/libs/orthers/removeVietnamese';
 import smoothScroll from '~/libs/orthers/smoothScroll';
 import useSize from '~/libs/hooks/useSize';
+import { useSelector } from 'react-redux';
+import { RootState } from '~/redux/provider/store';
+import ReactPaginate from 'react-paginate';
 
 const cx = classNames.bind(styles);
 
@@ -23,27 +26,33 @@ export default function BlogsList(props: IAppProps) {
     const [blogsList, setBlogsList] = useState<any[]>([]);
     const [currentBlog, setCurrentBlog] = useState(-1);
     const [searchValue, setSearchValue] = useState<string>('');
-    const [numberPage, setNumberPage] = useState<number>(0);
     const [numberPageValue, setNumberPageValue] = useState<number>(0);
     const { sizeX } = useSize();
+    let allBlogs: any = useSelector((state: RootState) => state.main.allBlogs);
+    const [itemOffset, setItemOffset] = useState(0);
+
+    const endOffset = itemOffset + 12;
+    const currentItems = blogsList.slice(itemOffset, endOffset);
+    const pageCount = Math.ceil(blogsList.length / 12);
+
+    const handlePageClick = (event: any) => {
+        const newOffset = (event.selected * 12) % blogsList.length;
+        setItemOffset(newOffset);
+        smoothScroll('#blogs-list');
+    };
 
     // Filter
     useEffect(() => {
         if (defaultList === 'Tất cả') {
-            // setBlogsList(blogs);
-            const newList = blogs.filter((a) => {
-                return 12 * numberPageValue < a.id && a.id <= 12 * (numberPageValue + 1);
-            });
-
-            setBlogsList(newList);
+            setBlogsList(allBlogs);
         } else {
-            const newBlogsList = blogs.filter((blog: any) => blog.category === defaultList);
+            const newBlogsList = allBlogs.filter((blog: any) => blog.category === defaultList);
 
             setBlogsList(newBlogsList);
         }
 
         if (searchValue) {
-            const newBlogs = blogs.filter((blog: any) => {
+            const newBlogs = allBlogs.filter((blog: any) => {
                 return (
                     removeVietnameseTones(blog.title)
                         .toLowerCase()
@@ -55,11 +64,7 @@ export default function BlogsList(props: IAppProps) {
         }
 
         return () => setBlogsList([]);
-    }, [defaultList, numberPageValue, searchValue]);
-
-    useEffect(() => {
-        setNumberPage(Math.ceil(blogs.length / 12));
-    }, []);
+    }, [allBlogs, defaultList, numberPageValue, searchValue]);
 
     return (
         // All blogs
@@ -91,7 +96,7 @@ export default function BlogsList(props: IAppProps) {
                 }}
             >
                 {/* Search */}
-                <div className={cx('search')}>
+                <div className={cx('search')} id="blogs-list">
                     <input
                         type="text"
                         placeholder="Tìm kiếm..."
@@ -107,13 +112,13 @@ export default function BlogsList(props: IAppProps) {
                 </div>
 
                 {/* Blog render */}
-                {blogsList.length > 0 ? (
+                {currentItems.length > 0 ? (
                     <>
-                        <div className={cx('lists-inside')} id="blogs-list">
-                            {blogsList.map((blog, index) => {
+                        <div className={cx('lists-inside')}>
+                            {currentItems.map((blog: any, index: any) => {
                                 return (
                                     <div
-                                        key={blog.id}
+                                        key={index}
                                         className={cx('blog-item')}
                                         style={{
                                             overflow: 'hidden',
@@ -183,7 +188,19 @@ export default function BlogsList(props: IAppProps) {
                                             <Link href={`blogs/${blog.path}`}>{blog.title}</Link>
                                             <p>
                                                 <AccessTimeIcon />
-                                                {blog.createdAt}
+                                                {new Date(blog.createdAt).toLocaleDateString() !==
+                                                'Invalid Date'
+                                                    ? `${
+                                                          new Date(blog.createdAt).getDate() < 10
+                                                              ? '0' + new Date(blog.createdAt).getDate()
+                                                              : new Date(blog.createdAt).getDate()
+                                                      } tháng ${
+                                                          new Date(blog.createdAt).getMonth() < 10
+                                                              ? '0' +
+                                                                `${new Date(blog.createdAt).getMonth() + 1}`
+                                                              : `${new Date(blog.createdAt).getMonth() + 1}`
+                                                      }, ${new Date(blog.createdAt).getFullYear()}`
+                                                    : blog.createdAt}
                                             </p>
                                         </div>
                                     </div>
@@ -191,29 +208,20 @@ export default function BlogsList(props: IAppProps) {
                             })}
                         </div>
 
-                        {/* More */}
-                        {defaultList === 'Tất cả' && !searchValue && (
-                            <div className={cx('btn-more')}>
-                                {Array.from({ length: numberPage }).map((_, index) => {
-                                    return (
-                                        <p
-                                            key={index}
-                                            className={cx('number-page')}
-                                            style={{
-                                                backgroundColor:
-                                                    numberPageValue === index ? 'var(--secondary)' : '',
-                                            }}
-                                            onClick={() => {
-                                                setNumberPageValue(index);
-                                                smoothScroll('#blogs-list');
-                                            }}
-                                        >
-                                            {index + 1}
-                                        </p>
-                                    );
-                                })}
-                            </div>
-                        )}
+                        <ReactPaginate
+                            breakLabel="..."
+                            nextLabel="Sau"
+                            onPageChange={handlePageClick}
+                            pageRangeDisplayed={5}
+                            pageCount={pageCount}
+                            previousLabel="Trước"
+                            renderOnZeroPageCount={null}
+                            nextClassName="next-pagination"
+                            previousClassName="next-pagination"
+                            className="pagination"
+                            activeClassName="pagination-active"
+                            disabledClassName="pagination-disabled"
+                        />
                     </>
                 ) : (
                     <p className={cx('blogs-wrong')}>Không tìm thấy bài viết nào!</p>

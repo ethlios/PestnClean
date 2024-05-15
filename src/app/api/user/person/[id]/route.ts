@@ -23,6 +23,7 @@ export async function GET(request: Request, { params }: { params: { id: string }
             cart: true,
             imgWork: true,
             notifications: true,
+            blog: true,
         },
     });
 
