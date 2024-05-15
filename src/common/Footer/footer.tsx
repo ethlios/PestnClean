@@ -167,10 +167,11 @@ export default function Footer(props: FooterProps) {
                             sx={{
                                 color: '#fff',
                             }}
+                            id="checkboxid"
                         />
-                        <p onClick={() => setChecked(!checked)}>
+                        <label htmlFor="checkboxid" style={{ fontWeight: 600 }}>
                             Luôn cập nhật cho tôi tin tức mới nhất về các sản phẩm và sự kiện của PETSNCLEAN.
-                        </p>
+                        </label>
                     </div>
                 </div>
             </div>
@@ -208,7 +209,7 @@ export default function Footer(props: FooterProps) {
                         className={cx('infor')}
                         style={{
                             width: sizeX < 900 ? '100%' : '50%',
-                            fontSize: sizeX < 576 ? '14px' : '15px',
+                            fontSize: sizeX < 576 ? '14px' : '15.5px',
                         }}
                     >
                         <Link
@@ -233,6 +234,7 @@ export default function Footer(props: FooterProps) {
                                 className="opacity"
                                 target="_blank"
                                 rel="noopener noreferrer"
+                                aria-label="facebook"
                             >
                                 <FacebookIcon />
                             </Link>
@@ -241,6 +243,7 @@ export default function Footer(props: FooterProps) {
                                 className="opacity"
                                 target="_blank"
                                 rel="noopener noreferrer"
+                                aria-label="linkedin"
                             >
                                 <LinkedInIcon />
                             </Link>
@@ -249,6 +252,7 @@ export default function Footer(props: FooterProps) {
                                 className="opacity"
                                 target="_blank"
                                 rel="noopener noreferrer"
+                                aria-label="youtube"
                             >
                                 <YouTubeIcon />
                             </Link>

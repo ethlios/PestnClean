@@ -77,17 +77,17 @@ export default function AllProduct({
                         {selectedCategory} <ClearOutlinedIcon />
                     </div>
                 ) : (
-                    <div>Tất cả</div>
+                    <div onClick={() => setSelectedCategory([])}>Tất cả</div>
                 )}
                 {checkedFilter.map((item: any, index: number) => {
                     return (
                         <div
                             key={index}
                             onClick={() => {
-                                setCheckedFilter(checkedFilter.filter((i: any) => i !== item));
+                                setCheckedFilter(checkedFilter.filter((i: any) => i.field !== item.field));
                             }}
                         >
-                            {item} <ClearOutlinedIcon />
+                            {item.checkbox} <ClearOutlinedIcon />
                         </div>
                     );
                 })}
@@ -98,6 +98,7 @@ export default function AllProduct({
                     gap: sizeX < 740 ? '8px' : '',
                 }}
             >
+                {displayedProducts.length === 0 && <p>Không có sản phẩm nào</p>}
                 {displayedProducts.map((item: any) => {
                     return (
                         <Link
@@ -123,7 +124,7 @@ export default function AllProduct({
                             >
                                 {item.status === 'SALE' && (
                                     <div className={cx('item-event-sale')}>
-                                        <p>{((1 - item.priceSales / item.price) * 100).toFixed(1)}%</p>
+                                        <p>-{((1 - item.priceSales / item.price) * 100).toFixed(1)}%</p>
                                     </div>
                                 )}
                                 {item.status === 'HOT' && (

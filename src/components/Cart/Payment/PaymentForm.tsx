@@ -39,6 +39,18 @@ export default function PaymentForm({ setFormData, formInfoRef }: IAppProps) {
     const province = useSelector((state: RootState) => state.main.province);
 
     useEffect(() => {
+        if (session?.user) {
+            setName(session.user.name || '');
+            setEmail(session.user.email || '');
+            setPhone(session.user.phone || '');
+            setAddress(session.user.address || '');
+            setCity(session.user.city || '');
+            setDistrict(session.user.district || '');
+            setWard(session.user.ward || '');
+        }
+    }, [session?.user]);
+
+    useEffect(() => {
         setFormData({
             name,
             email,
@@ -89,7 +101,7 @@ export default function PaymentForm({ setFormData, formInfoRef }: IAppProps) {
                             sx={{ marginBottom: '10px' }}
                             onChange={(e) => setName(e.target.value)}
                             required={true}
-                            value={session?.user.name || name}
+                            value={name}
                         />
                         <TextField
                             label="Email..."
@@ -98,7 +110,7 @@ export default function PaymentForm({ setFormData, formInfoRef }: IAppProps) {
                             onChange={(e) => setEmail(e.target.value)}
                             error={email !== null && email !== '' && !validateEmailRegex.test(email)}
                             type={'email'}
-                            value={session?.user.email || email}
+                            value={email}
                         />
                         <TextField
                             label="Số điện thoại..."
@@ -108,7 +120,7 @@ export default function PaymentForm({ setFormData, formInfoRef }: IAppProps) {
                             error={phone !== null && phone !== '' && !isPhone.test(phone)}
                             required={true}
                             type={'tel'}
-                            value={session?.user.phone || phone}
+                            value={phone}
                         />
                         <TextField
                             label="Địa chỉ..."
@@ -116,7 +128,7 @@ export default function PaymentForm({ setFormData, formInfoRef }: IAppProps) {
                             sx={{ marginBottom: '10px' }}
                             onChange={(e) => setAddress(e.target.value)}
                             required={true}
-                            value={session?.user.address || address}
+                            value={address}
                         />
                         <FormControl sx={{ mb: 1 }} className={classInput}>
                             <InputLabel>Tỉnh thành</InputLabel>
@@ -128,7 +140,7 @@ export default function PaymentForm({ setFormData, formInfoRef }: IAppProps) {
                                     setWard('');
                                 }}
                                 defaultValue={''}
-                                value={session?.user.city || city}
+                                value={city}
                             >
                                 {province.map((item: any, index: number) => (
                                     <MenuItem key={index} value={item.Name}>
@@ -146,7 +158,7 @@ export default function PaymentForm({ setFormData, formInfoRef }: IAppProps) {
                                     setWard('');
                                 }}
                                 defaultValue={''}
-                                value={session?.user.district || district}
+                                value={district}
                             >
                                 {province
                                     .find((item: any) => item.Name === city)
@@ -163,7 +175,7 @@ export default function PaymentForm({ setFormData, formInfoRef }: IAppProps) {
                                 label="Phường xã"
                                 onChange={(e) => setWard(e.target.value)}
                                 defaultValue={''}
-                                value={session?.user.ward || ward}
+                                value={ward}
                             >
                                 {province
                                     .find((item: any) => item.Name === city)

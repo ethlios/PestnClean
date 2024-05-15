@@ -10,7 +10,6 @@ const cx = classNames.bind(styles);
 export interface IAppProps {}
 
 export default function UserOder(props: IAppProps) {
-    const [searchValue, setSearchValue] = useState<string>('');
     const [order, setOrder] = useState<any>({});
     const [openOrder, setOpenOrder] = useState<boolean>(false);
     const [allOrders, setAllOrders] = useState<any>([]);
@@ -22,21 +21,14 @@ export default function UserOder(props: IAppProps) {
             setAllOrders(data);
         };
         getOrder();
-    }, []);
+    }, [session?.user.id]);
 
     return (
         <>
             {openOrder && <UserOpenOrder setOpenAddOrder={setOpenOrder} order={order} />}
             <div className={cx('common-wrapper')}>
-                <p className={cx('common-title')}>Order: {allOrders.length}</p>
-                <input
-                    type="text"
-                    placeholder="Search..."
-                    className={cx('common-inp')}
-                    value={searchValue}
-                    onChange={(e) => setSearchValue(e.target.value)}
-                ></input>
-                <div className={cx('common-item-wrapper')} style={{ marginTop: '20px' }}>
+                <p className={cx('common-title')}>Đơn hàng: {allOrders.length}</p>
+                <div className={cx('common-item-wrapper')}>
                     {allOrders.length > 0 ? (
                         <div className={cx('product-wrapper')}>
                             <TableOrder
@@ -47,7 +39,16 @@ export default function UserOder(props: IAppProps) {
                         </div>
                     ) : (
                         <div className={cx('product-wrapper')}>
-                            <p>No order</p>
+                            <p
+                                style={{
+                                    fontSize: '14px',
+                                    fontWeight: 600,
+                                    letterSpacing: '-.2px',
+                                    marginTop: '20px',
+                                }}
+                            >
+                                Chưa có đơn đặt hàng nào!
+                            </p>
                         </div>
                     )}
                 </div>

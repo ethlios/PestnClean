@@ -25,7 +25,7 @@ export default function FilterMenu({ title, subMenu, className, selected, setSel
     };
 
     const handleFilter = (e: any) => {
-        const value = e.target.innerText || e.target.innerHTML;
+        const value = e.target.dataset.value;
         smoothScroll('div#listAllProduct');
         if (selected === value) return setSelected([]);
         setSelected(value);
@@ -35,7 +35,7 @@ export default function FilterMenu({ title, subMenu, className, selected, setSel
         <>
             <div className={cx(className)}>
                 <p
-                    defaultValue={title}
+                    data-value={title}
                     onClick={handleFilter}
                     style={{ color: selected.includes(title) ? 'var(--primary)' : 'black' }}
                 >
@@ -64,9 +64,9 @@ export default function FilterMenu({ title, subMenu, className, selected, setSel
         </>
     ) : (
         <p
-            defaultValue={title}
+            data-value={title}
             onClick={handleFilter}
-            style={{ color: selected === title ? 'var(--primary)' : 'black' }}
+            style={{ color: selected === title ? 'var(--primary)' : 'black', fontWeight: 500 }}
         >
             {title}
         </p>

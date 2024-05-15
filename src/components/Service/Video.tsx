@@ -13,7 +13,7 @@ gsap.registerPlugin(ScrollTrigger);
 const cx = classNames.bind(styles);
 
 export interface IAppProps {
-    title: string;
+    title?: string;
     src: string;
 }
 
@@ -35,15 +35,16 @@ export default function Video(props: IAppProps) {
             }}
             ref={ref}
         >
-            <video
-                style={{ width: '100%', height: '100%' }}
-                controls
-                preload="none"
-                draggable={false}
-                title={props.title}
-            >
-                <source src={props.src} type="video/mp4" />
-            </video>
+            {/*<video*/}
+            {/*    style={{ width: '100%', height: '100%' }}*/}
+            {/*    controls*/}
+            {/*    preload="none"*/}
+            {/*    draggable={false}*/}
+            {/*    title={props.title}*/}
+            {/*>*/}
+            {/*    <source src={props.src} type="video/mp4" />*/}
+            {/*</video>*/}
+            <iframe src={props.src} width="100%" height="100%" allow="autoplay"></iframe>
         </div>
     );
 }

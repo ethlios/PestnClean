@@ -21,9 +21,14 @@ export interface IAppProps {
 
 export default function TableOrder({ orders, setOpenAddOrder, setOrder }: IAppProps) {
     return (
-        <TableContainer>
+        <TableContainer sx={{ marginTop: '20px', borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}>
             <Table sx={{ minWidth: 650 }}>
-                <TableHead>
+                <TableHead
+                    style={{
+                        backgroundColor: 'var(--primary)',
+                        color: '#fff',
+                    }}
+                >
                     <TableRow>
                         <TableCell>Tên</TableCell>
                         <TableCell align="right">Địa chỉ</TableCell>
@@ -35,14 +40,22 @@ export default function TableOrder({ orders, setOpenAddOrder, setOrder }: IAppPr
                 </TableHead>
                 <TableBody>
                     {orders.map((order: any) => (
-                        <TableRow key={order.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+                        <TableRow
+                            key={order.id}
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                            style={{
+                                backgroundColor: 'rgba(0,0,0,0.05)',
+                            }}
+                        >
                             <TableCell component="th" scope="row">
                                 {order.name}
                             </TableCell>
                             <TableCell align="right">{order.address}</TableCell>
                             <TableCell align="right">{order.phone}</TableCell>
                             <TableCell align="right">{formatter.format(order.payment)}</TableCell>
-                            <TableCell align="right">{order.status}</TableCell>
+                            <TableCell align="right">
+                                {order.status ? order.status : 'Chờ xác nhận'}
+                            </TableCell>
                             <TableCell>
                                 <div className="flex items-center justify-center">
                                     <IconButton

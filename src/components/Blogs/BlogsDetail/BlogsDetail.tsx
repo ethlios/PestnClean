@@ -86,6 +86,7 @@ export default function BlogDetails({ blogs }: IAppProps) {
                     className={cx('detail')}
                     style={{
                         width: sizeX < 810 ? '100%' : '',
+                        padding: sizeX < 500 ? '15px' : '',
                     }}
                 >
                     <p className={cx('detail-category')}>{blogs[0].category}</p>

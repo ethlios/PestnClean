@@ -208,9 +208,11 @@ export default function MenuMobile({ open, setOpen }: IAppProps) {
                 <div
                     className={cx('hdm-social')}
                     style={{
-                        flexDirection: sizeX < 500 ? 'column' : 'row',
-                        gap: sizeX < 500 ? '10px' : '',
+                        flexDirection: sizeX < 660 ? 'row' : 'row',
+                        gap: sizeX < 660 ? '10px' : '',
                         left: sizeX < 500 ? '35px' : '',
+                        flexWrap: 'wrap',
+                        alignItems: 'center',
                     }}
                 >
                     <Link href="mailto:sales@pestnclean.vn" target="_blank" rel="noopener noreferrer">

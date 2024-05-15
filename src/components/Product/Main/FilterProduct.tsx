@@ -4,12 +4,15 @@ import classNames from 'classnames/bind';
 import styles from '../product.module.scss';
 import useScroll from '~/libs/hooks/useScroll';
 import FilterMenu from '~/components/Product/Main/FilterMenu';
-import { Button, Checkbox, IconButton } from '@mui/material';
+import { Button, IconButton } from '@mui/material';
 import useSize from '~/libs/hooks/useSize';
 import DisabledByDefaultIcon from '@mui/icons-material/DisabledByDefault';
-import { filterMenu, checkboxFilter } from '~/constants/productFilter';
-import { useEffect, useState } from 'react';
+import { filterMenu, filterPrice } from '~/constants/productFilter';
+import { useEffect } from 'react';
 import CheckboxMenu from '~/components/Product/Main/CheckboxMenu';
+import { useSelector } from 'react-redux';
+import { RootState } from '~/redux/provider/store';
+import CheckboxPrice from '~/components/Product/Main/CheckboxPrice';
 
 const cx = classNames.bind(styles);
 
@@ -36,6 +39,7 @@ export default function FilterProduct({
 }: IAppProps) {
     const wheel: boolean = useScroll();
     const { sizeX } = useSize();
+    let checkboxFilterProduct = useSelector((state: RootState) => state.main.checkboxFilterProductPage);
 
     useEffect(() => {
         let filterProducts = allProducts.filter((product: any) => {
@@ -46,17 +50,20 @@ export default function FilterProduct({
                 selectedCategory.includes(product.category3)
             );
         });
-        checkedFilter.forEach((checked: any) => {
+        checkedFilter.map((item: any) => {
             filterProducts = filterProducts.filter((product: any) => {
-                return (
-                    (product.weight && product.weight.includes(checked)) ||
-                    (product.box && product.box.includes(checked)) ||
-                    (product.package && product.package.includes(checked)) ||
-                    (product.pieces && product.pieces.includes(checked)) ||
-                    (product.bag && product.bag.includes(checked)) ||
-                    (product.plate && product.plate.includes(checked)) ||
-                    (product.categoryMain && product.categoryMain.includes(checked))
-                );
+                if (item.field === 'price') {
+                    return (
+                        (product.price && product.price > item.min && product.price < item.max) ||
+                        (product.price && product.price > item.min && !item.max) ||
+                        (product.price && !item.min && product.price < item.max)
+                    );
+                } else {
+                    return (
+                        (product[item.field] && product[item.field].includes(item.checkbox)) ||
+                        (product.categoryMain && product.categoryMain.includes(item.checkbox))
+                    );
+                }
             });
         });
         setProducts(filterProducts);
@@ -126,14 +133,33 @@ export default function FilterProduct({
                         </div>
                     </div>
                 )}
-                {checkboxFilter.map((filter: any, index: any) => (
-                    <CheckboxMenu
-                        filter={filter}
-                        key={index}
-                        checked={checkedFilter}
-                        setChecked={setCheckedFilter}
-                    />
-                ))}
+                <div className={'flex flex-col gap-2'}>
+                    <h2 className={cx('filter-title')}>Theo giá</h2>
+                    {filterPrice[0].checkbox && (
+                        <div className={'flex flex-col'}>
+                            {filterPrice[0].checkbox.map((checkbox: any, index: any) => (
+                                <CheckboxPrice
+                                    key={index}
+                                    filterField={filterPrice[0].field}
+                                    checkbox={checkbox}
+                                    checked={checkedFilter}
+                                    setChecked={setCheckedFilter}
+                                />
+                            ))}
+                        </div>
+                    )}
+                </div>
+                {checkboxFilterProduct.map(
+                    (filter: any, index: any) =>
+                        filter.checkbox.length > 0 && (
+                            <CheckboxMenu
+                                filter={filter}
+                                key={index}
+                                checked={checkedFilter}
+                                setChecked={setCheckedFilter}
+                            />
+                        ),
+                )}
                 {sizeX < 1024 && (
                     <div className={cx('filter-button')}>
                         <Button

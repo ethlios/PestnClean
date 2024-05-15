@@ -57,7 +57,7 @@ export default function CheckoutPanel({
     }, []);
 
     const order = {
-        authorId: session?.user.rule === 'admin' ? session?.user.id : admin?.id,
+        authorId: admin?.id,
         userId: session?.user.id,
         name: formData?.name,
         email: formData?.email,
@@ -68,7 +68,9 @@ export default function CheckoutPanel({
         ward: formData?.ward,
         message: formData?.message,
         payment: String(totalPrice),
+        paymentMethod: 'Thanh toán khi nhận hàng',
         product: JSON.stringify(cart),
+        discount: discount,
     };
 
     const handleSubmit = () => {

@@ -43,7 +43,7 @@ export default function DichVu1Page(props: IAppProps) {
             </div>
             <Video
                 title="Dịch vụ kiểm soát côn trùng tại PetnClean."
-                src="https://res.cloudinary.com/dj2jarcxk/video/upload/v1713528846/Termite_bw08jg.mp4"
+                src="https://drive.google.com/file/d/1HkD4rSw7Nhlk_6vmJQtZWKEtFLseEjrW/preview"
             />
             <div className={'mb-10'}>
                 <h1 className={`${cx('title')}`}>Báo cáo phân tích chuẩn BRC, HACCP, ISO</h1>

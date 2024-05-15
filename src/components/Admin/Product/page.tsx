@@ -21,7 +21,7 @@ export interface IAppProps {}
 export default function AdminProduct(props: IAppProps) {
     const [searchValue, setSearchValue] = useState<string>('');
     const [addProduct, setAddProduct] = useState<boolean>(false);
-    let products: any = useSelector((state: RootState) => state.main.products);
+    let products: any = useSelector((state: RootState) => state.main.allProducts);
     const dispatch = useDispatch();
     const [updateProduct, setUpdateProduct] = useState<any>({});
     const debouncedText = useDebounce(searchValue, 200);

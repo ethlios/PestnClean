@@ -47,7 +47,7 @@ export default function DichVu3Page(props: IAppProps) {
             </BundleCard>
             <Video
                 title="Các giải pháp mùi hương tại PetnClean."
-                src="https://res.cloudinary.com/dj2jarcxk/video/upload/v1713531625/Gia%CC%89i_Pha%CC%81p_Mu%CC%80i_Hu%CC%9Bo%CC%9Bng_dm989a.mp4"
+                src="https://drive.google.com/file/d/1I9aB7OosTRKK1C-V2GWcFD0e3mi4byMW/preview"
             />
             <TextImageImage />
             <h1 className={cx('content-title')}>Giải pháp theo ngành hàng</h1>

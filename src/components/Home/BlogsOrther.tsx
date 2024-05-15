@@ -90,20 +90,24 @@ export default function BlogOthers(props: IAppProps) {
                                     }}
                                 >
                                     <p>{item.description}</p>
-                                    <Link href={`/blogs/${nameToLink(item.title)}`}>
-                                        <IconButton
-                                            sx={{
+
+                                    <Link href={`/blogs/${nameToLink(item.title)}`} aria-label="blog">
+                                        <div
+                                            style={{
                                                 backgroundColor: 'var(--secondary)',
                                                 marginTop: '10px',
                                                 transition: 'all ease .5s',
-                                                ':hover': {
-                                                    backgroundColor: 'var(--secondary)',
-                                                    marginLeft: '10px',
-                                                },
+                                                width: '40px',
+                                                height: '40px',
+                                                borderRadius: '50%',
+                                                display: 'flex',
+                                                justifyContent: 'center',
+                                                alignItems: 'center',
                                             }}
+                                            className={cx('content-link')}
                                         >
                                             <EastOutlinedIcon />
-                                        </IconButton>
+                                        </div>
                                     </Link>
                                 </div>
                             </div>

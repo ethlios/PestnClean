@@ -181,3 +181,6 @@ export const addNotificationFail = createAction<any>(type.ADD_NOTIFICATION_FAIL)
 export const getAllNotificationsById = createAction<any>(type.GET_ALL_NOTIFICATIONS_BY_ID);
 export const getAllNotificationsByIdSuccess = createAction<any>(type.GET_ALL_NOTIFICATIONS_BY_ID_SUCCESS);
 export const getAllNotificationsByIdFail = createAction<any>(type.GET_ALL_NOTIFICATIONS_BY_ID_FAIL);
+
+// FILTER PRODUCT PAGE
+export const addCheckboxFilterProductPage = createAction<any>(type.ADD_CHECKBOX_FILTER_PRODUCT_PAGE);

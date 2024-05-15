@@ -6,7 +6,6 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import AllProduct from '~/components/Product/Main/AllProduct';
 import BannerProduct from '~/components/Product/Main/Banner';
-import CategoryIconProduct from '~/components/Product/Main/CategoryIcon';
 import FilterProduct from '~/components/Product/Main/FilterProduct';
 import ProductStatus from '~/components/Product/Main/ProductStatus';
 import useSize from '~/libs/hooks/useSize';

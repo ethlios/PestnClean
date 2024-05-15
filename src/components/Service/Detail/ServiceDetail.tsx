@@ -83,6 +83,7 @@ export default function ServiceDetails({ blog }: IAppProps) {
                     className={cx('detail')}
                     style={{
                         width: sizeX < 810 ? '100%' : '',
+                        padding: sizeX < 500 ? '15px' : '',
                     }}
                 >
                     <p className={cx('detail-title')}>{blog[0].title}</p>

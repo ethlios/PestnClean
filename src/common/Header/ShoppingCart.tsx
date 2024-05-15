@@ -16,9 +16,9 @@ export default function ShoppingCart() {
     const localCart = localStorage.getItem('cart');
     const cart = localCart ? JSON.parse(localCart) : [];
     const totalAmount = cart.reduce((acc: number, item: any) => acc + item.quantity, 0);
-    
+
     return (
-        <Link href={'/giohang'} className={'icon-hover ' + (totalAmount > 0 ? 'mr-2' : '')}>
+        <Link href={'/giohang'} className={'icon-hover ' + (totalAmount > 0 ? 'mr-2' : '')} aria-label="cart">
             <StyledBadge badgeContent={totalAmount} color="primary">
                 <ShoppingBagOutlinedIcon />
             </StyledBadge>

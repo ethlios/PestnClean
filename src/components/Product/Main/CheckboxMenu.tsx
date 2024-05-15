@@ -23,6 +23,7 @@ export default function CheckboxMenu({ filter, checked, setChecked }: CheckboxMe
                     {filter.checkbox.map((checkbox: any, index: any) => (
                         <CheckboxItem
                             key={index}
+                            filterField={filter.field}
                             checkbox={checkbox}
                             checked={checked}
                             setChecked={setChecked}
@@ -35,17 +36,31 @@ export default function CheckboxMenu({ filter, checked, setChecked }: CheckboxMe
 }
 
 interface CheckboxItemProps {
+    filterField: any;
     checkbox: any;
     checked: any;
     setChecked: any;
 }
 
-export function CheckboxItem({ checkbox, checked, setChecked }: CheckboxItemProps) {
+export function CheckboxItem({ filterField, checkbox, checked, setChecked }: CheckboxItemProps) {
     const handleCheckbox = (e: any) => {
+        const existingItem = checked.find((item: any) => item.field === filterField);
         if (e.target.checked) {
-            setChecked([...checked, checkbox]);
+            if (existingItem) {
+                // Thay đổi giá trị checkbox của item hiện có
+                const updatedChecked = checked.map((item: any) =>
+                    item.field === filterField ? { ...item, checkbox: checkbox } : item,
+                );
+                setChecked(updatedChecked);
+            } else {
+                // Thêm item mới vào checked
+                setChecked([...checked, { field: filterField, checkbox: checkbox }]);
+            }
         } else {
-            setChecked(checked.filter((item: any) => item !== checkbox));
+            if (existingItem) {
+                // Xóa item hiện có khỏi checked
+                setChecked(checked.filter((item: any) => item !== existingItem));
+            }
         }
         smoothScroll('div#listAllProduct');
     };
@@ -54,7 +69,13 @@ export function CheckboxItem({ checkbox, checked, setChecked }: CheckboxItemProp
 
     return (
         <div className={'flex items-center gap-2'}>
-            <Checkbox value={checkbox} onChange={handleCheckbox} checked={checked.includes(checkbox)} />
+            <Checkbox
+                value={checkbox}
+                onChange={handleCheckbox}
+                checked={checked.some(
+                    (item: any) => item.field === filterField && item.checkbox === checkbox,
+                )}
+            />
             <p className={cx('label')}>{checkbox}</p>
         </div>
     );

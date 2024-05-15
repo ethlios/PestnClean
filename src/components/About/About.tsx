@@ -105,18 +105,19 @@ export default function AboutCPPage(props: IAppProps) {
                 }}
                 ref={videoRef}
             >
-                <video
-                    style={{ width: '100%', height: '100%' }}
-                    controls
-                    preload="none"
-                    draggable={false}
-                    title="Dịch vụ vệ sinh công nghiệp tại PetnClean."
-                >
-                    <source
-                        src="https://res.cloudinary.com/dj2jarcxk/video/upload/v1713698995/Thie%CC%82%CC%81t_Bi%CC%A3_Ve%CC%A3%CC%82_Sinh_1_r5nsql.mp4"
-                        type="video/mp4"
-                    />
-                </video>
+                {/*<video*/}
+                {/*    style={{ width: '100%', height: '100%' }}*/}
+                {/*    controls*/}
+                {/*    preload="none"*/}
+                {/*    draggable={false}*/}
+                {/*    title="Dịch vụ vệ sinh công nghiệp tại PetnClean."*/}
+                {/*></video>*/}
+                <iframe
+                    src="https://drive.google.com/file/d/1qf7KBSdgv-opaijXaOvVW3g07AIFsv3o/preview"
+                    width="100%"
+                    height="100%"
+                    allow="autoplay"
+                ></iframe>
             </div>
 
             {/*1st scope*/}
@@ -170,10 +171,10 @@ export default function AboutCPPage(props: IAppProps) {
                     >
                         <h1 className={cx('title')}>2. SỨ MỆNH</h1>
                         <p className={cx('text-common')}>
-                            “ Nâng cao chất lượng môi trường làm việc, đảm bảo giá trị kinh doanh hiệu quả bền
-                            vững ”. PESTNCLEAN tin rằng việc cung cấp mô hình dịch vụ giải pháp toàn diện về
-                            vệ sinh và kiểm soát côn trùng sẽ mang lại những giá trị tốt đẹp cho công việc
-                            kinh doanh của khách hàng, đối tác và xã hội.
+                            “Nâng cao chất lượng môi trường làm việc, đảm bảo giá trị kinh doanh hiệu quả bền
+                            vững”. PESTNCLEAN tin rằng việc cung cấp mô hình dịch vụ giải pháp toàn diện về vệ
+                            sinh và kiểm soát côn trùng sẽ mang lại những giá trị tốt đẹp cho công việc kinh
+                            doanh của khách hàng, đối tác và xã hội.
                         </p>
                     </div>
                     <Image

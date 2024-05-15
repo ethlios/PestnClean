@@ -13,6 +13,8 @@ import { addProduct, updateProduct as update } from '~/redux/actions';
 import { arrToStr, removeImg } from '~/libs/orthers/removeImg';
 import HastagList from './Hastag';
 import CategoryMain from './CategoryMain';
+import { filterMenu as categories } from '~/constants/productFilter';
+import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 
 const cx = classNames.bind(styles);
 
@@ -215,24 +217,65 @@ export default function AdminAddProduct({ setAddProduct, updateProduct, setUpdat
                             hastagList={phanloaiList}
                             setHastagList={setPhanloaiList}
                         />
-                        <input
-                            type="text"
-                            placeholder="Danh mục chính..."
-                            className={cx('add-inp')}
-                            {...register('category1')}
-                        ></input>
-                        <input
-                            type="text"
-                            placeholder="Danh mục phụ..."
-                            className={cx('add-inp')}
-                            {...register('category2')}
-                        ></input>
-                        <input
-                            type="text"
-                            placeholder="Danh mục con..."
-                            className={cx('add-inp')}
-                            {...register('category3')}
-                        ></input>
+                        <FormControl>
+                            <InputLabel
+                                style={{
+                                    fontSize: '14px',
+                                    fontWeight: '600',
+                                    marginBottom: '10px',
+                                }}
+                            >
+                                Danh mục chính
+                            </InputLabel>
+                            <Select defaultValue={''} {...register('category1')} label="Danh mục chính">
+                                {categories.map((item: any) => (
+                                    <MenuItem key={item.title} value={item.title}>
+                                        {item.title}
+                                    </MenuItem>
+                                ))}
+                            </Select>
+                        </FormControl>
+                        <FormControl>
+                            <InputLabel
+                                style={{
+                                    fontSize: '14px',
+                                    fontWeight: '600',
+                                    marginBottom: '10px',
+                                }}
+                            >
+                                Danh mục phụ
+                            </InputLabel>
+                            <Select defaultValue={''} {...register('category2')} label="Danh mục phụ">
+                                {categories
+                                    .find((item: any) => item.title === watch('category1'))
+                                    ?.subMenu?.map((item: any) => (
+                                        <MenuItem key={item.title} value={item.title}>
+                                            {item.title}
+                                        </MenuItem>
+                                    ))}
+                            </Select>
+                        </FormControl>
+                        <FormControl>
+                            <InputLabel
+                                style={{
+                                    fontSize: '14px',
+                                    fontWeight: '600',
+                                    marginBottom: '10px',
+                                }}
+                            >
+                                Danh mục con
+                            </InputLabel>
+                            <Select defaultValue={''} {...register('category3')} label="Danh mục con">
+                                {categories
+                                    .find((item: any) => item.title === watch('category1'))
+                                    ?.subMenu?.find((item: any) => item.title === watch('category2'))
+                                    ?.subMenu?.map((item: any) => (
+                                        <MenuItem key={item.title} value={item.title}>
+                                            {item.title}
+                                        </MenuItem>
+                                    ))}
+                            </Select>
+                        </FormControl>
                         <div className={cx('all-status')}>
                             <div className={cx('product-status')} onClick={() => setIsNew(!isNew)}>
                                 <div
