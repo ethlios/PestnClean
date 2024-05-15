@@ -3,10 +3,9 @@
 import classNames from 'classnames/bind';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import AllProduct from '~/components/Product/Main/AllProduct';
 import BannerProduct from '~/components/Product/Main/Banner';
-import CategoryIconProduct from '~/components/Product/Main/CategoryIcon';
 import FilterProduct from '~/components/Product/Main/FilterProduct';
 import ProductStatus from '~/components/Product/Main/ProductStatus';
 import useSize from '~/libs/hooks/useSize';
@@ -14,8 +13,6 @@ import { RootState } from '~/redux/provider/store';
 import styles from '~/components/Product/product.module.scss';
 import productBannerFooter from '../../../../public/img/productBannerFooter.jpg';
 import Image from 'next/image';
-import { checkboxFilter } from '~/constants/productFilter';
-import { addCheckboxFilterProductPage } from '~/redux/actions';
 
 const cx = classNames.bind(styles);
 
@@ -30,23 +27,6 @@ export default function ProductPage(props: IAppProps) {
     const [products, setProducts] = useState<any>(allProducts);
     const [selectedCategory, setSelectedCategory] = useState<any>([]);
     const [checkedFilter, setCheckedFilter] = useState<any>([]);
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-        // Duyệt qua tất cả sản phẩm
-        allProducts.forEach((product: any) => {
-            // Duyệt qua từng thuộc tính trong checkboxFilter
-            checkboxFilter.map((filter: any) => {
-                // Nếu thuộc tính của sản phẩm có giá trị và chưa tồn tại trong checkboxFilter
-                if (product[filter.field] && !filter.checkbox.includes(product[filter.field])) {
-                    // Thêm giá trị thuộc tính vào checkboxFilter
-                    filter.checkbox.push(product[filter.field]);
-                }
-            });
-        });
-        // Gửi giá trị checkboxFilter lên store
-        dispatch(addCheckboxFilterProductPage(checkboxFilter));
-    }, [dispatch]);
 
     useEffect(() => {
         if (sizeX < 1024) {
