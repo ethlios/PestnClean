@@ -1,11 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '~/libs/orthers/prisma';
 
-export async function PUT(request : NextRequest,{ params }: { params: { id: string } }) {
-    const id =  parseInt(params.id);
-    console.log(id);
+export async function PUT(request: NextRequest, { params }: { params: { id: string } }) {
+    const id = parseInt(params.id);
     if (!id) {
-      return NextResponse.json("Missing 'id' parameter",{status: 400});
+        return NextResponse.json("Missing 'id' parameter", { status: 400 });
     }
     const body = await request.json();
 
@@ -18,8 +17,7 @@ export async function PUT(request : NextRequest,{ params }: { params: { id: stri
     });
 
     return NextResponse.json({
-        message: "Cập nhập hình ảnh thành công",
-        data: res
+        message: 'Cập nhập hình ảnh thành công',
+        data: res,
     });
 }
-

@@ -81,15 +81,6 @@ export default function AdminDiscount(props: IAppProps) {
                             </div>
                         </div>
                         <p className={cx('text-sm font-semibold')}>Số lượng: {discounts.length}</p>
-                        {/* <div>
-                            <input
-                                className={cx('wrapper-inputSearch')}
-                                type="text"
-                                placeholder="Tìm kiếm mã khuyến mãi..."
-                                value=""
-                                onChange={() => console.log('123')}
-                            ></input>
-                        </div> */}
                     </div>
                     {isLoader ? (
                         <div className="flex items-center justify-center relative">
