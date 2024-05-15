@@ -85,7 +85,12 @@ export default function BlogsList(props: IAppProps) {
                     );
                 })}
             </div>
-            <div className={cx('blogs-list-wrapper')}>
+            <div
+                className={cx('blogs-list-wrapper')}
+                style={{
+                    padding: sizeX < 500 ? '15px' : '',
+                }}
+            >
                 {/* Search */}
                 <div className={cx('search')}>
                     <input
@@ -113,6 +118,14 @@ export default function BlogsList(props: IAppProps) {
                                         className={cx('blog-item')}
                                         style={{
                                             overflow: 'hidden',
+                                            width:
+                                                sizeX < 500
+                                                    ? '100%'
+                                                    : sizeX < 800
+                                                      ? 'calc(100% / 2 - 10px)'
+                                                      : sizeX < 1024
+                                                        ? 'calc(100% / 3 - 14px)'
+                                                        : 'calc(100% / 4 - 15px)',
                                         }}
                                     >
                                         <div

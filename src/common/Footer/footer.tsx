@@ -168,7 +168,7 @@ export default function Footer(props: FooterProps) {
                                 color: '#fff',
                             }}
                         />
-                        <p onClick={() => setChecked(!checked)}>
+                        <p onClick={() => setChecked(!checked)} style={{ fontWeight: 600 }}>
                             Luôn cập nhật cho tôi tin tức mới nhất về các sản phẩm và sự kiện của PETSNCLEAN.
                         </p>
                     </div>

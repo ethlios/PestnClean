@@ -65,7 +65,7 @@ export default function CardHover({ title, description, path, id, src, alt }: IA
                             }}
                         >
                             {pathname !== '/dichvu/giai-phap-ve-sinh' && (
-                                <ButtonCommon text="Xem thêm" path={path} />
+                                <ButtonCommon text="Xem thêm" path={path} rule2="rule-1" />
                             )}
                         </div>
                     </div>

@@ -13,9 +13,9 @@ export default function MuiSetUp({ children }: MuiSetupProps) {
 
     return (
         <>
-            <CssBaseline />
             <NextAppDirEmotionCacheProvider options={{ key: 'css' }}>
                 <ThemeProvider theme={theme}>
+                    <CssBaseline />
                     {/* custom layout */}
                     {children}
                 </ThemeProvider>
