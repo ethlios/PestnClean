@@ -28,16 +28,8 @@
     justify-content: center;
 }
 
-.inp-wrapper {
-    label {
-        font-weight: 700;
-        width: 150px;
-        font-size: 14.5px;
-    }
-}
-
 .add-inp {
-    width: 50%;
+    width: 55%;
     height: 45px;
     border: solid 1.5px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
@@ -54,14 +46,12 @@
     &::placeholder {
         color: rgba(0, 0, 0, 0.55);
     }
+
+    @media (max-width: 768px) {
+        width: 100%;
+    }
 }
 
-.inp-wrapper {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 10px;
-}
 
 .commom-button {
     font-size: 14.5px;
@@ -72,9 +62,13 @@
     border: solid 1.5px rgba(0, 0, 0, 0.1);
     transition: all ease 0.5s;
     height: 45px;
-    width: calc(50% + 160px);
+    width: 55%;
 
     &:hover {
         background-color: rgba($color: #000000, $alpha: 0.15);
+    }
+
+    @media (max-width: 768px) {
+        width: 100%;
     }
 }

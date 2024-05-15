@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { updateSessionUser } from '~/redux/actions';
 import Toast from '~/components/Orther/Toast';
 import { RootState } from '~/redux/provider/store';
-import MenuItem from '@mui/material/MenuItem';
+import { FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material';
 
 const cx = classNames.bind(styles);
 
@@ -73,72 +73,92 @@ export default function UserAccount(props: IAppProps) {
                     <b>Email:</b> {session?.user.email}
                 </p>
                 <form onSubmit={handleSubmit(onSubmit)} className={cx('user-form')}>
-                    <div className={cx('inp-wrapper')}>
-                        <label>Số điện thoại:</label>
-                        <input
-                            className={cx('add-inp')}
-                            defaultValue={session?.user.phone}
-                            {...register('phone')}
-                        />
-                    </div>
-                    <div className={cx('inp-wrapper')}>
-                        <label>Tỉnh/Thành phố:</label>
-                        <select
-                            className={cx('add-inp')}
+                    <TextField
+                        label="Số điện thoại"
+                        defaultValue={session?.user.phone}
+                        className={cx('add-inp')}
+                        {...register('phone')}
+                    />
+                    <FormControl className={cx('add-inp')}>
+                        <InputLabel
+                            style={{
+                                fontSize: '14px',
+                                fontWeight: '600',
+                                marginBottom: '10px',
+                            }}
+                        >
+                            Tỉnh/Thành phố:
+                        </InputLabel>
+                        <Select
                             defaultValue={''}
                             value={session?.user.city}
                             {...register('city')}
+                            label="Tỉnh/Thành phố"
                         >
                             {province.map((item: any, index: number) => (
-                                <option key={index} value={item.Name}>
+                                <MenuItem key={index} value={item.Name}>
                                     {item.Name}
-                                </option>
+                                </MenuItem>
                             ))}
-                        </select>
-                    </div>
-                    <div className={cx('inp-wrapper')}>
-                        <label>Huyện/Thị trấn:</label>
-                        <select
-                            className={cx('add-inp')}
+                        </Select>
+                    </FormControl>
+                    <FormControl className={cx('add-inp')}>
+                        <InputLabel
+                            style={{
+                                fontSize: '14px',
+                                fontWeight: '600',
+                                marginBottom: '10px',
+                            }}
+                        >
+                            Huyện/Thị trấn:
+                        </InputLabel>
+                        <Select
                             defaultValue={''}
                             value={session?.user.district}
                             {...register('district')}
+                            label="Huyện/Thị trấn"
                         >
                             {province
                                 .find((item: any) => item.Name === watch('city'))
                                 ?.Districts.map((item: any, index: number) => (
-                                    <option key={index} value={item.Name}>
+                                    <MenuItem key={index} value={item.Name}>
                                         {item.Name}
-                                    </option>
+                                    </MenuItem>
                                 ))}
-                        </select>
-                    </div>
-                    <div className={cx('inp-wrapper')}>
-                        <label>Phường/Xã:</label>
-                        <select
-                            className={cx('add-inp')}
+                        </Select>
+                    </FormControl>
+                    <FormControl className={cx('add-inp')}>
+                        <InputLabel
+                            style={{
+                                fontSize: '14px',
+                                fontWeight: '600',
+                                marginBottom: '10px',
+                            }}
+                        >
+                            Phường/Xã:
+                        </InputLabel>
+                        <Select
                             defaultValue={''}
                             value={session?.user.ward}
                             {...register('ward')}
+                            label="Phường/Xã"
                         >
                             {province
                                 .find((item: any) => item.Name === watch('city'))
                                 ?.Districts.find((item: any) => item.Name === watch('district'))
                                 ?.Wards.map((item: any, index: number) => (
-                                    <option key={index} value={item.Name}>
+                                    <MenuItem key={index} value={item.Name}>
                                         {item.Name}
-                                    </option>
+                                    </MenuItem>
                                 ))}
-                        </select>
-                    </div>
-                    <div className={cx('inp-wrapper')}>
-                        <label>Địa chỉ:</label>
-                        <input
-                            className={cx('add-inp')}
-                            defaultValue={session?.user.address}
-                            {...register('address')}
-                        />
-                    </div>
+                        </Select>
+                    </FormControl>
+                    <TextField
+                        label="Địa chỉ"
+                        defaultValue={session?.user.address}
+                        className={cx('add-inp')}
+                        {...register('address')}
+                    />
                     <button type="submit" className={cx('commom-button')}>
                         Cập nhật
                     </button>

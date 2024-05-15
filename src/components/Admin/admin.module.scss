@@ -159,6 +159,11 @@
         border: solid 1.5px rgba(0, 0, 0, 0.1);
         transition: all ease 0.5s;
     }
+
+    @media (max-width: 640px) {
+        flex-direction: column;
+        gap: 10px;
+    }
 }
 
 .user-item-name {
@@ -251,6 +256,10 @@
     flex-direction: row;
     gap: 20px;
     padding: 0 15px 10px 15px;
+
+    @media (max-width: 640px) {
+        flex-direction: column;
+    }
 }
 
 .add-body-2 {
@@ -259,6 +268,12 @@
     position: sticky;
     top: 50px;
     z-index: 1;
+
+    @media (max-width: 640px) {
+        width: 100%;
+        position: unset;
+        top: unset;
+    }
 }
 
 .add-body-1 {
@@ -267,6 +282,10 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+
+    @media (max-width: 640px) {
+        width: 100%;
+    }
 }
 
 .add-inp {
@@ -363,6 +382,7 @@
     padding: 10px;
     display: flex;
     flex-direction: column;
+    overflow: scroll;
 }
 
 .product-btn {

@@ -66,8 +66,10 @@ export default function UserCP(props: IAppProps) {
                                 </div>
                                 <p>{item.name}</p>
                             </div>
-                            <p>{item.email}</p>
-                            <p>{item.phone}</p>
+                            <div className={cx('user-item-info')}>
+                                <p>{item.email}</p>
+                                <p>{item.phone}</p>
+                            </div>
                             <button disabled>{item.rule === 'admin' ? 'ADMIN' : 'USERS'}</button>
                         </div>
                     );
