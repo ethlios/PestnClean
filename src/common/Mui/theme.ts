@@ -1,4 +1,5 @@
 import { createTheme, responsiveFontSizes } from '@mui/material';
+import RootLayout from '../../app/layout';
 // import { DatePicker } from '@mui/x-date-pickers';
 
 export let theme = createTheme({
@@ -17,7 +18,40 @@ export let theme = createTheme({
             main: '#000',
         },
     },
-    components: {},
+    components: {
+        MuiSelect: {
+            styleOverrides: {
+                root: {
+                    fontSize: '14px',
+                    fontWeight: 600,
+                },
+            },
+        },
+        MuiMenuItem: {
+            styleOverrides: {
+                root: {
+                    fontSize: '14px',
+                    fontWeight: 500,
+                },
+            },
+        },
+        MuiInputBase: {
+            styleOverrides: {
+                root: {
+                    fontSize: '14px',
+                    fontWeight: 500,
+                },
+            },
+        },
+        MuiInputLabel: {
+            styleOverrides: {
+                root: {
+                    fontSize: '14px',
+                    fontWeight: 500,
+                },
+            },
+        },
+    },
 });
 
 theme = responsiveFontSizes(theme);

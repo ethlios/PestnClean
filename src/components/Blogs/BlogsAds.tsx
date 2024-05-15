@@ -53,6 +53,7 @@ export default function BlogsAds(props: IAppProps) {
                     text="XEM THÊM"
                     path={`blogs/${nameToLink(blogsAds[0].title)}`}
                     fullWidth={sizeX < 800 ? true : false}
+                    rule="rule-1"
                 />
             </div>
             <div
