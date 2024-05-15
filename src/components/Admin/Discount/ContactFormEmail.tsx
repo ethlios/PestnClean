@@ -14,7 +14,6 @@ import {
 } from '@react-email/components';
 import moment from 'moment';
 import * as React from 'react';
-import { formatDate } from '~/libs/orthers/formatDate';
 interface DisCountProps {
     code: string;
     dateEnd: string;

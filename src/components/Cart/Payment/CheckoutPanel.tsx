@@ -11,7 +11,7 @@ import { Button } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSession } from 'next-auth/react';
-import { addOrder, orderBehavior } from '~/redux/actions';
+import { addOrder, orderBehavior, saveDataOrder } from '~/redux/actions';
 import useSize from '~/libs/hooks/useSize';
 
 const cx = classNames.bind(styles);
@@ -78,6 +78,7 @@ export default function CheckoutPanel({
             if (cart.length > 0) {
                 dispatch(orderBehavior('0'));
                 dispatch(addOrder(order));
+                dispatch(saveDataOrder({data:order}))
                 setShowDialog(true);
             } else {
                 setShowToast(true);

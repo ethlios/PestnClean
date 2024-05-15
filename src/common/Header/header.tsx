@@ -27,6 +27,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '~/redux/provider/store';
 import { clearMessage, getAllNotificationsById } from '~/redux/actions';
 import Toast from '~/components/Orther/Toast';
+import useConnectSocket from '~/libs/hooks/useConnectSocket';
+import { calculateTimeDifference } from '~/libs/orthers/formatDate';
 const cx = classNames.bind(styles);
 
 export interface HeaderProps {}
@@ -43,11 +45,10 @@ export default function Header(props: HeaderProps) {
     const router = useRouter();
     const wheel: boolean = useScroll();
     const { sizeX } = useSize();
+    const {isConnected} = useConnectSocket();
     const { data: session } = useSession();
     const [openAcc, setOpenAcc] = useState<boolean>(false);
     const [openNotifications, setOpenNotifications] = useState<boolean>(false);
-    const [isConnected, setIsConnected] = useState(false);
-    const [transport, setTransport] = useState('N/A');
     const [listNotifications, setListNotifications] = useState<any[]>([]);
     const [isShowToast, setShowToast] = useState<ShowToast>({
         message: '',
@@ -56,6 +57,7 @@ export default function Header(props: HeaderProps) {
     const dispatch = useDispatch();
     const selector = useSelector((state: RootState) => state.main);
 
+    // XỬ LÝ GỬI THÔNG TIN QUERY CHO PAGE KẾT QUẢ TÌM KIẾM
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
         if (searchValue !== '') {
@@ -63,55 +65,11 @@ export default function Header(props: HeaderProps) {
             router.push(`/search?q=${encodedSearchQuery}`);
         }
     };
-
-    // KẾT NỐI TỚI SOCKET
-    const connectSocket = () => {
-        if (socket.connected) {
-            onConnect();
-        }
-
-        function onConnect() {
-            setIsConnected(true);
-        }
-
-        function onDisconnect() {
-            setIsConnected(false);
-            setTransport('N/A');
-        }
-
-        socket.on('connect', onConnect);
-        socket.on('disconnect', onDisconnect);
-        return () => {
-            socket.off('connect', onConnect);
-            socket.off('disconnect', onDisconnect);
-        };
-    };
-
-    // HÀM TÍNH THỜI GIAN ĐẾN HIỆN TẠI
-    function calculateTimeDifference(startTime: string, endTime?: string): string {
-        const startDate = new Date(startTime);
-        const endDate = endTime ? new Date(endTime) : new Date();
-
-        const timeDifference = Math.abs(endDate.getTime() - startDate.getTime());
-
-        const secondsDifference = Math.floor(timeDifference / 1000);
-        const minutesDifference = Math.floor(secondsDifference / 60);
-        const hoursDifference = Math.floor(minutesDifference / 60);
-        const daysDifference = Math.floor(hoursDifference / 24);
-
-        let displayString = '';
-
-        if (daysDifference > 0) {
-            displayString = `${daysDifference} ngày`;
-        } else if (hoursDifference > 0) {
-            displayString = `${hoursDifference} giờ`;
-        } else if (minutesDifference > 0) {
-            displayString = `${minutesDifference} phút`;
-        } else {
-            displayString = `${secondsDifference} giây`;
-        }
-
-        return displayString.trim() + ' trước';
+    
+    // HÀM TÌM ID TRONG MẢNG
+    function findIdInArray(array: any[], id: string): string | undefined {
+        const foundId = array.find((element) => element.id === id);
+        return foundId;
     }
 
     useEffect(() => {
@@ -129,13 +87,23 @@ export default function Header(props: HeaderProps) {
 
     useEffect(() => {
         if (isConnected && session?.user.id) {
-            socket.on('respMessageAddNotify', (value) => {
-                const shortenedMessage = value.title.substring(0, 40 - 3) + '...';
-                setShowToast({
-                    message: 'Bạn vừa nhận được thông báo mới: ' + shortenedMessage,
-                    status: true,
-                });
-                dispatch(getAllNotificationsById({ id: session.user.id }));
+            socket.on('respMessageAddNotify', (value: any) => {
+                const notifyUser = () => {
+                    const shortenedMessage = value.title.substring(0, 37) + '...';
+                    setShowToast({
+                        message: 'Bạn vừa nhận được thông báo mới: ' + shortenedMessage,
+                        status: true,
+                    });
+                    dispatch(getAllNotificationsById({ id: session.user.id }));
+                };
+                if (!Array.isArray(value.recipientId)) {
+                    notifyUser();
+                } else {
+                    const result = findIdInArray(value.recipientId, session?.user.id);
+                    if (result !== undefined) {
+                        notifyUser();
+                    }
+                }
             });
         }
     }, [dispatch, isConnected, session?.user.id]);
@@ -144,20 +112,6 @@ export default function Header(props: HeaderProps) {
         const scroll = () => {
             setScrollToTop(window.scrollY);
         };
-        connectSocket();
-
-        window.addEventListener('scroll', scroll);
-
-        return () => window.removeEventListener('scroll', scroll);
-    }, []);
-
-    useEffect(() => {
-        if (wheel) {
-            setOpenSearch(false);
-            setOpenAcc(false);
-        }
-    }, [wheel]);
-    useEffect(() => {
         const handleScroll = () => {
             const scrollTopValue = window.scrollY || document.documentElement.scrollTop;
             if (scrollTopValue > 33) {
@@ -166,11 +120,20 @@ export default function Header(props: HeaderProps) {
         };
 
         window.addEventListener('scroll', handleScroll);
+        window.addEventListener('scroll', scroll);
 
         return () => {
+            window.removeEventListener('scroll', scroll);
             window.removeEventListener('scroll', handleScroll);
-        };
+        }
     }, []);
+
+    useEffect(() => {
+        if (wheel) {
+            setOpenSearch(false);
+            setOpenAcc(false);
+        }
+    }, [wheel]);
     return (
         <>
             <Toast

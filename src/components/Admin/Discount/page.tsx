@@ -5,7 +5,6 @@ import { useSelector } from 'react-redux';
 import React, { useEffect, useState } from 'react';
 import Toast from '~/components/Orther/Toast';
 import AddDiscount from './AddDiscount';
-import { formatDate } from '~/libs/orthers/formatDate';
 import AddIcon from '@mui/icons-material/Add';
 import ChooseObjectCustomer from './ChooseObjectCustomer';
 import DialogSendAll from './DialogSendAll';
@@ -36,7 +35,7 @@ export default function AdminDiscount(props: IAppProps) {
     });
 
     useEffect(() => {
-        if (discounts.length > 0) setIsLoader(false);
+        if (discounts.length >= 0) setIsLoader(false);
     }, [discounts]);
 
     return (
@@ -81,6 +80,15 @@ export default function AdminDiscount(props: IAppProps) {
                             </div>
                         </div>
                         <p className={cx('text-sm font-semibold')}>Số lượng: {discounts.length}</p>
+                        <div>
+                            <input
+                                className={cx('wrapper-inputSearch')}
+                                type="text"
+                                placeholder="Tìm kiếm mã khuyến mãi..."
+                                value=""
+                                onChange={() => console.log('123')}
+                            ></input>
+                        </div>
                     </div>
                     {isLoader ? (
                         <div className="flex items-center justify-center relative">
@@ -196,7 +204,7 @@ export default function AdminDiscount(props: IAppProps) {
                         </div>
                     ) : (
                         <div className="flex items-center justify-center mt-10">
-                            <p className="font-semibold text-base">Chưa có mã khuyến mãi</p>
+                            <p className="text-sm font-semibold">Chưa có mã khuyến mãi</p>
                         </div>
                     )}
                     {openChooseObjectCustomer && (

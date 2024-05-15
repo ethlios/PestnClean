@@ -133,6 +133,8 @@ export const updateOrderSuccess = createAction<any>(type.UPDATE_ORDER_SUCCESS);
 
 export const removeOrderAll = createAction<any>(type.REMOVE_ORDER_ALL);
 
+export const saveDataOrder = createAction<any>(type.SAVE_DATE_ORDER);
+
 // Email
 // add email
 export const addEmail = createAction<any>(type.ADD_EMAIL);
@@ -145,9 +147,7 @@ export const removeEmailSuccess = createAction<any>(type.REMOVE_EMAIL_SUCCESS);
 export const removeEmailFail = createAction<any>(type.REMOVE_EMAIL_FAIL);
 
 // Image Work
-// add imageWork
 export const getImgWork = createAction<any>(type.GET_IMG_WORK);
-export const getImgWorkByType = createAction<any>(type.GET_IMG_WORK_BY_TYPE);
 export const addImgWork = createAction<any>(type.ADD_IMG_WORK);
 export const addImgWorkSuccess = createAction<any>(type.ADD_IMG_WORK_SUCCESS);
 export const addImgWorkFail = createAction<any>(type.ADD_IMG_WORK_FAIL);

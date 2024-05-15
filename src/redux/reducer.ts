@@ -43,7 +43,6 @@ import {
     deleteImgWorkFail,
     updateImgWorkSuccess,
     updateImgWorkFail,
-    getImgWorkByType,
     addNotificationSuccess,
     addNotificationFail,
     getAllNotificationsByIdSuccess,
@@ -54,6 +53,7 @@ import {
     updateStatusDiscountSuccess,
     updateDiscountSuccess,
     addCheckboxFilterProductPage,
+    saveDataOrder,
 } from './actions';
 
 interface RootState {
@@ -80,6 +80,7 @@ interface RootState {
     notificationAll: any[];
     province: any[];
     checkboxFilterProductPage: any[];
+    infoOrder: any;
 }
 
 const initState: RootState = {
@@ -106,6 +107,7 @@ const initState: RootState = {
     notificationAll: [],
     province: [],
     checkboxFilterProductPage: [],
+    infoOrder: {},
 };
 
 const findIndex = (state: any[], id: number) => {
@@ -234,6 +236,11 @@ const rootReducer = createReducer(initState, (builder) => {
         const index = findIndex2(state.cart, action.payload);
         state.cart.splice(index, 1);
     });
+    builder.addCase(saveDataOrder, (state, action) => {
+        const { data } = action.payload;
+        state.infoOrder = data;
+    });
+
     builder.addCase(removeCartAll, (state, action) => {
         const newCart = state.cart.filter((cart: any) => cart.id !== action.payload);
         state.cart = newCart;
@@ -331,18 +338,12 @@ const rootReducer = createReducer(initState, (builder) => {
         const { message } = action.payload;
         state.message = message;
     });
-    // get image work by type
-    builder.addCase(getImgWorkByType, (state, action) => {
-        const { message, data } = action.payload;
-        state.imageWork = data;
-        state.message = message;
-    });
+
     // Message
     builder.addCase(clearMessage, (state, action) => {
         state.message = '';
+        state.orderBehavior = '';
     });
-
-    // get user not admin
 
     // NOTIFICATIONS
     builder.addCase(addNotificationSuccess, (state, action) => {

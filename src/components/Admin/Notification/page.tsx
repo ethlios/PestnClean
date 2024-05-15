@@ -81,7 +81,7 @@ export default function AdminNotification(props: IAppProps) {
                             <CogWheel />
                         </div>
                     ) : listNotifications.length <= 0 ? (
-                        <div className="flex items-end justify-center">
+                        <div className="flex items-end justify-center mt-10">
                             <p className="text-sm font-semibold">Không có thông báo</p>
                         </div>
                     ) : (

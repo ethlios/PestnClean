@@ -63,6 +63,7 @@ export default function PaymentPage(props: IAppProps) {
                     setShowDialog={setShowDialog}
                     formInfoRef={formInfoRef}
                     cartOrder={cartOrder}
+                    formData={formData}
                 />
             )}
             {/*Content*/}
