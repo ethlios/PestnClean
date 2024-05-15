@@ -18,10 +18,10 @@ export interface IAppProps {
     isOpen: boolean;
     isClose: Function;
     valueUpdate: any;
-    addSuccess: Function
+    addSuccess: Function;
 }
 
-export default function AddNotification({ isOpen, isClose, valueUpdate , addSuccess }: IAppProps) {
+export default function AddNotification({ isOpen, isClose, valueUpdate, addSuccess }: IAppProps) {
     const [open, setOpen] = useState(false);
     const [openChooseObjectCustomer, setOpenChooseObjectCustomer] = useState(false);
     const [showToast, setShowToast] = useState<boolean>(false);
@@ -38,11 +38,11 @@ export default function AddNotification({ isOpen, isClose, valueUpdate , addSucc
     const session = useSession();
 
     const reset = () => {
-        setValueTitleNotify("");
-        setValueDesNotify("");
+        setValueTitleNotify('');
+        setValueDesNotify('');
         setListUsersSelected([]);
         setIsClicked(false);
-        handleClose()
+        handleClose();
         dispatch(clearMessage());
     };
     const handleClose = () => {
@@ -53,7 +53,11 @@ export default function AddNotification({ isOpen, isClose, valueUpdate , addSucc
     // Xử lí sự kiện lưu notify vào database
     const handleSave = () => {
         if (valueDesNotify !== '' && valueTitleNotify !== '' && selectedOption !== '') {
-            const currentDate= formatISODate(new Date(moment().format("DD/MM/YYYY")));
+            const momentDate = moment().format('MMMM Do YYYY, h:mm:ss a');
+            const parsedDate = moment(momentDate, 'MMMM Do YYYY, h:mm:ss a');
+            const jsDate = parsedDate.toDate();
+            const formatISODate = (date:any) => date.toISOString();
+            const currentDate = formatISODate(jsDate);
             if (selectedOption === 'Không giới hạn') {
                 if (session.data && session.data?.user.rule === 'admin') {
                     dispatch(
@@ -114,13 +118,13 @@ export default function AddNotification({ isOpen, isClose, valueUpdate , addSucc
     };
 
     useEffect(() => {
-        if(showToast) {
+        if (showToast) {
             setTimeout(() => {
                 reset();
                 addSuccess(true);
-            },500);
+            }, 500);
         }
-    },[showToast])
+    }, [showToast]);
 
     // Xử lí khi thêm notify success vào db thì send toàn bộ notify đến client được chọn qua socket.io
     useEffect(() => {
@@ -158,7 +162,6 @@ export default function AddNotification({ isOpen, isClose, valueUpdate , addSucc
         connectSocket();
     }, []);
 
-
     useEffect(() => {
         if (isOpen) {
             setOpen(true);
@@ -178,12 +181,7 @@ export default function AddNotification({ isOpen, isClose, valueUpdate , addSucc
 
     return (
         <>
-            <Toast
-                text= "Thêm thành công"
-                showToast={showToast}
-                setShowToast={setShowToast}
-                rule="normal"
-            />
+            <Toast text="Thêm thành công" showToast={showToast} setShowToast={setShowToast} rule="normal" />
             <div className={cx('wrapper')}>
                 <div className={cx('wrapper-header', 'flex items-center justify-between h-10')}>
                     <p className="font-medium underline">TẠO THÔNG BÁO</p>
@@ -263,7 +261,11 @@ export default function AddNotification({ isOpen, isClose, valueUpdate , addSucc
                     </div>
                 </div>
                 <div className="flex justify-center">
-                    <button className={cx(isClicked ? "wrapper-unClicked" : 'wrapper-btnSubmit', 'mt-6')} onClick={handleSave} disabled={isClicked}>
+                    <button
+                        className={cx(isClicked ? 'wrapper-unClicked' : 'wrapper-btnSubmit', 'mt-6')}
+                        onClick={handleSave}
+                        disabled={isClicked}
+                    >
                         Thêm thông báo
                     </button>
                 </div>

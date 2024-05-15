@@ -17,9 +17,10 @@ export interface IAppProps {
     setShowDialog?: any;
     formInfoRef?: any;
     cartOrder?: any;
+    formData?: any
 }
 
-export default function DialogConfirm({ setShowDialog, formInfoRef, cartOrder }: IAppProps) {
+export default function DialogConfirm({ setShowDialog, formInfoRef, cartOrder, formData }: IAppProps) {
     const { sizeX } = useSize();
     let orderBehavior = useSelector((state: RootState) => state.main.orderBehavior);
 
@@ -33,6 +34,13 @@ export default function DialogConfirm({ setShowDialog, formInfoRef, cartOrder }:
             },
         );
     };
+
+    useEffect(() => {
+        console.log({
+            formData: formData,
+            cart: cartOrder
+        })
+    },[formData]);
 
     useEffect(() => {
         if (orderBehavior === '2') {

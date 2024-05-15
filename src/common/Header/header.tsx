@@ -130,6 +130,7 @@ export default function Header(props: HeaderProps) {
     useEffect(() => {
         if (isConnected && session?.user.id) {
             socket.on('respMessageAddNotify', (value) => {
+                console.log(value);
                 const shortenedMessage = value.title.substring(0, 40 - 3) + '...';
                 setShowToast({
                     message: 'Bạn vừa nhận được thông báo mới: ' + shortenedMessage,
