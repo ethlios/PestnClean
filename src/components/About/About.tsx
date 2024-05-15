@@ -116,7 +116,6 @@ export default function AboutCPPage(props: IAppProps) {
                     src="https://drive.google.com/file/d/1qf7KBSdgv-opaijXaOvVW3g07AIFsv3o/preview"
                     width="100%"
                     height="100%"
-                    allow="autoplay"
                 ></iframe>
             </div>
 
