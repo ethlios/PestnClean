@@ -10,7 +10,6 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import styles from './product_detail.module.scss';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
-import ButtonCommon from '~/components/Orther/Button';
 import useSize from '~/libs/hooks/useSize';
 import Image from 'next/image';
 import { useForm } from 'react-hook-form';
@@ -18,7 +17,6 @@ import { useSession } from 'next-auth/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addFeedback, deleteFeedback } from '~/redux/actions';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
-import { root } from 'postcss';
 import { RootState } from '~/redux/provider/store';
 
 const cx = classNames.bind(styles);
@@ -110,7 +108,12 @@ export default function ProductDescript({ product }: IAppProps) {
                         <IconButton>{isOpen1 ? <RemoveIcon /> : <AddIcon />}</IconButton>
                     </div>
                     <div className={cx('tab-content')} id="dropbox-1">
-                        {product.length > 0 && <p dangerouslySetInnerHTML={{ __html: product[0].detail }} />}
+                        {product.length > 0 && (
+                            <div
+                                dangerouslySetInnerHTML={{ __html: product[0].detail }}
+                                className="ql-editor"
+                            />
+                        )}
                     </div>
                 </div>
                 {/*  */}

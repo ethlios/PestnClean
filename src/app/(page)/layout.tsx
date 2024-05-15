@@ -46,7 +46,7 @@ export default function ComponentConnectLayout({ children }: { children: React.R
                 }),
             );
         }
-    }, [dispatch, session]);
+    }, []);
 
     useEffect(() => {
         if (session?.user.rule !== 'admin' || !session.user) {
@@ -60,7 +60,7 @@ export default function ComponentConnectLayout({ children }: { children: React.R
 
             allImg();
         }
-    }, [dispatch, session?.user]);
+    }, []);
 
     useEffect(() => {
         const allProducts = async () => {
@@ -72,7 +72,7 @@ export default function ComponentConnectLayout({ children }: { children: React.R
         };
 
         allProducts();
-    }, [dispatch]);
+    }, []);
 
     useEffect(() => {
         const allProvince = async () => {
@@ -82,7 +82,7 @@ export default function ComponentConnectLayout({ children }: { children: React.R
             dispatch(getProvince(province));
         };
         allProvince();
-    }, [dispatch]);
+    }, []);
 
     return openCp ? (
         <div>

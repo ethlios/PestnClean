@@ -33,13 +33,13 @@ export const metadata: Metadata = {
             'PestnClean chuyên cung cấp các dịch vụ kiểm soát côn trùng, dịch vụ vệ sinh, giải pháp vệ sinh cho doanh nghiệp, tòa nhà...',
         images: [
             {
-                url: 'https://res.cloudinary.com/dj2jarcxk/image/upload/v1713230975/pestnclean/mockuplogo-min_wvup8n.png',
+                url: 'https://res.cloudinary.com/dj2jarcxk/image/upload/v1715671656/21821905_OFC_3_231_12_2021-min_f7tr71-min_s5zixt.png',
                 width: 900,
                 height: 450,
                 alt: `Ảnh Pestnclean - Nâng cao chất lượng cuộc sống`,
                 type: 'image/png',
                 secureUrl:
-                    'https://res.cloudinary.com/dj2jarcxk/image/upload/v1713230975/pestnclean/mockuplogo-min_wvup8n.png',
+                    'https://res.cloudinary.com/dj2jarcxk/image/upload/v1715671656/21821905_OFC_3_231_12_2021-min_f7tr71-min_s5zixt.png',
             },
         ],
         type: 'website',

@@ -1,11 +1,11 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'Giỏ hàng',
+    title: 'Quản lý tài khoản',
     description:
         'Đến với PestnClean chúng tôi, bạn sẽ được cung cấp dịch vụ vệ sinh và kiểm soát côn trùng uy tín hàng đầu Việt Nam.',
     openGraph: {
-        title: 'Giỏ hàng - Pestnclean',
+        title: 'Quản lý tài khoản - Pestnclean',
         description:
             'Đến với PestnClean chúng tôi, bạn sẽ được cung cấp dịch vụ vệ sinh và kiểm soát côn trùng uy tín hàng đầu Việt Nam.',
         images: [
@@ -21,14 +21,10 @@ export const metadata: Metadata = {
         ],
         type: 'website',
         locale: 'vi_VN',
-        siteName: 'Giỏ hàng Pestnclean',
-        url: '/giohang',
-    },
-    alternates: {
-        canonical: `/giohang`,
+        siteName: 'Quản lý tài khoản Pestnclean',
     },
 };
 
-export default function CartPageLayout({ children }: { children: React.ReactNode }) {
+export default function BlogsPageLayout({ children }: { children: React.ReactNode }) {
     return children;
 }

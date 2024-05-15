@@ -10,10 +10,6 @@ const handler = NextAuth({
             clientId: process.env.GOOGLE_CLIENT_ID ?? '',
             clientSecret: process.env.GOOGLE_CLIENT_SECRET ?? '',
         }),
-        FacebookProvider({
-            clientId: process.env.FACEBOOK_CLIENT_ID ?? '',
-            clientSecret: process.env.FACEBOOK_CLIENT_SECRET ?? '',
-        }),
     ],
     session: {
         maxAge: 604800, //--> Lưu đăng nhập trong vòng 30 ngày
@@ -66,7 +62,7 @@ const handler = NextAuth({
         },
     },
     pages: {
-        signIn: '/',
+        signIn: '/login',
     },
 });
 
