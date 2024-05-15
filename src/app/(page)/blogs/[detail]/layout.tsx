@@ -1,5 +1,4 @@
 import { blogs } from '~/constants/blogs';
-import { nameToLink } from '~/libs/orthers/nameToLink';
 
 interface Props {
     params: {
@@ -9,10 +8,10 @@ interface Props {
 
 export async function generateMetadata({ params }: Props) {
     const blog: any = blogs.filter((blog) => {
-        return nameToLink(blog.title) === params.detail;
+        return blog.path === params.detail;
     });
 
-    const path = nameToLink(blog[0].title ?? '');
+    const path = blog.path;
 
     if (!blog[0]) {
         return {

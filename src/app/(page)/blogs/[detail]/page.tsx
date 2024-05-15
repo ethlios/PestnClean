@@ -13,7 +13,6 @@ import BlogDetails from '~/components/Blogs/BlogsDetail/BlogsDetail';
 import styles from '~/components/Blogs/BlogsDetail/blogDetail.module.scss';
 import { blogs } from '~/constants/blogs';
 import useSize from '~/libs/hooks/useSize';
-import { nameToLink } from '~/libs/orthers/nameToLink';
 import { getBlogComment } from '~/redux/actions';
 
 const cx = classNames.bind(styles);
@@ -28,7 +27,7 @@ export default function BlogsDetailPage(props: IAppProps) {
 
     useEffect(() => {
         const blogFilter = blogs.filter((blog) => {
-            return `/blogs/${nameToLink(blog.title)}` === pathname;
+            return `/blogs/${blog.path}` === pathname;
         });
 
         if (blogFilter.length > 0) {
@@ -49,7 +48,7 @@ export default function BlogsDetailPage(props: IAppProps) {
     useEffect(() => {
         const getComment = async () => {
             if (blog.length > 0) {
-                const cmts = await fetch(`/api/cmtblog/blog/${blog[0].title}`).then((res) => res.json());
+                const cmts = await fetch(`/api/cmtblog/blog/${blog[0].path}`).then((res) => res.json());
 
                 dispatch(getBlogComment(cmts));
             }

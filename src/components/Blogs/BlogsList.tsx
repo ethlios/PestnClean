@@ -6,7 +6,6 @@ import classNames from 'classnames/bind';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { blogs, btnLists } from '~/constants/blogs';
-import { nameToLink } from '~/libs/orthers/nameToLink';
 import ButtonCommon from '../Orther/Button';
 import styles from './blogs.module.scss';
 import Image from 'next/image';
@@ -153,7 +152,7 @@ export default function BlogsList(props: IAppProps) {
                                             >
                                                 {currentBlog === index && (
                                                     <Link
-                                                        href={`blogs/${nameToLink(blog.title)}`}
+                                                        href={`blogs/${blog.path}`}
                                                         style={{
                                                             backgroundColor: 'var(--primary)',
                                                             color: '#fff',
@@ -181,7 +180,7 @@ export default function BlogsList(props: IAppProps) {
                                             }}
                                         >
                                             <p>{blog.category}</p>
-                                            <Link href={`blogs/${nameToLink(blog.title)}`}>{blog.title}</Link>
+                                            <Link href={`blogs/${blog.path}`}>{blog.title}</Link>
                                             <p>
                                                 <AccessTimeIcon />
                                                 {blog.createdAt}

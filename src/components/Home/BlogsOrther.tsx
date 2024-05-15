@@ -5,7 +5,6 @@ import classNames from 'classnames/bind';
 import styles from './home.module.scss';
 import ButtonCommon from '../Orther/Button';
 import Image from 'next/image';
-import { nameToLink } from '~/libs/orthers/nameToLink';
 import Link from 'next/link';
 import { IconButton } from '@mui/material';
 import EastOutlinedIcon from '@mui/icons-material/EastOutlined';
@@ -91,7 +90,7 @@ export default function BlogOthers(props: IAppProps) {
                                 >
                                     <p>{item.description}</p>
 
-                                    <Link href={`/blogs/${nameToLink(item.title)}`} aria-label="blog">
+                                    <Link href={`/blogs/${item.path}`} aria-label="blog">
                                         <div
                                             style={{
                                                 backgroundColor: 'var(--secondary)',
