@@ -10,8 +10,9 @@ import { addNotification, clearMessage } from '~/redux/actions';
 import { useSession } from 'next-auth/react';
 import { socket } from '~/websocket/socket';
 import Toast from '~/components/Orther/Toast';
-import { formatISODate } from '~/libs/orthers/formatDate';
+import { convertMomentToDate, formatISODate } from '~/libs/orthers/formatDate';
 import moment from 'moment';
+import useConnectSocket from '~/libs/hooks/useConnectSocket';
 const cx = classNames.bind(styles);
 
 export interface IAppProps {
@@ -25,14 +26,13 @@ export default function AddNotification({ isOpen, isClose, valueUpdate, addSucce
     const [open, setOpen] = useState(false);
     const [openChooseObjectCustomer, setOpenChooseObjectCustomer] = useState(false);
     const [showToast, setShowToast] = useState<boolean>(false);
-    const [isConnected, setIsConnected] = useState(false);
-    const [transport, setTransport] = useState('N/A');
     const [valueTitleNotify, setValueTitleNotify] = useState<string>('');
     const [valueDesNotify, setValueDesNotify] = useState<string>('');
     const [listUsersSelected, setListUsersSelected] = useState<any[]>([]);
     const [selectedOption, setSelectedOption] = useState<string>('');
     const [isClicked, setIsClicked] = useState<boolean>(false);
     const [dataMessageNotifySuccess, setDataMessageNotifySuccess] = useState<any>({});
+    const {isConnected} = useConnectSocket();
     const dispatch = useDispatch();
     const selector = useSelector((state: RootState) => state.main);
     const session = useSession();
@@ -53,11 +53,7 @@ export default function AddNotification({ isOpen, isClose, valueUpdate, addSucce
     // Xử lí sự kiện lưu notify vào database
     const handleSave = () => {
         if (valueDesNotify !== '' && valueTitleNotify !== '' && selectedOption !== '') {
-            const momentDate = moment().format('MMMM Do YYYY, h:mm:ss a');
-            const parsedDate = moment(momentDate, 'MMMM Do YYYY, h:mm:ss a');
-            const jsDate = parsedDate.toDate();
-            const formatISODate = (date:any) => date.toISOString();
-            const currentDate = formatISODate(jsDate);
+            const currentDate = convertMomentToDate();
             if (selectedOption === 'Không giới hạn') {
                 if (session.data && session.data?.user.rule === 'admin') {
                     dispatch(
@@ -135,32 +131,6 @@ export default function AddNotification({ isOpen, isClose, valueUpdate, addSucce
             }
         }
     }, [selector.message]);
-
-    const connectSocket = () => {
-        if (socket.connected) {
-            onConnect();
-        }
-
-        function onConnect() {
-            setIsConnected(true);
-        }
-
-        function onDisconnect() {
-            setIsConnected(false);
-            setTransport('N/A');
-        }
-
-        socket.on('connect', onConnect);
-        socket.on('disconnect', onDisconnect);
-        return () => {
-            socket.off('connect', onConnect);
-            socket.off('disconnect', onDisconnect);
-        };
-    };
-
-    useEffect(() => {
-        connectSocket();
-    }, []);
 
     useEffect(() => {
         if (isOpen) {

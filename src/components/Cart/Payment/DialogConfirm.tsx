@@ -1,15 +1,19 @@
-import emailjs from '@emailjs/browser';
 import { Button } from '@mui/material';
 import CircularProgress from '@mui/material/CircularProgress';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
-import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import ButtonCommon from '~/components/Orther/Button';
 import useSize from '~/libs/hooks/useSize';
 import { RootState } from '~/redux/provider/store';
 import sendEmailImg from '../../../../public/img/Asset 1.png';
 import styles from './payment.module.scss';
+import useConnectSocket from '~/libs/hooks/useConnectSocket';
+import { convertMomentToDate } from '~/libs/orthers/formatDate';
+import { addNotification } from '~/redux/actions';
+import useSendEmailOnce from './useSendEmailOnce';
+import formatter from '~/libs/orthers/formatMoney';
 
 const cx = classNames.bind(styles);
 
@@ -17,30 +21,41 @@ export interface IAppProps {
     setShowDialog?: any;
     formInfoRef?: any;
     cartOrder?: any;
-    formData?: any
+    formData?: any;
 }
 
 export default function DialogConfirm({ setShowDialog, formInfoRef, cartOrder, formData }: IAppProps) {
     const { sizeX } = useSize();
+    const [dataMessageNotifySuccess, setDataMessageNotifySuccess] = useState<any>({});
     let orderBehavior = useSelector((state: RootState) => state.main.orderBehavior);
+    const { isConnected, socket } = useConnectSocket();
+    const selector = useSelector((state: RootState) => state.main);
+    const dispatch = useDispatch();
+    const currentDate = convertMomentToDate();
 
-    const sendEmail = () => {
-        emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', formInfoRef.current, 'YOUR_USER_ID').then(
-            (result) => {
-                console.log('SEND EMAIL SUCCESS!');
-            },
-            (error) => {
-                console.log('SEND EMAIL FAILED...', error);
-            },
-        );
+    const handleClose = () => {
+        setShowDialog(false);
     };
 
-    useEffect(() => {
-        console.log({
-            formData: formData,
-            cart: cartOrder
-        })
-    },[formData]);
+
+    // XỬ LÝ GỬI EMAIL KHI NGƯỜI DÙNG ĐẶT HÀNG THÔNG CÔNG
+    const sendEmail = useSendEmailOnce(formData, cartOrder, isConnected, selector.infoOrder.payment);
+
+    // XỬ LÝ LƯU THÔNG BÁO ĐẶT HÀNG CỦA NGƯỜI DÙNG VÀO DB
+    const addNotificationOrders = async () => {
+        if (selector.infoOrder) {
+            const notificationMessage = {
+                title: 'Bạn vừa đặt hàng thành công',
+                message: `Bạn vừa đặt ${cartOrder.length} sản phẩm với tổng giá tiền ${formatter.format(selector.infoOrder.payment)} 
+                với phương thức thanh toán(${selector.infoOrder.paymentMethod})`,
+                recipientId: selector.infoOrder.userId,
+                createdAt: currentDate,
+                state: false,
+            };
+            setDataMessageNotifySuccess(notificationMessage);
+            return await dispatch(addNotification(notificationMessage));
+        }
+    };
 
     useEffect(() => {
         if (orderBehavior === '2') {
@@ -53,13 +68,19 @@ export default function DialogConfirm({ setShowDialog, formInfoRef, cartOrder, f
                 return !existsInCartOrder;
             });
             localStorage.setItem('cart', JSON.stringify(filteredCart));
-            // sendEmail();
+            addNotificationOrders();
+            sendEmail();
         }
     }, [cartOrder, orderBehavior]);
 
-    const handleClose = () => {
-        setShowDialog(false);
-    };
+    // Xử lí khi thêm notify success vào db thì send toàn bộ notify đến client được chọn qua socket.io
+    useEffect(() => {
+        if (selector.message === 'Đã gửi thông báo đến user!') {
+            if (isConnected) {
+                socket.emit('addNotification', dataMessageNotifySuccess);
+            }
+        }
+    }, [selector.message]);
 
     return (
         <div className="cpmount">
