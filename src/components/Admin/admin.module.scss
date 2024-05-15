@@ -13,6 +13,20 @@
     border-right: solid 1.5px rgba(0, 0, 0, 0.1);
     height: 100%;
     background-color: rgb(245, 245, 245);
+
+    @media (max-width: 768px) {
+        position: absolute;
+        width: 100%;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        transition: transform 0.5s ease-in-out;
+        transform: translateX(-100%);
+
+        &.open {
+            transform: translateX(0);
+        }
+    }
 }
 
 .panel-header {
@@ -21,6 +35,7 @@
     display: flex;
     align-items: center;
     padding: 0 20px;
+    justify-content: space-between;
 }
 
 .panel-wrapper {
@@ -52,6 +67,10 @@
     width: 76%;
     height: 100%;
     overflow: scroll;
+
+    @media (max-width: 768px) {
+        width: 100%;
+    }
 }
 
 .content-header {
@@ -64,6 +83,10 @@
     align-items: center;
     position: sticky;
     top: 0;
+
+    @media (max-width: 768px) {
+        justify-content: space-between;
+    }
 }
 
 .commom-button {
@@ -334,6 +357,7 @@
         background-color: #fff;
     }
 }
+
 .product-info {
     width: calc(100% - 125px);
     padding: 10px;
@@ -384,6 +408,7 @@
     letter-spacing: -0.1px;
     color: var(--text-black);
 }
+
 .product-price {
     font-size: 16px;
     font-weight: 700;
@@ -410,6 +435,7 @@
         color: rgba(0, 0, 0, 0.55);
     }
 }
+
 // Email
 .email-item {
     display: flex;
