@@ -118,7 +118,7 @@ export default function Header(props: HeaderProps) {
         if (session?.user.id) {
             dispatch(getAllNotificationsById({ id: session.user.id }));
         }
-    }, [dispatch, session]);
+    }, []);
 
     useEffect(() => {
         if (selector.message === 'Get All Notifications By Id Success') {
