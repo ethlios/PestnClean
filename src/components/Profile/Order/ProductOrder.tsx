@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react';
 import RemoveIcon from '@mui/icons-material/Remove';
 import IconButton from '@mui/material/IconButton';
 import AddIcon from '@mui/icons-material/Add';
+import Link from 'next/link';
 
 const cx = classNames.bind(styles);
 
@@ -32,6 +33,40 @@ export default function ProductOrder({ products, payment }: ProductOrderProps) {
                     </>
                 )}
             </div>
+            <ul
+                style={{
+                    listStyleType: 'initial',
+                    marginLeft: '20px',
+                    borderTop: 'solid 2px var(--primary)',
+                    paddingTop: '10px',
+                }}
+            >
+                <li
+                    style={{
+                        fontSize: '14px',
+                        fontWeight: '500',
+                    }}
+                >
+                    Sau khi đã xác nhận, đơn hàng sẽ được giao từ 2-5 ngày!
+                </li>
+                <li
+                    style={{
+                        fontSize: '14px',
+                        fontWeight: '500',
+                    }}
+                >
+                    Hoặc gọi trực tiếp{' '}
+                    <Link
+                        href={'tel:0868363600'}
+                        aria-label="phone"
+                        rel="noopener noreferrer"
+                        target="_blank"
+                    >
+                        0868 3636 00
+                    </Link>{' '}
+                    nếu có bất kỳ thay đổi nào!
+                </li>
+            </ul>
         </div>
     );
 }
@@ -47,7 +82,13 @@ export function ProductItem({ item }: ProductItemProps) {
                 <Image src={item.img} alt={item.title} width={70} height={90} />
                 <div className={`${cx('product-detail')} flex flex-col justify-center ml-2`}>
                     <p className={cx('product-name')}>{item.title}</p>
-                    <div className="flex">
+                    <div
+                        className="flex"
+                        style={{
+                            fontSize: '14px',
+                            fontWeight: 500,
+                        }}
+                    >
                         <span>{item.quantity}</span>
                         <span className={'mx-1'}>x</span>
                         <span>{formatter.format(+item.price)}</span>

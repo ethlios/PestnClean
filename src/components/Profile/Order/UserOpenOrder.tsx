@@ -49,12 +49,12 @@ export default function UserOpenOrder({ setOpenAddOrder, order }: IAppProps) {
         setPaymentStatus(order?.paymentStatus || '');
         setOrderAt(order?.orderAt || '');
         setCode(order?.code || '');
-    }, []);
+    }, [order]);
 
     return (
         <div className={`${cx('add-wrapper')} cpmount`}>
             <div className={cx('add-content')} onClick={(e) => e.stopPropagation()} style={{ zIndex: 100 }}>
-                <div className={cx('add-header')}>
+                <div className={cx('add-header')} style={{ marginBottom: '10px' }}>
                     <p>Xem đơn hàng</p>
                     <button className={cx('commom-button')} onClick={() => setOpenAddOrder(false)}>
                         EXIT
@@ -63,7 +63,7 @@ export default function UserOpenOrder({ setOpenAddOrder, order }: IAppProps) {
                 <div className={cx('add-body')}>
                     <div className={'grid grid-cols-12 gap-3 w-full'}>
                         <div className={'col-span-12 md:col-span-4'}>
-                            <div className={'flex flex-col gap-2 w-full'}>
+                            <div className={'flex flex-col gap-5 w-full'}>
                                 <TextField label="Tên..." value={name} disabled={true} />
                                 <TextField label="Email..." type={'email'} value={email} disabled={true} />
                                 <TextField
@@ -79,7 +79,7 @@ export default function UserOpenOrder({ setOpenAddOrder, order }: IAppProps) {
                                         <MenuItem value={city}>{city}</MenuItem>
                                     </Select>
                                 </FormControl>
-                                <FormControl sx={{ mb: 1 }}>
+                                <FormControl>
                                     <InputLabel>Quận huyện</InputLabel>
                                     <Select
                                         label="Quận huyện"
@@ -90,7 +90,7 @@ export default function UserOpenOrder({ setOpenAddOrder, order }: IAppProps) {
                                         <MenuItem value={district}>{district}</MenuItem>
                                     </Select>
                                 </FormControl>
-                                <FormControl sx={{ mb: 1 }}>
+                                <FormControl>
                                     <InputLabel>Phường xã</InputLabel>
                                     <Select label="Phường xã" defaultValue={''} value={ward} disabled={true}>
                                         <MenuItem value={ward}>{ward}</MenuItem>
@@ -99,10 +99,10 @@ export default function UserOpenOrder({ setOpenAddOrder, order }: IAppProps) {
                             </div>
                         </div>
                         <div className={'col-span-12 md:col-span-4'}>
-                            <div className={'flex flex-col gap-2 w-full'}>
+                            <div className={'flex flex-col gap-5 w-full'}>
                                 <TextField label="Tạo ngày..." value={orderAt} disabled={true} />
                                 <TextField label="Code..." value={code} disabled={true} />
-                                <FormControl sx={{ mb: 1 }}>
+                                <FormControl>
                                     <InputLabel>Trạng thái</InputLabel>
                                     <Select
                                         label="Trạng thái"
@@ -113,7 +113,7 @@ export default function UserOpenOrder({ setOpenAddOrder, order }: IAppProps) {
                                         <MenuItem value={status}>{status}</MenuItem>
                                     </Select>
                                 </FormControl>
-                                <FormControl sx={{ mb: 1 }}>
+                                <FormControl>
                                     <InputLabel>Phương thức thanh toán</InputLabel>
                                     <Select
                                         label="Phương thức thanh toán"
@@ -130,6 +130,9 @@ export default function UserOpenOrder({ setOpenAddOrder, order }: IAppProps) {
                                     className={cx('textarea')}
                                     value={message}
                                     disabled={true}
+                                    style={{
+                                        marginTop: '0',
+                                    }}
                                 />
                             </div>
                         </div>

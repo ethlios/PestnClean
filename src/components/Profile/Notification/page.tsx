@@ -16,23 +16,23 @@ export default function UserNotification(props: IAppProps) {
     const dispatch = useDispatch();
     const selector = useSelector((state: RootState) => state.main);
     const [listNotifications, setListNotifications] = useState<any[]>([]);
-  
+
     useEffect(() => {
         if (session?.user.id) {
             dispatch(getAllNotificationsById({ id: session.user.id }));
         }
-    }, [session]);
+    }, [dispatch, session]);
 
     useEffect(() => {
         if (selector.message === 'Get All Notifications By Id Success') {
             setListNotifications(selector.notificationAll);
             dispatch(clearMessage());
         }
-    }, [selector.message]);
+    }, [dispatch, selector.message, selector.notificationAll]);
     return (
         <div className={cx('wrapper', '')}>
             <div className={cx('wrapper-header')}>
-                <p className='font-semibold'>Thông báo của bạn</p>
+                <p className="font-semibold">Thông báo của bạn</p>
             </div>
             <div className={cx('wrapper-table', 'mt-4')}>
                 <table>
@@ -44,15 +44,28 @@ export default function UserNotification(props: IAppProps) {
                         </tr>
                     </thead>
                     <tbody>
-                        {listNotifications.map((item, index) => {
-                            return (
-                                <tr key={index}>
-                                    <td className={cx('font-semibold')}>{item.title}</td>
-                                    <td className={cx('font-medium')}>{item.message}</td>
-                                    <td className={cx('font-medium')}>{formatDate(item.createdAt)}</td>
-                                </tr>
-                            );
-                        })}
+                        {listNotifications.length > 0 ? (
+                            listNotifications.map((item, index) => {
+                                return (
+                                    <tr key={index}>
+                                        <td className={cx('font-semibold')}>{item.title}</td>
+                                        <td className={cx('font-medium')}>{item.message}</td>
+                                        <td className={cx('font-medium')}>{formatDate(item.createdAt)}</td>
+                                    </tr>
+                                );
+                            })
+                        ) : (
+                            <p
+                                style={{
+                                    fontSize: '14px',
+                                    fontWeight: 600,
+                                    letterSpacing: '-.2px',
+                                    padding: '20px 20px 20px 8px',
+                                }}
+                            >
+                                Chưa có thông báo nào!
+                            </p>
+                        )}
                     </tbody>
                 </table>
             </div>

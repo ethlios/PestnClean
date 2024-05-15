@@ -48,7 +48,7 @@ export default function PaymentForm({ setFormData, formInfoRef }: IAppProps) {
             setDistrict(session.user.district || '');
             setWard(session.user.ward || '');
         }
-    }, []);
+    }, [session?.user]);
 
     useEffect(() => {
         setFormData({

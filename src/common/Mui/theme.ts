@@ -51,6 +51,14 @@ export let theme = createTheme({
                 },
             },
         },
+        MuiTableCell: {
+            styleOverrides: {
+                root: {
+                    fontSize: '14px',
+                    fontWeight: 600,
+                },
+            },
+        },
     },
 });
 

@@ -187,17 +187,17 @@ const rootReducer = createReducer(initState, (builder) => {
     });
 
     builder.addCase(addProductSuccess, (state, action) => {
-        state.products.push(action.payload);
+        state.allProducts.push(action.payload);
     });
 
     builder.addCase(removeProductSuccess, (state, action) => {
-        const index = findIndex(state.products, action.payload);
-        state.products.splice(index, 1);
+        const index = findIndex(state.allProducts, action.payload);
+        state.allProducts.splice(index, 1);
     });
 
     builder.addCase(updateProductSuccess, (state, action) => {
-        const index: number = findIndex(state.products, action.payload.id);
-        state.products[index] = action.payload;
+        const index: number = findIndex(state.allProducts, action.payload.id);
+        state.allProducts[index] = action.payload;
     });
 
     // Blog

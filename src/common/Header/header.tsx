@@ -214,9 +214,9 @@ export default function Header(props: HeaderProps) {
                         />
                     </form>
                     <div className={cx('search-btn-fill')} onClick={() => setOpenSearch(false)}>
-                        <IconButton>
+                        <div>
                             <CloseOutlinedIcon />
-                        </IconButton>
+                        </div>
                     </div>
                 </div>
                 <Link href={'/'}>
@@ -270,7 +270,7 @@ export default function Header(props: HeaderProps) {
                             }}
                             appendTo={document.body}
                             interactive
-                            placement="bottom"
+                            placement="auto"
                             offset={[-10, 10]}
                             zIndex={2000}
                             render={(attrs) => (
@@ -285,43 +285,56 @@ export default function Header(props: HeaderProps) {
                                         <SettingsIcon />
                                     </div>
                                     <div className={cx('tippy-boxNotifications-scroll')}>
-                                        {listNotifications.map((item, index) => {
-                                            return (
-                                                <div
-                                                    key={index}
-                                                    className={cx(
-                                                        'flex items-center justify-between',
-                                                        'tippy-boxNotifications-content',
-                                                    )}
-                                                >
-                                                    <div className={cx('tippy-boxNotifications-title')}>
-                                                        <p
-                                                            className={cx(
-                                                                'font-medium',
-                                                                'tippy-boxNotifications-content-title',
-                                                            )}
-                                                        >
-                                                            {item.title}
-                                                        </p>
-                                                        <p></p>
-                                                        <p
-                                                            className={cx(
-                                                                'tippy-boxNotifications-content-message',
-                                                            )}
-                                                        >
-                                                            {item.message}
-                                                        </p>
-                                                    </div>
-                                                    <p
+                                        {listNotifications.length > 0 ? (
+                                            listNotifications.map((item, index) => {
+                                                return (
+                                                    <div
+                                                        key={index}
                                                         className={cx(
-                                                            'tippy-boxNotifications-content-createdAt',
+                                                            'flex items-center justify-between',
+                                                            'tippy-boxNotifications-content',
                                                         )}
                                                     >
-                                                        {calculateTimeDifference(item.createdAt)}
-                                                    </p>
-                                                </div>
-                                            );
-                                        })}
+                                                        <div className={cx('tippy-boxNotifications-title')}>
+                                                            <p
+                                                                className={cx(
+                                                                    'font-medium',
+                                                                    'tippy-boxNotifications-content-title',
+                                                                )}
+                                                            >
+                                                                {item.title}
+                                                            </p>
+                                                            <p></p>
+                                                            <p
+                                                                className={cx(
+                                                                    'tippy-boxNotifications-content-message',
+                                                                )}
+                                                            >
+                                                                {item.message}
+                                                            </p>
+                                                        </div>
+                                                        <p
+                                                            className={cx(
+                                                                'tippy-boxNotifications-content-createdAt',
+                                                            )}
+                                                        >
+                                                            {calculateTimeDifference(item.createdAt)}
+                                                        </p>
+                                                    </div>
+                                                );
+                                            })
+                                        ) : (
+                                            <p
+                                                style={{
+                                                    padding: '15px',
+                                                    fontSize: '14px',
+                                                    fontWeight: '600',
+                                                    letterSpacing: '-.2px',
+                                                }}
+                                            >
+                                                Chưa có thông báo nào!
+                                            </p>
+                                        )}
                                     </div>
                                 </div>
                             )}
@@ -345,18 +358,23 @@ export default function Header(props: HeaderProps) {
                                 <div tabIndex={-1} {...attrs} className={cx('tippy-box')}>
                                     {session.user.rule === 'admin' ? (
                                         <div onClick={() => setOpenAcc(false)}>
-                                            <Link href={'/admin'}>Dashboard</Link>
+                                            <Link href={'/admin'} aria-label="admin">
+                                                Dashboard
+                                            </Link>
                                         </div>
                                     ) : (
                                         <div onClick={() => setOpenAcc(false)}>
-                                            <Link href={`/profile/${session.user.id}`}>
+                                            <Link href={`/profile/${session.user.id}`} aria-label="account">
                                                 Quản lý tài khoản
                                             </Link>
                                         </div>
                                     )}
                                     {session.user.rule !== 'admin' && (
                                         <div onClick={() => setOpenAcc(false)}>
-                                            <Link href={`/profile/${session.user.id}?q=order`}>
+                                            <Link
+                                                href={`/profile/${session.user.id}?q=order`}
+                                                aria-label="order"
+                                            >
                                                 Kiểm tra đơn hàng
                                             </Link>
                                         </div>
@@ -382,7 +400,7 @@ export default function Header(props: HeaderProps) {
                             </div>
                         </Tippy>
                     ) : (
-                        <Link href="/login" className="icon-hover">
+                        <Link href="/login" className="icon-hover" aria-label="login">
                             <AccountCircleOutlinedIcon />
                         </Link>
                     )}

@@ -14,6 +14,7 @@ import { arrToStr, removeImg } from '~/libs/orthers/removeImg';
 import HastagList from './Hastag';
 import CategoryMain from './CategoryMain';
 import { filterMenu as categories } from '~/constants/productFilter';
+import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 
 const cx = classNames.bind(styles);
 
@@ -216,41 +217,65 @@ export default function AdminAddProduct({ setAddProduct, updateProduct, setUpdat
                             hastagList={phanloaiList}
                             setHastagList={setPhanloaiList}
                         />
-                        <div>
-                            <label>Danh mục chính:</label>
-                            <select className={cx('add-inp')} defaultValue={''} {...register('category1')}>
+                        <FormControl>
+                            <InputLabel
+                                style={{
+                                    fontSize: '14px',
+                                    fontWeight: '600',
+                                    marginBottom: '10px',
+                                }}
+                            >
+                                Danh mục chính
+                            </InputLabel>
+                            <Select defaultValue={''} {...register('category1')} label="Danh mục chính">
                                 {categories.map((item: any) => (
-                                    <option key={item.title} value={item.title}>
+                                    <MenuItem key={item.title} value={item.title}>
                                         {item.title}
-                                    </option>
+                                    </MenuItem>
                                 ))}
-                            </select>
-                        </div>
-                        <div>
-                            <label>Danh mục phụ:</label>
-                            <select className={cx('add-inp')} defaultValue={''} {...register('category2')}>
+                            </Select>
+                        </FormControl>
+                        <FormControl>
+                            <InputLabel
+                                style={{
+                                    fontSize: '14px',
+                                    fontWeight: '600',
+                                    marginBottom: '10px',
+                                }}
+                            >
+                                Danh mục phụ
+                            </InputLabel>
+                            <Select defaultValue={''} {...register('category2')} label="Danh mục phụ">
                                 {categories
                                     .find((item: any) => item.title === watch('category1'))
                                     ?.subMenu?.map((item: any) => (
-                                        <option key={item.title} value={item.title}>
+                                        <MenuItem key={item.title} value={item.title}>
                                             {item.title}
-                                        </option>
+                                        </MenuItem>
                                     ))}
-                            </select>
-                        </div>
-                        <div>
-                            <label>Danh mục con:</label>
-                            <select className={cx('add-inp')} defaultValue={''} {...register('category3')}>
+                            </Select>
+                        </FormControl>
+                        <FormControl>
+                            <InputLabel
+                                style={{
+                                    fontSize: '14px',
+                                    fontWeight: '600',
+                                    marginBottom: '10px',
+                                }}
+                            >
+                                Danh mục con
+                            </InputLabel>
+                            <Select defaultValue={''} {...register('category3')} label="Danh mục con">
                                 {categories
                                     .find((item: any) => item.title === watch('category1'))
                                     ?.subMenu?.find((item: any) => item.title === watch('category2'))
                                     ?.subMenu?.map((item: any) => (
-                                        <option key={item.title} value={item.title}>
+                                        <MenuItem key={item.title} value={item.title}>
                                             {item.title}
-                                        </option>
+                                        </MenuItem>
                                     ))}
-                            </select>
-                        </div>
+                            </Select>
+                        </FormControl>
                         <div className={cx('all-status')}>
                             <div className={cx('product-status')} onClick={() => setIsNew(!isNew)}>
                                 <div
