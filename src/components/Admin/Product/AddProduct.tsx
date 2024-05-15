@@ -13,6 +13,7 @@ import { addProduct, updateProduct as update } from '~/redux/actions';
 import { arrToStr, removeImg } from '~/libs/orthers/removeImg';
 import HastagList from './Hastag';
 import CategoryMain from './CategoryMain';
+import { filterMenu as categories } from '~/constants/productFilter';
 
 const cx = classNames.bind(styles);
 
@@ -215,24 +216,41 @@ export default function AdminAddProduct({ setAddProduct, updateProduct, setUpdat
                             hastagList={phanloaiList}
                             setHastagList={setPhanloaiList}
                         />
-                        <input
-                            type="text"
-                            placeholder="Danh mục chính..."
-                            className={cx('add-inp')}
-                            {...register('category1')}
-                        ></input>
-                        <input
-                            type="text"
-                            placeholder="Danh mục phụ..."
-                            className={cx('add-inp')}
-                            {...register('category2')}
-                        ></input>
-                        <input
-                            type="text"
-                            placeholder="Danh mục con..."
-                            className={cx('add-inp')}
-                            {...register('category3')}
-                        ></input>
+                        <div>
+                            <label>Danh mục chính:</label>
+                            <select className={cx('add-inp')} defaultValue={''} {...register('category1')}>
+                                {categories.map((item: any) => (
+                                    <option key={item.title} value={item.title}>
+                                        {item.title}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+                        <div>
+                            <label>Danh mục phụ:</label>
+                            <select className={cx('add-inp')} defaultValue={''} {...register('category2')}>
+                                {categories
+                                    .find((item: any) => item.title === watch('category1'))
+                                    ?.subMenu?.map((item: any) => (
+                                        <option key={item.title} value={item.title}>
+                                            {item.title}
+                                        </option>
+                                    ))}
+                            </select>
+                        </div>
+                        <div>
+                            <label>Danh mục con:</label>
+                            <select className={cx('add-inp')} defaultValue={''} {...register('category3')}>
+                                {categories
+                                    .find((item: any) => item.title === watch('category1'))
+                                    ?.subMenu?.find((item: any) => item.title === watch('category2'))
+                                    ?.subMenu?.map((item: any) => (
+                                        <option key={item.title} value={item.title}>
+                                            {item.title}
+                                        </option>
+                                    ))}
+                            </select>
+                        </div>
                         <div className={cx('all-status')}>
                             <div className={cx('product-status')} onClick={() => setIsNew(!isNew)}>
                                 <div

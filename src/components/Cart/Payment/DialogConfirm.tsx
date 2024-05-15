@@ -107,7 +107,6 @@ export default function DialogConfirm({ setShowDialog, formInfoRef, cartOrder }:
                                     <ButtonCommon
                                         path="/"
                                         text={sizeX < 580 ? 'Home' : 'Quay về trang chủ'}
-                                        rule="rule-1"
                                     ></ButtonCommon>
                                 </>
                             ) : (
