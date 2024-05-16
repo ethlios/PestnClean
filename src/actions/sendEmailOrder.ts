@@ -1,21 +1,10 @@
 'use server';
 
 import FormEmailOrders from '~/components/Cart/Payment/FormEmailOrder';
-const nodemailer = require('nodemailer');
 import { render } from '@react-email/render';
+import { transporter } from './createTransport';
 export const sendEmailOrder = async (payload: any) => {
     const { data, cart , payment } = payload;
-    console.log({
-        data: data,
-        cart: cart,
-    });
-    let transporter = nodemailer.createTransport({
-        service: 'Gmail',
-        auth: {
-            user: 'nguyenthanhquynhlinh@gmail.com',
-            pass: 'kclk ldlh iykr knjx',
-        },
-    });
 
     const emailHtml = render(
         FormEmailOrders({

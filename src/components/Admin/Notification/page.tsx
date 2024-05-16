@@ -6,48 +6,45 @@ import styles from './Notification.module.scss';
 import AddIcon from '@mui/icons-material/Add';
 import AddNotification from './AddNotification';
 import CogWheel from '~/components/Orther/Loader/CogWheel/CogWheel';
-import { GetAllNotification } from '~/libs/orthers/getData';
-import { formatDate } from '~/libs/orthers/formatDate';
 import moment from 'moment';
+import useSWR from 'swr';
 
 const cx = classNames.bind(styles);
 
 export interface IAppProps {}
 
+const fetchPosts = async (url: string) => {
+    const response = await fetch(url);
+
+    if (!response.ok) {
+        throw new Error('Failed to fetch posts');
+    }
+
+    return response.json();
+};
 export default function AdminNotification(props: IAppProps) {
     const [openAddNotifications, setOpenNotifications] = useState<boolean>(false);
     const [listNotifications, setListNotifications] = useState<any[]>([]);
-    const [isLoader, setIsLoader] = useState<boolean>(true);
-
-    const getData = async () => {
-        const resp = await GetAllNotification();
-        if (resp) {
-            const { data, message } = resp;
-            if (message === 'Success') {
-                setListNotifications(data);
-                setIsLoader(false);
-            }
-        }
-    };
+    const { data , mutate , isLoading  } = useSWR('api/notification', fetchPosts);
 
     useEffect(() => {
-        setIsLoader(true);
-        getData();
-    }, []);
+        if (data?.message && data?.message === 'Success') {
+            setListNotifications(data?.data);
+        }
+    }, [data]);
 
     return (
         <>
             {openAddNotifications ? (
                 <AddNotification
-                    addSuccess={(e: boolean) => {
-                        if (e) {
-                            setIsLoader(true);
-                            getData();
-                        }
-                    }}
                     isOpen={openAddNotifications}
                     isClose={(e: boolean) => setOpenNotifications(e)}
                     valueUpdate={null}
+                    addSuccess={(e:boolean) => {
+                        if(e) {
+                            mutate();
+                        }
+                    }}
                 />
             ) : (
                 <div className={cx('wrapper')}>
@@ -76,7 +73,7 @@ export default function AdminNotification(props: IAppProps) {
                             placeholder="Tìm kiếm thông báo..."
                         ></input>
                     </div>
-                    {isLoader ? (
+                    {isLoading ? (
                         <div className="flex items-center justify-center relative">
                             <CogWheel />
                         </div>
@@ -102,7 +99,7 @@ export default function AdminNotification(props: IAppProps) {
                                                 <td className={cx('font-semibold')}>{item.title}</td>
                                                 <td className={cx('font-medium')}>{item.message}</td>
                                                 <td className={cx('font-medium')}>
-                                                    {moment(item.createdAt).format("DD/MM/YYYY")}
+                                                    {moment(item.createdAt).format('DD/MM/YYYY')}
                                                 </td>
                                                 <td className={cx('font-medium')}>
                                                     <ul>
