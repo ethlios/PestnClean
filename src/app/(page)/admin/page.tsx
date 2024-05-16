@@ -16,8 +16,6 @@ import AdminOder from '~/components/Admin/Order/page';
 import AdminEmail from '~/components/Admin/Email/page';
 import AdminImage from '~/components/Admin/Image/page';
 import AdminDiscount from '~/components/Admin/Discount/page';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import ReorderIcon from '@mui/icons-material/Reorder';
@@ -98,7 +96,6 @@ export default function Admin(props: IAppProps) {
                     )}
                 </div>
             </div>
-            <ToastContainer />
         </div>
     );
 }

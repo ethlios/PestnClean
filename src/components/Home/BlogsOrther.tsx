@@ -65,6 +65,7 @@ export default function BlogOthers(props: IAppProps) {
                                 width={1000}
                                 height={1000}
                                 className={cx('blogs-img')}
+                                priority
                             />
                             <div className={cx('blog-content')}>
                                 <div

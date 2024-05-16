@@ -66,6 +66,7 @@ export default function HeaderMobile(props: IAppProps) {
                         src={logo.src}
                         width={sizeX < 600 ? 150 : 176}
                         height={100}
+                        priority
                     />
                 </Link>
             </div>
