@@ -1,12 +1,11 @@
 import { Metadata } from 'next';
-import Image from 'next/image';
 
 export const metadata: Metadata = {
-    title: 'Hỏi đáp',
+    title: 'Chính sách giao nhận hàng',
     description:
         'Đến với PestnClean chúng tôi, bạn sẽ được cung cấp dịch vụ vệ sinh và kiểm soát côn trùng uy tín hàng đầu Việt Nam.',
     openGraph: {
-        title: 'Hỏi đáp - Pestnclean',
+        title: 'Chính sách giao nhận hàng - Pestnclean',
         description:
             'Đến với PestnClean chúng tôi, bạn sẽ được cung cấp dịch vụ vệ sinh và kiểm soát côn trùng uy tín hàng đầu Việt Nam.',
         images: [
@@ -22,31 +21,14 @@ export const metadata: Metadata = {
         ],
         type: 'website',
         locale: 'vi_VN',
-        siteName: 'Hỏi đáp Pestnclean',
-        url: '/hoidap',
+        siteName: 'Chính sách giao nhận hàng Pestnclean',
+        url: '/hoidap/chinh-sach-giao-nhan-hang',
     },
     alternates: {
-        canonical: `/hoidap`,
+        canonical: `/hoidap/chinh-sach-giao-nhan-hang`,
     },
 };
 
 export default function FaqPageLayout({ children }: { children: React.ReactNode }) {
-    return (
-        <div className={'w-full cpmount'}>
-            <Image
-                src={
-                    'https://res.cloudinary.com/dj2jarcxk/image/upload/v1713270511/question-mark-query-information-support-service-graphic_lhkaqg.jpg'
-                }
-                alt={'Banner FAQs'}
-                height={2000}
-                width={1980}
-                className={'bg-gray-200 h-auto md:h-80'}
-                style={{
-                    objectFit: 'cover',
-                    objectPosition: 'center',
-                }}
-            />
-            {children}
-        </div>
-    );
+    return children;
 }

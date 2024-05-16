@@ -3,7 +3,7 @@ import styles from './faq.module.scss';
 import Question from './Question';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import Link from 'next/link';
-import { questionsDaily, questionsCommon } from '~/constants/faq';
+import { questionsCommon } from '~/constants/faq';
 
 const cx = classNames.bind(styles);
 
@@ -19,18 +19,10 @@ export default function FaqCPPage(props: IFaqProps) {
             <div className={'flex justify-center'}>
                 <div className={'w-full md:w-5/6 lg:w-3/4'}>
                     <div className="my-8">
-                        <p className={cx('title')}>Câu hỏi thường gặp</p>
-                        <div className={'my-5'}>
-                            {questionsDaily.map((question, index) => (
-                                <Question key={index} title={question.title} content={question.content} />
-                            ))}
-                        </div>
-                    </div>
-                    <div className="my-8">
                         <p className={cx('title')}>Câu hỏi chung</p>
                         <div className={'my-5'}>
                             {questionsCommon.map((question, index) => (
-                                <Question key={index} title={question.title} content={question.content} />
+                                <Question key={index} title={question.title} path={question.path} />
                             ))}
                         </div>
                     </div>

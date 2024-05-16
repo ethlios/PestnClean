@@ -8,22 +8,20 @@ import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import { useParams, usePathname, useSearchParams } from 'next/navigation';
 import { nameToLink } from '~/libs/orthers/nameToLink';
+import EastOutlinedIcon from '@mui/icons-material/EastOutlined';
+import Link from 'next/link';
 
 const cx = classNames.bind(styles);
 
 export interface IFaqProps {
     title: string;
-    content?: string;
+    path?: string;
 }
 
-export default function Question({ title, content }: IFaqProps) {
+export default function Question({ title, path }: IFaqProps) {
     const [isOpen, setIsOpen] = useState(false);
     const searchParams = useSearchParams();
     const mainRef = useRef<any>();
-
-    const toggleOpen = () => {
-        setIsOpen(!isOpen);
-    };
 
     useEffect(() => {
         const q = searchParams.get('q');
@@ -43,10 +41,13 @@ export default function Question({ title, content }: IFaqProps) {
             className={'border-2 rounded-lg py-3 px-4 my-2 ' + (isOpen ? 'bg-gray-100' : '')}
             style={{
                 borderColor: isOpen ? 'var(--primary)' : 'black',
+                transition: 'all ease .5s',
             }}
             ref={mainRef}
+            onMouseOver={() => setIsOpen(true)}
+            onMouseOut={() => setIsOpen(false)}
         >
-            <div className={'flex justify-between items-center cursor-pointer'} onClick={toggleOpen}>
+            <Link href={path ?? ''} className={'flex justify-between items-center cursor-pointer'}>
                 <div
                     className={cx('faq-question')}
                     style={{
@@ -58,14 +59,13 @@ export default function Question({ title, content }: IFaqProps) {
                 <IconButton
                     sx={{
                         color: isOpen ? 'var(--primary)' : 'black',
+                        marginRight: isOpen ? '10px' : '',
+                        transition: 'all ease .5s',
                     }}
                 >
-                    {isOpen ? <RemoveIcon /> : <AddIcon />}
+                    <EastOutlinedIcon />
                 </IconButton>
-            </div>
-            {isOpen && content && (
-                <div className={cx('faq-answer')} dangerouslySetInnerHTML={{ __html: content }} />
-            )}
+            </Link>
         </div>
     );
 }

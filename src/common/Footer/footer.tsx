@@ -316,25 +316,21 @@ export default function Footer(props: FooterProps) {
                             ></div>
                             {sizeX < 576 ? (
                                 <div className="cs-footer flex flex-col gap-3">
-                                    <Link href={'/hoidap?q=chinh-sach-bao-mat-thong-tin'}>
+                                    <Link href={'/hoidap/chinh-sach-bao-mat-thong-tin'}>
                                         Bảo mật thông tin
                                     </Link>
-                                    <Link href={'/hoidap?q=bao-lau-toi-nhan-duoc-hang'}>Giao nhận hàng</Link>
-                                    <Link href={'/hoidap?q=chinh-sach-bao-hanh-doi-tra'}>
-                                        Bảo hành đổi trả
-                                    </Link>
-                                    <Link href={'/hoidap?q=hinh-thuc-thanh-toan'}>Thanh toán</Link>
+                                    <Link href={'/hoidap/chinh-sach-giao-nhan-hang'}>Giao nhận hàng</Link>
+                                    <Link href={'/hoidap/chinh-sach-bao-hanh-doi-tra'}>Bảo hành đổi trả</Link>
+                                    <Link href={'/hoidap/chinh-sach-thanh-toan'}>Thanh toán</Link>
                                 </div>
                             ) : (
                                 <>
-                                    <Link href={'/hoidap?q=chinh-sach-bao-mat-thong-tin'}>
+                                    <Link href={'/hoidap/chinh-sach-bao-mat-thong-tin'}>
                                         Bảo mật thông tin
                                     </Link>
-                                    <Link href={'/hoidap?q=bao-lau-toi-nhan-duoc-hang'}>Giao nhận hàng</Link>
-                                    <Link href={'/hoidap?q=chinh-sach-bao-hanh-doi-tra'}>
-                                        Bảo hành đổi trả
-                                    </Link>
-                                    <Link href={'/hoidap?q=hinh-thuc-thanh-toan'}>Thanh toán</Link>
+                                    <Link href={'/hoidap/chinh-sach-giao-nhan-hang'}>Giao nhận hàng</Link>
+                                    <Link href={'/hoidap/chinh-sach-bao-hanh-doi-tra'}>Bảo hành đổi trả</Link>
+                                    <Link href={'/hoidap/chinh-sach-thanh-toan'}>Thanh toán</Link>
                                 </>
                             )}
                         </div>
