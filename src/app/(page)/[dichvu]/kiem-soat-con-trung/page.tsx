@@ -10,6 +10,7 @@ import Video from '~/components/Service/Video';
 import useSize from '~/libs/hooks/useSize';
 import { linkKiemSoatConTrung } from '~/constants/links';
 import { cardKiemSoatConTrung } from '~/constants/card';
+import Image from 'next/image';
 
 const cx = classNames.bind(styles);
 
@@ -31,7 +32,22 @@ export default function DichVu1Page(props: IAppProps) {
                 src="https://res.cloudinary.com/dj2jarcxk/image/upload/v1713837564/person-disinfecting-dangerous-area-while-wearing-protective-suit_wj8knz.jpg"
                 alt="Dịch vụ kiểm soát côn trùng chuyên nghiệp tại PESTNCLEAN"
             />
-            <div className={'mb-10'}>
+            <h1
+                className={cx('title')}
+                style={{
+                    color: '#000',
+                }}
+            >
+                Dịch vụ kiểm soát côn trùng tại PESTNCLEAN
+            </h1>
+            <p className={cx('text-common')}>
+                Việc tìm được một công ty kiểm soát côn trùng hiệu quả cho nhà ở, các cơ sở, đơn vị kinh doanh
+                là hết sức cần thiết. PESTNCLEAN tự hào là một đơn vị có nhiều năm kinh nghiệm trong lĩnh vực
+                kiểm soát côn trùng. Chúng tôi với đội ngũ nhân viên lành nghề, được đào tạo kỹ càng về nhiều
+                mặt (chuyên môn và thái độ phục vụ) cam kết sẽ cung cấp tới Quý khách hàng một dịch vụ chất
+                lượng nhất.
+            </p>
+            <div className={'mb-10 mt-5'}>
                 <div
                     style={{
                         display: 'flex',
@@ -42,29 +58,25 @@ export default function DichVu1Page(props: IAppProps) {
                 >
                     <div
                         style={{
-                            width: '45%',
+                            width: '40%',
                         }}
                     >
-                        <h1
-                            className={cx('title')}
+                        <Image
+                            src="https://res.cloudinary.com/dj2jarcxk/image/upload/v1715826571/Quy-trinh-trien-khai-dich-vu-cua-PestnClean_tbu7fe.jpg"
+                            alt="Ảnh quy trình Pestnclean"
+                            width={1000}
+                            height={1000}
                             style={{
-                                color: '#000',
-                                textAlign: 'left',
+                                width: '100%',
+                                height: 'auto',
+                                objectFit: 'cover',
+                                objectPosition: 'center',
                             }}
-                        >
-                            Dịch vụ kiểm soát côn trùng tại PESTNCLEAN
-                        </h1>
-                        <p className={cx('text-common')}>
-                            Việc tìm được một công ty kiểm soát côn trùng hiệu quả cho nhà ở, các cơ sở, đơn
-                            vị kinh doanh là hết sức cần thiết. PESTNCLEAN tự hào là một đơn vị có nhiều năm
-                            kinh nghiệm trong lĩnh vực kiểm soát côn trùng. Chúng tôi với đội ngũ nhân viên
-                            lành nghề, được đào tạo kỹ càng về nhiều mặt (chuyên môn và thái độ phục vụ) cam
-                            kết sẽ cung cấp tới Quý khách hàng một dịch vụ chất lượng nhất.
-                        </p>
+                        />
                     </div>
                     <div
                         style={{
-                            width: '55%',
+                            width: '60%',
                         }}
                     >
                         <Video
@@ -131,7 +143,7 @@ export default function DichVu1Page(props: IAppProps) {
                     />
                 ))}
             </BundleCard>
-            <h1 className={cx('content-title')}>Dịch vụ kiểm soát côn trùng chuyên biệt</h1>
+            <h1 className={cx('content-title')}>Dịch vụ kiểm soát côn trùng cho từng ngành hàng</h1>
             <BundleCard className={'rounded-xl bg-gray-200 p-10'}>
                 {linkKiemSoatConTrung.map((item, index) => (
                     <Card

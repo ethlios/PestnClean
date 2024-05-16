@@ -15,23 +15,19 @@ import formatter from '~/libs/orthers/formatMoney';
 import ButtonCommon from '~/components/Orther/Button';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import CogWheel from '~/components/Orther/Loader/CogWheel/CogWheel';
+import { useSelector } from 'react-redux';
+import { RootState } from '~/redux/provider/store';
+import { allServices } from '~/constants/service';
+import { removeVietnameseTones } from '~/libs/orthers/removeVietnamese';
 
 const cx = classNames.bind(styles);
-const fetchPosts = async (url: string) => {
-    const response = await fetch(url);
 
-    if (!response.ok) {
-        throw new Error('Failed to fetch posts');
-    }
-
-    return response.json();
-};
 export default function FaqPage(props: IAppProps) {
     const { sizeX } = useSize();
     const search = useSearchParams();
-    const [resultQueryProducts, setResultQueryProducts] = useState([]);
-    const [resultQueryBlogs, setResultQueryBlogs] = useState([]);
-    const [resultQueryService, setResultQueryService] = useState([]);
+    const [resultQueryProducts, setResultQueryProducts] = useState<any[]>([]);
+    const [resultQueryBlogs, setResultQueryBlogs] = useState<any[]>([]);
+    const [resultQueryService, setResultQueryService] = useState<any[]>([]);
 
     const [isLoader, setIsLoader] = useState<boolean>(true);
     const [isCheckedProducts, setCheckedProducts] = useState<boolean>(false);
@@ -39,14 +35,37 @@ export default function FaqPage(props: IAppProps) {
     const [isCheckedService, setCheckedService] = useState<boolean>(false);
     const [currentBlog, setCurrentBlog] = useState(-1);
 
-    const query = search ? search.get('q') : null;
-    const encodedSearchQuery = encodeURI(query || '');
+    let allBlogs = useSelector((state: RootState) => state.main.allBlogs);
+    let allProducts = useSelector((state: RootState) => state.main.allProducts);
 
-    const { data } = useSWR(`/api/search/${encodedSearchQuery}`, fetchPosts, { revalidateOnFocus: false });
+    const query = search ? search.get('q') : null;
 
     useEffect(() => {
-        if (data) {
-            const { blogs, products, services } = data.data;
+        if (search.get('q')) {
+            const products: any[] = allProducts.filter((item) => {
+                return (
+                    removeVietnameseTones(item.title)
+                        .toLowerCase()
+                        .indexOf(removeVietnameseTones(search.get('q') ?? '').toLowerCase()) !== -1
+                );
+            });
+
+            const blogs: any[] = allBlogs.filter((item) => {
+                return (
+                    removeVietnameseTones(item.title)
+                        .toLowerCase()
+                        .indexOf(removeVietnameseTones(search.get('q') ?? '').toLowerCase()) !== -1
+                );
+            });
+
+            const services: any[] = allServices.filter((item) => {
+                return (
+                    removeVietnameseTones(item.title)
+                        .toLowerCase()
+                        .indexOf(removeVietnameseTones(search.get('q') ?? '').toLowerCase()) !== -1
+                );
+            });
+
             setResultQueryProducts(products);
             setResultQueryBlogs(blogs);
             setResultQueryService(services);
@@ -55,7 +74,27 @@ export default function FaqPage(props: IAppProps) {
             setCheckedService(false);
             setIsLoader(false);
         }
-    }, [data]);
+    }, [allBlogs, allProducts, search]);
+
+    useEffect(() => {
+        if (resultQueryProducts.length > 0) {
+            setCheckedProducts(true);
+            setCheckedBlogs(false);
+            setCheckedService(false);
+        }
+
+        if (resultQueryBlogs.length > 0) {
+            setCheckedBlogs(true);
+            setCheckedProducts(false);
+            setCheckedService(false);
+        }
+
+        if (resultQueryService.length > 0) {
+            setCheckedService(true);
+            setCheckedBlogs(false);
+            setCheckedProducts(false);
+        }
+    }, [resultQueryBlogs.length, resultQueryProducts.length, resultQueryService.length]);
 
     return (
         <>
@@ -252,13 +291,7 @@ export default function FaqPage(props: IAppProps) {
                                 <div className={cx('wrapper-search-grid')}>
                                     {resultQueryBlogs.map((blog: any, index) => {
                                         return (
-                                            <div
-                                                key={blog.id}
-                                                className={cx('blog-item')}
-                                                style={{
-                                                    overflow: 'hidden',
-                                                }}
-                                            >
+                                            <div key={blog.id} className={cx('blog-item')}>
                                                 <div
                                                     className={cx('img-wrapper')}
                                                     onMouseOver={() => setCurrentBlog(index)}
@@ -288,6 +321,7 @@ export default function FaqPage(props: IAppProps) {
                                                             <ButtonCommon
                                                                 text="XEM"
                                                                 path={`blogs/${nameToLink(blog.title)}`}
+                                                                rule="rule-1"
                                                             />
                                                         )}
                                                     </div>
@@ -298,7 +332,7 @@ export default function FaqPage(props: IAppProps) {
                                                     style={{
                                                         backgroundColor:
                                                             currentBlog === index ? '#fff' : 'transparent',
-                                                        padding: currentBlog === index ? '10px' : '5px',
+                                                        padding: currentBlog === index ? '10px' : '8px',
                                                         transition: 'all ease .5s',
                                                     }}
                                                 >
@@ -365,6 +399,7 @@ export default function FaqPage(props: IAppProps) {
                                                             <ButtonCommon
                                                                 text="XEM"
                                                                 path={`/${nameToLink(service.title)}`}
+                                                                rule="rule-1"
                                                             />
                                                         )}
                                                     </div>
@@ -375,7 +410,7 @@ export default function FaqPage(props: IAppProps) {
                                                     style={{
                                                         backgroundColor:
                                                             currentBlog === index ? '#fff' : 'transparent',
-                                                        padding: currentBlog === index ? '10px' : '5px',
+                                                        padding: currentBlog === index ? '10px' : '8px',
                                                         transition: 'all ease .5s',
                                                     }}
                                                 >
