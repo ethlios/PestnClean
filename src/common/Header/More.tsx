@@ -1,15 +1,13 @@
-import React, { useState } from 'react';
-import classNames from 'classnames/bind';
-import styles from './header.module.scss';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
-import AutoAwesomeMosaicOutlinedIcon from '@mui/icons-material/AutoAwesomeMosaicOutlined';
-import NorthOutlinedIcon from '@mui/icons-material/NorthOutlined';
 import MoreHorizOutlinedIcon from '@mui/icons-material/MoreHorizOutlined';
-import zalo from '../../../public/img/zalo.png';
+import NorthOutlinedIcon from '@mui/icons-material/NorthOutlined';
+import PhoneIphoneOutlinedIcon from '@mui/icons-material/PhoneIphoneOutlined';
+import classNames from 'classnames/bind';
 import Image from 'next/image';
 import Link from 'next/link';
-import Tippy from '@tippyjs/react';
-
+import { useState } from 'react';
+import zalo from '../../../public/img/zalo.png';
+import styles from './header.module.scss';
 const cx = classNames.bind(styles);
 
 export interface IAppProps {}
@@ -50,9 +48,20 @@ export default function MoreBtn(props: IAppProps) {
             </div>
 
             <div
-                className={cx('back-top')}
+                className={cx('zalo')}
                 style={{
                     bottom: isOpen ? '145px' : '15px',
+                }}
+            >
+                <Link href={'tel:0868363600'}>
+                    <PhoneIphoneOutlinedIcon />
+                </Link>
+            </div>
+
+            <div
+                className={cx('back-top')}
+                style={{
+                    bottom: isOpen ? '210px' : '15px',
                 }}
                 onClick={handleClick}
             >
