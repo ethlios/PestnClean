@@ -52,8 +52,8 @@ export default function ViewBlog({ setView, updateProduct, setUpdateProduct }: I
         formState: { errors },
     } = useForm<any>();
 
-    const QuillEditor = useMemo(() => {
-        return dynamic(() => import('~/components/Orther/quii'), {
+    const CKEditor = useMemo(() => {
+        return dynamic(() => import('~/components/Orther/CKeditor'), {
             loading: () => <p>loading...</p>,
             ssr: false,
         });
@@ -186,7 +186,7 @@ export default function ViewBlog({ setView, updateProduct, setUpdateProduct }: I
                         ></input>
                     </div>
                     <div className={cx('add-body-2')}>
-                        <QuillEditor cb={setDetail} value={detail} readOnly />
+                        <CKEditor value={detail} cb={setDetail} readOnly={true} />
                     </div>
                 </form>
             </div>

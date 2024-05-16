@@ -42,7 +42,7 @@ export default function HastagList({ setHastag, hastag, setHastagList, hastagLis
                     onChange={(e) => setHastag(e.target.value)}
                     placeholder="Menus"
                     value={hastag}
-                    readOnly
+                    readOnly={readOnly}
                 />
                 <EastOutlinedIcon
                     style={{
