@@ -2,7 +2,6 @@
 
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import ChatOutlinedIcon from '@mui/icons-material/ChatOutlined';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
 import useSize from '~/libs/hooks/useSize';
@@ -62,7 +61,16 @@ export default function BlogDetails({ blogs }: IAppProps) {
                     <h1>MỤC LỤC</h1>
                     {blogs[0].menu.map((item: any, index: number) => {
                         return (
-                            <p key={index} onClick={() => smoothScroll(`#header${index + 1}`)}>
+                            <p
+                                key={index}
+                                onClick={() => {
+                                    const headers = document.querySelectorAll('.ql-editor h2');
+                                    headers[index].scrollIntoView({
+                                        behavior: 'smooth',
+                                        block: 'center',
+                                    });
+                                }}
+                            >
                                 {`0${index + 1}. ${item}`}
                             </p>
                         );

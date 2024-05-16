@@ -340,4 +340,5 @@ html textarea::placeholder {
 .ck.ck-content.ck-editor__editable {
     height: 500px;
     overflow: auto;
+    border: 1px solid #d1d1d1;
 }

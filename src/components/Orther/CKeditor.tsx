@@ -1,5 +1,5 @@
 import { CKEditor } from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
 import uploadToCloudinary from '~/libs/orthers/uploadClound';
 
 export interface IAppProps {
@@ -18,7 +18,7 @@ export default function CKeditor({ cb, value, readOnly }: IAppProps) {
     return (
         <div className={'ql-editor'}>
             <CKEditor
-                editor={ClassicEditor}
+                editor={DecoupledEditor}
                 data={value}
                 onChange={(event, editor) => {
                     const data = editor.getData();
@@ -27,6 +27,37 @@ export default function CKeditor({ cb, value, readOnly }: IAppProps) {
                 disabled={readOnly}
                 config={{
                     extraPlugins: [MyCustomUploadAdapterPlugin],
+                    heading: {
+                        options: [
+                            { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
+                            {
+                                model: 'heading2',
+                                view: 'h2',
+                                title: 'Heading 2',
+                                class: '',
+                            },
+                            {
+                                model: 'heading3',
+                                view: 'h3',
+                                title: 'Heading 3',
+                                class: '',
+                            },
+                            {
+                                model: 'heading4',
+                                view: 'h4',
+                                title: 'Heading 4',
+                                class: '',
+                            },
+                        ],
+                    },
+                }}
+                onReady={(editor) => {
+                    editor.ui
+                        .getEditableElement()
+                        ?.parentElement?.insertBefore(
+                            editor.ui.view.toolbar.element,
+                            editor.ui.getEditableElement(),
+                        );
                 }}
             />
         </div>

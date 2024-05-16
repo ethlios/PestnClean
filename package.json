@@ -10,7 +10,7 @@
         "postinstall": "prisma generate"
     },
     "dependencies": {
-        "@ckeditor/ckeditor5-build-classic": "^41.3.1",
+        "@ckeditor/ckeditor5-build-decoupled-document": "^41.3.1",
         "@ckeditor/ckeditor5-react": "^6.3.0",
         "@emailjs/browser": "^4.3.3",
         "@emotion/react": "^11.11.4",

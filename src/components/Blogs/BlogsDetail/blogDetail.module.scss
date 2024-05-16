@@ -122,6 +122,14 @@
     background-color: rgba(0, 0, 0, 0.03);
     border-radius: 20px;
     padding: 20px 30px;
+
+    figure img {
+        width: 100%;
+    }
+
+    figcaption {
+        text-align: center;
+    }
 }
 
 .detail-category {

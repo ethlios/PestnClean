@@ -39,7 +39,7 @@ export default function HastagList({ setHastag, hastag, setHastagList, hastagLis
                     type="text"
                     className={cx('add-inp')}
                     onChange={(e) => setHastag(e.target.value)}
-                    placeholder="Hastag"
+                    placeholder="Keywords"
                     value={hastag}
                 />
                 <EastOutlinedIcon
