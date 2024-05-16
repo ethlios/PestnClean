@@ -201,6 +201,7 @@ export default function MenuMobile({ open, setOpen }: IAppProps) {
                         src={logo2.src}
                         width={sizeX < 600 ? 120 : 140}
                         height={100}
+                        priority
                     />
                 </div>
 

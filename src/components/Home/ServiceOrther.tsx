@@ -79,6 +79,7 @@ export default function ServiceAds(props: IAppProps) {
                                 style={{
                                     height: '100%',
                                 }}
+                                priority
                             />
                             <div
                                 style={{

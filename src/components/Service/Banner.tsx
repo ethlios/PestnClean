@@ -46,6 +46,7 @@ export default function ServiceBanner({ src, alt }: IAppProps) {
                         objectPosition: 'center',
                     }}
                     draggable={false}
+                    priority
                 />
             </div>
         </div>

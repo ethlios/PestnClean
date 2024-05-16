@@ -174,6 +174,7 @@ export default function WhyChooseMe() {
                         style={{
                             height: sizeX < 900 ? '300px' : '',
                         }}
+                        priority
                     />
                     <Link
                         href={'/gioithieu'}
@@ -231,6 +232,7 @@ export default function WhyChooseMe() {
                             alt="Logo đơn của Pestnclean"
                             width={sizeX < 600 ? 100 : sizeX < 1024 ? 140 : 173}
                             height={216}
+                            priority
                         />
                     </div>
                 </div>

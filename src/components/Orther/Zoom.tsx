@@ -43,6 +43,7 @@ export function ImageZoom({ options, src, alt, width, height, id, className }: I
             ref={attachZoom}
             id={id}
             className={className}
+            priority
         />
     );
 }

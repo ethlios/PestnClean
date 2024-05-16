@@ -27,6 +27,7 @@ export default function BlogsBanner({ blog }: IAppProps) {
                     height: sizeX < 550 ? '250px' : sizeX < 810 ? '300px' : '',
                 }}
                 draggable={false}
+                priority
             />
         )
     );
