@@ -1,10 +1,17 @@
 'use server';
 
 import { ContactFormEmail } from './../components/Admin/Discount/ContactFormEmail';
+const nodemailer = require("nodemailer");
 import { render } from '@react-email/render';
-import { transporter } from './createTransport';
 export const sendEmail = async (payload: any) => {
     const {data,user} = payload;
+    let transporter = nodemailer.createTransport({
+        service: 'Gmail',
+        auth: {
+            user: 'nguyenthanhquynhlinh@gmail.com',
+            pass: 'kclk ldlh iykr knjx',
+        },
+    });
 
     const emailHtml = render(ContactFormEmail({
         code: data.code,

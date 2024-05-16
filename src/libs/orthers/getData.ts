@@ -21,6 +21,15 @@ async function getAllUsersNotAdmin() {
     return res.data;
 }
 
+async function GetAllNotification() {
+    const res = await axios.get(`api/notification`);
+
+    if (res.status === 400) {
+        throw new Error('Failed to fetch data');
+    }
+
+    return res.data;
+}
 async function GetAllCodeInDiscount() {
     const res = await axios.get(`api/Discount/getCode`);
 
@@ -47,4 +56,4 @@ export async function getAllBlogs() {
     return prisma.blog.findMany();
 }
 
-export { getAllUsers, getAllUsersNotAdmin, GetAllCodeInDiscount, GetAllDiscount };
+export { getAllUsers, getAllUsersNotAdmin, GetAllNotification, GetAllCodeInDiscount, GetAllDiscount };
