@@ -3,8 +3,8 @@
 import classNames from 'classnames/bind';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import React, { useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import React, { useEffect, useState } from 'react';
 import styles from '~/components/Admin/admin.module.scss';
 import UserAccount from '~/components/Profile/Account/page';
 import UserNotification from '~/components/Profile/Notification/page';
@@ -23,8 +23,14 @@ export interface IAppProps {}
 export default function Admin(props: IAppProps) {
     const { sizeX } = useSize();
     const [currentContent, setCurrentContent] = useState<number>(0);
+    const search = useSearchParams();
     const router = useRouter();
     const [isOpenMenu, setIsOpenMenu] = useState<boolean>(false);
+
+    useEffect(() => {
+        const query = search.get("q");
+        if(query === "order") setCurrentContent(2)
+    },[])
 
     return (
         <div className={cx('admin-wrapper')}>

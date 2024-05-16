@@ -1,6 +1,14 @@
 import axios from 'axios';
 import { prisma } from './prisma';
+const fetchPosts = async (url:string) => {
+    const response = await fetch(url);
 
+    if (!response.ok) {
+        throw new Error('Failed to fetch posts');
+    }
+
+    return response.json();
+};
 async function getAllUsers() {
     const res = await fetch(`/api/user/all`);
 
@@ -11,25 +19,6 @@ async function getAllUsers() {
     return res.json();
 }
 
-async function getAllUsersNotAdmin() {
-    const res = await axios.get(`/api/user/all/ruleUser`);
-
-    if (res.status === 400) {
-        throw new Error('Failed to fetch data');
-    }
-
-    return res.data;
-}
-
-async function GetAllNotification() {
-    const res = await axios.get(`api/notification`);
-
-    if (res.status === 400) {
-        throw new Error('Failed to fetch data');
-    }
-
-    return res.data;
-}
 async function GetAllCodeInDiscount() {
     const res = await axios.get(`api/Discount/getCode`);
 
@@ -56,4 +45,4 @@ export async function getAllBlogs() {
     return prisma.blog.findMany();
 }
 
-export { getAllUsers, getAllUsersNotAdmin, GetAllNotification, GetAllCodeInDiscount, GetAllDiscount };
+export { getAllUsers, GetAllCodeInDiscount, GetAllDiscount , fetchPosts };

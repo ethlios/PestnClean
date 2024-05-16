@@ -62,7 +62,7 @@
         border-radius: 10px;
         border: solid 1.5px rgba(0, 0, 0, 0.1);
         width: 100%;
-        height: 50px;
+        height: 40px;
         margin-top: 10px;
         font-size: 14px;
         font-weight: 600;
@@ -140,5 +140,24 @@
             list-style-type: disc;
             margin-left: 20px;
         }
+    }
+    &-filter{
+        &-type{
+            height: 40px;
+            border: solid 1.5px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            font-size: 13px;
+            font-weight: 600;
+            padding: 0 10px;
+            letter-spacing: -0.2px;
+            transition: all ease 0.5s; 
+        }
+    }
+    &-controls{
+        padding: 10px;
+        margin-top: 10px;
+        border-radius: 5px;
+        box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
+    
     }
 }

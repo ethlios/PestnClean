@@ -7,7 +7,8 @@ import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import { useDebounce } from '@react-hooks-library/core';
 import { removeVietnameseTones } from '~/libs/orthers/removeVietnamese';
-import { getAllUsersNotAdmin } from '~/libs/orthers/getData';
+import { fetchPosts} from '~/libs/orthers/getData';
+import useSWR from 'swr';
 const cx = classNames.bind(styles);
 
 export interface IAppProps {
@@ -42,6 +43,7 @@ export default function ChooseObjectCustomer({
     const [listUsersSelected, setListUsersSelected] = useState<any[]>([]);
     const [listUsers, setListUsers] = useState<any[]>([]);
     const [searchValue, setSearchValue] = useState<string>('');
+    const { data , isLoading} = useSWR('api/user/all/ruleUser', fetchPosts);
     const debouncedText = useDebounce(searchValue, 200);
 
     const handleClose = () => {
@@ -101,17 +103,17 @@ export default function ChooseObjectCustomer({
         }
     }, [sendListUser]);
 
+    useEffect(() => {
+        if(!isLoading){
+            setListUsers(data.data);
+        }
+    },[isLoading])
+
     // Sự kiện lấy ra danh sách người dùng để chọn và tìm kiếm người dùng theo tên
     useEffect(() => {
-        const getUser = async () => {
-            const res = await getAllUsersNotAdmin();
-            const { data } = res;
-            if (data.length > 0) {
-                setListUsers(data);
-            }
-
+        const getUser = () => {
             if (debouncedText) {
-                const findUser = data.filter((user: any) => {
+                const findUser = data.data.filter((user: any) => {
                     return (
                         removeVietnameseTones(user.name)
                             .toLowerCase()
@@ -123,7 +125,6 @@ export default function ChooseObjectCustomer({
             }
         };
         getUser();
-
         return () => setListUsers([]);
     }, [debouncedText]);
 

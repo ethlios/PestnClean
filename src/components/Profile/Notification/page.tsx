@@ -35,39 +35,33 @@ export default function UserNotification(props: IAppProps) {
                 <p className="font-semibold">Thông báo của bạn</p>
             </div>
             <div className={cx('wrapper-table', 'mt-4')}>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Tiêu đề</th>
-                            <th>Lời nhắn</th>
-                            <th>Ngày gửi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {listNotifications.length > 0 ? (
-                            listNotifications.map((item, index) => {
-                                return (
-                                    <tr key={index}>
-                                        <td className={cx('font-semibold')}>{item.title}</td>
-                                        <td className={cx('font-medium')}>{item.message}</td>
-                                        <td className={cx('font-medium')}>{formatDate(item.createdAt)}</td>
-                                    </tr>
-                                );
-                            })
-                        ) : (
-                            <p
-                                style={{
-                                    fontSize: '14px',
-                                    fontWeight: 600,
-                                    letterSpacing: '-.2px',
-                                    padding: '20px 20px 20px 8px',
-                                }}
-                            >
-                                Chưa có thông báo nào!
-                            </p>
-                        )}
-                    </tbody>
-                </table>
+                {
+                    listNotifications.length > 0 ? (
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Tiêu đề</th>
+                                    <th>Lời nhắn</th>
+                                    <th>Ngày gửi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                { listNotifications.map((item, index) => {
+                                        return (
+                                            <tr key={index}>
+                                                <td className={cx('font-semibold')}>{item.title}</td>
+                                                <td className={cx('font-medium')}>{item.message}</td>
+                                                <td className={cx('font-medium')}>{formatDate(item.createdAt)}</td>
+                                            </tr>
+                                        );
+                                    })
+                                }
+                            </tbody>
+                        </table>
+                    ) : (
+                        <p>Chưa có thông báo nào</p>
+                    )
+                }
             </div>
         </div>
     );

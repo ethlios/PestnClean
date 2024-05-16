@@ -80,6 +80,7 @@ export default function Header(props: HeaderProps) {
 
     useEffect(() => {
         if (selector.message === 'Get All Notifications By Id Success') {
+            console.log(selector.notificationAll);
             setListNotifications(selector.notificationAll);
             dispatch(clearMessage());
         }
@@ -251,12 +252,13 @@ export default function Header(props: HeaderProps) {
                                         {listNotifications.length > 0 ? (
                                             listNotifications.map((item, index) => {
                                                 return (
-                                                    <div
+                                                    <Link
                                                         key={index}
                                                         className={cx(
                                                             'flex items-center justify-between',
                                                             'tippy-boxNotifications-content',
                                                         )}
+                                                        href={item.type === "Cập nhật về đơn hàng và thanh toán" ? `/profile/${session?.user.id}?q=order` : ""}
                                                     >
                                                         <div className={cx('tippy-boxNotifications-title')}>
                                                             <p
@@ -283,7 +285,7 @@ export default function Header(props: HeaderProps) {
                                                         >
                                                             {calculateTimeDifference(item.createdAt)}
                                                         </p>
-                                                    </div>
+                                                    </Link>
                                                 );
                                             })
                                         ) : (
@@ -302,7 +304,9 @@ export default function Header(props: HeaderProps) {
                                 </div>
                             )}
                         >
-                            <NotificationsNoneIcon onClick={() => setOpenNotifications(!openNotifications)} />
+                            <div className="icon-hover" >
+                                <NotificationsNoneIcon onClick={() => setOpenNotifications(!openNotifications)} />
+                            </div>
                         </Tippy>
                     )}
                     {session ? (

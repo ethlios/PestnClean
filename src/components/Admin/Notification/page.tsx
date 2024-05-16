@@ -6,44 +6,121 @@ import styles from './Notification.module.scss';
 import AddIcon from '@mui/icons-material/Add';
 import AddNotification from './AddNotification';
 import CogWheel from '~/components/Orther/Loader/CogWheel/CogWheel';
-import { GetAllNotification } from '~/libs/orthers/getData';
-import { formatDate } from '~/libs/orthers/formatDate';
 import moment from 'moment';
-
+import useSWR, { mutate } from 'swr';
+import { fetchPosts } from '~/libs/orthers/getData';
+import { filterTypeNotifications } from './const';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import { formatDate } from '~/libs/orthers/formatDate';
 const cx = classNames.bind(styles);
 
 export interface IAppProps {}
+interface Recipient {
+    id: string;
+    email: string;
+    name: string;
+}
 
+interface Notification {
+    id: number;
+    title: string;
+    message: string;
+    recipientId: Recipient[];
+    state: boolean;
+    createdAt: string;
+    type: string;
+}
 export default function AdminNotification(props: IAppProps) {
     const [openAddNotifications, setOpenNotifications] = useState<boolean>(false);
     const [listNotifications, setListNotifications] = useState<any[]>([]);
-    const [isLoader, setIsLoader] = useState<boolean>(true);
+    const [listNameUser, setListNameUser] = useState<any[]>([]);
+    const [filteredNotifications, setFilteredNotifications] = useState<any[]>([]);
+    const [valueFilterType, setValueFilterType] = useState<string>('');
+    const [valueFilterName, setValueFilterName] = useState<string>('');
+    const { data, isLoading } = useSWR('api/notification', fetchPosts);
 
-    const getData = async () => {
-        const resp = await GetAllNotification();
-        if (resp) {
-            const { data, message } = resp;
-            if (message === 'Success') {
-                setListNotifications(data);
-                setIsLoader(false);
-            }
+
+    // hàm lấy các tên người nhận có trong list thông báo
+    function extractUniqueNames(notifications: Notification[]): string[] {
+        const userNamesMap: Map<string, number> = new Map();
+
+        // Lặp qua danh sách thông báo
+        notifications.forEach((notification) => {
+            // Lặp qua mỗi người nhận trong thông báo
+            notification.recipientId.forEach((recipient) => {
+                // Kiểm tra xem tên của người nhận đã tồn tại trong Map chưa
+                if (userNamesMap.has(recipient.name)) {
+                    // Nếu đã tồn tại, tăng số lần xuất hiện lên 1
+                    userNamesMap.set(recipient.name, userNamesMap.get(recipient.name)! + 1);
+                } else {
+                    // Nếu chưa tồn tại, thêm tên vào Map với số lần xuất hiện là 1
+                    userNamesMap.set(recipient.name, 1);
+                }
+            });
+        });
+
+        // Tạo một mảng mới chứa các tên người dùng duy nhất
+        // Thêm "Tất cả" vào đầu mảng kết quả
+        const uniqueUserNames: string[] = ["Tất cả"];
+
+        // Lặp qua các cặp key-value trong Map và thêm tên vào mảng mới
+        userNamesMap.forEach((count, name) => {
+            uniqueUserNames.push(name);
+        });
+
+        return uniqueUserNames;
+    }
+    // Hàm lọc dữ liệu theo loại thông báo
+    const handleFilterType = (e: any) => {
+        const data = e.target.value;
+        setValueFilterType(data);
+        if (data !== 'Tất cả') {
+            const filteredNotifications = listNotifications.filter(
+                (notification: any) => notification.type === data,
+            );
+            setFilteredNotifications(filteredNotifications);
+        } else {
+            // Nếu chọn "Tất cả", khôi phục dữ liệu gốc
+            setFilteredNotifications(listNotifications);
+        }
+    };
+
+    // Hàm lọc dữ liệu theo người nhận
+    const handleFilterName = (e: any) => {
+        const data = e.target.value;
+        setValueFilterName(data);
+        if (data !== 'Tất cả') {
+            const filteredNotifications = listNotifications.filter(
+                (notification: any) => notification.recipientId.some(
+                    (item: any) => item.name === data
+                )
+            );
+            setFilteredNotifications(filteredNotifications);
+        } else {
+            // Nếu chọn "Tất cả", khôi phục dữ liệu gốc
+            setFilteredNotifications(listNotifications);
         }
     };
 
     useEffect(() => {
-        setIsLoader(true);
-        getData();
-    }, []);
+        if (!isLoading) {
+            if (data?.message && data.message === 'Success') {
+                setListNotifications(data.data);
+                setFilteredNotifications(data.data); // Ban đầu, dữ liệu đã được lọc là dữ liệu gốc
+                setListNameUser(extractUniqueNames(data.data));
+            }
+        }
+    }, [isLoading, data]);
 
     return (
         <>
             {openAddNotifications ? (
                 <AddNotification
                     addSuccess={(e: boolean) => {
-                        if (e) {
-                            setIsLoader(true);
-                            getData();
-                        }
+                        if (e) mutate('api/notification');
                     }}
                     isOpen={openAddNotifications}
                     isClose={(e: boolean) => setOpenNotifications(e)}
@@ -68,16 +145,63 @@ export default function AdminNotification(props: IAppProps) {
                             </button>
                         </div>
                     </div>
-                    <p className={cx('text-sm font-semibold')}>Số lượng: {listNotifications.length}</p>
-                    <div>
-                        <input
-                            className={cx('wrapper-inputSearch')}
-                            type="text"
-                            placeholder="Tìm kiếm thông báo..."
-                        ></input>
+                    <div className={cx('wrapper-controls')}>
+                        <p className={cx('text-sm font-semibold')}>Số lượng: {listNotifications.length}</p>
+                        <div>
+                            <input
+                                className={cx('wrapper-inputSearch')}
+                                type="text"
+                                placeholder="Tìm kiếm thông báo..."
+                            ></input>
+                        </div>
+                        <div className={cx('wrapper-filter', 'flex items-center justify-start mt-2')}>
+                            <p className="text-sm font-semibold">Lọc theo:</p>
+                            <div className="ml-2">
+                                <FormControl sx={{ m: 1, minWidth: 150 }} size="small">
+                                    <InputLabel id="demo-select-small-label">Loại thông báo</InputLabel>
+                                    <Select
+                                        className={cx('wrapper-filter-type')}
+                                        labelId="demo-select-small-label"
+                                        id="demo-select-small"
+                                        value={valueFilterType}
+                                        label="Loại thông báo"
+                                        onChange={handleFilterType}
+                                    >
+                                        {filterTypeNotifications.map((item, index) => {
+                                            return (
+                                                <MenuItem key={index} value={item}>
+                                                    {item}
+                                                </MenuItem>
+                                            );
+                                        })}
+                                    </Select>
+                                </FormControl>
+                            </div>
+                            <div className="ml-2">
+                                <FormControl sx={{ m: 1, minWidth: 150 }} size="small">
+                                    <InputLabel id="demo-select-small-label">Người nhận</InputLabel>
+                                    <Select
+                                        className={cx('wrapper-filter-type')}
+                                        labelId="demo-select-small-label"
+                                        id="demo-select-small"
+                                        value={valueFilterName}
+                                        label="Người nhận"
+                                        onChange={handleFilterName}
+                                    >
+                                        {listNameUser.map((item, index) => {
+                                            return (
+                                                <MenuItem key={index} value={item}>
+                                                    {item}
+                                                </MenuItem>
+                                            );
+                                        })}
+                                    </Select>
+                                </FormControl>
+                            </div>
+                        </div>
                     </div>
-                    {isLoader ? (
-                        <div className="flex items-center justify-center relative">
+                    {isLoading ? (
+                        <div className="flex items-center justify-center relative mt-10">
                             <CogWheel />
                         </div>
                     ) : listNotifications.length <= 0 ? (
@@ -92,18 +216,20 @@ export default function AdminNotification(props: IAppProps) {
                                         <th>Tiêu đề</th>
                                         <th>Lời nhắn</th>
                                         <th>Ngày tạo</th>
+                                        <th>Loại thông báo</th>
                                         <th>Người nhận</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {listNotifications.map((item, index) => {
+                                    {filteredNotifications.map((item, index) => {
                                         return (
                                             <tr key={index}>
                                                 <td className={cx('font-semibold')}>{item.title}</td>
                                                 <td className={cx('font-medium')}>{item.message}</td>
                                                 <td className={cx('font-medium')}>
-                                                    {moment(item.createdAt).format("DD/MM/YYYY")}
+                                                    {formatDate(item.createdAt)}
                                                 </td>
+                                                <td className={cx('font-medium')}>{item.type}</td>
                                                 <td className={cx('font-medium')}>
                                                     <ul>
                                                         {item.recipientId.map(

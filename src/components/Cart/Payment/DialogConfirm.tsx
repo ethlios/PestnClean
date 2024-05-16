@@ -51,6 +51,7 @@ export default function DialogConfirm({ setShowDialog, formInfoRef, cartOrder, f
                 recipientId: selector.infoOrder.userId,
                 createdAt: currentDate,
                 state: false,
+                type: 'Cập nhật về đơn hàng và thanh toán'
             };
             setDataMessageNotifySuccess(notificationMessage);
             return await dispatch(addNotification(notificationMessage));

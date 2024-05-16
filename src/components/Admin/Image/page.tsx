@@ -17,7 +17,6 @@ export interface showToast {
 export default function AdminImage(props: IAppProps) {
     const [openAddImage, setOpenAddImage] = useState<boolean>(false);
     let imgWorks: any = useSelector((state: RootState) => state.main.imageWork);
-    const dispatch = useDispatch();
     const [updateProduct, setUpdateProduct] = useState<any>({});
     const [openDialogDelete, setOpenDiaLogDelete] = useState<boolean>(false);
     const [valueDelete, setValueDelete] = useState<any>({});
