@@ -55,8 +55,8 @@ export default function CKeditor({ cb, value, readOnly }: IAppProps) {
                     editor.ui
                         .getEditableElement()
                         ?.parentElement?.insertBefore(
-                            editor.ui.view.toolbar.element,
-                            editor.ui.getEditableElement(),
+                            editor.ui.view.toolbar.element as Node,
+                            editor.ui.getEditableElement() as Node,
                         );
                 }}
             />
