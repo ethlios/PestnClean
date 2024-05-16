@@ -15,7 +15,7 @@ import UploadImgProduct from './UploadImg';
 const cx = classNames.bind(styles);
 
 export interface IAppProps {
-    setAddProduct: any;
+    setView: any;
     updateProduct: any;
     setUpdateProduct: any;
 }
@@ -31,7 +31,7 @@ const status = [
     },
 ];
 
-export default function AdminAddProduct({ setAddProduct, updateProduct, setUpdateProduct }: IAppProps) {
+export default function ViewBlog({ setView, updateProduct, setUpdateProduct }: IAppProps) {
     const [detail, setDetail] = useState<string>('');
     const [statusValue, setStatusValue] = useState<string>(''); //category
     const [isNew, setIsNew] = useState<boolean>(false);
@@ -98,17 +98,17 @@ export default function AdminAddProduct({ setAddProduct, updateProduct, setUpdat
             dispatch(update({ ...blog, id: updateProduct.id, createdAt: updateProduct.createdAt }));
         }
 
-        setAddProduct(false);
+        setView(false);
     };
 
     return (
         <div className={`${cx('add-wrapper')} cpmount`}>
             <div className={cx('add-content')} onClick={(e) => e.stopPropagation()}>
                 <div className={cx('add-header')}>
-                    <p>{isUpdate ? 'CHỈNH SỬA BÀI VIẾT' : 'THÊM BÀI VIẾT'}</p>
+                    <p>XEM BÀI VIẾT</p>
                     <button
                         onClick={() => {
-                            setAddProduct(false);
+                            setView(false);
                             setUpdateProduct({});
                         }}
                         className={cx('commom-button')}
@@ -123,18 +123,21 @@ export default function AdminAddProduct({ setAddProduct, updateProduct, setUpdat
                             placeholder="Tiêu đề..."
                             className={cx('add-inp')}
                             {...register('title')}
+                            readOnly
                         ></input>
                         <input
                             type="text"
                             placeholder="Mô tả..."
                             className={cx('add-inp')}
                             {...register('desHead')}
+                            readOnly
                         ></input>
                         <textarea
                             className={cx('textarea')}
                             spellCheck={false}
                             placeholder="Chi tiết..."
                             {...register('description')}
+                            readOnly
                         />
 
                         <div
@@ -146,15 +149,7 @@ export default function AdminAddProduct({ setAddProduct, updateProduct, setUpdat
                         >
                             {status.map((status, index) => {
                                 return (
-                                    <div
-                                        key={index}
-                                        className={cx('product-status')}
-                                        onClick={() =>
-                                            status.value === statusValue
-                                                ? setStatusValue('')
-                                                : setStatusValue(status.value)
-                                        }
-                                    >
+                                    <div key={index} className={cx('product-status')}>
                                         <div
                                             style={{
                                                 backgroundColor:
@@ -173,36 +168,25 @@ export default function AdminAddProduct({ setAddProduct, updateProduct, setUpdat
                             setHastag={setHastag}
                             hastagList={hastagList}
                             setHastagList={setHastagList}
+                            readOnly
                         />
                         <CategoryMain
                             hastag={phanloai}
                             setHastag={setPhanloai}
                             hastagList={phanloaiList}
                             setHastagList={setPhanloaiList}
+                            readOnly
                         />
                         <input
                             type="text"
                             placeholder="Path..."
                             className={cx('add-inp')}
                             {...register('path')}
+                            readOnly
                         ></input>
-
-                        <button
-                            className={cx('commom-button')}
-                            type="submit"
-                            style={{
-                                backgroundColor: 'var(--primary)',
-                                height: '42px',
-                                color: '#fff',
-                                fontSize: '13px',
-                                letterSpacing: '-.2px',
-                            }}
-                        >
-                            {isUpdate ? 'CHỈNH SỬA BÀI VIẾT' : 'THÊM BÀI VIẾT'}
-                        </button>
                     </div>
                     <div className={cx('add-body-2')}>
-                        <QuillEditor cb={setDetail} value={detail} />
+                        <QuillEditor cb={setDetail} value={detail} readOnly />
                     </div>
                 </form>
             </div>

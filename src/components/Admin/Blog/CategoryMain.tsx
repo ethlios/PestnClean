@@ -11,9 +11,10 @@ export interface IAppProps {
     hastag: string;
     setHastagList: any;
     hastagList: any[];
+    readOnly?: boolean;
 }
 
-export default function CategoryMain({ setHastag, hastag, setHastagList, hastagList }: IAppProps) {
+export default function CategoryMain({ setHastag, hastag, setHastagList, hastagList, readOnly }: IAppProps) {
     const [hastagIndex, setHastagIndex] = useState<number>(-1);
 
     const handleDeleteHastag = (ind: number) => {
@@ -41,6 +42,7 @@ export default function CategoryMain({ setHastag, hastag, setHastagList, hastagL
                     onChange={(e) => setHastag(e.target.value)}
                     placeholder="Keywords"
                     value={hastag}
+                    readOnly
                 />
                 <EastOutlinedIcon
                     style={{

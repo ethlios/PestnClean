@@ -7,9 +7,10 @@ import useSize from '~/libs/hooks/useSize';
 export interface IAppProps {
     value: string;
     cb: any;
+    readOnly?: boolean;
 }
 
-export default function QuillEditor({ cb, value }: IAppProps) {
+export default function QuillEditor({ cb, value, readOnly }: IAppProps) {
     const reactQuillRef = useRef<any>();
     const { sizeX } = useSize();
 
@@ -86,6 +87,7 @@ export default function QuillEditor({ cb, value }: IAppProps) {
             style={{
                 height: '520px',
             }}
+            readOnly
         />
     );
 }
