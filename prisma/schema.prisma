@@ -171,6 +171,7 @@ model Notification {
   recipientId String
   message     String?
   state       Boolean
+  type       String
   createdAt   DateTime @default(now())
   recipient   User     @relation(fields: [recipientId], references: [id])
 }

@@ -13,6 +13,7 @@ import Toast from '~/components/Orther/Toast';
 import { convertMomentToDate, formatISODate } from '~/libs/orthers/formatDate';
 import moment from 'moment';
 import useConnectSocket from '~/libs/hooks/useConnectSocket';
+import { typeNotifications } from './const';
 const cx = classNames.bind(styles);
 
 export interface IAppProps {
@@ -22,17 +23,20 @@ export interface IAppProps {
     addSuccess: Function;
 }
 
+
+
 export default function AddNotification({ isOpen, isClose, valueUpdate, addSuccess }: IAppProps) {
     const [open, setOpen] = useState(false);
     const [openChooseObjectCustomer, setOpenChooseObjectCustomer] = useState(false);
     const [showToast, setShowToast] = useState<boolean>(false);
     const [valueTitleNotify, setValueTitleNotify] = useState<string>('');
     const [valueDesNotify, setValueDesNotify] = useState<string>('');
+    const [valueTypeNotify, setValueTypeNotify] = useState<string>('Khuyến mãi và Ưu đãi');
     const [listUsersSelected, setListUsersSelected] = useState<any[]>([]);
     const [selectedOption, setSelectedOption] = useState<string>('');
     const [isClicked, setIsClicked] = useState<boolean>(false);
     const [dataMessageNotifySuccess, setDataMessageNotifySuccess] = useState<any>({});
-    const {isConnected} = useConnectSocket();
+    const { isConnected } = useConnectSocket();
     const dispatch = useDispatch();
     const selector = useSelector((state: RootState) => state.main);
     const session = useSession();
@@ -52,7 +56,13 @@ export default function AddNotification({ isOpen, isClose, valueUpdate, addSucce
 
     // Xử lí sự kiện lưu notify vào database
     const handleSave = () => {
-        if (valueDesNotify !== '' && valueTitleNotify !== '' && selectedOption !== '') {
+        console.log(valueTypeNotify);
+        if (
+            valueDesNotify !== '' &&
+            valueTitleNotify !== '' &&
+            selectedOption !== '' &&
+            valueTypeNotify !== ''
+        ) {
             const currentDate = convertMomentToDate();
             if (selectedOption === 'Không giới hạn') {
                 if (session.data && session.data?.user.rule === 'admin') {
@@ -63,6 +73,7 @@ export default function AddNotification({ isOpen, isClose, valueUpdate, addSucce
                             recipientId: session.data?.user.id,
                             createdAt: currentDate,
                             state: false,
+                            type: valueTypeNotify,
                         }),
                     );
                     setDataMessageNotifySuccess({
@@ -84,6 +95,7 @@ export default function AddNotification({ isOpen, isClose, valueUpdate, addSucce
                                 recipientId: item.id,
                                 createdAt: currentDate,
                                 state: false,
+                                type: valueTypeNotify,
                             }),
                         );
                     });
@@ -180,6 +192,22 @@ export default function AddNotification({ isOpen, isClose, valueUpdate, addSucce
                             value={valueDesNotify}
                             onChange={(e) => setValueDesNotify(e.target.value)}
                         ></textarea>
+                    </div>
+                    <div className="mt-4">
+                        <p className="font-semibold text-sm">Loại thông báo</p>
+                        <select
+                            value={valueTypeNotify}
+                            onChange={(e) => setValueTypeNotify(e.target.value)}
+                            className={cx('wrapper-content-inputName', 'mt-2')}
+                        >
+                            {typeNotifications.map((item, index) => {
+                                return (
+                                    <option key={index} value={item}>
+                                        {item}
+                                    </option>
+                                );
+                            })}
+                        </select>
                     </div>
                     <div className="mt-2">
                         <p className="font-semibold text-sm">Đối tượng thông báo</p>

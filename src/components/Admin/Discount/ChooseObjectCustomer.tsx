@@ -7,12 +7,12 @@ import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import { useDebounce } from '@react-hooks-library/core';
 import { removeVietnameseTones } from '~/libs/orthers/removeVietnamese';
-import { getAllUsersNotAdmin } from '~/libs/orthers/getData';
+import { fetchPosts} from '~/libs/orthers/getData';
 import { sendEmail } from '~/actions/sendEmails';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearMessage, updateStatusDiscount } from '~/redux/actions';
 import { RootState } from '~/redux/provider/store';
-import Toast from '~/components/Orther/Toast';
+import useSWR from 'swr';
 const cx = classNames.bind(styles);
 
 export interface IAppProps {
@@ -41,6 +41,7 @@ export default function ChooseObjectCustomer({ isOpen, isClose, dataSendMail, sh
     const [listUsers, setListUsers] = useState<any[]>([]);
     const [searchValue, setSearchValue] = useState<string>('');
     const [isLoader, setIsLoader] = useState<boolean>(false);
+    const { data , isLoading} = useSWR('api/user/all/ruleUser', fetchPosts);
     const debouncedText = useDebounce(searchValue, 200);
     const dispatch = useDispatch();
     const selector = useSelector((state: RootState) => state.main);
@@ -127,17 +128,17 @@ export default function ChooseObjectCustomer({ isOpen, isClose, dataSendMail, sh
         }
     }, [isOpen]);
 
+    useEffect(() => {
+        if(!isLoading){
+            setListUsers(data.data);
+        }
+    },[isLoading])
+
     // Sự kiện lấy ra danh sách người dùng để chọn và tìm kiếm người dùng theo tên
     useEffect(() => {
-        const getUser = async () => {
-            const res = await getAllUsersNotAdmin();
-            const { data } = res;
-            if (data.length > 0) {
-                setListUsers(data);
-            }
-
+        const getUser = () => {
             if (debouncedText) {
-                const findUser = data.filter((user: any) => {
+                const findUser = data.data.filter((user: any) => {
                     return (
                         removeVietnameseTones(user.name)
                             .toLowerCase()

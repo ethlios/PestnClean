@@ -1,13 +1,14 @@
 import * as React from 'react';
 import Dialog from '@mui/material/Dialog';
-import { formatDate } from '~/libs/orthers/formatDate';
 import classNames from 'classnames/bind';
 import styles from './Discount.module.scss';
-import { getAllUsersNotAdmin } from '~/libs/orthers/getData';
+import { fetchPosts } from '~/libs/orthers/getData';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '~/redux/provider/store';
 import { clearMessage, updateStatusDiscount } from '~/redux/actions';
 import { sendEmail } from '~/actions/sendEmails';
+import useSWR from 'swr';
+import moment from 'moment';
 export interface IAppProps {
     isOpen: boolean;
     isClose: Function;
@@ -20,8 +21,10 @@ export default function DialogSendAll({ isOpen, isClose, dataSendMail , showToas
     const [open, setOpen] = React.useState(false);
     const [isLoader, setIsLoader] = React.useState(false);
     const [isClicked, setIsClicked] = React.useState(false);
+    const { data } = useSWR('api/user/all/ruleUser', fetchPosts);
     const dispatch = useDispatch();
     const selector = useSelector((state:RootState) => state.main);
+    
     const handleClose = () => {
         setOpen(false);
         isClose(false);
@@ -57,21 +60,17 @@ export default function DialogSendAll({ isOpen, isClose, dataSendMail , showToas
         if (dataSendMail) {
             setIsLoader(true);
             setIsClicked(true);
-            const respUsers = await getAllUsersNotAdmin();
-            const {data , message} = respUsers;
-            console.log(respUsers);
             const emailAccepts = [];
-            for (const item of data) {
+            for (const item of data.data) {
                 const resp = await sendEmail({ data: dataSendMail, user: item });
                 emailAccepts.push(resp.accepted[0]);
             }
-            const emails: string[] = data.map((user:any) => user.email);
+            const emails: string[] = data.data.map((user:any) => user.email);
             if(arraysAreEqual(emailAccepts, emails)){
                 dispatch(updateStatusDiscount({id: dataSendMail.id , status: true}));
             };
         }
     };
-
 
     React.useEffect(() => {
         if(selector.message === 'Update Status Success'){
@@ -113,10 +112,10 @@ export default function DialogSendAll({ isOpen, isClose, dataSendMail , showToas
                             <li className="font-medium text-xs mt-2">Tỉ lệ giảm: {dataSendMail.percent+ '%'}</li>
                             <li className="font-medium text-xs mt-2">Mô tả: {dataSendMail.description}</li>
                             <li className="font-medium text-xs mt-2">
-                                Ngày bắt đầu: {formatDate(dataSendMail.dateStart)}
+                                Ngày bắt đầu: {moment(dataSendMail.dateStart).format('DD/MM/YYYY')}
                             </li>
                             <li className="font-medium text-xs mt-2">
-                                Ngày kết thúc: {formatDate(dataSendMail.dateEnd)}
+                                Ngày kết thúc: {moment(dataSendMail.dateEnd).format('DD/MM/YYYY')}
                             </li>
                         </ul>
                     </div>

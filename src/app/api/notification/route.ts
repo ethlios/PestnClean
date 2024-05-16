@@ -11,6 +11,7 @@ export async function POST(request: NextRequest) {
                 createdAt: body.createdAt,
                 recipientId: body.recipientId,
                 state: body.state,
+                type: body.type,
             },
         });
 
@@ -44,6 +45,7 @@ interface Message {
     recipientId: string[];
     state: boolean;
     createdAt: Date;
+    type: string;
 }
 
 export async function GET(request: NextRequest) {
@@ -70,6 +72,7 @@ export async function GET(request: NextRequest) {
                         recipientId: [msg.recipientId],
                         state: msg.state,
                         createdAt: msg.createdAt,
+                        type: msg.type,
                     };
                     mergedMessages.push(newMessage);
                 }

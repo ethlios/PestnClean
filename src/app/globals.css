@@ -341,3 +341,21 @@ html textarea::placeholder {
     height: 500px;
     overflow: auto;
 }
+
+/* Custom label input meterial */
+.css-14zqb2g-MuiFormLabel-root-MuiInputLabel-root{
+    font-family: '__Montserrat_45bddf' !important;
+    color: black !important;
+    font-weight: 600 !important;
+    top: -2px !important;
+}
+.css-sxgi39-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root,
+.css-au48m7-MuiButtonBase-root-MuiMenuItem-root,
+.css-fxoyq4-MuiFormLabel-root-MuiInputLabel-root{
+    font-family: '__Montserrat_45bddf' !important;
+}
+.css-fxoyq4-MuiFormLabel-root-MuiInputLabel-root{
+    font-size: 13px !important;
+    color: black !important;
+    font-weight: 600 !important;
+}

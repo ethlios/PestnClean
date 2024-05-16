@@ -12,8 +12,8 @@ export const sendEmailOrder = async (payload: any) => {
     let transporter = nodemailer.createTransport({
         service: 'Gmail',
         auth: {
-            user: 'nguyenthanhquynhlinh@gmail.com',
-            pass: 'kclk ldlh iykr knjx',
+            user: 'sales@pestnclean.vn',
+            pass: 'kiqx qnlc ronc didc',
         },
     });
 
@@ -33,7 +33,7 @@ export const sendEmailOrder = async (payload: any) => {
     );
 
     let info = await transporter.sendMail({
-        from: 'PESTNCLEAN <sender@gmail.com>', // sender address
+        from: 'PESTNCLEAN <sales@pestnclean.vn>', // sender address
         to: data.email, // list of receivers
         subject: 'Bạn vừa đặt hàng thành công tại PestnClean', // Subject line
         html: emailHtml, // html body
