@@ -42,7 +42,7 @@ export default function CategoryMain({ setHastag, hastag, setHastagList, hastagL
                     onChange={(e) => setHastag(e.target.value)}
                     placeholder="Keywords"
                     value={hastag}
-                    readOnly
+                    readOnly={readOnly}
                 />
                 <EastOutlinedIcon
                     style={{

@@ -64,8 +64,8 @@ export default function AdminAddProduct({ setAddProduct, updateProduct, setUpdat
         formState: { errors },
     } = useForm<any>();
 
-    const QuillEditor = useMemo(() => {
-        return dynamic(() => import('~/components/Orther/quii'), {
+    const CKEditor = useMemo(() => {
+        return dynamic(() => import('~/components/Orther/CKeditor'), {
             loading: () => <p>loading...</p>,
             ssr: false,
         });
@@ -343,7 +343,7 @@ export default function AdminAddProduct({ setAddProduct, updateProduct, setUpdat
                         </button>
                     </div>
                     <div className={cx('add-body-2')}>
-                        <QuillEditor cb={setDetail} value={detail} />
+                        <CKEditor cb={setDetail} value={detail} />
                     </div>
                 </form>
             </div>
