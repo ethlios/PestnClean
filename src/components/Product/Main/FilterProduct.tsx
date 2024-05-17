@@ -53,10 +53,11 @@ export default function FilterProduct({
         checkedFilter.map((item: any) => {
             filterProducts = filterProducts.filter((product: any) => {
                 if (item.field === 'price') {
+                    const price = product.price * (1 - product.priceSales / 100);
                     return (
-                        (product.price && product.price > item.min && product.price < item.max) ||
-                        (product.price && product.price > item.min && !item.max) ||
-                        (product.price && !item.min && product.price < item.max)
+                        (product.price && price > item.min && price < item.max) ||
+                        (product.price && price > item.min && !item.max) ||
+                        (product.price && !item.min && price < item.max)
                     );
                 } else {
                     return (
