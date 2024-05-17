@@ -31,19 +31,19 @@ model User {
 }
 
 model Blog {
-  id           Int        @id @default(autoincrement())
-  authorId     String
-  title        String?
-  desHead      String?
-  description  String?
-  detail       String?
-  img          String?
-  author       User       @relation(fields: [authorId], references: [id])
-  path         String?
-  createdAt    DateTime @default(now())
-  menu         String[]
-  key          String[]
-  category     String?
+  id          Int      @id @default(autoincrement())
+  authorId    String
+  title       String?
+  desHead     String?
+  description String?
+  detail      String?
+  img         String?
+  author      User     @relation(fields: [authorId], references: [id])
+  path        String?
+  createdAt   DateTime @default(now())
+  menu        String[]
+  key         String[]
+  category    String?
 }
 
 model Cart {
@@ -93,7 +93,7 @@ model Product {
   comments     Comments[]
   author       User       @relation(fields: [authorId], references: [id])
   hastags      String[]
-  categoryMain String[]
+  categoryMain String?
 }
 
 model CommentBlogs {
@@ -171,7 +171,7 @@ model Notification {
   recipientId String
   message     String?
   state       Boolean
-  type       String
+  type        String
   createdAt   DateTime @default(now())
   recipient   User     @relation(fields: [recipientId], references: [id])
 }

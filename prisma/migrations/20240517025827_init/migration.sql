@@ -83,7 +83,7 @@ CREATE TABLE "Product" (
     "plate" TEXT,
     "quantity" INTEGER,
     "hastags" TEXT[],
-    "categoryMain" TEXT[],
+    "categoryMain" TEXT,
 
     CONSTRAINT "Product_pkey" PRIMARY KEY ("id")
 );
@@ -174,6 +174,7 @@ CREATE TABLE "Notification" (
     "recipientId" TEXT NOT NULL,
     "message" TEXT,
     "state" BOOLEAN NOT NULL,
+    "type" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "Notification_pkey" PRIMARY KEY ("id")
