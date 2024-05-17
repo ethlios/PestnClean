@@ -11,10 +11,10 @@ export async function generateMetadata({ params }: Props) {
     const products = await getAllProducts();
 
     const productDetail: any = products.filter((product: any) => {
-        return nameToLink(product.title) === params['sanpham-detail'];
+        return product.path === params['sanpham-detail'];
     });
 
-    const path = nameToLink(productDetail.length > 0 ? productDetail[0].title : '');
+    const path = productDetail.length > 0 ? productDetail[0].path : '';
 
     if (!productDetail[0]) {
         return {

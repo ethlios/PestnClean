@@ -11,6 +11,7 @@ export async function PUT(request: Request, { params }: { params: { id: number }
             title: body.title,
             desHead: body.desHead,
             description: body.description,
+            path: body.path,
             price: body.price,
             code: body.code,
             status: body.status,

@@ -84,6 +84,7 @@ export default function AdminAddProduct({ setAddProduct, updateProduct, setUpdat
             setValue('title', updateProduct.title);
             setValue('desHead', updateProduct.desHead);
             setValue('price', updateProduct.price);
+            setValue('path', updateProduct.path);
             setDetail(updateProduct.detail);
             setStatusValue(updateProduct.status);
             setImageList(updateProduct.Image);
@@ -112,6 +113,7 @@ export default function AdminAddProduct({ setAddProduct, updateProduct, setUpdat
             detail: detail,
             image: imageList,
             code: uid(),
+            path: data.path,
             price: +data.price,
             priceSales: +data.priceSales,
             status: statusValue,
@@ -159,13 +161,18 @@ export default function AdminAddProduct({ setAddProduct, updateProduct, setUpdat
                             className={cx('add-inp')}
                             {...register('desHead')}
                         ></input>
-
                         <textarea
                             className={cx('textarea')}
                             spellCheck={false}
                             placeholder="Chi tiết..."
                             {...register('description')}
                         />
+                        <input
+                            type="text"
+                            placeholder="Đường dẫn..."
+                            className={cx('add-inp')}
+                            {...register('path')}
+                        ></input>
                         <input
                             type="text"
                             placeholder="Price..."
