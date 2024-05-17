@@ -89,7 +89,7 @@ export default function CartItem({ item, setCart }: IAppProps) {
                 <div className={'flex justify-center items-center'}>
                     <Checkbox onChange={() => handleCheck(item.id)} checked={item.checked} />
                 </div>
-                <Link href={`sanpham/${nameToLink(item.title)}`}>
+                <Link href={`sanpham/${item.path}`}>
                     <div
                         style={{
                             width:

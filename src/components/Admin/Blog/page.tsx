@@ -11,7 +11,7 @@ import { removeVietnameseTones } from '~/libs/orthers/removeVietnamese';
 import { removeBlog } from '~/redux/actions';
 import { RootState } from '~/redux/provider/store';
 import styles from '../admin.module.scss';
-import AdminAddProduct from './AddProduct';
+import AdminAddBlog from './AddBlog';
 import Tippy from '@tippyjs/react';
 import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
 import ViewBlog from './View';
@@ -22,19 +22,19 @@ export interface IAppProps {}
 
 export default function AdminBlog(props: IAppProps) {
     const [searchValue, setSearchValue] = useState<string>('');
-    const [addProduct, setAddProduct] = useState<boolean>(false);
+    const [addBlog, setAddBlog] = useState<boolean>(false);
     const [view, setView] = useState<boolean>(false);
-    let products: any = useSelector((state: RootState) => state.main.allBlogs);
+    let blogs: any = useSelector((state: RootState) => state.main.allBlogs);
     const dispatch = useDispatch();
-    const [updateProduct, setUpdateProduct] = useState<any>({});
+    const [updateBlog, setUpdateBlog] = useState<any>({});
     const debouncedText = useDebounce(searchValue, 200);
 
-    const handleDeleteProduct = (id: number) => {
+    const handleDeleteBlog = (id: number) => {
         dispatch(removeBlog(id));
     };
 
     if (debouncedText) {
-        products = products.filter((product: any) => {
+        blogs = blogs.filter((product: any) => {
             return (
                 removeVietnameseTones(product.title)
                     .toLowerCase()
@@ -45,23 +45,18 @@ export default function AdminBlog(props: IAppProps) {
 
     return (
         <>
-            {addProduct && (
-                <AdminAddProduct
-                    setAddProduct={setAddProduct}
-                    updateProduct={updateProduct}
-                    setUpdateProduct={setUpdateProduct}
+            {addBlog && (
+                <AdminAddBlog
+                    setAddBlog={setAddBlog}
+                    updateBlog={updateBlog}
+                    setUpdateBlog={setUpdateBlog}
+                    blogs={blogs}
                 />
             )}
-            {view && (
-                <ViewBlog
-                    setView={setView}
-                    updateProduct={updateProduct}
-                    setUpdateProduct={setUpdateProduct}
-                />
-            )}
+            {view && <ViewBlog setView={setView} updateBlog={updateBlog} setUpdateBlog={setUpdateBlog} />}
             <div className={cx('common-wrapper')}>
                 <div className={cx('product-panel')}>
-                    <button className={cx('commom-button')} onClick={() => setAddProduct(true)}>
+                    <button className={cx('commom-button')} onClick={() => setAddBlog(true)}>
                         Thêm bài viết
                     </button>
                 </div>
@@ -73,7 +68,7 @@ export default function AdminBlog(props: IAppProps) {
                         alignItems: 'center',
                     }}
                 >
-                    Blogs: {products.length}{' '}
+                    Blogs: {blogs.length}{' '}
                     <Tippy content="Có một số bài đã đăng trước nên không thể chỉnh sửa!">
                         <HelpOutlineIcon
                             style={{
@@ -90,16 +85,16 @@ export default function AdminBlog(props: IAppProps) {
                     onChange={(e) => setSearchValue(e.target.value)}
                 ></input>
                 <div className={cx('common-item-wrapper')}>
-                    {products.length > 0 ? (
+                    {blogs.length > 0 ? (
                         <div className={cx('product-wrapper')}>
-                            {products.map((product: any, index: number) => {
+                            {blogs.map((blog: any, index: number) => {
                                 return (
                                     <div key={index} className={cx('product-item')}>
-                                        <Link href={`/blogs/${product.path}`} className={cx('product-img')}>
-                                            {product.img ? (
+                                        <Link href={`/blogs/${blog.path}`} className={cx('product-img')}>
+                                            {blog.img ? (
                                                 <Image
-                                                    src={!!product.img ? product.img : ''}
-                                                    alt={product.title}
+                                                    src={!!blog.img ? blog.img : ''}
+                                                    alt={blog.title}
                                                     width={1000}
                                                     height={1000}
                                                 />
@@ -108,17 +103,17 @@ export default function AdminBlog(props: IAppProps) {
                                             )}
                                         </Link>
                                         <div className={cx('product-info')}>
-                                            <p className={cx('product-title')}>{product.title}</p>
-                                            <p className={cx('product-des')}>{product.desHead}</p>
+                                            <p className={cx('product-title')}>{blog.title}</p>
+                                            <p className={cx('product-des')}>{blog.desHead}</p>
                                         </div>
                                         <div className={cx('product-btn')}>
-                                            {new Date(product.createdAt).toLocaleDateString() !==
+                                            {new Date(blog.createdAt).toLocaleDateString() !==
                                             'Invalid Date' ? (
                                                 <>
                                                     <div
                                                         onClick={() => {
-                                                            setUpdateProduct(product);
-                                                            setAddProduct(true);
+                                                            setUpdateBlog(blog);
+                                                            setAddBlog(true);
                                                         }}
                                                     >
                                                         <DriveFileRenameOutlineOutlinedIcon />
@@ -126,7 +121,7 @@ export default function AdminBlog(props: IAppProps) {
                                                     <div
                                                         onClick={() => {
                                                             if (confirm('Bạn có chắc chắn muốn xóa?')) {
-                                                                handleDeleteProduct(product.id);
+                                                                handleDeleteBlog(blog.id);
                                                             }
                                                         }}
                                                     >
@@ -136,7 +131,7 @@ export default function AdminBlog(props: IAppProps) {
                                             ) : (
                                                 <div
                                                     onClick={() => {
-                                                        setUpdateProduct(product);
+                                                        setUpdateBlog(blog);
                                                         setView(true);
                                                     }}
                                                     style={{ border: '0px solid' }}

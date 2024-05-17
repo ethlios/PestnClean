@@ -3,7 +3,7 @@
 import classNames from 'classnames/bind';
 import { useSession } from 'next-auth/react';
 import dynamic from 'next/dynamic';
-import { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { addBlog, updateBlog as update } from '~/redux/actions';
@@ -11,13 +11,16 @@ import styles from '../admin.module.scss';
 import CategoryMain from './CategoryMain';
 import HastagList from './Hastag';
 import UploadImgProduct from './UploadImg';
+import { nameToLink } from '~/libs/orthers/nameToLink';
+import Toast from '~/components/Orther/Toast';
 
 const cx = classNames.bind(styles);
 
 export interface IAppProps {
-    setAddProduct: any;
-    updateProduct: any;
-    setUpdateProduct: any;
+    setAddBlog: any;
+    updateBlog: any;
+    setUpdateBlog: any;
+    blogs: any;
 }
 
 const status = [
@@ -31,7 +34,7 @@ const status = [
     },
 ];
 
-export default function AdminAddProduct({ setAddProduct, updateProduct, setUpdateProduct }: IAppProps) {
+export default function AdminAddBlog({ setAddBlog, updateBlog, setUpdateBlog, blogs }: IAppProps) {
     const [detail, setDetail] = useState<string>('');
     const [statusValue, setStatusValue] = useState<string>(''); //category
     const [isNew, setIsNew] = useState<boolean>(false);
@@ -43,6 +46,7 @@ export default function AdminAddProduct({ setAddProduct, updateProduct, setUpdat
     const [hastag, setHastag] = useState<string>('');
     const [phanloaiList, setPhanloaiList] = useState<any[]>([]); //key
     const [phanloai, setPhanloai] = useState<string>('');
+    const [showToast, setShowToast] = useState<boolean>(false);
 
     const {
         register,
@@ -60,28 +64,31 @@ export default function AdminAddProduct({ setAddProduct, updateProduct, setUpdat
     }, []);
 
     useEffect(() => {
-        if (!!updateProduct.id) {
+        if (!!updateBlog.id) {
             setIsUpdate(true);
         } else {
             setIsUpdate(false);
         }
-    }, [updateProduct]);
+    }, [updateBlog]);
 
     useEffect(() => {
         if (isUpdate) {
-            setValue('title', updateProduct.title);
-            setValue('desHead', updateProduct.desHead);
-            setDetail(updateProduct.detail);
-            setStatusValue(updateProduct.category);
-            setImageList(updateProduct.img);
-            setValue('description', updateProduct.description);
-            setHastagList(updateProduct.menu);
-            setPhanloaiList(updateProduct.key);
-            setValue('path', updateProduct.path);
+            setValue('title', updateBlog.title);
+            setValue('desHead', updateBlog.desHead);
+            setDetail(updateBlog.detail);
+            setStatusValue(updateBlog.category);
+            setImageList(updateBlog.img);
+            setValue('description', updateBlog.description);
+            setHastagList(updateBlog.menu);
+            setPhanloaiList(updateBlog.key);
+            setValue('path', updateBlog.path);
         }
-    }, [isUpdate, setValue, updateProduct]);
+    }, [isUpdate, setValue, updateBlog]);
 
     const onSubmit = (data: any) => {
+        const isPathExists = blogs.some((blog: any) => blog.path === data.path);
+        if (isPathExists) return setShowToast(true);
+
         const blog = {
             ...data,
             authorId: session?.user.id,
@@ -90,26 +97,33 @@ export default function AdminAddProduct({ setAddProduct, updateProduct, setUpdat
             category: statusValue,
             menu: hastagList,
             key: phanloaiList,
+            path: data.path,
         };
 
         if (!isUpdate) {
             dispatch(addBlog(blog));
         } else {
-            dispatch(update({ ...blog, id: updateProduct.id, createdAt: updateProduct.createdAt }));
+            dispatch(update({ ...blog, id: updateBlog.id, createdAt: updateBlog.createdAt }));
         }
 
-        setAddProduct(false);
+        setAddBlog(false);
     };
 
     return (
         <div className={`${cx('add-wrapper')} cpmount`}>
+            <Toast
+                text={'Đường dẫn đã tồn tại'}
+                showToast={showToast}
+                setShowToast={setShowToast}
+                rule="error"
+            />
             <div className={cx('add-content')} onClick={(e) => e.stopPropagation()}>
                 <div className={cx('add-header')}>
                     <p>{isUpdate ? 'CHỈNH SỬA BÀI VIẾT' : 'THÊM BÀI VIẾT'}</p>
                     <button
                         onClick={() => {
-                            setAddProduct(false);
-                            setUpdateProduct({});
+                            setAddBlog(false);
+                            setUpdateBlog({});
                         }}
                         className={cx('commom-button')}
                     >
@@ -123,6 +137,7 @@ export default function AdminAddProduct({ setAddProduct, updateProduct, setUpdat
                             placeholder="Tiêu đề..."
                             className={cx('add-inp')}
                             {...register('title')}
+                            onChange={(e) => !isUpdate && setValue('path', nameToLink(e.target.value))}
                         ></input>
                         <input
                             type="text"
@@ -182,7 +197,7 @@ export default function AdminAddProduct({ setAddProduct, updateProduct, setUpdat
                         />
                         <input
                             type="text"
-                            placeholder="Path..."
+                            placeholder="Đường dẫn..."
                             className={cx('add-inp')}
                             {...register('path')}
                         ></input>

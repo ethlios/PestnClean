@@ -10,11 +10,12 @@ import { useSession } from 'next-auth/react';
 import { uid } from '~/libs/orthers/generatedCode';
 import { useDispatch } from 'react-redux';
 import { addProduct, updateProduct as update } from '~/redux/actions';
-import { arrToStr, removeImg } from '~/libs/orthers/removeImg';
 import HastagList from './Hastag';
 import CategoryMain from './CategoryMain';
 import { filterMenu as categories } from '~/constants/productFilter';
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
+import { nameToLink } from '~/libs/orthers/nameToLink';
+import Toast from '~/components/Orther/Toast';
 
 const cx = classNames.bind(styles);
 
@@ -22,6 +23,7 @@ export interface IAppProps {
     setAddProduct: any;
     updateProduct: any;
     setUpdateProduct: any;
+    products: any;
 }
 
 const status = [
@@ -43,7 +45,12 @@ const status = [
     },
 ];
 
-export default function AdminAddProduct({ setAddProduct, updateProduct, setUpdateProduct }: IAppProps) {
+export default function AdminAddProduct({
+    setAddProduct,
+    updateProduct,
+    setUpdateProduct,
+    products,
+}: IAppProps) {
     const [detail, setDetail] = useState<string>('');
     const [statusValue, setStatusValue] = useState<string>('');
     const [isNew, setIsNew] = useState<boolean>(false);
@@ -55,6 +62,7 @@ export default function AdminAddProduct({ setAddProduct, updateProduct, setUpdat
     const [hastag, setHastag] = useState<string>('');
     const [phanloaiList, setPhanloaiList] = useState<any[]>([]);
     const [phanloai, setPhanloai] = useState<string>('');
+    const [showToast, setShowToast] = useState<boolean>(false);
 
     const {
         register,
@@ -107,6 +115,9 @@ export default function AdminAddProduct({ setAddProduct, updateProduct, setUpdat
     }, [isUpdate, setValue, updateProduct]);
 
     const onSubmit = (data: any) => {
+        const isPathExists = products.some((product: any) => product.path === data.path);
+        if (isPathExists) return setShowToast(true);
+
         const product = {
             ...data,
             authorId: session?.user.id,
@@ -134,6 +145,12 @@ export default function AdminAddProduct({ setAddProduct, updateProduct, setUpdat
 
     return (
         <div className={`${cx('add-wrapper')} cpmount`}>
+            <Toast
+                text={'Đường dẫn đã tồn tại'}
+                showToast={showToast}
+                setShowToast={setShowToast}
+                rule="error"
+            />
             <div className={cx('add-content')} onClick={(e) => e.stopPropagation()}>
                 <div className={cx('add-header')}>
                     <p>{isUpdate ? 'CHỈNH SỬA SẢN PHẨM' : 'THÊM SẢN PHẨM'}</p>
@@ -154,6 +171,7 @@ export default function AdminAddProduct({ setAddProduct, updateProduct, setUpdat
                             placeholder="Tên sản phẩm..."
                             className={cx('add-inp')}
                             {...register('title')}
+                            onChange={(e) => !isUpdate && setValue('path', nameToLink(e.target.value))}
                         ></input>
                         <input
                             type="text"
