@@ -49,8 +49,6 @@
                 border-radius: 10px;
                 border: 2px solid;
                 font-weight: 500;
-                font-size: 14px;
-                width: 130px;
                 &:hover {
                     cursor: pointer;
                 }
@@ -77,9 +75,6 @@
         &-grid {
             margin-top: 10px;
             padding: 10px;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr); /* Three columns with equal width */
-            grid-gap: 10px; /* Gap between grid items */
         }
     }
 }

@@ -38,8 +38,6 @@ export default function FaqPage(props: IAppProps) {
     let allBlogs = useSelector((state: RootState) => state.main.allBlogs);
     let allProducts = useSelector((state: RootState) => state.main.allProducts);
 
-    const query = search ? search.get('q') : null;
-
     useEffect(() => {
         if (search.get('q')) {
             const products: any[] = allProducts.filter((item) => {
@@ -122,27 +120,27 @@ export default function FaqPage(props: IAppProps) {
                             paddingTop: '30px',
                         }}
                     >
-                        <div className="flex items-center">
+                        <div className="sm:flex sm:items-center">
                             <p className="font-semibold pl-4">Kết quả tìm kiếm:</p>
                             <ul
-                                className={cx('flex items-center ml-4', 'wrapper-search-ul')}
+                                className={cx('sm:flex sm:items-center sm:ml-4', 'wrapper-search-ul')}
                                 style={{
                                     fontWeight: 600,
                                 }}
                             >
-                                <li>
+                                <li className='ml-4 sm:ml-0'>
                                     Sản phẩm:
                                     {resultQueryProducts
                                         ? `(${resultQueryProducts.length} kết quả);`
                                         : '(0 kết quả);'}
                                 </li>
-                                <li className="ml-2">
+                                <li className="ml-4 sm:ml-2">
                                     Bài viết:
                                     {resultQueryBlogs
                                         ? `(${resultQueryBlogs.length} kết quả);`
                                         : '(0 kết quả);'}
                                 </li>
-                                <li className="ml-2">
+                                <li className="ml-4 sm:ml-2">
                                     Dịch vụ:
                                     {resultQueryService
                                         ? `(${resultQueryService.length} kết quả);`
@@ -150,12 +148,12 @@ export default function FaqPage(props: IAppProps) {
                                 </li>
                             </ul>
                         </div>
-                        <div className="flex items-center justify-start pl-4 mt-4">
+                        <div className="sm:flex sm:items-center sm:justify-start pl-4 mt-4">
                             <p>Hiển thị theo:</p>
-                            <div className="flex items-center justify-start ml-4">
+                            <div className="flex items-center justify-start sm:ml-4 mt-4 sm:mt-0">
                                 <button
                                     className={cx(
-                                        'ml-2 ',
+                                        'sm:ml-2 text-xs sm:text-sm sm:w-32 w-28',
                                         'wrapper-search-control-btn',
                                         isCheckedProducts
                                             ? 'wrapper-search-control-btnChecked'
@@ -174,7 +172,7 @@ export default function FaqPage(props: IAppProps) {
                                 </button>
                                 <button
                                     className={cx(
-                                        'ml-2',
+                                        'ml-2 text-xs sm:text-sm sm:w-32 w-28',
                                         'wrapper-search-control-btn',
                                         isCheckedBlogs
                                             ? 'wrapper-search-control-btnChecked'
@@ -193,7 +191,7 @@ export default function FaqPage(props: IAppProps) {
                                 </button>
                                 <button
                                     className={cx(
-                                        'ml-2',
+                                        'ml-2 text-xs sm:text-sm sm:w-32 w-28',
                                         'wrapper-search-control-btn',
                                         isCheckedService
                                             ? 'wrapper-search-control-btnChecked'
@@ -216,7 +214,7 @@ export default function FaqPage(props: IAppProps) {
                         {/* HIỂN THỊ SEARCH THEO SẢN PHẨM */}
                         {isCheckedProducts &&
                             (resultQueryProducts && resultQueryProducts.length > 0 ? (
-                                <div className={cx('wrapper-search-grid')}>
+                                <div className={cx('wrapper-search-grid','grid lg:grid-cols-4 gap-4 md:grid-cols-3 sm:grid-cols-2')}>
                                     {resultQueryProducts.map((item: any, index) => {
                                         const path = nameToLink(item ? item.title : '');
                                         return (
@@ -288,7 +286,7 @@ export default function FaqPage(props: IAppProps) {
                         {/* HIỂN THỊ SEARCH THEO BÀI VIẾT */}
                         {isCheckedBlogs &&
                             (resultQueryBlogs && resultQueryBlogs.length > 0 ? (
-                                <div className={cx('wrapper-search-grid')}>
+                                <div className={cx('wrapper-search-grid','grid lg:grid-cols-4 gap-4 md:grid-cols-3 sm:grid-cols-2')}>
                                     {resultQueryBlogs.map((blog: any, index) => {
                                         return (
                                             <div key={blog.id} className={cx('blog-item')}>
@@ -360,7 +358,7 @@ export default function FaqPage(props: IAppProps) {
                         {/* HIỂN THỊ SEARCH THEO DỊCH VỤ */}
                         {isCheckedService &&
                             (resultQueryService && resultQueryService.length > 0 ? (
-                                <div className={cx('wrapper-search-grid')}>
+                                <div className={cx('wrapper-search-grid','grid lg:grid-cols-4 gap-4 md:grid-cols-3 sm:grid-cols-2')}>
                                     {resultQueryService.map((service: any, index) => {
                                         return (
                                             <div
