@@ -8,8 +8,8 @@ const config: Config = {
     ],
     theme: {
         colors: {
-            'primaryColor':'#0274be',
-            'gray' : '#dbdde2'
+            primaryColor: '#0274be',
+            gray: '#dbdde2',
         },
         extend: {
             backgroundImage: {
@@ -41,7 +41,7 @@ const config: Config = {
             },
         },
         fontFamily: {
-            'system': "Merriweather",
+            system: 'Merriweather',
         },
     },
     plugins: [],
