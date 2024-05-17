@@ -12,12 +12,12 @@ const cx = classNames.bind(styles);
 export interface IAppProps {
     title: string;
     subMenu?: any;
-    className?: string;
+    field?: string;
     setSelected?: any;
     selected?: any;
 }
 
-export default function FilterMenu({ title, subMenu, className, selected, setSelected }: IAppProps) {
+export default function FilterMenu({ title, subMenu, field, selected, setSelected }: IAppProps) {
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleOpen = () => {
@@ -31,9 +31,13 @@ export default function FilterMenu({ title, subMenu, className, selected, setSel
         setSelected(value);
     };
 
-    return subMenu && subMenu.length > 0 ? (
+    return (
         <>
-            <div className={cx(className)}>
+            <div
+                className={cx(
+                    `${field === 'category1' ? 'title1' : field === 'category2' ? 'title2' : 'title3'}`,
+                )}
+            >
                 <p
                     data-value={title}
                     onClick={handleFilter}
@@ -41,20 +45,21 @@ export default function FilterMenu({ title, subMenu, className, selected, setSel
                 >
                     {title}
                 </p>
-                {isOpen ? (
-                    <KeyboardArrowDownIcon onClick={toggleOpen} />
-                ) : (
-                    <KeyboardArrowRightIcon onClick={toggleOpen} />
-                )}
+                {subMenu?.length > 0 &&
+                    (isOpen ? (
+                        <KeyboardArrowDownIcon onClick={toggleOpen} />
+                    ) : (
+                        <KeyboardArrowRightIcon onClick={toggleOpen} />
+                    ))}
             </div>
-            {isOpen && (
+            {subMenu?.length > 0 && isOpen && (
                 <ul className={cx('drop-menu')}>
                     {subMenu.map((subMenu: any, index: number) => (
                         <FilterMenu
                             key={index}
                             title={subMenu.title}
                             subMenu={subMenu.subMenu}
-                            className={cx('title2')}
+                            field={subMenu.field}
                             selected={selected}
                             setSelected={setSelected}
                         />
@@ -62,13 +67,5 @@ export default function FilterMenu({ title, subMenu, className, selected, setSel
                 </ul>
             )}
         </>
-    ) : (
-        <p
-            data-value={title}
-            onClick={handleFilter}
-            style={{ color: selected === title ? 'var(--primary)' : 'black', fontWeight: 500 }}
-        >
-            {title}
-        </p>
     );
 }

@@ -106,11 +106,9 @@
     -webkit-user-select: none;
     user-select: none;
     transition: all ease 0.5s;
-    font-size: 14.5px;
-    font-weight: 600;
 }
 
-.title {
+.title1 {
     @include menu-tile;
     padding-bottom: 0.6rem;
     border-bottom: 3px solid var(--secondary);
@@ -121,7 +119,13 @@
 .title2 {
     @include menu-tile;
     font-size: 15px;
-    font-weight: 600;
+    font-weight: 550;
+}
+
+.title3 {
+    @include menu-tile;
+    font-size: 14px;
+    font-weight: 500;
 }
 
 .drop-menu {

@@ -45,9 +45,9 @@ export default function FilterProduct({
         let filterProducts = allProducts.filter((product: any) => {
             if (selectedCategory.length === 0) return allProducts;
             return (
-                selectedCategory.includes(product.category1) ||
-                selectedCategory.includes(product.category2) ||
-                selectedCategory.includes(product.category3)
+                product.category1.includes(selectedCategory) ||
+                product.category2.includes(selectedCategory) ||
+                product.category3.includes(selectedCategory)
             );
         });
         checkedFilter.map((item: any) => {
@@ -127,7 +127,7 @@ export default function FilterProduct({
                                     key={index}
                                     title={menu.title}
                                     subMenu={menu.subMenu}
-                                    className={cx('title')}
+                                    field={menu.field}
                                     selected={selectedCategory}
                                     setSelected={setSelectedCategory}
                                 />
