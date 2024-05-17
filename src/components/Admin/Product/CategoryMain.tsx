@@ -7,20 +7,20 @@ import EastOutlinedIcon from '@mui/icons-material/EastOutlined';
 const cx = classNames.bind(styles);
 
 export interface IAppProps {
-    setHastag: any;
-    hastag: string;
-    setHastagList: any;
-    hastagList: any[];
+    setPhanloai: any;
+    phanloai: any;
+    setPhanloaiList: any;
+    phanloaiList: any[];
 }
 
-export default function CategoryMain({ setHastag, hastag, setHastagList, hastagList }: IAppProps) {
-    const [hastagIndex, setHastagIndex] = useState<number>(-1);
+export default function CategoryMain({ setPhanloai, phanloai, setPhanloaiList, phanloaiList }: IAppProps) {
+    const [phanloaiIndex, setPhanloaiIndex] = useState<number>(-1);
 
-    const handleDeleteHastag = (ind: number) => {
-        const newList = hastagList.filter((image) => {
-            return image !== hastagList[ind];
+    const handleDeletePhanloai = (index: number) => {
+        const newList = phanloaiList.filter((item) => {
+            return item !== phanloaiList[index];
         });
-        setHastagList(newList);
+        setPhanloaiList(newList);
     };
 
     return (
@@ -35,12 +35,12 @@ export default function CategoryMain({ setHastag, hastag, setHastagList, hastagL
                 }}
             >
                 <input
-                    id="Hastag"
+                    id="PhanLoai"
                     type="text"
                     className={cx('add-inp')}
-                    onChange={(e) => setHastag(e.target.value)}
+                    onChange={(e) => setPhanloai(e.target.value)}
                     placeholder="Phân loại"
-                    value={hastag}
+                    value={phanloai}
                 />
                 <EastOutlinedIcon
                     style={{
@@ -51,12 +51,13 @@ export default function CategoryMain({ setHastag, hastag, setHastagList, hastagL
                         marginBottom: '3px',
                     }}
                     onClick={() => {
-                        setHastagList((prev: any) => [...prev, hastag]);
-                        setHastag('');
+                        setPhanloaiList((prev: any) => [...prev, { type: phanloai, price: 0 }]);
+                        setPhanloai('');
+                        setPhanloaiIndex(-1);
                     }}
                 />
             </div>
-            {hastagList.length > 0 && (
+            {phanloaiList.length > 0 && (
                 <div
                     style={{
                         display: 'flex',
@@ -67,49 +68,57 @@ export default function CategoryMain({ setHastag, hastag, setHastagList, hastagL
                         gap: '5px',
                     }}
                 >
-                    {hastagList.map((item, index) => {
+                    {phanloaiList.map((item, index) => {
                         return (
-                            <div
-                                key={index}
-                                style={{
-                                    backgroundColor: 'rgba(0,0,0,0.2)',
-                                    padding: '5px 10px',
-                                    borderRadius: '5px',
-                                    cursor: 'pointer',
-                                    position: 'relative',
-                                    fontWeight: 600,
-                                }}
-                                onClick={(e) => {
-                                    e.stopPropagation();
-                                    setHastagIndex(index);
-                                }}
-                            >
-                                {item}
-                                {hastagIndex === index && (
-                                    <div
-                                        style={{
-                                            width: '100%',
-                                            height: '100%',
-                                            position: 'absolute',
-                                            backgroundColor: 'rgba(0,0,0,0.5)',
-                                            display: 'flex',
-                                            justifyContent: 'center',
-                                            alignItems: 'center',
-                                            top: 0,
-                                            left: 0,
-                                            borderRadius: '5px',
-                                            fontSize: '18px',
-                                        }}
-                                    >
-                                        <RemoveOutlinedIcon
-                                            onClick={() => handleDeleteHastag(index)}
+                            <div key={index} className={'flex gap-1 w-full'}>
+                                <div
+                                    className={cx('add-inp-type')}
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        setPhanloaiIndex(index);
+                                    }}
+                                >
+                                    {item.type}
+                                    {phanloaiIndex === index && (
+                                        <div
                                             style={{
-                                                color: '#fff',
-                                                zIndex: 10,
+                                                width: '100%',
+                                                height: '100%',
+                                                position: 'absolute',
+                                                backgroundColor: 'rgba(0,0,0,0.5)',
+                                                display: 'flex',
+                                                justifyContent: 'center',
+                                                alignItems: 'center',
+                                                top: 0,
+                                                left: 0,
+                                                borderRadius: '5px',
+                                                fontSize: '18px',
                                             }}
-                                        />
-                                    </div>
-                                )}
+                                        >
+                                            <RemoveOutlinedIcon
+                                                onClick={() => handleDeletePhanloai(index)}
+                                                style={{
+                                                    color: '#fff',
+                                                    zIndex: 10,
+                                                }}
+                                            />
+                                        </div>
+                                    )}
+                                </div>
+                                <input
+                                    type="text"
+                                    className={cx('add-inp-type-price')}
+                                    value={item.price}
+                                    onChange={(e) => {
+                                        const newList = phanloaiList.map((item, i) => {
+                                            if (i === index) {
+                                                return { ...item, price: +e.target.value };
+                                            }
+                                            return item;
+                                        });
+                                        setPhanloaiList(newList);
+                                    }}
+                                ></input>
                             </div>
                         );
                     })}

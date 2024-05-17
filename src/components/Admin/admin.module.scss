@@ -308,6 +308,33 @@
     }
 }
 
+.add-inp-type {
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    position: relative;
+    font-weight: 600;
+    width: 30%;
+    text-align: center;
+}
+
+.add-inp-type-price {
+    display: inline;
+    border: solid 1.5px rgba(0, 0, 0, 0.1);
+    padding: 0 10px;
+    border-radius: 3px;
+    width: 70%;
+
+    &:focus {
+        border: solid 1.5px var(--primary);
+    }
+
+    &::placeholder {
+        color: rgba(0, 0, 0, 0.55);
+    }
+}
+
 .all-status {
     display: flex;
     flex-direction: row;

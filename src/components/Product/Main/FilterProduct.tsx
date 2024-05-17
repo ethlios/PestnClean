@@ -61,7 +61,8 @@ export default function FilterProduct({
                 } else {
                     return (
                         (product[item.field] && product[item.field].includes(item.checkbox)) ||
-                        (product.categoryMain && product.categoryMain.includes(item.checkbox))
+                        (product.categoryMain &&
+                            product.categoryMain.find((i: any) => i.type === item.checkbox))
                     );
                 }
             });

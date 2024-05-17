@@ -101,7 +101,7 @@ export default function AdminAddProduct({ setAddProduct, updateProduct, setUpdat
             setIsNew(updateProduct.new);
             setValue('description', updateProduct.description);
             setHastagList(updateProduct.hastags);
-            setPhanloaiList(updateProduct.categoryMain);
+            setPhanloaiList(JSON.parse(updateProduct.categoryMain));
         }
     }, [isUpdate, setValue, updateProduct]);
 
@@ -109,7 +109,7 @@ export default function AdminAddProduct({ setAddProduct, updateProduct, setUpdat
         const product = {
             ...data,
             authorId: session?.user.id,
-            detail,
+            detail: detail,
             image: imageList,
             code: uid(),
             price: +data.price,
@@ -118,7 +118,7 @@ export default function AdminAddProduct({ setAddProduct, updateProduct, setUpdat
             new: isNew,
             quantity: +data.quantity,
             hastags: hastagList,
-            categoryMain: phanloaiList,
+            categoryMain: JSON.stringify(phanloaiList),
         };
 
         if (!isUpdate) {
@@ -212,10 +212,10 @@ export default function AdminAddProduct({ setAddProduct, updateProduct, setUpdat
                             setHastagList={setHastagList}
                         />
                         <CategoryMain
-                            hastag={phanloai}
-                            setHastag={setPhanloai}
-                            hastagList={phanloaiList}
-                            setHastagList={setPhanloaiList}
+                            phanloai={phanloai}
+                            setPhanloai={setPhanloai}
+                            phanloaiList={phanloaiList}
+                            setPhanloaiList={setPhanloaiList}
                         />
                         <FormControl>
                             <InputLabel
