@@ -164,7 +164,7 @@ export default function ThanhToan(props: IAppProps) {
                     Thời Gian Giao Hàng Ước Tính: Dự kiến từ 2-5 ngày làm việc cho các đơn hàng trong nội
                     thành và 5-10 ngày làm việc cho các đơn hàng ngoại thành.
                 </p>
-                <div className="mt-20">
+                <div className="mt-10">
                     <div className="flex justify-end">
                         <div
                             className={'p-8 rounded-lg'}

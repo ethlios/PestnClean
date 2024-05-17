@@ -26,7 +26,7 @@ export default function FaqCPPage(props: IFaqProps) {
                             ))}
                         </div>
                     </div>
-                    <div className="mt-20">
+                    <div className="mt-10">
                         <div className="flex justify-end">
                             <div
                                 className={'p-8 rounded-lg'}

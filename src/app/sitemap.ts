@@ -7,7 +7,7 @@ export default async function sitemap() {
     const baseUrl = process.env.NEXTAUTH_URL;
 
     const blogUrl = blogs.map((blog) => ({
-        url: `${baseUrl}/blogs/${nameToLink(blog.title)}`,
+        url: `${baseUrl}/blogs/${blog.path}`,
         lastModified: new Date(),
     }));
 
@@ -30,6 +30,12 @@ export default async function sitemap() {
         { url: `${baseUrl}/gioithieu`, lastModified: new Date() },
         { url: `${baseUrl}/giohang`, lastModified: new Date() },
         { url: `${baseUrl}/lienhe`, lastModified: new Date() },
+        { url: `${baseUrl}/login`, lastModified: new Date() },
+        { url: `${baseUrl}/search`, lastModified: new Date() },
+        { url: `${baseUrl}/hoidap/chinh-sach-bao-mat-thong-tin`, lastModified: new Date() },
+        { url: `${baseUrl}/hoidap/chinh-sach-giao-nhan-hang`, lastModified: new Date() },
+        { url: `${baseUrl}/hoidap/chinh-sach-bao-hanh-doi-tra`, lastModified: new Date() },
+        { url: `${baseUrl}/hoidap/chinh-sach-thanh-toan`, lastModified: new Date() },
         { url: `${baseUrl}/hoidap`, lastModified: new Date() },
         { url: `${baseUrl}/dichvu/kiem-soat-con-trung`, lastModified: new Date() },
         { url: `${baseUrl}/dichvu/dich-vu-ve-sinh`, lastModified: new Date() },

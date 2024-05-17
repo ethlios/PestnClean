@@ -234,7 +234,7 @@ export default function ThanhToan(props: IAppProps) {
                         của khách hàng trong vòng 7 ngày làm việc.
                     </li>
                 </ul>
-                <div className="mt-20">
+                <div className="mt-10">
                     <div className="flex justify-end">
                         <div
                             className={'p-8 rounded-lg'}

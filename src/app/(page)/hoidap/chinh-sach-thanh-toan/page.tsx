@@ -132,7 +132,7 @@ export default function ThanhToan(props: IAppProps) {
                         đặt hàng.
                     </li>
                 </ul>
-                <div className="mt-20">
+                <div className="mt-10">
                     <div className="flex justify-end">
                         <div
                             className={'p-8 rounded-lg'}

@@ -204,7 +204,7 @@ export default function ThanhToan(props: IAppProps) {
                     một phần với công ty khác, người mua sẽ có quyền truy cập thông tin được chúng tôi lưu
                     trữ, duy trì trong đó bao gồm cả thông tin cá nhân.
                 </div>
-                <div className="mt-20">
+                <div className="mt-10">
                     <div className="flex justify-end">
                         <div
                             className={'p-8 rounded-lg'}
