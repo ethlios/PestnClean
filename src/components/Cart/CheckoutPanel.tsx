@@ -30,7 +30,7 @@ export default function CheckoutPanel({ cartOrder, setCart, setShowToast }: IApp
         setTotalItem(cartOrder.reduce((acc: any, item: any) => acc + item.quantity, 0));
         setTotalPrice(
             cartOrder.reduce(
-                (acc: any, item: any) => acc + (item.priceSales || item.price) * item.quantity,
+                (acc: any, item: any) => acc + item.price * (1 - item.priceSales / 100) * item.quantity,
                 0,
             ),
         );

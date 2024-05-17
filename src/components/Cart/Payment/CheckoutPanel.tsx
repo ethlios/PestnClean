@@ -38,7 +38,7 @@ export default function CheckoutPanel({
     const [totalPrice, setTotalPrice] = useState<number>(0);
     const totalAmount = cart.reduce((acc: number, item: any) => acc + item.quantity, 0);
     const totalProductPrice = cart.reduce(
-        (acc: number, item: any) => acc + (item.priceSales || item.price) * item.quantity,
+        (acc: number, item: any) => acc + item.price * (1 - item.priceSales / 100) * item.quantity,
         0,
     );
     const { sizeX } = useSize();
@@ -78,7 +78,7 @@ export default function CheckoutPanel({
             if (cart.length > 0) {
                 dispatch(orderBehavior('0'));
                 dispatch(addOrder(order));
-                dispatch(saveDataOrder({data:order}))
+                dispatch(saveDataOrder({ data: order }));
                 setShowDialog(true);
             } else {
                 setShowToast(true);

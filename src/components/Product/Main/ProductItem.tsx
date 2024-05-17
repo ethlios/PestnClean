@@ -27,7 +27,7 @@ export default function ProductItem({ item }: ProductItemProps) {
             <div className={cx('item-img')}>
                 {item.status === 'SALE' && (
                     <div className={cx('item-event-sale')}>
-                        <p>-{((1 - item.priceSales / item.price) * 100).toFixed(1)}%</p>
+                        <p>-{item.priceSales}%</p>
                     </div>
                 )}
                 {item.status === 'HOT' && (
@@ -50,7 +50,9 @@ export default function ProductItem({ item }: ProductItemProps) {
             {item.priceSales ? (
                 <>
                     <p className={cx('item-sale-price')}>{formatter.format(+item.price)}</p>
-                    <p className={cx('item-sale')}>{formatter.format(+item.priceSales)}</p>
+                    <p className={cx('item-sale')}>
+                        {formatter.format(+item.price * (1 - item.priceSales / 100))}
+                    </p>
                 </>
             ) : (
                 <p className={cx('item-price')}>{formatter.format(+item.price)}</p>

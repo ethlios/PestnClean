@@ -135,6 +135,10 @@ export default function CartItem({ item, setCart }: IAppProps) {
                     >
                         <p className={cx('product-category')}>{item.category}</p>
                         <p className={cx('product-name')}>{item.title}</p>
+                        {item.type && <p className={cx('product-type')}>Loại: {item.type}</p>}
+                        {item.priceSales > 0 && (
+                            <p className={cx('sales-percent')}>Giảm giá: {+item.priceSales}%</p>
+                        )}
                         <ul className={cx('cart-list')} style={{ marginLeft: 0 }}>
                             {item.description &&
                                 sizeX > 600 &&
@@ -158,11 +162,11 @@ export default function CartItem({ item, setCart }: IAppProps) {
                         >
                             <p className={cx('price')}>
                                 <b>Giá: </b>
-                                {formatter.format((+item.priceSales || +item.price) * amount)}
+                                {formatter.format(+item.price * (1 - item.priceSales / 100) * amount)}
                             </p>
                             {amount > 1 && (
                                 <p className={cx('price-default')}>
-                                    ({formatter.format(+item.priceSales || +item.price)})
+                                    ({formatter.format(+item.price * (1 - item.priceSales / 100))})
                                 </p>
                             )}
                         </div>

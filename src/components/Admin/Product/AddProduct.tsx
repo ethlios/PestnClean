@@ -197,12 +197,15 @@ export default function AdminAddProduct({ setAddProduct, updateProduct, setUpdat
                         </div>
 
                         {statusValue === 'SALE' && (
-                            <input
-                                type="text"
-                                placeholder="New price..."
-                                className={cx('add-inp')}
-                                {...register('priceSales')}
-                            ></input>
+                            <>
+                                <input
+                                    type="text"
+                                    placeholder="New price..."
+                                    className={cx('add-inp')}
+                                    {...register('priceSales')}
+                                ></input>
+                                <p>Phần trăm giảm giá (nhỏ hơn 100)</p>
+                            </>
                         )}
                         <UploadImgProduct imageList={imageList} setImageList={setImageList} />
                         <HastagList

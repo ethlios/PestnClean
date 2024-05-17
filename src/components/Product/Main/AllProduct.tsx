@@ -101,8 +101,7 @@ export default function AllProduct({
                 {displayedProducts.length === 0 && <p>Không có sản phẩm nào</p>}
                 {displayedProducts.map((item: any) => {
                     return (
-                        <Link
-                            href={`/sanpham/${nameToLink(item.title)}`}
+                        <div
                             className={cx('content-item2')}
                             key={item.id}
                             style={{
@@ -124,7 +123,7 @@ export default function AllProduct({
                             >
                                 {item.status === 'SALE' && (
                                     <div className={cx('item-event-sale')}>
-                                        <p>-{((1 - item.priceSales / item.price) * 100).toFixed(1)}%</p>
+                                        <p>-{item.priceSales}%</p>
                                     </div>
                                 )}
                                 {item.status === 'HOT' && (
@@ -141,16 +140,22 @@ export default function AllProduct({
                                 />
                             </div>
                             <p className={cx('item-category')}>{item.category1}</p>
-                            <p className={cx('item-name')}>{item.title}</p>
+                            <Link href={`/sanpham/${nameToLink(item.title)}`}>
+                                <p className={cx('item-name')}>{item.title}</p>
+                            </Link>
                             {item.priceSales ? (
                                 <>
                                     <p className={cx('item-sale-price')}>{formatter.format(+item.price)}</p>
-                                    <p className={cx('item-sale')}>{formatter.format(+item.priceSales)}</p>
+                                    <p className={cx('item-sale')}>
+                                        {formatter.format(
+                                            +item.priceSales + item.price * (1 - item.priceSales / 100),
+                                        )}
+                                    </p>
                                 </>
                             ) : (
                                 <p className={cx('item-price')}>{formatter.format(+item.price)}</p>
                             )}
-                        </Link>
+                        </div>
                     );
                 })}
             </div>

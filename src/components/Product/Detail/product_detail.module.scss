@@ -173,6 +173,17 @@
     margin: 5px 0 0 0;
 }
 
+.price-sale {
+    font-size: 30px;
+    color: var(--secondary);
+    margin: 5px 0 0 0;
+}
+
+.sale-percent {
+    @include text-format;
+    color: var(--secondary);
+}
+
 .other {
     // @include text-format;
     margin: 20px 0;

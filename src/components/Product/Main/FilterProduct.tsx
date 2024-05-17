@@ -62,7 +62,7 @@ export default function FilterProduct({
                     return (
                         (product[item.field] && product[item.field].includes(item.checkbox)) ||
                         (product.categoryMain &&
-                            product.categoryMain.find((i: any) => i.type === item.checkbox))
+                            JSON.parse(product.categoryMain).find((i: any) => i.type === item.checkbox))
                     );
                 }
             });

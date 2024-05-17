@@ -32,6 +32,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '~/redux/provider/store';
 import Toast from '~/components/Orther/Toast';
 import { useRouter } from 'next/navigation';
+import generateId from '~/libs/orthers/generateId';
 
 const cx = classNames.bind(styles);
 
@@ -40,7 +41,9 @@ export interface IAppProps {
 }
 
 export default function ProductInfo({ product }: IAppProps) {
-    const [type, setType] = useState('');
+    const categoryMain = JSON.parse(product[0]?.categoryMain);
+    const [type, setType] = useState(categoryMain[0]?.type || null);
+    const [price, setPrice] = useState(product[0].price);
     const [amount, setAmount] = useState(1);
     const wheel: boolean = useScroll();
     const { sizeX } = useSize();
@@ -51,6 +54,8 @@ export default function ProductInfo({ product }: IAppProps) {
 
     const handleChange = (event: SelectChangeEvent) => {
         setType(event.target.value as string);
+        const category = categoryMain.find((item: any) => item.type === event.target.value);
+        setPrice(category.price);
     };
 
     const handleClick = () => {
@@ -74,20 +79,23 @@ export default function ProductInfo({ product }: IAppProps) {
         if (localCart) {
             cart = JSON.parse(localCart);
         }
-        const productIndex = cart.findIndex((item) => item.id === product[0].id); //Find product in cart
+        //Find product in cart
+        const productIndex = cart.findIndex((item) => item.productId === product[0].id && item.type === type);
         //If product exist in cart, increase quantity
         if (productIndex !== -1) {
             cart[productIndex].quantity += amount;
         } else {
             //If product not exist in cart, add new product
             cart.push({
-                id: product[0].id,
+                id: generateId(),
+                productId: product[0].id,
                 title: product[0].title,
                 img: product[0].Image[0],
                 description: product[0].description,
                 quantity: amount,
-                price: product[0].price,
+                price: price,
                 priceSales: product[0].priceSales,
+                type: type,
                 checked: false,
             });
         }
@@ -98,12 +106,12 @@ export default function ProductInfo({ product }: IAppProps) {
     const handleBuyNow = () => {
         let cartOrder = [];
         cartOrder.push({
-            id: product[0].id,
+            productId: product[0].id,
             title: product[0].title,
             img: product[0].Image[0],
             description: product[0].description,
             quantity: amount,
-            price: product[0].price,
+            price: price,
             priceSales: product[0].priceSales,
             checked: true,
         });
@@ -173,7 +181,7 @@ export default function ProductInfo({ product }: IAppProps) {
                         <LinkedinIcon size={28} round={true} />
                     </LinkedinShareButton>
                 </div>
-                {product[0].categoryMain.length > 0 && (
+                {categoryMain.length > 0 && (
                     <div className={'type'}>
                         <p
                             className={cx('text')}
@@ -184,18 +192,12 @@ export default function ProductInfo({ product }: IAppProps) {
                             Phân loại:
                         </p>
                         <FormControl fullWidth>
-                            <InputLabel id="demo-simple-select-label">Loại</InputLabel>
-                            <Select
-                                labelId="demo-simple-select-label"
-                                id="demo-simple-select"
-                                value={type}
-                                label="Loại"
-                                onChange={handleChange}
-                            >
-                                {product[0].categoryMain.map((value: string, index: number) => {
+                            <InputLabel>Loại</InputLabel>
+                            <Select value={type} label="Loại" onChange={handleChange}>
+                                {categoryMain.map((value: any, index: number) => {
                                     return (
-                                        <MenuItem value={value} key={index}>
-                                            {value.toUpperCase()}
+                                        <MenuItem value={value.type} key={index}>
+                                            {value.type.toUpperCase()}
                                         </MenuItem>
                                     );
                                 })}
@@ -220,9 +222,17 @@ export default function ProductInfo({ product }: IAppProps) {
                         <AddIcon />
                     </IconButton>
                 </div>
-                <h1 className={cx('price')}>
-                    {formatter.format(+product[0].priceSales || +product[0].price)}
-                </h1>
+                <div className={'flex gap-1'}>
+                    {product[0].priceSales > 0 && (
+                        <div className={'flex'}>
+                            <h1 className={cx('price-sale')}>
+                                {formatter.format(+price * (1 - product[0].priceSales / 100) * amount)}
+                            </h1>
+                            <p className={cx('sale-percent')}>-{product[0].priceSales}%</p>
+                        </div>
+                    )}
+                    <h1 className={cx('price')}>{formatter.format(+price * amount)}</h1>
+                </div>
                 <div className={cx('other')}>
                     <div>
                         <ElectricRickshawOutlinedIcon />
