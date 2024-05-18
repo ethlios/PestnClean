@@ -40,6 +40,7 @@ export let theme = createTheme({
                 root: {
                     fontSize: '14px',
                     fontWeight: 500,
+                    fontFamily: ['Montserrat'].join(','),
                 },
             },
         },
@@ -56,6 +57,14 @@ export let theme = createTheme({
                 root: {
                     fontSize: '14px',
                     fontWeight: 600,
+                },
+            },
+        },
+        MuiCheckbox: {
+            styleOverrides: {
+                root: {
+                    paddingLeft: '0px',
+                    paddingRight: '0px',
                 },
             },
         },
