@@ -10,6 +10,7 @@ import { fadeIn } from '~/libs/orthers/animation';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import useSize from '~/libs/hooks/useSize';
+import Image from 'next/image';
 
 export interface IAppProps {}
 
@@ -81,83 +82,122 @@ export default function Content3(props: IAppProps) {
     }, []);
 
     return (
+        // <div
+        //     className={cx('content-3')}
+        //     style={{
+        //         flexDirection: sizeX < 768 ? 'column' : 'row',
+        //         paddingBottom: sizeX < 768 ? '30px' : '',
+        //         gap: '30px',
+        //     }}
+        // >
+        //     <div
+        //         className={cx('text-content-3')}
+        //         style={{
+        //             position: sizeX < 768 ? 'relative' : 'absolute',
+        //             top: sizeX < 768 ? '0px' : '',
+        //         }}
+        //     >
+        //         <div
+        //             className={cx('text-content-3-main')}
+        //             style={{
+        //                 backgroundColor: sizeX < 768 ? 'transparent' : '',
+        //                 height: sizeX < 768 ? '200px' : '',
+        //             }}
+        //         >
+        //             <div
+        //                 className={cx('text-content-tired')}
+        //                 style={{
+        //                     width: sizeX < 768 ? '100%' : sizeX < 950 ? '45%' : '35%',
+        //                     paddingLeft: sizeX < 768 ? '0' : sizeX < 800 ? '20px' : '50px',
+        //                 }}
+        //             >
+        //                 <h1 className={cx('title')}>3. GIÁ TRỊ CỐT LÕI</h1>
+        //                 <p className={cx('text-common')} ref={about1DesRef}>
+        //                     {
+        //                         'Sự cam kết với khách hàng - Chất lượng của dịch vụ - Chuyên nghiệp về thái độ - Trách nhiệm với xã hội.'
+        //                     }
+        //                 </p>
+        //             </div>
+        //         </div>
+        //     </div>
+        //     <div
+        //         className={cx('img-content-3')}
+        //         style={{
+        //             width: sizeX < 768 ? '100%' : '80%',
+        //             bottom: sizeX < 768 ? '0' : '',
+        //             right: sizeX < 768 ? '0' : '-250px',
+        //             position: sizeX < 768 ? 'relative' : 'absolute',
+        //         }}
+        //     >
+        //         <div className="slider-container">
+        //             <Slider {...settings} slidesToShow={sizeX > 768 ? 2 : 1}>
+        //                 {content3.map((item, index) => {
+        //                     return (
+        //                         <div key={index} className={cx('img-item-wrapper')}>
+        //                             <div
+        //                                 className={`${cx('img-item')} card-about`}
+        //                                 style={{
+        //                                     height: sizeX < 768 ? '400px' : '',
+        //                                     width: sizeX < 768 ? '100%' : '',
+        //                                 }}
+        //                             >
+        //                                 <div className={cx('img-decor')}></div>
+        //                                 <div className={cx('img-item-main')}>
+        //                                     <div className={cx('img-icon')}>
+        //                                         <p style={{}}>0{index + 1}.</p>
+        //                                         <div className={cx('img-icon-decor')}></div>
+        //                                     </div>
+        //                                     <div className={cx('img-item-text')}>
+        //                                         <p>{item.description}</p>
+        //                                     </div>
+        //                                     {item.icon}
+        //                                 </div>
+        //                             </div>
+        //                         </div>
+        //                     );
+        //                 })}
+        //             </Slider>
+        //         </div>
+        //     </div>
+        // </div>
         <div
-            className={cx('content-3')}
             style={{
-                flexDirection: sizeX < 768 ? 'column' : 'row',
-                paddingBottom: sizeX < 768 ? '30px' : '',
-                gap: '30px',
+                marginTop: '130px',
+                width: '100%',
+                height: '100%',
+                display: 'flex',
+                flexDirection: 'column',
             }}
+            className={cx('content-3')}
         >
             <div
-                className={cx('text-content-3')}
+                className={cx('text-content-tired')}
                 style={{
-                    position: sizeX < 768 ? 'relative' : 'absolute',
-                    top: sizeX < 768 ? '0px' : '',
+                    width: sizeX < 768 ? '100%' : sizeX < 950 ? '45%' : '35%',
+                    paddingLeft: sizeX < 768 ? '0' : sizeX < 800 ? '20px' : '50px',
                 }}
             >
-                <div
-                    className={cx('text-content-3-main')}
+                <h1
+                    className={cx('title')}
                     style={{
-                        backgroundColor: sizeX < 768 ? 'transparent' : '',
-                        height: sizeX < 768 ? '200px' : '',
+                        marginBottom: '30px',
                     }}
                 >
-                    <div
-                        className={cx('text-content-tired')}
-                        style={{
-                            width: sizeX < 768 ? '100%' : sizeX < 950 ? '45%' : '35%',
-                            paddingLeft: sizeX < 768 ? '0' : sizeX < 800 ? '20px' : '50px',
-                        }}
-                    >
-                        <h1 className={cx('title')}>3. GIÁ TRỊ CỐT LÕI</h1>
-                        <p className={cx('text-common')} ref={about1DesRef}>
-                            {
-                                'Sự cam kết với khách hàng - Chất lượng của dịch vụ - Chuyên nghiệp về thái độ - Trách nhiệm với xã hội.'
-                            }
-                        </p>
-                    </div>
-                </div>
+                    3. GIÁ TRỊ CỐT LÕI
+                </h1>
             </div>
-            <div
-                className={cx('img-content-3')}
+            <Image
+                src="https://res.cloudinary.com/dj2jarcxk/image/upload/v1716105189/ve-chung-toi-PnC_mhgqzl.jpg"
+                height={1000}
+                width={1000}
+                alt="Giá trị cốt lõi Pestnclean"
                 style={{
-                    width: sizeX < 768 ? '100%' : '80%',
-                    bottom: sizeX < 768 ? '0' : '',
-                    right: sizeX < 768 ? '0' : '-250px',
-                    position: sizeX < 768 ? 'relative' : 'absolute',
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    objectPosition: 'center',
                 }}
-            >
-                <div className="slider-container">
-                    <Slider {...settings} slidesToShow={sizeX > 768 ? 2 : 1}>
-                        {content3.map((item, index) => {
-                            return (
-                                <div key={index} className={cx('img-item-wrapper')}>
-                                    <div
-                                        className={`${cx('img-item')} card-about`}
-                                        style={{
-                                            height: sizeX < 768 ? '400px' : '',
-                                            width: sizeX < 768 ? '100%' : '',
-                                        }}
-                                    >
-                                        <div className={cx('img-decor')}></div>
-                                        <div className={cx('img-item-main')}>
-                                            <div className={cx('img-icon')}>
-                                                <p style={{}}>0{index + 1}.</p>
-                                                <div className={cx('img-icon-decor')}></div>
-                                            </div>
-                                            <div className={cx('img-item-text')}>
-                                                <p>{item.description}</p>
-                                            </div>
-                                            {item.icon}
-                                        </div>
-                                    </div>
-                                </div>
-                            );
-                        })}
-                    </Slider>
-                </div>
-            </div>
+            />
         </div>
     );
 }

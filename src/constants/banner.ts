@@ -1,7 +1,7 @@
 const homeBanner = [
     {
         id: 1,
-        src: 'https://res.cloudinary.com/dj2jarcxk/image/upload/v1714114154/goutham-krishna-h5wvMCdOV3w-unsplash_bwngod.jpg',
+        src: 'https://res.cloudinary.com/dj2jarcxk/image/upload/v1716104752/z5455405175581_4b6f59c64014ffe42bb9b2d69aa042e9_z4smyt.jpg',
         alt: 'Các dịch vụ của pestnclean',
         color: 'var(--primary)',
         title: 'Nâng cao chất lượng cuộc sống',
@@ -10,7 +10,7 @@ const homeBanner = [
     },
     {
         id: 2,
-        src: 'https://res.cloudinary.com/dj2jarcxk/image/upload/v1714114163/michel-bosma-XgF9e93Tkt0-unsplash_jl480i.jpg',
+        src: 'https://res.cloudinary.com/dj2jarcxk/image/upload/v1716104751/z5455405250013_8769cedbc89feb3dac3505f79500dae3_peczq6.jpg',
         alt: 'Kiểm soát côn trùng',
         color: 'var(--primary)',
         title: 'Kiểm soát côn trùng',
@@ -19,7 +19,7 @@ const homeBanner = [
     },
     {
         id: 3,
-        src: 'https://res.cloudinary.com/dj2jarcxk/image/upload/v1715653631/mawckapzauly61wwan2y.jpg',
+        src: 'https://res.cloudinary.com/dj2jarcxk/image/upload/v1716104752/z5455405212393_3d4e995e27b906999f15e04692f3f8f0_xkmrku.jpg',
         alt: 'Dịch vụ vệ sinh',
         color: 'var(--secondary)',
         title: 'Dịch vụ vệ sinh',
@@ -28,7 +28,7 @@ const homeBanner = [
     },
     {
         id: 4,
-        src: 'https://res.cloudinary.com/dj2jarcxk/image/upload/v1714114152/kelly-sikkema-W1XbZLRdk8o-unsplash_y5nk6z.jpg',
+        src: 'https://res.cloudinary.com/dj2jarcxk/image/upload/v1716104752/z5455405249991_1284ed086780473c891db2853a37c212_y6iv9v.jpg',
         alt: 'Dịch vụ Giải pháp vệ sinh',
         color: 'var(--secondary-dark)',
         title: 'Giải pháp vệ sinh',

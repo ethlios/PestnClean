@@ -34,12 +34,12 @@ export default function BannerHomePage(props: IAppProps) {
                             <div key={index}>
                                 <div
                                     style={{
-                                        // backgroundImage: `url('${item.src}')`,
+                                        backgroundImage: `url('${item.src}')`,
                                         backgroundPosition: 'center',
                                         backgroundSize: 'cover',
                                         width: '100%',
                                         backgroundColor: 'rgba(0,0,0,0.05)',
-                                        height: '500px',
+                                        height: sizeX < 500 ? '200px' : sizeX < 900 ? '350px' : '500px',
                                         display: 'flex',
                                         flexDirection: 'column',
                                         justifyContent: 'center',
@@ -55,7 +55,7 @@ export default function BannerHomePage(props: IAppProps) {
                                                     : '0 100px',
                                     }}
                                 >
-                                    <h1
+                                    {/* <h1
                                         style={{
                                             width: sizeX < 640 ? '100%' : '450px',
                                             fontSize: sizeX < 550 ? '28px' : '34px',
@@ -87,7 +87,7 @@ export default function BannerHomePage(props: IAppProps) {
                                             path={item.path}
                                             rule="rule-1"
                                         ></ButtonCommon>
-                                    </div>
+                                    </div> */}
                                 </div>
                             </div>
                         );
