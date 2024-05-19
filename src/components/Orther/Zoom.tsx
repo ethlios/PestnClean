@@ -11,9 +11,10 @@ type ImageZoomProps = ComponentProps<'img'> & {
     height: number;
     id?: string;
     className?: string;
+    hello?: any;
 };
 
-export function ImageZoom({ options, src, alt, width, height, id, className }: ImageZoomProps) {
+export function ImageZoom({ options, src, alt, width, height, id, className, hello }: ImageZoomProps) {
     const zoomRef = useRef<Zoom | null>(null);
 
     function getZoom() {
@@ -44,6 +45,7 @@ export function ImageZoom({ options, src, alt, width, height, id, className }: I
             id={id}
             className={className}
             priority
+            style={hello}
         />
     );
 }
