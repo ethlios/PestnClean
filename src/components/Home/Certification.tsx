@@ -37,7 +37,7 @@ export default function Certification(props: IAppProps) {
                 }
                 style={{
                     fontSize: sizeX < 550 ? '18px' : '24px',
-                    marginBottom: '20px',
+                    marginBottom: sizeX < 500 ? '10px' : '20px',
                 }}
             >
                 Giải thưởng và chứng nhận
@@ -47,7 +47,7 @@ export default function Certification(props: IAppProps) {
                     width: '100%',
                     display: 'flex',
                     flexDirection: 'row',
-                    gap: '30px',
+                    gap: sizeX < 500 ? '10px' : '30px',
                 }}
             >
                 {certi.map((item, index) => {
