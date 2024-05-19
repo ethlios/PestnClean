@@ -16,8 +16,8 @@ const cx = classNames.bind(styles);
 
 export interface IAppProps {
     setView: any;
-    updateProduct: any;
-    setUpdateProduct: any;
+    updateBlog: any;
+    setUpdateBlog: any;
 }
 
 const status = [
@@ -31,7 +31,7 @@ const status = [
     },
 ];
 
-export default function ViewBlog({ setView, updateProduct, setUpdateProduct }: IAppProps) {
+export default function ViewBlog({ setView, updateBlog, setUpdateBlog }: IAppProps) {
     const [detail, setDetail] = useState<string>('');
     const [statusValue, setStatusValue] = useState<string>(''); //category
     const [isNew, setIsNew] = useState<boolean>(false);
@@ -60,26 +60,26 @@ export default function ViewBlog({ setView, updateProduct, setUpdateProduct }: I
     }, []);
 
     useEffect(() => {
-        if (!!updateProduct.id) {
+        if (!!updateBlog.id) {
             setIsUpdate(true);
         } else {
             setIsUpdate(false);
         }
-    }, [updateProduct]);
+    }, [updateBlog]);
 
     useEffect(() => {
         if (isUpdate) {
-            setValue('title', updateProduct.title);
-            setValue('desHead', updateProduct.desHead);
-            setDetail(updateProduct.detail);
-            setStatusValue(updateProduct.category);
-            setImageList(updateProduct.img);
-            setValue('description', updateProduct.description);
-            setHastagList(updateProduct.menu);
-            setPhanloaiList(updateProduct.key);
-            setValue('path', updateProduct.path);
+            setValue('title', updateBlog.title);
+            setValue('desHead', updateBlog.desHead);
+            setDetail(updateBlog.detail);
+            setStatusValue(updateBlog.category);
+            setImageList(updateBlog.img);
+            setValue('description', updateBlog.description);
+            setHastagList(updateBlog.menu);
+            setPhanloaiList(updateBlog.key);
+            setValue('path', updateBlog.path);
         }
-    }, [isUpdate, setValue, updateProduct]);
+    }, [isUpdate, setValue, updateBlog]);
 
     const onSubmit = (data: any) => {
         const blog = {
@@ -95,7 +95,7 @@ export default function ViewBlog({ setView, updateProduct, setUpdateProduct }: I
         if (!isUpdate) {
             dispatch(addBlog(blog));
         } else {
-            dispatch(update({ ...blog, id: updateProduct.id, createdAt: updateProduct.createdAt }));
+            dispatch(update({ ...blog, id: updateBlog.id, createdAt: updateBlog.createdAt }));
         }
 
         setView(false);
@@ -109,7 +109,7 @@ export default function ViewBlog({ setView, updateProduct, setUpdateProduct }: I
                     <button
                         onClick={() => {
                             setView(false);
-                            setUpdateProduct({});
+                            setUpdateBlog({});
                         }}
                         className={cx('commom-button')}
                     >

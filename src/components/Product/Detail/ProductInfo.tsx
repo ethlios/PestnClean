@@ -42,7 +42,7 @@ export interface IAppProps {
 
 export default function ProductInfo({ product }: IAppProps) {
     const categoryMain = JSON.parse(product[0]?.categoryMain);
-    const [type, setType] = useState(categoryMain[0]?.type || null);
+    const [type, setType] = useState('');
     const [price, setPrice] = useState(product[0].price);
     const [amount, setAmount] = useState(1);
     const wheel: boolean = useScroll();
@@ -51,6 +51,7 @@ export default function ProductInfo({ product }: IAppProps) {
     const [url, setUrl] = useState<string>('');
     const comments = useSelector((state: RootState) => state.main.feedback);
     const [openToast, setOpenToast] = useState<boolean>(false);
+    const [openToast2, setOpenToast2] = useState<boolean>(false);
 
     const handleChange = (event: SelectChangeEvent) => {
         setType(event.target.value as string);
@@ -74,6 +75,7 @@ export default function ProductInfo({ product }: IAppProps) {
     };
 
     const handleAddToCart = () => {
+        if (!type && categoryMain.length > 0) return setOpenToast2(true);
         const localCart = localStorage.getItem('cart'); //Get cart from local storage
         let cart: any[] = [];
         if (localCart) {
@@ -93,6 +95,7 @@ export default function ProductInfo({ product }: IAppProps) {
                 img: product[0].Image[0],
                 description: product[0].description,
                 quantity: amount,
+                path: product[0].path,
                 price: price,
                 priceSales: product[0].priceSales,
                 type: type,
@@ -104,6 +107,7 @@ export default function ProductInfo({ product }: IAppProps) {
     };
 
     const handleBuyNow = () => {
+        if (!type && categoryMain.length > 0) return setOpenToast2(true);
         let cartOrder = [];
         cartOrder.push({
             productId: product[0].id,
@@ -112,7 +116,9 @@ export default function ProductInfo({ product }: IAppProps) {
             description: product[0].description,
             quantity: amount,
             price: price,
+            path: product[0].path,
             priceSales: product[0].priceSales,
+            type: type,
             checked: true,
         });
         localStorage.setItem('cartOrder', JSON.stringify(cartOrder));
@@ -132,6 +138,12 @@ export default function ProductInfo({ product }: IAppProps) {
                 rule="normal"
                 setShowToast={setOpenToast}
                 showToast={openToast}
+            />
+            <Toast
+                text="Hãy chọn loại sản phẩm."
+                rule="error"
+                setShowToast={setOpenToast2}
+                showToast={openToast2}
             />
             <div
                 className={cx('product-info')}
@@ -222,16 +234,22 @@ export default function ProductInfo({ product }: IAppProps) {
                         <AddIcon />
                     </IconButton>
                 </div>
-                <div className={'flex gap-1'}>
-                    {product[0].priceSales > 0 && (
+                <div className={'flex flex-col gap-1'}>
+                    {categoryMain.length > 1 && !type ? (
+                        <h1 className={cx('price')}>
+                            {formatter.format(categoryMain[0].price)}-
+                            {formatter.format(categoryMain.slice(-1)[0].price)}
+                        </h1>
+                    ) : (
                         <div className={'flex'}>
-                            <h1 className={cx('price-sale')}>
+                            <h1 className={cx(`${product[0].priceSales > 0 ? 'price-sale' : 'price'}`)}>
                                 {formatter.format(+price * (1 - product[0].priceSales / 100) * amount)}
                             </h1>
-                            <p className={cx('sale-percent')}>-{product[0].priceSales}%</p>
+                            {product[0].priceSales > 0 && (
+                                <p className={cx('sale-percent')}>-{product[0].priceSales}%</p>
+                            )}
                         </div>
                     )}
-                    <h1 className={cx('price')}>{formatter.format(+price * amount)}</h1>
                 </div>
                 <div className={cx('other')}>
                     <div>

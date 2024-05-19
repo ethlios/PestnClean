@@ -45,18 +45,19 @@ export default function FilterProduct({
         let filterProducts = allProducts.filter((product: any) => {
             if (selectedCategory.length === 0) return allProducts;
             return (
-                selectedCategory.includes(product.category1) ||
-                selectedCategory.includes(product.category2) ||
-                selectedCategory.includes(product.category3)
+                product.category1.includes(selectedCategory) ||
+                product.category2.includes(selectedCategory) ||
+                product.category3.includes(selectedCategory)
             );
         });
         checkedFilter.map((item: any) => {
             filterProducts = filterProducts.filter((product: any) => {
                 if (item.field === 'price') {
+                    const price = product.price * (1 - product.priceSales / 100);
                     return (
-                        (product.price && product.price > item.min && product.price < item.max) ||
-                        (product.price && product.price > item.min && !item.max) ||
-                        (product.price && !item.min && product.price < item.max)
+                        (product.price && price > item.min && price < item.max) ||
+                        (product.price && price > item.min && !item.max) ||
+                        (product.price && !item.min && price < item.max)
                     );
                 } else {
                     return (
@@ -126,7 +127,7 @@ export default function FilterProduct({
                                     key={index}
                                     title={menu.title}
                                     subMenu={menu.subMenu}
-                                    className={cx('title')}
+                                    field={menu.field}
                                     selected={selectedCategory}
                                     setSelected={setSelectedCategory}
                                 />

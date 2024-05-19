@@ -29,7 +29,7 @@ export default function ProductDetailPage(props: IAppProps) {
     useEffect(() => {
         if (products.length > 0) {
             const productFilter = products.filter((product: any) => {
-                return `/sanpham/${nameToLink(product.title)}` === pathname;
+                return `/sanpham/${product.path}` === pathname;
             });
 
             if (productFilter.length > 0) {

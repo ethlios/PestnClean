@@ -140,7 +140,7 @@ export default function AllProduct({
                                 />
                             </div>
                             <p className={cx('item-category')}>{item.category1}</p>
-                            <Link href={`/sanpham/${nameToLink(item.title)}`}>
+                            <Link href={`/sanpham/${item.path}`}>
                                 <p className={cx('item-name')}>{item.title}</p>
                             </Link>
                             {item.priceSales ? (

@@ -73,6 +73,7 @@ model Product {
   desHead      String?
   description  String?
   detail       String?
+  path         String?
   price        Int?
   Image        String[]
   code         String?

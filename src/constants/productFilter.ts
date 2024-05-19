@@ -3,13 +3,16 @@ import { cons } from 'effect/List';
 const filterMenu = [
     {
         title: 'Kiểm soát côn trùng',
+        field: 'category1',
         subMenu: [
             {
                 title: 'Thiết bị máy móc',
+                field: 'category2',
                 subMenu: [{ title: 'Đèn' }, { title: 'Máy phun xịt' }],
             },
             {
                 title: 'Hoá Chất Diệt Côn Trùng',
+                field: 'category2',
                 subMenu: [
                     { title: 'Dạng dung dịch' },
                     { title: 'Dạng bả' },
@@ -19,14 +22,16 @@ const filterMenu = [
                     { title: 'Dạng viên' },
                 ],
             },
-            { title: 'Bẫy côn trùng' },
+            { title: 'Bẫy côn trùng', field: 'category2' },
         ],
     },
     {
         title: 'Vệ sinh công nghiệp',
+        field: 'category1',
         subMenu: [
             {
                 title: 'Máy vệ sinh công nghiệp',
+                field: 'category2',
                 subMenu: [
                     { title: 'Máy chà sàn' },
                     { title: 'Máy hút bụi' },
@@ -36,11 +41,13 @@ const filterMenu = [
             },
             {
                 title: 'Dụng cụ vệ sinh',
+                field: 'category2',
                 subMenu: [{ title: 'Xe quét rác công nghiệp' }],
             },
-            { title: 'Thiết bị Khách Sạn - Nhà Hàng' },
+            { title: 'Thiết bị Khách Sạn - Nhà Hàng', field: 'category2' },
             {
                 title: 'Dung dịch Hóa chất',
+                field: 'category2',
                 subMenu: [
                     { title: 'DEW' },
                     { title: 'ECOLAB' },
@@ -50,6 +57,7 @@ const filterMenu = [
             },
             {
                 title: 'Thiết bị công nghiệp',
+                field: 'category2',
                 subMenu: [
                     { title: 'Xe đẩy hàng' },
                     { title: 'Máy phun xịt áp lực' },
@@ -59,15 +67,18 @@ const filterMenu = [
             },
             {
                 title: 'Phụ kiện',
+                field: 'category2',
                 subMenu: [{ title: 'Phụ kiện máy chà sàn' }, { title: 'phụ kiện máy hút bụi' }],
             },
         ],
     },
     {
         title: 'Giải pháp vệ sinh',
+        field: 'category1',
         subMenu: [
             {
                 title: 'Giải Pháp Mùi Hương',
+                field: 'category2',
                 subMenu: [
                     { title: 'Máy Khuếch Tán' },
                     {
@@ -83,6 +94,7 @@ const filterMenu = [
             },
             {
                 title: 'Thiết bị Vệ Sinh',
+                field: 'category2',
                 subMenu: [
                     { title: 'Thiết bị đựng xà phòng' },
                     { title: 'Thiết bị rửa tay sát khuẩn' },
@@ -92,10 +104,12 @@ const filterMenu = [
             },
             {
                 title: 'Vệ sinh không khí',
+                field: 'category2',
                 subMenu: [{ title: 'Máy lọc không khí' }],
             },
             {
                 title: 'Giải pháp bảo vệ sàn',
+                field: 'category2',
                 subMenu: [{ title: 'Thảm kiểm soát bụi' }],
             },
         ],

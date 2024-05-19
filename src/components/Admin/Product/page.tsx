@@ -47,6 +47,7 @@ export default function AdminProduct(props: IAppProps) {
                     setAddProduct={setAddProduct}
                     updateProduct={updateProduct}
                     setUpdateProduct={setUpdateProduct}
+                    products={products}
                 />
             )}
             <div className={cx('common-wrapper')}>
@@ -69,10 +70,7 @@ export default function AdminProduct(props: IAppProps) {
                             {products.map((product: any, index: number) => {
                                 return (
                                     <div key={index} className={cx('product-item')}>
-                                        <Link
-                                            href={`/sanpham/${nameToLink(product.title)}`}
-                                            className={cx('product-img')}
-                                        >
+                                        <Link href={`/sanpham/${product.path}`} className={cx('product-img')}>
                                             {product.Image ? (
                                                 <Image
                                                     src={!!product.Image ? product.Image[0] : ''}

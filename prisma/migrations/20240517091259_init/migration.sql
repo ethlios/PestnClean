@@ -65,6 +65,7 @@ CREATE TABLE "Product" (
     "desHead" TEXT,
     "description" TEXT,
     "detail" TEXT,
+    "path" TEXT,
     "price" INTEGER,
     "Image" TEXT[],
     "code" TEXT,
