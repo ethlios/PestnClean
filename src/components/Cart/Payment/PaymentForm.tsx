@@ -110,6 +110,7 @@ export default function PaymentForm({ setFormData, formInfoRef }: IAppProps) {
                             onChange={(e) => setEmail(e.target.value)}
                             error={email !== null && email !== '' && !validateEmailRegex.test(email)}
                             type={'email'}
+                            required={true}
                             value={email}
                         />
                         <TextField
@@ -141,6 +142,7 @@ export default function PaymentForm({ setFormData, formInfoRef }: IAppProps) {
                                 }}
                                 defaultValue={''}
                                 value={city}
+                                required={true}
                             >
                                 {province.map((item: any, index: number) => (
                                     <MenuItem key={index} value={item.Name}>
@@ -159,6 +161,7 @@ export default function PaymentForm({ setFormData, formInfoRef }: IAppProps) {
                                 }}
                                 defaultValue={''}
                                 value={district}
+                                required={true}
                             >
                                 {province
                                     .find((item: any) => item.Name === city)
@@ -176,6 +179,7 @@ export default function PaymentForm({ setFormData, formInfoRef }: IAppProps) {
                                 onChange={(e) => setWard(e.target.value)}
                                 defaultValue={''}
                                 value={ward}
+                                required={true}
                             >
                                 {province
                                     .find((item: any) => item.Name === city)
