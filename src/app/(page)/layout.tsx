@@ -47,50 +47,10 @@ export default function ComponentConnectLayout({ children }: { children: React.R
                     img: session.user.picture ?? session.user.image,
                 }),
             );
+        } else {
+            dispatch(getUser({}));
         }
     }, [dispatch, session]);
-
-    useEffect(() => {
-        if (session?.user.rule !== 'admin' || !session.user) {
-            const allImg = async () => {
-                const imgWorks = (await fetch('/api/imagework/all').then((res) => res.json())) ?? [];
-
-                if (typeof imgWorks[0] !== 'undefined') {
-                    dispatch(getImgWork(imgWorks[0].imgWork));
-                }
-            };
-
-            allImg();
-        }
-    }, []);
-
-    useEffect(() => {
-        if (session?.user.rule !== 'admin' || !session.user) {
-            const allProducts = async () => {
-                const products = (await fetch('/api/product/all').then((res) => res.json())) ?? [];
-
-                if (typeof products[0] !== 'undefined') {
-                    dispatch(getAllProducts(products[0].product));
-                }
-            };
-
-            allProducts();
-        }
-    }, []);
-
-    useEffect(() => {
-        if (session?.user.rule !== 'admin' || !session.user) {
-            const allBlogs = async () => {
-                const blogsData = (await fetch('/api/blog/all').then((res) => res.json())) ?? [];
-
-                if (typeof blogsData[0] !== 'undefined') {
-                    dispatch(getAllBlogs([...blogs, ...blogsData[0].blog]));
-                }
-            };
-
-            allBlogs();
-        }
-    }, []);
 
     useEffect(() => {
         const allProvince = async () => {
