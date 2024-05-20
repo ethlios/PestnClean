@@ -6,6 +6,11 @@ export async function GET(request: Request) {
         where: {
             rule: 'admin',
         },
+        include: {
+            product: true,
+            blog: true,
+            imgWork: true,
+        },
     });
     return NextResponse.json(user);
 }
