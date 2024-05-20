@@ -8,11 +8,13 @@ import { Button, IconButton } from '@mui/material';
 import useSize from '~/libs/hooks/useSize';
 import DisabledByDefaultIcon from '@mui/icons-material/DisabledByDefault';
 import { filterMenu, filterPrice } from '~/constants/productFilter';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import CheckboxMenu from '~/components/Product/Main/CheckboxMenu';
 import { useSelector } from 'react-redux';
 import { RootState } from '~/redux/provider/store';
 import CheckboxPrice from '~/components/Product/Main/CheckboxPrice';
+import { useDebounce } from '@react-hooks-library/core';
+import { removeVietnameseTones } from '~/libs/orthers/removeVietnamese';
 
 const cx = classNames.bind(styles);
 
@@ -40,6 +42,8 @@ export default function FilterProduct({
     const wheel: boolean = useScroll();
     const { sizeX } = useSize();
     let checkboxFilterProduct = useSelector((state: RootState) => state.main.checkboxFilterProductPage);
+    const [searchValue, setSearchValue] = useState<string>('');
+    const debouncedText = useDebounce(searchValue, 500);
 
     useEffect(() => {
         let filterProducts = allProducts.filter((product: any) => {
@@ -68,8 +72,17 @@ export default function FilterProduct({
                 }
             });
         });
+        if (debouncedText) {
+            filterProducts = filterProducts.filter((product: any) => {
+                return (
+                    removeVietnameseTones(product.title)
+                        .toLowerCase()
+                        .indexOf(removeVietnameseTones(debouncedText).toLowerCase()) !== -1
+                );
+            });
+        }
         setProducts(filterProducts);
-    }, [selectedCategory, checkedFilter]);
+    }, [selectedCategory, checkedFilter, debouncedText]);
 
     const handleCancel = () => {
         setSelectedCategory([]);
@@ -110,7 +123,12 @@ export default function FilterProduct({
                         <DisabledByDefaultIcon color="primary" sx={{ fontSize: '40px' }} />
                     </IconButton>
                 )}
-                <input className={cx('search-product')} type={'text'} placeholder={'Tên sản phẩm'} />
+                <input
+                    className={cx('search-product')}
+                    type={'text'}
+                    placeholder={'Tên sản phẩm'}
+                    onChange={(event) => setSearchValue(event.target.value)}
+                />
                 {filterMenu.length !== 0 && (
                     <div className={'flex flex-col gap-2'}>
                         <h2
