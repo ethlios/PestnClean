@@ -15,6 +15,7 @@ import HeaderMobile from '~/common/Header/headerMobile';
 import { blogs } from '~/constants/blogs';
 import useSize from '~/libs/hooks/useSize';
 import { getAllBlogs, getAllProducts, getImgWork, getProvince, getUser } from '~/redux/actions';
+import { getAllProducts as getProductsPage } from '~/libs/orthers/getData';
 import logo from '../../../public/img/logo.png';
 
 ScrollTrigger.addEventListener('refresh', function () {
@@ -64,27 +65,31 @@ export default function ComponentConnectLayout({ children }: { children: React.R
     }, []);
 
     useEffect(() => {
-        const allProducts = async () => {
-            const products = (await fetch('/api/product/all').then((res) => res.json())) ?? [];
+        if (session?.user.rule !== 'admin' || !session.user) {
+            const allProducts = async () => {
+                const products = (await fetch('/api/product/all').then((res) => res.json())) ?? [];
 
-            if (typeof products[0] !== 'undefined') {
-                dispatch(getAllProducts(products[0].product));
-            }
-        };
+                if (typeof products[0] !== 'undefined') {
+                    dispatch(getAllProducts(products[0].product));
+                }
+            };
 
-        allProducts();
+            allProducts();
+        }
     }, []);
 
     useEffect(() => {
-        const allBlogs = async () => {
-            const blogsData = (await fetch('/api/blog/all').then((res) => res.json())) ?? [];
+        if (session?.user.rule !== 'admin' || !session.user) {
+            const allBlogs = async () => {
+                const blogsData = (await fetch('/api/blog/all').then((res) => res.json())) ?? [];
 
-            if (typeof blogsData[0] !== 'undefined') {
-                dispatch(getAllBlogs([...blogs, ...blogsData[0].blog]));
-            }
-        };
+                if (typeof blogsData[0] !== 'undefined') {
+                    dispatch(getAllBlogs([...blogs, ...blogsData[0].blog]));
+                }
+            };
 
-        allBlogs();
+            allBlogs();
+        }
     }, []);
 
     useEffect(() => {

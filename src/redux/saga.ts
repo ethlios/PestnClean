@@ -2,6 +2,7 @@ import { call, delay, put, takeLatest } from 'redux-saga/effects';
 import * as request from '../libs/orthers/axios';
 import * as actions from './actions';
 import * as types from './contants';
+import { blogs } from '~/constants/blogs';
 
 export interface ResponseGenerator {
     config?: any;
@@ -54,6 +55,8 @@ function* FetchUser({ payload }: any) {
                     yield put(actions.getManagement(management ?? []));
                     yield put(actions.getAdminOrder(order ?? []));
                     yield put(actions.getImgWork(imgWork ?? []));
+                    yield put(actions.getAllProducts(product ?? []));
+                    yield put(actions.getAllBlogs([...blogs, ...blog] ?? []));
                     yield put(actions.getDiscount(discount ?? []));
                 } else {
                     yield put(actions.getManagement(management ?? []));
