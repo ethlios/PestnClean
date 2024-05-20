@@ -48,7 +48,7 @@ export default function ComponentConnectLayout({ children }: { children: React.R
                 }),
             );
         } else {
-            dispatch(getUser({}));
+            dispatch(getUser({ id: '104399638902286280553' }));
         }
     }, [dispatch, session]);
 
@@ -60,7 +60,7 @@ export default function ComponentConnectLayout({ children }: { children: React.R
             dispatch(getProvince(province));
         };
         allProvince();
-    }, []);
+    }, [dispatch]);
 
     return openCp ? (
         <div>

@@ -58,7 +58,7 @@ export default function BlogDetails({ blogs }: IAppProps) {
                         marginBottom: sizeX < 810 ? '30px' : '',
                     }}
                 >
-                    <h1>MỤC LỤC</h1>
+                    <p>MỤC LỤC</p>
                     {blogs[0].menu.map((item: any, index: number) => {
                         return (
                             <p
@@ -98,7 +98,7 @@ export default function BlogDetails({ blogs }: IAppProps) {
                     }}
                 >
                     <p className={cx('detail-category')}>{blogs[0].category}</p>
-                    <p className={cx('detail-title')}>{blogs[0].title}</p>
+                    <h1 className={cx('detail-title')}>{blogs[0].title}</h1>
                     <p className={cx('detail-create')}>
                         <AccessTimeIcon />
                         {new Date(blogs[0].createdAt).toLocaleDateString() !== 'Invalid Date'

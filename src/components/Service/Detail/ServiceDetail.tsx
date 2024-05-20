@@ -57,7 +57,7 @@ export default function ServiceDetails({ blog }: IAppProps) {
                         marginBottom: sizeX < 810 ? '30px' : '',
                     }}
                 >
-                    <h1>MỤC LỤC</h1>
+                    <p>MỤC LỤC</p>
                     {blog[0].menu.map((item: any, index: number) => {
                         return (
                             <p key={index} onClick={() => smoothScroll(`#header${index + 1}`)}>
@@ -86,7 +86,7 @@ export default function ServiceDetails({ blog }: IAppProps) {
                         padding: sizeX < 500 ? '15px' : '',
                     }}
                 >
-                    <p className={cx('detail-title')}>{blog[0].title}</p>
+                    <h1 className={cx('detail-title')}>{blog[0].title}</h1>
                     <p className={cx('detail-create')}>
                         <AccessTimeIcon />
                         {blog[0].createdAt}

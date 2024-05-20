@@ -83,7 +83,9 @@ export default function ServiceComment({ blog }: IAppProps) {
                     marginBottom: sizeX < 810 ? '20px' : '',
                 }}
             >
-                <h1 id="comment-blogs">ĐÁNH GIÁ</h1>
+                <p id="comment-blogs" className={cx('comment-blogs')}>
+                    ĐÁNH GIÁ
+                </p>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     {!session?.user && (
                         <div className={cx('input-list')}>

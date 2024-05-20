@@ -34,7 +34,7 @@ export default function ServiceSuggest(props: IAppProps) {
                 width: sizeX < 810 ? '100%' : sizeX < 900 ? '50%' : '',
             }}
         >
-            <h1>CÁC BÀI VIẾT KHÁC</h1>
+            <p>CÁC BÀI VIẾT KHÁC</p>
             <div
                 className={cx('suggest-wrapper')}
                 style={{
