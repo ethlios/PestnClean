@@ -2,4 +2,4 @@
 User-agent: *
 Disallow: 
 
-Sitemap: http://localhost:3000/sitemap.xml
+Sitemap: http://pestnclean.vercel.app/sitemap.xml

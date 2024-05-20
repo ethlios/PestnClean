@@ -45,7 +45,7 @@ export default function Header(props: HeaderProps) {
     const router = useRouter();
     const wheel: boolean = useScroll();
     const { sizeX } = useSize();
-    const {isConnected} = useConnectSocket();
+    const { isConnected } = useConnectSocket();
     const { data: session } = useSession();
     const [openAcc, setOpenAcc] = useState<boolean>(false);
     const [openNotifications, setOpenNotifications] = useState<boolean>(false);
@@ -65,7 +65,7 @@ export default function Header(props: HeaderProps) {
             router.push(`/search?q=${encodedSearchQuery}`);
         }
     };
-    
+
     // HÀM TÌM ID TRONG MẢNG
     function findIdInArray(array: any[], id: string): string | undefined {
         const foundId = array.find((element) => element.id === id);
@@ -80,7 +80,6 @@ export default function Header(props: HeaderProps) {
 
     useEffect(() => {
         if (selector.message === 'Get All Notifications By Id Success') {
-            console.log(selector.notificationAll);
             setListNotifications(selector.notificationAll);
             dispatch(clearMessage());
         }
@@ -126,7 +125,7 @@ export default function Header(props: HeaderProps) {
         return () => {
             window.removeEventListener('scroll', scroll);
             window.removeEventListener('scroll', handleScroll);
-        }
+        };
     }, []);
 
     useEffect(() => {
@@ -258,7 +257,11 @@ export default function Header(props: HeaderProps) {
                                                             'flex items-center justify-between',
                                                             'tippy-boxNotifications-content',
                                                         )}
-                                                        href={item.type === "Cập nhật về đơn hàng và thanh toán" ? `/profile/${session?.user.id}?q=order` : ""}
+                                                        href={
+                                                            item.type === 'Cập nhật về đơn hàng và thanh toán'
+                                                                ? `/profile/${session?.user.id}?q=order`
+                                                                : ''
+                                                        }
                                                     >
                                                         <div className={cx('tippy-boxNotifications-title')}>
                                                             <p
@@ -304,8 +307,10 @@ export default function Header(props: HeaderProps) {
                                 </div>
                             )}
                         >
-                            <div className="icon-hover" >
-                                <NotificationsNoneIcon onClick={() => setOpenNotifications(!openNotifications)} />
+                            <div className="icon-hover">
+                                <NotificationsNoneIcon
+                                    onClick={() => setOpenNotifications(!openNotifications)}
+                                />
                             </div>
                         </Tippy>
                     )}

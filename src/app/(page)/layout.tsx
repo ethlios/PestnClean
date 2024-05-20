@@ -15,6 +15,7 @@ import HeaderMobile from '~/common/Header/headerMobile';
 import { blogs } from '~/constants/blogs';
 import useSize from '~/libs/hooks/useSize';
 import { getAllBlogs, getAllProducts, getImgWork, getProvince, getUser } from '~/redux/actions';
+import { getAllProducts as getProductsPage } from '~/libs/orthers/getData';
 import logo from '../../../public/img/logo.png';
 
 ScrollTrigger.addEventListener('refresh', function () {
@@ -61,7 +62,7 @@ export default function ComponentConnectLayout({ children }: { children: React.R
 
             allImg();
         }
-    }, []);
+    }, [dispatch, session?.user]);
 
     useEffect(() => {
         const allProducts = async () => {
@@ -73,7 +74,7 @@ export default function ComponentConnectLayout({ children }: { children: React.R
         };
 
         allProducts();
-    }, []);
+    }, [dispatch]);
 
     useEffect(() => {
         const allBlogs = async () => {
@@ -85,7 +86,7 @@ export default function ComponentConnectLayout({ children }: { children: React.R
         };
 
         allBlogs();
-    }, []);
+    }, [dispatch]);
 
     useEffect(() => {
         const allProvince = async () => {
