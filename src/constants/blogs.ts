@@ -2,7 +2,7 @@
 
 const blogsAds = [
     {
-        id: 100,
+        id: 1000,
         title: 'Bảng giá vệ sinh công nghiệp PestnClean',
         path: 'bang-gia-ve-sinh-cong-nghiep-pestnclean',
         createdAt: '09 tháng 4, 2024',
