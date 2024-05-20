@@ -1,0 +1,74 @@
+.avatar {
+    background-color: var(--primary);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.user-account {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px 10px;
+    font-size: 14.5px;
+    font-weight: 600;
+    letter-spacing: -0.1px;
+}
+
+.user-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+}
+
+.add-inp {
+    width: 55%;
+    height: 45px;
+    border: solid 1.5px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 0 10px;
+    letter-spacing: -0.2px;
+    transition: all ease 0.5s;
+
+    &:focus {
+        border: solid 1.5px var(--primary);
+    }
+
+    &::placeholder {
+        color: rgba(0, 0, 0, 0.55);
+    }
+
+    @media (max-width: 768px) {
+        width: 100%;
+    }
+}
+
+
+.commom-button {
+    font-size: 14.5px;
+    font-weight: 600;
+    background-color: rgba($color: #000000, $alpha: 0.05);
+    border-radius: 5px;
+    padding: 6px 14px;
+    border: solid 1.5px rgba(0, 0, 0, 0.1);
+    transition: all ease 0.5s;
+    height: 45px;
+    width: 55%;
+
+    &:hover {
+        background-color: rgba($color: #000000, $alpha: 0.15);
+    }
+
+    @media (max-width: 768px) {
+        width: 100%;
+    }
+}

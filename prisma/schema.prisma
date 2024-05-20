@@ -1,0 +1,178 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String         @id
+  email         String         @unique
+  name          String?
+  img           String?
+  rule          String?
+  address       String?
+  district      String?
+  Ward          String?
+  city          String?
+  phone         String?
+  avatar        String?
+  cart          Cart[]
+  comment       CommentBlogs[]
+  discount      Discount[]
+  emailkm       Email[]
+  imgWork       ImgWork[]
+  notifications Notification[]
+  order         Order[]
+  product       Product[]
+  blog          Blog[]
+}
+
+model Blog {
+  id          Int      @id @default(autoincrement())
+  authorId    String
+  title       String?
+  desHead     String?
+  description String?
+  detail      String?
+  img         String?
+  author      User     @relation(fields: [authorId], references: [id])
+  path        String?
+  createdAt   DateTime @default(now())
+  menu        String[]
+  key         String[]
+  category    String?
+}
+
+model Cart {
+  id          Int     @id @default(autoincrement())
+  authorId    String
+  productId   Int?
+  title       String?
+  description String?
+  price       Int?
+  img         String?
+  quantity    Int?
+  code        String?
+  author      User    @relation(fields: [authorId], references: [id])
+}
+
+model Email {
+  id       Int    @id @default(autoincrement())
+  authorId String
+  email    String
+  author   User   @relation(fields: [authorId], references: [id])
+}
+
+model Product {
+  id           Int        @id @default(autoincrement())
+  authorId     String
+  title        String?
+  desHead      String?
+  description  String?
+  detail       String?
+  path         String?
+  price        Int?
+  Image        String[]
+  code         String?
+  category1    String?
+  category2    String?
+  category3    String?
+  status       String?
+  priceSales   Int?
+  weight       String?
+  expiry       String?
+  new          Boolean?
+  box          String?
+  package      String?
+  pieces       String?
+  bag          String?
+  plate        String?
+  quantity     Int?
+  comments     Comments[]
+  author       User       @relation(fields: [authorId], references: [id])
+  hastags      String[]
+  categoryMain String?
+}
+
+model CommentBlogs {
+  id        Int      @id @default(autoincrement())
+  authorId  String
+  blogName  String?
+  message   String?
+  img       String?
+  name      String?
+  createdAt DateTime @default(now())
+  userId    String?
+  type      String?
+  email     String?
+  avatar    String?
+  author    User     @relation(fields: [authorId], references: [id])
+}
+
+model Comments {
+  id        Int      @id @default(autoincrement())
+  productId Int?
+  message   String?
+  img       String?
+  name      String?
+  createdAt DateTime @default(now())
+  email     String?
+  product   Product? @relation(fields: [productId], references: [id])
+}
+
+model Order {
+  id            Int      @id @default(autoincrement())
+  authorId      String
+  userId        String?
+  name          String?
+  address       String?
+  city          String?
+  district      String?
+  Ward          String?
+  phone         String?
+  email         String?
+  message       String?
+  product       String?
+  orderAt       DateTime @default(now())
+  code          String?
+  status        String?
+  payment       String?
+  paymentStatus String?
+  discount      Int?
+  author        User     @relation(fields: [authorId], references: [id])
+}
+
+model Discount {
+  id          Int       @id @default(autoincrement())
+  authorId    String
+  code        String?
+  percent     Int?
+  name        String?
+  dateStart   DateTime?
+  dateEnd     DateTime?
+  description String?
+  author      User      @relation(fields: [authorId], references: [id])
+  status      Boolean
+}
+
+model ImgWork {
+  id       Int     @id @default(autoincrement())
+  authorId String
+  img      String?
+  type     String?
+  author   User    @relation(fields: [authorId], references: [id])
+}
+
+model Notification {
+  id          Int      @id @default(autoincrement())
+  title       String
+  recipientId String
+  message     String?
+  state       Boolean
+  type        String
+  createdAt   DateTime @default(now())
+  recipient   User     @relation(fields: [recipientId], references: [id])
+}

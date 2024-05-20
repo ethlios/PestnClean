@@ -1,0 +1,154 @@
+.panel {
+    height: 55px;
+    width: 100%;
+    border-radius: 10px;
+    border: solid 1.5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0 10px;
+    gap: 10px;
+}
+
+.commom-button {
+    font-size: 14.5px;
+    font-weight: 600;
+    background-color: rgba($color: #000000, $alpha: 0.05);
+    border-radius: 10px;
+    padding: 6px 14px;
+    border: solid 1.5px rgba(0, 0, 0, 0.1);
+    transition: all ease 0.5s;
+
+    &:hover {
+        background-color: rgba($color: #000000, $alpha: 0.15);
+    }
+}
+
+.common-title {
+    font-weight: 600;
+    text-decoration: 2px underline;
+}
+
+.common-inp {
+    border-radius: 10px;
+    border: solid 1.5px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    height: 50px;
+    margin: 20px 0;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 0 10px;
+
+    &:focus {
+        outline: solid 2px var(--primary);
+        outline-offset: 2px;
+    }
+}
+
+.common-item-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.product-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    gap: 10px;
+}
+
+.add-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba($color: #000000, $alpha: 0.5);
+    z-index: 10;
+}
+
+.add-content {
+    width: 90%;
+    max-height: 90%;
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: scroll;
+}
+
+.add-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+    position: sticky;
+    z-index: 1;
+    top: 0px;
+    background-color: #fff;
+    padding: 10px 15px;
+
+    p {
+        font-weight: 600;
+        text-decoration: 2px underline;
+        letter-spacing: -0.2px;
+    }
+}
+
+.add-body {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    padding: 0 15px 10px 15px;
+}
+
+.product-detail {
+    p {
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--text-black);
+        letter-spacing: -0.2px;
+    }
+}
+
+.textarea {
+    border: solid 0.5px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    margin-top: 12px;
+    padding: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    resize: none;
+    min-height: 150px;
+
+    &:hover {
+        border: solid 0.5px rgba(0, 0, 0, 0.7);
+    }
+
+    &:focus {
+        border: solid 2px var(--primary);
+        outline: none;
+    }
+
+    &::placeholder {
+        color: rgba(0, 0, 0, 0.55);
+    }
+}
+
+.total-price {
+    font-size: 16px;
+    font-weight: 550;
+}
+
+.common-p {
+    font-size: 14.5px;
+    font-weight: 600;
+    letter-spacing: -0.2px;
+}

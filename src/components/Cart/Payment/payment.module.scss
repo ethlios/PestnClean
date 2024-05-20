@@ -1,0 +1,243 @@
+//Header title
+.progress-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.progress {
+    width: 350px;
+    margin: 50px 0;
+    background-color: rgba($color: #000000, $alpha: 0.1);
+    height: 3px;
+    border-radius: 5px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.progress-complete {
+    width: calc(100% / 2);
+    background-color: var(--secondary);
+    height: 3px;
+    border-radius: 5px;
+    position: absolute;
+    left: 0px;
+}
+
+.dot-1 {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: #fff;
+    border: solid 1.5px var(--text-black);
+    position: absolute;
+    top: -7px;
+    left: -7.5px;
+}
+
+.dot-2 {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: #fff;
+    border: solid 1.5px var(--text-black);
+    position: absolute;
+    top: -7px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dot-current {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--secondary);
+}
+
+.dot-3 {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: #fff;
+    border: solid 1.5px var(--text-black);
+    position: absolute;
+    top: -7px;
+    right: -7.5px;
+}
+
+.payment-method {
+    display: flex;
+    flex-direction: row;
+    font-size: 15px;
+    font-weight: 600;
+    align-items: center;
+    gap: 10px;
+    border: 2px solid var(--text-black);
+    border-radius: 10px;
+    margin-bottom: 15px;
+    padding: 15px 10px;
+    cursor: pointer;
+    letter-spacing: -0.5px;
+
+    svg {
+        font-size: 30px;
+    }
+}
+
+//Panel
+.title {
+    font-weight: 700;
+    text-decoration: 2px underline;
+    letter-spacing: -0.5px;
+    text-transform: uppercase;
+    font-size: 15px;
+}
+
+.description {
+    font-size: 0.8rem;
+    color: var(--text-black);
+}
+
+.product-detail {
+    p {
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--text-black);
+        letter-spacing: -0.2px;
+    }
+}
+
+.product-name {
+    font-size: 15px;
+    font-weight: 600;
+    color: #000 !important;
+}
+
+.hr-decor {
+    height: 1.5px;
+    background-color: var(--primary);
+    width: 100%;
+    border-radius: 5px;
+    margin: 20px 0 !important;
+}
+
+.total-price {
+    letter-spacing: -0.2px;
+    font-size: 15px;
+    margin-bottom: 8px;
+
+    p {
+        font-weight: 700;
+    }
+
+    span {
+        font-weight: 600;
+        letter-spacing: -0.5px;
+    }
+}
+
+.back-cart {
+    transition: all ease 0.5s;
+
+    h1 {
+        font-size: 14px;
+        font-weight: 600;
+        letter-spacing: -0.2px;
+        text-transform: uppercase;
+    }
+
+    svg {
+        font-size: 18px;
+    }
+
+    &:hover {
+        color: var(--primary);
+    }
+}
+
+.textarea {
+    border: solid 0.5px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    margin-top: 12px;
+    padding: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    resize: none;
+    min-height: 150px;
+
+    &:hover {
+        border: solid 0.5px rgba(0, 0, 0, 0.7);
+    }
+
+    &:focus {
+        border: solid 2px var(--primary);
+        outline: none;
+    }
+
+    &::placeholder {
+        color: rgba(0, 0, 0, 0.55);
+    }
+}
+
+// Dialog
+.dialog-wrapper {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    z-index: 3000;
+    top: 0;
+    left: 0;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.dialog-content {
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 15px;
+    background-color: #fff;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 35px 55px;
+    cursor: default;
+}
+
+.dialog-title {
+    font-size: 18px;
+    letter-spacing: -1px;
+    font-weight: 600;
+    margin-top: 20px;
+}
+
+.dialog-text {
+    font-size: 13.5px;
+    font-weight: 500;
+    letter-spacing: -0.5px;
+    color: rgba(0, 0, 0, 0.5);
+    text-align: center;
+    margin-top: 5px;
+}
+
+.dialog-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 15px;
+    gap: 20px;
+    width: 100%;
+}
+
+.button-hover {
+    &:hover {
+        outline: solid 1.5px var(--primary);
+        outline-offset: 3px;
+        transition: all ease 0.5s;
+    }
+}

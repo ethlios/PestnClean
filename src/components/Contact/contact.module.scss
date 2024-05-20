@@ -1,0 +1,365 @@
+// Banner
+.banner {
+    width: 100%;
+    height: 350px;
+    background-color: var(--secondary-dark);
+    position: relative;
+
+    h1 {
+        position: absolute;
+        font-size: 30px;
+        font-weight: bold;
+        bottom: 15px;
+        color: #fff;
+        right: 20px;
+        text-decoration: 2px underline;
+    }
+}
+
+// Content
+.content {
+    display: flex;
+    flex-direction: row;
+    margin-top: 40px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+// INFORMATION
+.information {
+    .information-1 {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 10px;
+        gap: 5px;
+    }
+
+    .information-1 a:hover {
+        color: var(--secondary);
+    }
+
+    .information-1 a {
+        font-size: 15px;
+        font-weight: 600;
+    }
+
+    .information-1 p,
+    .information-2 p {
+        font-size: 17px;
+        font-weight: 600;
+        margin-bottom: 5px;
+        text-decoration: 2px underline;
+        letter-spacing: -0.2px;
+    }
+}
+
+.social-icon {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    color: var(--primary);
+    margin-top: 10px;
+
+    svg {
+        font-size: 28px;
+    }
+}
+
+// Map
+.map {
+    width: 100%;
+    height: 300px;
+    margin-top: 30px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px;
+}
+
+.description {
+    margin-top: 30px;
+    font-size: 14px;
+    color: #434343;
+    font-weight: 600;
+    text-align: justify;
+    letter-spacing: -0.3px;
+
+    :first-child {
+        margin-bottom: 5px;
+    }
+}
+
+.watermark {
+    font-size: 17.5px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-top: 15px;
+    letter-spacing: -0.3px;
+}
+
+// FORM
+.form {
+    h1 {
+        font-size: 28px;
+        font-weight: 500;
+    }
+}
+
+.service {
+    margin-top: 20px;
+}
+
+.form-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    text-decoration: 2px underline;
+    text-underline-offset: 4px;
+    letter-spacing: -0.2px;
+}
+
+.service-title {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+// Progress
+.progress {
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+}
+
+.progress-1 {
+    width: 50%;
+
+    p {
+        font-weight: 600;
+        letter-spacing: -0.5px;
+    }
+}
+
+.progress-value,
+.progress-value-comple {
+    width: 100%;
+    height: 6px;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.16);
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+.progress-item {
+    height: 6px;
+    background-color: var(--secondary);
+    transition: all ease 0.5s;
+}
+
+.progress-item-first {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    height: 6px;
+    background-color: var(--secondary);
+    transition: all ease 0.5s;
+}
+
+.progress-item-last {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    height: 6px;
+    background-color: var(--secondary);
+    transition: all ease 0.5s;
+}
+
+.progress-value-comple {
+    background-color: var(--secondary) !important;
+}
+
+// Form
+
+.form-wrapper {
+    width: 100%;
+}
+
+.form-content {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    margin-bottom: 20px;
+}
+
+.textarea {
+    border: solid 0.5px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    margin-top: 20px;
+    padding: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    resize: none;
+
+    &:hover {
+        border: solid 0.5px rgba(0, 0, 0, 0.7);
+    }
+
+    &:focus {
+        border: solid 2px var(--primary);
+        outline: none;
+    }
+
+    &::placeholder {
+        color: rgba(0, 0, 0, 0.55);
+    }
+}
+
+// Confirm Form
+.confirm-main {
+    margin-top: 30px;
+}
+
+.confirm-title {
+    font-size: 15.5px;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+    margin-bottom: 10px;
+    margin-top: 20px;
+}
+
+.confirm-wrapper {
+    display: flex;
+    width: 100%;
+    border-radius: 20px;
+    border: solid 2px rgba(0, 0, 0, 0.2);
+    align-items: center;
+    gap: 30px;
+    flex-direction: column;
+    padding: 30px;
+}
+
+.confirm-text {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    width: 100%;
+}
+
+.confirm-item {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    width: 50%;
+    align-items: center;
+
+    p {
+        font-size: 15px;
+        letter-spacing: -0.2px;
+        font-weight: 600;
+    }
+
+    svg {
+        color: rgba(0, 0, 0, 0.6);
+    }
+}
+
+.confirm-item-orther {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    width: 100%;
+
+    p {
+        font-size: 15px;
+        letter-spacing: -0.2px;
+        font-weight: 600;
+    }
+
+    svg {
+        color: rgba(0, 0, 0, 0.6);
+        position: relative;
+        bottom: 1px;
+    }
+}
+
+.confirm-shield {
+    font-size: 12.7px;
+    font-weight: 500;
+    letter-spacing: -0.5px;
+    color: rgba(0, 0, 0, 0.5);
+    margin-bottom: 10px;
+    margin-top: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 20px;
+    gap: 10px;
+}
+
+// Dialog
+.dialog-wrapper {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    z-index: 3000;
+    top: 0;
+    left: 0;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.dialog-content {
+    width: 600px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 15px;
+    background-color: #fff;
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 35px 55px;
+    cursor: default;
+}
+
+.dialog-title {
+    font-size: 18px;
+    letter-spacing: -1px;
+    font-weight: 600;
+    margin-top: 20px;
+}
+
+.dialog-text {
+    font-size: 13.5px;
+    font-weight: 500;
+    letter-spacing: -0.5px;
+    color: rgba(0, 0, 0, 0.5);
+    text-align: center;
+    margin-top: 5px;
+}
+
+.dialog-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 15px;
+    gap: 20px;
+    width: 100%;
+}
+
+.button-hover {
+    &:hover {
+        outline: solid 1.5px var(--primary);
+        outline-offset: 3px;
+        transition: all ease 0.5s;
+    }
+}

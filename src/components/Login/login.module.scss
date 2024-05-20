@@ -1,0 +1,336 @@
+.login-page {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    overflow: hidden;
+    position: relative;
+}
+
+.login-img {
+    object-fit: cover;
+    object-position: center;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.content-1 {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    padding: 40px;
+    justify-content: space-between;
+}
+
+.logo {
+    width: 176px;
+    object-position: center;
+    object-fit: cover;
+}
+
+.quote {
+    transition: all ease 0.5s;
+
+    svg {
+        font-size: 30px;
+    }
+
+    h1 {
+        font-size: 28px;
+        width: 450px;
+    }
+
+    p {
+        display: block;
+        width: 400px;
+        font-size: 14px;
+        font-weight: 600;
+        letter-spacing: -0.5px;
+        transition: all ease 0.5s;
+    }
+}
+
+.decor {
+    height: 2px;
+    width: 400px;
+    background-color: var(--secondary);
+    margin-top: 15px;
+}
+
+// Login form
+
+.content-2 {
+    width: 40%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    right: 0;
+}
+
+.login-wrapper {
+    width: 100%;
+    height: 100%;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: -1;
+    transition: all ease 0.5s;
+}
+
+.login-form {
+    z-index: 10;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 30px 80px;
+
+    p {
+        display: block;
+        width: 400px;
+        font-size: 14px;
+        font-weight: 600;
+        letter-spacing: -0.5px;
+        color: var(--text-black);
+        margin-top: 15px;
+        text-align: center;
+    }
+
+    p b {
+        cursor: pointer;
+        transition: all ease 0.5s;
+    }
+
+    p b:hover {
+        color: var(--primary);
+    }
+}
+
+.form-header {
+    margin-bottom: 60px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    transition: all ease 0.5s;
+}
+
+.back-home {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    align-items: flex-start;
+
+    b {
+        font-size: 14px;
+        font-weight: 600;
+        letter-spacing: -0.5px;
+    }
+}
+
+.back-1 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+
+    &:hover ~ .back-decor {
+        background-color: var(--secondary);
+        width: 100%;
+        height: 2px;
+    }
+}
+
+.back-decor {
+    background-color: var(--secondary);
+    width: 0;
+    height: 2px;
+    transition: all ease 0.5s;
+}
+
+.login-title {
+    object-position: center;
+    object-fit: cover;
+    width: 350px;
+    height: auto;
+    transition: all ease 0.5s;
+}
+
+.input-list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.btnBlack {
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    height: 40px;
+    width: 100%;
+    background-color: var(--primary);
+    transition: all ease 0.5s;
+    color: #fff;
+    text-transform: uppercase;
+
+    &:hover {
+        background-color: transparent;
+        outline: solid 2px var(--primary);
+        color: #000;
+    }
+}
+
+.btnWhite {
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    height: 40px;
+    width: 100%;
+    background-color: var(--primary);
+    transition: all ease 0.5s;
+    color: #fff;
+    text-transform: uppercase;
+
+    &:hover {
+        background-color: transparent;
+        outline: solid 2px var(--primary);
+        color: #fff;
+    }
+}
+
+.btnBlack {
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    height: 40px;
+    width: 100%;
+    background-color: var(--primary);
+    transition: all ease 0.5s;
+    color: #fff;
+    text-transform: uppercase;
+
+    &:hover {
+        background-color: transparent;
+        outline: solid 2px var(--primary);
+        color: #000;
+    }
+}
+
+.blackTheme {
+    border: solid 2px var(--text-black);
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 13px;
+    font-weight: 500;
+    height: 40px;
+    width: 100%;
+    background-color: transparent;
+    transition: all ease 0.5s;
+
+    &:hover {
+        border: solid 2px var(--primary);
+    }
+
+    &:focus {
+        border: solid 2px var(--primary);
+        outline: none;
+    }
+
+    &::placeholder {
+        color: rgba(0, 0, 0, 0.55);
+    }
+}
+
+.whiteTheme {
+    border: solid 2px #fff;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 13px;
+    font-weight: 500;
+    height: 40px;
+    width: 100%;
+    background-color: transparent;
+    transition: all ease 0.5s;
+
+    &:hover {
+        border: solid 2px var(--primary);
+    }
+
+    &:focus {
+        border: solid 2px var(--primary);
+        outline: none;
+    }
+
+    &::placeholder {
+        color: rgba(255, 255, 255, 0.55);
+    }
+}
+
+.or-decor {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 10px;
+    transition: all ease 0.5s;
+}
+
+.hr-decor {
+    width: 130%;
+    background-color: #000;
+    height: 1.5px;
+    margin-top: 15px;
+}
+
+.button-list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 15px;
+    margin-top: 20px;
+
+    button {
+        border-radius: 10px;
+        padding: 10px;
+        font-size: 13px;
+        font-weight: 600;
+        height: 45px;
+        width: 100%;
+        background-color: transparent;
+        transition: all ease 0.5s;
+        color: var(--text-black);
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        justify-content: center;
+        border: solid 2px var(--primary);
+    }
+
+    button svg {
+        font-size: 20px;
+    }
+
+    button:hover {
+        border: none;
+        background-color: var(--primary);
+        color: #fff;
+    }
+}
