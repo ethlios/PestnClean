@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const axiosRequest = axios.create({
-    baseURL: `http://localhost:3000/`,
+    baseURL: `https://pestnclean.vercel.app/`,
 });
 
 export const get = async (endpoint: string, body: any) => {

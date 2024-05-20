@@ -3,12 +3,14 @@
 import FormatQuoteOutlinedIcon from '@mui/icons-material/FormatQuoteOutlined';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import LoginForm from '~/components/Login/LoginForm';
 import { loginBanner } from '~/constants/banner';
 import useSize from '~/libs/hooks/useSize';
 import logo from '../../../../public/img/logo.png';
 import styles from '../../../components/Login/login.module.scss';
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 const cx = classNames.bind(styles);
 
@@ -17,6 +19,14 @@ export interface IAppProps {}
 export default function LoginPage(props: IAppProps) {
     const [theme, setTheme] = useState<boolean>(false);
     const { sizeX } = useSize();
+    const { data: session } = useSession();
+    const router = useRouter();
+
+    useEffect(() => {
+        if (!!session?.user) {
+            router.push('/');
+        }
+    }, [router, session?.user]);
 
     return (
         <div
