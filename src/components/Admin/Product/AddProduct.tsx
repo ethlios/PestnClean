@@ -114,9 +114,16 @@ export default function AdminAddProduct({
         }
     }, [isUpdate, setValue, updateProduct]);
 
+    const isPathExists = (path: string) => {
+        if (updateProduct) {
+            return products.some((product: any) => product.id !== updateProduct?.id && product.path === path);
+        } else {
+            return products.some((product: any) => product.path === path);
+        }
+    };
+
     const onSubmit = (data: any) => {
-        const isPathExists = products.some((product: any) => product.path === data.path);
-        if (isPathExists) return setShowToast(true);
+        if (isPathExists(data.path)) return setShowToast(true);
 
         const product = {
             ...data,
