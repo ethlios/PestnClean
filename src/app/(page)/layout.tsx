@@ -61,7 +61,7 @@ export default function ComponentConnectLayout({ children }: { children: React.R
 
             allImg();
         }
-    }, [dispatch]);
+    }, []);
 
     useEffect(() => {
         const allProducts = async () => {
@@ -73,7 +73,7 @@ export default function ComponentConnectLayout({ children }: { children: React.R
         };
 
         allProducts();
-    }, [dispatch]);
+    }, []);
 
     useEffect(() => {
         const allBlogs = async () => {
@@ -85,7 +85,7 @@ export default function ComponentConnectLayout({ children }: { children: React.R
         };
 
         allBlogs();
-    }, [dispatch]);
+    }, []);
 
     useEffect(() => {
         const allProvince = async () => {
