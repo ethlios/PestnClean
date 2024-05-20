@@ -36,7 +36,6 @@ html * {
     user-select: none;
     scroll-behavior: smooth !important;
     -webkit-text-size-adjust: 100%;
-    font-family: 'Montserrat';
 }
 
 /* Custom font */
@@ -213,6 +212,11 @@ html textarea::placeholder {
     font-weight: 500 !important;
     color: var(--text-black) !important;
     text-align: justify !important;
+}
+.ck.ck-content.ck-editor__editable {
+    padding-left: 30px;
+    padding-right: 30px;
+    height: 520px !important;
 }
 
 /* CUSTOM TAILWIND */

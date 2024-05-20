@@ -87,7 +87,7 @@ export default function FilterProduct({
                 position: sizeX < 1024 ? 'fixed' : 'sticky',
                 zIndex: sizeX < 1024 ? '5000' : '',
                 left: sizeX < 1024 && !openFilter ? '-1024px' : sizeX < 1024 && openFilter ? '0px' : '',
-                height: sizeX < 1024 ? '1300px' : '',
+                height: sizeX < 1024 ? '1300px' : 'calc(100vh - 70px)',
             }}
         >
             <div

@@ -37,11 +37,26 @@ function* FetchUser({ payload }: any) {
             }
 
             if (person.data.length > 0) {
-                const { management, order, emailkm, discount, comment } = person.data[0] ?? [];
+                const {
+                    cart,
+                    product,
+                    management,
+                    blog,
+                    order,
+                    emailkm,
+                    imgWork,
+                    discount,
+                    notification,
+                    comment,
+                } = person.data[0] ?? [];
                 if (person.data[0].rule === 'admin') {
                     yield put(actions.getEmail(emailkm ?? []));
+                    // yield put(actions.getCart(cart ?? []));
                     yield put(actions.getManagement(management ?? []));
                     yield put(actions.getAdminOrder(order ?? []));
+                    yield put(actions.getImgWork(imgWork ?? []));
+                    yield put(actions.getAllProducts(product ?? []));
+                    yield put(actions.getAllBlogs([...blogs, ...blog] ?? []));
                     yield put(actions.getDiscount(discount ?? []));
                 } else {
                     yield put(actions.getManagement(management ?? []));
@@ -49,11 +64,6 @@ function* FetchUser({ payload }: any) {
                 }
             }
         }
-
-        const person: ResponseGenerator = yield call(request.get, `api/user/all/ruleAdmin`, null);
-        yield put(actions.getImgWork(person.data[0].imgWork ?? []));
-        yield put(actions.getAllProducts(person.data[0].product ?? []));
-        yield put(actions.getAllBlogs([...blogs, ...person.data[0].blog] ?? []));
     } catch (err) {
         console.log(err);
     }
