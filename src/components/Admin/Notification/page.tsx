@@ -6,7 +6,6 @@ import styles from './Notification.module.scss';
 import AddIcon from '@mui/icons-material/Add';
 import AddNotification from './AddNotification';
 import CogWheel from '~/components/Orther/Loader/CogWheel/CogWheel';
-import moment from 'moment';
 import useSWR, { mutate } from 'swr';
 import { fetchPosts } from '~/libs/orthers/getData';
 import { filterTypeNotifications } from './const';
@@ -40,7 +39,7 @@ export default function AdminNotification(props: IAppProps) {
     const [filteredNotifications, setFilteredNotifications] = useState<any[]>([]);
     const [valueFilterType, setValueFilterType] = useState<string>('');
     const [valueFilterName, setValueFilterName] = useState<string>('');
-    const { data, isLoading } = useSWR('api/notification', fetchPosts);
+    const { data, isLoading } = useSWR('/api/notification', fetchPosts);
 
 
     // hàm lấy các tên người nhận có trong list thông báo

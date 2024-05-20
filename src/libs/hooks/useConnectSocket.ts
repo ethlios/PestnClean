@@ -3,36 +3,40 @@ import { socket } from '~/websocket/socket';
 
 const useConnectSocket = () => {
     const [isConnected, setIsConnected] = useState<boolean>(false);
-    const [transport, setTransport] = useState('N/A');
 
     // KẾT NỐI TỚI SOCKET
-    const connectSocket = () => {
-        if (socket.connected) {
-            onConnect();
-        }
-
-        function onConnect() {
-            setIsConnected(true);
-        }
-
-        function onDisconnect() {
-            setIsConnected(false);
-            setTransport('N/A');
-        }
-
-        socket.on('connect', onConnect);
-        socket.on('disconnect', onDisconnect);
-        return () => {
-            socket.off('connect', onConnect);
-            socket.off('disconnect', onDisconnect);
-        };
-    };
-
     useEffect(() => {
-        connectSocket();
+        const connectSocket = () => {
+            if (socket.connected) {
+                onConnect();
+            }
+
+            function onConnect() {
+                setIsConnected(true);
+            }
+
+            function onDisconnect() {
+                setIsConnected(false);
+            }
+
+            socket.on('connect', onConnect);
+            socket.on('disconnect', onDisconnect);
+
+            return () => {
+                socket.off('connect', onConnect);
+                socket.off('disconnect', onDisconnect);
+            };
+        };
+
+        const cleanup = connectSocket();
+
+        return () => {
+            if (cleanup) cleanup();
+            socket.disconnect();
+        };
     }, []);
 
-    return {isConnected,socket};
+    return { isConnected, socket };
 };
 
 export default useConnectSocket;
