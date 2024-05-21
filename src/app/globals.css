@@ -173,6 +173,7 @@ html textarea::placeholder {
     font-weight: 500 !important;
     color: var(--text-black) !important;
     text-align: justify !important;
+    margin-bottom: 25px !important;
 }
 
 .ql-editor h2 {
@@ -180,10 +181,13 @@ html textarea::placeholder {
     text-underline-offset: 5px !important;
     font-weight: 700 !important;
     font-size: 17px !important;
+    margin-top: 40px !important;
+    margin-bottom: 30px !important;
 }
 
 .ql-editor h3 {
     font-size: 15px !important;
+    margin-bottom: 25px !important;
 }
 
 .ql-editor a {
@@ -205,6 +209,7 @@ html textarea::placeholder {
     padding-left: 10px !important;
     font-weight: 500 !important;
     text-align: justify !important;
+    margin-bottom: 25px !important;
 }
 
 .ql-editor li {
@@ -212,10 +217,22 @@ html textarea::placeholder {
     font-weight: 500 !important;
     color: var(--text-black) !important;
     text-align: justify !important;
+    margin-bottom: 10px !important;
 }
+.ql-editor ul,
+.ql-editor ol {
+    margin-left: 40px !important;
+}
+
+.ql-editor ul {
+    list-style-type: disc !important;
+}
+
+.ql-editor ol {
+    list-style-type: decimal !important;
+}
+
 .ck.ck-content.ck-editor__editable {
-    padding-left: 30px;
-    padding-right: 30px;
     height: 520px !important;
 }
 
