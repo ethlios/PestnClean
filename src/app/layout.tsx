@@ -27,6 +27,9 @@ export const metadata: Metadata = {
             'max-snippet': -1,
         },
     },
+    verification: {
+        google: 'rrx9Ep5SQed8hRReWkHvDG79MpyJU1w9IqZ5NiPsyeQ',
+    },
     openGraph: {
         title: 'PestnClean - Chuyên cung cấp dịch vụ vệ sinh toàn diện',
         description:
