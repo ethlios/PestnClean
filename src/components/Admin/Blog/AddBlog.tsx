@@ -85,9 +85,16 @@ export default function AdminAddBlog({ setAddBlog, updateBlog, setUpdateBlog, bl
         }
     }, [isUpdate, setValue, updateBlog]);
 
+    const isPathExists = (path: string) => {
+        if (updateBlog) {
+            return blogs.some((blog: any) => blog.id !== updateBlog?.id && blog.path === path);
+        } else {
+            return blogs.some((blog: any) => blog.path === path);
+        }
+    };
+
     const onSubmit = (data: any) => {
-        const isPathExists = blogs.some((blog: any) => blog.path === data.path);
-        if (isPathExists) return setShowToast(true);
+        if (isPathExists(data.path)) return setShowToast(true);
 
         const blog = {
             ...data,
