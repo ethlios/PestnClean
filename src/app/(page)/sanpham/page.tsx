@@ -37,9 +37,14 @@ export default function ProductPage(props: IAppProps) {
             // Duyệt qua từng thuộc tính trong checkboxFilter
             checkboxFilter.map((filter: any) => {
                 // Nếu thuộc tính của sản phẩm có giá trị và chưa tồn tại trong checkboxFilter
-                if (product[filter.field] && !filter.checkbox.includes(product[filter.field])) {
-                    // Thêm giá trị thuộc tính vào checkboxFilter
-                    filter.checkbox.push(product[filter.field]);
+                if (product[filter.field]) {
+                    let productValues = product[filter.field].split(', ');
+                    productValues.forEach((value: any) => {
+                        if (!filter.checkbox.includes(value)) {
+                            // Thêm giá trị thuộc tính vào checkboxFilter
+                            filter.checkbox.push(value);
+                        }
+                    });
                 }
             });
         });
