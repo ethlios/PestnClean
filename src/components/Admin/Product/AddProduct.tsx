@@ -262,7 +262,11 @@ export default function AdminAddProduct({
                             >
                                 Danh mục chính
                             </InputLabel>
-                            <Select defaultValue={''} {...register('category1')} label="Danh mục chính">
+                            <Select
+                                defaultValue={updateProduct?.category1 || ''}
+                                {...register('category1')}
+                                label="Danh mục chính"
+                            >
                                 {categories.map((item: any) => (
                                     <MenuItem key={item.title} value={item.title}>
                                         {item.title}
@@ -280,7 +284,11 @@ export default function AdminAddProduct({
                             >
                                 Danh mục phụ
                             </InputLabel>
-                            <Select defaultValue={''} {...register('category2')} label="Danh mục phụ">
+                            <Select
+                                defaultValue={updateProduct?.category2 || ''}
+                                {...register('category2')}
+                                label="Danh mục phụ"
+                            >
                                 {categories
                                     .find((item: any) => item.title === watch('category1'))
                                     ?.subMenu?.map((item: any) => (
@@ -300,7 +308,11 @@ export default function AdminAddProduct({
                             >
                                 Danh mục con
                             </InputLabel>
-                            <Select defaultValue={''} {...register('category3')} label="Danh mục con">
+                            <Select
+                                defaultValue={updateProduct?.category3 || ''}
+                                {...register('category3')}
+                                label="Danh mục con"
+                            >
                                 {categories
                                     .find((item: any) => item.title === watch('category1'))
                                     ?.subMenu?.find((item: any) => item.title === watch('category2'))
