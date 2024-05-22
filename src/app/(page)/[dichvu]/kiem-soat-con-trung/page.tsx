@@ -97,13 +97,21 @@ export default function DichVu1Page(props: IAppProps) {
                         alignItems: 'center',
                     }}
                 >
-                    <div
-                        style={{
-                            width: '55%',
-                            backgroundColor: 'rgba(0,0,0,0.05)',
-                            height: '400px',
-                        }}
-                    ></div>
+                    <div className={'flex flex-col gap-3'} style={{ width: '55%' }}>
+                        <div className={'flex flex-col gap-2 text-center'}>
+                            <h2 className={'font-bold'}>
+                                BIỂU ĐỒ THEO DÕI SỐ LƯỢNG CÔN TRÙNG KHI DÙNG DỊCH VỤ
+                            </h2>
+                            <div style={{ height: '200px', backgroundColor: 'rgba(0,0,0,0.05)' }}></div>
+                            <p>
+                                THÔNG THƯỜNG VS{' '}
+                                <span style={{ color: 'var(--primary)', fontWeight: 600 }}>
+                                    PEST<span style={{ color: 'var(--secondary-dark)' }}>N</span>CLEAN
+                                </span>
+                            </p>
+                        </div>
+                        <div style={{ height: '300px', backgroundColor: 'rgba(0,0,0,0.05)' }}></div>
+                    </div>
                     <div
                         style={{
                             width: '45%',
@@ -130,6 +138,7 @@ export default function DichVu1Page(props: IAppProps) {
                     </div>
                 </div>
             </div>
+            <h1 className={cx('content-title')}>Dịch vụ kiểm soát côn trùng theo ngành hàng</h1>
             <BundleCard>
                 {cardKiemSoatConTrung.map((item, index) => (
                     <CardHover
@@ -143,7 +152,7 @@ export default function DichVu1Page(props: IAppProps) {
                     />
                 ))}
             </BundleCard>
-            <h1 className={cx('content-title')}>Dịch vụ kiểm soát côn trùng cho từng ngành hàng</h1>
+            <h1 className={cx('content-title')}>Dịch vụ kiểm soát côn trùng</h1>
             <BundleCard className={'rounded-xl bg-gray-200 p-10'}>
                 {linkKiemSoatConTrung.map((item, index) => (
                     <Card
