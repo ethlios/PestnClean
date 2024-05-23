@@ -39,13 +39,15 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    position: sticky;
+    position: fixed;
     top: 0;
     z-index: 1000;
     transition: all ease 0.5s;
     overflow: hidden;
     padding-top: 1rem;
     padding-bottom: 1rem;
+    width: 100vw;
+    left: 0;
 }
 
 .searchFill {

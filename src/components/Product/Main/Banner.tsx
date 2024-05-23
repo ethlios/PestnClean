@@ -6,6 +6,7 @@ import styles from '../product.module.scss';
 import Slider from 'react-slick';
 import { productBanner } from '~/constants/banner';
 import Image from 'next/image';
+import useSize from '~/libs/hooks/useSize';
 
 const cx = classNames.bind(styles);
 
@@ -22,13 +23,15 @@ const settings = {
 };
 
 export default function BannerProduct(props: IAppProps) {
+    const { sizeX } = useSize();
+
     return (
         <div className="slider-container">
             <Slider {...settings}>
                 {productBanner.map((item, index) => {
                     return (
                         <div key={index} className={cx('img-fix-size')}>
-                            <Image src={item.img} alt={item.alt} width={1980} height={1000} />
+                            <Image src={item.img} alt={item.alt} width={1000} height={1000} />
                             {/*{index + 1}*/}
                         </div>
                     );

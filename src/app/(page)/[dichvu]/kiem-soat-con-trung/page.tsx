@@ -102,15 +102,23 @@ export default function DichVu1Page(props: IAppProps) {
                             <h2 className={'font-bold'}>
                                 BIỂU ĐỒ THEO DÕI SỐ LƯỢNG CÔN TRÙNG KHI DÙNG DỊCH VỤ
                             </h2>
-                            <div style={{ height: '200px', backgroundColor: 'rgba(0,0,0,0.05)' }}></div>
+                            {/* <div style={{ height: '200px', backgroundColor: 'rgba(0,0,0,0.05)' }}></div>
                             <p>
                                 THÔNG THƯỜNG VS{' '}
                                 <span style={{ color: 'var(--primary)', fontWeight: 600 }}>
                                     PEST<span style={{ color: 'var(--secondary-dark)' }}>N</span>CLEAN
                                 </span>
-                            </p>
+                            </p> */}
                         </div>
-                        <div style={{ height: '300px', backgroundColor: 'rgba(0,0,0,0.05)' }}></div>
+                        {/* <div style={{ height: '300px', backgroundColor: 'rgba(0,0,0,0.05)' }}></div> */}
+                        <Image
+                            src={
+                                'https://res.cloudinary.com/dj2jarcxk/image/upload/v1716428794/Untitled-3.png'
+                            }
+                            alt="BIỂU ĐỒ THEO DÕI SỐ LƯỢNG CÔN TRÙNG KHI DÙNG DỊCH VỤ TẠI PESTNCLEAN"
+                            width={1000}
+                            height={1000}
+                        />
                     </div>
                     <div
                         style={{
