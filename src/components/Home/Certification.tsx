@@ -14,27 +14,43 @@ const cx = classNames.bind(styles);
 const certi = [
     {
         id: 1,
-        src: 'https://res.cloudinary.com/dj2jarcxk/image/upload/v1716108276/z5455549697986_00688594b88681be9baa6b86a5483aa5_dd9tit.jpg',
+        src: 'https://res.cloudinary.com/dj2jarcxk/image/upload/v1716427279/cn11.png',
     },
     {
         id: 2,
-        src: 'https://res.cloudinary.com/dj2jarcxk/image/upload/v1716108265/z5455549697928_cb6f1ff6074be72de57aaf039413ecd8_yhiwob.jpg',
+        src: 'https://res.cloudinary.com/dj2jarcxk/image/upload/v1716427278/cn10.png',
     },
     {
         id: 3,
-        src: 'https://res.cloudinary.com/dj2jarcxk/image/upload/v1716108246/z5455549785603_6aa41394e9efc2cf8e9e040c0f680f08_tgu3uz.jpg',
+        src: 'https://res.cloudinary.com/dj2jarcxk/image/upload/v1716427275/cn9.png',
     },
     {
         id: 4,
-        src: 'https://res.cloudinary.com/dj2jarcxk/image/upload/v1716108276/z5455549697986_00688594b88681be9baa6b86a5483aa5_dd9tit.jpg',
+        src: 'https://res.cloudinary.com/dj2jarcxk/image/upload/v1716427275/cn8.png',
     },
     {
         id: 5,
-        src: 'https://res.cloudinary.com/dj2jarcxk/image/upload/v1716108265/z5455549697928_cb6f1ff6074be72de57aaf039413ecd8_yhiwob.jpg',
+        src: 'https://res.cloudinary.com/dj2jarcxk/image/upload/v1716427273/cn7.png',
     },
     {
         id: 6,
-        src: 'https://res.cloudinary.com/dj2jarcxk/image/upload/v1716108246/z5455549785603_6aa41394e9efc2cf8e9e040c0f680f08_tgu3uz.jpg',
+        src: 'https://res.cloudinary.com/dj2jarcxk/image/upload/v1716427271/cn6.png',
+    },
+    {
+        id: 7,
+        src: 'https://res.cloudinary.com/dj2jarcxk/image/upload/v1716427270/cn4.png',
+    },
+    {
+        id: 8,
+        src: 'https://res.cloudinary.com/dj2jarcxk/image/upload/v1716427268/cn2.png',
+    },
+    {
+        id: 9,
+        src: 'https://res.cloudinary.com/dj2jarcxk/image/upload/v1716427267/cn.png',
+    },
+    {
+        id: 10,
+        src: 'https://res.cloudinary.com/dj2jarcxk/image/upload/v1716427267/cn1.png',
     },
 ];
 
@@ -128,7 +144,6 @@ export default function Certification(props: IAppProps) {
                                         height: '100%',
                                         objectFit: 'cover',
                                         objectPosition: 'center',
-                                        backgroundColor: '#000',
                                     }}
                                 ></ImageZoom>
                             </div>

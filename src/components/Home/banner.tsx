@@ -6,6 +6,7 @@ import ButtonCommon from '../Orther/Button';
 import styles from './home.module.scss';
 import useSize from '~/libs/hooks/useSize';
 import { homeBanner } from '~/constants/banner';
+import Image from 'next/image';
 
 const cx = classNames.bind(styles);
 
@@ -32,7 +33,17 @@ export default function BannerHomePage(props: IAppProps) {
                     {homeBanner.map((item, index) => {
                         return (
                             <div key={index}>
-                                <div
+                                <Image
+                                    src={item.src}
+                                    alt={item.alt}
+                                    width={2000}
+                                    height={900}
+                                    style={{
+                                        width: '100%',
+                                        height: '100%',
+                                    }}
+                                />
+                                {/* <div
                                     style={{
                                         backgroundImage: `url('${item.src}')`,
                                         backgroundPosition: 'center',
@@ -54,8 +65,8 @@ export default function BannerHomePage(props: IAppProps) {
                                                     ? '0 80px'
                                                     : '0 100px',
                                     }}
-                                >
-                                    {/* <h1
+                                > */}
+                                {/* <h1
                                         style={{
                                             width: sizeX < 640 ? '100%' : '450px',
                                             fontSize: sizeX < 550 ? '28px' : '34px',
@@ -88,7 +99,7 @@ export default function BannerHomePage(props: IAppProps) {
                                             rule="rule-1"
                                         ></ButtonCommon>
                                     </div> */}
-                                </div>
+                                {/* </div> */}
                             </div>
                         );
                     })}

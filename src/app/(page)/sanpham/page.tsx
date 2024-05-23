@@ -111,7 +111,7 @@ export default function ProductPage(props: IAppProps) {
                     />
                 </div>
             </div>
-            <div className={cx('banner-auto')}>
+            {/* <div className={cx('banner-auto')}>
                 <Image
                     src={productBannerFooter}
                     alt={'product banner footer'}
@@ -119,7 +119,7 @@ export default function ProductPage(props: IAppProps) {
                     height={1000}
                     className={'h-full w-full object-cover'}
                 />
-            </div>
+            </div> */}
         </div>
     );
 }

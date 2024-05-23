@@ -134,6 +134,9 @@ export default function Header(props: HeaderProps) {
             setOpenAcc(false);
         }
     }, [wheel]);
+
+    console.log(path);
+
     return (
         <>
             <Toast
@@ -144,6 +147,7 @@ export default function Header(props: HeaderProps) {
             />
             <Services setOpenService={setOpenService} openService={openService} />
             <MoreBtn />
+            {path !== '/' && <div style={{ height: '70px' }}></div>}
             <div
                 style={{
                     padding:

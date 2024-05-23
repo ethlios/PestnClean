@@ -187,7 +187,7 @@ export default function Content3(props: IAppProps) {
                 </h1>
             </div>
             <Image
-                src="https://res.cloudinary.com/dj2jarcxk/image/upload/v1716105189/ve-chung-toi-PnC_mhgqzl.jpg"
+                src="https://res.cloudinary.com/dj2jarcxk/image/upload/v1716427219/ioss.png"
                 height={1000}
                 width={1000}
                 alt="Giá trị cốt lõi Pestnclean"
