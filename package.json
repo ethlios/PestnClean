@@ -7,7 +7,8 @@
         "build": "prisma generate && next build",
         "start": "NODE_ENV=production node src/websocket/server.js",
         "lint": "next lint",
-        "postinstall": "prisma generate"
+        "postinstall": "prisma generate",
+        "export": "next build && next export"
     },
     "dependencies": {
         "@ckeditor/ckeditor5-build-decoupled-document": "^41.3.1",

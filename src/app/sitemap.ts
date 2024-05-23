@@ -4,7 +4,7 @@ import { getAllBlogs, getAllProducts } from '~/libs/orthers/getData';
 import { nameToLink } from '~/libs/orthers/nameToLink';
 
 export default async function sitemap() {
-    const baseUrl = 'https://pestnclean.vercel.app';
+    const baseUrl = 'https://pestnclean.vn';
 
     const blogUrl = blogs.map((blog) => ({
         url: `${baseUrl}/blogs/${blog.path}`,

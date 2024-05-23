@@ -2,4 +2,4 @@
 User-agent: *
 Disallow: 
 
-Sitemap: http://pestnclean.vercel.app/sitemap.xml
+Sitemap: https://pestnclean.vn/sitemap.xml
