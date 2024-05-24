@@ -3,9 +3,9 @@
     "version": "0.1.0",
     "private": true,
     "scripts": {
-        "dev": "node src/websocket/server.js",
+        "dev": "node server.js",
         "build": "prisma generate && next build",
-        "start": "NODE_ENV=production node src/websocket/server.js",
+        "start": "NODE_ENV=production node server.js",
         "lint": "next lint",
         "postinstall": "prisma generate",
         "export": "next build && next export"

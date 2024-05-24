@@ -12,6 +12,7 @@ import Toast from '~/components/Orther/Toast';
 import { convertMomentToDate } from '~/libs/orthers/formatDate';
 import useConnectSocket from '~/libs/hooks/useConnectSocket';
 import { typeNotifications } from './const';
+import { toast, Zoom } from 'react-toastify';
 const cx = classNames.bind(styles);
 
 export interface IAppProps {
@@ -54,7 +55,6 @@ export default function AddNotification({ isOpen, isClose, valueUpdate, addSucce
 
     // Xử lí sự kiện lưu notify vào database
     const handleSave = () => {
-        console.log(valueTypeNotify);
         if (
             valueDesNotify !== '' &&
             valueTitleNotify !== '' &&
@@ -107,6 +107,18 @@ export default function AddNotification({ isOpen, isClose, valueUpdate, addSucce
                     setIsClicked(true);
                 }
             }
+        } else {
+            toast.warning('Vui lòng nhập đầy đủ các thông tin!', {
+                position: 'bottom-right',
+                autoClose: 1000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: 'dark',
+                transition: Zoom,
+            });
         }
     };
 
@@ -134,6 +146,8 @@ export default function AddNotification({ isOpen, isClose, valueUpdate, addSucce
 
     // Xử lí khi thêm notify success vào db thì send toàn bộ notify đến client được chọn qua socket.io
     useEffect(() => {
+        console.log(selector.message);
+        console.log(isConnected);
         if (selector.message === 'Đã gửi thông báo đến user!') {
             if (isConnected) {
                 setShowToast(true);
