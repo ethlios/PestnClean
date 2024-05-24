@@ -26,7 +26,7 @@
         "**/*.ts",
         "**/*.tsx",
         ".next/types/**/*.ts",
-        "src/websocket/server.js",
+        "server.js",
         "src/libs/orthers/zoom.js",
         "src/components/Orther/ckeditor.js"
     ],

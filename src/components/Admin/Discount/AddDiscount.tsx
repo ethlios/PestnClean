@@ -27,12 +27,12 @@ export default function AddDiscount({ isOpen, isClose, valueUpdate, showToast }:
     const [isLoader, setIsLoader] = useState<boolean>(false);
     const [timeStart, setTimeStart] = useState<string>(moment().format('YYYY-MM-DD'));
     const [timeEnd, setTimeEnd] = useState<string>(moment().format('YYYY-MM-DD'));
-    
+
     const [tenKhuyenMai, setTenKhuyenMai] = useState<string>('');
     const [moTa, setMoTa] = useState<string>('');
     const [maKhuyenMai, setMaKhuyenMai] = useState<string>('');
     const [mucGiamGia, setMucGiamGia] = useState<string>('');
-    
+
     const [valueUpdateState, setValueUpdateState] = useState<any>(valueUpdate ? valueUpdate : null);
     const selector = useSelector((state: RootState) => state.main);
     const { data: session } = useSession();
@@ -55,17 +55,21 @@ export default function AddDiscount({ isOpen, isClose, valueUpdate, showToast }:
 
     // xử lý thêm hoặc chỉnh sửa mã khuyễn mãi
     const handleClickBtn = () => {
-        const isFormValid =
-            tenKhuyenMai.trim() !== '' &&
-            moTa.trim() !== '' &&
-            maKhuyenMai.trim() !== '' &&
-            mucGiamGia &&
-            timeStart.trim() !== '' &&
-            timeEnd.trim() !== '';
-        if (isFormValid) {
+        console.log({
+            ten: tenKhuyenMai,
+            mota: moTa,
+            ma: maKhuyenMai,
+            mucGiamGia: mucGiamGia
+        })
+        if (
+            tenKhuyenMai !== undefined &&
+            moTa !== undefined &&
+            maKhuyenMai !== undefined &&
+            mucGiamGia !== undefined
+        ) {
             const dateStart = formatISODate(new Date(timeStart));
             const dateEnd = formatISODate(new Date(timeEnd));
-    
+
             if (dateEnd > dateStart) {
                 const discountData = {
                     authorId: session?.user.id,
@@ -76,9 +80,9 @@ export default function AddDiscount({ isOpen, isClose, valueUpdate, showToast }:
                     code: maKhuyenMai,
                     percent: +mucGiamGia,
                 };
-    
+
                 const action = valueUpdate && valueUpdate.id ? updateDiscount : addDiscount;
-    
+
                 dispatch(action(valueUpdate?.id ? { ...discountData, id: valueUpdate.id } : discountData));
                 setIsLoader(true);
             } else {
@@ -108,7 +112,6 @@ export default function AddDiscount({ isOpen, isClose, valueUpdate, showToast }:
             });
         }
     };
-    
 
     // tạo tự động các mã khuyễn mãi
     const generateMaKhuyenMai = async () => {
@@ -233,7 +236,7 @@ export default function AddDiscount({ isOpen, isClose, valueUpdate, showToast }:
                                 <input
                                     className={cx('wrapper-content-inputTimeEnd', 'mt-2')}
                                     type="date"
-                                    value={timeEnd  || ''}
+                                    value={timeEnd || ''}
                                     onChange={(e) => setTimeEnd(e.target.value)}
                                 />
                             </div>
